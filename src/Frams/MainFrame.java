@@ -220,6 +220,8 @@ public class MainFrame extends javax.swing.JFrame {
     private void clientMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clientMouseClicked
         // TODO add your handling code here:
         clickPanel(client);
+        ClintFrame c = new ClintFrame();
+        Tools.openJFram(c, "العملاء");
     }//GEN-LAST:event_clientMouseClicked
 
     private void clientMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clientMouseExited
