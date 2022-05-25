@@ -33,6 +33,17 @@ public class MainFrame extends javax.swing.JFrame {
         background.setPreferredSize(dim);
         ImageIcon bg = new ImageIcon(new ImageIcon(Toolkit.getDefaultToolkit().getClass().getResource("/icons/bg.jpg")).getImage().getScaledInstance(dim.width, dim.height, Image.SCALE_DEFAULT));
         background.setIcon(bg);
+        int x = dim.width - 220;
+        client.setLocation(x - 20, 40);
+        items.setLocation(x - 20 , 250);
+        suppliers.setLocation(x - 20 , 460);
+        x = x - 260;
+        Purchases.setLocation(x, 40);
+        sales.setLocation(x, 250);
+        Reports.setLocation(x, 460);
+        x = x - 240;
+        Payments.setLocation(x, 40);
+        Receipts.setLocation(x, 250);
     }
 
     /**
@@ -44,37 +55,38 @@ public class MainFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        suppliers = new javax.swing.JLabel();
+        Receipts = new javax.swing.JLabel();
         client = new javax.swing.JLabel();
         items = new javax.swing.JLabel();
-        suppliers1 = new javax.swing.JLabel();
-        suppliers2 = new javax.swing.JLabel();
-        suppliers3 = new javax.swing.JLabel();
-        suppliers4 = new javax.swing.JLabel();
-        suppliers5 = new javax.swing.JLabel();
+        suppliers = new javax.swing.JLabel();
+        Payments = new javax.swing.JLabel();
+        Purchases = new javax.swing.JLabel();
+        Reports = new javax.swing.JLabel();
+        sales = new javax.swing.JLabel();
         background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
         getContentPane().setLayout(null);
 
-        suppliers.setFont(new java.awt.Font("VIP Hala Bold", 1, 18)); // NOI18N
-        suppliers.setForeground(new java.awt.Color(0, 51, 255));
-        suppliers.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        suppliers.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/cash.png"))); // NOI18N
-        suppliers.setText("تحصيلات");
-        suppliers.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        suppliers.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        suppliers.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        suppliers.addMouseListener(new java.awt.event.MouseAdapter() {
+        Receipts.setFont(new java.awt.Font("VIP Hala Bold", 1, 18)); // NOI18N
+        Receipts.setForeground(new java.awt.Color(0, 51, 255));
+        Receipts.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Receipts.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/cash.png"))); // NOI18N
+        Receipts.setText("تحصيلات");
+        Receipts.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        Receipts.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        Receipts.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        Receipts.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                suppliersMouseClicked(evt);
+                ReceiptsMouseClicked(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                suppliersMouseExited(evt);
+                ReceiptsMouseExited(evt);
             }
         });
-        getContentPane().add(suppliers);
-        suppliers.setBounds(310, 250, 220, 190);
+        getContentPane().add(Receipts);
+        Receipts.setBounds(310, 250, 220, 190);
 
         client.setFont(new java.awt.Font("VIP Hala Bold", 1, 18)); // NOI18N
         client.setForeground(new java.awt.Color(0, 51, 255));
@@ -114,100 +126,100 @@ public class MainFrame extends javax.swing.JFrame {
         getContentPane().add(items);
         items.setBounds(790, 250, 220, 190);
 
-        suppliers1.setFont(new java.awt.Font("VIP Hala Bold", 1, 18)); // NOI18N
-        suppliers1.setForeground(new java.awt.Color(0, 51, 255));
-        suppliers1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        suppliers1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/courier.png"))); // NOI18N
-        suppliers1.setText("الموردين");
-        suppliers1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        suppliers1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        suppliers1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        suppliers1.addMouseListener(new java.awt.event.MouseAdapter() {
+        suppliers.setFont(new java.awt.Font("VIP Hala Bold", 1, 18)); // NOI18N
+        suppliers.setForeground(new java.awt.Color(0, 51, 255));
+        suppliers.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        suppliers.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/courier.png"))); // NOI18N
+        suppliers.setText("الموردين");
+        suppliers.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        suppliers.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        suppliers.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        suppliers.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                suppliers1MouseClicked(evt);
+                suppliersMouseClicked(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                suppliers1MouseExited(evt);
+                suppliersMouseExited(evt);
             }
         });
-        getContentPane().add(suppliers1);
-        suppliers1.setBounds(790, 470, 220, 190);
+        getContentPane().add(suppliers);
+        suppliers.setBounds(790, 470, 220, 190);
 
-        suppliers2.setFont(new java.awt.Font("VIP Hala Bold", 1, 18)); // NOI18N
-        suppliers2.setForeground(new java.awt.Color(0, 51, 255));
-        suppliers2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        suppliers2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/payment_1.png"))); // NOI18N
-        suppliers2.setText("مدفوعات");
-        suppliers2.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        suppliers2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        suppliers2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        suppliers2.addMouseListener(new java.awt.event.MouseAdapter() {
+        Payments.setFont(new java.awt.Font("VIP Hala Bold", 1, 18)); // NOI18N
+        Payments.setForeground(new java.awt.Color(0, 51, 255));
+        Payments.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Payments.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/payment_1.png"))); // NOI18N
+        Payments.setText("مدفوعات");
+        Payments.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        Payments.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        Payments.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        Payments.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                suppliers2MouseClicked(evt);
+                PaymentsMouseClicked(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                suppliers2MouseExited(evt);
+                PaymentsMouseExited(evt);
             }
         });
-        getContentPane().add(suppliers2);
-        suppliers2.setBounds(310, 40, 220, 190);
+        getContentPane().add(Payments);
+        Payments.setBounds(310, 40, 220, 190);
 
-        suppliers3.setFont(new java.awt.Font("VIP Hala Bold", 1, 18)); // NOI18N
-        suppliers3.setForeground(new java.awt.Color(0, 51, 255));
-        suppliers3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        suppliers3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/selling.png"))); // NOI18N
-        suppliers3.setText("مشتريات");
-        suppliers3.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        suppliers3.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        suppliers3.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        suppliers3.addMouseListener(new java.awt.event.MouseAdapter() {
+        Purchases.setFont(new java.awt.Font("VIP Hala Bold", 1, 18)); // NOI18N
+        Purchases.setForeground(new java.awt.Color(0, 51, 255));
+        Purchases.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Purchases.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/selling.png"))); // NOI18N
+        Purchases.setText("مشتريات");
+        Purchases.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        Purchases.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        Purchases.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        Purchases.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                suppliers3MouseClicked(evt);
+                PurchasesMouseClicked(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                suppliers3MouseExited(evt);
+                PurchasesMouseExited(evt);
             }
         });
-        getContentPane().add(suppliers3);
-        suppliers3.setBounds(550, 40, 220, 190);
+        getContentPane().add(Purchases);
+        Purchases.setBounds(550, 40, 220, 190);
 
-        suppliers4.setFont(new java.awt.Font("VIP Hala Bold", 1, 18)); // NOI18N
-        suppliers4.setForeground(new java.awt.Color(0, 51, 255));
-        suppliers4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        suppliers4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/software.png"))); // NOI18N
-        suppliers4.setText("تقارير");
-        suppliers4.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        suppliers4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        suppliers4.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        suppliers4.addMouseListener(new java.awt.event.MouseAdapter() {
+        Reports.setFont(new java.awt.Font("VIP Hala Bold", 1, 18)); // NOI18N
+        Reports.setForeground(new java.awt.Color(0, 51, 255));
+        Reports.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Reports.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/software.png"))); // NOI18N
+        Reports.setText("تقارير");
+        Reports.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        Reports.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        Reports.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        Reports.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                suppliers4MouseClicked(evt);
+                ReportsMouseClicked(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                suppliers4MouseExited(evt);
+                ReportsMouseExited(evt);
             }
         });
-        getContentPane().add(suppliers4);
-        suppliers4.setBounds(550, 470, 220, 190);
+        getContentPane().add(Reports);
+        Reports.setBounds(550, 470, 220, 190);
 
-        suppliers5.setFont(new java.awt.Font("VIP Hala Bold", 1, 18)); // NOI18N
-        suppliers5.setForeground(new java.awt.Color(0, 51, 255));
-        suppliers5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        suppliers5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/buy.png"))); // NOI18N
-        suppliers5.setText("مبيعات");
-        suppliers5.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        suppliers5.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        suppliers5.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        suppliers5.addMouseListener(new java.awt.event.MouseAdapter() {
+        sales.setFont(new java.awt.Font("VIP Hala Bold", 1, 18)); // NOI18N
+        sales.setForeground(new java.awt.Color(0, 51, 255));
+        sales.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        sales.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/buy.png"))); // NOI18N
+        sales.setText("مبيعات");
+        sales.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        sales.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        sales.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        sales.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                suppliers5MouseClicked(evt);
+                salesMouseClicked(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                suppliers5MouseExited(evt);
+                salesMouseExited(evt);
             }
         });
-        getContentPane().add(suppliers5);
-        suppliers5.setBounds(550, 250, 220, 190);
+        getContentPane().add(sales);
+        sales.setBounds(550, 250, 220, 190);
 
         background.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         background.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -243,9 +255,21 @@ public class MainFrame extends javax.swing.JFrame {
         exitPanel(items);
     }//GEN-LAST:event_itemsMouseExited
 
+    private void ReceiptsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ReceiptsMouseClicked
+        // TODO add your handling code here:
+        clickPanel(Receipts);
+    }//GEN-LAST:event_ReceiptsMouseClicked
+
+    private void ReceiptsMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ReceiptsMouseExited
+        // TODO add your handling code here:
+        exitPanel(Receipts);
+    }//GEN-LAST:event_ReceiptsMouseExited
+
     private void suppliersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_suppliersMouseClicked
         // TODO add your handling code here:
         clickPanel(suppliers);
+        SuppliersFrame sf = new SuppliersFrame();
+        Tools.openJFram(sf, "الموردين");
     }//GEN-LAST:event_suppliersMouseClicked
 
     private void suppliersMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_suppliersMouseExited
@@ -253,45 +277,37 @@ public class MainFrame extends javax.swing.JFrame {
         exitPanel(suppliers);
     }//GEN-LAST:event_suppliersMouseExited
 
-    private void suppliers1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_suppliers1MouseClicked
+    private void PaymentsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PaymentsMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_suppliers1MouseClicked
+    }//GEN-LAST:event_PaymentsMouseClicked
 
-    private void suppliers1MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_suppliers1MouseExited
+    private void PaymentsMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PaymentsMouseExited
         // TODO add your handling code here:
-    }//GEN-LAST:event_suppliers1MouseExited
+    }//GEN-LAST:event_PaymentsMouseExited
 
-    private void suppliers2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_suppliers2MouseClicked
+    private void PurchasesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PurchasesMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_suppliers2MouseClicked
+    }//GEN-LAST:event_PurchasesMouseClicked
 
-    private void suppliers2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_suppliers2MouseExited
+    private void PurchasesMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PurchasesMouseExited
         // TODO add your handling code here:
-    }//GEN-LAST:event_suppliers2MouseExited
+    }//GEN-LAST:event_PurchasesMouseExited
 
-    private void suppliers3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_suppliers3MouseClicked
+    private void ReportsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ReportsMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_suppliers3MouseClicked
+    }//GEN-LAST:event_ReportsMouseClicked
 
-    private void suppliers3MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_suppliers3MouseExited
+    private void ReportsMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ReportsMouseExited
         // TODO add your handling code here:
-    }//GEN-LAST:event_suppliers3MouseExited
+    }//GEN-LAST:event_ReportsMouseExited
 
-    private void suppliers4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_suppliers4MouseClicked
+    private void salesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_salesMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_suppliers4MouseClicked
+    }//GEN-LAST:event_salesMouseClicked
 
-    private void suppliers4MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_suppliers4MouseExited
+    private void salesMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_salesMouseExited
         // TODO add your handling code here:
-    }//GEN-LAST:event_suppliers4MouseExited
-
-    private void suppliers5MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_suppliers5MouseClicked
-        // TODO add your handling code here:
-    }//GEN-LAST:event_suppliers5MouseClicked
-
-    private void suppliers5MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_suppliers5MouseExited
-        // TODO add your handling code here:
-    }//GEN-LAST:event_suppliers5MouseExited
+    }//GEN-LAST:event_salesMouseExited
     
     private void clickPanel(JLabel lable){
         lable.setBorder(BorderFactory.createLoweredBevelBorder());
@@ -336,14 +352,14 @@ public class MainFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel Payments;
+    private javax.swing.JLabel Purchases;
+    private javax.swing.JLabel Receipts;
+    private javax.swing.JLabel Reports;
     private javax.swing.JLabel background;
     private javax.swing.JLabel client;
     private javax.swing.JLabel items;
+    private javax.swing.JLabel sales;
     private javax.swing.JLabel suppliers;
-    private javax.swing.JLabel suppliers1;
-    private javax.swing.JLabel suppliers2;
-    private javax.swing.JLabel suppliers3;
-    private javax.swing.JLabel suppliers4;
-    private javax.swing.JLabel suppliers5;
     // End of variables declaration//GEN-END:variables
 }

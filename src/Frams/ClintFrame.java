@@ -5,6 +5,14 @@
  */
 package Frams;
 
+
+import Entity.ClientPerson;
+import Utilities.Tools;
+import java.awt.Dimension;
+import java.awt.Image;
+import java.awt.Toolkit;
+import javax.swing.ImageIcon;
+
 /**
  *
  * @author mosta
@@ -14,8 +22,18 @@ public class ClintFrame extends javax.swing.JFrame {
     /**
      * Creates new form ClintFrame
      */
+    ClientPerson c = new ClientPerson();
     public ClintFrame() {
-        initComponents();
+        initComponents(); 
+        setSize(new Dimension(795, 617));
+        background.setLocation(0, 0);
+        background.setSize(780,600);
+        ImageIcon bg = new ImageIcon(new ImageIcon(Toolkit.getDefaultToolkit().getClass().getResource("/icons/clientbg.jpg")).getImage().getScaledInstance(780, 600, Image.SCALE_DEFAULT));
+        background.setIcon(bg);
+        txtId.setText(c.lastid());
+        Tools.disableButOpen(btPanel);
+        txtFirsbalance.setText("0.00");
+        c.filTable(jTable1);
     }
 
     /**
@@ -27,7 +45,7 @@ public class ClintFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jPanel1 = new javax.swing.JPanel();
+        txtPanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         txtId = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
@@ -50,16 +68,22 @@ public class ClintFrame extends javax.swing.JFrame {
         btdel = new javax.swing.JButton();
         btexit = new javax.swing.JButton();
         btprint = new javax.swing.JButton();
+        background = new javax.swing.JLabel();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setResizable(false);
+        getContentPane().setLayout(null);
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        txtPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        txtPanel.setOpaque(false);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("مسلسل");
         jLabel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
+        txtId.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        txtId.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         txtId.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -102,63 +126,66 @@ public class ClintFrame extends javax.swing.JFrame {
         txtFirsbalance.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         txtFirsbalance.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout txtPanelLayout = new javax.swing.GroupLayout(txtPanel);
+        txtPanel.setLayout(txtPanelLayout);
+        txtPanelLayout.setHorizontalGroup(
+            txtPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, txtPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(txtPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtName)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, txtPanelLayout.createSequentialGroup()
+                        .addGroup(txtPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtAdrees)
                             .addComponent(txtFirsbalance))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addGroup(txtPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
                             .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGroup(txtPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                    .addGroup(txtPanelLayout.createSequentialGroup()
                         .addComponent(txtINational)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGroup(txtPanelLayout.createSequentialGroup()
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtId, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGroup(txtPanelLayout.createSequentialGroup()
                         .addComponent(txtMobil)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        txtPanelLayout.setVerticalGroup(
+            txtPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(txtPanelLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(txtPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(txtId, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txtName, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(txtPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txtMobil, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
                     .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txtAdrees))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(txtPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txtINational, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
                     .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txtFirsbalance))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        getContentPane().add(txtPanel);
+        txtPanel.setBounds(10, 11, 760, 143);
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -176,6 +203,11 @@ public class ClintFrame extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
         if (jTable1.getColumnModel().getColumnCount() > 0) {
             jTable1.getColumnModel().getColumn(0).setResizable(false);
@@ -191,6 +223,9 @@ public class ClintFrame extends javax.swing.JFrame {
             jTable1.getColumnModel().getColumn(5).setResizable(false);
             jTable1.getColumnModel().getColumn(5).setPreferredWidth(50);
         }
+
+        getContentPane().add(jScrollPane1);
+        jScrollPane1.setBounds(10, 160, 760, 348);
 
         btPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         btPanel.setOpaque(false);
@@ -302,59 +337,99 @@ public class ClintFrame extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1)
-                    .addComponent(btPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 348, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(23, Short.MAX_VALUE))
-        );
+        getContentPane().add(btPanel);
+        btPanel.setBounds(10, 514, 760, 61);
+        getContentPane().add(background);
+        background.setBounds(0, 0, 0, 0);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnewActionPerformed
         // TODO add your handling code here:
-
+                txtId.setText(c.lastid());
+                Tools.disableButOpen(btPanel);
+                txtAdrees.setText("");
+                txtFirsbalance.setText("0.00");
+                txtINational.setText("");
+                txtMobil.setText("");
+                txtName.setText("");
+                c.filTable(jTable1);
 
     }//GEN-LAST:event_btnewActionPerformed
 
     private void btsaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btsaveActionPerformed
         // TODO add your handling code here:
-
+       String id_client = txtId.getText();
+       String name = txtName.getText();
+       String phone = txtMobil.getText();
+       String address = txtAdrees.getText();
+       String idNational = txtINational.getText();
+       double firstBalance = Double.valueOf(txtFirsbalance.getText());
+        if(name.equals("")){
+             Tools.showErrorMsg("اسم العميل غير مكتوب");
+        }else{
+            c.setData(id_client,name,phone,address,idNational,firstBalance);
+            if(c.Save()){
+                Tools.showInfoMsg("تم الحفظ بنجاح", "حفظ");
+                txtId.setText(c.lastid());
+                Tools.disableButOpen(btPanel);
+                txtAdrees.setText("");
+                txtFirsbalance.setText("0.00");
+                txtINational.setText("");
+                txtMobil.setText("");
+                txtName.setText("");
+                c.filTable(jTable1);
+            }else{
+                Tools.showErrorMsg("خطأ في حفظ البيانات");
+            }
+        }
 
     }//GEN-LAST:event_btsaveActionPerformed
 
     private void bteditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bteditActionPerformed
         // TODO add your handling code here:
-
+       Tools.EditButton(btPanel, txtPanel);
     }//GEN-LAST:event_bteditActionPerformed
 
     private void btupdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btupdateActionPerformed
         // TODO add your handling code here:
-     
-
+       String id_client = txtId.getText();
+       String name = txtName.getText();
+       String phone = txtMobil.getText();
+       String address = txtAdrees.getText();
+       String idNational = txtINational.getText();
+       double firstBalance = Double.valueOf(txtFirsbalance.getText());
+       c.setData(id_client,name,phone,address,idNational,firstBalance);
+        if(c.Update(id_client)){
+                Tools.showInfoMsg("تم تحديث البيانات  بنجاح", "تحديث بيانات");
+                txtId.setText(c.lastid());
+                Tools.disableButOpen(btPanel);
+                txtAdrees.setText("");
+                txtFirsbalance.setText("0.00");
+                txtINational.setText("");
+                txtMobil.setText("");
+                txtName.setText("");
+                c.filTable(jTable1);
+            }else{
+                 Tools.showErrorMsg("خطأ في تحديث البيانات");
+            }
     }//GEN-LAST:event_btupdateActionPerformed
 
     private void btdelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btdelActionPerformed
         // TODO add your handling code here:
-  
+         String id = txtId.getText();
+         if(c.Delete(id)){
+             Tools.showInfoMsg("تم حذف العميل بنجاح", "حذف");
+             txtId.setText(c.lastid());
+             txtName.setText("");
+             txtMobil.setText("");
+             txtAdrees.setText("");
+             txtINational.setText("");
+             txtFirsbalance.setText("0.00");
+             Tools.disableButOpen(btPanel);
+             c.filTable(jTable1);
+         }
     }//GEN-LAST:event_btdelActionPerformed
 
     private void btexitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btexitActionPerformed
@@ -365,6 +440,31 @@ public class ClintFrame extends javax.swing.JFrame {
     private void btprintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btprintActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btprintActionPerformed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        // TODO add your handling code here:
+        int row = jTable1.getSelectedRow();
+        String firstBalance = jTable1.getValueAt(row, 0).toString();
+        String idInternational =  jTable1.getValueAt(row, 1).toString();
+        String address =  jTable1.getValueAt(row, 2).toString();
+        String mobil =  jTable1.getValueAt(row, 3).toString();
+        String name =  jTable1.getValueAt(row, 4).toString();
+        String id =  jTable1.getValueAt(row, 5).toString();
+        txtAdrees.setText(address);
+        txtAdrees.setEnabled(false);
+        txtFirsbalance.setText(firstBalance);
+        txtFirsbalance.setEnabled(false);
+        txtINational.setText(idInternational);
+        txtINational.setEnabled(false);
+        txtId.setText(id);
+        txtMobil.setText(mobil);
+        txtMobil.setEnabled(false);
+        txtName.setText(name);
+        txtName.setEnabled(false);
+        Tools.selectButtonTable(btPanel);
+        
+        
+    }//GEN-LAST:event_jTable1MouseClicked
 
     /**
      * @param args the command line arguments
@@ -402,6 +502,7 @@ public class ClintFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel background;
     private javax.swing.JPanel btPanel;
     private javax.swing.JButton btdel;
     private javax.swing.JButton btedit;
@@ -416,7 +517,6 @@ public class ClintFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
-    private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JTextField txtAdrees;
@@ -425,5 +525,6 @@ public class ClintFrame extends javax.swing.JFrame {
     private javax.swing.JLabel txtId;
     private javax.swing.JTextField txtMobil;
     private javax.swing.JTextField txtName;
+    private javax.swing.JPanel txtPanel;
     // End of variables declaration//GEN-END:variables
 }

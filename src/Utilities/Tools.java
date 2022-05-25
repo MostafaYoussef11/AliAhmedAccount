@@ -55,6 +55,7 @@ public class Tools {
         lab.setHorizontalAlignment(JLabel.CENTER);
         lab.setText(text);
         return lab;
+        
   }
   
   public static void disableButOpen(JPanel btnPanel){
@@ -67,6 +68,15 @@ public class Tools {
       }
   }
 
+    public static void selectButtonTable(JPanel btnPanel){
+      for (Component c : btnPanel.getComponents()) {
+          if(c.getName().equals("edit") || c.getName().equals("exit") || c.getName().equals("del")){
+            c.setEnabled(true);
+          }else{
+              c.setEnabled(false);
+          }
+      }
+  }
   public static void EditButton(JPanel btPanel , JPanel txtPanal){
     for (Component c : btPanel.getComponents()) {
           if(c.getName().equals("save") || c.getName().equals("edit")){
