@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 25, 2022 at 07:30 PM
+-- Generation Time: May 25, 2022 at 08:27 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 7.3.27
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `ali`
+-- Database: `aliaccount`
 --
 
 -- --------------------------------------------------------
@@ -34,7 +34,7 @@ CREATE TABLE `client` (
   `address` varchar(512) DEFAULT NULL,
   `idNational` varchar(14) DEFAULT NULL,
   `firstBalance` double NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `client`
@@ -78,7 +78,7 @@ CREATE TABLE `suppliers` (
   `address` varchar(512) DEFAULT NULL,
   `idNational` varchar(14) DEFAULT NULL,
   `firstBalance` double(10,2) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `suppliers`
