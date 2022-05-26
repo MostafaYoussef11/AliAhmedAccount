@@ -287,10 +287,13 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void PurchasesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PurchasesMouseClicked
         // TODO add your handling code here:
+        purchaseInvoiceFrame purchfrm = new purchaseInvoiceFrame();
+        Tools.openJFram(purchfrm, "فواتير المشتريات");
     }//GEN-LAST:event_PurchasesMouseClicked
 
     private void PurchasesMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PurchasesMouseExited
         // TODO add your handling code here:
+        exitPanel(Purchases);
     }//GEN-LAST:event_PurchasesMouseExited
 
     private void ReportsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ReportsMouseClicked

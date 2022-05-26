@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.4
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 26, 2022 at 10:02 AM
--- Server version: 10.4.17-MariaDB
--- PHP Version: 7.3.27
+-- Generation Time: May 26, 2022 at 04:06 PM
+-- Server version: 10.4.13-MariaDB
+-- PHP Version: 7.2.31
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -81,6 +81,34 @@ CREATE TABLE `priselist` (
   `id_items` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `priselist`
+--
+
+INSERT INTO `priselist` (`last_edit`, `purchase_price_low`, `purchase_price_high`, `sale_price_low`, `sale_price_high`, `id_items`) VALUES
+('2022-05-26', 2900.00, 97150.00, 3200.00, 107200.00, 1),
+('2022-05-31', 2500.00, 83750.00, 2800.00, 93800.00, 1),
+('2022-05-26', 150.00, 3750.00, 175.00, 4375.00, 2),
+('2022-06-01', 1000.00, 33500.00, 1200.00, 40200.00, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `salesinvoic`
+--
+
+CREATE TABLE `salesinvoic` (
+  `id_salesInvoic` int(11) NOT NULL,
+  `date_salesInvoic` date DEFAULT NULL,
+  `type_salesInvoic` varchar(512) DEFAULT NULL,
+  `id_client` int(11) DEFAULT NULL,
+  `totalAmount` double(10,2) DEFAULT NULL,
+  `discount` double(10,2) DEFAULT NULL,
+  `amountCash` double(10,2) DEFAULT NULL,
+  `amountLater` double(10,2) DEFAULT NULL,
+  `note` varchar(1024) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
 -- --------------------------------------------------------
 
 --
@@ -128,6 +156,21 @@ INSERT INTO `unit` (`id`, `low`, `high`, `val`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Stand-in structure for view `unititems`
+-- (See below for the actual view)
+--
+CREATE TABLE `unititems` (
+`id_items` int(11)
+,`name_items` varchar(255)
+,`firstbalance` int(11)
+,`low` varchar(512)
+,`high` varchar(512)
+,`val` double(10,2)
+);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 
@@ -143,6 +186,15 @@ CREATE TABLE `users` (
 INSERT INTO `users` (`username`, `passwod`) VALUES
 ('ali', 123),
 ('0', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `unititems`
+--
+DROP TABLE IF EXISTS `unititems`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `unititems`  AS  (select `i`.`id_items` AS `id_items`,`i`.`name_items` AS `name_items`,`i`.`firstbalance` AS `firstbalance`,`u`.`low` AS `low`,`u`.`high` AS `high`,`u`.`val` AS `val` from (`items` `i` join `unit` `u` on(`i`.`id` = `u`.`id`))) ;
 
 --
 -- Indexes for dumped tables
@@ -167,6 +219,13 @@ ALTER TABLE `items`
 --
 ALTER TABLE `priselist`
   ADD KEY `id_items` (`id_items`);
+
+--
+-- Indexes for table `salesinvoic`
+--
+ALTER TABLE `salesinvoic`
+  ADD PRIMARY KEY (`id_salesInvoic`),
+  ADD KEY `id_client` (`id_client`);
 
 --
 -- Indexes for table `suppliers`
@@ -195,6 +254,12 @@ ALTER TABLE `items`
 --
 ALTER TABLE `priselist`
   ADD CONSTRAINT `priselist_ibfk_1` FOREIGN KEY (`id_items`) REFERENCES `items` (`id_items`);
+
+--
+-- Constraints for table `salesinvoic`
+--
+ALTER TABLE `salesinvoic`
+  ADD CONSTRAINT `salesinvoic_ibfk_1` FOREIGN KEY (`id_client`) REFERENCES `client` (`id_client`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

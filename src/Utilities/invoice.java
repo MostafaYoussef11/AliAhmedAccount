@@ -13,6 +13,7 @@ public abstract class invoice {
     private String id_invoice ;
     private String date_invoice;
     private String id_items ;
+    private String name_items;
     private double qty;
     private String id_unit;
     private double Price;
@@ -32,6 +33,10 @@ public abstract class invoice {
        String sql = "";
        return ConnectDB.ExucuteAnyQuery(sql);
     
+    }
+    
+    public String getLastId(){
+        return ConnectDB.LastId(tableName, "id_"+tableName);
     }
     
     public String getTableName() {
@@ -144,6 +149,14 @@ public abstract class invoice {
 
     public void setNote(String note) {
         this.note = note;
+    }
+
+    public String getName_items() {
+        return name_items;
+    }
+
+    public void setName_items(String name_items) {
+        this.name_items = name_items;
     }
    
     

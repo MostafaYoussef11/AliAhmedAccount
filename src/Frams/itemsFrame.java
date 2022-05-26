@@ -40,8 +40,9 @@ public class itemsFrame extends javax.swing.JFrame {
         txtid.setText(i.lastid());
         i.fillComboHigh(combo);
         Tools.CenterJDateChos(txtDate);
-       i.fillComboNameItems(ComboNameItems);
-       ComboNameItemsItemStateChanged();
+         i.fillComboNameItems(ComboNameItems);
+        ComboNameItemsItemStateChanged();
+        i.fillTableListPrice(jTable3);
     }
 
     /**
@@ -1248,6 +1249,23 @@ public class itemsFrame extends javax.swing.JFrame {
 
     private void btsave2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btsave2ActionPerformed
         // TODO add your handling code here:
+        String name_items = ComboNameItems.getSelectedItem().toString();
+       //`purchase_price_low`, `purchase_price_high`, `sale_price_low`, `sale_price_high`
+        double purchasePriceLow = Double.valueOf(purchase_price_low.getText());
+        double purchasPriceHigh = Double.valueOf(purchase_price_high.getText());
+        double salePriceLow = Double.valueOf(sale_price_low.getText());
+        double salePriceHigh= Double.valueOf(sale_price_high.getText());
+        i.setDataPriceList(txtDate.getDate(), purchasePriceLow, purchasPriceHigh, salePriceLow, salePriceHigh, name_items);
+        boolean isSave = i.SaveListPrice();
+        if(isSave){
+            Tools.showInfoMsg("تم الحفظ", "حفظ");
+            txtDate.setDate(new Date());
+            purchase_price_high.setText("0.00");
+            purchase_price_low.setText("0.00");
+            sale_price_high.setText("0.00");
+            sale_price_low.setText("0.00");
+            i.fillTableListPrice(jTable3);
+        }
     }//GEN-LAST:event_btsave2ActionPerformed
 
     private void btedit2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btedit2ActionPerformed
@@ -1264,6 +1282,7 @@ public class itemsFrame extends javax.swing.JFrame {
 
     private void btexit2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btexit2ActionPerformed
         // TODO add your handling code here:
+        dispose();
     }//GEN-LAST:event_btexit2ActionPerformed
 
     private void ComboNameItemsItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_ComboNameItemsItemStateChanged

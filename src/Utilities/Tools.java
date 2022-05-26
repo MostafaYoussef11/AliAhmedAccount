@@ -12,6 +12,7 @@ import static java.awt.Component.CENTER_ALIGNMENT;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Toolkit;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -152,5 +153,8 @@ public class Tools {
        txtDate.setDate(new Date());
        txtDate.setFont(new Font("Dialog", Font.BOLD, 11));
     }
-  
+    public static String dateSql(Date date){
+        SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-dd");
+        return sdf.format(date);
+    }
 }

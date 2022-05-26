@@ -7,6 +7,8 @@ package Entity;
 
 import Utilities.ConnectDB;
 import Utilities.Ent;
+import Utilities.Tools;
+import java.util.Date;
 import javax.swing.JComboBox;
 import javax.swing.JTable;
 
@@ -22,7 +24,8 @@ public class Items implements Ent{
     String id_items;
     double val ;
     int firstbalance;
-    
+    private String last_edit; 
+    private double purchase_price_low, purchase_price_high, sale_price_low, sale_price_high;
     
     public void SetAll(String id , String low , String hight , double val){
         this.low = low;
@@ -131,4 +134,64 @@ public class Items implements Ent{
         return ConnectDB.getIdFromName(sql);
     }
     
+    
+    /*
+    INSERT INTO `priselist` (`last_edit`, `purchase_price_low`, `purchase_price_high`, `sale_price_low`, `sale_price_high`, `id_items`) 
+    VALUES (NULL, NULL, NULL, NULL, NULL, NULL)
+    
+    */
+    
+    public void setDataPriceList(Date last_edit ,double purchase_price_low , double purchase_price_high , double sale_price_low , double sale_price_high , String name_item  ){
+        this.purchase_price_high = purchase_price_high;
+        this.purchase_price_low = purchase_price_low;
+        this.sale_price_high = sale_price_high;
+        this.sale_price_low = sale_price_low;
+        this.id_items = getIdItemsFromName(name_item);
+        this.last_edit = Tools.dateSql(last_edit);
+    }
+    public void fillTableListPrice(JTable table){
+        String[] columnName = {"سعر البيع", "سعر الشراء", "الصنف", "التاريخ"};
+        String sql = "select p.sale_price_high , p.purchase_price_high , i.name_items , p.last_edit from priselist p inner join items i on p.id_items = i.id_items order by last_edit DESC  ";
+        ConnectDB.fillAndCenterTable(sql, table, columnName);
+    }
+    public boolean SaveListPrice(){
+       String sql = "INSERT INTO priselist VALUES('"+last_edit+"' , "+purchase_price_low+","+purchase_price_high
+               +","+sale_price_low+","+sale_price_high+","+id_items+");";
+       return ConnectDB.ExucuteAnyQuery(sql);
+    }
+    public boolean deleteListPrice(){
+        return false;
+    }
+    public boolean updateListPrice(){
+        return false;
+    }
+    
+    public String getSalesPriceHight(String nameItems){
+        String id_items = getIdItemsFromName(nameItems);
+        String sql = "select sale_price_high as id from priselist where id_items="+id_items+" ORDER BY last_edit DESC LIMIT 1 ; ";
+        return ConnectDB.getIdFromName(sql);
+    }
+    public String getSalesPriceLow(String nameItems){
+        String id_items = getIdItemsFromName(nameItems);
+        String sql = "select sale_price_low as id from priselist where id_items="+id_items+" ORDER BY last_edit DESC LIMIT 1 ; ";
+        return ConnectDB.getIdFromName(sql);
+    }
+    
+    public String getSalesPriceHightOrLow(String nameItems , String type){
+        String id_items = getIdItemsFromName(nameItems);
+        String sql ="";
+        String low = ConnectDB.getIdFromName("select low as id from unititems where id_items="+id_items);
+        String high = ConnectDB.getIdFromName("select high as id from unititems where id_items="+id_items);
+        if(type.equals(low)){
+          sql = "select sale_price_low as id from priselist where id_items="+id_items+" ORDER BY last_edit DESC LIMIT 1 ; ";
+        }else if(type.equals(high)){
+          sql = "select sale_price_high as id from priselist where id_items="+id_items+" ORDER BY last_edit DESC LIMIT 1 ; ";
+        }
+        else{
+            Tools.showErrorMsg("خطأ في الوحدة");
+        }
+        return ConnectDB.getIdFromName(sql);
+    }
+
+
 }
