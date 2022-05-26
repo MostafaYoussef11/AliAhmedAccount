@@ -303,10 +303,14 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void salesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_salesMouseClicked
         // TODO add your handling code here:
+        clickPanel(sales);
+        SalesInvoiceFrame sInvoice = new SalesInvoiceFrame();
+        Tools.openJFram(sInvoice, "فاتورة مبيعات");
     }//GEN-LAST:event_salesMouseClicked
 
     private void salesMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_salesMouseExited
         // TODO add your handling code here:
+        exitPanel(sales);
     }//GEN-LAST:event_salesMouseExited
     
     private void clickPanel(JLabel lable){

@@ -5,17 +5,21 @@
  */
 package Utilities;
 
+import com.toedter.calendar.JDateChooser;
+import com.toedter.calendar.JTextFieldDateEditor;
 import java.awt.Component;
 import static java.awt.Component.CENTER_ALIGNMENT;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Toolkit;
+import java.util.Date;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 import javax.swing.table.DefaultTableCellRenderer;
 
 /**
@@ -99,6 +103,54 @@ public class Tools {
         for(int i = 0 ; i< count ; i++){
             table.getColumn(coulmnName[i]).setCellRenderer(center);
         }
+    }
+ 
+    public static String payMethod(PaymentMethod payMethod){
+        String paymethod = "";
+        switch(payMethod){
+            case cash:
+               paymethod = "كاش";
+               break;
+            case deferred:
+               paymethod = "دفعة من الحساب";
+               break; 
+            case installments:
+                paymethod = "آجل";
+                break;
+            default:
+                paymethod = "كاش";
+                break;
+        }
+        return paymethod; 
+    
+    }
+    
+    public static PaymentMethod getPayment(String paymentMethod){
+        PaymentMethod p;
+        switch(paymentMethod){
+            case "كاش":
+               p = PaymentMethod.cash;
+               break;
+            case "دفعة من الحساب":
+               p = PaymentMethod.installments;
+               break; 
+            case "آجل":
+                p = PaymentMethod.deferred;
+                break;
+            default:
+                p = PaymentMethod.cash;
+                break;
+        }
+    
+        return p;
+    
+    }
+    
+    public static void CenterJDateChos(JDateChooser txtDate){
+       JTextFieldDateEditor dateEditor = (JTextFieldDateEditor)txtDate.getComponent(1);
+       dateEditor.setHorizontalAlignment(JTextField.CENTER);
+       txtDate.setDate(new Date());
+       txtDate.setFont(new Font("Dialog", Font.BOLD, 11));
     }
   
 }

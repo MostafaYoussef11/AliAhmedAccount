@@ -144,7 +144,32 @@ public class ConnectDB {
        
        }
    }
- 
+ public static void fillComboUnit( String id , JComboBox combo){
+       try{
+           SetConnection();
+           stmt = (Statement) con.createStatement();
+           ResultSet rst;
+          // String id = getIdFromName("select id from items where name_items='"+itemName+"'");
+           String sqlhigh = "SELECT high , low from unit where id="+id;
+           rst = stmt.executeQuery(sqlhigh);
+           rst.last();
+           int c = rst.getRow()+1;
+           rst.beforeFirst();
+           String values[] = new String[c];
+           int i = 0;
+           while(rst.next()){
+               values[i]=rst.getString(1);
+               values[i+1] = rst.getString(2);
+               i++;
+           }
+           con.close();
+           ((JLabel)combo.getRenderer()).setHorizontalAlignment(SwingConstants.CENTER);
+           combo.setModel(new DefaultComboBoxModel(values));
+       }catch(SQLException ex){
+           Tools.showErrorMsg(ex.getMessage());
+       
+       }
+   }
  public static String getIdFromName(String sql){
        try{
            String id = "";
@@ -181,5 +206,6 @@ public class ConnectDB {
        }
    
    }
+  
  
 }

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 25, 2022 at 08:27 PM
+-- Generation Time: May 26, 2022 at 10:02 AM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 7.3.27
 
@@ -63,7 +63,23 @@ CREATE TABLE `items` (
 --
 
 INSERT INTO `items` (`id_items`, `name_items`, `firstbalance`, `id`) VALUES
-(1, 'زئبق', 10, 1);
+(1, 'زئبق', 20, 1),
+(2, 'مادة اصلي', 5, 2);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `priselist`
+--
+
+CREATE TABLE `priselist` (
+  `last_edit` date DEFAULT NULL,
+  `purchase_price_low` double(10,2) DEFAULT NULL,
+  `purchase_price_high` double(10,2) DEFAULT NULL,
+  `sale_price_low` double(10,2) DEFAULT NULL,
+  `sale_price_high` double(10,2) DEFAULT NULL,
+  `id_items` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -105,7 +121,9 @@ CREATE TABLE `unit` (
 --
 
 INSERT INTO `unit` (`id`, `low`, `high`, `val`) VALUES
-(1, 'كيلو', 'اسطوانة', 33.50);
+(1, 'كيلو', 'اسطوانة', 33.50),
+(2, 'كيلو', 'شكارة', 25.00),
+(3, 'كيس', 'لفة', 20.00);
 
 -- --------------------------------------------------------
 
@@ -145,6 +163,12 @@ ALTER TABLE `items`
   ADD KEY `fkitemsunit` (`id`);
 
 --
+-- Indexes for table `priselist`
+--
+ALTER TABLE `priselist`
+  ADD KEY `id_items` (`id_items`);
+
+--
 -- Indexes for table `suppliers`
 --
 ALTER TABLE `suppliers`
@@ -165,6 +189,12 @@ ALTER TABLE `unit`
 --
 ALTER TABLE `items`
   ADD CONSTRAINT `fkitemsunit` FOREIGN KEY (`id`) REFERENCES `unit` (`id`);
+
+--
+-- Constraints for table `priselist`
+--
+ALTER TABLE `priselist`
+  ADD CONSTRAINT `priselist_ibfk_1` FOREIGN KEY (`id_items`) REFERENCES `items` (`id_items`);
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
