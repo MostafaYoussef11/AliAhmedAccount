@@ -12,5 +12,5 @@ package Utilities;
 public enum PaymentMethod {
     cash , installments , deferred;
     
-
+    
 }

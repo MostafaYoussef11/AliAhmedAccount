@@ -21,6 +21,7 @@ import javax.swing.JLabel;
 import javax.swing.JSpinner;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -33,15 +34,18 @@ public class SalesInvoiceFrame extends javax.swing.JFrame {
      */
     Dimension dim;
     SalesInvoic sales;
+    DefaultTableModel model;
+    
     public SalesInvoiceFrame() {
         initComponents();
         background.setLocation(0, 0);
         dim = getToolkit().getScreenSize();
-        setSize(dim.width,520);
-        background.setSize(dim.width,520);
-        ImageIcon bg = new ImageIcon(new ImageIcon(Toolkit.getDefaultToolkit().getClass().getResource("/icons/selBack.jpg")).getImage().getScaledInstance(dim.width, 520, Image.SCALE_DEFAULT));
+        setSize(1024,520);
+        background.setSize(1024,520);
+        ImageIcon bg = new ImageIcon(new ImageIcon(Toolkit.getDefaultToolkit().getClass().getResource("/icons/selBack.jpg")).getImage().getScaledInstance(1024, 520, Image.SCALE_DEFAULT));
         background.setIcon(bg);
         sales = new SalesInvoic();
+        
         newInvoice();
        
     }
@@ -54,6 +58,8 @@ public class SalesInvoiceFrame extends javax.swing.JFrame {
     private void newInvoice(){
         Tools.disableButOpen(btPanel);
         txtId_Invoice.setText(sales.getLastId());
+        txtDiscond.setText("0.00");
+        txtAmountPayment.setText("0.00");
         ItemsPanale.setVisible(false);
         ConnectDB.fillCombo("items", "name_items", comboItems);
         ConnectDB.fillCombo("client", "name_client", comboName);
@@ -64,15 +70,19 @@ public class SalesInvoiceFrame extends javax.swing.JFrame {
         for(int i = 0 ; i < 3 ; i++){
             values[i] = Tools.payMethod(value[i]);
         }
+        
         comboPaymentMethod.setModel(new DefaultComboBoxModel(values));
         ((JLabel)comboPaymentMethod.getRenderer()).setHorizontalAlignment(SwingConstants.CENTER);
+        txtAmountPayment.setEnabled(false);
         JComponent editor = txtCount.getEditor();
         JSpinner.DefaultEditor spinnerEditor = (JSpinner.DefaultEditor)editor;
         spinnerEditor.getTextField().setHorizontalAlignment(JTextField.CENTER);
         String id = ConnectDB.getIdFromName("select id from items where name_items='"+comboItems.getSelectedItem().toString()+"'");
         ConnectDB.fillComboUnit(id, comboUnit);
         txtPrice.setText(new Items().getSalesPriceHight(comboItems.getSelectedItem().toString()));
-        
+        String columns[]={ "الاجمالي", "الخصم", "سعر الوحدة", "الكمية", "الصنف", "م"};
+        model = (DefaultTableModel) jTable1.getModel();
+        Tools.CenterTable(columns, jTable1);
         calcSumPrice();
     }
     
@@ -86,15 +96,15 @@ public class SalesInvoiceFrame extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         txtDate = new com.toedter.calendar.JDateChooser();
         jLabel4 = new javax.swing.JLabel();
-        comboPaymentMethod = new javax.swing.JComboBox<String>();
+        comboPaymentMethod = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
-        comboName = new javax.swing.JComboBox<String>();
+        comboName = new javax.swing.JComboBox<>();
         ItemsPanale = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
-        comboItems = new javax.swing.JComboBox<String>();
+        comboItems = new javax.swing.JComboBox<>();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        comboUnit = new javax.swing.JComboBox<String>();
+        comboUnit = new javax.swing.JComboBox<>();
         jLabel9 = new javax.swing.JLabel();
         txtPrice = new javax.swing.JTextField();
         btnItemPanale = new javax.swing.JPanel();
@@ -134,6 +144,7 @@ public class SalesInvoiceFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setMinimumSize(null);
+        setResizable(false);
         getContentPane().setLayout(null);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -161,14 +172,19 @@ public class SalesInvoiceFrame extends javax.swing.JFrame {
         jLabel4.setText("نوع الفاتورة");
         jLabel4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        comboPaymentMethod.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboPaymentMethod.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboPaymentMethod.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                comboPaymentMethodItemStateChanged(evt);
+            }
+        });
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setText("اسم العميل");
         jLabel5.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        comboName.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboName.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         ItemsPanale.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         ItemsPanale.setOpaque(false);
@@ -178,7 +194,7 @@ public class SalesInvoiceFrame extends javax.swing.JFrame {
         jLabel6.setText("اسم الصنف");
         jLabel6.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        comboItems.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboItems.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         comboItems.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 comboItemsItemStateChanged(evt);
@@ -196,7 +212,7 @@ public class SalesInvoiceFrame extends javax.swing.JFrame {
         jLabel8.setText("الوحدة");
         jLabel8.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        comboUnit.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboUnit.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         comboUnit.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 comboUnitItemStateChanged(evt);
@@ -241,6 +257,11 @@ public class SalesInvoiceFrame extends javax.swing.JFrame {
         btndelItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/delete.png"))); // NOI18N
         btndelItem.setText("حذف");
         btndelItem.setName("delete"); // NOI18N
+        btndelItem.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btndelItemActionPerformed(evt);
+            }
+        });
 
         btnUpdateItem.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btnUpdateItem.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/exchange.png"))); // NOI18N
@@ -388,6 +409,11 @@ public class SalesInvoiceFrame extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
         if (jTable1.getColumnModel().getColumnCount() > 0) {
             jTable1.getColumnModel().getColumn(0).setResizable(false);
@@ -420,6 +446,11 @@ public class SalesInvoiceFrame extends javax.swing.JFrame {
 
         txtDiscond.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         txtDiscond.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtDiscond.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtDiscondKeyReleased(evt);
+            }
+        });
 
         jLabel16.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -428,6 +459,11 @@ public class SalesInvoiceFrame extends javax.swing.JFrame {
 
         txtAmountPayment.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         txtAmountPayment.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtAmountPayment.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtAmountPaymentKeyReleased(evt);
+            }
+        });
 
         jLabel17.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -642,7 +678,7 @@ public class SalesInvoiceFrame extends javax.swing.JFrame {
         btPanelLayout.setHorizontalGroup(
             btPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btPanelLayout.createSequentialGroup()
-                .addContainerGap(53, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btexit, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btserch, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -689,7 +725,31 @@ public class SalesInvoiceFrame extends javax.swing.JFrame {
 
         
     }//GEN-LAST:event_btnewActionPerformed
-
+    private void setTextPayAmount(){
+        double total = 0.00;
+        double  discount = 0.00;
+        double PaymentCash = 0.00;
+         
+         
+        if(txtTotalAmount.getText().equals("")){
+            total = 0;
+        }else{
+            total = Double.parseDouble(txtTotalAmount.getText());
+        }
+        if(txtDiscond.getText().equals("")){
+            discount = 0;
+        }else{
+            discount = Double.parseDouble(txtDiscond.getText());
+        }
+        if(txtAmountPayment.getText().equals("")){
+            PaymentCash = 0;
+        }else{
+           PaymentCash = Double.parseDouble(txtAmountPayment.getText());
+        }        
+        double payAmount = total - discount - PaymentCash;
+        txtPayAmount.setText(payAmount+"");
+    
+    }
     private void btsaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btsaveActionPerformed
         // TODO add your handling code here:
         int row = jTable1.getRowCount();
@@ -729,8 +789,12 @@ public class SalesInvoiceFrame extends javax.swing.JFrame {
 
     private void btnAddItemsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddItemsActionPerformed
         // TODO add your handling code here:
+
+       //insert into SalesInvoice
+       sales.setId_invoice(txtId_Invoice.getText()); 
        ItemsPanale.setVisible(true);
        Tools.disableButOpen(btnItemPanale);
+
     }//GEN-LAST:event_btnAddItemsActionPerformed
 
     private void comboItemsItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboItemsItemStateChanged
@@ -769,8 +833,64 @@ public class SalesInvoiceFrame extends javax.swing.JFrame {
 
     private void btnSaveItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveItemActionPerformed
         // TODO add your handling code here:
+       String[] values = new String[6];
+       int c = jTable1.getRowCount();
+       c++;
+       values[5] = c+"";
+       values[4] = comboItems.getSelectedItem().toString();
+       values[3] = txtCount.getValue().toString();
+       values[2] = txtPrice.getText();
+       values[1] = txtDiscondItem.getText();
+       values[0] = txtSumPrice.getText();
+       model.addRow(values);
+       SumTotal();
+       txtDiscondItem.setText("0.00");
+       //Seting Data
+       
        
     }//GEN-LAST:event_btnSaveItemActionPerformed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        // TODO add your handling code here:
+
+        btndelItem.setEnabled(true);
+    }//GEN-LAST:event_jTable1MouseClicked
+
+    private void btndelItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btndelItemActionPerformed
+        // TODO add your handling code here:
+              int row = jTable1.getSelectedRow();
+              model.removeRow(row);
+              btndelItem.setEnabled(false);
+              SumTotal();
+    }//GEN-LAST:event_btndelItemActionPerformed
+
+    private void txtDiscondKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDiscondKeyReleased
+        // TODO add your handling code here:
+        setTextPayAmount();
+    }//GEN-LAST:event_txtDiscondKeyReleased
+
+    private void txtAmountPaymentKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAmountPaymentKeyReleased
+        // TODO add your handling code here:
+        setTextPayAmount();
+    }//GEN-LAST:event_txtAmountPaymentKeyReleased
+
+    private void comboPaymentMethodItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboPaymentMethodItemStateChanged
+        // TODO add your handling code here:
+       PaymentMethod payMethod = Tools.getPayment(comboPaymentMethod.getSelectedItem().toString());
+        switch(payMethod){
+            case cash:
+                txtAmountPayment.setEnabled(false);
+                break;
+            case deferred:
+                txtAmountPayment.setEnabled(false);
+                break;
+            case installments:
+                txtAmountPayment.setEnabled(true);
+                break;
+            default:
+                break;
+        }
+    }//GEN-LAST:event_comboPaymentMethodItemStateChanged
     private void calcSumPrice(){
         double priceUnit = Double.valueOf(txtPrice.getText());
         double count = Double.valueOf(txtCount.getValue().toString());
@@ -778,6 +898,15 @@ public class SalesInvoiceFrame extends javax.swing.JFrame {
         double sumTotal = (priceUnit*count)-discound;
         txtSumPrice.setText(sumTotal+"");
     
+    }
+    private void SumTotal(){
+        int c = jTable1.getRowCount();
+        double sum = 0;
+        for(int i = 0 ; i < c ; i++){
+            sum += Double.valueOf( (jTable1.getValueAt(i, 0)).toString());
+        }
+        txtTotalAmount.setText(sum+"");
+        setTextPayAmount();
     }
     /**
      * @param args the command line arguments

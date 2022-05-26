@@ -5,6 +5,7 @@
  */
 package Entity;
 
+import Utilities.ConnectDB;
 import Utilities.invoice;
 
 /**
@@ -16,7 +17,8 @@ public class SalesInvoic extends invoice{
     public SalesInvoic() {
         super("salesinvoic");
     }
-    
+
+
     
     
 }

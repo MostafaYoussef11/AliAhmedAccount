@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.2
+-- version 5.0.4
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 26, 2022 at 04:06 PM
--- Server version: 10.4.13-MariaDB
--- PHP Version: 7.2.31
+-- Generation Time: May 26, 2022 at 07:56 PM
+-- Server version: 10.4.17-MariaDB
+-- PHP Version: 7.3.27
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -69,6 +69,24 @@ INSERT INTO `items` (`id_items`, `name_items`, `firstbalance`, `id`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `itemsonsalesinvoice`
+--
+
+CREATE TABLE `itemsonsalesinvoice` (
+  `id` int(11) DEFAULT NULL,
+  `id_items` int(11) DEFAULT NULL,
+  `name_items` varchar(512) DEFAULT NULL,
+  `qyt` double(10,2) DEFAULT NULL,
+  `id_unit` int(11) DEFAULT NULL,
+  `price` double(10,2) DEFAULT NULL,
+  `discount` double(10,2) DEFAULT NULL,
+  `Amount` double(10,2) DEFAULT NULL,
+  `id_salesInvoic` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `priselist`
 --
 
@@ -108,6 +126,13 @@ CREATE TABLE `salesinvoic` (
   `amountLater` double(10,2) DEFAULT NULL,
   `note` varchar(1024) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `salesinvoic`
+--
+
+INSERT INTO `salesinvoic` (`id_salesInvoic`, `date_salesInvoic`, `type_salesInvoic`, `id_client`, `totalAmount`, `discount`, `amountCash`, `amountLater`, `note`) VALUES
+(1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -215,6 +240,14 @@ ALTER TABLE `items`
   ADD KEY `fkitemsunit` (`id`);
 
 --
+-- Indexes for table `itemsonsalesinvoice`
+--
+ALTER TABLE `itemsonsalesinvoice`
+  ADD KEY `id_items` (`id_items`),
+  ADD KEY `id_unit` (`id_unit`),
+  ADD KEY `id_salesInvoic` (`id_salesInvoic`);
+
+--
 -- Indexes for table `priselist`
 --
 ALTER TABLE `priselist`
@@ -248,6 +281,14 @@ ALTER TABLE `unit`
 --
 ALTER TABLE `items`
   ADD CONSTRAINT `fkitemsunit` FOREIGN KEY (`id`) REFERENCES `unit` (`id`);
+
+--
+-- Constraints for table `itemsonsalesinvoice`
+--
+ALTER TABLE `itemsonsalesinvoice`
+  ADD CONSTRAINT `itemsonsalesinvoice_ibfk_1` FOREIGN KEY (`id_items`) REFERENCES `items` (`id_items`),
+  ADD CONSTRAINT `itemsonsalesinvoice_ibfk_2` FOREIGN KEY (`id_unit`) REFERENCES `unit` (`id`),
+  ADD CONSTRAINT `itemsonsalesinvoice_ibfk_3` FOREIGN KEY (`id_salesInvoic`) REFERENCES `salesinvoic` (`id_salesInvoic`);
 
 --
 -- Constraints for table `priselist`
