@@ -137,7 +137,7 @@
 	<columnFooter>
 		<band height="50">
 			<staticText>
-				<reportElement mode="Transparent" x="367" y="0" width="200" height="30" forecolor="#000000" backcolor="#FFFFFF" uuid="9f586e9b-be8c-4457-a36c-38e5ddfaf82c"/>
+				<reportElement mode="Transparent" x="207" y="0" width="360" height="30" forecolor="#000000" backcolor="#FFFFFF" uuid="9f586e9b-be8c-4457-a36c-38e5ddfaf82c"/>
 				<box>
 					<pen lineWidth="1.75"/>
 					<topPen lineWidth="1.75"/>

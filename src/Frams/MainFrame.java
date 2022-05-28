@@ -258,6 +258,8 @@ public class MainFrame extends javax.swing.JFrame {
     private void ReceiptsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ReceiptsMouseClicked
         // TODO add your handling code here:
         clickPanel(Receipts);
+        ReciptFrame r = new ReciptFrame();
+        Tools.openJFram(r, "استلام نقدية");
     }//GEN-LAST:event_ReceiptsMouseClicked
 
     private void ReceiptsMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ReceiptsMouseExited

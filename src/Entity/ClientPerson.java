@@ -7,6 +7,7 @@ package Entity;
 
 import Utilities.ConnectDB;
 import Utilities.Person;
+import javax.swing.JComboBox;
 
 /**
  *
@@ -19,6 +20,32 @@ public class ClientPerson extends Person{
         this.tableName = "client";
     }
 
-
+    public String getFirstBalance(String idClient){
+        String firstbalance = ConnectDB.getIdFromName("SELECT firstBalance AS id FROM client WHERE id_client="+idClient);
+        return firstbalance;
+    }
+    public double calcBalanceClient(String nameClient){
+        double debit , Creditor = 0;
+        String id_client = getIdByName(nameClient);
+        double First_Balance = Double.parseDouble(getFirstBalance(id_client));
+        String sqlDebit = ConnectDB.getIdFromName("SELECT SUM(Debit) as id FROM debitandcreditorclient WHERE id_client="+id_client);
+        if(sqlDebit == null){
+            debit = 0 ;
+        }else{
+            debit = Double.parseDouble(sqlDebit);
+        }
+        String sqlCreditor = ConnectDB.getIdFromName("SELECT SUM(Creditor) as id FROM debitandcreditorclient WHERE id_client="+id_client);
+        if(sqlCreditor == null){
+            Creditor = 0 ;
+        }else{
+            Creditor = Double.parseDouble(sqlCreditor);
+        }
+        double newBalance = First_Balance + debit - Creditor;
+        return newBalance;
+    }
+    public void FillComboNameClient(JComboBox combo){
+      ConnectDB.fillCombo("client WHERE id_client != 1", "name_client", combo);
+    
+    }
     
 }
