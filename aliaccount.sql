@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 26, 2022 at 07:56 PM
+-- Generation Time: May 28, 2022 at 11:23 AM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 7.3.27
 
@@ -20,6 +20,30 @@ SET time_zone = "+00:00";
 --
 -- Database: `aliaccount`
 --
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `casher`
+--
+
+CREATE TABLE `casher` (
+  `id_casher` int(11) NOT NULL,
+  `date_casher` date DEFAULT NULL,
+  `Debit` double(10,2) DEFAULT NULL,
+  `Creditor` double(10,2) DEFAULT NULL,
+  `note` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `casher`
+--
+
+INSERT INTO `casher` (`id_casher`, `date_casher`, `Debit`, `Creditor`, `note`) VALUES
+(7, '2022-05-28', 42500.00, NULL, 'فاتورة مبيعات نقدية رقم  2'),
+(8, '2022-05-28', 124750.00, NULL, 'فاتورة مبيعات نقدية رقم  3'),
+(9, '2022-05-28', 239500.00, NULL, 'فاتورة مبيعات نقدية رقم  4'),
+(10, '2022-05-28', 235300.00, NULL, 'فاتورة مبيعات نقدية رقم  5');
 
 -- --------------------------------------------------------
 
@@ -41,9 +65,34 @@ CREATE TABLE `client` (
 --
 
 INSERT INTO `client` (`id_client`, `name_client`, `phone`, `address`, `idNational`, `firstBalance`) VALUES
-(1, 'احمد محمد', '01127333021', 'العدوة', '12345698745625', 20000),
-(2, 'مصطفي يوسف', '01221788873', 'النزل', '28611182800257', 0),
-(3, 'test Client', '0100255164', 'ادفو', '28611162800253', 0);
+(1, 'عميل نقدي', NULL, NULL, NULL, 0),
+(2, 'احمد محمد', '01127333021', 'العدوة', '12345698745625', 20000),
+(3, 'مصطفي يوسف', '01221788873', 'النزل', '28611182800257', 0),
+(4, 'test Client', '0100255164', 'ادفو', '28611162800253', 0);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `clientaccount`
+--
+
+CREATE TABLE `clientaccount` (
+  `id_ClientAccount` int(11) NOT NULL,
+  `date_ClientAccount` date DEFAULT NULL,
+  `Debit` double(10,2) DEFAULT NULL,
+  `Creditor` double(10,2) DEFAULT NULL,
+  `id_client` int(11) DEFAULT NULL,
+  `id_salesInvoic` int(11) DEFAULT NULL,
+  `id_Receipt` int(11) DEFAULT NULL,
+  `note` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `clientaccount`
+--
+
+INSERT INTO `clientaccount` (`id_ClientAccount`, `date_ClientAccount`, `Debit`, `Creditor`, `id_client`, `id_salesInvoic`, `id_Receipt`, `note`) VALUES
+(2, '2022-05-28', 117250.00, NULL, 2, 1, NULL, 'فاتورة مبيعات رقم  1 - آجل - احمد محمد');
 
 -- --------------------------------------------------------
 
@@ -82,7 +131,24 @@ CREATE TABLE `itemsonsalesinvoice` (
   `discount` double(10,2) DEFAULT NULL,
   `Amount` double(10,2) DEFAULT NULL,
   `id_salesInvoic` int(11) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `itemsonsalesinvoice`
+--
+
+INSERT INTO `itemsonsalesinvoice` (`id`, `id_items`, `name_items`, `qyt`, `id_unit`, `price`, `discount`, `Amount`, `id_salesInvoic`) VALUES
+(1, 1, 'زئبق', 1.00, 1, 117250.00, 0.00, 117250.00, 1),
+(1, 1, 'زئبق', 10.00, 1, 3500.00, 0.00, 35000.00, 2),
+(2, 2, 'مادة اصلي', 1.00, 2, 7500.00, 0.00, 7500.00, 2),
+(1, 1, 'زئبق', 1.00, 1, 117250.00, 0.00, 117250.00, 3),
+(2, 2, 'مادة اصلي', 1.00, 2, 7500.00, 0.00, 7500.00, 3),
+(1, 1, 'زئبق', 1.00, 1, 117250.00, 0.00, 117250.00, 4),
+(2, 1, 'زئبق', 1.00, 1, 117250.00, 0.00, 117250.00, 4),
+(3, 2, 'مادة اصلي', 1.00, 2, 5000.00, 0.00, 5000.00, 4),
+(1, 1, 'زئبق', 1.00, 1, 117250.00, 0.00, 117250.00, 5),
+(2, 1, 'زئبق', 1.00, 1, 117250.00, 0.00, 117250.00, 5),
+(3, 2, 'مادة اصلي', 1.00, 2, 1500.00, 0.00, 1500.00, 5);
 
 -- --------------------------------------------------------
 
@@ -91,6 +157,7 @@ CREATE TABLE `itemsonsalesinvoice` (
 --
 
 CREATE TABLE `priselist` (
+  `id_priceList` int(11) NOT NULL,
   `last_edit` date DEFAULT NULL,
   `purchase_price_low` double(10,2) DEFAULT NULL,
   `purchase_price_high` double(10,2) DEFAULT NULL,
@@ -103,11 +170,22 @@ CREATE TABLE `priselist` (
 -- Dumping data for table `priselist`
 --
 
-INSERT INTO `priselist` (`last_edit`, `purchase_price_low`, `purchase_price_high`, `sale_price_low`, `sale_price_high`, `id_items`) VALUES
-('2022-05-26', 2900.00, 97150.00, 3200.00, 107200.00, 1),
-('2022-05-31', 2500.00, 83750.00, 2800.00, 93800.00, 1),
-('2022-05-26', 150.00, 3750.00, 175.00, 4375.00, 2),
-('2022-06-01', 1000.00, 33500.00, 1200.00, 40200.00, 1);
+INSERT INTO `priselist` (`id_priceList`, `last_edit`, `purchase_price_low`, `purchase_price_high`, `sale_price_low`, `sale_price_high`, `id_items`) VALUES
+(1, '2022-05-27', 3000.00, 100500.00, 3500.00, 117250.00, 1),
+(2, '2022-05-27', 0.00, 0.00, 500.00, 16750.00, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `receipt`
+--
+
+CREATE TABLE `receipt` (
+  `id_Receipt` int(11) NOT NULL,
+  `date_Receipt` date DEFAULT NULL,
+  `amount` double(10,2) DEFAULT NULL,
+  `id_client` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -124,15 +202,20 @@ CREATE TABLE `salesinvoic` (
   `discount` double(10,2) DEFAULT NULL,
   `amountCash` double(10,2) DEFAULT NULL,
   `amountLater` double(10,2) DEFAULT NULL,
-  `note` varchar(1024) DEFAULT NULL
+  `note` text DEFAULT NULL,
+  `isFilltering` tinyint(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `salesinvoic`
 --
 
-INSERT INTO `salesinvoic` (`id_salesInvoic`, `date_salesInvoic`, `type_salesInvoic`, `id_client`, `totalAmount`, `discount`, `amountCash`, `amountLater`, `note`) VALUES
-(1, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `salesinvoic` (`id_salesInvoic`, `date_salesInvoic`, `type_salesInvoic`, `id_client`, `totalAmount`, `discount`, `amountCash`, `amountLater`, `note`, `isFilltering`) VALUES
+(1, '2022-05-04', 'آجل', 2, 117250.00, 0.00, 0.00, 117250.00, 'فاتورة مبيعات رقم  1 - آجل - احمد محمد', 0),
+(2, '2022-05-28', 'كاش', 1, 42500.00, 0.00, 42500.00, 0.00, 'فاتورة مبيعات نقدية رقم  2', 0),
+(3, '2022-05-28', 'كاش', 1, 124750.00, 0.00, 124750.00, 0.00, 'فاتورة مبيعات نقدية رقم  3', 0),
+(4, '2022-05-28', 'كاش', 1, 239500.00, 0.00, 239500.00, 0.00, 'فاتورة مبيعات نقدية رقم  4', 0),
+(5, '2022-05-28', 'كاش', 1, 236000.00, 700.00, 235300.00, 0.00, 'فاتورة مبيعات نقدية رقم  5', 0);
 
 -- --------------------------------------------------------
 
@@ -226,10 +309,25 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 
 --
+-- Indexes for table `casher`
+--
+ALTER TABLE `casher`
+  ADD PRIMARY KEY (`id_casher`);
+
+--
 -- Indexes for table `client`
 --
 ALTER TABLE `client`
   ADD PRIMARY KEY (`id_client`);
+
+--
+-- Indexes for table `clientaccount`
+--
+ALTER TABLE `clientaccount`
+  ADD PRIMARY KEY (`id_ClientAccount`),
+  ADD KEY `id_salesInvoic` (`id_salesInvoic`),
+  ADD KEY `id_client` (`id_client`),
+  ADD KEY `id_Receipt` (`id_Receipt`);
 
 --
 -- Indexes for table `items`
@@ -251,7 +349,15 @@ ALTER TABLE `itemsonsalesinvoice`
 -- Indexes for table `priselist`
 --
 ALTER TABLE `priselist`
+  ADD PRIMARY KEY (`id_priceList`),
   ADD KEY `id_items` (`id_items`);
+
+--
+-- Indexes for table `receipt`
+--
+ALTER TABLE `receipt`
+  ADD PRIMARY KEY (`id_Receipt`),
+  ADD KEY `id_client` (`id_client`);
 
 --
 -- Indexes for table `salesinvoic`
@@ -273,8 +379,32 @@ ALTER TABLE `unit`
   ADD PRIMARY KEY (`id`);
 
 --
+-- AUTO_INCREMENT for dumped tables
+--
+
+--
+-- AUTO_INCREMENT for table `casher`
+--
+ALTER TABLE `casher`
+  MODIFY `id_casher` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT for table `clientaccount`
+--
+ALTER TABLE `clientaccount`
+  MODIFY `id_ClientAccount` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `clientaccount`
+--
+ALTER TABLE `clientaccount`
+  ADD CONSTRAINT `clientaccount_ibfk_1` FOREIGN KEY (`id_salesInvoic`) REFERENCES `salesinvoic` (`id_salesInvoic`),
+  ADD CONSTRAINT `clientaccount_ibfk_2` FOREIGN KEY (`id_client`) REFERENCES `client` (`id_client`),
+  ADD CONSTRAINT `clientaccount_ibfk_3` FOREIGN KEY (`id_Receipt`) REFERENCES `receipt` (`id_Receipt`);
 
 --
 -- Constraints for table `items`
@@ -295,6 +425,12 @@ ALTER TABLE `itemsonsalesinvoice`
 --
 ALTER TABLE `priselist`
   ADD CONSTRAINT `priselist_ibfk_1` FOREIGN KEY (`id_items`) REFERENCES `items` (`id_items`);
+
+--
+-- Constraints for table `receipt`
+--
+ALTER TABLE `receipt`
+  ADD CONSTRAINT `receipt_ibfk_1` FOREIGN KEY (`id_client`) REFERENCES `client` (`id_client`);
 
 --
 -- Constraints for table `salesinvoic`

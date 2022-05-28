@@ -18,7 +18,7 @@ public abstract class Person{
     String address;
     String idInternational;
     double firstBalance;
-    private String tableName;
+    public String tableName;
 
     public Person(String tableName) {
         this.tableName = tableName;
@@ -67,5 +67,8 @@ public abstract class Person{
         return ConnectDB.LastId(tableName, "id_"+tableName);
     }
     
-    
+    public String getIdByName(String name){
+        String id = ConnectDB.getIdFrmName(tableName, name);
+        return id;
+    }
 }

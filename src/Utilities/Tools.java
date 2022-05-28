@@ -5,6 +5,7 @@
  */
 package Utilities;
 
+import Frams.MainFrame;
 import com.toedter.calendar.JDateChooser;
 import com.toedter.calendar.JTextFieldDateEditor;
 import java.awt.Component;
@@ -12,8 +13,14 @@ import static java.awt.Component.CENTER_ALIGNMENT;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Toolkit;
+import java.io.InputStream;
+import java.sql.Connection;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -22,6 +29,15 @@ import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableCellRenderer;
+import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.JasperCompileManager;
+import net.sf.jasperreports.engine.JasperFillManager;
+import net.sf.jasperreports.engine.JasperPrint;
+import net.sf.jasperreports.engine.JasperReport;
+import net.sf.jasperreports.engine.design.JRDesignQuery;
+import net.sf.jasperreports.engine.design.JasperDesign;
+import net.sf.jasperreports.engine.xml.JRXmlLoader;
+import net.sf.jasperreports.view.JasperViewer;
 
 /**
  *
@@ -75,7 +91,7 @@ public class Tools {
 
     public static void selectButtonTable(JPanel btnPanel){
       for (Component c : btnPanel.getComponents()) {
-          if(c.getName().equals("edit") || c.getName().equals("exit") || c.getName().equals("del")){
+          if(c.getName().equals("edit") || c.getName().equals("exit") || c.getName().equals("new")){
             c.setEnabled(true);
           }else{
               c.setEnabled(false);
@@ -113,10 +129,10 @@ public class Tools {
                paymethod = "كاش";
                break;
             case deferred:
-               paymethod = "دفعة من الحساب";
+               paymethod = "آجل";
                break; 
             case installments:
-                paymethod = "آجل";
+                paymethod = "دفعة من الحساب";
                 break;
             default:
                 paymethod = "كاش";
@@ -157,4 +173,32 @@ public class Tools {
         SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-dd");
         return sdf.format(date);
     }
+    public static Date dateFrmJTable(String date){
+      SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+      Date dat = null;
+      try {
+           dat = sdf.parse(date);
+      } catch (ParseException ex) {
+          Logger.getLogger(Tools.class.getName()).log(Level.SEVERE, null, ex);
+          
+      }
+      return dat;
+    }
+     public static void Printer(String sql ,InputStream stream , HashMap para){        
+        try {
+            JasperDesign jd = JRXmlLoader.load(stream); 
+            JRDesignQuery designQuery = new JRDesignQuery();
+            designQuery.setText(sql);
+            jd.setQuery(designQuery);
+            JasperReport jr = JasperCompileManager.compileReport(jd);
+            Connection con = ConnectDB.getCon();
+            JasperPrint jp = JasperFillManager.fillReport(jr, para, con);
+            JasperViewer.viewReport(jp, false);
+            
+        } catch (NumberFormatException | JRException ex) {
+            Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    
+    
+    } 
 }

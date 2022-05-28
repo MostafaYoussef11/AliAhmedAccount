@@ -5,6 +5,8 @@
  */
 package Utilities;
 
+import java.util.Date;
+
 /**
  *
  * @author mosta
@@ -14,17 +16,18 @@ public abstract class invoice {
     private String date_invoice;
     private String id_items ;
     private String name_items;
-    private double qty;
-    private String id_unit;
-    private double Price;
+    private String id_unit;   
     private double Amount ;
     private String id_client;
     private String id_Supplier;
     private PaymentMethod paymentMethod;
     private double CashAmount;
+    private double Discont;
+    private double RemainingAmount;
     private boolean isFilter;
     private String note;
     private String tableName;
+    
     public invoice(String tableName) {
         this.tableName = tableName;
     }
@@ -38,7 +41,9 @@ public abstract class invoice {
     public String getLastId(){
         return ConnectDB.LastId(tableName, "id_"+tableName);
     }
-    
+    public String getLastIdItemsOnInvoice(String id_salesInvoic){
+            return ConnectDB.LastId("itemsonsalesinvoice WHERE id_salesInvoic="+id_salesInvoic, "id");
+    };
     public String getTableName() {
         return tableName;
     }
@@ -59,6 +64,18 @@ public abstract class invoice {
         return date_invoice;
     }
 
+    public void setDate_invoice(Date date_invoice) {
+        this.date_invoice = Tools.dateSql(date_invoice);
+    }
+
+    public double getRemainingAmount() {
+        return RemainingAmount;
+    }
+
+    public void setRemainingAmount(double RemainingAmount) {
+        this.RemainingAmount = RemainingAmount;
+    }
+
     public void setDate_invoice(String date_invoice) {
         this.date_invoice = date_invoice;
     }
@@ -71,13 +88,6 @@ public abstract class invoice {
         this.id_items = id_items;
     }
 
-    public double getQty() {
-        return qty;
-    }
-
-    public void setQty(double qty) {
-        this.qty = qty;
-    }
 
     public String getId_unit() {
         return id_unit;
@@ -85,14 +95,6 @@ public abstract class invoice {
 
     public void setId_unit(String id_unit) {
         this.id_unit = id_unit;
-    }
-
-    public double getPrice() {
-        return Price;
-    }
-
-    public void setPrice(double Price) {
-        this.Price = Price;
     }
 
     public double getAmount() {
@@ -160,6 +162,13 @@ public abstract class invoice {
     }
    
     
+    public double getDiscont() {
+        return Discont;
+    }
+
+    public void setDiscont(double Discont) {
+        this.Discont = Discont;
+    }
     
     
     

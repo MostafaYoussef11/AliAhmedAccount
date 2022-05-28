@@ -37,7 +37,10 @@ public class ConnectDB {
       }
   
   }
-  
+  public static Connection getCon(){
+      SetConnection();
+      return con;
+  }
   public static boolean chakeusername(String username, String passwod){
       boolean isTrue = false;
       try{

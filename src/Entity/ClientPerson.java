@@ -5,6 +5,7 @@
  */
 package Entity;
 
+import Utilities.ConnectDB;
 import Utilities.Person;
 
 /**
@@ -15,7 +16,9 @@ public class ClientPerson extends Person{
 
     public ClientPerson() {
         super("client");
+        this.tableName = "client";
     }
+
 
     
 }

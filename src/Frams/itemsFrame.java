@@ -846,23 +846,34 @@ public class itemsFrame extends javax.swing.JFrame {
 
             },
             new String [] {
-                "سعر البيع", "سعر الشراء", "الصنف", "التاريخ"
+                "سعر البيع", "سعر الشراء", "الصنف", "التاريخ", "م"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
+        jTable3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable3MouseClicked(evt);
+            }
+        });
         jScrollPane3.setViewportView(jTable3);
         if (jTable3.getColumnModel().getColumnCount() > 0) {
             jTable3.getColumnModel().getColumn(0).setResizable(false);
+            jTable3.getColumnModel().getColumn(0).setPreferredWidth(100);
             jTable3.getColumnModel().getColumn(1).setResizable(false);
+            jTable3.getColumnModel().getColumn(1).setPreferredWidth(100);
             jTable3.getColumnModel().getColumn(2).setResizable(false);
+            jTable3.getColumnModel().getColumn(2).setPreferredWidth(150);
             jTable3.getColumnModel().getColumn(3).setResizable(false);
+            jTable3.getColumnModel().getColumn(3).setPreferredWidth(100);
+            jTable3.getColumnModel().getColumn(4).setResizable(false);
+            jTable3.getColumnModel().getColumn(4).setPreferredWidth(50);
         }
 
         btPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -1009,10 +1020,13 @@ public class itemsFrame extends javax.swing.JFrame {
         txtid.setText(i.lastid());
         txtLow.setText("");
         txtLow.setEditable(true);
+        txtLow.setEnabled(true);
         txtHight.setText("");
         txtHight.setEditable(true);
+        txtHight.setEnabled(true);
         txtVal.setText("");
         txtVal.setEditable(true);
+        txtVal.setEnabled(true);
         Tools.disableButOpen(btPanel);
         i.filTable(jTable1);
         
@@ -1060,11 +1074,8 @@ public class itemsFrame extends javax.swing.JFrame {
         txtLow.setEnabled(false);
         txtVal.setText(val);
         txtVal.setEnabled(false);
-        Tools.disableButOpen(btPanel);
-        btsave.setEnabled(false);
-        //btnew.setEnabled(true);
-        btedit.setEnabled(true);
-        btdel.setEnabled(true);
+        Tools.selectButtonTable(btPanel);
+
         txtid.setText(id);
         
     }//GEN-LAST:event_jTable1MouseClicked
@@ -1141,8 +1152,10 @@ public class itemsFrame extends javax.swing.JFrame {
         i.fillTableItems(jTable2);
         txtFirstBalance.setText("0");
         txtFirstBalance.setEditable(true);
+        txtFirstBalance.setEnabled(true);
         txtname.setText("");
         txtname.setEditable(true);
+        txtname.setEnabled(true);
         combo.setEnabled(true);
         Tools.disableButOpen(btPanel1);
         
@@ -1237,47 +1250,105 @@ public class itemsFrame extends javax.swing.JFrame {
         txtFirstBalance.setEnabled(false);
         combo.setSelectedItem(unit);
         combo.setEnabled(false);
-        Tools.disableButOpen(btPanel1);
-        btsave1.setEnabled(false);
-        btdel1.setEnabled(true);
-        btedit1.setEnabled(true);
+        Tools.selectButtonTable(btPanel1);
+//        Tools.disableButOpen(btPanel1);
+//        btsave1.setEnabled(false);
+//        btdel1.setEnabled(true);
+//        btedit1.setEnabled(true);
     }//GEN-LAST:event_jTable2MouseClicked
 
     private void btnew2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnew2ActionPerformed
         // TODO add your handling code here:
+        Tools.disableButOpen(btPanel2);
+        ComboNameItems.setSelectedIndex(0);
+        txtDate.setDate(new Date());
+        i.setId_priceList(i.getLastIdPriceList());
+        txtDate.setEnabled(true);
+        ComboNameItems.setEnabled(true);
+        purchase_price_high.setEnabled(true);
+        purchase_price_high.setText("0.00");
+        purchase_price_low.setEnabled(true);
+        purchase_price_low.setText("0.00");
+        sale_price_high.setEnabled(true);
+        sale_price_high.setText("0.00");
+        sale_price_low.setEnabled(true);
+        sale_price_low.setText("0.00");
+        txtnameLowUnit.setEnabled(true);
+        txtnameLowUnit1.setEnabled(true);
+        txtnameHightUnit1.setEnabled(true);
+        txtnameHightUnit.setEnabled(true);
     }//GEN-LAST:event_btnew2ActionPerformed
 
     private void btsave2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btsave2ActionPerformed
         // TODO add your handling code here:
+
         String name_items = ComboNameItems.getSelectedItem().toString();
-       //`purchase_price_low`, `purchase_price_high`, `sale_price_low`, `sale_price_high`
         double purchasePriceLow = Double.valueOf(purchase_price_low.getText());
         double purchasPriceHigh = Double.valueOf(purchase_price_high.getText());
         double salePriceLow = Double.valueOf(sale_price_low.getText());
         double salePriceHigh= Double.valueOf(sale_price_high.getText());
-        i.setDataPriceList(txtDate.getDate(), purchasePriceLow, purchasPriceHigh, salePriceLow, salePriceHigh, name_items);
-        boolean isSave = i.SaveListPrice();
-        if(isSave){
+        if(salePriceLow == 0 || salePriceHigh == 0){
+            Tools.showErrorMsg("سعر البيع غير صحيح");
+        }else{
+            i.setDataPriceList(txtDate.getDate(), purchasePriceLow, purchasPriceHigh, salePriceLow, salePriceHigh, name_items);
+            boolean isSave = i.SaveListPrice();
+            if(isSave){
             Tools.showInfoMsg("تم الحفظ", "حفظ");
-            txtDate.setDate(new Date());
-            purchase_price_high.setText("0.00");
-            purchase_price_low.setText("0.00");
-            sale_price_high.setText("0.00");
-            sale_price_low.setText("0.00");
-            i.fillTableListPrice(jTable3);
+             txtDate.setDate(new Date());
+              purchase_price_high.setText("0.00");
+             purchase_price_low.setText("0.00");
+             sale_price_high.setText("0.00");
+             sale_price_low.setText("0.00");
+              i.fillTableListPrice(jTable3);
+            }        
         }
+
     }//GEN-LAST:event_btsave2ActionPerformed
 
     private void btedit2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btedit2ActionPerformed
         // TODO add your handling code here:
+        Tools.EditButton(btPanel2, jPanel4);
+        Tools.EditButton(btPanel2, jPanel5);
+        Tools.EditButton(btPanel2, jPanel7);
     }//GEN-LAST:event_btedit2ActionPerformed
 
     private void btupdate2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btupdate2ActionPerformed
         // TODO add your handling code here:
+        i.setDataPriceList(txtDate.getDate(), Double.parseDouble(purchase_price_low.getText()),  Double.parseDouble(purchase_price_high.getText()), Double.parseDouble(sale_price_low.getText()),  Double.parseDouble(sale_price_high.getText()), ComboNameItems.getSelectedItem().toString());
+        int row = jTable3.getSelectedRow();
+        String id_priceList = jTable3.getValueAt(row, 4).toString();
+        i.setId_priceList(id_priceList);
+        boolean isTrue = i.updateListPrice();
+        if(isTrue){
+            Tools.showInfoMsg("تم تحديث البيانات", "تحديث");
+            txtDate.setDate(new Date());
+            i.setId_priceList(i.getLastIdPriceList());
+           ComboNameItems.setSelectedIndex(0);
+           Tools.disableButOpen(btPanel2);
+           i.fillTableListPrice(jTable3);
+        }else{
+            Tools.showErrorMsg("حدث خطا اثناء التحديث");
+        }
+//            purchase_price_high.setText("0.00");
+//            purchase_price_low.setText("0.00");
+//            sale_price_high.setText("0.00");
+//            sale_price_low.setText("0.00");
     }//GEN-LAST:event_btupdate2ActionPerformed
 
     private void btdel2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btdel2ActionPerformed
         // TODO add your handling code here:
+        i.setId_priceList(jTable3.getValueAt(jTable3.getSelectedRow(), 4).toString());
+        boolean isDel = i.deleteListPrice();
+        if(isDel){
+            Tools.showInfoMsg("تم حذف البيانات", "حذف");
+            txtDate.setDate(new Date());
+            i.setId_priceList(i.getLastIdPriceList());
+            ComboNameItems.setSelectedIndex(0);
+            Tools.disableButOpen(btPanel2);
+            i.fillTableListPrice(jTable3);            
+        }else{
+            Tools.showErrorMsg("حدث خطا اثناء الحذف");
+        }
     }//GEN-LAST:event_btdel2ActionPerformed
 
     private void btexit2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btexit2ActionPerformed
@@ -1318,6 +1389,45 @@ public class itemsFrame extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_sale_price_lowKeyReleased
+
+    private void jTable3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable3MouseClicked
+        // TODO add your handling code here:
+        Tools.selectButtonTable(btPanel2);
+        int row = jTable3.getSelectedRow();
+        String nameItems = jTable3.getValueAt(row, 2).toString();
+        String id = i.getIdUnitFromNameItems(nameItems);
+        double val = i.getValFromId(id);
+        String date = jTable3.getValueAt(row, 3).toString();
+        double saleHight =Double.parseDouble( jTable3.getValueAt(row, 0).toString());
+        double purchaseHigh = Double.parseDouble(jTable3.getValueAt(row, 1).toString());
+        double saleLow = saleHight / val;
+        double purchaseLow = purchaseHigh / val ;
+        String idUnit = i.getIdUnitFromNameItems(nameItems);
+        String lowUnit = i.getlowUnitFromId(idUnit);
+        String HighUnit = i.getHightUnitFromId(idUnit);
+        //Set Values in txt and disable 
+        ComboNameItems.setSelectedItem(nameItems);
+        ComboNameItems.setEnabled(false);
+        txtDate.setDate(Tools.dateFrmJTable(date));
+        //
+        txtDate.setEnabled(false);
+        txtnameLowUnit.setText(lowUnit);
+        txtnameLowUnit.setEnabled(false);
+        txtnameLowUnit1.setText(lowUnit);
+        txtnameLowUnit1.setEnabled(false);
+        txtnameHightUnit.setText(HighUnit);
+        txtnameHightUnit.setEnabled(false);
+        txtnameHightUnit1.setText(HighUnit);
+        txtnameHightUnit1.setEnabled(false);
+        purchase_price_low.setText(String.valueOf(purchaseLow));
+        purchase_price_low.setEnabled(false);
+        purchase_price_high.setText(String.valueOf(purchaseHigh));
+        purchase_price_high.setEnabled(false);
+        sale_price_high.setText(String.valueOf(saleHight));
+        sale_price_high.setEnabled(false);
+        sale_price_low.setText(String.valueOf(saleLow));
+        sale_price_low.setEnabled(false);
+    }//GEN-LAST:event_jTable3MouseClicked
     private void ComboNameItemsItemStateChanged(){
         String id = i.getIdUnitFromNameItems(ComboNameItems.getSelectedItem().toString());
         String high = i.getHightUnitFromId(id);
@@ -1328,6 +1438,8 @@ public class itemsFrame extends javax.swing.JFrame {
         txtnameLowUnit1.setText(low);
         purchase_price_low.setText("0.00");
         sale_price_low.setText("0.00");
+        purchase_price_high.setText("0.00");
+        sale_price_high.setText("0.00");
         
         
     }
