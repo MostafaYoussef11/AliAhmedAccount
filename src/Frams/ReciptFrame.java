@@ -8,6 +8,7 @@ package Frams;
 import Entity.ClientPerson;
 import Entity.recipt;
 import Utilities.Tools;
+import Utilities.TypeOfFilter;
 import java.awt.ComponentOrientation;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -25,6 +26,11 @@ public class ReciptFrame extends javax.swing.JFrame {
      */
     ClientPerson cp;
     recipt r;
+    private String id_recipt , date_recipt , name_client , id_client , notes;
+    private boolean isSelected ;
+    private double OldBalance , newBalance , amount ;
+    private TypeOfFilter type_filter;
+    
     public ReciptFrame() {
         initComponents();
         setSize(820, 740);
@@ -61,9 +67,9 @@ public class ReciptFrame extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         txt_note = new javax.swing.JTextArea();
         jPanel1 = new javax.swing.JPanel();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
-        jRadioButton3 = new javax.swing.JRadioButton();
+        radio_Payment = new javax.swing.JRadioButton();
+        radio_Clear = new javax.swing.JRadioButton();
+        radio_End = new javax.swing.JRadioButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         btPanel = new javax.swing.JPanel();
@@ -145,43 +151,43 @@ public class ReciptFrame extends javax.swing.JFrame {
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "نوع الدفعة", javax.swing.border.TitledBorder.RIGHT, javax.swing.border.TitledBorder.TOP));
         jPanel1.setOpaque(false);
 
-        jRadioButton1.setBackground(new java.awt.Color(255, 255, 255));
-        buttonGroup1.add(jRadioButton1);
-        jRadioButton1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jRadioButton1.setSelected(true);
-        jRadioButton1.setText("دفعة من الحساب");
-        jRadioButton1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jRadioButton1.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-        jRadioButton1.setOpaque(false);
-        jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
+        radio_Payment.setBackground(new java.awt.Color(255, 255, 255));
+        buttonGroup1.add(radio_Payment);
+        radio_Payment.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        radio_Payment.setSelected(true);
+        radio_Payment.setText("دفعة من الحساب");
+        radio_Payment.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        radio_Payment.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        radio_Payment.setOpaque(false);
+        radio_Payment.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton1ActionPerformed(evt);
+                radio_PaymentActionPerformed(evt);
             }
         });
 
-        jRadioButton2.setBackground(new java.awt.Color(255, 255, 255));
-        buttonGroup1.add(jRadioButton2);
-        jRadioButton2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jRadioButton2.setText("تصفية نقدية");
-        jRadioButton2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jRadioButton2.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-        jRadioButton2.setOpaque(false);
-        jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
+        radio_Clear.setBackground(new java.awt.Color(255, 255, 255));
+        buttonGroup1.add(radio_Clear);
+        radio_Clear.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        radio_Clear.setText("تصفية نقدية");
+        radio_Clear.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        radio_Clear.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        radio_Clear.setOpaque(false);
+        radio_Clear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton2ActionPerformed(evt);
+                radio_ClearActionPerformed(evt);
             }
         });
 
-        jRadioButton3.setBackground(new java.awt.Color(255, 255, 255));
-        buttonGroup1.add(jRadioButton3);
-        jRadioButton3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jRadioButton3.setText("تصفية نهائي");
-        jRadioButton3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jRadioButton3.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-        jRadioButton3.setOpaque(false);
-        jRadioButton3.addActionListener(new java.awt.event.ActionListener() {
+        radio_End.setBackground(new java.awt.Color(255, 255, 255));
+        buttonGroup1.add(radio_End);
+        radio_End.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        radio_End.setText("تصفية نهائي");
+        radio_End.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        radio_End.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        radio_End.setOpaque(false);
+        radio_End.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton3ActionPerformed(evt);
+                radio_EndActionPerformed(evt);
             }
         });
 
@@ -190,20 +196,20 @@ public class ReciptFrame extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addComponent(jRadioButton3)
+                .addComponent(radio_End)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jRadioButton2)
+                .addComponent(radio_Clear)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jRadioButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE))
+                .addComponent(radio_Payment, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jRadioButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jRadioButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jRadioButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(radio_Payment, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(radio_Clear, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(radio_End, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(21, Short.MAX_VALUE))
         );
 
@@ -428,6 +434,7 @@ public class ReciptFrame extends javax.swing.JFrame {
     private void newRecipt(){
         cp = new ClientPerson();
         r = new recipt();
+        r.fillTalble(jTable1);
         txt_note.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
         Tools.disableButOpen(btPanel);
         cp.FillComboNameClient(com_Name_Client);
@@ -443,6 +450,45 @@ public class ReciptFrame extends javax.swing.JFrame {
 
     private void btsaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btsaveActionPerformed
         // TODO add your handling code here:
+        id_recipt = txt_id_reciept.getText();
+        date_recipt = Tools.dateSql(txt_Date_Process.getDate()); 
+        name_client = com_Name_Client.getSelectedItem().toString();
+        id_client = cp.getIdByName(name_client);
+        notes = txt_note.getText();
+        OldBalance = Double.parseDouble(txt_balance.getText());
+        String amountst = txt_Amount.getText();
+        try{
+            amount = Double.parseDouble(amountst);
+        }catch(NumberFormatException ex){
+            amount = 0;
+             System.err.println(amountst);
+             Tools.showErrorMsg(ex.getMessage());
+        }
+         newBalance = OldBalance - amount;
+         if(radio_Payment.isSelected()){
+             type_filter = TypeOfFilter.Payment;
+         }else if(radio_Clear.isSelected()){
+               type_filter = TypeOfFilter.Clear;
+         }else{
+             type_filter = TypeOfFilter.End;
+         }
+         
+         //set data 
+         r.setAmount(amount);
+         r.setCreditor(amount);
+         r.setDate_process(date_recipt);
+         r.setId_Receipt(Integer.parseInt(id_recipt));
+         r.setId_client(Integer.parseInt(id_client));
+         r.setNote(notes);
+         r.setType(type_filter);
+         r.setNewBalance(newBalance);
+         if(r.Save()){
+             Tools.showInfoMsg("تم الحفظ بنجاح و الرصيد الحالي = " + newBalance, "حفظ");
+             newRecipt();
+         }else{
+             Tools.showErrorMsg("خطأ في الحفظ");
+         }
+         
     }//GEN-LAST:event_btsaveActionPerformed
 
     private void bteditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bteditActionPerformed
@@ -475,21 +521,21 @@ public class ReciptFrame extends javax.swing.JFrame {
         txt_note.setText("دفعة من حساب " + " " + com_Name_Client.getSelectedItem().toString());
     }//GEN-LAST:event_com_Name_ClientItemStateChanged
 
-    private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
+    private void radio_ClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radio_ClearActionPerformed
         // TODO add your handling code here:
         txt_note.setText("تصفية نقدية لحساب " + com_Name_Client.getSelectedItem().toString());
-    }//GEN-LAST:event_jRadioButton2ActionPerformed
+    }//GEN-LAST:event_radio_ClearActionPerformed
 
-    private void jRadioButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton3ActionPerformed
+    private void radio_EndActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radio_EndActionPerformed
         // TODO add your handling code here:
         txt_note.setText("تصفية نهائية لحساب " + com_Name_Client.getSelectedItem().toString());
-    }//GEN-LAST:event_jRadioButton3ActionPerformed
+    }//GEN-LAST:event_radio_EndActionPerformed
 
-    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
+    private void radio_PaymentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radio_PaymentActionPerformed
         // TODO add your handling code here:
       txt_note.setText("دفعة من حساب " + " " + com_Name_Client.getSelectedItem().toString());
 
-    }//GEN-LAST:event_jRadioButton1ActionPerformed
+    }//GEN-LAST:event_radio_PaymentActionPerformed
     //txt_note.setText("تصفية نهائية لحساب " + com_Name_Client.getSelectedItem().toString());
     /**
      * @param args the command line arguments
@@ -547,12 +593,12 @@ public class ReciptFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JRadioButton jRadioButton3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
+    private javax.swing.JRadioButton radio_Clear;
+    private javax.swing.JRadioButton radio_End;
+    private javax.swing.JRadioButton radio_Payment;
     private javax.swing.JTextField txt_Amount;
     private com.toedter.calendar.JDateChooser txt_Date_Process;
     private javax.swing.JLabel txt_balance;

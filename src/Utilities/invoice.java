@@ -24,7 +24,7 @@ public abstract class invoice {
     private double CashAmount;
     private double Discont;
     private double RemainingAmount;
-    private boolean isFilter;
+    private boolean isActive;
     private String note;
     private String tableName;
     
@@ -137,12 +137,12 @@ public abstract class invoice {
         this.CashAmount = CashAmount;
     }
 
-    public boolean isIsFilter() {
-        return isFilter;
+    public boolean getisActive() {
+        return isActive;
     }
 
-    public void setIsFilter(boolean isFilter) {
-        this.isFilter = isFilter;
+    public void setisActive(boolean isActive) {
+        this.isActive = isActive;
     }
 
     public String getNote() {

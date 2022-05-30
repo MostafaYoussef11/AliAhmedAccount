@@ -8,11 +8,13 @@ package Entity;
 import Utilities.ConnectDB;
 import Utilities.Tools;
 import Utilities.invoice;
-import com.mysql.jdbc.Connection;
-import com.mysql.jdbc.Statement;
+import java.sql.Connection;
+//import com.mysql.jdbc.Connection;
+//import com.mysql.jdbc.Statement;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -41,8 +43,8 @@ public class SalesInvoic extends invoice{
         con = ConnectDB.getCon();
         con.setAutoCommit(false);
         String sqlInsert = "INSERT INTO `salesinvoic` (`id_salesInvoic`, `date_salesInvoic`, `type_salesInvoic`, `id_client`"
-                + ", `totalAmount`, `discount`, `amountCash`, `amountLater`, `note`, `isFilltering`) "
-                + "VALUES (?,?,?,?,?,?,?,?,?,?)";
+                + ", `totalAmount`, `discount`, `amountCash`, `amountLater`, `note`) "
+                + "VALUES (?,?,?,?,?,?,?,?,?)";
         pstmt = con.prepareStatement(sqlInsert,Statement.RETURN_GENERATED_KEYS);
         pstmt.setString(1, getId_invoice());
         pstmt.setString(2, getDate_invoice());
@@ -53,7 +55,6 @@ public class SalesInvoic extends invoice{
         pstmt.setDouble(7, getCashAmount());
         pstmt.setDouble(8, getRemainingAmount());
         pstmt.setString(9, getNote());
-        pstmt.setBoolean(10, isIsFilter());
         int rowAffected = pstmt.executeUpdate();
         rs = pstmt.getGeneratedKeys();
         if(rowAffected == 1){
@@ -66,7 +67,6 @@ public class SalesInvoic extends invoice{
                  pstcasher.setDouble(2, getCashAmount());
                  pstcasher.setString(3,getNote());
                  rowAffected = pstcasher.executeUpdate();
-                   //System.out.println("Cash : " + rowAffected);
                  break;
                case deferred:
                    String sqlInserClientAccount = "INSERT INTO `clientaccount` (`date_ClientAccount`, `Debit`,`id_client`, `id_salesInvoic`, `note`) "
@@ -78,7 +78,6 @@ public class SalesInvoic extends invoice{
                    pstcasher.setString(4, getId_invoice());
                    pstcasher.setString(5, getNote());
                    rowAffected = pstcasher.executeUpdate();
-                   //System.out.println("deferred : " + rowAffected);
                    break;
                case installments:
                  String sqlInsertCasherInsallmen ="INSERT INTO `casher` (`date_casher`, `Debit`, `note`) VALUES (?,?,?)";
@@ -86,8 +85,7 @@ public class SalesInvoic extends invoice{
                  pstcasher.setString(1, getDate_invoice());
                  pstcasher.setDouble(2, getCashAmount());
                  pstcasher.setString(3,getNote());
-                 rowAffected = pstcasher.executeUpdate();
-                 //System.out.println("Installments Cash : " + rowAffected);
+                 pstcasher.executeUpdate();
                  String sqlInserClientAccountInstallmen = "INSERT INTO `clientaccount` (`date_ClientAccount`, `Debit`,`id_client`, `id_salesInvoic`, `note`) "
                            + "VALUES (?,?,?,?,?)";
                  pstcasher = con.prepareStatement(sqlInserClientAccountInstallmen, Statement.RETURN_GENERATED_KEYS);
@@ -100,10 +98,12 @@ public class SalesInvoic extends invoice{
                  //System.out.println("Installments ClientAccount : " + rowAffected);  
                  break;
            }
-           
-           Values.forEach((i)->getValuesFromVector(i));
-           con.commit();
-           isSaved = true;
+           if(rowAffected == 1){
+                Values.forEach((i)->getValuesFromVector(i));         
+                con.commit();
+                isSaved = true;
+           }
+
         }else{
             con.rollback();
             isSaved = false;
@@ -113,7 +113,7 @@ public class SalesInvoic extends invoice{
       catch(SQLException ex){
            try{
               if(con != null)
-                    con.rollback();
+                 con.rollback();
             }catch(SQLException e){
                 System.out.println(e.getMessage());
             }
@@ -153,8 +153,7 @@ public class SalesInvoic extends invoice{
             pstItems.setDouble(7, i.discount);
             pstItems.setDouble(8, i.Amount);
             pstItems.setInt(9, i.id_salesInvoic);
-            int rowAffect = pstItems.executeUpdate();
-            //System.out.println(""+rowAffect+i.id);
+            pstItems.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(SalesInvoic.class.getName()).log(Level.SEVERE, null, ex);
         }

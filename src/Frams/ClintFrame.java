@@ -11,6 +11,8 @@ import Utilities.Tools;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.io.InputStream;
+import java.util.HashMap;
 import javax.swing.ImageIcon;
 
 /**
@@ -439,6 +441,19 @@ public class ClintFrame extends javax.swing.JFrame {
 
     private void btprintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btprintActionPerformed
         // TODO add your handling code here:
+        int row = jTable1.getSelectedRow();
+        if(row < 0){
+            InputStream strem = getClass().getResourceAsStream("/Reborts/AllClientReport.jrxml");
+            //HashMap map = new HashMap();
+            String sql = "SELECT ac.id_client , c.name_client ,c.firstBalance , SUM(ac.Debit) As Debit, Sum(ac.Creditor) as Creditor , SUM(c.firstBalance + ac.Debit+ac.Creditor) as total "
+                    + "from clientaccount ac INNER JOIN client c ON c.id_client = ac.id_client";
+            Tools.Printer(sql, strem, null);
+        }else{
+//               String note = "فاتورة مبيعات - دفعة من الحساب  "  + jTable1.getValueAt(row, 4).toString();
+//               String not2 =  note.substring(0, 30);
+//               Tools.showInfoMsg(note, not2);
+        }
+        
     }//GEN-LAST:event_btprintActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
@@ -462,7 +477,7 @@ public class ClintFrame extends javax.swing.JFrame {
         txtName.setText(name);
         txtName.setEnabled(false);
         Tools.selectButtonTable(btPanel);
-        
+        btprint.setEnabled(true);
         
     }//GEN-LAST:event_jTable1MouseClicked
 

@@ -15,17 +15,25 @@ import com.sun.security.ntlm.Client;
  */
 public abstract class MoneyTransfer {
     private String date_process;
-    private double Debit , Creditor , amount;
+    private double Debit , Creditor , amount , newBalance;
     private String note;
     private int id_client , id_Suppliers , id_Receipt , id_PaymentReceipt  ;
     
     public boolean Save(){return false;};
     public boolean Delete(){return false;};
     public boolean Update(){return false;};
+
+    public double getNewBalance() {
+        return newBalance;
+    }
+
+    public void setNewBalance(double newBalance) {
+        this.newBalance = newBalance;
+    }
     
     public void SetIdClientFromName(String name_client){
-        String id_client = new ClientPerson().getIdByName(name_client);
-        setId_client(Integer.parseInt(id_client));
+        String idclient = new ClientPerson().getIdByName(name_client);
+        setId_client(Integer.parseInt(idclient));
     }
     public void SetIdSuppliersFromName(String name_suppliers){
         String id_Supplier = new Suppliers().getIdByName(name_suppliers);

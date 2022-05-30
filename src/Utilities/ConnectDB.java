@@ -5,12 +5,14 @@
  */
 package Utilities;
 
-import com.mysql.jdbc.Connection;
-import com.mysql.jdbc.Statement;
+//import com.mysql.jdbc.Connection;
+//import com.mysql.jdbc.Statement;
+import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.Vector;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
@@ -45,7 +47,7 @@ public class ConnectDB {
       boolean isTrue = false;
       try{
           SetConnection();
-          stmt = (Statement) con.createStatement();
+          stmt = con.createStatement();
           String sql = "Select * from users where username = '"+username+"' and passwod ='"+passwod+"' ;";
           ResultSet rst = stmt.executeQuery(sql);
           if(rst.next()){

@@ -81,7 +81,7 @@ public class Tools {
   
   public static void disableButOpen(JPanel btnPanel){
       for (Component c : btnPanel.getComponents()) {
-          if(c.getName().equals("save") || c.getName().equals("exit")){
+          if(c.getName().equals("save") || c.getName().equals("exit") || c.getName().equals("print") || c.getName().equals("search")){
             c.setEnabled(true);
           }else{
               c.setEnabled(false);

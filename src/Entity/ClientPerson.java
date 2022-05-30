@@ -8,6 +8,7 @@ package Entity;
 import Utilities.ConnectDB;
 import Utilities.Person;
 import javax.swing.JComboBox;
+import javax.swing.JTable;
 
 /**
  *
@@ -44,8 +45,19 @@ public class ClientPerson extends Person{
         return newBalance;
     }
     public void FillComboNameClient(JComboBox combo){
-      ConnectDB.fillCombo("client WHERE id_client != 1", "name_client", combo);
-    
+      ConnectDB.fillCombo("client WHERE id_client != 1 AND isActive = 1", "name_client", combo);
+    }
+    public void FillComboCashClient(JComboBox combo){
+        ConnectDB.fillCombo("client WHERE id_client = 1 ", "name_client", combo);
+    }
+
+    @Override
+    public void filTable(JTable table) {
+       // super.filTable(table); //To change body of generated methods, choose Tools | Templates.
+               String sql = "select firstBalance , idNational , address , phone , name_client , id_client from  client where id_client != 1 ";
+        String[] coulmnName = {"رصيد سابق", "رقم قومي", "عنوان", "هاتف", "الاسم", "مسلسل"};
+        ConnectDB.fillAndCenterTable(sql, table, coulmnName);
+        
     }
     
 }

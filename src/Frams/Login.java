@@ -30,7 +30,7 @@ public class Login extends javax.swing.JFrame {
     public Login() {
         setUndecorated(true);
         initComponents();
-        setIconImage(new ImageIcon(Toolkit.getDefaultToolkit().getClass().getResource("/Icons/laptop.png")).getImage());
+   //     setIconImage(new ImageIcon(Toolkit.getDefaultToolkit().getClass().getResource("/iconApp/laptop.png")).getImage());
         setBackground(new Color(0.0f, 0.0f, 0.0f, 0.05f));
     }
     public static String getServer(){
