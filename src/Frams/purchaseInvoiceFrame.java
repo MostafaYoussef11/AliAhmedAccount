@@ -99,11 +99,13 @@ public class purchaseInvoiceFrame extends javax.swing.JFrame {
         }
         txtAmountCashing.setEnabled(false);
         JComponent editor = txtCount.getEditor();
+        String name_item = comboItems.getSelectedItem().toString();
         JSpinner.DefaultEditor spinnerEditor = (JSpinner.DefaultEditor)editor;
         spinnerEditor.getTextField().setHorizontalAlignment(JTextField.CENTER);
-        String id = ConnectDB.getIdFromName("select id from items where name_items='"+comboItems.getSelectedItem().toString()+"'");
+        String id = ConnectDB.getIdFromName("select id from items where name_items='"+name_item+"'");
         ConnectDB.fillComboUnit(id, comboUnit);
-        txtPrice.setText(new Items().getSalesPriceHight(comboItems.getSelectedItem().toString()));
+        String name_unit = comboUnit.getSelectedItem().toString();
+        txtPrice.setText(items.getPurchasePriceHightOrLow(name_item, name_unit));
         String columns[]={ "الاجمالي", "الخصم", "سعر الوحدة", "الكمية", "الصنف", "م"};
         model = (DefaultTableModel) jTable1.getModel();
         Tools.CenterTable(columns, jTable1);
@@ -901,9 +903,10 @@ public class purchaseInvoiceFrame extends javax.swing.JFrame {
 
     private void comboItemsItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboItemsItemStateChanged
         // TODO add your handling code here:
-        String id = ConnectDB.getIdFromName("select id from items where name_items='"+comboItems.getSelectedItem().toString()+"'");
+        String name_item = comboItems.getSelectedItem().toString();
+        String id = items.getIdUnitFromNameItems(name_item);
         ConnectDB.fillComboUnit(id, comboUnit);
-        String priceHigh = new Items().getSalesPriceHight(comboItems.getSelectedItem().toString());
+        String priceHigh = items.getPurchasePriceHightOrLow(name_item,comboUnit.getSelectedItem().toString());
         if(priceHigh.equals("")){
                txtPrice.setText("0.00");
         }else{
@@ -918,7 +921,7 @@ public class purchaseInvoiceFrame extends javax.swing.JFrame {
         Items i = new Items();
         String name_items = comboItems.getSelectedItem().toString();
         String type = comboUnit.getSelectedItem().toString();
-        String price = i.getSalesPriceHightOrLow(name_items, type);
+        String price = i.getPurchasePriceHightOrLow(name_items, type);
         if(price.equals("")){
             txtPrice.setText("0.00");
         }else{

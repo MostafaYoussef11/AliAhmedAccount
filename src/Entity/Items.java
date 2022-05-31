@@ -24,6 +24,7 @@ public class Items implements Ent{
     String id_items;
     double val ;
     int firstbalance;
+    private String id_priceList;
     private String last_edit; 
     private double purchase_price_low, purchase_price_high, sale_price_low, sale_price_high;
     
@@ -133,14 +134,7 @@ public class Items implements Ent{
         String sql = "SELECT id_items as id FROM items WHERE name_items='"+nameItem+"';";
         return ConnectDB.getIdFromName(sql);
     }
-    
-    
-    /*
-    INSERT INTO `priselist` (`last_edit`, `purchase_price_low`, `purchase_price_high`, `sale_price_low`, `sale_price_high`, `id_items`) 
-    VALUES (NULL, NULL, NULL, NULL, NULL, NULL)
-    
-    */
-    private String id_priceList;
+
     public String getLastIdPriceList(){
         return ConnectDB.LastId("priselist", "id_priceList");
     }
@@ -168,7 +162,6 @@ public class Items implements Ent{
         return ConnectDB.ExucuteAnyQuery(sql);
     }
     public boolean updateListPrice(){
-        //`last_edit`, `purchase_price_low`, `purchase_price_high`, `sale_price_low`, `sale_price_high`, `id_items`
         String sql = "UPDATE priselist SET last_edit='"+last_edit+"' , purchase_price_low = "+purchase_price_low+", "
                 + "purchase_price_high = "+purchase_price_high + ", sale_price_low = "+sale_price_low+","
                 + "sale_price_high = "+sale_price_high+", id_items = "+id_items+" WHERE id_priceList ="+getId_priceList();
@@ -209,6 +202,20 @@ public class Items implements Ent{
     public void setId_priceList(String id_priceList) {
         this.id_priceList = id_priceList;
     }
-
+    public String getPurchasePriceHightOrLow(String nameItems , String type){
+        String id_items = getIdItemsFromName(nameItems);
+        String sql ="";
+        String low = ConnectDB.getIdFromName("select low as id from unititems where id_items="+id_items);
+        String high = ConnectDB.getIdFromName("select high as id from unititems where id_items="+id_items);
+        if(type.equals(low)){
+          sql = "select purchase_price_low as id from priselist where id_items="+id_items+" ORDER BY last_edit DESC LIMIT 1 ; ";
+        }else if(type.equals(high)){
+          sql = "select purchase_price_high as id from priselist where id_items="+id_items+" ORDER BY last_edit DESC LIMIT 1 ; ";
+        }
+        else{
+            Tools.showErrorMsg("خطأ في الوحدة");
+        }
+        return ConnectDB.getIdFromName(sql);
+    }
 
 }
