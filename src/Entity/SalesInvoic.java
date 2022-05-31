@@ -107,7 +107,7 @@ public class SalesInvoic extends invoice{
             con.rollback();
             isSaved = false;
         }
-        
+        con.close();
       }
       catch(SQLException ex){
            try{

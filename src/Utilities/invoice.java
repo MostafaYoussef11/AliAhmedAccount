@@ -47,7 +47,7 @@ public abstract class invoice {
     public String getLastIdItemsOnInvoice(String id_salesInvoic){
             return ConnectDB.LastId("itemsonsalesinvoice WHERE id_salesInvoic="+id_salesInvoic, "id");
     };
-    
+
     public String getTableName() {
         return tableName;
     }

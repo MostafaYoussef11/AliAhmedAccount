@@ -40,11 +40,11 @@ public abstract class Person{
     }
     
     public boolean Save(){
-        String sql = "INSERT INTO "+tableName+" VALUES ("+id_person+",'"+name+"','"+phone+"','"+address+"','"+idInternational+"',"+firstBalance+")";
+        String sql = "INSERT INTO "+tableName+" VALUES ("+id_person+",'"+name+"','"+phone+"','"+address+"','"+idInternational+"',"+firstBalance+" , isActive = 1)";
         return ConnectDB.ExucuteAnyQuery(sql);
     }
     public boolean Update(String id){
-      String sql = "update client set name_"+tableName+"='"+name+"' , phone='"+phone+"' , address='"+address+"' , idNational = '"+idInternational+"' , firstBalance='"+firstBalance+"' where id_"+tableName+" ="+id;
+      String sql = "update "+tableName+" set name_"+tableName+"='"+name+"' , phone='"+phone+"' , address='"+address+"' , idNational = '"+idInternational+"' , firstBalance='"+firstBalance+"' where id_"+tableName+" ="+id;
       return ConnectDB.ExucuteAnyQuery(sql);
     }
     public boolean Delete(String id){
@@ -78,11 +78,14 @@ public abstract class Person{
     }
     
     public void FillComboCash(JComboBox comboName){
-         ConnectDB.fillCombo(tableName + " WHERE id_"+tableName +"= 1 ", "name_Suppliers", comboName);
+         ConnectDB.fillCombo(tableName + " WHERE id_"+tableName +"= 1 ", "name_"+tableName, comboName);
         
     }
     public void FillComboName(JComboBox comboName){
-        ConnectDB.fillCombo(tableName + " WHERE id_"+tableName +"!= 1 AND isActive = 1", "name_Suppliers", comboName);
+        ConnectDB.fillCombo(tableName + " WHERE id_"+tableName +"!= 1 AND isActive = 1", "name_"+tableName, comboName);
     }    
-    
+    public boolean ActiveOurDisactive(boolean isActive , String id){
+        String sql = "update "+tableName+" set isActive = "+isActive+" where id_"+tableName+" ="+id;
+        return ConnectDB.ExucuteAnyQuery(sql);
+    }
 }

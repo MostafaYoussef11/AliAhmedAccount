@@ -73,10 +73,11 @@ public class purchaseInvoiceFrame extends javax.swing.JFrame {
         Tools.disableButOpen(btPanel);
         String id_Invoic = invoice.getLastId();
         txtId_Invoice.setText(id_Invoic);
+        txtTotalAmount.setText("0.00");
         txtDiscond.setText("0.00");
         txtAmountCashing.setText("0.00");
         ItemsPanale.setVisible(false);
-        items.fillComboNameItems(comboName);
+        items.fillComboNameItems(comboItems);
         Tools.CenterJDateChos(txtDate);
         PaymentMethod value[];
         value = PaymentMethod.values();
@@ -107,8 +108,8 @@ public class purchaseInvoiceFrame extends javax.swing.JFrame {
         model = (DefaultTableModel) jTable1.getModel();
         Tools.CenterTable(columns, jTable1);
         btnAddItems.setEnabled(true);
-//        setTextPayAmount();
-//        calcSumPrice();
+        setTextPayAmount();
+        calcSumPrice();
         valuesItems = new Vector<ItemsOnInvoice>();
         c = 1;
     }
@@ -816,7 +817,7 @@ public class purchaseInvoiceFrame extends javax.swing.JFrame {
     }
     private void btsaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btsaveActionPerformed
         // TODO add your handling code here:
-        /**
+       
         int size = valuesItems.size();
         if(size == 0){
             Tools.showErrorMsg("لا توجد اصناف بالفاتورة");
@@ -825,7 +826,7 @@ public class purchaseInvoiceFrame extends javax.swing.JFrame {
             invoice.setId_invoice(txtId_Invoice.getText());
             invoice.setDate_invoice(txtDate.getDate());
             invoice.setPaymentMethod(Tools.getPayment(comboPaymentMethod.getSelectedItem().toString()));
-            invoice.setId_client(new ClientPerson().getIdByName(comboName.getSelectedItem().toString()));
+            invoice.setId_Supplier(suppliers.getIdByName(comboName.getSelectedItem().toString()));
             invoice.setAmount(Double.parseDouble(txtTotalAmount.getText()));
             invoice.setDiscont(Double.parseDouble(txtDiscond.getText()));
             invoice.setCashAmount(Double.parseDouble(txtAmountCashing.getText()));
@@ -836,16 +837,17 @@ public class purchaseInvoiceFrame extends javax.swing.JFrame {
                // Tools.showInfoMsg("تم الحفظ بنجاح", "حفظ فاتورة");
                 int isPrint = JOptionPane.showConfirmDialog(null,"تم الحفظ بنجاح . "+ "هل تريد طباعة الفاتورة ؟ ", "طباعة فاتورة", JOptionPane.YES_NO_OPTION);
                 if(isPrint == JOptionPane.YES_OPTION){
-                    String sql = "SELECT s.id_salesInvoic , s.date_salesInvoic , s.type_salesInvoic , c.name_client , s.totalAmount , s.discount , s.amountCash , s.amountLater , s.note FROM salesinvoic s"
-                            + " INNER JOIN client c on s.id_client = c.id_client where id_salesinvoic=$P{id_salesInvoice}";
+                    String sql = "SELECT ps.id_purchaseInvoice , ps.date_purchaseInvoice , ps.type_purchaseInvoic , s.name_Suppliers , ps.totalAmount , ps.discount , ps.amountCash , ps.amountLater , ps.note"
+                            + " FROM purchaseinvoice ps INNER JOIN suppliers s on ps.id_Suppliers = s.id_Suppliers where ps.id_purchaseInvoice=$P{id_purchaseInvoice}";//where ps.id_purchaseInvoice=1
                     HashMap para = new HashMap();
                     int id_invoicBil = Integer.parseInt(invoice.getId_invoice());
-                    para.put("id_salesInvoice", id_invoicBil);
+                    para.put("id_purchaseInvoice", id_invoicBil);
                     double amount = invoice.getAmount() - invoice.getDiscont();
                     para.put("Tafqeet", Tafqeet.doTafqeet(new BigDecimal(amount)));
-                    InputStream stream =getClass().getResourceAsStream("/Reborts/SalesInvoicReport.jrxml");
+                    InputStream stream =getClass().getResourceAsStream("/Reborts/PurchaseInvoicReport.jrxml");
                     Tools.Printer(sql, stream, para);
                 }
+                Tools.showInfoMsg("تم الحفظ بنجاح", "حفظ");
                 newInvoice();
                 txtTotalAmount.setText("0.00");
                 txtDiscond.setText("0.00");
@@ -857,7 +859,7 @@ public class purchaseInvoiceFrame extends javax.swing.JFrame {
             }
             
         }
-    */    
+    
     }//GEN-LAST:event_btsaveActionPerformed
 
     private void bteditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bteditActionPerformed
@@ -991,16 +993,16 @@ public class purchaseInvoiceFrame extends javax.swing.JFrame {
             case cash:
                 txtAmountCashing.setEnabled(false);
                 suppliers.FillComboCash(comboName);
-                txtNote.setText("فاتورة مبيعات نقدية رقم " +" "+ id_salesInvoic );
+                txtNote.setText("فاتورة مشتريات نقدية رقم " +" "+ id_salesInvoic );
                 break;
             case deferred:
                 txtAmountCashing.setEnabled(false);
                 suppliers.FillComboName(comboName);
-                txtNote.setText("فاتورة مبيعات رقم " +" "+ id_salesInvoic + " - " + comboPaymentMethod.getSelectedItem().toString() + " - " + comboName.getSelectedItem().toString());
+                txtNote.setText("فاتورة مشتريات رقم " +" "+ id_salesInvoic + " - " + comboPaymentMethod.getSelectedItem().toString() + " - " + comboName.getSelectedItem().toString());
                 break;
             case installments:
                 txtAmountCashing.setEnabled(true);
-                txtNote.setText("فاتورة مبيعات رقم " +" "+ id_salesInvoic + " - " + comboPaymentMethod.getSelectedItem().toString() + " - " + comboName.getSelectedItem().toString());
+                txtNote.setText("فاتورة مشتريات رقم " +" "+ id_salesInvoic + " - " + comboPaymentMethod.getSelectedItem().toString() + " - " + comboName.getSelectedItem().toString());
                 suppliers.FillComboName(comboName);
                 break;
             default:
@@ -1014,13 +1016,13 @@ public class purchaseInvoiceFrame extends javax.swing.JFrame {
        String id_salesInvoic = txtId_Invoice.getText() ;
         switch(payMethod){
             case cash:
-                txtNote.setText("فاتورة مبيعات نقدية رقم " +" "+ id_salesInvoic );
+                txtNote.setText("فاتورة مشتريات نقدية رقم " +" "+ id_salesInvoic );
                 break;
             case deferred:
-                txtNote.setText("فاتورة مبيعات رقم " + " "+id_salesInvoic + " - " + comboPaymentMethod.getSelectedItem().toString() + " - " + comboName.getSelectedItem().toString());
+                txtNote.setText("فاتورة مشتريات رقم " + " "+id_salesInvoic + " - " + comboPaymentMethod.getSelectedItem().toString() + " - " + comboName.getSelectedItem().toString());
                 break;
             case installments:
-                txtNote.setText("فاتورة مبيعات رقم " +" "+ id_salesInvoic + " - " + comboPaymentMethod.getSelectedItem().toString() + " - " + comboName.getSelectedItem().toString());
+                txtNote.setText("فاتورة مشتريات رقم " +" "+ id_salesInvoic + " - " + comboPaymentMethod.getSelectedItem().toString() + " - " + comboName.getSelectedItem().toString());
                 break;
             default:
                 break;
