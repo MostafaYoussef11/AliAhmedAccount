@@ -5,6 +5,7 @@
  */
 package Utilities;
 
+import javax.swing.JComboBox;
 import javax.swing.JTable;
 
 /**
@@ -22,6 +23,10 @@ public abstract class Person{
 
     public Person(String tableName) {
         this.tableName = tableName;
+    }
+
+    public String getId_person() {
+        return id_person;
     }
     
     
@@ -71,4 +76,13 @@ public abstract class Person{
         String id = ConnectDB.getIdFrmName(tableName, name);
         return id;
     }
+    
+    public void FillComboCash(JComboBox comboName){
+         ConnectDB.fillCombo(tableName + " WHERE id_"+tableName +"= 1 ", "name_Suppliers", comboName);
+        
+    }
+    public void FillComboName(JComboBox comboName){
+        ConnectDB.fillCombo(tableName + " WHERE id_"+tableName +"!= 1 AND isActive = 1", "name_Suppliers", comboName);
+    }    
+    
 }

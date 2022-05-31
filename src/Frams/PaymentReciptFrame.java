@@ -431,7 +431,7 @@ public class PaymentReciptFrame extends javax.swing.JFrame {
         r.fillTalble(jTable1);
         txt_note.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
         Tools.disableButOpen(btPanel);
-        cp.FillComboNameClient(com_Name_Client);
+        cp.FillComboName(com_Name_Client);
         txt_balance.setText(cp.calcBalanceClient(com_Name_Client.getSelectedItem().toString())+"");
         txt_Amount.setText("0.00");
         Tools.CenterJDateChos(txt_Date_Process);

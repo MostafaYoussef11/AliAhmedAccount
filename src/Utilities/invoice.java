@@ -5,7 +5,10 @@
  */
 package Utilities;
 
+import Entity.ItemsOnInvoice;
 import java.util.Date;
+import java.util.Vector;
+import javax.swing.JComboBox;
 
 /**
  *
@@ -27,7 +30,7 @@ public abstract class invoice {
     private boolean isActive;
     private String note;
     private String tableName;
-    
+     private Vector<ItemsOnInvoice> Values;
     public invoice(String tableName) {
         this.tableName = tableName;
     }
@@ -44,6 +47,7 @@ public abstract class invoice {
     public String getLastIdItemsOnInvoice(String id_salesInvoic){
             return ConnectDB.LastId("itemsonsalesinvoice WHERE id_salesInvoic="+id_salesInvoic, "id");
     };
+    
     public String getTableName() {
         return tableName;
     }
@@ -170,8 +174,12 @@ public abstract class invoice {
         this.Discont = Discont;
     }
     
-    
-    
-    
+    public Vector<ItemsOnInvoice> getValues() {
+        return Values;
+    }
+    public void setValues(Vector<ItemsOnInvoice> Values) {
+        this.Values = Values;
+    }
+
    
 }

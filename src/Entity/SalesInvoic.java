@@ -15,7 +15,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -26,7 +25,7 @@ import java.util.logging.Logger;
 
 
 public class SalesInvoic extends invoice{
-    private Vector<ItemsOnSalesInvoice> Values;
+   // private Vector<ItemsOnInvoice> Values;
     private Connection con;
     private PreparedStatement pstmt = null;
     private PreparedStatement pstItems = null;
@@ -99,7 +98,7 @@ public class SalesInvoic extends invoice{
                  break;
            }
            if(rowAffected == 1){
-                Values.forEach((i)->getValuesFromVector(i));         
+                getValues().forEach((i)->getValuesFromVector(i));         
                 con.commit();
                 isSaved = true;
            }
@@ -132,13 +131,8 @@ public class SalesInvoic extends invoice{
         return isSaved;
     }
 
-    public Vector<ItemsOnSalesInvoice> getValues() {
-        return Values;
-    }
-    public void setValues(Vector<ItemsOnSalesInvoice> Values) {
-        this.Values = Values;
-    }
-    public void getValuesFromVector(ItemsOnSalesInvoice i){
+
+    public void getValuesFromVector(ItemsOnInvoice i){
         try {
            String Sql = "INSERT INTO `itemsonsalesinvoice` (`id`, `id_items`, `name_items`, `qyt`, `id_unit`,"
                       + " `price`, `discount`, `Amount`, `id_salesInvoic`)"
@@ -152,7 +146,7 @@ public class SalesInvoic extends invoice{
             pstItems.setDouble(6, i.price);
             pstItems.setDouble(7, i.discount);
             pstItems.setDouble(8, i.Amount);
-            pstItems.setInt(9, i.id_salesInvoic);
+            pstItems.setInt(9, i.id_Invoic);
             pstItems.executeUpdate();
         } catch (SQLException ex) {
             Logger.getLogger(SalesInvoic.class.getName()).log(Level.SEVERE, null, ex);

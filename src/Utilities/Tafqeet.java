@@ -79,8 +79,8 @@ private final static Map<Integer, String> NUMBERS_MAP = new HashMap<>();
         String remainderNumber = splittedNumber.length > 1 ? splittedNumber[1] : "0";
 
         convertNumberToWords(beforeDotNumber, numberToReturn);
-
-        numberToReturn.append(" جنيها");
+        numberToReturn.append("  ");
+        numberToReturn.append(" جنيها مصريا لاغير ");
 
         int remainder = Integer.parseInt(remainderNumber);
 
@@ -127,12 +127,14 @@ private final static Map<Integer, String> NUMBERS_MAP = new HashMap<>();
             }
 
             int rightCombined = right + (mid * 10);
+            //add = opration and "rightCombined ==0"
+            if (rightCombined >= 0) {
 
-            if (rightCombined > 0) {
-
-                if (multiplier > 0 && rightCombined == 1) {
+                if (multiplier > 0 && rightCombined == 1 || rightCombined == 0) {
+                    currentThreeBuilder.append(" ");
                     currentThreeBuilder.append(MULTIPLIERS_MAP.get(multiplier)[0]);
-                } else if (multiplier > 0 && rightCombined == 2) {
+                } else if (multiplier > 0 && rightCombined == 2) { 
+                    currentThreeBuilder.append(" " + "و"+" ");
                     currentThreeBuilder.append(MULTIPLIERS_MAP.get(multiplier)[1]);
                 } else if (rightCombined > 20) {
                     if (left > 0) {

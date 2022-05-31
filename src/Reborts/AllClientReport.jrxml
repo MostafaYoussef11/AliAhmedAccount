@@ -4,7 +4,7 @@
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<queryString>
-		<![CDATA[SELECT ac.id_client , c.name_client , c.firstBalance , SUM(ac.Debit) As Debit, Sum(ac.Creditor) as Creditor from clientaccount ac INNER JOIN client c ON c.id_client = ac.id_client]]>
+		<![CDATA[SELECT client.id_client , c.name_client , client.firstBalance ,sum(c.Debit) as Debit , sum(c.Creditor) as Creditor FROM debitandcreditorclient c INNER JOIN client on c.id_client = client.id_client where client.isActive = 1 GROUP by c.name_client]]>
 	</queryString>
 	<field name="id_client" class="java.lang.Integer">
 		<fieldDescription><![CDATA[]]></fieldDescription>
@@ -21,8 +21,8 @@
 	<field name="Creditor" class="java.lang.Double">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<variable name="balance" class="java.lang.Double" calculation="Sum">
-		<variableExpression><![CDATA[$F{firstBalance}+$F{Debit}-$F{Creditor}]]></variableExpression>
+	<variable name="balance" class="java.lang.Double">
+		<variableExpression><![CDATA[($F{firstBalance} != null ? $F{firstBalance}: 0.00)+($F{Debit} != null ? $F{Debit} : 0.00 )-($F{Creditor} != null ? $F{Creditor} : 0.00)]]></variableExpression>
 	</variable>
 	<background>
 		<band splitType="Stretch"/>
@@ -126,7 +126,7 @@
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="52" splitType="Stretch">
+		<band height="22" splitType="Stretch">
 			<textField>
 				<reportElement x="509" y="0" width="46" height="20" uuid="d263b044-49e7-4df6-83e4-16f4bbb174f0"/>
 				<box>
@@ -153,7 +153,7 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{name_client}]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField pattern="#,##0.00">
 				<reportElement x="178" y="0" width="100" height="20" uuid="db92b306-3fd4-4f7c-a098-74b725e27428"/>
 				<box>
 					<topPen lineWidth="1.75"/>
@@ -164,9 +164,9 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Tahoma" size="12" isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{Debit}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{Debit} != null ? $F{Debit} : 0.00]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField pattern="#,##0.00">
 				<reportElement x="78" y="0" width="100" height="20" uuid="5f3860f9-4d7e-4b33-bfb0-e10168fbafaf"/>
 				<box>
 					<topPen lineWidth="1.75"/>
@@ -177,9 +177,9 @@
 				<textElement textAlignment="Center" verticalAlignment="Middle">
 					<font fontName="Tahoma" size="12" isBold="true"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{Creditor}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{Creditor} != null ? $F{Creditor} : 0.00]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField pattern="#,##0.00">
 				<reportElement mode="Transparent" x="279" y="0" width="82" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="039a2df5-4004-4892-8f4a-dda620d4a8df"/>
 				<box>
 					<topPen lineWidth="1.25"/>
@@ -191,9 +191,9 @@
 					<font fontName="Tahoma" size="12" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$F{firstBalance}]]></textFieldExpression>
+				<textFieldExpression><![CDATA[$F{firstBalance} != null ? $F{firstBalance} : 0.00]]></textFieldExpression>
 			</textField>
-			<textField>
+			<textField pattern="#,##0.00">
 				<reportElement mode="Transparent" x="0" y="0" width="78" height="20" forecolor="#000000" backcolor="#FFFFFF" uuid="29aa687a-f8e4-4281-9312-8fbc22d9e9a5"/>
 				<box>
 					<pen lineWidth="1.5"/>

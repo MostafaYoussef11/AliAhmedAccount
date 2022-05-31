@@ -7,11 +7,13 @@ package Frams;
 
 
 import Entity.ClientPerson;
+import Utilities.Tafqeet;
 import Utilities.Tools;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.io.InputStream;
+import java.math.BigDecimal;
 import java.util.HashMap;
 import javax.swing.ImageIcon;
 
@@ -442,16 +444,33 @@ public class ClintFrame extends javax.swing.JFrame {
     private void btprintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btprintActionPerformed
         // TODO add your handling code here:
         int row = jTable1.getSelectedRow();
+        c = new ClientPerson();
+
         if(row < 0){
             InputStream strem = getClass().getResourceAsStream("/Reborts/AllClientReport.jrxml");
             //HashMap map = new HashMap();
-            String sql = "SELECT ac.id_client , c.name_client ,c.firstBalance , SUM(ac.Debit) As Debit, Sum(ac.Creditor) as Creditor , SUM(c.firstBalance + ac.Debit+ac.Creditor) as total "
-                    + "from clientaccount ac INNER JOIN client c ON c.id_client = ac.id_client";
+            String sql = "SELECT client.id_client , c.name_client , client.firstBalance ,sum(c.Debit) as Debit , sum(c.Creditor) as Creditor FROM debitandcreditorclient c "
+                    + "INNER JOIN client on c.id_client = client.id_client where client.isActive = 1 GROUP by c.name_client";
             Tools.Printer(sql, strem, null);
         }else{
-//               String note = "فاتورة مبيعات - دفعة من الحساب  "  + jTable1.getValueAt(row, 4).toString();
-//               String not2 =  note.substring(0, 30);
-//               Tools.showInfoMsg(note, not2);
+//            String nameClient = jTable1.getValueAt(row, 4).toString();
+//            c.setId_person(c.getIdByName(nameClient));
+            String txtid = txtId.getText() ;
+           
+            if(txtid == null){
+                 Tools.showErrorMsg("الرجاء تحديد اسم العميل");
+            }else{
+                int id_client = Integer.parseInt(txtid);
+                String sql = "SELECT ac.id_client , c.firstBalance , c.name_client ,c.address,c.phone, SUM(ac.Debit) As Debit, Sum(ac.Creditor) as Creditor from clientaccount ac "
+                        + " INNER JOIN client c ON c.id_client = ac.id_client where ac.id_client = $P{id_client} and ac.isActive = 1"; //
+                InputStream strem = getClass().getResourceAsStream("/Reborts/ClientReport.jrxml");
+                HashMap para = new HashMap();
+                para.put("id_client", id_client);
+                double new_balance = c.calcBalanceClient(txtName.getText());
+                para.put("Tafqeet", Tafqeet.doTafqeet(new BigDecimal(new_balance)));
+                Tools.Printer(sql, strem, para);            
+            }
+
         }
         
     }//GEN-LAST:event_btprintActionPerformed

@@ -7,7 +7,7 @@ package Frams;
 
 import Entity.ClientPerson;
 import Entity.Items;
-import Entity.ItemsOnSalesInvoice;
+import Entity.ItemsOnInvoice;
 import Entity.SalesInvoic;
 import Utilities.ConnectDB;
 import Utilities.PaymentMethod;
@@ -45,7 +45,7 @@ public class SalesInvoiceFrame extends javax.swing.JFrame {
     DefaultTableModel model;
     int c = 0;
     ClientPerson client;
-    Vector<ItemsOnSalesInvoice> valuesItems;
+    Vector<ItemsOnInvoice> valuesItems;
     public SalesInvoiceFrame() {
         initComponents();
         background.setLocation(0, 0);
@@ -86,11 +86,11 @@ public class SalesInvoiceFrame extends javax.swing.JFrame {
         comboPaymentMethod.setModel(new DefaultComboBoxModel(values));
         ((JLabel)comboPaymentMethod.getRenderer()).setHorizontalAlignment(SwingConstants.CENTER);
         if(comboPaymentMethod.getSelectedItem().toString().equals("كاش")){
-               client.FillComboCashClient(comboName);
+               client.FillComboCash(comboName);
                txtNote.setText("فاتورة مبيعات نقدية رقم " +" "+id_salesInvoic );
 
         }else{
-            client.FillComboNameClient(comboName);
+            client.FillComboName(comboName);
             txtNote.setText("فاتورة مبيعات رقم " +" "+id_salesInvoic + " - " + comboPaymentMethod.getSelectedItem().toString() + " - " + comboName.getSelectedItem().toString());
 
         }
@@ -106,7 +106,7 @@ public class SalesInvoiceFrame extends javax.swing.JFrame {
         Tools.CenterTable(columns, jTable1);
         btnAddItems.setEnabled(true);
         calcSumPrice();
-        valuesItems = new Vector<ItemsOnSalesInvoice>();
+        valuesItems = new Vector<ItemsOnInvoice>();
         c = 1;
     }
     
@@ -947,7 +947,7 @@ public class SalesInvoiceFrame extends javax.swing.JFrame {
        values[1] = txtDiscondItem.getText();
        values[0] = txtSumPrice.getText();
        model.addRow(values);
-       valuesItems.add(new ItemsOnSalesInvoice(c, Integer.parseInt(new Items().getIdItemsFromName(values[4])), values[4],Double.parseDouble(txtCount.getValue().toString()),Integer.parseInt(new Items().getIdUnitFromNameItems(values[4])), Double.parseDouble(txtPrice.getText()), Double.parseDouble(txtDiscondItem.getText()), Double.parseDouble(txtSumPrice.getText()), Integer.parseInt(txtId_Invoice.getText())));
+       valuesItems.add(new ItemsOnInvoice(c, Integer.parseInt(new Items().getIdItemsFromName(values[4])), values[4],Double.parseDouble(txtCount.getValue().toString()),Integer.parseInt(new Items().getIdUnitFromNameItems(values[4])), Double.parseDouble(txtPrice.getText()), Double.parseDouble(txtDiscondItem.getText()), Double.parseDouble(txtSumPrice.getText()), Integer.parseInt(txtId_Invoice.getText())));
        SumTotal();
        c++;
        txtDiscondItem.setText("0.00"); 
@@ -986,18 +986,18 @@ public class SalesInvoiceFrame extends javax.swing.JFrame {
         switch(payMethod){
             case cash:
                 txtAmountCashing.setEnabled(false);
-                client.FillComboCashClient(comboName);
+                client.FillComboCash(comboName);
                 txtNote.setText("فاتورة مبيعات نقدية رقم " +" "+ id_salesInvoic );
                 break;
             case deferred:
                 txtAmountCashing.setEnabled(false);
-                client.FillComboNameClient(comboName);
+                client.FillComboName(comboName);
                 txtNote.setText("فاتورة مبيعات رقم " +" "+ id_salesInvoic + " - " + comboPaymentMethod.getSelectedItem().toString() + " - " + comboName.getSelectedItem().toString());
                 break;
             case installments:
                 txtAmountCashing.setEnabled(true);
                 txtNote.setText("فاتورة مبيعات رقم " +" "+ id_salesInvoic + " - " + comboPaymentMethod.getSelectedItem().toString() + " - " + comboName.getSelectedItem().toString());
-                client.FillComboNameClient(comboName);
+                client.FillComboName(comboName);
                 break;
             default:
                 break;

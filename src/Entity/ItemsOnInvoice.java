@@ -9,16 +9,16 @@ package Entity;
  *
  * @author mosta
  */
-public class ItemsOnSalesInvoice {
-    public int id , id_items , id_unit , id_salesInvoic;
+public class ItemsOnInvoice {
+    public int id , id_items , id_unit , id_Invoic;
     public double qyt , price , discount , Amount;
     public String name_items;
-    public ItemsOnSalesInvoice(int id , int id_items , String name_items , double qyt , int id_unit , double price , double discount , double Amount , int id_salesInvoic){
+    public ItemsOnInvoice(int id , int id_items , String name_items , double qyt , int id_unit , double price , double discount , double Amount , int id_Invoic){
             this.Amount = Amount;
             this.discount = discount;
             this.id = id;
             this.id_items = id_items;
-            this.id_salesInvoic = id_salesInvoic;
+            this.id_Invoic = id_Invoic;
             this.id_unit = id_unit;
             this.name_items = name_items;
             this.price = price;
