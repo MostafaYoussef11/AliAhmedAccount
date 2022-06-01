@@ -120,15 +120,15 @@ public class SalesInvoiceFrame extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         txtDate = new com.toedter.calendar.JDateChooser();
         jLabel4 = new javax.swing.JLabel();
-        comboPaymentMethod = new javax.swing.JComboBox<>();
+        comboPaymentMethod = new javax.swing.JComboBox<String>();
         jLabel5 = new javax.swing.JLabel();
-        comboName = new javax.swing.JComboBox<>();
+        comboName = new javax.swing.JComboBox<String>();
         ItemsPanale = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
-        comboItems = new javax.swing.JComboBox<>();
+        comboItems = new javax.swing.JComboBox<String>();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        comboUnit = new javax.swing.JComboBox<>();
+        comboUnit = new javax.swing.JComboBox<String>();
         jLabel9 = new javax.swing.JLabel();
         txtPrice = new javax.swing.JTextField();
         btnItemPanale = new javax.swing.JPanel();
@@ -198,7 +198,7 @@ public class SalesInvoiceFrame extends javax.swing.JFrame {
         jLabel4.setText("نوع الفاتورة");
         jLabel4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        comboPaymentMethod.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboPaymentMethod.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         comboPaymentMethod.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 comboPaymentMethodItemStateChanged(evt);
@@ -210,7 +210,7 @@ public class SalesInvoiceFrame extends javax.swing.JFrame {
         jLabel5.setText("اسم العميل");
         jLabel5.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        comboName.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboName.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         comboName.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 comboNameItemStateChanged(evt);
@@ -225,7 +225,7 @@ public class SalesInvoiceFrame extends javax.swing.JFrame {
         jLabel6.setText("اسم الصنف");
         jLabel6.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        comboItems.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboItems.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         comboItems.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 comboItemsItemStateChanged(evt);
@@ -243,7 +243,7 @@ public class SalesInvoiceFrame extends javax.swing.JFrame {
         jLabel8.setText("الوحدة");
         jLabel8.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        comboUnit.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboUnit.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         comboUnit.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 comboUnitItemStateChanged(evt);
@@ -713,7 +713,7 @@ public class SalesInvoiceFrame extends javax.swing.JFrame {
         btserch.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         btserch.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/search.png"))); // NOI18N
         btserch.setText("بحث ");
-        btserch.setName("print"); // NOI18N
+        btserch.setName("search"); // NOI18N
         btserch.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btserchActionPerformed(evt);
@@ -882,6 +882,8 @@ public class SalesInvoiceFrame extends javax.swing.JFrame {
 
     private void btserchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btserchActionPerformed
         // TODO add your handling code here:
+        SearchSealseFrame search = new SearchSealseFrame();
+        Tools.openJFram(search);
     }//GEN-LAST:event_btserchActionPerformed
 
     private void btnAddItemsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddItemsActionPerformed

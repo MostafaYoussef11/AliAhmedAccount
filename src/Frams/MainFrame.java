@@ -85,6 +85,7 @@ public class MainFrame extends javax.swing.JFrame {
         Receipts.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/cash.png"))); // NOI18N
         Receipts.setText("تحصيلات");
         Receipts.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        Receipts.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         Receipts.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         Receipts.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         Receipts.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -104,6 +105,7 @@ public class MainFrame extends javax.swing.JFrame {
         client.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/clint.png"))); // NOI18N
         client.setText("العملاء");
         client.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        client.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         client.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         client.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         client.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -123,6 +125,7 @@ public class MainFrame extends javax.swing.JFrame {
         items.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/shelves.png"))); // NOI18N
         items.setText("الاصناف");
         items.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        items.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         items.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         items.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         items.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -142,6 +145,7 @@ public class MainFrame extends javax.swing.JFrame {
         suppliers.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/courier.png"))); // NOI18N
         suppliers.setText("الموردين");
         suppliers.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        suppliers.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         suppliers.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         suppliers.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         suppliers.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -161,6 +165,7 @@ public class MainFrame extends javax.swing.JFrame {
         Payments.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/payment_1.png"))); // NOI18N
         Payments.setText("مدفوعات");
         Payments.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        Payments.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         Payments.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         Payments.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         Payments.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -180,6 +185,7 @@ public class MainFrame extends javax.swing.JFrame {
         Purchases.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/selling.png"))); // NOI18N
         Purchases.setText("مشتريات");
         Purchases.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        Purchases.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         Purchases.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         Purchases.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         Purchases.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -199,6 +205,7 @@ public class MainFrame extends javax.swing.JFrame {
         Reports.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/software.png"))); // NOI18N
         Reports.setText("تقارير");
         Reports.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        Reports.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         Reports.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         Reports.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         Reports.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -218,6 +225,7 @@ public class MainFrame extends javax.swing.JFrame {
         sales.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/buy.png"))); // NOI18N
         sales.setText("مبيعات");
         sales.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        sales.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         sales.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         sales.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         sales.addMouseListener(new java.awt.event.MouseAdapter() {
@@ -291,10 +299,13 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void PaymentsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PaymentsMouseClicked
         // TODO add your handling code here:
+        PaymentReciptFrame payRecipt = new PaymentReciptFrame();
+        Tools.openJFram(payRecipt, "ايصال دفع نقدية");
     }//GEN-LAST:event_PaymentsMouseClicked
 
     private void PaymentsMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PaymentsMouseExited
         // TODO add your handling code here:
+        exitPanel(Payments);
     }//GEN-LAST:event_PaymentsMouseExited
 
     private void PurchasesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PurchasesMouseClicked
@@ -310,10 +321,13 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void ReportsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ReportsMouseClicked
         // TODO add your handling code here:
+        RebortsFrame rebort = new RebortsFrame();
+        Tools.openJFram(rebort, "التقارير");
     }//GEN-LAST:event_ReportsMouseClicked
 
     private void ReportsMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ReportsMouseExited
         // TODO add your handling code here:
+        exitPanel(Reports);
     }//GEN-LAST:event_ReportsMouseExited
 
     private void salesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_salesMouseClicked

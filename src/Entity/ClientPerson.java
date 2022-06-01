@@ -44,12 +44,6 @@ public class ClientPerson extends Person{
         double newBalance = First_Balance + debit - Creditor;
         return newBalance;
     }
-//    public void FillComboNameClient(JComboBox combo){
-//      ConnectDB.fillCombo("client WHERE id_client != 1 AND isActive = 1", "name_client", combo);
-//    }
-//    public void FillComboCashClient(JComboBox combo){
-//        ConnectDB.fillCombo("client WHERE id_client = 1 ", "name_client", combo);
-//    }
 
     @Override
     public void filTable(JTable table) {

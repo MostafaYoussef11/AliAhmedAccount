@@ -17,6 +17,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JTable;
 
 /**
  *
@@ -153,7 +154,11 @@ public class SalesInvoic extends invoice{
         }
        
     }
-
+    public static void fillTable(JTable jTable){
+        String sql = "SELECT s.amountLater , s.amountCash , s.discount , s.totalAmount , c.name_client ,s.type_salesInvoic , s.date_salesInvoic , s.id_salesInvoic FROM salesinvoic s INNER JOIN client c on s.id_client = c.id_client";
+        String[] column_Name = { "الباقي", "المبلغ المدفوع", "الخصم", "الاجمالي", "العميل", "نوع الفاتورة", "التاريخ", "م"};
+        ConnectDB.fillAndCenterTable(sql, jTable, column_Name);
+    }
     
     
 }

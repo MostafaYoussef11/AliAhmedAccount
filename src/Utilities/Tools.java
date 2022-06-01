@@ -78,9 +78,9 @@ public class Tools {
         lab.setPreferredSize(new Dimension(100, 40));
         lab.setAlignmentX(CENTER_ALIGNMENT);
         lab.setAlignmentY(CENTER_ALIGNMENT);
-        lab.setFont(new Font("VIP Hala Bold", Font.BOLD, 14));
         lab.setHorizontalAlignment(JLabel.CENTER);
         lab.setText(text);
+        lab.setFont(font(14f));
         return lab;
         
   }

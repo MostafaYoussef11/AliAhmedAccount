@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.4
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 31, 2022 at 07:26 PM
--- Server version: 10.4.17-MariaDB
--- PHP Version: 7.3.27
+-- Generation Time: Jun 01, 2022 at 11:25 PM
+-- Server version: 10.4.13-MariaDB
+-- PHP Version: 7.2.31
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -34,6 +34,14 @@ CREATE TABLE `casher` (
   `Creditor` double(10,2) DEFAULT NULL,
   `note` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `casher`
+--
+
+INSERT INTO `casher` (`id_casher`, `date_casher`, `Debit`, `Creditor`, `note`) VALUES
+(1, '2022-06-01', 117250.00, NULL, 'فاتورة مبيعات نقدية رقم  1'),
+(2, '2022-06-01', 0.00, NULL, 'فاتورة مبيعات رقم  2 - دفعة من الحساب - احمد محمد');
 
 -- --------------------------------------------------------
 
@@ -78,6 +86,13 @@ CREATE TABLE `clientaccount` (
   `isActive` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Dumping data for table `clientaccount`
+--
+
+INSERT INTO `clientaccount` (`id_ClientAccount`, `date_ClientAccount`, `Debit`, `Creditor`, `id_client`, `id_salesInvoic`, `id_Receipt`, `note`, `isActive`) VALUES
+(1, '2022-06-01', 117250.00, NULL, 2, 2, NULL, 'فاتورة مبيعات رقم  2 - دفعة من الحساب - احمد محمد', 1);
+
 -- --------------------------------------------------------
 
 --
@@ -92,6 +107,23 @@ CREATE TABLE `debitandcreditorclient` (
 ,`name_client` varchar(512)
 ,`id_salesInvoic` int(11)
 ,`id_Receipt` int(11)
+,`note` text
+);
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `debitandcreditorsupplier`
+-- (See below for the actual view)
+--
+CREATE TABLE `debitandcreditorsupplier` (
+`date_suppliersAccount` date
+,`Debit` double(10,2)
+,`Creditor` double(10,2)
+,`id_Suppliers` int(11)
+,`name_Suppliers` varchar(512)
+,`id_purchaseInvoice` int(11)
+,`id_paymentReceipt` int(11)
 ,`note` text
 );
 
@@ -151,6 +183,14 @@ CREATE TABLE `itemsonsalesinvoice` (
   `Amount` double(10,2) DEFAULT NULL,
   `id_salesInvoic` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `itemsonsalesinvoice`
+--
+
+INSERT INTO `itemsonsalesinvoice` (`id`, `id_items`, `name_items`, `qyt`, `id_unit`, `price`, `discount`, `Amount`, `id_salesInvoic`) VALUES
+(1, 1, 'زئبق', 1.00, 1, 117250.00, 0.00, 117250.00, 1),
+(1, 1, 'زئبق', 1.00, 1, 117250.00, 0.00, 117250.00, 2);
 
 -- --------------------------------------------------------
 
@@ -241,6 +281,14 @@ CREATE TABLE `salesinvoic` (
   `note` text DEFAULT NULL,
   `isActive` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `salesinvoic`
+--
+
+INSERT INTO `salesinvoic` (`id_salesInvoic`, `date_salesInvoic`, `type_salesInvoic`, `id_client`, `totalAmount`, `discount`, `amountCash`, `amountLater`, `note`, `isActive`) VALUES
+(1, '2022-06-01', 'كاش', 1, 117250.00, 0.00, 117250.00, 0.00, 'فاتورة مبيعات نقدية رقم  1', 1),
+(2, '2022-06-01', 'دفعة من الحساب', 2, 117250.00, 0.00, 0.00, 117250.00, 'فاتورة مبيعات رقم  2 - دفعة من الحساب - احمد محمد', 1);
 
 -- --------------------------------------------------------
 
@@ -348,7 +396,16 @@ INSERT INTO `users` (`username`, `passwod`) VALUES
 --
 DROP TABLE IF EXISTS `debitandcreditorclient`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `debitandcreditorclient`  AS SELECT `ac`.`date_ClientAccount` AS `date_ClientAccount`, `ac`.`Debit` AS `Debit`, `ac`.`Creditor` AS `Creditor`, `ac`.`id_client` AS `id_client`, `c`.`name_client` AS `name_client`, `ac`.`id_salesInvoic` AS `id_salesInvoic`, `ac`.`id_Receipt` AS `id_Receipt`, `ac`.`note` AS `note` FROM (`clientaccount` `ac` join `client` `c` on(`ac`.`id_client` = `c`.`id_client`)) WHERE `ac`.`isActive` = 1 ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `debitandcreditorclient`  AS  select `ac`.`date_ClientAccount` AS `date_ClientAccount`,`ac`.`Debit` AS `Debit`,`ac`.`Creditor` AS `Creditor`,`ac`.`id_client` AS `id_client`,`c`.`name_client` AS `name_client`,`ac`.`id_salesInvoic` AS `id_salesInvoic`,`ac`.`id_Receipt` AS `id_Receipt`,`ac`.`note` AS `note` from (`clientaccount` `ac` join `client` `c` on(`ac`.`id_client` = `c`.`id_client`)) where `ac`.`isActive` = 1 ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `debitandcreditorsupplier`
+--
+DROP TABLE IF EXISTS `debitandcreditorsupplier`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `debitandcreditorsupplier`  AS  select `ac`.`date_suppliersAccount` AS `date_suppliersAccount`,`ac`.`Debit` AS `Debit`,`ac`.`Creditor` AS `Creditor`,`ac`.`id_Suppliers` AS `id_Suppliers`,`sup`.`name_Suppliers` AS `name_Suppliers`,`ac`.`id_purchaseInvoice` AS `id_purchaseInvoice`,`ac`.`id_paymentReceipt` AS `id_paymentReceipt`,`ac`.`note` AS `note` from (`suppliersaccount` `ac` join `suppliers` `sup` on(`ac`.`id_Suppliers` = `sup`.`id_Suppliers`)) where `ac`.`isActive` = 1 ;
 
 -- --------------------------------------------------------
 
@@ -472,13 +529,13 @@ ALTER TABLE `unit`
 -- AUTO_INCREMENT for table `casher`
 --
 ALTER TABLE `casher`
-  MODIFY `id_casher` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_casher` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `clientaccount`
 --
 ALTER TABLE `clientaccount`
-  MODIFY `id_ClientAccount` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_ClientAccount` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `purchaseinvoice`

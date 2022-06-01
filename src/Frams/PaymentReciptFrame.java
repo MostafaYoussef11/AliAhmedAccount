@@ -6,6 +6,8 @@
 package Frams;
 
 import Entity.ClientPerson;
+import Entity.PaymentRecipt;
+import Entity.Suppliers;
 import Entity.recipt;
 import Utilities.Tools;
 import java.awt.ComponentOrientation;
@@ -23,8 +25,8 @@ public class PaymentReciptFrame extends javax.swing.JFrame {
     /**
      * Creates new form ReciptFrame
      */
-    ClientPerson cp;
-    recipt r;
+    Suppliers suppliers;
+    PaymentRecipt pay_recipt;
     public PaymentReciptFrame() {
         initComponents();
         setSize(820, 740);
@@ -83,7 +85,7 @@ public class PaymentReciptFrame extends javax.swing.JFrame {
 
         title.setFont(new java.awt.Font("VIP Hala Bold", 1, 36)); // NOI18N
         title.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        title.setText("ايصال استلام نقدية");
+        title.setText("ايصال دفع نقدية");
         getContentPane().add(title);
         title.setBounds(110, 10, 521, 72);
 
@@ -114,7 +116,7 @@ public class PaymentReciptFrame extends javax.swing.JFrame {
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel6.setText("اسم العميل");
+        jLabel6.setText("اسم المورد");
         jLabel6.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         com_Name_Client.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
@@ -427,16 +429,16 @@ public class PaymentReciptFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void newRecipt(){
-        cp = new ClientPerson();
-        r = new recipt();
-        r.fillTalble(jTable1);
+        suppliers  = new Suppliers();
+        pay_recipt = new PaymentRecipt();
+        pay_recipt.fillTalble(jTable1);
         txt_note.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
         Tools.disableButOpen(btPanel);
-        cp.FillComboName(com_Name_Client);
-        txt_balance.setText(cp.calcBalanceClient(com_Name_Client.getSelectedItem().toString())+"");
+        suppliers.FillComboName(com_Name_Client);
+        txt_balance.setText(suppliers.calcBalanceSupplier(com_Name_Client.getSelectedItem().toString())+"");
         txt_Amount.setText("0.00");
         Tools.CenterJDateChos(txt_Date_Process);
-        txt_id_reciept.setText(r.getLastReceiptId());
+        txt_id_reciept.setText(pay_recipt.getLastPaymentReceiptId());
         txt_note.setText("دفعة من حساب " + " " + com_Name_Client.getSelectedItem().toString());
     }
     private void btnewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnewActionPerformed
@@ -470,10 +472,10 @@ public class PaymentReciptFrame extends javax.swing.JFrame {
 
     private void com_Name_ClientItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_com_Name_ClientItemStateChanged
         // TODO add your handling code here:
-        txt_balance.setText(cp.calcBalanceClient(com_Name_Client.getSelectedItem().toString())+"");
+        txt_balance.setText(suppliers.calcBalanceSupplier(com_Name_Client.getSelectedItem().toString())+"");
         txt_Amount.setText("0.00");
         Tools.CenterJDateChos(txt_Date_Process);
-        txt_id_reciept.setText(r.getLastReceiptId());
+        txt_id_reciept.setText(pay_recipt.getLastPaymentReceiptId());
         txt_note.setText("دفعة من حساب " + " " + com_Name_Client.getSelectedItem().toString());
     }//GEN-LAST:event_com_Name_ClientItemStateChanged
 

@@ -26,6 +26,7 @@ public class SearchPurchaseFrame extends javax.swing.JFrame {
         initComponents();
         txt_titel.setFont(Tools.font(24f));
         purchaseInvoice.fillTable(jTable1);
+        setSize(700, 660);
     }
 
     /**
@@ -40,13 +41,18 @@ public class SearchPurchaseFrame extends javax.swing.JFrame {
         txt_titel = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("بحث عن فاتورة مشتريات");
+        getContentPane().setLayout(null);
 
         txt_titel.setFont(new Font("VIP Hala Bold", Font.BOLD, 24));
+        txt_titel.setForeground(new java.awt.Color(255, 255, 255));
         txt_titel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         txt_titel.setText("بحث عن فاتورة مشتريات");
+        getContentPane().add(txt_titel);
+        txt_titel.setBounds(130, 11, 426, 60);
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -81,29 +87,13 @@ public class SearchPurchaseFrame extends javax.swing.JFrame {
             jTable1.getColumnModel().getColumn(7).setResizable(false);
         }
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(0, 120, Short.MAX_VALUE)
-                        .addComponent(txt_titel, javax.swing.GroupLayout.PREFERRED_SIZE, 426, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 120, Short.MAX_VALUE))
-                    .addComponent(jScrollPane1))
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(txt_titel, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 533, Short.MAX_VALUE)
-                .addContainerGap())
-        );
+        getContentPane().add(jScrollPane1);
+        jScrollPane1.setBounds(10, 77, 666, 533);
+
+        background.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/6649006.jpg"))); // NOI18N
+        getContentPane().add(background);
+        background.setBounds(0, 0, 690, 620);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -161,6 +151,7 @@ public class SearchPurchaseFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel background;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JLabel txt_titel;
