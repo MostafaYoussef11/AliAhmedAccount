@@ -8,6 +8,7 @@ package Frams;
 import Utilities.Tools;
 import java.awt.ComponentOrientation;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Image;
 import java.awt.Toolkit;
 import javax.swing.BorderFactory;
@@ -26,6 +27,7 @@ public class MainFrame extends javax.swing.JFrame {
      * Creates new form MainFrame
      */
     Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+    Font font = Tools.font(18f);
     public MainFrame() {
         initComponents();
         background.setLocation(0, 0);
@@ -35,15 +37,23 @@ public class MainFrame extends javax.swing.JFrame {
         background.setIcon(bg);
         int x = dim.width - 220;
         client.setLocation(x - 20, 40);
+        client.setFont(font);
         items.setLocation(x - 20 , 250);
+        items.setFont(font);
         suppliers.setLocation(x - 20 , 460);
+        suppliers.setFont(font);
         x = x - 260;
         Purchases.setLocation(x, 40);
+        Purchases.setFont(font);
         sales.setLocation(x, 250);
+        sales.setFont(font);
         Reports.setLocation(x, 460);
+        Reports.setFont(font);
         x = x - 240;
         Payments.setLocation(x, 40);
+        Payments.setFont(font);
         Receipts.setLocation(x, 250);
+        Receipts.setFont(font);
     }
 
     /**

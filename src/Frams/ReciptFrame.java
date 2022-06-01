@@ -38,6 +38,7 @@ public class ReciptFrame extends javax.swing.JFrame {
         background.setSize(820, 740);
         ImageIcon bg = new ImageIcon(new ImageIcon(Toolkit.getDefaultToolkit().getClass().getResource("/icons/Recipt.jpg")).getImage().getScaledInstance(820, 740, Image.SCALE_DEFAULT));
         background.setIcon(bg);
+        titel.setFont(Tools.font(36f));
         newRecipt();
     }
 
@@ -51,7 +52,7 @@ public class ReciptFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
-        jLabel1 = new javax.swing.JLabel();
+        titel = new javax.swing.JLabel();
         Paneltxt = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         txt_id_reciept = new javax.swing.JLabel();
@@ -86,11 +87,11 @@ public class ReciptFrame extends javax.swing.JFrame {
         setResizable(false);
         getContentPane().setLayout(null);
 
-        jLabel1.setFont(new java.awt.Font("VIP Hala Bold", 1, 36)); // NOI18N
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("ايصال استلام نقدية");
-        getContentPane().add(jLabel1);
-        jLabel1.setBounds(110, 10, 521, 72);
+        titel.setFont(new java.awt.Font("VIP Hala Bold", 1, 36)); // NOI18N
+        titel.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        titel.setText("ايصال استلام نقدية");
+        getContentPane().add(titel);
+        titel.setBounds(110, 10, 521, 72);
 
         Paneltxt.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         Paneltxt.setOpaque(false);
@@ -585,7 +586,6 @@ public class ReciptFrame extends javax.swing.JFrame {
     private javax.swing.JButton btupdate;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox com_Name_Client;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -599,6 +599,7 @@ public class ReciptFrame extends javax.swing.JFrame {
     private javax.swing.JRadioButton radio_Clear;
     private javax.swing.JRadioButton radio_End;
     private javax.swing.JRadioButton radio_Payment;
+    private javax.swing.JLabel titel;
     private javax.swing.JTextField txt_Amount;
     private com.toedter.calendar.JDateChooser txt_Date_Process;
     private javax.swing.JLabel txt_balance;

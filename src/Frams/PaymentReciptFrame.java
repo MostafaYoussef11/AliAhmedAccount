@@ -32,6 +32,7 @@ public class PaymentReciptFrame extends javax.swing.JFrame {
         background.setSize(820, 740);
         ImageIcon bg = new ImageIcon(new ImageIcon(Toolkit.getDefaultToolkit().getClass().getResource("/icons/Recipt.jpg")).getImage().getScaledInstance(820, 740, Image.SCALE_DEFAULT));
         background.setIcon(bg);
+        title.setFont(Tools.font(36f));
         newRecipt();
     }
 
@@ -45,7 +46,7 @@ public class PaymentReciptFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         buttonGroup1 = new javax.swing.ButtonGroup();
-        jLabel1 = new javax.swing.JLabel();
+        title = new javax.swing.JLabel();
         Paneltxt = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         txt_id_reciept = new javax.swing.JLabel();
@@ -80,11 +81,11 @@ public class PaymentReciptFrame extends javax.swing.JFrame {
         setResizable(false);
         getContentPane().setLayout(null);
 
-        jLabel1.setFont(new java.awt.Font("VIP Hala Bold", 1, 36)); // NOI18N
-        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("ايصال استلام نقدية");
-        getContentPane().add(jLabel1);
-        jLabel1.setBounds(110, 10, 521, 72);
+        title.setFont(new java.awt.Font("VIP Hala Bold", 1, 36)); // NOI18N
+        title.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        title.setText("ايصال استلام نقدية");
+        getContentPane().add(title);
+        title.setBounds(110, 10, 521, 72);
 
         Paneltxt.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         Paneltxt.setOpaque(false);
@@ -274,7 +275,7 @@ public class PaymentReciptFrame extends javax.swing.JFrame {
         );
 
         getContentPane().add(Paneltxt);
-        Paneltxt.setBounds(10, 97, 770, 0);
+        Paneltxt.setBounds(10, 97, 770, 189);
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -418,7 +419,7 @@ public class PaymentReciptFrame extends javax.swing.JFrame {
         );
 
         getContentPane().add(btPanel);
-        btPanel.setBounds(10, 630, 770, 0);
+        btPanel.setBounds(10, 630, 770, 61);
         getContentPane().add(background);
         background.setBounds(0, 0, 0, 0);
 
@@ -541,7 +542,6 @@ public class PaymentReciptFrame extends javax.swing.JFrame {
     private javax.swing.JButton btupdate;
     private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JComboBox com_Name_Client;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -555,6 +555,7 @@ public class PaymentReciptFrame extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
+    private javax.swing.JLabel title;
     private javax.swing.JTextField txt_Amount;
     private com.toedter.calendar.JDateChooser txt_Date_Process;
     private javax.swing.JLabel txt_balance;

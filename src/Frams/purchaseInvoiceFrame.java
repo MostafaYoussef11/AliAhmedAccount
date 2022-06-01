@@ -886,10 +886,13 @@ public class purchaseInvoiceFrame extends javax.swing.JFrame {
 
     private void btprintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btprintActionPerformed
         // TODO add your handling code here:
+        //int row = jTable1.getSelectedRow()
     }//GEN-LAST:event_btprintActionPerformed
 
     private void btserchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btserchActionPerformed
         // TODO add your handling code here:
+        SearchPurchaseFrame search = new SearchPurchaseFrame();
+        Tools.openJFram(search);
     }//GEN-LAST:event_btserchActionPerformed
 
     private void btnAddItemsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAddItemsActionPerformed

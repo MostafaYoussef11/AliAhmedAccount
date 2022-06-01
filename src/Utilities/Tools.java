@@ -6,13 +6,19 @@
 package Utilities;
 
 import Frams.MainFrame;
+import Frams.SearchPurchaseFrame;
 import com.toedter.calendar.JDateChooser;
 import com.toedter.calendar.JTextFieldDateEditor;
 import java.awt.Component;
 import static java.awt.Component.CENTER_ALIGNMENT;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.FontFormatException;
 import java.awt.Toolkit;
+import java.io.BufferedInputStream;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.InputStream;
 import java.sql.Connection;
 import java.text.ParseException;
@@ -81,7 +87,7 @@ public class Tools {
   
   public static void disableButOpen(JPanel btnPanel){
       for (Component c : btnPanel.getComponents()) {
-          if(c.getName().equals("save") || c.getName().equals("exit") || c.getName().equals("print") || c.getName().equals("search")){
+          if(c.getName().equals("save") || c.getName().equals("exit") || c.getName().equals("search")){
             c.setEnabled(true);
           }else{
               c.setEnabled(false);
@@ -198,7 +204,19 @@ public class Tools {
         } catch (NumberFormatException | JRException ex) {
             Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
-    
-    
     } 
+    public static Font font(Float size){
+       Font font = null ;
+        try {
+            InputStream stream = new BufferedInputStream(new FileInputStream("vip.ttf"));
+            font = Font.createFont(Font.TRUETYPE_FONT, stream); 
+        } catch (FileNotFoundException ex) {
+            font = Font.getFont("Tahoma") ;
+            Logger.getLogger(SearchPurchaseFrame.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (FontFormatException | IOException  ex) {
+            font = Font.getFont("Tahoma") ;
+            Logger.getLogger(SearchPurchaseFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return font.deriveFont(Font.BOLD, size);
+    }
 }

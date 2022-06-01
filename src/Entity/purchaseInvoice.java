@@ -14,6 +14,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JTable;
 
 /**
  *
@@ -124,7 +125,6 @@ public class purchaseInvoice extends invoice{
         }
         return isSave;
     }
-    
     private void getValuesFromVector(ItemsOnInvoice i){
         try {
            String Sql = "INSERT INTO `itemsonpurchaseinvoice` (`id`, `id_items`, `name_items`, `qyt`, `id_unit`,"
@@ -146,5 +146,9 @@ public class purchaseInvoice extends invoice{
         }
        
     }
-    
+    public static void fillTable(JTable jTable){
+        String sql = "SELECT p.amountLater , p.amountCash , p.discount , p.totalAmount , s.name_Suppliers , p.type_purchaseInvoic , p.date_purchaseInvoice , p.id_purchaseInvoice FROM purchaseinvoice p INNER JOIN suppliers s on p.id_Suppliers = s.id_Suppliers";
+        String[] colunm_names = { "الباقي", "المبلغ المدفوع", "الخصم", "الاجمالي", "المورد", "نوع الفاتورة", "التاريخ", "م"};
+        ConnectDB.fillAndCenterTable(sql, jTable, colunm_names);
+    }
 }
