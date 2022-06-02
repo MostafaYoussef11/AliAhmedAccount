@@ -12,7 +12,6 @@ import Utilities.TypeOfFilter;
 import java.awt.ComponentOrientation;
 import java.awt.Image;
 import java.awt.Toolkit;
-import java.util.Date;
 import javax.swing.ImageIcon;
 
 /**
@@ -456,9 +455,13 @@ public class ReciptFrame extends javax.swing.JFrame {
         name_client = com_Name_Client.getSelectedItem().toString();
         id_client = cp.getIdByName(name_client);
         notes = txt_note.getText();
-        OldBalance = Double.parseDouble(txt_balance.getText());
         String amountst = txt_Amount.getText();
         try{
+            OldBalance = Double.parseDouble(txt_balance.getText());
+        }catch(NumberFormatException ex){
+            OldBalance = 0.00;
+        }
+        try{OldBalance = Double.parseDouble(txt_balance.getText());
             amount = Double.parseDouble(amountst);
         }catch(NumberFormatException ex){
             amount = 0;

@@ -85,15 +85,7 @@ public class SalesInvoiceFrame extends javax.swing.JFrame {
         txtM.setText(sales.getLastIdItemsOnInvoice(id_salesInvoic));
         comboPaymentMethod.setModel(new DefaultComboBoxModel(values));
         ((JLabel)comboPaymentMethod.getRenderer()).setHorizontalAlignment(SwingConstants.CENTER);
-        if(comboPaymentMethod.getSelectedItem().toString().equals("كاش")){
-               client.FillComboCash(comboName);
-               txtNote.setText("فاتورة مبيعات نقدية رقم " +" "+id_salesInvoic );
-
-        }else{
-            client.FillComboName(comboName);
-            txtNote.setText("فاتورة مبيعات رقم " +" "+id_salesInvoic + " - " + comboPaymentMethod.getSelectedItem().toString() + " - " + comboName.getSelectedItem().toString());
-
-        }
+        txtNote.setText("فاتورة مبيعات رقم " +" "+id_salesInvoic );
         txtAmountCashing.setEnabled(false);
         JComponent editor = txtCount.getEditor();
         JSpinner.DefaultEditor spinnerEditor = (JSpinner.DefaultEditor)editor;
@@ -940,7 +932,6 @@ public class SalesInvoiceFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_txtDiscondItemKeyReleased
 
     private void btnSaveItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveItemActionPerformed
-        // TODO add your handling code here:
        String[] values = new String[6];
        values[5] = txtM.getText();
        values[4] = comboItems.getSelectedItem().toString();
@@ -957,12 +948,10 @@ public class SalesInvoiceFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnSaveItemActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
-        // TODO add your handling code here:
         btndelItem.setEnabled(true);
     }//GEN-LAST:event_jTable1MouseClicked
 
     private void btndelItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btndelItemActionPerformed
-        // TODO add your handling code here:
               int row = jTable1.getSelectedRow();
               model.removeRow(row);
               valuesItems.remove(row);
@@ -972,57 +961,36 @@ public class SalesInvoiceFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btndelItemActionPerformed
 
     private void txtDiscondKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtDiscondKeyReleased
-        // TODO add your handling code here:
         setTextPayAmount();
     }//GEN-LAST:event_txtDiscondKeyReleased
 
     private void txtAmountCashingKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtAmountCashingKeyReleased
-        // TODO add your handling code here:
         setTextPayAmount();
     }//GEN-LAST:event_txtAmountCashingKeyReleased
 
     private void comboPaymentMethodItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboPaymentMethodItemStateChanged
-        // TODO add your handling code here:
        PaymentMethod payMethod = Tools.getPayment(comboPaymentMethod.getSelectedItem().toString());
        String id_salesInvoic = txtId_Invoice.getText() ;
         switch(payMethod){
             case cash:
                 txtAmountCashing.setEnabled(false);
                 client.FillComboCash(comboName);
-                txtNote.setText("فاتورة مبيعات نقدية رقم " +" "+ id_salesInvoic );
                 break;
             case deferred:
                 txtAmountCashing.setEnabled(false);
                 client.FillComboName(comboName);
-                txtNote.setText("فاتورة مبيعات رقم " +" "+ id_salesInvoic + " - " + comboPaymentMethod.getSelectedItem().toString() + " - " + comboName.getSelectedItem().toString());
                 break;
             case installments:
                 txtAmountCashing.setEnabled(true);
-                txtNote.setText("فاتورة مبيعات رقم " +" "+ id_salesInvoic + " - " + comboPaymentMethod.getSelectedItem().toString() + " - " + comboName.getSelectedItem().toString());
                 client.FillComboName(comboName);
                 break;
             default:
                 break;
         }
+       txtNote.setText("فاتورة مبيعات رقم " +" "+id_salesInvoic );
     }//GEN-LAST:event_comboPaymentMethodItemStateChanged
 
     private void comboNameItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboNameItemStateChanged
-        // TODO add your handling code here:
-       PaymentMethod payMethod = Tools.getPayment(comboPaymentMethod.getSelectedItem().toString());
-       String id_salesInvoic = txtId_Invoice.getText() ;
-        switch(payMethod){
-            case cash:
-                txtNote.setText("فاتورة مبيعات نقدية رقم " +" "+ id_salesInvoic );
-                break;
-            case deferred:
-                txtNote.setText("فاتورة مبيعات رقم " + " "+id_salesInvoic + " - " + comboPaymentMethod.getSelectedItem().toString() + " - " + comboName.getSelectedItem().toString());
-                break;
-            case installments:
-                txtNote.setText("فاتورة مبيعات رقم " +" "+ id_salesInvoic + " - " + comboPaymentMethod.getSelectedItem().toString() + " - " + comboName.getSelectedItem().toString());
-                break;
-            default:
-                break;
-        }
     }//GEN-LAST:event_comboNameItemStateChanged
     private void calcSumPrice(){
         double priceUnit = Double.valueOf(txtPrice.getText());

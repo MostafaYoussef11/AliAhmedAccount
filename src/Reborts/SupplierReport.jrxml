@@ -2,9 +2,12 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="3290fda5-1393-400e-9344-921d2c3dd6f5">
 	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="96"/>
+	<property name="ireport.y" value="144"/>
 	<parameter name="id_Suppliers" class="java.lang.Integer">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["E:\\AliAhmedAccount\\AliAhmedAccount\\src\\Reborts\\"]]></defaultValueExpression>
 	</parameter>
 	<queryString>
 		<![CDATA[SELECT  s.name_Suppliers , s.phone , s.address ,s.firstBalance , SUM(ac.Creditor) creditor , SUM(ac.Debit) debit FROM suppliers s INNER JOIN suppliersaccount ac ON s.id_Suppliers = ac.id_Suppliers where s.id_Suppliers = $P{id_Suppliers}]]>
@@ -27,8 +30,8 @@
 	<field name="debit" class="java.lang.Double">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<variable name="new_balance" class="java.lang.Double">
-		<variableExpression><![CDATA[($F{firstBalance} != null ? $F{firstBalance} : 0.00) + ($F{creditor} != null ? $F{creditor} : 0.00)]]></variableExpression>
+	<variable name="variable1" class="java.lang.Double">
+		<variableExpression><![CDATA[$F{firstBalance}.doubleValue()]]></variableExpression>
 	</variable>
 	<background>
 		<band splitType="Stretch"/>
@@ -43,10 +46,10 @@
 				<text><![CDATA[كشف حساب مورد]]></text>
 			</staticText>
 			<rectangle>
-				<reportElement x="0" y="30" width="555" height="146" uuid="31efb3bb-102e-42ea-8390-c110809e9b13"/>
+				<reportElement x="0" y="49" width="553" height="114" uuid="31efb3bb-102e-42ea-8390-c110809e9b13"/>
 			</rectangle>
 			<staticText>
-				<reportElement x="448" y="35" width="100" height="30" uuid="19affcb9-0370-4643-8bc9-8205b3774bc5"/>
+				<reportElement x="443" y="58" width="100" height="30" uuid="19affcb9-0370-4643-8bc9-8205b3774bc5"/>
 				<box>
 					<pen lineWidth="1.25"/>
 					<topPen lineWidth="1.25"/>
@@ -60,7 +63,7 @@
 				<text><![CDATA[المورد : ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="448" y="67" width="100" height="30" uuid="8750ebf7-c820-4d37-84bc-5aa9b74e5db1"/>
+				<reportElement x="443" y="90" width="100" height="30" uuid="8750ebf7-c820-4d37-84bc-5aa9b74e5db1"/>
 				<box>
 					<pen lineWidth="1.25"/>
 					<topPen lineWidth="1.25"/>
@@ -74,7 +77,7 @@
 				<text><![CDATA[الهاتف : ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="448" y="99" width="100" height="30" uuid="10e34df7-d2c6-438d-85af-6f4de73e44de"/>
+				<reportElement x="443" y="122" width="100" height="30" uuid="10e34df7-d2c6-438d-85af-6f4de73e44de"/>
 				<box>
 					<pen lineWidth="1.25"/>
 					<topPen lineWidth="1.25"/>
@@ -88,7 +91,7 @@
 				<text><![CDATA[العنوان : ]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="160" y="35" width="100" height="30" uuid="3d74bef2-0811-42ba-bdc8-28a619cf33d4"/>
+				<reportElement x="160" y="58" width="100" height="30" uuid="3d74bef2-0811-42ba-bdc8-28a619cf33d4"/>
 				<box>
 					<pen lineWidth="1.25"/>
 					<topPen lineWidth="1.25"/>
@@ -102,7 +105,7 @@
 				<text><![CDATA[رصيد أول المدة :]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="160" y="67" width="100" height="30" uuid="50a049c1-6baf-41f5-b4ba-9f1ebac2defd"/>
+				<reportElement x="160" y="90" width="100" height="30" uuid="50a049c1-6baf-41f5-b4ba-9f1ebac2defd"/>
 				<box>
 					<pen lineWidth="1.25"/>
 					<topPen lineWidth="1.25"/>
@@ -116,7 +119,7 @@
 				<text><![CDATA[اجمالي دائن :]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="160" y="99" width="100" height="30" uuid="dbd46dbd-08e7-4edb-a2fe-464aabea5643"/>
+				<reportElement x="160" y="122" width="100" height="30" uuid="dbd46dbd-08e7-4edb-a2fe-464aabea5643"/>
 				<box>
 					<pen lineWidth="1.25"/>
 					<topPen lineWidth="1.25"/>
@@ -129,23 +132,8 @@
 				</textElement>
 				<text><![CDATA[اجمالي مدين :]]></text>
 			</staticText>
-			<staticText>
-				<reportElement mode="Transparent" x="160" y="131" width="100" height="30" forecolor="#000000" backcolor="#FFFFFF" uuid="b9cc2d33-749d-4e62-8cbc-dca8e63b4ed5"/>
-				<box>
-					<pen lineWidth="1.25"/>
-					<topPen lineWidth="1.25"/>
-					<leftPen lineWidth="1.25"/>
-					<bottomPen lineWidth="1.25"/>
-					<rightPen lineWidth="1.25"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
-					<font fontName="SansSerif" size="16" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
-					<paragraph lineSpacing="Single"/>
-				</textElement>
-				<text><![CDATA[الرصيد الحالي :]]></text>
-			</staticText>
 			<textField>
-				<reportElement mode="Transparent" x="272" y="35" width="173" height="30" forecolor="#000000" backcolor="#FFFFFF" uuid="1a2ec9ca-012f-42c4-9a81-b9c4117da4e4"/>
+				<reportElement mode="Transparent" x="270" y="58" width="170" height="30" forecolor="#000000" backcolor="#FFFFFF" uuid="1a2ec9ca-012f-42c4-9a81-b9c4117da4e4"/>
 				<box>
 					<pen lineWidth="1.25"/>
 					<topPen lineWidth="1.25"/>
@@ -160,7 +148,7 @@
 				<textFieldExpression><![CDATA[$F{name_Suppliers}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement mode="Transparent" x="272" y="67" width="173" height="30" forecolor="#000000" backcolor="#FFFFFF" uuid="bfd24544-2318-4e03-9d7d-28cbaf6cb5ea"/>
+				<reportElement mode="Transparent" x="270" y="90" width="170" height="30" forecolor="#000000" backcolor="#FFFFFF" uuid="bfd24544-2318-4e03-9d7d-28cbaf6cb5ea"/>
 				<box>
 					<pen lineWidth="1.25"/>
 					<topPen lineWidth="1.25"/>
@@ -175,7 +163,7 @@
 				<textFieldExpression><![CDATA[$F{phone}==null?"":$F{phone}]]></textFieldExpression>
 			</textField>
 			<textField>
-				<reportElement mode="Transparent" x="272" y="99" width="173" height="30" forecolor="#000000" backcolor="#FFFFFF" uuid="73787f0d-849d-436b-be6a-4f2de09747d0"/>
+				<reportElement mode="Transparent" x="270" y="122" width="170" height="30" forecolor="#000000" backcolor="#FFFFFF" uuid="73787f0d-849d-436b-be6a-4f2de09747d0"/>
 				<box>
 					<pen lineWidth="1.25"/>
 					<topPen lineWidth="1.25"/>
@@ -190,7 +178,7 @@
 				<textFieldExpression><![CDATA[$F{address}== null ? "" : $F{address}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
-				<reportElement mode="Transparent" x="10" y="35" width="147" height="30" forecolor="#000000" backcolor="#FFFFFF" uuid="6145fd7b-b89f-41a4-bf88-f303b3ee24c2"/>
+				<reportElement mode="Transparent" x="10" y="58" width="147" height="30" forecolor="#000000" backcolor="#FFFFFF" uuid="6145fd7b-b89f-41a4-bf88-f303b3ee24c2"/>
 				<box>
 					<pen lineWidth="1.25"/>
 					<topPen lineWidth="1.25"/>
@@ -205,7 +193,7 @@
 				<textFieldExpression><![CDATA[$F{firstBalance} == null ? 0.00 : $F{firstBalance}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
-				<reportElement mode="Transparent" x="10" y="67" width="147" height="30" forecolor="#000000" backcolor="#FFFFFF" uuid="8763ca4e-c249-4236-b0ff-3c585f776702"/>
+				<reportElement mode="Transparent" x="10" y="90" width="147" height="30" forecolor="#000000" backcolor="#FFFFFF" uuid="8763ca4e-c249-4236-b0ff-3c585f776702"/>
 				<box>
 					<pen lineWidth="1.25"/>
 					<topPen lineWidth="1.25"/>
@@ -220,7 +208,7 @@
 				<textFieldExpression><![CDATA[$F{creditor} == null ? 0.00 : $F{creditor}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00">
-				<reportElement mode="Transparent" x="10" y="99" width="147" height="30" forecolor="#000000" backcolor="#FFFFFF" uuid="85fb776a-ced8-4211-b526-c83442d2b2e2"/>
+				<reportElement mode="Transparent" x="10" y="122" width="147" height="30" forecolor="#000000" backcolor="#FFFFFF" uuid="85fb776a-ced8-4211-b526-c83442d2b2e2"/>
 				<box>
 					<pen lineWidth="1.25"/>
 					<topPen lineWidth="1.25"/>
@@ -234,17 +222,10 @@
 				</textElement>
 				<textFieldExpression><![CDATA[$F{debit} == null ? 0.00 : $F{debit}]]></textFieldExpression>
 			</textField>
-			<textField>
-				<reportElement x="10" y="131" width="147" height="30" uuid="5f402913-6de8-43f7-a84d-c8418ee99caf"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="16" isBold="true"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$V{new_balance}]]></textFieldExpression>
-			</textField>
 		</band>
 	</title>
 	<pageHeader>
-		<band height="8" splitType="Stretch"/>
+		<band height="3" splitType="Stretch"/>
 	</pageHeader>
 	<columnHeader>
 		<band height="69" splitType="Stretch">
@@ -363,7 +344,19 @@
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="125" splitType="Stretch"/>
+		<band height="102" splitType="Stretch">
+			<subreport>
+				<reportElement x="278" y="0" width="275" height="100" uuid="4216c725-4308-4600-8916-c44912d9a170"/>
+				<subreportParameter name="id_Suppliers">
+					<subreportParameterExpression><![CDATA[$P{id_Suppliers}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="SUBREPORT_DIR">
+					<subreportParameterExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "SupplierReport_critor.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
 	</detail>
 	<columnFooter>
 		<band height="45" splitType="Stretch"/>

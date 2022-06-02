@@ -7,7 +7,8 @@ package Utilities;
 
 import Entity.ClientPerson;
 import Entity.Suppliers;
-import com.sun.security.ntlm.Client;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  *
@@ -47,7 +48,9 @@ public abstract class MoneyTransfer {
     public void setDate_process(String date_process) {
         this.date_process = date_process;
     }
-
+    public void setDate_process(Date date_process) {
+        this.date_process = new SimpleDateFormat("YYYY-MM-dd").format(date_process);
+    }
     public double getDebit() {
         return Debit;
     }

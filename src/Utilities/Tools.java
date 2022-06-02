@@ -208,7 +208,7 @@ public class Tools {
     public static Font font(Float size){
        Font font = null ;
         try {
-            InputStream stream = new BufferedInputStream(new FileInputStream("vip.ttf"));
+            InputStream stream = new BufferedInputStream(new FileInputStream("Fonts/vip.ttf"));
             font = Font.createFont(Font.TRUETYPE_FONT, stream); 
         } catch (FileNotFoundException ex) {
             font = Font.getFont("Tahoma") ;
@@ -218,5 +218,35 @@ public class Tools {
             Logger.getLogger(SearchPurchaseFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
         return font.deriveFont(Font.BOLD, size);
+    }
+    
+    public static String getDayName(Date date){
+        String day_ar ="";
+        SimpleDateFormat sdf = new SimpleDateFormat("EEEEE");
+        String day_En = sdf.format(date);
+        switch(day_En){
+            case "Monday":
+                day_ar = "الاثنين";
+                break;
+            case "Tuesday" :
+                day_ar = "الثلاثاء";
+                break;
+            case "Wednesday":
+                day_ar = "الأربعاء";
+                break;
+            case "Thursday":
+                day_ar = "الخميس";
+                break;
+            case "Friday":
+                day_ar = "الجمعة";
+                break;
+            case "Saturday":
+                day_ar = "السبت";
+                break;
+            case "Sunday":
+                day_ar = "الأحد";
+                break;
+        }
+        return day_ar;
     }
 }

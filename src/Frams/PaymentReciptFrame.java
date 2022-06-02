@@ -9,12 +9,19 @@ import Entity.ClientPerson;
 import Entity.PaymentRecipt;
 import Entity.Suppliers;
 import Entity.recipt;
+import Utilities.Tafqeet;
 import Utilities.Tools;
+import Utilities.TypeOfFilter;
 import java.awt.ComponentOrientation;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.io.InputStream;
+import java.math.BigDecimal;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -27,6 +34,9 @@ public class PaymentReciptFrame extends javax.swing.JFrame {
      */
     Suppliers suppliers;
     PaymentRecipt pay_recipt;
+    private String id_reciept , name_suppliers , note ;
+    private double OldBalance , newBalance , amount;
+    private TypeOfFilter type_filter;
     public PaymentReciptFrame() {
         initComponents();
         setSize(820, 740);
@@ -57,16 +67,16 @@ public class PaymentReciptFrame extends javax.swing.JFrame {
         jLabel5 = new javax.swing.JLabel();
         txt_Amount = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
-        com_Name_Client = new javax.swing.JComboBox();
+        com_Name_Suppliers = new javax.swing.JComboBox();
         jLabel7 = new javax.swing.JLabel();
         txt_balance = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         txt_note = new javax.swing.JTextArea();
         jPanel1 = new javax.swing.JPanel();
-        jRadioButton1 = new javax.swing.JRadioButton();
-        jRadioButton2 = new javax.swing.JRadioButton();
-        jRadioButton3 = new javax.swing.JRadioButton();
+        radio_Payment = new javax.swing.JRadioButton();
+        radio_Clear = new javax.swing.JRadioButton();
+        radio_End = new javax.swing.JRadioButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         btPanel = new javax.swing.JPanel();
@@ -119,10 +129,10 @@ public class PaymentReciptFrame extends javax.swing.JFrame {
         jLabel6.setText("اسم المورد");
         jLabel6.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        com_Name_Client.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-        com_Name_Client.addItemListener(new java.awt.event.ItemListener() {
+        com_Name_Suppliers.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        com_Name_Suppliers.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
-                com_Name_ClientItemStateChanged(evt);
+                com_Name_SuppliersItemStateChanged(evt);
             }
         });
 
@@ -148,43 +158,43 @@ public class PaymentReciptFrame extends javax.swing.JFrame {
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "نوع الدفعة", javax.swing.border.TitledBorder.RIGHT, javax.swing.border.TitledBorder.TOP));
         jPanel1.setOpaque(false);
 
-        jRadioButton1.setBackground(new java.awt.Color(255, 255, 255));
-        buttonGroup1.add(jRadioButton1);
-        jRadioButton1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jRadioButton1.setSelected(true);
-        jRadioButton1.setText("دفعة من الحساب");
-        jRadioButton1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jRadioButton1.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-        jRadioButton1.setOpaque(false);
-        jRadioButton1.addActionListener(new java.awt.event.ActionListener() {
+        radio_Payment.setBackground(new java.awt.Color(255, 255, 255));
+        buttonGroup1.add(radio_Payment);
+        radio_Payment.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        radio_Payment.setSelected(true);
+        radio_Payment.setText("دفعة من الحساب");
+        radio_Payment.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        radio_Payment.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        radio_Payment.setOpaque(false);
+        radio_Payment.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton1ActionPerformed(evt);
+                radio_PaymentActionPerformed(evt);
             }
         });
 
-        jRadioButton2.setBackground(new java.awt.Color(255, 255, 255));
-        buttonGroup1.add(jRadioButton2);
-        jRadioButton2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jRadioButton2.setText("تصفية نقدية");
-        jRadioButton2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jRadioButton2.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-        jRadioButton2.setOpaque(false);
-        jRadioButton2.addActionListener(new java.awt.event.ActionListener() {
+        radio_Clear.setBackground(new java.awt.Color(255, 255, 255));
+        buttonGroup1.add(radio_Clear);
+        radio_Clear.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        radio_Clear.setText("تصفية نقدية");
+        radio_Clear.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        radio_Clear.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        radio_Clear.setOpaque(false);
+        radio_Clear.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton2ActionPerformed(evt);
+                radio_ClearActionPerformed(evt);
             }
         });
 
-        jRadioButton3.setBackground(new java.awt.Color(255, 255, 255));
-        buttonGroup1.add(jRadioButton3);
-        jRadioButton3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jRadioButton3.setText("تصفية نهائي");
-        jRadioButton3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jRadioButton3.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-        jRadioButton3.setOpaque(false);
-        jRadioButton3.addActionListener(new java.awt.event.ActionListener() {
+        radio_End.setBackground(new java.awt.Color(255, 255, 255));
+        buttonGroup1.add(radio_End);
+        radio_End.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        radio_End.setText("تصفية نهائي");
+        radio_End.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        radio_End.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        radio_End.setOpaque(false);
+        radio_End.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jRadioButton3ActionPerformed(evt);
+                radio_EndActionPerformed(evt);
             }
         });
 
@@ -193,20 +203,20 @@ public class PaymentReciptFrame extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addComponent(jRadioButton3)
+                .addComponent(radio_End)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jRadioButton2)
+                .addComponent(radio_Clear)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jRadioButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE))
+                .addComponent(radio_Payment, javax.swing.GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jRadioButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jRadioButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jRadioButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(radio_Payment, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(radio_Clear, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(radio_End, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(21, Short.MAX_VALUE))
         );
 
@@ -228,7 +238,7 @@ public class PaymentReciptFrame extends javax.swing.JFrame {
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(5, 5, 5)
                 .addGroup(PaneltxtLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addComponent(com_Name_Client, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(com_Name_Suppliers, javax.swing.GroupLayout.Alignment.LEADING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, PaneltxtLayout.createSequentialGroup()
                         .addComponent(txt_Date_Process, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -268,7 +278,7 @@ public class PaymentReciptFrame extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(PaneltxtLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
-                            .addComponent(com_Name_Client))
+                            .addComponent(com_Name_Suppliers))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(PaneltxtLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jScrollPane1)
@@ -434,12 +444,12 @@ public class PaymentReciptFrame extends javax.swing.JFrame {
         pay_recipt.fillTalble(jTable1);
         txt_note.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
         Tools.disableButOpen(btPanel);
-        suppliers.FillComboName(com_Name_Client);
-        txt_balance.setText(suppliers.calcBalanceSupplier(com_Name_Client.getSelectedItem().toString())+"");
+        suppliers.FillComboName(com_Name_Suppliers);
+        txt_balance.setText(suppliers.calcBalanceSupplier(com_Name_Suppliers.getSelectedItem().toString())+"");
         txt_Amount.setText("0.00");
         Tools.CenterJDateChos(txt_Date_Process);
         txt_id_reciept.setText(pay_recipt.getLastPaymentReceiptId());
-        txt_note.setText("دفعة من حساب " + " " + com_Name_Client.getSelectedItem().toString());
+        txt_note.setText("دفعة من حساب " + " " + com_Name_Suppliers.getSelectedItem().toString());
     }
     private void btnewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnewActionPerformed
         // TODO add your handling code here:
@@ -447,6 +457,59 @@ public class PaymentReciptFrame extends javax.swing.JFrame {
 
     private void btsaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btsaveActionPerformed
         // TODO add your handling code here:
+        id_reciept = txt_id_reciept.getText();
+        name_suppliers = com_Name_Suppliers.getSelectedItem().toString();
+        note = txt_note.getText();
+        Date date = txt_Date_Process.getDate();
+        pay_recipt.setId_PaymentReceipt(Integer.parseInt(id_reciept));
+        pay_recipt.setDate_process(date);
+        String amount_str = txt_Amount.getText();
+        try{
+            amount = Double.parseDouble(amount_str);
+            OldBalance = Double.parseDouble(txt_balance.getText());
+            newBalance = OldBalance - amount;
+        }catch(NumberFormatException ex){
+            amount = 0 ;
+            Logger.getLogger("Double Amount").warning(ex.getMessage());
+        }
+        pay_recipt.setAmount(amount);
+        pay_recipt.SetIdSuppliersFromName(name_suppliers);
+        pay_recipt.setNote(note); 
+        if(radio_Payment.isSelected()){
+             type_filter = TypeOfFilter.Payment;
+         }else if(radio_Clear.isSelected()){
+               type_filter = TypeOfFilter.Clear;
+         }else{
+             type_filter = TypeOfFilter.End;
+         }
+        pay_recipt.setTypeOfFiltter(type_filter);
+        pay_recipt.setNewBalance(newBalance);
+        boolean isSave = pay_recipt.Save();
+        String Tafqet = "";
+        if(isSave){
+            int ok_Print = JOptionPane.showConfirmDialog(null, "تم الحفظ بنجاح . هل تريد طباعة الايصال ؟", note, JOptionPane.YES_NO_OPTION);
+            if(ok_Print == JOptionPane.YES_OPTION){
+                String sql = "SELECT pay.* , s.name_Suppliers from paymentreceipt pay "
+                        + "INNER JOIN suppliers s on pay.id_Suppliers = s.id_Suppliers where id_PaymentReceipt = $P{id_PaymentReceipt}";
+                InputStream stream = getClass().getResourceAsStream("/Reborts/PaymentReciptReport.jrxml");
+                HashMap para = new HashMap();
+                int id_PaymentReceipt = Integer.parseInt(id_reciept);
+                para.put("id_PaymentReceipt", id_PaymentReceipt);
+                para.put("day", Tools.getDayName(date));
+                try{
+                   Tafqet =  Tafqeet.doTafqeet(new BigDecimal(amount));
+                }catch(NullPointerException ex){
+                    Tafqet = "";
+                    System.err.println(ex.getMessage());
+                }
+                para.put("Tafqet",Tafqet);
+                Tools.Printer(sql, stream, para);
+                newRecipt();
+            }
+        }else{
+            Tools.showErrorMsg("خطـ في الحفظ");
+        }
+        
     }//GEN-LAST:event_btsaveActionPerformed
 
     private void bteditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bteditActionPerformed
@@ -470,30 +533,30 @@ public class PaymentReciptFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_btprintActionPerformed
 
-    private void com_Name_ClientItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_com_Name_ClientItemStateChanged
+    private void com_Name_SuppliersItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_com_Name_SuppliersItemStateChanged
         // TODO add your handling code here:
-        txt_balance.setText(suppliers.calcBalanceSupplier(com_Name_Client.getSelectedItem().toString())+"");
+        txt_balance.setText(suppliers.calcBalanceSupplier(com_Name_Suppliers.getSelectedItem().toString())+"");
         txt_Amount.setText("0.00");
         Tools.CenterJDateChos(txt_Date_Process);
         txt_id_reciept.setText(pay_recipt.getLastPaymentReceiptId());
-        txt_note.setText("دفعة من حساب " + " " + com_Name_Client.getSelectedItem().toString());
-    }//GEN-LAST:event_com_Name_ClientItemStateChanged
+        txt_note.setText("دفعة من حساب " + " " + com_Name_Suppliers.getSelectedItem().toString());
+    }//GEN-LAST:event_com_Name_SuppliersItemStateChanged
 
-    private void jRadioButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton2ActionPerformed
+    private void radio_ClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radio_ClearActionPerformed
         // TODO add your handling code here:
-        txt_note.setText("تصفية نقدية لحساب " + com_Name_Client.getSelectedItem().toString());
-    }//GEN-LAST:event_jRadioButton2ActionPerformed
+        txt_note.setText("تصفية نقدية لحساب " + com_Name_Suppliers.getSelectedItem().toString());
+    }//GEN-LAST:event_radio_ClearActionPerformed
 
-    private void jRadioButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton3ActionPerformed
+    private void radio_EndActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radio_EndActionPerformed
         // TODO add your handling code here:
-        txt_note.setText("تصفية نهائية لحساب " + com_Name_Client.getSelectedItem().toString());
-    }//GEN-LAST:event_jRadioButton3ActionPerformed
+        txt_note.setText("تصفية نهائية لحساب " + com_Name_Suppliers.getSelectedItem().toString());
+    }//GEN-LAST:event_radio_EndActionPerformed
 
-    private void jRadioButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRadioButton1ActionPerformed
+    private void radio_PaymentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radio_PaymentActionPerformed
         // TODO add your handling code here:
-      txt_note.setText("دفعة من حساب " + " " + com_Name_Client.getSelectedItem().toString());
+      txt_note.setText("دفعة من حساب " + " " + com_Name_Suppliers.getSelectedItem().toString());
 
-    }//GEN-LAST:event_jRadioButton1ActionPerformed
+    }//GEN-LAST:event_radio_PaymentActionPerformed
     //txt_note.setText("تصفية نهائية لحساب " + com_Name_Client.getSelectedItem().toString());
     /**
      * @param args the command line arguments
@@ -543,7 +606,7 @@ public class PaymentReciptFrame extends javax.swing.JFrame {
     private javax.swing.JButton btsave;
     private javax.swing.JButton btupdate;
     private javax.swing.ButtonGroup buttonGroup1;
-    private javax.swing.JComboBox com_Name_Client;
+    private javax.swing.JComboBox com_Name_Suppliers;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -551,12 +614,12 @@ public class PaymentReciptFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
-    private javax.swing.JRadioButton jRadioButton1;
-    private javax.swing.JRadioButton jRadioButton2;
-    private javax.swing.JRadioButton jRadioButton3;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
+    private javax.swing.JRadioButton radio_Clear;
+    private javax.swing.JRadioButton radio_End;
+    private javax.swing.JRadioButton radio_Payment;
     private javax.swing.JLabel title;
     private javax.swing.JTextField txt_Amount;
     private com.toedter.calendar.JDateChooser txt_Date_Process;
