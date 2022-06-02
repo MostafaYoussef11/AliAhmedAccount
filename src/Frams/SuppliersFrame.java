@@ -12,6 +12,8 @@ import Utilities.Tools;
 import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.io.InputStream;
+import java.util.HashMap;
 import javax.swing.ImageIcon;
 
 /**
@@ -35,6 +37,7 @@ public class SuppliersFrame extends javax.swing.JFrame {
         Tools.disableButOpen(btPanel);
         txtFirsbalance.setText("0.00");
         s.filTable(jTable1);
+        btprint.setEnabled(true);
     }
 
     /**
@@ -381,6 +384,7 @@ public class SuppliersFrame extends javax.swing.JFrame {
                 txtMobil.setText("");
                 txtName.setText("");
                 s.filTable(jTable1);
+                
             }else{
                 Tools.showErrorMsg("خطأ في حفظ البيانات");
             }
@@ -421,7 +425,7 @@ public class SuppliersFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
          String id = txtId.getText();
          if(s.Delete(id)){
-             Tools.showInfoMsg("تم حذف العميل بنجاح", "حذف");
+             Tools.showInfoMsg("تم حذف المورد بنجاح", "حذف");
              txtId.setText(s.lastid());
              txtName.setText("");
              txtMobil.setText("");
@@ -440,6 +444,19 @@ public class SuppliersFrame extends javax.swing.JFrame {
 
     private void btprintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btprintActionPerformed
         // TODO add your handling code here:
+        String sql = "";
+        InputStream stream ;
+        HashMap para = new HashMap();
+        int row = jTable1.getSelectedRow();
+        if(row < 1){
+           sql = "SELECT sup.id_Suppliers id, SUM(sup.Debit) debit , SUM(sup.Creditor) creditor , sup.name_Suppliers , s.firstBalance FROM debitandcreditorsupplier sup"
+                   + " INNER JOIN suppliers s ON sup.id_Suppliers = s.id_Suppliers";
+           stream = getClass().getResourceAsStream("/Reborts/AllSuppliersReport.jrxml");///Reborts/AllClientReport.jrxml
+           Tools.Printer(sql, stream, para);
+        }else{
+        
+        
+        }
     }//GEN-LAST:event_btprintActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked

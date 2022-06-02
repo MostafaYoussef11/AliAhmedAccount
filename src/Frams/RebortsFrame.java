@@ -9,6 +9,7 @@ import Utilities.Tools;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.io.InputStream;
 import javax.swing.ImageIcon;
 
 /**
@@ -23,17 +24,19 @@ public class RebortsFrame extends javax.swing.JFrame {
     final Font font = Tools.font(24f);
     public RebortsFrame() {
         initComponents();
-        setSize(420, 750);
-        background.setSize(420, 750);
+        setSize(725, 530);
+        background.setSize(725, 530);
         background.setLocation(0, 0);
-        ImageIcon bg = new ImageIcon(new ImageIcon(Toolkit.getDefaultToolkit().getClass().getResource("/icons/bg_reports.jpg")).getImage().getScaledInstance(420, 750, Image.SCALE_DEFAULT));
+        ImageIcon bg = new ImageIcon(new ImageIcon(Toolkit.getDefaultToolkit().getClass().getResource("/icons/bg_reports.jpg")).getImage().getScaledInstance(725, 530, Image.SCALE_DEFAULT));
         background.setIcon(bg);
         btn_report_all_client.setFont(font);
-        btn_report_all_items.setFont(font);
+        btn_report_one_items.setFont(font);
         btn_report_all_supllires.setFont(font);
-        btn_report_casher.setFont(font);
+        btn_report_casher_day.setFont(font);
         btn_report_one_client.setFont(font);
         btn_report_one_suplier.setFont(font);
+        btn_report_all_items.setFont(font);
+        btn_report_casher.setFont(font);
     }
 
     /**
@@ -49,6 +52,8 @@ public class RebortsFrame extends javax.swing.JFrame {
         btn_report_one_client = new javax.swing.JLabel();
         btn_report_all_supllires = new javax.swing.JLabel();
         btn_report_one_suplier = new javax.swing.JLabel();
+        btn_report_one_items = new javax.swing.JLabel();
+        btn_report_casher_day = new javax.swing.JLabel();
         btn_report_all_items = new javax.swing.JLabel();
         btn_report_casher = new javax.swing.JLabel();
         background = new javax.swing.JLabel();
@@ -56,64 +61,106 @@ public class RebortsFrame extends javax.swing.JFrame {
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(null);
 
-        btn_report_all_client.setForeground(new java.awt.Color(0, 0, 255));
+        btn_report_all_client.setForeground(new java.awt.Color(0, 51, 153));
         btn_report_all_client.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         btn_report_all_client.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/report_1.png"))); // NOI18N
         btn_report_all_client.setText("تقرير العملاء");
         btn_report_all_client.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btn_report_all_client.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_report_all_client.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_report_all_clientMouseClicked(evt);
+            }
+        });
         getContentPane().add(btn_report_all_client);
-        btn_report_all_client.setBounds(50, 30, 300, 100);
+        btn_report_all_client.setBounds(370, 40, 300, 100);
 
-        btn_report_one_client.setForeground(new java.awt.Color(0, 0, 255));
+        btn_report_one_client.setForeground(new java.awt.Color(0, 51, 153));
         btn_report_one_client.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         btn_report_one_client.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/report_2.png"))); // NOI18N
         btn_report_one_client.setText("تقرير عن عميل");
         btn_report_one_client.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btn_report_one_client.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_report_one_client.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_report_one_clientMouseClicked(evt);
+            }
+        });
         getContentPane().add(btn_report_one_client);
-        btn_report_one_client.setBounds(50, 140, 300, 100);
+        btn_report_one_client.setBounds(50, 40, 300, 100);
 
-        btn_report_all_supllires.setForeground(new java.awt.Color(0, 0, 255));
+        btn_report_all_supllires.setForeground(new java.awt.Color(0, 51, 153));
         btn_report_all_supllires.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         btn_report_all_supllires.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/report_3.png"))); // NOI18N
         btn_report_all_supllires.setText("تقرير الموردين");
         btn_report_all_supllires.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btn_report_all_supllires.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         getContentPane().add(btn_report_all_supllires);
-        btn_report_all_supllires.setBounds(50, 250, 300, 100);
+        btn_report_all_supllires.setBounds(370, 150, 300, 100);
 
-        btn_report_one_suplier.setForeground(new java.awt.Color(0, 0, 255));
+        btn_report_one_suplier.setForeground(new java.awt.Color(0, 51, 153));
         btn_report_one_suplier.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         btn_report_one_suplier.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/report_4.png"))); // NOI18N
         btn_report_one_suplier.setText("تقرير عن مورد");
         btn_report_one_suplier.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btn_report_one_suplier.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         getContentPane().add(btn_report_one_suplier);
-        btn_report_one_suplier.setBounds(50, 360, 300, 100);
+        btn_report_one_suplier.setBounds(50, 150, 300, 100);
 
-        btn_report_all_items.setForeground(new java.awt.Color(0, 0, 255));
+        btn_report_one_items.setForeground(new java.awt.Color(0, 51, 153));
+        btn_report_one_items.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btn_report_one_items.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/report_2.png"))); // NOI18N
+        btn_report_one_items.setText("تقرير عن صنف");
+        btn_report_one_items.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btn_report_one_items.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        getContentPane().add(btn_report_one_items);
+        btn_report_one_items.setBounds(50, 260, 300, 100);
+
+        btn_report_casher_day.setForeground(new java.awt.Color(0, 51, 153));
+        btn_report_casher_day.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btn_report_casher_day.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/report_5.png"))); // NOI18N
+        btn_report_casher_day.setText("تقرير اليوم");
+        btn_report_casher_day.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btn_report_casher_day.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        getContentPane().add(btn_report_casher_day);
+        btn_report_casher_day.setBounds(50, 380, 300, 100);
+
+        btn_report_all_items.setForeground(new java.awt.Color(0, 51, 153));
         btn_report_all_items.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         btn_report_all_items.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/report_2.png"))); // NOI18N
         btn_report_all_items.setText("تقرير الاصناف");
         btn_report_all_items.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btn_report_all_items.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         getContentPane().add(btn_report_all_items);
-        btn_report_all_items.setBounds(50, 470, 300, 100);
+        btn_report_all_items.setBounds(370, 260, 300, 100);
 
-        btn_report_casher.setForeground(new java.awt.Color(0, 0, 255));
+        btn_report_casher.setForeground(new java.awt.Color(0, 51, 153));
         btn_report_casher.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         btn_report_casher.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/report_5.png"))); // NOI18N
         btn_report_casher.setText("تقرير الخزينة");
         btn_report_casher.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btn_report_casher.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         getContentPane().add(btn_report_casher);
-        btn_report_casher.setBounds(50, 580, 300, 100);
+        btn_report_casher.setBounds(370, 380, 300, 100);
         getContentPane().add(background);
         background.setBounds(0, 0, 0, 0);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
+
+    private void btn_report_all_clientMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_report_all_clientMouseClicked
+        // TODO add your handling code here:
+        InputStream strem = getClass().getResourceAsStream("/Reborts/AllClientReport.jrxml");
+        String sql = "SELECT client.id_client , c.name_client , client.firstBalance ,sum(c.Debit) as Debit , sum(c.Creditor) as Creditor FROM debitandcreditorclient c "
+                + "INNER JOIN client on c.id_client = client.id_client where client.isActive = 1 GROUP by c.name_client";
+        Tools.Printer(sql, strem, null);
+    }//GEN-LAST:event_btn_report_all_clientMouseClicked
+
+    private void btn_report_one_clientMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_report_one_clientMouseClicked
+        // TODO add your handling code here:
+        chooseClient choose = new chooseClient();
+        Tools.openJFram(choose);
+    }//GEN-LAST:event_btn_report_one_clientMouseClicked
 
     /**
      * @param args the command line arguments
@@ -156,7 +203,9 @@ public class RebortsFrame extends javax.swing.JFrame {
     private javax.swing.JLabel btn_report_all_items;
     private javax.swing.JLabel btn_report_all_supllires;
     private javax.swing.JLabel btn_report_casher;
+    private javax.swing.JLabel btn_report_casher_day;
     private javax.swing.JLabel btn_report_one_client;
+    private javax.swing.JLabel btn_report_one_items;
     private javax.swing.JLabel btn_report_one_suplier;
     // End of variables declaration//GEN-END:variables
 }

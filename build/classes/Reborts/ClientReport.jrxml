@@ -53,7 +53,7 @@
 				<reportElement x="0" y="30" width="555" height="101" uuid="fc6f3383-421b-4d62-b9d2-5503c344c78d"/>
 			</rectangle>
 			<textField pattern="#,##0.00">
-				<reportElement mode="Transparent" x="17" y="35" width="127" height="30" forecolor="#000000" backcolor="#FFFFFF" uuid="9e74254a-40f3-40f6-9ff9-118bb6872cc1"/>
+				<reportElement mode="Transparent" x="18" y="35" width="127" height="30" forecolor="#000000" backcolor="#FFFFFF" uuid="9e74254a-40f3-40f6-9ff9-118bb6872cc1"/>
 				<box>
 					<pen lineWidth="1.5"/>
 					<topPen lineWidth="1.5"/>
@@ -128,7 +128,7 @@
 				<textFieldExpression><![CDATA[$F{Creditor} != null ? $F{Creditor} : 0.00]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement mode="Transparent" x="144" y="35" width="76" height="30" forecolor="#000000" backcolor="#FFFFFF" uuid="81ad5703-b2f3-4436-a1ec-7036528025c0"/>
+				<reportElement mode="Transparent" x="145" y="35" width="76" height="30" forecolor="#000000" backcolor="#FFFFFF" uuid="81ad5703-b2f3-4436-a1ec-7036528025c0"/>
 				<box>
 					<pen lineWidth="1.5"/>
 					<topPen lineWidth="1.5"/>
