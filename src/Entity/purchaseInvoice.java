@@ -40,8 +40,8 @@ public class purchaseInvoice extends invoice{
             con = ConnectDB.getCon();
             con.setAutoCommit(false);
             String sql_insert_purchase_invoice = "INSERT INTO `purchaseinvoice` (`id_purchaseInvoice`, `date_purchaseInvoice`, "
-                    + "`type_purchaseInvoic`, `id_Suppliers`, `totalAmount`, `discount`, `amountCash`, `amountLater`, `note`, `isActive`) "
-                    + "VALUES (?,?,?,?,?,?,?,?,?,?) ";
+                    + "`type_purchaseInvoic`, `id_Suppliers`, `totalAmount`, `discount`, `amountCash`, `amountLater`, `note`) "
+                    + "VALUES (?,?,?,?,?,?,?,?,?) ";
             pstmt = con.prepareStatement(sql_insert_purchase_invoice,Statement.RETURN_GENERATED_KEYS);
             pstmt.setString(1, getId_invoice());
             pstmt.setString(2, getDate_invoice());
@@ -52,7 +52,6 @@ public class purchaseInvoice extends invoice{
             pstmt.setDouble(7, getCashAmount());
             pstmt.setDouble(8, getRemainingAmount());
             pstmt.setString(9, getNote());
-            pstmt.setBoolean(10, isSave);
             int row_inserted = pstmt.executeUpdate();
             if(row_inserted == 1){
                 int rowAffected = 0 ;
@@ -127,7 +126,7 @@ public class purchaseInvoice extends invoice{
     }
     private void getValuesFromVector(ItemsOnInvoice i){
         try {
-           String Sql = "INSERT INTO `itemsonpurchaseinvoice` (`id`, `id_items`, `name_items`, `qyt`, `id_unit`,"
+           String Sql = "INSERT INTO `itemsonpurchaseinvoice` (`id`, `id_items`, `name_items`, `qyt`, `name_unit`,"
                    + " `price`, `discount`, `Amount`, `id_purchaseInvoice`)"
                       + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
             pstItems = con.prepareStatement(Sql, Statement.RETURN_GENERATED_KEYS);
@@ -135,7 +134,7 @@ public class purchaseInvoice extends invoice{
             pstItems.setInt(2, i.id_items);
             pstItems.setString(3, i.name_items);
             pstItems.setDouble(4, i.qyt);
-            pstItems.setInt(5, i.id_unit);
+            pstItems.setString(5, i.name_unit);
             pstItems.setDouble(6, i.price);
             pstItems.setDouble(7, i.discount);
             pstItems.setDouble(8, i.Amount);

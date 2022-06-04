@@ -62,7 +62,7 @@ public abstract class Person{
     
     
     public void filTable(JTable table) {
-        String sql = "select firstBalance , idNational , address , phone , name_"+tableName+" , id_"+tableName+" from "+tableName ;
+        String sql = "select firstBalance , idNational , address , phone , name_"+tableName+" , id_"+tableName+" from "+tableName +" where isActive = 1";
         String[] coulmnName = {"رصيد سابق", "رقم قومي", "عنوان", "هاتف", "الاسم", "مسلسل"};
         ConnectDB.fillAndCenterTable(sql, table, coulmnName);
     }

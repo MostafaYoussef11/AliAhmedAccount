@@ -135,7 +135,7 @@ public class SalesInvoic extends invoice{
 
     public void getValuesFromVector(ItemsOnInvoice i){
         try {
-           String Sql = "INSERT INTO `itemsonsalesinvoice` (`id`, `id_items`, `name_items`, `qyt`, `id_unit`,"
+           String Sql = "INSERT INTO `itemsonsalesinvoice` (`id`, `id_items`, `name_items`, `qyt`, `name_unit`,"
                       + " `price`, `discount`, `Amount`, `id_salesInvoic`)"
                       + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
             pstItems = con.prepareStatement(Sql, Statement.RETURN_GENERATED_KEYS);
@@ -143,7 +143,8 @@ public class SalesInvoic extends invoice{
             pstItems.setInt(2, i.id_items);
             pstItems.setString(3, i.name_items);
             pstItems.setDouble(4, i.qyt);
-            pstItems.setInt(5, i.id_unit);
+            //pstItems.setInt(5, i.id_unit);
+            pstItems.setString(5,i.name_unit);
             pstItems.setDouble(6, i.price);
             pstItems.setDouble(7, i.discount);
             pstItems.setDouble(8, i.Amount);

@@ -21,6 +21,7 @@ import java.io.InputStream;
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Vector;
+import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JComponent;
@@ -67,7 +68,6 @@ public class SalesInvoiceFrame extends javax.swing.JFrame {
     private void newInvoice(){
         sales = new SalesInvoic();
         client = new ClientPerson();
-
         Tools.disableButOpen(btPanel);
         String id_salesInvoic = sales.getLastId();
         txtId_Invoice.setText(id_salesInvoic);
@@ -75,6 +75,7 @@ public class SalesInvoiceFrame extends javax.swing.JFrame {
         txtAmountCashing.setText("0.00");
         ItemsPanale.setVisible(false);
         ConnectDB.fillCombo("items", "name_items", comboItems);
+        client.FillComboCash(comboName);
         Tools.CenterJDateChos(txtDate);
         PaymentMethod value[];
         value = PaymentMethod.values();
@@ -93,7 +94,7 @@ public class SalesInvoiceFrame extends javax.swing.JFrame {
         String id = ConnectDB.getIdFromName("select id from items where name_items='"+comboItems.getSelectedItem().toString()+"'");
         ConnectDB.fillComboUnit(id, comboUnit);
         txtPrice.setText(new Items().getSalesPriceHight(comboItems.getSelectedItem().toString()));
-        String columns[]={ "الاجمالي", "الخصم", "سعر الوحدة", "الكمية", "الصنف", "م"};
+        String columns[]={ "الاجمالي", "الخصم", "سعر الوحدة", "الوحدة","الكمية", "الصنف", "م"};
         model = (DefaultTableModel) jTable1.getModel();
         Tools.CenterTable(columns, jTable1);
         btnAddItems.setEnabled(true);
@@ -112,15 +113,15 @@ public class SalesInvoiceFrame extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         txtDate = new com.toedter.calendar.JDateChooser();
         jLabel4 = new javax.swing.JLabel();
-        comboPaymentMethod = new javax.swing.JComboBox<String>();
+        comboPaymentMethod = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
-        comboName = new javax.swing.JComboBox<String>();
+        comboName = new javax.swing.JComboBox<>();
         ItemsPanale = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
-        comboItems = new javax.swing.JComboBox<String>();
+        comboItems = new javax.swing.JComboBox<>();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        comboUnit = new javax.swing.JComboBox<String>();
+        comboUnit = new javax.swing.JComboBox<>();
         jLabel9 = new javax.swing.JLabel();
         txtPrice = new javax.swing.JTextField();
         btnItemPanale = new javax.swing.JPanel();
@@ -190,7 +191,7 @@ public class SalesInvoiceFrame extends javax.swing.JFrame {
         jLabel4.setText("نوع الفاتورة");
         jLabel4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        comboPaymentMethod.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboPaymentMethod.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         comboPaymentMethod.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 comboPaymentMethodItemStateChanged(evt);
@@ -202,7 +203,7 @@ public class SalesInvoiceFrame extends javax.swing.JFrame {
         jLabel5.setText("اسم العميل");
         jLabel5.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        comboName.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboName.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         comboName.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 comboNameItemStateChanged(evt);
@@ -217,7 +218,7 @@ public class SalesInvoiceFrame extends javax.swing.JFrame {
         jLabel6.setText("اسم الصنف");
         jLabel6.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        comboItems.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboItems.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         comboItems.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 comboItemsItemStateChanged(evt);
@@ -235,7 +236,7 @@ public class SalesInvoiceFrame extends javax.swing.JFrame {
         jLabel8.setText("الوحدة");
         jLabel8.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        comboUnit.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboUnit.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         comboUnit.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 comboUnitItemStateChanged(evt);
@@ -437,11 +438,11 @@ public class SalesInvoiceFrame extends javax.swing.JFrame {
 
             },
             new String [] {
-                "الاجمالي", "الخصم", "سعر الوحدة", "الكمية", "الصنف", "م"
+                "الاجمالي", "الخصم", "سعر الوحدة", "الوحدة", "الكمية", "الصنف", "م"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -462,11 +463,13 @@ public class SalesInvoiceFrame extends javax.swing.JFrame {
             jTable1.getColumnModel().getColumn(2).setResizable(false);
             jTable1.getColumnModel().getColumn(2).setPreferredWidth(100);
             jTable1.getColumnModel().getColumn(3).setResizable(false);
-            jTable1.getColumnModel().getColumn(3).setPreferredWidth(50);
+            jTable1.getColumnModel().getColumn(3).setPreferredWidth(75);
             jTable1.getColumnModel().getColumn(4).setResizable(false);
-            jTable1.getColumnModel().getColumn(4).setPreferredWidth(150);
+            jTable1.getColumnModel().getColumn(4).setPreferredWidth(50);
             jTable1.getColumnModel().getColumn(5).setResizable(false);
-            jTable1.getColumnModel().getColumn(5).setPreferredWidth(25);
+            jTable1.getColumnModel().getColumn(5).setPreferredWidth(150);
+            jTable1.getColumnModel().getColumn(6).setResizable(false);
+            jTable1.getColumnModel().getColumn(6).setPreferredWidth(25);
         }
 
         jLabel13.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -830,7 +833,14 @@ public class SalesInvoiceFrame extends javax.swing.JFrame {
                     int id_invoicBil = Integer.parseInt(sales.getId_invoice());
                     para.put("id_salesInvoice", id_invoicBil);
                     double amount = sales.getAmount() - sales.getDiscont();
-                    para.put("Tafqeet", Tafqeet.doTafqeet(new BigDecimal(amount)));
+                    String tafqeet = "";
+                    try{
+                        tafqeet = Tafqeet.doTafqeet(new BigDecimal(amount));
+                    }catch(NullPointerException ex){
+                        tafqeet = "";
+                        Logger.getLogger("salseInvoic").warning(ex.getMessage());
+                    }
+                    para.put("Tafqeet",tafqeet );
                     InputStream stream =getClass().getResourceAsStream("/Reborts/SalesInvoicReport.jrxml");
                     Tools.Printer(sql, stream, para);
                 }
@@ -932,15 +942,17 @@ public class SalesInvoiceFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_txtDiscondItemKeyReleased
 
     private void btnSaveItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveItemActionPerformed
-       String[] values = new String[6];
-       values[5] = txtM.getText();
-       values[4] = comboItems.getSelectedItem().toString();
-       values[3] = txtCount.getValue().toString();
-       values[2] = txtPrice.getText();
-       values[1] = txtDiscondItem.getText();
-       values[0] = txtSumPrice.getText();
+       String[] values = new String[7];
+       
+       values[6] = txtM.getText();//مسلسل
+       values[5] = comboItems.getSelectedItem().toString();//اسم الصنف
+       values[4] = txtCount.getValue().toString();//الكمية
+       values[3] = comboUnit.getSelectedItem().toString();//اسم الوحدة
+       values[2] = txtPrice.getText();//سعر الوحدة
+       values[1] = txtDiscondItem.getText();//الخصم
+       values[0] = txtSumPrice.getText();// الاجمالي
        model.addRow(values);
-       valuesItems.add(new ItemsOnInvoice(c, Integer.parseInt(new Items().getIdItemsFromName(values[4])), values[4],Double.parseDouble(txtCount.getValue().toString()),Integer.parseInt(new Items().getIdUnitFromNameItems(values[4])), Double.parseDouble(txtPrice.getText()), Double.parseDouble(txtDiscondItem.getText()), Double.parseDouble(txtSumPrice.getText()), Integer.parseInt(txtId_Invoice.getText())));
+       valuesItems.add(new ItemsOnInvoice(c, Integer.parseInt(new Items().getIdItemsFromName(values[5])), values[5],Double.parseDouble(txtCount.getValue().toString()),comboUnit.getSelectedItem().toString(), Double.parseDouble(txtPrice.getText()), Double.parseDouble(txtDiscondItem.getText()), Double.parseDouble(txtSumPrice.getText()), Integer.parseInt(txtId_Invoice.getText())));
        SumTotal();
        c++;
        txtDiscondItem.setText("0.00"); 

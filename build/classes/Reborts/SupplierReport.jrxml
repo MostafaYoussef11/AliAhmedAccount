@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="3290fda5-1393-400e-9344-921d2c3dd6f5">
 	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="144"/>
+	<property name="ireport.y" value="93"/>
 	<parameter name="id_Suppliers" class="java.lang.Integer">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
@@ -31,7 +31,7 @@
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<variable name="variable1" class="java.lang.Double">
-		<variableExpression><![CDATA[$F{firstBalance}.doubleValue()]]></variableExpression>
+		<variableExpression><![CDATA[($F{firstBalance} == null ? 0.00 : $F{firstBalance})+($F{creditor} == null ? 0.00 : $F{creditor})-($F{debit} == null ? 0.00 : $F{debit})]]></variableExpression>
 	</variable>
 	<background>
 		<band splitType="Stretch"/>
@@ -228,9 +228,9 @@
 		<band height="3" splitType="Stretch"/>
 	</pageHeader>
 	<columnHeader>
-		<band height="69" splitType="Stretch">
+		<band height="32" splitType="Stretch">
 			<staticText>
-				<reportElement x="2" y="5" width="275" height="30" uuid="7de1dc2e-3371-4b98-9e8a-cdb2a2fb9065"/>
+				<reportElement x="300" y="0" width="125" height="30" uuid="bbc25134-95a6-467c-8d00-0f2536ab5d9f"/>
 				<box>
 					<pen lineWidth="1.75" lineStyle="Solid"/>
 					<topPen lineWidth="1.75" lineStyle="Solid"/>
@@ -239,12 +239,12 @@
 					<rightPen lineWidth="1.75" lineStyle="Solid"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="18" isBold="true"/>
+					<font size="16" isBold="true"/>
 				</textElement>
 				<text><![CDATA[الصادر]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="278" y="5" width="275" height="30" uuid="af41e2d4-0f40-4033-b380-375003fe1cf9"/>
+				<reportElement x="425" y="0" width="125" height="30" uuid="2c2e7bdb-5a44-4d80-aad8-cdbc020cd1e7"/>
 				<box>
 					<pen lineWidth="1.75" lineStyle="Solid"/>
 					<topPen lineWidth="1.75" lineStyle="Solid"/>
@@ -253,12 +253,12 @@
 					<rightPen lineWidth="1.75" lineStyle="Solid"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="18" isBold="true"/>
+					<font size="16" isBold="true"/>
 				</textElement>
 				<text><![CDATA[الوارد]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="2" y="36" width="125" height="30" uuid="f1dfd681-3c10-4c52-8774-7093de5db74a"/>
+				<reportElement x="0" y="0" width="180" height="30" uuid="f1dfd681-3c10-4c52-8774-7093de5db74a"/>
 				<box>
 					<pen lineWidth="1.75" lineStyle="Solid"/>
 					<topPen lineWidth="1.75" lineStyle="Solid"/>
@@ -272,63 +272,7 @@
 				<text><![CDATA[البيان]]></text>
 			</staticText>
 			<staticText>
-				<reportElement x="127" y="36" width="75" height="30" uuid="b1951708-5003-4920-9b8a-7fa8193b1c72"/>
-				<box>
-					<pen lineWidth="1.75" lineStyle="Solid"/>
-					<topPen lineWidth="1.75" lineStyle="Solid"/>
-					<leftPen lineWidth="1.75" lineStyle="Solid"/>
-					<bottomPen lineWidth="1.75" lineStyle="Solid"/>
-					<rightPen lineWidth="1.75" lineStyle="Solid"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="16" isBold="true"/>
-				</textElement>
-				<text><![CDATA[المبلغ]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="202" y="36" width="75" height="30" uuid="59440b42-0d0b-43d0-85de-b42d15e54189"/>
-				<box>
-					<pen lineWidth="1.75" lineStyle="Solid"/>
-					<topPen lineWidth="1.75" lineStyle="Solid"/>
-					<leftPen lineWidth="1.75" lineStyle="Solid"/>
-					<bottomPen lineWidth="1.75" lineStyle="Solid"/>
-					<rightPen lineWidth="1.75" lineStyle="Solid"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="16" isBold="true"/>
-				</textElement>
-				<text><![CDATA[التاريخ]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="403" y="36" width="75" height="30" uuid="bbc25134-95a6-467c-8d00-0f2536ab5d9f"/>
-				<box>
-					<pen lineWidth="1.75" lineStyle="Solid"/>
-					<topPen lineWidth="1.75" lineStyle="Solid"/>
-					<leftPen lineWidth="1.75" lineStyle="Solid"/>
-					<bottomPen lineWidth="1.75" lineStyle="Solid"/>
-					<rightPen lineWidth="1.75" lineStyle="Solid"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="16" isBold="true"/>
-				</textElement>
-				<text><![CDATA[المبلغ]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="278" y="36" width="125" height="30" uuid="8c174900-8e0c-42b8-82b5-0afa7c8379e5"/>
-				<box>
-					<pen lineWidth="1.75" lineStyle="Solid"/>
-					<topPen lineWidth="1.75" lineStyle="Solid"/>
-					<leftPen lineWidth="1.75" lineStyle="Solid"/>
-					<bottomPen lineWidth="1.75" lineStyle="Solid"/>
-					<rightPen lineWidth="1.75" lineStyle="Solid"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="16" isBold="true"/>
-				</textElement>
-				<text><![CDATA[البيان]]></text>
-			</staticText>
-			<staticText>
-				<reportElement x="478" y="36" width="75" height="30" uuid="2c2e7bdb-5a44-4d80-aad8-cdbc020cd1e7"/>
+				<reportElement x="180" y="0" width="120" height="30" uuid="8c174900-8e0c-42b8-82b5-0afa7c8379e5"/>
 				<box>
 					<pen lineWidth="1.75" lineStyle="Solid"/>
 					<topPen lineWidth="1.75" lineStyle="Solid"/>
@@ -344,27 +288,141 @@
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="102" splitType="Stretch">
+		<band height="32" splitType="Stretch">
 			<subreport>
-				<reportElement x="278" y="0" width="275" height="100" uuid="4216c725-4308-4600-8916-c44912d9a170"/>
-				<subreportParameter name="id_Suppliers">
-					<subreportParameterExpression><![CDATA[$P{id_Suppliers}]]></subreportParameterExpression>
-				</subreportParameter>
+				<reportElement x="0" y="1" width="550" height="30" uuid="45fd55c2-a412-49f5-b689-e3f14153e30b"/>
 				<subreportParameter name="SUBREPORT_DIR">
 					<subreportParameterExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportParameterExpression>
 				</subreportParameter>
+				<subreportParameter name="id_Suppliers">
+					<subreportParameterExpression><![CDATA[$P{id_Suppliers}]]></subreportParameterExpression>
+				</subreportParameter>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
-				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "SupplierReport_critor.jasper"]]></subreportExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "SupplierReport_subreport1.jasper"]]></subreportExpression>
 			</subreport>
 		</band>
 	</detail>
-	<columnFooter>
-		<band height="45" splitType="Stretch"/>
-	</columnFooter>
-	<pageFooter>
-		<band height="54" splitType="Stretch"/>
-	</pageFooter>
 	<summary>
-		<band height="42" splitType="Stretch"/>
+		<band height="123" splitType="Stretch">
+			<rectangle>
+				<reportElement x="0" y="5" width="553" height="107" uuid="fd312f3f-b616-4c4e-a3c2-77a87db6ed1e"/>
+			</rectangle>
+			<staticText>
+				<reportElement x="450" y="11" width="100" height="30" uuid="cc34e27e-58d1-47f9-88e0-7b90c7beca2c"/>
+				<box>
+					<pen lineWidth="1.5"/>
+					<topPen lineWidth="1.5"/>
+					<leftPen lineWidth="1.5"/>
+					<bottomPen lineWidth="1.5"/>
+					<rightPen lineWidth="1.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[رصيد سابق]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="450" y="43" width="100" height="30" uuid="59899ff5-936e-4f72-9ba2-63a4bddc7ea1"/>
+				<box>
+					<pen lineWidth="1.5"/>
+					<topPen lineWidth="1.5"/>
+					<leftPen lineWidth="1.5"/>
+					<bottomPen lineWidth="1.5"/>
+					<rightPen lineWidth="1.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[اجمالي الوارد]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="450" y="75" width="100" height="30" uuid="b86df7de-c749-4964-a39f-9f7e170c0419"/>
+				<box>
+					<pen lineWidth="1.5"/>
+					<topPen lineWidth="1.5"/>
+					<leftPen lineWidth="1.5"/>
+					<bottomPen lineWidth="1.5"/>
+					<rightPen lineWidth="1.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[اجمالي الصادر]]></text>
+			</staticText>
+			<textField pattern="#,##0.00">
+				<reportElement mode="Transparent" x="297" y="11" width="150" height="30" forecolor="#000000" backcolor="#FFFFFF" uuid="433cc6cd-328f-44a4-b646-5a71e44e3c1c"/>
+				<box>
+					<pen lineWidth="1.5"/>
+					<topPen lineWidth="1.5"/>
+					<leftPen lineWidth="1.5"/>
+					<bottomPen lineWidth="1.5"/>
+					<rightPen lineWidth="1.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="16" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{firstBalance} == null ? 0 : $F{firstBalance}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement mode="Transparent" x="297" y="43" width="150" height="30" forecolor="#000000" backcolor="#FFFFFF" uuid="d1414df0-eb64-498a-9908-70532b6cd9b9"/>
+				<box>
+					<pen lineWidth="1.5"/>
+					<topPen lineWidth="1.5"/>
+					<leftPen lineWidth="1.5"/>
+					<bottomPen lineWidth="1.5"/>
+					<rightPen lineWidth="1.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="16" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{creditor} == null ? 0 : $F{creditor}]]></textFieldExpression>
+			</textField>
+			<textField pattern="#,##0.00">
+				<reportElement mode="Transparent" x="297" y="75" width="150" height="30" forecolor="#000000" backcolor="#FFFFFF" uuid="68e4adeb-c1fc-4655-91fa-eb018af20e01"/>
+				<box>
+					<pen lineWidth="1.5"/>
+					<topPen lineWidth="1.5"/>
+					<leftPen lineWidth="1.5"/>
+					<bottomPen lineWidth="1.5"/>
+					<rightPen lineWidth="1.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="16" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{debit} == null ? 0 : $F{debit}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="192" y="11" width="100" height="94" uuid="34a7fb45-376b-4147-9dd5-ec93ae0134ae"/>
+				<box>
+					<pen lineWidth="1.5"/>
+					<topPen lineWidth="1.5"/>
+					<leftPen lineWidth="1.5"/>
+					<bottomPen lineWidth="1.5"/>
+					<rightPen lineWidth="1.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[الرصيد الحالي]]></text>
+			</staticText>
+			<textField pattern="#,##0.00">
+				<reportElement mode="Transparent" x="10" y="11" width="177" height="94" forecolor="#000000" backcolor="#FFFFFF" uuid="7b29a9a4-bce6-4101-8548-84015756ffb9"/>
+				<box>
+					<pen lineWidth="1.5"/>
+					<topPen lineWidth="1.5"/>
+					<leftPen lineWidth="1.5"/>
+					<bottomPen lineWidth="1.5"/>
+					<rightPen lineWidth="1.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="16" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{variable1}]]></textFieldExpression>
+			</textField>
+		</band>
 	</summary>
 </jasperReport>

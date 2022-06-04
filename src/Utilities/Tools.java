@@ -246,6 +246,9 @@ public class Tools {
             case "Sunday":
                 day_ar = "الأحد";
                 break;
+            default:
+                day_ar = day_En;
+                break;
         }
         return day_ar;
     }

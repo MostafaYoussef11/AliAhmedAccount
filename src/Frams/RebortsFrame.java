@@ -6,11 +6,15 @@
 package Frams;
 
 import Utilities.Tools;
+import java.awt.Cursor;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.io.InputStream;
+import java.util.HashMap;
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
+import javax.swing.border.Border;
 
 /**
  *
@@ -59,6 +63,7 @@ public class RebortsFrame extends javax.swing.JFrame {
         background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         getContentPane().setLayout(null);
 
         btn_report_all_client.setForeground(new java.awt.Color(0, 51, 153));
@@ -66,10 +71,13 @@ public class RebortsFrame extends javax.swing.JFrame {
         btn_report_all_client.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/report_1.png"))); // NOI18N
         btn_report_all_client.setText("تقرير العملاء");
         btn_report_all_client.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        btn_report_all_client.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_report_all_client.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btn_report_all_client.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btn_report_all_clientMouseClicked(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btn_report_all_clientMouseExited(evt);
             }
         });
         getContentPane().add(btn_report_all_client);
@@ -80,10 +88,13 @@ public class RebortsFrame extends javax.swing.JFrame {
         btn_report_one_client.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/report_2.png"))); // NOI18N
         btn_report_one_client.setText("تقرير عن عميل");
         btn_report_one_client.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        btn_report_one_client.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_report_one_client.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         btn_report_one_client.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btn_report_one_clientMouseClicked(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btn_report_one_clientMouseExited(evt);
             }
         });
         getContentPane().add(btn_report_one_client);
@@ -94,7 +105,15 @@ public class RebortsFrame extends javax.swing.JFrame {
         btn_report_all_supllires.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/report_3.png"))); // NOI18N
         btn_report_all_supllires.setText("تقرير الموردين");
         btn_report_all_supllires.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        btn_report_all_supllires.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_report_all_supllires.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btn_report_all_supllires.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_report_all_suplliresMouseClicked(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btn_report_all_suplliresMouseExited(evt);
+            }
+        });
         getContentPane().add(btn_report_all_supllires);
         btn_report_all_supllires.setBounds(370, 150, 300, 100);
 
@@ -103,7 +122,15 @@ public class RebortsFrame extends javax.swing.JFrame {
         btn_report_one_suplier.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/report_4.png"))); // NOI18N
         btn_report_one_suplier.setText("تقرير عن مورد");
         btn_report_one_suplier.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        btn_report_one_suplier.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_report_one_suplier.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btn_report_one_suplier.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_report_one_suplierMouseClicked(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btn_report_one_suplierMouseExited(evt);
+            }
+        });
         getContentPane().add(btn_report_one_suplier);
         btn_report_one_suplier.setBounds(50, 150, 300, 100);
 
@@ -112,7 +139,7 @@ public class RebortsFrame extends javax.swing.JFrame {
         btn_report_one_items.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/report_2.png"))); // NOI18N
         btn_report_one_items.setText("تقرير عن صنف");
         btn_report_one_items.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        btn_report_one_items.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_report_one_items.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         getContentPane().add(btn_report_one_items);
         btn_report_one_items.setBounds(50, 260, 300, 100);
 
@@ -121,7 +148,7 @@ public class RebortsFrame extends javax.swing.JFrame {
         btn_report_casher_day.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/report_5.png"))); // NOI18N
         btn_report_casher_day.setText("تقرير اليوم");
         btn_report_casher_day.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        btn_report_casher_day.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_report_casher_day.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         getContentPane().add(btn_report_casher_day);
         btn_report_casher_day.setBounds(50, 380, 300, 100);
 
@@ -130,7 +157,7 @@ public class RebortsFrame extends javax.swing.JFrame {
         btn_report_all_items.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/report_2.png"))); // NOI18N
         btn_report_all_items.setText("تقرير الاصناف");
         btn_report_all_items.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        btn_report_all_items.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_report_all_items.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         getContentPane().add(btn_report_all_items);
         btn_report_all_items.setBounds(370, 260, 300, 100);
 
@@ -139,7 +166,7 @@ public class RebortsFrame extends javax.swing.JFrame {
         btn_report_casher.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/report_5.png"))); // NOI18N
         btn_report_casher.setText("تقرير الخزينة");
         btn_report_casher.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        btn_report_casher.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btn_report_casher.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         getContentPane().add(btn_report_casher);
         btn_report_casher.setBounds(370, 380, 300, 100);
         getContentPane().add(background);
@@ -150,6 +177,7 @@ public class RebortsFrame extends javax.swing.JFrame {
 
     private void btn_report_all_clientMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_report_all_clientMouseClicked
         // TODO add your handling code here:
+        btn_report_all_client.setBorder(BorderFactory.createLoweredBevelBorder());
         InputStream strem = getClass().getResourceAsStream("/Reborts/AllClientReport.jrxml");
         String sql = "SELECT client.id_client , c.name_client , client.firstBalance ,sum(c.Debit) as Debit , sum(c.Creditor) as Creditor FROM debitandcreditorclient c "
                 + "INNER JOIN client on c.id_client = client.id_client where client.isActive = 1 GROUP by c.name_client";
@@ -158,9 +186,50 @@ public class RebortsFrame extends javax.swing.JFrame {
 
     private void btn_report_one_clientMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_report_one_clientMouseClicked
         // TODO add your handling code here:
+        btn_report_one_client.setBorder(BorderFactory.createLoweredBevelBorder());
         chooseClient choose = new chooseClient();
         Tools.openJFram(choose);
     }//GEN-LAST:event_btn_report_one_clientMouseClicked
+
+    private void btn_report_all_suplliresMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_report_all_suplliresMouseClicked
+        // TODO add your handling code here:
+        btn_report_all_supllires.setBorder(BorderFactory.createLoweredBevelBorder());
+        String sql = "";
+        InputStream stream ;
+        HashMap para = new HashMap();
+        sql = "SELECT sup.id_Suppliers id, SUM(sup.Debit) debit , SUM(sup.Creditor) creditor , sup.name_Suppliers , s.firstBalance FROM debitandcreditorsupplier sup"
+            + " INNER JOIN suppliers s ON sup.id_Suppliers = s.id_Suppliers";
+        stream = getClass().getResourceAsStream("/Reborts/AllSuppliersReport.jrxml");///Reborts/AllClientReport.jrxml
+        Tools.Printer(sql, stream, para);
+    
+    }//GEN-LAST:event_btn_report_all_suplliresMouseClicked
+
+    private void btn_report_one_suplierMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_report_one_suplierMouseClicked
+        // TODO add your handling code here:
+        btn_report_one_suplier.setBorder(BorderFactory.createLoweredBevelBorder());
+        chooseSuppliers ch = new chooseSuppliers();
+        Tools.openJFram(ch);
+    }//GEN-LAST:event_btn_report_one_suplierMouseClicked
+
+    private void btn_report_one_suplierMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_report_one_suplierMouseExited
+        // TODO add your handling code here:
+        btn_report_one_suplier.setBorder(BorderFactory.createRaisedBevelBorder());
+    }//GEN-LAST:event_btn_report_one_suplierMouseExited
+
+    private void btn_report_all_clientMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_report_all_clientMouseExited
+        // TODO add your handling code here:
+        btn_report_all_client.setBorder(BorderFactory.createRaisedBevelBorder());
+    }//GEN-LAST:event_btn_report_all_clientMouseExited
+
+    private void btn_report_one_clientMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_report_one_clientMouseExited
+        // TODO add your handling code here:
+        btn_report_one_client.setBorder(BorderFactory.createRaisedBevelBorder());
+    }//GEN-LAST:event_btn_report_one_clientMouseExited
+
+    private void btn_report_all_suplliresMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_report_all_suplliresMouseExited
+        // TODO add your handling code here:
+        btn_report_all_supllires.setBorder(BorderFactory.createRaisedBevelBorder());
+    }//GEN-LAST:event_btn_report_all_suplliresMouseExited
 
     /**
      * @param args the command line arguments

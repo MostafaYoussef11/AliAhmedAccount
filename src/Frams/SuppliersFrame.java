@@ -454,20 +454,42 @@ public class SuppliersFrame extends javax.swing.JFrame {
            stream = getClass().getResourceAsStream("/Reborts/AllSuppliersReport.jrxml");///Reborts/AllClientReport.jrxml
            Tools.Printer(sql, stream, para);
         }else{
-        
-        
+            sql =  "SELECT  s.name_Suppliers , s.phone , s.address ,s.firstBalance , SUM(ac.Creditor) creditor , SUM(ac.Debit) debit FROM suppliers s INNER JOIN suppliersaccount ac ON s.id_Suppliers = ac.id_Suppliers where s.id_Suppliers = $P{id_Suppliers} and ac.isActive = 1 and s.isActive = 1";
+            stream = getClass().getResourceAsStream("/Reborts/SupplierReport.jrxml");
+            int id = Integer.parseInt(txtId.getText());
+            para.put("id_Suppliers", id);
+            Tools.Printer(sql, stream, para);
         }
     }//GEN-LAST:event_btprintActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         // TODO add your handling code here:
         int row = jTable1.getSelectedRow();
-        String firstBalance = jTable1.getValueAt(row, 0).toString();
-        String idInternational =  jTable1.getValueAt(row, 1).toString();
-        String address =  jTable1.getValueAt(row, 2).toString();
-        String mobil =  jTable1.getValueAt(row, 3).toString();
+        String firstBalance ,idInternational,address,mobil;
+        try{ 
+            firstBalance = jTable1.getValueAt(row, 0).toString();
+            
+        }catch(NullPointerException ex){
+            firstBalance = "";
+        }
+        try{ 
+            idInternational =  jTable1.getValueAt(row, 1).toString();
+        }catch(NullPointerException ex){
+             idInternational = "";
+        } 
+        try{ 
+           address =  jTable1.getValueAt(row, 2).toString();
+        }catch(NullPointerException ex){
+             address = "";
+        } 
+        try{ 
+           mobil =  jTable1.getValueAt(row, 3).toString();
+        }catch(NullPointerException ex){
+             mobil = "";
+        }  
         String name =  jTable1.getValueAt(row, 4).toString();
         String id =  jTable1.getValueAt(row, 5).toString();
+
         txtAdrees.setText(address);
         txtAdrees.setEnabled(false);
         txtFirsbalance.setText(firstBalance);
@@ -480,7 +502,7 @@ public class SuppliersFrame extends javax.swing.JFrame {
         txtName.setText(name);
         txtName.setEnabled(false);
         Tools.selectButtonTable(btPanel);
-        
+        btprint.setEnabled(true);
         
     }//GEN-LAST:event_jTable1MouseClicked
 

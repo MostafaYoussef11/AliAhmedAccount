@@ -18,7 +18,7 @@ public class Suppliers extends Person{
         super("Suppliers");
     }
     
-        public String getFirstBalance(String id_Supplier){
+    public String getFirstBalance(String id_Supplier){
         String firstbalance = ConnectDB.getIdFromName("SELECT firstBalance AS id FROM suppliers WHERE id_Suppliers="+id_Supplier);
         return firstbalance;
     }

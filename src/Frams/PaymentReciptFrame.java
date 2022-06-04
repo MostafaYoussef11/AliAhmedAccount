@@ -37,6 +37,8 @@ public class PaymentReciptFrame extends javax.swing.JFrame {
     private String id_reciept , name_suppliers , note ;
     private double OldBalance , newBalance , amount;
     private TypeOfFilter type_filter;
+    private String noteText = "";
+    private Date date;
     public PaymentReciptFrame() {
         initComponents();
         setSize(820, 740);
@@ -448,8 +450,10 @@ public class PaymentReciptFrame extends javax.swing.JFrame {
         txt_balance.setText(suppliers.calcBalanceSupplier(com_Name_Suppliers.getSelectedItem().toString())+"");
         txt_Amount.setText("0.00");
         Tools.CenterJDateChos(txt_Date_Process);
-        txt_id_reciept.setText(pay_recipt.getLastPaymentReceiptId());
-        txt_note.setText("دفعة من حساب " + " " + com_Name_Suppliers.getSelectedItem().toString());
+        id_reciept = pay_recipt.getLastPaymentReceiptId();
+        txt_id_reciept.setText(id_reciept);
+        noteText = "ايصال دفع رقم " + id_reciept;
+        txt_note.setText(noteText);
     }
     private void btnewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnewActionPerformed
         // TODO add your handling code here:
@@ -460,9 +464,7 @@ public class PaymentReciptFrame extends javax.swing.JFrame {
         id_reciept = txt_id_reciept.getText();
         name_suppliers = com_Name_Suppliers.getSelectedItem().toString();
         note = txt_note.getText();
-        Date date = txt_Date_Process.getDate();
-        pay_recipt.setId_PaymentReceipt(Integer.parseInt(id_reciept));
-        pay_recipt.setDate_process(date);
+        date = txt_Date_Process.getDate();
         String amount_str = txt_Amount.getText();
         try{
             amount = Double.parseDouble(amount_str);
@@ -472,46 +474,68 @@ public class PaymentReciptFrame extends javax.swing.JFrame {
             amount = 0 ;
             Logger.getLogger("Double Amount").warning(ex.getMessage());
         }
-        pay_recipt.setAmount(amount);
-        pay_recipt.SetIdSuppliersFromName(name_suppliers);
-        pay_recipt.setNote(note); 
-        if(radio_Payment.isSelected()){
-             type_filter = TypeOfFilter.Payment;
-         }else if(radio_Clear.isSelected()){
-               type_filter = TypeOfFilter.Clear;
-         }else{
-             type_filter = TypeOfFilter.End;
-         }
-        pay_recipt.setTypeOfFiltter(type_filter);
-        pay_recipt.setNewBalance(newBalance);
-        boolean isSave = pay_recipt.Save();
-        String Tafqet = "";
-        if(isSave){
-            int ok_Print = JOptionPane.showConfirmDialog(null, "تم الحفظ بنجاح . هل تريد طباعة الايصال ؟", note, JOptionPane.YES_NO_OPTION);
-            if(ok_Print == JOptionPane.YES_OPTION){
-                String sql = "SELECT pay.* , s.name_Suppliers from paymentreceipt pay "
-                        + "INNER JOIN suppliers s on pay.id_Suppliers = s.id_Suppliers where id_PaymentReceipt = $P{id_PaymentReceipt}";
-                InputStream stream = getClass().getResourceAsStream("/Reborts/PaymentReciptReport.jrxml");
-                HashMap para = new HashMap();
-                int id_PaymentReceipt = Integer.parseInt(id_reciept);
-                para.put("id_PaymentReceipt", id_PaymentReceipt);
-                para.put("day", Tools.getDayName(date));
-                try{
-                   Tafqet =  Tafqeet.doTafqeet(new BigDecimal(amount));
-                }catch(NullPointerException ex){
-                    Tafqet = "";
-                    System.err.println(ex.getMessage());
-                }
-                para.put("Tafqet",Tafqet);
-                Tools.Printer(sql, stream, para);
-                newRecipt();
-            }
-        }else{
-            Tools.showErrorMsg("خطـ في الحفظ");
+        if(amount == 0){
+            Tools.showErrorMsg("المبلغ غير مكتوب");
         }
+        else{
+
+            if(radio_Payment.isSelected()){
+                 type_filter = TypeOfFilter.Payment;
+                 savedRecipt();
+             }else if(radio_Clear.isSelected()){
+                   type_filter = TypeOfFilter.Clear;
+                   int isOk = JOptionPane.showConfirmDialog(this, "سوف يقوم هذا الاختيار بالتصفية المالية للمورد . هل انت متاكد", "تصفية مالية", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+                   if(isOk == JOptionPane.YES_OPTION){
+                       savedRecipt();
+                   }
+             }else{
+                 type_filter = TypeOfFilter.End;
+                 int isOk = JOptionPane.showConfirmDialog(this, "سوف يقوم هذا الاختيار بحذف كل فواتير و ايصالات المورد . هل انت متاكد", "تصفية  نهائية", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
+                 if(isOk == JOptionPane.YES_OPTION){
+                       savedRecipt();
+                   }               
+             }
+        }
+
         
     }//GEN-LAST:event_btsaveActionPerformed
-
+    private void savedRecipt(){
+      pay_recipt.setId_PaymentReceipt(Integer.parseInt(id_reciept));
+      pay_recipt.setDate_process(date);
+      pay_recipt.setAmount(amount);
+      pay_recipt.SetIdSuppliersFromName(name_suppliers);
+      pay_recipt.setNote(note); 
+      pay_recipt.setTypeOfFiltter(type_filter);
+      pay_recipt.setNewBalance(newBalance);  
+      boolean isSave = pay_recipt.Save();
+            String Tafqet = "";
+            if(isSave){
+                int ok_Print = JOptionPane.showConfirmDialog(null, "تم الحفظ بنجاح . هل تريد طباعة الايصال ؟", note, JOptionPane.YES_NO_OPTION);
+                if(ok_Print == JOptionPane.YES_OPTION){
+                    String sql = "SELECT pay.* , s.name_Suppliers from paymentreceipt pay "
+                            + "INNER JOIN suppliers s on pay.id_Suppliers = s.id_Suppliers where id_PaymentReceipt = $P{id_PaymentReceipt}";
+                    InputStream stream = getClass().getResourceAsStream("/Reborts/PaymentReciptReport.jrxml");
+                    HashMap para = new HashMap();
+                    int id_PaymentReceipt = Integer.parseInt(id_reciept);
+                    para.put("id_PaymentReceipt", id_PaymentReceipt);
+                    para.put("day", Tools.getDayName(txt_Date_Process.getDate()));
+                    try{
+                       Tafqet =  Tafqeet.doTafqeet(new BigDecimal(amount));
+                    }catch(NullPointerException ex){
+                        Tafqet = "";
+                        System.err.println(ex.getMessage());
+                    }
+                    para.put("Tafqet",Tafqet);
+                    Tools.Printer(sql, stream, para);
+                    newRecipt();
+                }
+                else{
+                    newRecipt();
+                }
+            }else{
+                Tools.showErrorMsg("خطـ في الحفظ");
+            }    
+    }
     private void bteditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bteditActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_bteditActionPerformed
@@ -539,25 +563,20 @@ public class PaymentReciptFrame extends javax.swing.JFrame {
         txt_Amount.setText("0.00");
         Tools.CenterJDateChos(txt_Date_Process);
         txt_id_reciept.setText(pay_recipt.getLastPaymentReceiptId());
-        txt_note.setText("دفعة من حساب " + " " + com_Name_Suppliers.getSelectedItem().toString());
     }//GEN-LAST:event_com_Name_SuppliersItemStateChanged
 
     private void radio_ClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radio_ClearActionPerformed
-        // TODO add your handling code here:
         txt_note.setText("تصفية نقدية لحساب " + com_Name_Suppliers.getSelectedItem().toString());
     }//GEN-LAST:event_radio_ClearActionPerformed
 
     private void radio_EndActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radio_EndActionPerformed
-        // TODO add your handling code here:
         txt_note.setText("تصفية نهائية لحساب " + com_Name_Suppliers.getSelectedItem().toString());
     }//GEN-LAST:event_radio_EndActionPerformed
 
     private void radio_PaymentActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radio_PaymentActionPerformed
-        // TODO add your handling code here:
-      txt_note.setText("دفعة من حساب " + " " + com_Name_Suppliers.getSelectedItem().toString());
+      txt_note.setText(noteText);
 
     }//GEN-LAST:event_radio_PaymentActionPerformed
-    //txt_note.setText("تصفية نهائية لحساب " + com_Name_Client.getSelectedItem().toString());
     /**
      * @param args the command line arguments
      */
