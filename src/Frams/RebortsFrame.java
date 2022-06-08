@@ -11,7 +11,12 @@ import java.awt.Font;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.io.InputStream;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.border.Border;
@@ -72,6 +77,11 @@ public class RebortsFrame extends javax.swing.JFrame {
         btn_report_all_client.setText("تقرير العملاء");
         btn_report_all_client.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btn_report_all_client.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btn_report_all_client.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseMoved(java.awt.event.MouseEvent evt) {
+                btn_report_all_clientMouseMoved(evt);
+            }
+        });
         btn_report_all_client.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btn_report_all_clientMouseClicked(evt);
@@ -140,6 +150,11 @@ public class RebortsFrame extends javax.swing.JFrame {
         btn_report_one_items.setText("تقرير عن صنف");
         btn_report_one_items.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btn_report_one_items.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btn_report_one_items.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_report_one_itemsMouseClicked(evt);
+            }
+        });
         getContentPane().add(btn_report_one_items);
         btn_report_one_items.setBounds(50, 260, 300, 100);
 
@@ -149,6 +164,11 @@ public class RebortsFrame extends javax.swing.JFrame {
         btn_report_casher_day.setText("تقرير اليوم");
         btn_report_casher_day.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btn_report_casher_day.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btn_report_casher_day.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_report_casher_dayMouseClicked(evt);
+            }
+        });
         getContentPane().add(btn_report_casher_day);
         btn_report_casher_day.setBounds(50, 380, 300, 100);
 
@@ -158,6 +178,14 @@ public class RebortsFrame extends javax.swing.JFrame {
         btn_report_all_items.setText("تقرير الاصناف");
         btn_report_all_items.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btn_report_all_items.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btn_report_all_items.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_report_all_itemsMouseClicked(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btn_report_all_itemsMouseExited(evt);
+            }
+        });
         getContentPane().add(btn_report_all_items);
         btn_report_all_items.setBounds(370, 260, 300, 100);
 
@@ -167,6 +195,11 @@ public class RebortsFrame extends javax.swing.JFrame {
         btn_report_casher.setText("تقرير الخزينة");
         btn_report_casher.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         btn_report_casher.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btn_report_casher.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_report_casherMouseClicked(evt);
+            }
+        });
         getContentPane().add(btn_report_casher);
         btn_report_casher.setBounds(370, 380, 300, 100);
         getContentPane().add(background);
@@ -230,6 +263,53 @@ public class RebortsFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         btn_report_all_supllires.setBorder(BorderFactory.createRaisedBevelBorder());
     }//GEN-LAST:event_btn_report_all_suplliresMouseExited
+
+    private void btn_report_all_itemsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_report_all_itemsMouseClicked
+        // TODO add your handling code here:
+        btn_report_all_items.setBorder(BorderFactory.createLoweredBevelBorder());
+        String sql = "SELECT * FROM `calcbalanceitems`";
+        InputStream stream = getClass().getResourceAsStream("/Reborts/itemReport.jrxml");
+        Tools.Printer(sql, stream, null);
+    }//GEN-LAST:event_btn_report_all_itemsMouseClicked
+
+    private void btn_report_all_itemsMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_report_all_itemsMouseExited
+        // TODO add your handling code here:
+        btn_report_all_items.setBorder(BorderFactory.createRaisedBevelBorder());
+        
+    }//GEN-LAST:event_btn_report_all_itemsMouseExited
+
+    private void btn_report_all_clientMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_report_all_clientMouseMoved
+        // TODO add your handling code here:
+       
+
+    }//GEN-LAST:event_btn_report_all_clientMouseMoved
+
+    private void btn_report_one_itemsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_report_one_itemsMouseClicked
+        // TODO add your handling code here:
+        chooseitems item = new chooseitems();
+        Tools.openJFram(item);
+    }//GEN-LAST:event_btn_report_one_itemsMouseClicked
+
+    private void btn_report_casherMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_report_casherMouseClicked
+        // TODO add your handling code here:
+        String sql = "SELECT * FROM `casher`";
+        InputStream stream = getClass().getResourceAsStream("/Reborts/CasherReport.jrxml");
+        Tools.Printer(sql, stream, null);
+        
+    }//GEN-LAST:event_btn_report_casherMouseClicked
+
+    private void btn_report_casher_dayMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_report_casher_dayMouseClicked
+        // TODO add your handling code here:
+        String sql = " SELECT * FROM `casher` where date_casher = $P{date_day}";
+        
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        String date_cahser = sdf.format(new Date());
+        InputStream streem = getClass().getResourceAsStream("/Reborts/CasherReport_day.jrxml");
+        HashMap para = new HashMap();
+        System.out.println(date_cahser);
+        para.put("date_day", date_cahser);
+        Tools.Printer(sql, streem, para);
+    }//GEN-LAST:event_btn_report_casher_dayMouseClicked
 
     /**
      * @param args the command line arguments

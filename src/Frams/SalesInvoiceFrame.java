@@ -47,6 +47,9 @@ public class SalesInvoiceFrame extends javax.swing.JFrame {
     int c = 0;
     ClientPerson client;
     Vector<ItemsOnInvoice> valuesItems;
+    private String high_name_unit ,  balance;
+    private double balanceItem;
+    Items items;
     public SalesInvoiceFrame() {
         initComponents();
         background.setLocation(0, 0);
@@ -68,13 +71,14 @@ public class SalesInvoiceFrame extends javax.swing.JFrame {
     private void newInvoice(){
         sales = new SalesInvoic();
         client = new ClientPerson();
+        items = new Items();
         Tools.disableButOpen(btPanel);
         String id_salesInvoic = sales.getLastId();
         txtId_Invoice.setText(id_salesInvoic);
         txtDiscond.setText("0.00");
         txtAmountCashing.setText("0.00");
         ItemsPanale.setVisible(false);
-        ConnectDB.fillCombo("items", "name_items", comboItems);
+        items.fillComboNameItems(comboItems);
         client.FillComboCash(comboName);
         Tools.CenterJDateChos(txtDate);
         PaymentMethod value[];
@@ -101,6 +105,9 @@ public class SalesInvoiceFrame extends javax.swing.JFrame {
         calcSumPrice();
         valuesItems = new Vector<ItemsOnInvoice>();
         c = 1;
+        high_name_unit = new Items().getHightUnitFromId(id);
+        balance = sales.chackBalanceForItems(items.getIdItemsFromName(comboItems.getSelectedItem().toString()));
+        balanceItem = Double.parseDouble(balance); 
     }
     
     @SuppressWarnings("unchecked")
@@ -899,9 +906,11 @@ public class SalesInvoiceFrame extends javax.swing.JFrame {
 
     private void comboItemsItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboItemsItemStateChanged
         // TODO add your handling code here:
-        String id = ConnectDB.getIdFromName("select id from items where name_items='"+comboItems.getSelectedItem().toString()+"'");
+        String name_item = comboItems.getSelectedItem().toString();
+        String id = items.getIdItemsFromName(name_item);
         ConnectDB.fillComboUnit(id, comboUnit);
-        String priceHigh = new Items().getSalesPriceHight(comboItems.getSelectedItem().toString());
+        high_name_unit = items.getHightUnitFromId(id);
+        String priceHigh = items.getSalesPriceHight(name_item);
         if(priceHigh.equals("")){
                txtPrice.setText("0.00");
         }else{
@@ -909,6 +918,8 @@ public class SalesInvoiceFrame extends javax.swing.JFrame {
         }
         txtCount.setValue(1);
         calcSumPrice();
+        balance = sales.chackBalanceForItems(id);
+        balanceItem = Double.parseDouble(balance); 
     }//GEN-LAST:event_comboItemsItemStateChanged
 
     private void comboUnitItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboUnitItemStateChanged
@@ -942,8 +953,8 @@ public class SalesInvoiceFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_txtDiscondItemKeyReleased
 
     private void btnSaveItemActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveItemActionPerformed
-       String[] values = new String[7];
-       
+       String[] values = new String[7]; 
+       Items item = new Items();
        values[6] = txtM.getText();//مسلسل
        values[5] = comboItems.getSelectedItem().toString();//اسم الصنف
        values[4] = txtCount.getValue().toString();//الكمية
@@ -951,12 +962,45 @@ public class SalesInvoiceFrame extends javax.swing.JFrame {
        values[2] = txtPrice.getText();//سعر الوحدة
        values[1] = txtDiscondItem.getText();//الخصم
        values[0] = txtSumPrice.getText();// الاجمالي
-       model.addRow(values);
-       valuesItems.add(new ItemsOnInvoice(c, Integer.parseInt(new Items().getIdItemsFromName(values[5])), values[5],Double.parseDouble(txtCount.getValue().toString()),comboUnit.getSelectedItem().toString(), Double.parseDouble(txtPrice.getText()), Double.parseDouble(txtDiscondItem.getText()), Double.parseDouble(txtSumPrice.getText()), Integer.parseInt(txtId_Invoice.getText())));
-       SumTotal();
-       c++;
-       txtDiscondItem.setText("0.00"); 
-       txtM.setText(c+"");   
+       // عدم توافر الكميات بالمخزن
+       String id = item.getIdUnitFromNameItems(values[5]);
+       String h_Unit = item.getHightUnitFromId(id);
+       double balance_after = 0.0;
+       double count = Double.parseDouble(values[4]);
+       int sizeVlues = valuesItems.size();
+        for(int i = 0 ; i < sizeVlues ; i++ ){
+          if(valuesItems.get(i).name_items.equals(values[5])){
+              balanceItem = balanceItem - valuesItems.get(i).qyt;
+           }
+        }  
+       if(h_Unit.equals(values[3])){
+         balance_after = balanceItem - count;
+         if(balance_after >= count ){
+            model.addRow(values);
+            valuesItems.add(new ItemsOnInvoice(c, Integer.parseInt(new Items().getIdItemsFromName(values[5])), values[5],Double.parseDouble(txtCount.getValue().toString()),comboUnit.getSelectedItem().toString(), Double.parseDouble(txtPrice.getText()), Double.parseDouble(txtDiscondItem.getText()), Double.parseDouble(txtSumPrice.getText()), Integer.parseInt(txtId_Invoice.getText())));
+            SumTotal();
+            c++;
+            txtDiscondItem.setText("0.00"); 
+            txtM.setText(c+"");                  
+         }
+         else{
+             Tools.showErrorMsg("الكمية غير متوفرة !!!!!!");
+         }
+       }else{
+           double val = item.getValFromId(id);
+           balance_after = (balanceItem * val) - count;
+           if(balance_after >= count){
+                model.addRow(values);
+                valuesItems.add(new ItemsOnInvoice(c, Integer.parseInt(new Items().getIdItemsFromName(values[5])), values[5],Double.parseDouble(txtCount.getValue().toString()),comboUnit.getSelectedItem().toString(), Double.parseDouble(txtPrice.getText()), Double.parseDouble(txtDiscondItem.getText()), Double.parseDouble(txtSumPrice.getText()), Integer.parseInt(txtId_Invoice.getText())));
+                SumTotal();
+                c++;
+                txtDiscondItem.setText("0.00"); 
+                txtM.setText(c+"");               
+           }else{
+                Tools.showErrorMsg("الكمية غير متوفرة !!!!!!");
+           }
+       
+       }  
     }//GEN-LAST:event_btnSaveItemActionPerformed
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
@@ -1012,9 +1056,9 @@ public class SalesInvoiceFrame extends javax.swing.JFrame {
         txtSumPrice.setText(sumTotal+"");
     }
     private void SumTotal(){
-        int c = jTable1.getRowCount();
+        int co = jTable1.getRowCount();
         double sum = 0;
-        for(int i = 0 ; i < c ; i++){
+        for(int i = 0 ; i < co ; i++){
             sum += Double.valueOf( (jTable1.getValueAt(i, 0)).toString());
         }
         txtTotalAmount.setText(sum+"");

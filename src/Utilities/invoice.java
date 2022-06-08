@@ -181,5 +181,9 @@ public abstract class invoice {
         this.Values = Values;
     }
 
-   
+   public String chackBalanceForItems(String id_items){
+       String sql = "SELECT nowBalance AS id FROM calcbalanceitems WHERE id="+id_items;
+       String balance = ConnectDB.getIdFromName(sql);
+       return balance;
+   }
 }
