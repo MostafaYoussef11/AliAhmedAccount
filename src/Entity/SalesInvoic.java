@@ -61,11 +61,12 @@ public class SalesInvoic extends invoice{
             rowAffected = 0 ;
            switch(getPaymentMethod()){  
                case cash:
-                 String sqlInsertCasher ="INSERT INTO `casher` (`date_casher`, `Debit`, `note`) VALUES (?,?,?)";
+                 String sqlInsertCasher ="INSERT INTO `casher` (`date_casher`, `Debit`, `note`,`id_salesInvoic`) VALUES (?,?,?,?)";
                  pstcasher = con.prepareStatement(sqlInsertCasher, Statement.RETURN_GENERATED_KEYS);
                  pstcasher.setString(1, getDate_invoice());
                  pstcasher.setDouble(2, getCashAmount());
                  pstcasher.setString(3,getNote());
+                 pstcasher.setString(4, getId_invoice());
                  rowAffected = pstcasher.executeUpdate();
                  break;
                case deferred:
@@ -80,11 +81,12 @@ public class SalesInvoic extends invoice{
                    rowAffected = pstcasher.executeUpdate();
                    break;
                case installments:
-                 String sqlInsertCasherInsallmen ="INSERT INTO `casher` (`date_casher`, `Debit`, `note`) VALUES (?,?,?)";
+                 String sqlInsertCasherInsallmen ="INSERT INTO `casher` (`date_casher`, `Debit`, `note`,`id_salesInvoic`) VALUES (?,?,?,?)";
                  pstcasher = con.prepareStatement(sqlInsertCasherInsallmen, Statement.RETURN_GENERATED_KEYS);
                  pstcasher.setString(1, getDate_invoice());
                  pstcasher.setDouble(2, getCashAmount());
                  pstcasher.setString(3,getNote());
+                 pstcasher.setString(4, getId_invoice());
                  pstcasher.executeUpdate();
                  String sqlInserClientAccountInstallmen = "INSERT INTO `clientaccount` (`date_ClientAccount`, `Debit`,`id_client`, `id_salesInvoic`, `note`) "
                            + "VALUES (?,?,?,?,?)";
@@ -132,7 +134,69 @@ public class SalesInvoic extends invoice{
         return isSaved;
     }
 
+    @Override
+    public boolean delete(int id) {
+        boolean isDel = false;
+        try{
+            con = ConnectDB.getCon();
+            con.setAutoCommit(false);
+            String sql_delete_items_invoice = "delete from itemsonsalesinvoice where id_salesInvoic = ?";
+            pstItems = con.prepareStatement(sql_delete_items_invoice, Statement.RETURN_GENERATED_KEYS);
+            pstItems.setInt(1, id);
+            int rowAffect = pstItems.executeUpdate();
+            if(rowAffect >= 1){
+                rowAffect = 0;
+                switch(getPaymentMethod()){
+                    case cash :
+                         String sql_casher_del = "delete from casher where id_salesInvoic = ?";
+                         pstcasher = con.prepareStatement(sql_casher_del, Statement.RETURN_GENERATED_KEYS);
+                         pstcasher.setInt(1, id);
+                         rowAffect = pstcasher.executeUpdate();
+                         break;
+                    case deferred :
+                        String sql_del_clientAccount = "DELETE FROM clientaccount WHERE id_salesInvoic=?";
+                        pstmt = con.prepareStatement(sql_del_clientAccount, Statement.RETURN_GENERATED_KEYS);
+                        pstmt.setInt(1, id);
+                        rowAffect = pstmt.executeUpdate();
+                        break;
+                    case installments :
+                         String sql_casher_delelet = "delete from casher where id_salesInvoic = ?";
+                         pstcasher = con.prepareStatement(sql_casher_delelet, Statement.RETURN_GENERATED_KEYS);
+                         pstcasher.setString(1, getId_invoice());
+                         pstcasher.executeUpdate();
+                         String sql_del_client_Account = "DELETE FROM clientaccount WHERE id_salesInvoic=?";
+                         pstmt = con.prepareStatement(sql_del_client_Account, Statement.RETURN_GENERATED_KEYS);
+                         pstmt.setInt(1, id);
+                         rowAffect = pstmt.executeUpdate();
+                         break;      
+                }
+                if(rowAffect >= 1){
+                    String sql_delete_salesinvoic = "DELETE FROM salesinvoic WHERE id_salesInvoic = ? ";
+                    pstmt = con.prepareStatement(sql_delete_salesinvoic, Statement.RETURN_GENERATED_KEYS);
+                    pstmt.setInt(1, id);
+                    rowAffect = pstmt.executeUpdate();
+                    if(rowAffect == 1){
+                        con.commit();
+                        con.close();
+                        isDel = true;
+                    }
+                }
 
+                
+            }
+        }catch(SQLException ex){
+            try {
+                con.rollback();
+            } catch (SQLException ex1) {
+                Logger.getLogger(SalesInvoic.class.getName()).log(Level.SEVERE, null, ex1);
+            }
+            
+        }
+        
+        
+        return isDel; //To change body of generated methods, choose Tools | Templates.
+    }
+    
     public void getValuesFromVector(ItemsOnInvoice i){
         try {
            String Sql = "INSERT INTO `itemsonsalesinvoice` (`id`, `id_items`, `name_items`, `qyt`, `name_unit`,"
@@ -155,7 +219,7 @@ public class SalesInvoic extends invoice{
         }
        
     }
-    public static void fillTable(JTable jTable){
+    public void fillTable(JTable jTable){
         String sql = "SELECT s.amountLater , s.amountCash , s.discount , s.totalAmount , c.name_client ,s.type_salesInvoic , s.date_salesInvoic , s.id_salesInvoic FROM salesinvoic s INNER JOIN client c on s.id_client = c.id_client";
         String[] column_Name = { "الباقي", "المبلغ المدفوع", "الخصم", "الاجمالي", "العميل", "نوع الفاتورة", "التاريخ", "م"};
         ConnectDB.fillAndCenterTable(sql, jTable, column_Name);

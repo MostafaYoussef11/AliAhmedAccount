@@ -307,6 +307,11 @@ public class PaymentReciptFrame extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(jTable1);
         if (jTable1.getColumnModel().getColumnCount() > 0) {
             jTable1.getColumnModel().getColumn(0).setResizable(false);
@@ -538,6 +543,7 @@ public class PaymentReciptFrame extends javax.swing.JFrame {
     }
     private void bteditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bteditActionPerformed
         // TODO add your handling code here:
+        Tools.EditButton(btPanel, Paneltxt);
     }//GEN-LAST:event_bteditActionPerformed
 
     private void btupdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btupdateActionPerformed
@@ -577,6 +583,12 @@ public class PaymentReciptFrame extends javax.swing.JFrame {
       txt_note.setText(noteText);
 
     }//GEN-LAST:event_radio_PaymentActionPerformed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        // TODO add your handling code here:
+        int row = jTable1.getSelectedRow();
+        String
+    }//GEN-LAST:event_jTable1MouseClicked
     /**
      * @param args the command line arguments
      */

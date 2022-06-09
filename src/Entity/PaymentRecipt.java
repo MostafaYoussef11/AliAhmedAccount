@@ -61,15 +61,15 @@ public class PaymentRecipt extends MoneyTransfer{
             pstm.setInt(4, id_Sup);
             int row_effect = pstm.executeUpdate();
             if(row_effect == 1){
-               sql = "INSERT INTO `casher` (`date_casher`,`Creditor`, `note`) VALUES (?,?,?)";
+               sql = "INSERT INTO `casher` (`date_casher`,`Creditor`, `note`,`id_PaymentReceipt`) VALUES (?,?,?,?)";
                pstm = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
                pstm.setString(1, date_proc);
                pstm.setDouble(2, amount);
                pstm.setString(3, not);
+               pstm.setInt(4, id_recipt_payment);
                row_effect = pstm.executeUpdate();
                if(row_effect == 1){
-                    String sql_insert_sup_account = "INSERT INTO `suppliersaccount` (`date_suppliersAccount`, `Debit`,`id_Suppliers`, `id_paymentReceipt`, `note`) VALUES (?,?,?,?,?)";
-                                                   //INSERT INTO `suppliersaccount` (`date_suppliersAccount`, `Debit`,`id_Suppliers`, `id_paymentReceipt`, `note`) VALUES (?,?,?,?,?)
+                   String sql_insert_sup_account = "INSERT INTO `suppliersaccount` (`date_suppliersAccount`, `Debit`,`id_Suppliers`, `id_paymentReceipt`, `note`) VALUES (?,?,?,?,?)";
                    pstm = con.prepareStatement(sql_insert_sup_account, Statement.RETURN_GENERATED_KEYS);
                    pstm.setString(1,date_proc );
                    pstm.setDouble(2, amount);

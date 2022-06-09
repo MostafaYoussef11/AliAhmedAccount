@@ -40,7 +40,7 @@ public abstract class invoice {
        return ConnectDB.ExucuteAnyQuery(sql);
     
     }
-    
+    public boolean delete(int id){return false;}
     public String getLastId(){
         return ConnectDB.LastId(tableName, "id_"+tableName);
     }

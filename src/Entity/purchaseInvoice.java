@@ -57,11 +57,12 @@ public class purchaseInvoice extends invoice{
                 int rowAffected = 0 ;
                 switch(getPaymentMethod()){  
                     case cash:
-                      String sqlInsertCasher ="INSERT INTO `casher` (`date_casher`, `Creditor`, `note`) VALUES (?,?,?)";
+                      String sqlInsertCasher ="INSERT INTO `casher` (`date_casher`, `Creditor`, `note`,`id_purchaseInvoice`) VALUES (?,?,?,?)";
                       pstcasher = con.prepareStatement(sqlInsertCasher, Statement.RETURN_GENERATED_KEYS);
                       pstcasher.setString(1, getDate_invoice());
                       pstcasher.setDouble(2, getCashAmount());
                       pstcasher.setString(3,getNote());
+                      pstcasher.setString(4, getId_invoice());
                       rowAffected = pstcasher.executeUpdate();
                       break;
                     case deferred:
@@ -76,11 +77,12 @@ public class purchaseInvoice extends invoice{
                         rowAffected = pstcasher.executeUpdate();
                         break;
                     case installments:
-                      String sqlInsertCasherInsallmen ="INSERT INTO `casher` (`date_casher`, `Creditor`, `note`) VALUES (?,?,?)";
+                      String sqlInsertCasherInsallmen ="INSERT INTO `casher` (`date_casher`, `Creditor`, `note`,`id_purchaseInvoice`) VALUES (?,?,?,?)";
                       pstcasher = con.prepareStatement(sqlInsertCasherInsallmen, Statement.RETURN_GENERATED_KEYS);
                       pstcasher.setString(1, getDate_invoice());
                       pstcasher.setDouble(2, getCashAmount());
                       pstcasher.setString(3,getNote());
+                      pstcasher.setString(4, getId_invoice());
                       pstcasher.executeUpdate();
                       String sqlInserClientAccountInstallmen = "INSERT INTO `suppliersaccount` (`date_suppliersAccount`, `Creditor`,`id_Suppliers`, `id_purchaseInvoice`,`note`) "
                                 + "VALUES (?,?,?,?,?)";

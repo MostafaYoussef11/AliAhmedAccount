@@ -50,11 +50,12 @@ public class recipt extends MoneyTransfer{
         try{
             con = ConnectDB.getCon();
             con.setAutoCommit(false);
-            String sqlInser = "INSERT INTO `casher` (`date_casher`, `Debit`, `note`) VALUES (?,?,?)";
+            String sqlInser = "INSERT INTO `casher` (`date_casher`, `Debit`, `note`,`id_Receipt`) VALUES (?,?,?,?)";
             pstm = (PreparedStatement) con.prepareStatement(sqlInser, Statement.RETURN_GENERATED_KEYS);
             pstm.setString(1, getDate_process());
             pstm.setDouble(2, getAmount());
             pstm.setString(3, getNote());
+            pstm.setInt(4, getId_Receipt());
             int rowAffect = pstm.executeUpdate();
             if(rowAffect == 1){
                 String sqlInserrecipt = "INSERT INTO `receipt` (`id_Receipt`, `date_Receipt`, `amount`, `id_client`) VALUES (?,?,?,?)";

@@ -6,7 +6,6 @@
 package Frams;
 
 import Entity.SalesInvoic;
-import Entity.purchaseInvoice;
 import Utilities.Tafqeet;
 import Utilities.Tools;
 import java.awt.Font;
@@ -23,11 +22,15 @@ public class SearchSealseFrame extends javax.swing.JFrame {
     /**
      * Creates new form SearchPurchaseFrame
      */
+    SalesInvoic invoic;
     public SearchSealseFrame() {
         initComponents();
         txt_titel.setFont(Tools.font(24f));
-        SalesInvoic.fillTable(jTable1);
+        invoic = new SalesInvoic();
+        invoic.fillTable(jTable1);
         setSize(700, 660);
+        btdel.setEnabled(true);
+        btprint.setEnabled(true);
     }
 
     /**
@@ -42,6 +45,9 @@ public class SearchSealseFrame extends javax.swing.JFrame {
         txt_titel = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        btdel = new javax.swing.JButton();
+        btprint = new javax.swing.JButton();
+        btexit = new javax.swing.JButton();
         background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -89,7 +95,43 @@ public class SearchSealseFrame extends javax.swing.JFrame {
         }
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(10, 77, 666, 533);
+        jScrollPane1.setBounds(10, 77, 666, 460);
+
+        btdel.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        btdel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/delete.png"))); // NOI18N
+        btdel.setText("حذف");
+        btdel.setName("del"); // NOI18N
+        btdel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btdelActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btdel);
+        btdel.setBounds(290, 560, 130, 30);
+
+        btprint.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        btprint.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/printer.png"))); // NOI18N
+        btprint.setText("طباعة");
+        btprint.setName("print"); // NOI18N
+        btprint.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btprintActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btprint);
+        btprint.setBounds(540, 560, 130, 30);
+
+        btexit.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        btexit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/exit.png"))); // NOI18N
+        btexit.setText("خروج");
+        btexit.setName("exit"); // NOI18N
+        btexit.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btexitActionPerformed(evt);
+            }
+        });
+        getContentPane().add(btexit);
+        btexit.setBounds(20, 560, 130, 30);
 
         background.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/6649006.jpg"))); // NOI18N
@@ -101,19 +143,56 @@ public class SearchSealseFrame extends javax.swing.JFrame {
 
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         // TODO add your handling code here:
-        int row = jTable1.getSelectedRow();
-        int id_invoicBil = Integer.parseInt(jTable1.getValueAt(row, 7).toString());
-        double Total_amount = Double.parseDouble(jTable1.getValueAt(row, 3).toString());
-        double discont = Double.parseDouble(jTable1.getValueAt(row, 2).toString());
-        System.out.println(id_invoicBil +" " + Total_amount +" "+discont);
-       String sql = "SELECT s.id_salesInvoic , s.date_salesInvoic , s.type_salesInvoic , c.name_client , s.totalAmount , s.discount , s.amountCash , s.amountLater , s.note FROM salesinvoic s INNER JOIN client c on s.id_client = c.id_client where id_salesinvoic=$P{id_salesInvoice}";//where ps.id_purchaseInvoice=1
-        HashMap para = new HashMap();
-        para.put("id_salesInvoice", id_invoicBil);//id_salesInvoice
-        double amount = Total_amount - discont;
-        para.put("Tafqeet", Tafqeet.doTafqeet(new BigDecimal(amount)));
-        InputStream stream =getClass().getResourceAsStream("/Reborts/SalesInvoicReport.jrxml");
-        Tools.Printer(sql, stream, para);
+        btdel.setEnabled(true);
+        btprint.setEnabled(true);
     }//GEN-LAST:event_jTable1MouseClicked
+
+    private void btdelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btdelActionPerformed
+        // TODO add your handling code here:
+       
+        int row = jTable1.getSelectedRow();
+        String id_salesIvoic = jTable1.getValueAt(row, 7).toString();
+        String paymentMethod = jTable1.getValueAt(row, 5).toString();
+        if(row >= 0){
+           // Tools.showErrorMsg(id_salesIvoic + " " + paymentMethod);
+            int id = Integer.parseInt(id_salesIvoic);
+            invoic.setPaymentMethod(Tools.getPayment(paymentMethod));
+            invoic.setId_invoice(id_salesIvoic);
+            if(invoic.delete(id)){
+                Tools.showInfoMsg("تم حذف الفاتورة", "حذف");
+                invoic.fillTable(jTable1);
+            }
+        }else{
+            Tools.showErrorMsg("لم يتم اختيار فاتورة");
+        }
+        
+
+    }//GEN-LAST:event_btdelActionPerformed
+
+    private void btprintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btprintActionPerformed
+        // TODO add your handling code here:
+        int row = jTable1.getSelectedRow();
+        if(row < 0){
+            Tools.showErrorMsg("لم يتم اختيار فاتورة");
+        }else{
+            int id_invoicBil = Integer.parseInt(jTable1.getValueAt(row, 7).toString());
+            double Total_amount = Double.parseDouble(jTable1.getValueAt(row, 3).toString());
+            double discont = Double.parseDouble(jTable1.getValueAt(row, 2).toString());
+            //System.out.println(id_invoicBil +" " + Total_amount +" "+discont);
+            String sql = "SELECT s.id_salesInvoic , s.date_salesInvoic , s.type_salesInvoic , c.name_client , s.totalAmount , s.discount , s.amountCash , s.amountLater , s.note FROM salesinvoic s INNER JOIN client c on s.id_client = c.id_client where id_salesinvoic=$P{id_salesInvoice}";//where ps.id_purchaseInvoice=1
+            HashMap para = new HashMap();
+            para.put("id_salesInvoice", id_invoicBil);//id_salesInvoice
+            double amount = Total_amount - discont;
+            para.put("Tafqeet", Tafqeet.doTafqeet(new BigDecimal(amount)));
+            InputStream stream =getClass().getResourceAsStream("/Reborts/SalesInvoicReport.jrxml");
+            Tools.Printer(sql, stream, para);
+        }
+    }//GEN-LAST:event_btprintActionPerformed
+
+    private void btexitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btexitActionPerformed
+        // TODO add your handling code here:
+        dispose();
+    }//GEN-LAST:event_btexitActionPerformed
 
     /**
      * @param args the command line arguments
@@ -153,6 +232,9 @@ public class SearchSealseFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel background;
+    private javax.swing.JButton btdel;
+    private javax.swing.JButton btexit;
+    private javax.swing.JButton btprint;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JLabel txt_titel;
