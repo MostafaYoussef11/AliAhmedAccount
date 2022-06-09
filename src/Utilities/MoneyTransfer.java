@@ -21,8 +21,8 @@ public abstract class MoneyTransfer {
     private int id_client , id_Suppliers , id_Receipt , id_PaymentReceipt  ;
     
     public boolean Save(){return false;};
-    public boolean Delete(){return false;};
-    public boolean Update(){return false;};
+    public boolean Delete(String id){return false;};
+    public boolean Update(String id){return false;};
 
     public double getNewBalance() {
         return newBalance;

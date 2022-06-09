@@ -5,6 +5,7 @@
  */
 package Frams;
 
+import Entity.CasherClass;
 import Entity.ClientPerson;
 import Entity.PaymentRecipt;
 import Entity.Suppliers;
@@ -17,8 +18,11 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.io.InputStream;
 import java.math.BigDecimal;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
@@ -544,14 +548,50 @@ public class PaymentReciptFrame extends javax.swing.JFrame {
     private void bteditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bteditActionPerformed
         // TODO add your handling code here:
         Tools.EditButton(btPanel, Paneltxt);
+        txt_note.setEnabled(true);
+        radio_Payment.setEnabled(true);
+        btprint.setEnabled(false);
     }//GEN-LAST:event_bteditActionPerformed
 
     private void btupdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btupdateActionPerformed
         // TODO add your handling code here:
+        int id_supplier = Integer.parseInt(suppliers.getIdByName(com_Name_Suppliers.getSelectedItem().toString()));
+        String id_paymentRecipt = txt_id_reciept.getText();
+        String amount = txt_Amount.getText();
+        String date = Tools.dateSql(txt_Date_Process.getDate());
+        String note = txt_note.getText();
+        pay_recipt.setId_PaymentReceipt(Integer.parseInt(id_paymentRecipt));
+        pay_recipt.setDate_process(date);
+        pay_recipt.setAmount(Double.parseDouble(amount));
+        pay_recipt.setId_Suppliers(id_supplier);
+        pay_recipt.setNote(note);
+        int confirm = JOptionPane.showConfirmDialog(null, "هل ترغب في تحديث الايصال ؟", "تحديث", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+        if(confirm == JOptionPane.YES_OPTION){
+            if(pay_recipt.Update(id_paymentRecipt)){
+                   Tools.showInfoMsg("تم التحديث بنجاح", "تحديث");
+                   newRecipt();
+            }else{
+               Tools.showErrorMsg("خطأ في التحديث");
+            }
+        }else{
+            newRecipt();
+        }
+        
     }//GEN-LAST:event_btupdateActionPerformed
 
     private void btdelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btdelActionPerformed
         // TODO add your handling code here:
+        String id = txt_id_reciept.getText();
+        int isOK = JOptionPane.showConfirmDialog(null, "هل تريد حذف الايصال", "حذف", JOptionPane.YES_NO_OPTION);
+        if(isOK == JOptionPane.YES_OPTION){
+            if(pay_recipt.Delete(id)){
+                Tools.showInfoMsg("تم الحذف بنجاح", "حذف");
+                newRecipt();
+            }
+            else{
+                Tools.showErrorMsg("خطأ");
+            }
+        }
     }//GEN-LAST:event_btdelActionPerformed
 
     private void btexitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btexitActionPerformed
@@ -561,6 +601,27 @@ public class PaymentReciptFrame extends javax.swing.JFrame {
 
     private void btprintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btprintActionPerformed
         // TODO add your handling code here:
+        int row = jTable1.getSelectedRow();
+        String Tafqet = "";
+        if(row >= 0){
+            String sql = "SELECT pay.* , s.name_Suppliers from paymentreceipt pay "
+                    + "INNER JOIN suppliers s on pay.id_Suppliers = s.id_Suppliers where id_PaymentReceipt = $P{id_PaymentReceipt}";
+            InputStream stream = getClass().getResourceAsStream("/Reborts/PaymentReciptReport.jrxml");
+            HashMap para = new HashMap();
+            id_reciept = txt_id_reciept.getText();
+            int id_PaymentReceipt = Integer.parseInt(id_reciept);
+            para.put("id_PaymentReceipt", id_PaymentReceipt);
+            para.put("day", Tools.getDayName(txt_Date_Process.getDate()));
+            amount  = Double.parseDouble(txt_Amount.getText());
+            try{
+               Tafqet =  Tafqeet.doTafqeet(new BigDecimal(amount));
+            }catch(NullPointerException ex){
+                Tafqet = "";
+                System.err.println(ex.getMessage());
+            }
+            para.put("Tafqet",Tafqet);
+            Tools.Printer(sql, stream, para);
+        }
     }//GEN-LAST:event_btprintActionPerformed
 
     private void com_Name_SuppliersItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_com_Name_SuppliersItemStateChanged
@@ -587,7 +648,39 @@ public class PaymentReciptFrame extends javax.swing.JFrame {
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         // TODO add your handling code here:
         int row = jTable1.getSelectedRow();
-        String
+        String Amount = jTable1.getValueAt(row, 0).toString();
+        String nameSuppliers = jTable1.getValueAt(row, 1).toString();
+        String date_Payment = jTable1.getValueAt(row, 2).toString();
+        String id_PaymentInvoic = jTable1.getValueAt(row, 3).toString();
+        try{
+           OldBalance  = suppliers.calcBalanceSupplier(nameSuppliers);
+           amount = Double.valueOf(Amount);
+           newBalance = OldBalance + amount;
+        }catch(NumberFormatException ex){
+            Logger.getLogger(getClass().getName()).log(Level.WARNING, ex.getMessage(), ex);
+        }
+        Tools.selectButtonTable(btPanel);
+        //Set Txt
+        txt_id_reciept.setText(id_PaymentInvoic);
+        txt_Amount.setText(Amount);
+        txt_Amount.setEnabled(false);
+        txt_balance.setText(newBalance+"");
+        txt_balance.setEnabled(false);
+        try {
+            txt_Date_Process.setDate(new SimpleDateFormat("yyyy-MM-dd").parse(date_Payment));
+            txt_Date_Process.setEnabled(false);
+        } catch (ParseException ex) {
+            Logger.getLogger(PaymentReciptFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        String note = new CasherClass().getNoteFromIdPaymentRecipt(id_PaymentInvoic);
+        txt_note.setText(note);
+        txt_note.setEnabled(false);
+        com_Name_Suppliers.setSelectedItem(nameSuppliers);
+        com_Name_Suppliers.setEnabled(false);
+        radio_Clear.setEnabled(false);
+        radio_End.setEnabled(false);
+        radio_Payment.setEnabled(false);
+        btprint.setEnabled(true);
     }//GEN-LAST:event_jTable1MouseClicked
     /**
      * @param args the command line arguments

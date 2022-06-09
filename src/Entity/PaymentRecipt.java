@@ -26,7 +26,7 @@ public class PaymentRecipt extends MoneyTransfer{
     private PreparedStatement pstm;
     private ResultSet rst;
     private TypeOfFilter type_filter;
-    
+    private CasherClass casher = new CasherClass();
     public void fillTalble(JTable table){
         String sql = "SELECT r.amount , c.name_Suppliers , r.date_PaymentReceipt , r.id_PaymentReceipt FROM paymentreceipt r INNER JOIN suppliers c on r.id_Suppliers = c.id_Suppliers where r.isActive = 1";
         String[] coulmnName = { "المبلغ", "العميل", "التاريخ", "رقم"};
@@ -36,10 +36,10 @@ public class PaymentRecipt extends MoneyTransfer{
     public void setTypeOfFiltter(TypeOfFilter typeOfFilter){
         this.type_filter = typeOfFilter;
     }
-
+    
     public TypeOfFilter getType_filter() {
         return type_filter;
-    }
+    } 
     
     @Override
     public boolean Save() {
@@ -175,5 +175,88 @@ public class PaymentRecipt extends MoneyTransfer{
         }
         return isclear;
     }
+    
+    @Override
+    public boolean Delete(String id) {
+        setId_PaymentReceipt(Integer.parseInt(id));
+        boolean isDel = false;
+        int row_affect = 0;
+        try{
+            con = ConnectDB.getCon();
+            con.setAutoCommit(false);
+            String sql_delete = "DELETE FROM suppliersaccount WHERE `id_PaymentReceipt`=?";
+            pstm = con.prepareStatement(sql_delete, Statement.RETURN_GENERATED_KEYS);
+            pstm.setString(1, id);
+            int rowDelete = pstm.executeUpdate();
+            if(rowDelete == 1){
+                String sql = "DELETE FROM `paymentreceipt` WHERE `id_PaymentReceipt`=?";
+                pstm = con.prepareStatement(sql ,Statement.RETURN_GENERATED_KEYS);
+                pstm.setInt(1, getId_PaymentReceipt());
+                row_affect = pstm.executeUpdate();            
+                if(row_affect == 1){
+                  if(casher.DeleteByIdPaymentRecipt(id)){ 
+                          isDel = true;
+                          con.commit();
+                          con.close();
+                     }
+            }
+           }
+            
+        }catch(SQLException ex){
+            isDel = false;
+            try{
+                con.rollback();
+                con.close();
+            }catch(SQLException exception){
+                Logger.getLogger(getClass().getName()).log(Level.SEVERE, null, exception);
+            }
+            Logger.getLogger(getClass().getName()).log(Level.SEVERE,null,ex);
+        }
+        
+        return isDel; //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public boolean Update(String id) {
+        boolean isUpdate = false;
+        //Update suppliersaccount  --- Update paymentreceipt --- Update casher
+        try{
+            con = ConnectDB.getCon();
+            con.setAutoCommit(false);
+            String sql_Update_suppliersaccount= "UPDATE `suppliersaccount` SET date_suppliersAccount='"+getDate_process()+"' , "
+                    + "Debit = "+getAmount()+" , id_Suppliers = "+ getId_Suppliers()+", note ='"+getNote()+"'  WHERE id_paymentReceipt ="+id;
+            pstm = con.prepareStatement(sql_Update_suppliersaccount, Statement.RETURN_GENERATED_KEYS);
+            int rowAffect = pstm.executeUpdate();
+            if(rowAffect == 1){
+                //Update paymentreceipt
+                String sql_paymentreceipt_update = "UPDATE paymentreceipt SET date_PaymentReceipt='"+getDate_process()+"' , amount = "
+                        + getAmount() +" , id_Suppliers ="+getId_Suppliers() +" WHERE id_PaymentReceipt = "+id;
+                pstm = con.prepareStatement(sql_paymentreceipt_update,Statement.RETURN_GENERATED_KEYS);
+                int rowAffect_pay = pstm.executeUpdate();
+                if(rowAffect_pay == 1){
+                    //Update casher
+                    String sql_casher_update = "UPDATE casher SET date_casher = '"+getDate_process()+"' , Creditor ="+getAmount()+", note ='"+getNote()+"' WHERE id_PaymentReceipt = "+id;
+                    pstm = con.prepareStatement(sql_casher_update, Statement.RETURN_GENERATED_KEYS);
+                    int rowAffectCasher = pstm.executeUpdate();
+                    if(rowAffectCasher == 1){
+                        con.commit();
+                        con.close();
+                        isUpdate = true;
+                    }
+                }
+            }
+        }catch(SQLException ex){
+            try {
+                con.rollback();
+                con.close();
+            } catch (SQLException ex1) {
+                Logger.getLogger(PaymentRecipt.class.getName()).log(Level.SEVERE, null, ex1);
+            }
+        }
+        
+      return isUpdate; //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    
     
 }

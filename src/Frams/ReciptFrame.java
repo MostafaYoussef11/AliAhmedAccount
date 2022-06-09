@@ -5,6 +5,7 @@
  */
 package Frams;
 
+import Entity.CasherClass;
 import Entity.ClientPerson;
 import Entity.recipt;
 import Utilities.Tools;
@@ -298,6 +299,11 @@ public class ReciptFrame extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
+        jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable1MouseClicked(evt);
+            }
+        });
         jScrollPane2.setViewportView(jTable1);
         if (jTable1.getColumnModel().getColumnCount() > 0) {
             jTable1.getColumnModel().getColumn(0).setResizable(false);
@@ -540,6 +546,30 @@ public class ReciptFrame extends javax.swing.JFrame {
       txt_note.setText("دفعة من حساب " + " " + com_Name_Client.getSelectedItem().toString());
 
     }//GEN-LAST:event_radio_PaymentActionPerformed
+
+    private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
+        // TODO add your handling code here:
+        int row = jTable1.getSelectedRow();
+        if(row >= 0){
+            String amountStr = jTable1.getValueAt(row, 0).toString();
+            String client_name = jTable1.getValueAt(row, 1).toString();  
+            String date = jTable1.getValueAt(row, 2).toString();
+            String id_recipt = jTable1.getValueAt(row, 3).toString();
+            String note = new CasherClass().getNoteFromIdRecipt(id_recipt);
+            Tools.selectButtonTable(btPanel);
+            txt_Amount.setText(amountStr);
+            txt_Amount.setEnabled(false);
+            txt_Date_Process.setDate(Tools.dateFrmJTable(date));
+            txt_Date_Process.setEnabled(false);
+            txt_id_reciept.setText(id_recipt);
+            txt_id_reciept.setEnabled(false);
+            txt_note.setText(note);
+            txt_note.setEnabled(false);
+            com_Name_Client.setSelectedItem(client_name);
+            com_Name_Client.setEnabled(false);
+            Tools.showErrorMsg("كمل التعديل");
+        }
+    }//GEN-LAST:event_jTable1MouseClicked
     //txt_note.setText("تصفية نهائية لحساب " + com_Name_Client.getSelectedItem().toString());
     /**
      * @param args the command line arguments

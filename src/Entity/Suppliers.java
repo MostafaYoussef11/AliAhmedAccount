@@ -48,5 +48,15 @@ public class Suppliers extends Person{
         return newBalance;
     }
 
+//    public boolean UpdateSupplierAccount(String id){
+//        String sql_update_supplier_account = "UPDATE `suppliersaccount` SET `date_suppliersAccount`=?,`Debit`=?,`Creditor`=?,`id_Suppliers`=?,"
+//                + "`id_purchaseInvoice`=?,`note`= ? WHERE `id_supplliersAccount`="+id;
+//    }
     
+    // get id_supplierAccount from `id_purchaseInvoice`  Or `id_paymentReceipt`
+    
+    public String getIdSupplliersAccountFromIdPayReceipt(String id_paymentReceipt){
+        String sql = "SELECT `id_supplliersAccount` AS id FROM `suppliersaccount` WHERE `id_paymentReceipt`="+id_paymentReceipt;
+        return ConnectDB.getIdFromName(sql);
+    }
 }
