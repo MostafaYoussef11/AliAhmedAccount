@@ -13,6 +13,8 @@ import Utilities.TypeOfFilter;
 import java.awt.ComponentOrientation;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 
 /**
@@ -62,7 +64,7 @@ public class ReciptFrame extends javax.swing.JFrame {
         txt_Amount = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         com_Name_Client = new javax.swing.JComboBox();
-        jLabel7 = new javax.swing.JLabel();
+        lab_balance = new javax.swing.JLabel();
         txt_balance = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -130,10 +132,10 @@ public class ReciptFrame extends javax.swing.JFrame {
             }
         });
 
-        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel7.setText("الرصيد");
-        jLabel7.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        lab_balance.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        lab_balance.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lab_balance.setText("الرصيد");
+        lab_balance.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         txt_balance.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         txt_balance.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -228,7 +230,7 @@ public class ReciptFrame extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(PaneltxtLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addComponent(lab_balance, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(5, 5, 5)
                 .addGroup(PaneltxtLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -259,7 +261,7 @@ public class ReciptFrame extends javax.swing.JFrame {
                             .addComponent(txt_Amount, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(PaneltxtLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
+                            .addComponent(lab_balance, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
                             .addComponent(txt_balance, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -440,6 +442,7 @@ public class ReciptFrame extends javax.swing.JFrame {
     private void newRecipt(){
         cp = new ClientPerson();
         r = new recipt();
+        lab_balance.setText("الرصيد");
         r.fillTalble(jTable1);
         txt_note.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
         Tools.disableButOpen(btPanel);
@@ -452,6 +455,7 @@ public class ReciptFrame extends javax.swing.JFrame {
     }
     private void btnewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnewActionPerformed
         // TODO add your handling code here:
+        newRecipt();
     }//GEN-LAST:event_btnewActionPerformed
 
     private void btsaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btsaveActionPerformed
@@ -503,6 +507,10 @@ public class ReciptFrame extends javax.swing.JFrame {
 
     private void bteditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bteditActionPerformed
         // TODO add your handling code here:
+        Tools.EditButton(btPanel,Paneltxt);
+        txt_note.setEnabled(true);
+        radio_Payment.setEnabled(true);
+        btprint.setEnabled(false);
     }//GEN-LAST:event_bteditActionPerformed
 
     private void btupdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btupdateActionPerformed
@@ -567,7 +575,18 @@ public class ReciptFrame extends javax.swing.JFrame {
             txt_note.setEnabled(false);
             com_Name_Client.setSelectedItem(client_name);
             com_Name_Client.setEnabled(false);
-            Tools.showErrorMsg("كمل التعديل");
+            radio_End.setEnabled(false);
+            radio_Clear.setEnabled(false);
+            try{
+                OldBalance = cp.calcBalanceClient(client_name);
+                amount = Double.parseDouble(amountStr);
+                newBalance = OldBalance + amount;
+            }catch(NumberFormatException ex){
+                Logger.getLogger(getClass().getName()).log(Level.SEVERE, null  , ex);
+            }
+            txt_balance.setText(newBalance+"");
+            lab_balance.setText("رصيد ق الدفع");
+            //Tools.showErrorMsg("كمل التعديل");
         }
     }//GEN-LAST:event_jTable1MouseClicked
     //txt_note.setText("تصفية نهائية لحساب " + com_Name_Client.getSelectedItem().toString());
@@ -623,12 +642,12 @@ public class ReciptFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
+    private javax.swing.JLabel lab_balance;
     private javax.swing.JRadioButton radio_Clear;
     private javax.swing.JRadioButton radio_End;
     private javax.swing.JRadioButton radio_Payment;

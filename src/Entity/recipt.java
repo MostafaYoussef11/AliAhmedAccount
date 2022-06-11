@@ -10,9 +10,6 @@ import Utilities.MoneyTransfer;
 import Utilities.TypeOfFilter;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-//import com.mysql.jdbc.Connection;
-//import com.mysql.jdbc.PreparedStatement;
-//import com.mysql.jdbc.Statement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -34,16 +31,12 @@ public class recipt extends MoneyTransfer{
         String[] coulmnName = { "المبلغ", "العميل", "التاريخ", "رقم"};
         ConnectDB.fillAndCenterTable(sql, table, coulmnName);
     }
-
-    
     public TypeOfFilter getType() {
         return type;
     }
-
     public void setType(TypeOfFilter type) {
         this.type = type;
     }
-
     @Override
     public boolean Save() {
         boolean isSaved = false;
@@ -149,6 +142,25 @@ public class recipt extends MoneyTransfer{
         }
         return isclear;
     }
+    
+    
+    //update casher , receipt , clientaccount
+
+    @Override
+    public boolean Update(String id) {
+        //Update Casher
+        try{
+            con = ConnectDB.getCon();
+            con.setAutoCommit(false);
+            String sql = "UPDATE casher SET ";
+        }catch(SQLException ex){
+        
+        }
+        
+        return super.Update(id); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+    
     
     
 }
