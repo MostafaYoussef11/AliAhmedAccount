@@ -13,7 +13,7 @@
 	<queryString>
 		<![CDATA[SELECT ac.id_client , c.firstBalance , c.name_client ,c.address,c.phone, SUM(ac.Debit) As Debit, Sum(ac.Creditor) as Creditor from clientaccount ac  INNER JOIN client c ON c.id_client = ac.id_client where ac.id_client = $P{id_client} and  ac.isActive = 1]]>
 	</queryString>
-	<field name="id_client" class="java.lang.Integer">
+	<field name="id_client" class="java.lang.Long">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="firstBalance" class="java.lang.Double">

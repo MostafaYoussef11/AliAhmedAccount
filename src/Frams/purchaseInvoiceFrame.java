@@ -844,7 +844,7 @@ public class purchaseInvoiceFrame extends javax.swing.JFrame {
                     String sql = "SELECT ps.id_purchaseInvoice , ps.date_purchaseInvoice , ps.type_purchaseInvoic , s.name_Suppliers , ps.totalAmount , ps.discount , ps.amountCash , ps.amountLater , ps.note"
                             + " FROM purchaseinvoice ps INNER JOIN suppliers s on ps.id_Suppliers = s.id_Suppliers where ps.id_purchaseInvoice=$P{id_purchaseInvoice}";//where ps.id_purchaseInvoice=1
                     HashMap para = new HashMap();
-                    int id_invoicBil = Integer.parseInt(invoice.getId_invoice());
+                    String id_invoicBil = invoice.getId_invoice();
                     para.put("id_purchaseInvoice", id_invoicBil);
                     try{
                         double amount = invoice.getAmount() - invoice.getDiscont();
@@ -969,7 +969,7 @@ public class purchaseInvoiceFrame extends javax.swing.JFrame {
        values[1] = txtDiscondItem.getText();
        values[0] = txtSumPrice.getText();
        model.addRow(values);
-       valuesItems.add(new ItemsOnInvoice(c, Integer.parseInt(new Items().getIdItemsFromName(values[5])), values[5],Double.parseDouble(txtCount.getValue().toString()),values[3], Double.parseDouble(txtPrice.getText()), Double.parseDouble(txtDiscondItem.getText()), Double.parseDouble(txtSumPrice.getText()), Integer.parseInt(txtId_Invoice.getText())));
+       valuesItems.add(new ItemsOnInvoice(c, new Items().getIdItemsFromName(values[5]), values[5],Double.parseDouble(txtCount.getValue().toString()),values[3], Double.parseDouble(txtPrice.getText()), Double.parseDouble(txtDiscondItem.getText()), Double.parseDouble(txtSumPrice.getText()), Integer.parseInt(txtId_Invoice.getText())));
        SumTotal();
        c++;
        txtDiscondItem.setText("0.00"); 

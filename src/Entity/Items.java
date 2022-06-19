@@ -217,5 +217,10 @@ public class Items implements Ent{
         }
         return ConnectDB.getIdFromName(sql);
     }
+    public String getNameItemFromId(String id_item){
+        String sql = "Select name_items as id from items where id_items="+id_item;
+        return  ConnectDB.getIdFromName(sql);
+    }
+    
 
 }

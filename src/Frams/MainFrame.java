@@ -5,12 +5,18 @@
  */
 package Frams;
 
+import Entity.ClientPerson;
+import Entity.Items;
+import Entity.ItemsOnInvoice;
+import Entity.SalesInvoic;
 import Utilities.Tools;
 import java.awt.ComponentOrientation;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.util.Date;
+import java.util.Vector;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -54,6 +60,7 @@ public class MainFrame extends javax.swing.JFrame {
         Payments.setFont(font);
         Receipts.setLocation(x, 250);
         Receipts.setFont(font);
+        txtIdItems.setFocusable(true);
     }
 
     /**
@@ -73,6 +80,14 @@ public class MainFrame extends javax.swing.JFrame {
         Purchases = new javax.swing.JLabel();
         Reports = new javax.swing.JLabel();
         sales = new javax.swing.JLabel();
+        jPanel1 = new javax.swing.JPanel();
+        txtIdItems = new javax.swing.JTextField();
+        txtnameItem = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        txtQut = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        txtPrice = new javax.swing.JTextField();
+        btnSave = new javax.swing.JButton();
         background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -239,6 +254,95 @@ public class MainFrame extends javax.swing.JFrame {
         getContentPane().add(sales);
         sales.setBounds(550, 250, 220, 190);
 
+        jPanel1.setOpaque(false);
+
+        txtIdItems.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtIdItems.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtIdItems.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtIdItemsActionPerformed(evt);
+            }
+        });
+        txtIdItems.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtIdItemsKeyReleased(evt);
+            }
+        });
+
+        txtnameItem.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        txtnameItem.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        txtnameItem.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setText("الكمية");
+        jLabel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        txtQut.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        txtQut.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setText("السعر");
+        jLabel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        txtPrice.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        txtPrice.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+
+        btnSave.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btnSave.setText("ترحيل");
+        btnSave.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnSaveActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txtIdItems)
+                    .addComponent(txtnameItem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(txtQut)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(txtPrice, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap())
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(69, 69, 69))
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(txtIdItems, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(txtnameItem, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtQut, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtPrice, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE))
+                .addGap(40, 40, 40)
+                .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(26, Short.MAX_VALUE))
+        );
+
+        getContentPane().add(jPanel1);
+        jPanel1.setBounds(40, 60, 230, 270);
+
         background.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         background.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         getContentPane().add(background);
@@ -341,6 +445,79 @@ public class MainFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         exitPanel(sales);
     }//GEN-LAST:event_salesMouseExited
+
+    private void txtIdItemsActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtIdItemsActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtIdItemsActionPerformed
+
+    private void txtIdItemsKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtIdItemsKeyReleased
+        // TODO add your handling code here:
+        Items item = new Items();
+        String id_item = txtIdItems.getText();
+        String name_item = item.getNameItemFromId(id_item);
+        txtnameItem.setText(name_item);
+        txtQut.setText("1");
+        txtPrice.setText(item.getSalesPriceLow(name_item));
+        //txtIdItems.setFocusable(false);
+        //btnSave.setFocusable(true);
+    }//GEN-LAST:event_txtIdItemsKeyReleased
+
+    private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
+        // TODO add your handling code here:
+         Items item = new Items();
+        String name_items = txtnameItem.getText();
+        double Total = Double.parseDouble(txtQut.getText()) * Double.parseDouble(txtPrice.getText());
+        SalesInvoic sales = new SalesInvoic();
+        if(name_items != null){
+         Vector<ItemsOnInvoice> valuesItems = new Vector<ItemsOnInvoice> ();
+         String id_unit = item.getIdUnitFromNameItems(name_items);
+         String[] values = new String[7]; 
+      
+         values[6] = "1";//مسلسل
+         values[5] = name_items;//اسم الصنف
+         values[4] = txtQut.getText();//الكمية
+         values[3] = item.getlowUnitFromId(id_unit);//اسم الوحدة
+         values[2] = txtPrice.getText();//سعر الوحدة
+         values[1] = "0.00";//الخصم
+         values[0] = Total+"";// الاجمالي
+         //ItemsOnInvoice(1 , Integer.parseInt(item.getIdItemsFromName(name_items)) ,name_items ,Double.parseDouble(values[4]) , values[3] ,Double.parseDouble(values[2]) , 0.00 , Double.parseDouble(values[2]), Integer.parsInt(sales.getLastId()))
+        // valuesItems.add(new ItemsOnInvoice(1 , Integer.parseInt(item.getIdItemsFromName(name_items)) ,name_items ,Double.parseDouble(values[4]) , values[3] ,Double.parseDouble(values[2]) , 0.00 , Double.parseDouble(values[2]), Integer.parsInt(sales.getLastId()));
+         //ItemsOnInvoice(int id , int id_items , String name_items , double qyt , 
+         //String name_unit , double price , double discount , double Amount , int id_Invoic)
+         int id = 1;
+         String id_items = item.getIdItemsFromName(name_items);
+         double qyt = Double.parseDouble(values[4]);
+         String name_unit = values[3];
+         double price = Double.parseDouble(values[2]);
+         double discont = 0.00;
+         double amount = Total;
+         int id_Invoic = Integer.parseInt(sales.getLastId());
+         valuesItems.add(new ItemsOnInvoice(id, id_items, name_items, qyt, name_unit, price, discont, amount, id_Invoic));
+         
+         // عدم توافر الكميات بالمخزن
+         //double oldBalance = 
+        sales.setValues(valuesItems);
+        sales.setId_invoice(sales.getLastId());
+        sales.setDate_invoice(new Date());
+        sales.setPaymentMethod(Tools.getPayment("كاش"));
+        sales.setId_client("1");
+        sales.setAmount(Total);
+        sales.setDiscont(Double.parseDouble("0.00"));
+        sales.setCashAmount(Total);
+        sales.setRemainingAmount(Double.parseDouble("0.00"));
+        sales.setNote("فاتورة مبيعات نقدية" + id_Invoic);
+        
+        if(sales.Save()){
+            txtPrice.setText("");
+            txtQut.setText("");
+            txtnameItem.setText("");
+            txtIdItems.setText("");
+           // txtIdItems.setFocusable(true);
+            
+        }
+          txtIdItems.requestFocus();
+        }
+    }//GEN-LAST:event_btnSaveActionPerformed
     
     private void clickPanel(JLabel lable){
         lable.setBorder(BorderFactory.createLoweredBevelBorder());
@@ -390,9 +567,17 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel Receipts;
     private javax.swing.JLabel Reports;
     private javax.swing.JLabel background;
+    private javax.swing.JButton btnSave;
     private javax.swing.JLabel client;
     private javax.swing.JLabel items;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JLabel sales;
     private javax.swing.JLabel suppliers;
+    private javax.swing.JTextField txtIdItems;
+    private javax.swing.JTextField txtPrice;
+    private javax.swing.JTextField txtQut;
+    private javax.swing.JLabel txtnameItem;
     // End of variables declaration//GEN-END:variables
 }

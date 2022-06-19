@@ -14,7 +14,7 @@
 	<queryString>
 		<![CDATA[SELECT s.id_salesInvoic , s.date_salesInvoic , s.type_salesInvoic , c.name_client , s.totalAmount , s.discount , s.amountCash , s.amountLater , s.note FROM salesinvoic s INNER JOIN client c on s.id_client = c.id_client where id_salesinvoic=$P{id_salesInvoice}]]>
 	</queryString>
-	<field name="id_salesInvoic" class="java.lang.Integer">
+	<field name="id_salesInvoic" class="java.lang.Long">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="date_salesInvoic" class="java.sql.Date">

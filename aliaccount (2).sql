@@ -28,7 +28,7 @@ SET time_zone = "+00:00";
 -- (See below for the actual view)
 --
 CREATE TABLE `calcbalanceitems` (
-`id` int(11)
+`id` bigint(255)
 ,`name_items` varchar(255)
 ,`firstBalance` double(10,2)
 ,`purchase` double(10,2)
@@ -43,10 +43,10 @@ CREATE TABLE `calcbalanceitems` (
 -- (See below for the actual view)
 --
 CREATE TABLE `calcbalance_purchase` (
-`id` int(11)
+`id` bigint(255)
 ,`name_items` varchar(255)
 ,`qyt_pursh` double(23,6)
-,`firstbalance` int(11)
+,`firstbalance` bigint(255)
 );
 
 -- --------------------------------------------------------
@@ -56,10 +56,10 @@ CREATE TABLE `calcbalance_purchase` (
 -- (See below for the actual view)
 --
 CREATE TABLE `calcbalance_sales` (
-`id` int(11)
+`id` bigint(255)
 ,`name_items` varchar(255)
 ,`qyt_sales` double(23,6)
-,`firstbalance` int(11)
+,`firstbalance` bigint(255)
 );
 
 -- --------------------------------------------------------
@@ -69,15 +69,15 @@ CREATE TABLE `calcbalance_sales` (
 --
 
 CREATE TABLE `casher` (
-  `id_casher` int(11) NOT NULL,
+  `id_casher` bigint(255) NOT NULL,
   `date_casher` date DEFAULT NULL,
   `Debit` double(10,2) DEFAULT NULL,
   `Creditor` double(10,2) DEFAULT NULL,
   `note` text DEFAULT NULL,
-  `id_purchaseInvoice` int(11) DEFAULT NULL,
-  `id_Receipt` int(11) DEFAULT NULL,
-  `id_salesInvoic` int(11) DEFAULT NULL,
-  `id_PaymentReceipt` int(11) DEFAULT NULL
+  `id_purchaseInvoice` bigint(255) DEFAULT NULL,
+  `id_Receipt` bigint(255) DEFAULT NULL,
+  `id_salesInvoic` bigint(255) DEFAULT NULL,
+  `id_PaymentReceipt` bigint(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -98,7 +98,7 @@ INSERT INTO `casher` (`id_casher`, `date_casher`, `Debit`, `Creditor`, `note`, `
 --
 
 CREATE TABLE `client` (
-  `id_client` int(11) NOT NULL,
+  `id_client` bigint(255) NOT NULL,
   `name_client` varchar(512) DEFAULT NULL,
   `phone` varchar(11) DEFAULT NULL,
   `address` varchar(512) DEFAULT NULL,
@@ -124,13 +124,13 @@ INSERT INTO `client` (`id_client`, `name_client`, `phone`, `address`, `idNationa
 --
 
 CREATE TABLE `clientaccount` (
-  `id_ClientAccount` int(11) NOT NULL,
+  `id_ClientAccount` bigint(255) NOT NULL,
   `date_ClientAccount` date DEFAULT NULL,
   `Debit` double(10,2) DEFAULT NULL,
   `Creditor` double(10,2) DEFAULT NULL,
-  `id_client` int(11) DEFAULT NULL,
-  `id_salesInvoic` int(11) DEFAULT NULL,
-  `id_Receipt` int(11) DEFAULT NULL,
+  `id_client` bigint(255) DEFAULT NULL,
+  `id_salesInvoic` bigint(255) DEFAULT NULL,
+  `id_Receipt` bigint(255) DEFAULT NULL,
   `note` text DEFAULT NULL,
   `isActive` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -152,10 +152,10 @@ CREATE TABLE `debitandcreditorclient` (
 `date_ClientAccount` date
 ,`Debit` double(10,2)
 ,`Creditor` double(10,2)
-,`id_client` int(11)
+,`id_client` bigint(255)
 ,`name_client` varchar(512)
-,`id_salesInvoic` int(11)
-,`id_Receipt` int(11)
+,`id_salesInvoic` bigint(255)
+,`id_Receipt` bigint(255)
 ,`note` text
 );
 
@@ -169,10 +169,10 @@ CREATE TABLE `debitandcreditorsupplier` (
 `date_suppliersAccount` date
 ,`Debit` double(10,2)
 ,`Creditor` double(10,2)
-,`id_Suppliers` int(11)
+,`id_Suppliers` bigint(255)
 ,`name_Suppliers` varchar(512)
-,`id_purchaseInvoice` int(11)
-,`id_paymentReceipt` int(11)
+,`id_purchaseInvoice` bigint(255)
+,`id_paymentReceipt` bigint(255)
 ,`note` text
 );
 
@@ -183,10 +183,10 @@ CREATE TABLE `debitandcreditorsupplier` (
 --
 
 CREATE TABLE `items` (
-  `id_items` int(11) NOT NULL,
+  `id_items` bigint(255) NOT NULL,
   `name_items` varchar(255) DEFAULT NULL,
-  `firstbalance` int(11) DEFAULT NULL,
-  `id` int(11) DEFAULT NULL
+  `firstbalance` bigint(255) DEFAULT NULL,
+  `id` bigint(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -204,15 +204,15 @@ INSERT INTO `items` (`id_items`, `name_items`, `firstbalance`, `id`) VALUES
 --
 
 CREATE TABLE `itemsonpurchaseinvoice` (
-  `id` int(11) DEFAULT NULL,
-  `id_items` int(11) DEFAULT NULL,
+  `id` bigint(255) DEFAULT NULL,
+  `id_items` bigint(255) DEFAULT NULL,
   `name_items` varchar(512) DEFAULT NULL,
   `qyt` double(10,2) DEFAULT NULL,
   `name_unit` varchar(512) DEFAULT NULL,
   `price` double(10,2) DEFAULT NULL,
   `discount` double(10,2) DEFAULT NULL,
   `Amount` double(10,2) DEFAULT NULL,
-  `id_purchaseInvoice` int(11) DEFAULT NULL
+  `id_purchaseInvoice` bigint(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -232,15 +232,15 @@ INSERT INTO `itemsonpurchaseinvoice` (`id`, `id_items`, `name_items`, `qyt`, `na
 --
 
 CREATE TABLE `itemsonsalesinvoice` (
-  `id` int(11) DEFAULT NULL,
-  `id_items` int(11) DEFAULT NULL,
+  `id` bigint(255) DEFAULT NULL,
+  `id_items` bigint(255) DEFAULT NULL,
   `name_items` varchar(512) DEFAULT NULL,
   `qyt` double(10,2) DEFAULT NULL,
   `name_unit` varchar(512) DEFAULT NULL,
   `price` double(10,2) DEFAULT NULL,
   `discount` double(10,2) DEFAULT NULL,
   `Amount` double(10,2) DEFAULT NULL,
-  `id_salesInvoic` int(11) DEFAULT NULL
+  `id_salesInvoic` bigint(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
@@ -250,10 +250,10 @@ CREATE TABLE `itemsonsalesinvoice` (
 --
 
 CREATE TABLE `paymentreceipt` (
-  `id_PaymentReceipt` int(11) NOT NULL,
+  `id_PaymentReceipt` bigint(255) NOT NULL,
   `date_PaymentReceipt` date DEFAULT NULL,
   `amount` double(10,2) DEFAULT NULL,
-  `id_Suppliers` int(11) DEFAULT NULL,
+  `id_Suppliers` bigint(255) DEFAULT NULL,
   `isActive` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -271,13 +271,13 @@ INSERT INTO `paymentreceipt` (`id_PaymentReceipt`, `date_PaymentReceipt`, `amoun
 --
 
 CREATE TABLE `priselist` (
-  `id_priceList` int(11) NOT NULL,
+  `id_priceList` bigint(255) NOT NULL,
   `last_edit` date DEFAULT NULL,
   `purchase_price_low` double(10,2) DEFAULT NULL,
   `purchase_price_high` double(10,2) DEFAULT NULL,
   `sale_price_low` double(10,2) DEFAULT NULL,
   `sale_price_high` double(10,2) DEFAULT NULL,
-  `id_items` int(11) DEFAULT NULL
+  `id_items` bigint(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -295,10 +295,10 @@ INSERT INTO `priselist` (`id_priceList`, `last_edit`, `purchase_price_low`, `pur
 --
 
 CREATE TABLE `purchaseinvoice` (
-  `id_purchaseInvoice` int(11) NOT NULL,
+  `id_purchaseInvoice` bigint(255) NOT NULL,
   `date_purchaseInvoice` date DEFAULT NULL,
   `type_purchaseInvoic` varchar(512) DEFAULT NULL,
-  `id_Suppliers` int(11) DEFAULT NULL,
+  `id_Suppliers` bigint(255) DEFAULT NULL,
   `totalAmount` double(10,2) DEFAULT NULL,
   `discount` double(10,2) DEFAULT NULL,
   `amountCash` double(10,2) DEFAULT NULL,
@@ -324,10 +324,10 @@ INSERT INTO `purchaseinvoice` (`id_purchaseInvoice`, `date_purchaseInvoice`, `ty
 --
 
 CREATE TABLE `receipt` (
-  `id_Receipt` int(11) NOT NULL,
+  `id_Receipt` bigint(255) NOT NULL,
   `date_Receipt` date DEFAULT NULL,
   `amount` double(10,2) DEFAULT NULL,
-  `id_client` int(11) DEFAULT NULL,
+  `id_client` bigint(255) DEFAULT NULL,
   `isActive` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -345,10 +345,10 @@ INSERT INTO `receipt` (`id_Receipt`, `date_Receipt`, `amount`, `id_client`, `isA
 --
 
 CREATE TABLE `salesinvoic` (
-  `id_salesInvoic` int(11) NOT NULL,
+  `id_salesInvoic` bigint(255) NOT NULL,
   `date_salesInvoic` date DEFAULT NULL,
   `type_salesInvoic` varchar(512) DEFAULT NULL,
-  `id_client` int(11) DEFAULT NULL,
+  `id_client` bigint(255) DEFAULT NULL,
   `totalAmount` double(10,2) DEFAULT NULL,
   `discount` double(10,2) DEFAULT NULL,
   `amountCash` double(10,2) DEFAULT NULL,
@@ -364,7 +364,7 @@ CREATE TABLE `salesinvoic` (
 --
 
 CREATE TABLE `suppliers` (
-  `id_Suppliers` int(11) NOT NULL,
+  `id_Suppliers` bigint(255) NOT NULL,
   `name_Suppliers` varchar(512) NOT NULL,
   `phone` varchar(11) DEFAULT NULL,
   `address` varchar(512) DEFAULT NULL,
@@ -389,13 +389,13 @@ INSERT INTO `suppliers` (`id_Suppliers`, `name_Suppliers`, `phone`, `address`, `
 --
 
 CREATE TABLE `suppliersaccount` (
-  `id_supplliersAccount` int(11) NOT NULL,
+  `id_supplliersAccount` bigint(255) NOT NULL,
   `date_suppliersAccount` date DEFAULT NULL,
   `Debit` double(10,2) DEFAULT NULL,
   `Creditor` double(10,2) DEFAULT NULL,
-  `id_Suppliers` int(11) DEFAULT NULL,
-  `id_purchaseInvoice` int(11) DEFAULT NULL,
-  `id_paymentReceipt` int(11) DEFAULT NULL,
+  `id_Suppliers` bigint(255) DEFAULT NULL,
+  `id_purchaseInvoice` bigint(255) DEFAULT NULL,
+  `id_paymentReceipt` bigint(255) DEFAULT NULL,
   `note` text DEFAULT NULL,
   `isActive` tinyint(1) DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -415,7 +415,7 @@ INSERT INTO `suppliersaccount` (`id_supplliersAccount`, `date_suppliersAccount`,
 --
 
 CREATE TABLE `unit` (
-  `id` int(11) NOT NULL,
+  `id` bigint(255) NOT NULL,
   `low` varchar(512) DEFAULT NULL,
   `high` varchar(512) DEFAULT NULL,
   `val` double(10,2) DEFAULT NULL
@@ -437,9 +437,9 @@ INSERT INTO `unit` (`id`, `low`, `high`, `val`) VALUES
 -- (See below for the actual view)
 --
 CREATE TABLE `unititems` (
-`id_items` int(11)
+`id_items` bigint(255)
 ,`name_items` varchar(255)
-,`firstbalance` int(11)
+,`firstbalance` bigint(255)
 ,`low` varchar(512)
 ,`high` varchar(512)
 ,`val` double(10,2)
@@ -453,7 +453,7 @@ CREATE TABLE `unititems` (
 
 CREATE TABLE `users` (
   `username` varchar(255) DEFAULT NULL,
-  `passwod` int(11) DEFAULT NULL
+  `passwod` bigint(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -629,25 +629,25 @@ ALTER TABLE `unit`
 -- AUTO_INCREMENT for table `casher`
 --
 ALTER TABLE `casher`
-  MODIFY `id_casher` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id_casher` bigint(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `clientaccount`
 --
 ALTER TABLE `clientaccount`
-  MODIFY `id_ClientAccount` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_ClientAccount` bigint(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `purchaseinvoice`
 --
 ALTER TABLE `purchaseinvoice`
-  MODIFY `id_purchaseInvoice` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id_purchaseInvoice` bigint(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `suppliersaccount`
 --
 ALTER TABLE `suppliersaccount`
-  MODIFY `id_supplliersAccount` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_supplliersAccount` bigint(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Constraints for dumped tables

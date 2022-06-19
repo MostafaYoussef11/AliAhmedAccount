@@ -21,6 +21,7 @@ import java.io.InputStream;
 import java.math.BigDecimal;
 import java.util.HashMap;
 import java.util.Vector;
+import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
@@ -106,8 +107,20 @@ public class SalesInvoiceFrame extends javax.swing.JFrame {
         valuesItems = new Vector<ItemsOnInvoice>();
         c = 1;
         high_name_unit = new Items().getHightUnitFromId(id);
-        balance = sales.chackBalanceForItems(items.getIdItemsFromName(comboItems.getSelectedItem().toString()));
-        balanceItem = Double.parseDouble(balance); 
+        try{
+          balance = sales.chackBalanceForItems(items.getIdItemsFromName(comboItems.getSelectedItem().toString()));
+            if(balance != null){
+                balanceItem = Double.parseDouble(balance); 
+            }
+            else{
+                balanceItem = 0.00;
+            }
+             
+        }catch(NumberFormatException ex){
+            balanceItem = 0.00;
+            Logger.getLogger(getClass().getName()).log(Level.SEVERE, null, ex);
+        }
+       
     }
     
     @SuppressWarnings("unchecked")
@@ -977,7 +990,7 @@ public class SalesInvoiceFrame extends javax.swing.JFrame {
          balance_after = balanceItem - count;
          if(balance_after >= count ){
             model.addRow(values);
-            valuesItems.add(new ItemsOnInvoice(c, Integer.parseInt(new Items().getIdItemsFromName(values[5])), values[5],Double.parseDouble(txtCount.getValue().toString()),comboUnit.getSelectedItem().toString(), Double.parseDouble(txtPrice.getText()), Double.parseDouble(txtDiscondItem.getText()), Double.parseDouble(txtSumPrice.getText()), Integer.parseInt(txtId_Invoice.getText())));
+            valuesItems.add(new ItemsOnInvoice(c, new Items().getIdItemsFromName(values[5]), values[5],Double.parseDouble(txtCount.getValue().toString()),comboUnit.getSelectedItem().toString(), Double.parseDouble(txtPrice.getText()), Double.parseDouble(txtDiscondItem.getText()), Double.parseDouble(txtSumPrice.getText()), Integer.parseInt(txtId_Invoice.getText())));
             SumTotal();
             c++;
             txtDiscondItem.setText("0.00"); 
@@ -991,7 +1004,7 @@ public class SalesInvoiceFrame extends javax.swing.JFrame {
            balance_after = (balanceItem * val) - count;
            if(balance_after >= count){
                 model.addRow(values);
-                valuesItems.add(new ItemsOnInvoice(c, Integer.parseInt(new Items().getIdItemsFromName(values[5])), values[5],Double.parseDouble(txtCount.getValue().toString()),comboUnit.getSelectedItem().toString(), Double.parseDouble(txtPrice.getText()), Double.parseDouble(txtDiscondItem.getText()), Double.parseDouble(txtSumPrice.getText()), Integer.parseInt(txtId_Invoice.getText())));
+                valuesItems.add(new ItemsOnInvoice(c, new Items().getIdItemsFromName(values[5]), values[5],Double.parseDouble(txtCount.getValue().toString()),comboUnit.getSelectedItem().toString(), Double.parseDouble(txtPrice.getText()), Double.parseDouble(txtDiscondItem.getText()), Double.parseDouble(txtSumPrice.getText()), Integer.parseInt(txtId_Invoice.getText())));
                 SumTotal();
                 c++;
                 txtDiscondItem.setText("0.00"); 

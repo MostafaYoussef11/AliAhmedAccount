@@ -133,7 +133,7 @@ public class purchaseInvoice extends invoice{
                       + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
             pstItems = con.prepareStatement(Sql, Statement.RETURN_GENERATED_KEYS);
             pstItems.setInt(1,i.id);
-            pstItems.setInt(2, i.id_items);
+            pstItems.setString(2, i.id_items);
             pstItems.setString(3, i.name_items);
             pstItems.setDouble(4, i.qyt);
             pstItems.setString(5, i.name_unit);

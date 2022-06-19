@@ -12,6 +12,8 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Insets;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JComponent;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -37,10 +39,11 @@ public class itemsFrame extends javax.swing.JFrame {
         Tools.disableButOpen(btPanel2);
         i = new Items();
         i.filTable(jTable1);
-        txtid.setText(i.lastid());
+        //txtid.setText("");
         i.fillComboHigh(combo);
         Tools.CenterJDateChos(txtDate);
          i.fillComboNameItems(ComboNameItems);
+         txtid.setText(i.lastid());
         ComboNameItemsItemStateChanged();
         i.fillTableListPrice(jTable3);
     }
@@ -84,19 +87,19 @@ public class itemsFrame extends javax.swing.JFrame {
         btexit1 = new javax.swing.JButton();
         txtPanel = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        txtidItem = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         txtname = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
         combo = new javax.swing.JComboBox();
         jLabel2 = new javax.swing.JLabel();
         txtFirstBalance = new javax.swing.JTextField();
+        txtidItem = new javax.swing.JTextField();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable2 = new javax.swing.JTable();
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
-        ComboNameItems = new javax.swing.JComboBox<>();
+        ComboNameItems = new javax.swing.JComboBox<String>();
         jLabel10 = new javax.swing.JLabel();
         txtDate = new com.toedter.calendar.JDateChooser();
         jPanel5 = new javax.swing.JPanel();
@@ -445,7 +448,7 @@ public class itemsFrame extends javax.swing.JFrame {
                 .addComponent(btsave1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnew1, javax.swing.GroupLayout.PREFERRED_SIZE, 105, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(11, Short.MAX_VALUE))
         );
         btPanel1Layout.setVerticalGroup(
             btPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -469,10 +472,6 @@ public class itemsFrame extends javax.swing.JFrame {
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("كود الصنف");
         jLabel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-
-        txtidItem.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        txtidItem.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        txtidItem.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -498,6 +497,8 @@ public class itemsFrame extends javax.swing.JFrame {
         txtFirstBalance.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtFirstBalance.setText("0");
 
+        txtidItem.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+
         javax.swing.GroupLayout txtPanelLayout = new javax.swing.GroupLayout(txtPanel);
         txtPanel.setLayout(txtPanelLayout);
         txtPanelLayout.setHorizontalGroup(
@@ -505,18 +506,18 @@ public class itemsFrame extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, txtPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(txtPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtname)
                     .addGroup(txtPanelLayout.createSequentialGroup()
                         .addComponent(txtFirstBalance)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(txtPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(txtPanelLayout.createSequentialGroup()
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtidItem, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(combo, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(combo, javax.swing.GroupLayout.PREFERRED_SIZE, 197, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(txtPanelLayout.createSequentialGroup()
+                        .addComponent(txtname, javax.swing.GroupLayout.PREFERRED_SIZE, 334, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtidItem)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(txtPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -529,9 +530,9 @@ public class itemsFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(txtPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtidItem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtname, javax.swing.GroupLayout.DEFAULT_SIZE, 40, Short.MAX_VALUE))
+                    .addComponent(txtname, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtidItem)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(txtPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -594,7 +595,7 @@ public class itemsFrame extends javax.swing.JFrame {
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 368, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(34, Short.MAX_VALUE))
         );
 
         jTabbedPane1.addTab("اضافة صنف", new javax.swing.ImageIcon(getClass().getResource("/Icons/pencil.png")), jPanel2); // NOI18N
@@ -609,7 +610,7 @@ public class itemsFrame extends javax.swing.JFrame {
         jLabel9.setText("اسم الصنف");
         jLabel9.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        ComboNameItems.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        ComboNameItems.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         ComboNameItems.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 ComboNameItemsItemStateChanged(evt);
@@ -1138,7 +1139,7 @@ public class itemsFrame extends javax.swing.JFrame {
         int tabPostion = jTabbedPane1.getSelectedIndex();
         if(tabPostion == 1){
             i.fillComboHigh(combo);
-            txtidItem.setText(i.lastiditem());
+           // txtidItem.setText(i.lastiditem());
             Tools.disableButOpen(btPanel1);
             i.fillTableItems(jTable2);
         }else{
@@ -1148,7 +1149,7 @@ public class itemsFrame extends javax.swing.JFrame {
 
     private void btnew1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnew1ActionPerformed
         // TODO add your handling code here:
-        txtidItem.setText(i.lastiditem());
+       // txtidItem.setText(i.lastiditem());
         i.fillTableItems(jTable2);
         txtFirstBalance.setText("0");
         txtFirstBalance.setEditable(true);
@@ -1174,7 +1175,8 @@ public class itemsFrame extends javax.swing.JFrame {
             if(i.saveItems()){
                 Tools.showInfoMsg("تم الخفظ بنجاح", "حفظ");
                 txtFirstBalance.setText("0");
-                txtidItem.setText(i.lastiditem());
+               txtidItem.setText("");
+               txtidItem.requestFocus();
                 txtname.setText("");
                 i.fillTableItems(jTable2);
             }else{
@@ -1198,7 +1200,7 @@ public class itemsFrame extends javax.swing.JFrame {
         boolean isUpdate = i.updateItems(id);
         if(isUpdate){
             Tools.showInfoMsg("تم تحديث البيانات بنجاح", "تحديث بيانات");
-            txtidItem.setText(i.lastiditem());
+            //txtidItem.setText(i.lastiditem());
             i.fillTableItems(jTable2);
             txtFirstBalance.setText("0");
             txtFirstBalance.setEditable(true);
@@ -1217,7 +1219,7 @@ public class itemsFrame extends javax.swing.JFrame {
         boolean isDel = i.deleteItems(id_items);
         if(isDel){
             Tools.showInfoMsg("تم حذف الصنف", "حذف البيانات");
-            txtidItem.setText(i.lastiditem());
+            //txtidItem.setText(i.lastiditem());
             i.fillTableItems(jTable2);
             txtFirstBalance.setText("0");
             txtFirstBalance.setEditable(true);
@@ -1429,6 +1431,7 @@ public class itemsFrame extends javax.swing.JFrame {
         sale_price_low.setEnabled(false);
     }//GEN-LAST:event_jTable3MouseClicked
     private void ComboNameItemsItemStateChanged(){
+      try{
         String id = i.getIdUnitFromNameItems(ComboNameItems.getSelectedItem().toString());
         String high = i.getHightUnitFromId(id);
         String low = i.getlowUnitFromId(id);
@@ -1440,6 +1443,10 @@ public class itemsFrame extends javax.swing.JFrame {
         sale_price_low.setText("0.00");
         purchase_price_high.setText("0.00");
         sale_price_high.setText("0.00");
+       }catch(Exception ex){
+           Logger.getLogger(getClass().getName()).log(Level.OFF, ex.getMessage());
+       }
+
         
         
     }
@@ -1545,7 +1552,7 @@ public class itemsFrame extends javax.swing.JFrame {
     private javax.swing.JPanel txtPanelUnit;
     private javax.swing.JTextField txtVal;
     private javax.swing.JLabel txtid;
-    private javax.swing.JLabel txtidItem;
+    private javax.swing.JTextField txtidItem;
     private javax.swing.JTextField txtname;
     private javax.swing.JLabel txtnameHightUnit;
     private javax.swing.JLabel txtnameHightUnit1;

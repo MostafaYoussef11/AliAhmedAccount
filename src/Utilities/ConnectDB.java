@@ -32,7 +32,7 @@ public class ConnectDB {
   private static void SetConnection(){
       try{
         Class .forName("com.mysql.jdbc.Driver");
-        con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/aliaccount?useUnicode=yes&characterEncoding=UTF-8", "root","");
+        con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/accountmasrawy?useUnicode=yes&characterEncoding=UTF-8", "root","");
 
       }catch(ClassNotFoundException | SQLException ex){
           Tools.showErrorMsg(ex.getMessage());

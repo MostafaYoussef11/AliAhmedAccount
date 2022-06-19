@@ -11,7 +11,7 @@
 	<queryString>
 		<![CDATA[SELECT pay.* , s.name_Suppliers from paymentreceipt pay INNER JOIN suppliers s on pay.id_Suppliers = s.id_Suppliers where id_PaymentReceipt = $P{id_PaymentReceipt}]]>
 	</queryString>
-	<field name="id_PaymentReceipt" class="java.lang.Integer">
+	<field name="id_PaymentReceipt" class="java.lang.Long">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="date_PaymentReceipt" class="java.sql.Date">
@@ -20,7 +20,7 @@
 	<field name="amount" class="java.lang.Double">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="id_Suppliers" class="java.lang.Integer">
+	<field name="id_Suppliers" class="java.lang.Long">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="isActive" class="java.lang.Boolean">

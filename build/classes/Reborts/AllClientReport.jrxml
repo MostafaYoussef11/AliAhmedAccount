@@ -6,7 +6,7 @@
 	<queryString>
 		<![CDATA[SELECT client.id_client , c.name_client , client.firstBalance ,sum(c.Debit) as Debit , sum(c.Creditor) as Creditor FROM debitandcreditorclient c INNER JOIN client on c.id_client = client.id_client where client.isActive = 1 GROUP by c.name_client]]>
 	</queryString>
-	<field name="id_client" class="java.lang.Integer">
+	<field name="id_client" class="java.lang.Long">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="name_client" class="java.lang.String">

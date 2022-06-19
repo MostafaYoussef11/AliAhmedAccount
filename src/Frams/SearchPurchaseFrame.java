@@ -101,7 +101,7 @@ public class SearchPurchaseFrame extends javax.swing.JFrame {
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         // TODO add your handling code here:
         int row = jTable1.getSelectedRow();
-        int id_invoicBil = Integer.parseInt(jTable1.getValueAt(row, 7).toString());
+        String id_invoicBil = jTable1.getValueAt(row, 7).toString();
         double Total_amount = Double.parseDouble(jTable1.getValueAt(row, 3).toString());
         double discont = Double.parseDouble(jTable1.getValueAt(row, 2).toString());
         System.out.println(id_invoicBil +" " + Total_amount +" "+discont);

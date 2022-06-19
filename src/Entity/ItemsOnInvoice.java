@@ -10,10 +10,10 @@ package Entity;
  * @author mosta
  */
 public class ItemsOnInvoice {
-    public int id , id_items  , id_Invoic;
+    public int id ,id_Invoic;
     public double qyt , price , discount , Amount;
-    public String name_items , name_unit;
-    public ItemsOnInvoice(int id , int id_items , String name_items , double qyt , String name_unit , double price , double discount , double Amount , int id_Invoic){
+    public String name_items , name_unit , id_items;
+    public ItemsOnInvoice(int id , String id_items , String name_items , double qyt , String name_unit , double price , double discount , double Amount , int id_Invoic){
             this.Amount = Amount;
             this.discount = discount;
             this.id = id;
