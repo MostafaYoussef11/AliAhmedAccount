@@ -5,6 +5,8 @@
  */
 package Frams;
 
+import Entity.CasherClass;
+import Entity.CheckCasher;
 import Entity.ClientPerson;
 import Entity.Items;
 import Entity.ItemsOnInvoice;
@@ -20,8 +22,7 @@ import java.util.Vector;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.border.Border;
+
 
 /**
  *
@@ -34,6 +35,8 @@ public class MainFrame extends javax.swing.JFrame {
      */
     Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
     Font font = Tools.font(18f);
+    Thread thread;
+    CheckCasher cash ;
     public MainFrame() {
         initComponents();
         background.setLocation(0, 0);
@@ -61,6 +64,11 @@ public class MainFrame extends javax.swing.JFrame {
         Receipts.setLocation(x, 250);
         Receipts.setFont(font);
         txtIdItems.setFocusable(true);
+        cash = new CheckCasher();
+        String nowbalance = cash.getNow_balance();
+        System.out.println(getClass().getName() + " : "+nowbalance);
+        txtNowBalance.setText(cash.getNow_balance());
+
     }
 
     /**
@@ -88,6 +96,7 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         txtPrice = new javax.swing.JTextField();
         btnSave = new javax.swing.JButton();
+        txtNowBalance = new javax.swing.JLabel();
         background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -343,6 +352,12 @@ public class MainFrame extends javax.swing.JFrame {
         getContentPane().add(jPanel1);
         jPanel1.setBounds(40, 60, 230, 270);
 
+        txtNowBalance.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        txtNowBalance.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        txtNowBalance.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        getContentPane().add(txtNowBalance);
+        txtNowBalance.setBounds(60, 600, 260, 100);
+
         background.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         background.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         getContentPane().add(background);
@@ -576,6 +591,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel sales;
     private javax.swing.JLabel suppliers;
     private javax.swing.JTextField txtIdItems;
+    private javax.swing.JLabel txtNowBalance;
     private javax.swing.JTextField txtPrice;
     private javax.swing.JTextField txtQut;
     private javax.swing.JLabel txtnameItem;

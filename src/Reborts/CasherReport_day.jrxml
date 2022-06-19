@@ -6,10 +6,13 @@
 	<parameter name="date_day" class="java.lang.String">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["E:\\masrawyAccountBranch\\AliAhmedAccount\\src\\Reborts\\"]]></defaultValueExpression>
+	</parameter>
 	<queryString>
 		<![CDATA[SELECT * FROM `casher` where date_casher = $P{date_day}]]>
 	</queryString>
-	<field name="id_casher" class="java.lang.Integer">
+	<field name="id_casher" class="java.lang.Long">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="date_casher" class="java.sql.Date">
@@ -24,11 +27,29 @@
 	<field name="note" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
+	<field name="id_purchaseInvoice" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="id_Receipt" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="id_salesInvoic" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="id_PaymentReceipt" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
 	<variable name="Debit_1" class="java.lang.Double" resetType="Column" calculation="Sum">
 		<variableExpression><![CDATA[$F{Debit}]]></variableExpression>
 	</variable>
 	<variable name="Creditor_1" class="java.lang.Double" resetType="Column" calculation="Sum">
 		<variableExpression><![CDATA[$F{Creditor}]]></variableExpression>
+	</variable>
+	<variable name="old_Balance_main" class="java.lang.Double" resetType="None">
+		<variableExpression><![CDATA[]]></variableExpression>
+	</variable>
+	<variable name="nowBalance" class="java.lang.Double" resetType="None">
+		<variableExpression><![CDATA[$V{old_Balance_main}]]></variableExpression>
 	</variable>
 	<background>
 		<band splitType="Stretch"/>
@@ -193,9 +214,9 @@
 		</band>
 	</detail>
 	<columnFooter>
-		<band height="74" splitType="Stretch">
+		<band height="189" splitType="Stretch">
 			<textField pattern="#,##0.00" isBlankWhenNull="false">
-				<reportElement mode="Transparent" x="152" y="4" width="198" height="30" forecolor="#000000" backcolor="#FFFFFF" uuid="2efa8137-d9e6-45f7-824d-13c8dc164321"/>
+				<reportElement mode="Transparent" x="150" y="50" width="198" height="35" forecolor="#000000" backcolor="#FFFFFF" uuid="2efa8137-d9e6-45f7-824d-13c8dc164321"/>
 				<box>
 					<pen lineWidth="1.5"/>
 					<topPen lineWidth="1.5"/>
@@ -210,7 +231,7 @@
 				<textFieldExpression><![CDATA[$V{Debit_1} == null ? 0.00 : $V{Debit_1}]]></textFieldExpression>
 			</textField>
 			<textField pattern="#,##0.00" isBlankWhenNull="false">
-				<reportElement mode="Transparent" x="152" y="40" width="198" height="30" forecolor="#000000" backcolor="#FFFFFF" uuid="551f6ed4-df2c-4e67-a1cd-4a61cbf58a14"/>
+				<reportElement mode="Transparent" x="150" y="90" width="198" height="35" forecolor="#000000" backcolor="#FFFFFF" uuid="551f6ed4-df2c-4e67-a1cd-4a61cbf58a14"/>
 				<box>
 					<pen lineWidth="1.5"/>
 					<topPen lineWidth="1.5"/>
@@ -225,7 +246,7 @@
 				<textFieldExpression><![CDATA[$V{Creditor_1} == null ? 0.00 : $V{Creditor_1}]]></textFieldExpression>
 			</textField>
 			<staticText>
-				<reportElement mode="Transparent" x="356" y="4" width="197" height="30" forecolor="#000000" backcolor="#FFFFFF" uuid="c7d39dda-a40c-4bd3-b133-e2274c9e4289"/>
+				<reportElement mode="Transparent" x="356" y="50" width="197" height="35" forecolor="#000000" backcolor="#FFFFFF" uuid="c7d39dda-a40c-4bd3-b133-e2274c9e4289"/>
 				<box>
 					<pen lineWidth="1.5"/>
 					<topPen lineWidth="1.5"/>
@@ -240,7 +261,7 @@
 				<text><![CDATA[اجمالي الوارد]]></text>
 			</staticText>
 			<staticText>
-				<reportElement mode="Transparent" x="356" y="40" width="197" height="30" forecolor="#000000" backcolor="#FFFFFF" uuid="5c4c3237-ced4-4790-bf82-2a6a7ccb8186"/>
+				<reportElement mode="Transparent" x="356" y="90" width="197" height="35" forecolor="#000000" backcolor="#FFFFFF" uuid="5c4c3237-ced4-4790-bf82-2a6a7ccb8186"/>
 				<box>
 					<pen lineWidth="1.5"/>
 					<topPen lineWidth="1.5"/>
@@ -254,6 +275,81 @@
 				</textElement>
 				<text><![CDATA[اجمالي الصادر]]></text>
 			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="356" y="10" width="197" height="35" forecolor="#000000" backcolor="#FFFFFF" uuid="a26a0b83-c19c-4e27-b70d-3a37d80c452c"/>
+				<box>
+					<pen lineWidth="1.5"/>
+					<topPen lineWidth="1.5"/>
+					<leftPen lineWidth="1.5"/>
+					<bottomPen lineWidth="1.5"/>
+					<rightPen lineWidth="1.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Tahoma" size="16" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[رصيد مرحل]]></text>
+			</staticText>
+			<subreport>
+				<reportElement x="150" y="10" width="198" height="35" uuid="b7d23a40-a11a-4a99-9c66-999f298077c9"/>
+				<subreportParameter name="SUBREPORT_DIR">
+					<subreportParameterExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="date_day">
+					<subreportParameterExpression><![CDATA[$P{date_day}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<returnValue subreportVariable="old_balance" toVariable="old_Balance_main"/>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "CasherReport_day_subreport1.jasper"]]></subreportExpression>
+			</subreport>
+			<staticText>
+				<reportElement mode="Transparent" x="356" y="130" width="197" height="35" forecolor="#000000" backcolor="#FFFFFF" uuid="e5f0300f-f7c8-4d9c-9910-9b3922558c31"/>
+				<box>
+					<pen lineWidth="1.5"/>
+					<topPen lineWidth="1.5"/>
+					<leftPen lineWidth="1.5"/>
+					<bottomPen lineWidth="1.5"/>
+					<rightPen lineWidth="1.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Tahoma" size="16" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[الرصيد الحالي]]></text>
+			</staticText>
+			<textField evaluationTime="Report" pattern="#,##0.00" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="150" y="130" width="198" height="35" forecolor="#000000" backcolor="#FFFFFF" uuid="37bbcaa8-9ff5-4502-bedf-da388e39925e"/>
+				<box>
+					<pen lineWidth="1.5"/>
+					<topPen lineWidth="1.5"/>
+					<leftPen lineWidth="1.5"/>
+					<bottomPen lineWidth="1.5"/>
+					<rightPen lineWidth="1.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="Tahoma" size="16" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{old_Balance_main}+$V{Debit_1}-$V{Creditor_1}]]></textFieldExpression>
+			</textField>
 		</band>
 	</columnFooter>
+	<pageFooter>
+		<band height="23">
+			<textField pattern="EEEEE dd MMMMM yyyy">
+				<reportElement x="374" y="0" width="181" height="20" uuid="4e57ba2d-42cd-4afe-8bae-b295be46b000"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA[new java.util.Date()]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="0" width="61" height="20" uuid="974c2ca1-215a-465b-b8f6-0e2c52b42118"/>
+				<textElement textAlignment="Right"/>
+				<textFieldExpression><![CDATA["Page "+$V{PAGE_NUMBER}+" of"]]></textFieldExpression>
+			</textField>
+			<textField evaluationTime="Report">
+				<reportElement x="61" y="0" width="40" height="20" uuid="d4c00307-b265-4e80-9d18-448cfb36666d"/>
+				<textFieldExpression><![CDATA[" " + $V{PAGE_NUMBER}]]></textFieldExpression>
+			</textField>
+		</band>
+	</pageFooter>
 </jasperReport>

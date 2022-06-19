@@ -447,11 +447,18 @@ public class ReciptFrame extends javax.swing.JFrame {
         txt_note.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
         Tools.disableButOpen(btPanel);
         cp.FillComboName(com_Name_Client);
-        txt_balance.setText(cp.calcBalanceClient(com_Name_Client.getSelectedItem().toString())+"");
+        int sizeComboClient = com_Name_Client.getItemCount();
+        if(sizeComboClient > 0){
+            String name_client_st = com_Name_Client.getSelectedItem().toString();
+            if(name_client_st != null){
+                txt_balance.setText(cp.calcBalanceClient(name_client_st)+"");
+                txt_note.setText("دفعة من حساب " + " " + com_Name_Client.getSelectedItem().toString());
+            }
+        }
         txt_Amount.setText("0.00");
         Tools.CenterJDateChos(txt_Date_Process);
         txt_id_reciept.setText(r.getLastReceiptId());
-        txt_note.setText("دفعة من حساب " + " " + com_Name_Client.getSelectedItem().toString());
+        
     }
     private void btnewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnewActionPerformed
         // TODO add your handling code here:
