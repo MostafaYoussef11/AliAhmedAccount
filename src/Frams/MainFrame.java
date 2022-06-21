@@ -18,7 +18,11 @@ import java.awt.Font;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.util.Date;
+import java.util.Timer;
+import java.util.TimerTask;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -36,7 +40,7 @@ public class MainFrame extends javax.swing.JFrame {
     Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
     Font font = Tools.font(18f);
     Thread thread;
-    CheckCasher cash ;
+    //CheckCasher cash ;
     public MainFrame() {
         initComponents();
         background.setLocation(0, 0);
@@ -64,13 +68,12 @@ public class MainFrame extends javax.swing.JFrame {
         Receipts.setLocation(x, 250);
         Receipts.setFont(font);
         txtIdItems.setFocusable(true);
-        cash = new CheckCasher();
-        String nowbalance = cash.getNow_balance();
-        System.out.println(getClass().getName() + " : "+nowbalance);
-        txtNowBalance.setText(cash.getNow_balance());
-
-    }
-
+        setBalanceCasher();
+        
+        
+    };
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -596,4 +599,21 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JTextField txtQut;
     private javax.swing.JLabel txtnameItem;
     // End of variables declaration//GEN-END:variables
+
+    private void setBalanceCasher(){
+        Timer t = new Timer();
+        t.schedule(new TimerTask() {
+
+            @Override
+            public void run() {
+                txtNowBalance.setText(new CasherClass().getNowBalanceCasher());
+                run();
+            }
+        }, 5000);
+    
+       
+    }
+
+
+
 }
