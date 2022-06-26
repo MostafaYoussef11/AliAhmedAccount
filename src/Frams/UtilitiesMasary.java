@@ -50,7 +50,9 @@ public class UtilitiesMasary extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
-        combocategoryutilites = new javax.swing.JComboBox<>();
+        combocategoryutilites = new javax.swing.JComboBox<String>();
+        jLabel1 = new javax.swing.JLabel();
+        txtprice = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -201,7 +203,15 @@ public class UtilitiesMasary extends javax.swing.JFrame {
         jLabel2.setText("الخدمة");
         jLabel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        combocategoryutilites.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        combocategoryutilites.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel1.setText("السعر");
+        jLabel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        txtprice.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        txtprice.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -211,19 +221,23 @@ public class UtilitiesMasary extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                            .addComponent(txtcost, javax.swing.GroupLayout.DEFAULT_SIZE, 613, Short.MAX_VALUE)
-                            .addComponent(txtNote))
+                        .addComponent(txtprice)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(lablenote, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 127, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtcost, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addComponent(btPanel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jScrollPane1)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(combocategoryutilites, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(combocategoryutilites, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtNote))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(lablenote, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE))))
                 .addGap(10, 10, 10))
         );
         layout.setVerticalGroup(
@@ -238,9 +252,12 @@ public class UtilitiesMasary extends javax.swing.JFrame {
                     .addComponent(txtNote, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(lablenote, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txtcost, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(txtcost, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtprice))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 307, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 35, Short.MAX_VALUE)
@@ -260,14 +277,17 @@ public class UtilitiesMasary extends javax.swing.JFrame {
           String note = txtNote.getText();
           String name_Categoray = combocategoryutilites.getSelectedItem().toString();
           double cost = 0 ;
+          double price = 0;
           try{
               cost = Double.parseDouble(txtcost.getText());
+              price = Double.parseDouble(txtprice.getText());
           }catch(NumberFormatException ex){
               Logger.getLogger(getClass().getName()).log(Level.SEVERE, null, ex);
           }
           util.setCost_by_perse(cost);
           util.setName_utility_masary(name_Categoray);
           util.setNote_utility(note);
+          util.setPrice(price);
           //util.setId_category(name_Categoray);
           if(util.Save()){
               Tools.showInfoMsg("تم الحفظ", "حفظ");
@@ -317,7 +337,6 @@ public class UtilitiesMasary extends javax.swing.JFrame {
         txtNote.setEnabled(false);
         txtcost.setText(cost);
         txtcost.setEnabled(false);
-        
         Tools.EditButton(btPanel, null);
     }//GEN-LAST:event_jTable1MouseClicked
 
@@ -366,6 +385,7 @@ public class UtilitiesMasary extends javax.swing.JFrame {
     private javax.swing.JButton btsave;
     private javax.swing.JButton btupdate;
     private javax.swing.JComboBox<String> combocategoryutilites;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JScrollPane jScrollPane1;
@@ -373,6 +393,7 @@ public class UtilitiesMasary extends javax.swing.JFrame {
     private javax.swing.JLabel lablenote;
     private javax.swing.JTextField txtNote;
     private javax.swing.JTextField txtcost;
+    private javax.swing.JTextField txtprice;
     // End of variables declaration//GEN-END:variables
 
     private void newUtilies() {
@@ -385,6 +406,7 @@ public class UtilitiesMasary extends javax.swing.JFrame {
         txtNote.setText("");
         txtNote.setEnabled(true);
         txtcost.setText("0.00");
+        txtprice.setText("0.00");
         txtcost.setEnabled(true);
     }
 }

@@ -31,7 +31,7 @@ public class masary_Utilites {
    private Statement stmt;
    private int id_utility_masary , id_category;
    private String name_utility_masary , note_utility ;
-   private double cost_by_perse;
+   private double cost_by_perse ,price;
 
     public int getId_utility_masary() {
         return id_utility_masary;
@@ -39,6 +39,14 @@ public class masary_Utilites {
 
     public int getId_category() {
         return id_category;
+    }
+
+    public double getPrice() {
+        return price;
+    }
+
+    public void setPrice(double price) {
+        this.price = price;
     }
 
     public void setId_category(String name_category) {
@@ -100,13 +108,13 @@ public class masary_Utilites {
        boolean isSave = false;
         try {  
            con = ConnectDB.getCon();
-           String sql_Save = "INSERT INTO `utility_masary` (`name_utility_masary`, `note_utility`, `cost_by_perse`) VALUES ( ?, ?, ? )";
+           String sql_Save = "INSERT INTO `utility_masary` (`name_utility_masary`, `note_utility`, `cost_by_perse`,`price`) VALUES ( ?, ?, ?,? )";
            pstm = con.prepareStatement(sql_Save, Statement.RETURN_GENERATED_KEYS);
            
            pstm.setString(1, name_utility_masary);
            pstm.setString(2, note_utility);
            pstm.setDouble(3, cost_by_perse);
-           
+           pstm.setDouble(4, price);
            int rowAffact = pstm.executeUpdate();
            if(rowAffact == 1){
                isSave = true;

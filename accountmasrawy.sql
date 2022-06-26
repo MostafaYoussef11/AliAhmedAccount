@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 21, 2022 at 08:50 PM
+-- Generation Time: Jun 27, 2022 at 01:32 AM
 -- Server version: 10.4.13-MariaDB
 -- PHP Version: 7.2.31
 
@@ -70,27 +70,70 @@ CREATE TABLE `calcbalance_sales` (
 
 CREATE TABLE `casher` (
   `id_casher` bigint(255) NOT NULL,
-  `date_casher` date DEFAULT NULL,
+  `date_casher` date NOT NULL DEFAULT curdate(),
   `Debit` double(10,2) DEFAULT NULL,
   `Creditor` double(10,2) DEFAULT NULL,
   `note` text DEFAULT NULL,
   `id_purchaseInvoice` bigint(255) DEFAULT NULL,
   `id_Receipt` bigint(255) DEFAULT NULL,
   `id_salesInvoic` bigint(255) DEFAULT NULL,
-  `id_PaymentReceipt` bigint(255) DEFAULT NULL
+  `id_PaymentReceipt` bigint(255) DEFAULT NULL,
+  `id_masary_pay` int(11) DEFAULT NULL,
+  `id_masary_sell` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `casher`
 --
 
-INSERT INTO `casher` (`id_casher`, `date_casher`, `Debit`, `Creditor`, `note`, `id_purchaseInvoice`, `id_Receipt`, `id_salesInvoic`, `id_PaymentReceipt`) VALUES
-(21, '2022-06-19', NULL, 10695.00, 'فاتورة مشتريات رقم  1', 1, NULL, NULL, NULL),
-(41, '2022-06-19', 75.00, NULL, 'فاتورة مبيعات نقدية1', NULL, NULL, 1, NULL),
-(42, '2022-06-19', 75.00, NULL, 'فاتورة مبيعات نقدية2', NULL, NULL, 2, NULL),
-(43, '2022-06-19', 75.00, NULL, 'فاتورة مبيعات نقدية3', NULL, NULL, 3, NULL),
-(44, '2022-06-21', 50.00, NULL, 'فاتورة مبيعات نقدية4', NULL, NULL, 4, NULL),
-(45, '2022-06-21', 50.00, NULL, 'فاتورة مبيعات نقدية5', NULL, NULL, 5, NULL);
+INSERT INTO `casher` (`id_casher`, `date_casher`, `Debit`, `Creditor`, `note`, `id_purchaseInvoice`, `id_Receipt`, `id_salesInvoic`, `id_PaymentReceipt`, `id_masary_pay`, `id_masary_sell`) VALUES
+(21, '2022-06-19', NULL, 10695.00, 'فاتورة مشتريات رقم  1', 1, NULL, NULL, NULL, NULL, NULL),
+(41, '2022-06-19', 75.00, NULL, 'فاتورة مبيعات نقدية1', NULL, NULL, 1, NULL, NULL, NULL),
+(42, '2022-06-19', 75.00, NULL, 'فاتورة مبيعات نقدية2', NULL, NULL, 2, NULL, NULL, NULL),
+(43, '2022-06-19', 75.00, NULL, 'فاتورة مبيعات نقدية3', NULL, NULL, 3, NULL, NULL, NULL),
+(44, '2022-06-21', 50.00, NULL, 'فاتورة مبيعات نقدية4', NULL, NULL, 4, NULL, NULL, NULL),
+(45, '2022-06-21', 50.00, NULL, 'فاتورة مبيعات نقدية5', NULL, NULL, 5, NULL, NULL, NULL),
+(46, '2022-06-22', 70.00, NULL, 'فاتورة مبيعات نقدية6', NULL, NULL, 6, NULL, NULL, NULL),
+(47, '2022-06-22', 25.00, NULL, 'فاتورة مبيعات نقدية7', NULL, NULL, 7, NULL, NULL, NULL),
+(48, '2022-06-22', 25.00, NULL, 'فاتورة مبيعات نقدية8', NULL, NULL, 8, NULL, NULL, NULL),
+(49, '2022-06-22', 25.00, NULL, 'فاتورة مبيعات نقدية9', NULL, NULL, 9, NULL, NULL, NULL),
+(50, '2022-06-22', 25.00, NULL, 'فاتورة مبيعات نقدية10', NULL, NULL, 10, NULL, NULL, NULL),
+(51, '2022-06-22', 25.00, NULL, 'فاتورة مبيعات نقدية11', NULL, NULL, 11, NULL, NULL, NULL),
+(52, '2022-06-22', 30.00, NULL, 'فاتورة مبيعات نقدية12', NULL, NULL, 12, NULL, NULL, NULL),
+(53, '2022-06-22', 40.00, NULL, 'فاتورة مبيعات نقدية13', NULL, NULL, 13, NULL, NULL, NULL),
+(54, '2022-06-22', 40.00, NULL, 'فاتورة مبيعات نقدية14', NULL, NULL, 14, NULL, NULL, NULL),
+(55, '2022-06-26', 10.00, NULL, NULL, NULL, NULL, NULL, NULL, 0, NULL),
+(56, '2022-06-26', 10.00, NULL, 'كرت اتصالات 10', NULL, NULL, NULL, NULL, 12, NULL),
+(57, '2022-06-26', 10.00, NULL, 'كرت اتصالات 10', NULL, NULL, NULL, NULL, 13, NULL),
+(58, '2022-06-26', 10.00, NULL, 'كرت اتصالات 10', NULL, NULL, NULL, NULL, 14, NULL),
+(59, '2022-06-26', 15.00, NULL, 'شحن اتصالات', NULL, NULL, NULL, NULL, 15, NULL),
+(60, '2022-06-26', 150.00, NULL, 'شحن اتصالات', NULL, NULL, NULL, NULL, 16, NULL),
+(61, '2022-06-26', 100.00, NULL, 'فاتورة مبيعات نقدية15', NULL, NULL, 15, NULL, NULL, NULL),
+(62, '2022-06-26', 60.00, NULL, 'فاتورة مبيعات نقدية16', NULL, NULL, 16, NULL, NULL, NULL),
+(63, '2022-06-26', 50.00, NULL, 'فاتورة مبيعات نقدية17', NULL, NULL, 17, NULL, NULL, NULL),
+(64, '2022-06-27', 100.00, NULL, 'فاتورة مبيعات نقدية18', NULL, NULL, 18, NULL, NULL, NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `categoryutilites`
+--
+
+CREATE TABLE `categoryutilites` (
+  `id_category` int(11) NOT NULL,
+  `name_category` varchar(512) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `categoryutilites`
+--
+
+INSERT INTO `categoryutilites` (`id_category`, `name_category`) VALUES
+(1, 'كروت اتصالات'),
+(2, 'كروت اورنج'),
+(3, 'كروت WE'),
+(4, 'كروت فودافون'),
+(9, 'اتصالات حكاية');
 
 -- --------------------------------------------------------
 
@@ -189,7 +232,13 @@ INSERT INTO `finallyday` (`dateFinally`, `oldBalance`, `totalimport`, `totalexpo
 ('2022-06-18', 11000, 0, 0),
 ('2022-06-19', 11000, 225, 10695),
 ('2022-06-20', 530, 0, 0),
-('2022-06-21', 530, 100, 0);
+('2022-06-21', 530, 100, 0),
+('2022-06-22', 630, 305, 0),
+('2022-06-23', 935, 0, 0),
+('2022-06-24', 935, 0, 0),
+('2022-06-25', 935, 0, 0),
+('2022-06-26', 935, 415, 0),
+('2022-06-27', 1350, 100, 0);
 
 -- --------------------------------------------------------
 
@@ -307,7 +356,74 @@ INSERT INTO `itemsonsalesinvoice` (`id`, `id_items`, `name_items`, `qyt`, `name_
 (1, 6971410555944, 'شاحن Earldom 2.1', 1.00, 'قطعة', 75.00, 0.00, 75.00, 2),
 (1, 6971410555944, 'شاحن Earldom 2.1', 1.00, 'قطعة', 75.00, 0.00, 75.00, 3),
 (1, 6949810504466, 'شاحن سيارة فاست', 1.00, 'قطعة', 50.00, 0.00, 50.00, 4),
-(1, 6949810504466, 'شاحن سيارة فاست', 1.00, 'قطعة', 50.00, 0.00, 50.00, 5);
+(1, 6949810504466, 'شاحن سيارة فاست', 1.00, 'قطعة', 50.00, 0.00, 50.00, 5),
+(1, 6922154678772, 'ST-031 شاحن ستار ', 1.00, 'قطعة', 70.00, 0.00, 70.00, 6),
+(1, 6949810502219, 'كبل ستار L21A', 1.00, 'قطعة', 25.00, 0.00, 25.00, 7),
+(1, 6949810502219, 'كبل ستار L21A', 1.00, 'قطعة', 25.00, 0.00, 25.00, 8),
+(1, 6949810502219, 'كبل ستار L21A', 1.00, 'قطعة', 25.00, 0.00, 25.00, 9),
+(1, 6949810502219, 'كبل ستار L21A', 1.00, 'قطعة', 25.00, 0.00, 25.00, 10),
+(1, 6949810502219, 'كبل ستار L21A', 1.00, 'قطعة', 25.00, 0.00, 25.00, 11),
+(1, 6921042111322, 'كبل ميكرو KaKu', 1.00, 'قطعة', 30.00, 0.00, 30.00, 12),
+(1, 6944561153543, 'كبل ستار ميكرو A02', 1.00, 'قطعة', 40.00, 0.00, 40.00, 13),
+(1, 6944561153543, 'كبل ستار ميكرو A02', 1.00, 'قطعة', 40.00, 0.00, 40.00, 14),
+(1, 6949810510177, 'شاحن سيارة Smart 3.0', 1.00, 'قطعة', 100.00, 0.00, 100.00, 15),
+(1, 6949810510177, 'شاحن سيارة Smart 3.0', 1.00, 'قطعة', 60.00, 0.00, 60.00, 16),
+(1, 6949810510177, 'شاحن سيارة Smart 3.0', 1.00, 'قطعة', 50.00, 0.00, 50.00, 17),
+(1, 6949810510177, 'شاحن سيارة Smart 3.0', 1.00, 'قطعة', 100.00, 0.00, 100.00, 18);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `masary_pay`
+--
+
+CREATE TABLE `masary_pay` (
+  `id_masary_pay` int(11) NOT NULL,
+  `date_masary_pay` date NOT NULL DEFAULT curdate(),
+  `id_utility_masary` int(11) DEFAULT NULL,
+  `price_masary_pay` double(10,2) NOT NULL,
+  `id_client` bigint(20) DEFAULT NULL,
+  `discount_of_balance` double(10,2) DEFAULT NULL,
+  `amount_masary_pay` double(10,2) DEFAULT NULL,
+  `id_pos` int(11) NOT NULL DEFAULT 1,
+  `balance` double NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `masary_pay`
+--
+
+INSERT INTO `masary_pay` (`id_masary_pay`, `date_masary_pay`, `id_utility_masary`, `price_masary_pay`, `id_client`, `discount_of_balance`, `amount_masary_pay`, `id_pos`, `balance`) VALUES
+(8, '2022-06-26', 8, 9.80, 1, 9.80, 10.00, 1, 10990.2),
+(9, '2022-06-26', 15, 25.00, 1, 25.00, 25.00, 1, 10965.2),
+(10, '2022-06-26', 8, 10.00, 1, 10.00, 10.00, 1, 10955.2),
+(12, '2022-06-26', 8, 10.00, 1, 10.00, 10.00, 1, 10945.2),
+(13, '2022-06-26', 8, 10.00, 1, 10.00, 10.00, 1, 10935.2),
+(14, '2022-06-26', 8, 10.00, 1, 10.00, 10.00, 1, 10925.2),
+(15, '2022-06-26', 19, 10.00, 1, 14.30, 15.00, 1, 10910.900000000001),
+(16, '2022-06-26', 19, 100.00, 1, 143.00, 150.00, 1, 10767.9);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `masary_sell`
+--
+
+CREATE TABLE `masary_sell` (
+  `id_masary_sell` int(11) NOT NULL,
+  `date_masary_sell` date DEFAULT NULL,
+  `amount_masary_sell` double(10,2) DEFAULT NULL,
+  `id_Suppliers` bigint(20) DEFAULT NULL,
+  `id_pos` int(11) NOT NULL DEFAULT 1
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `masary_sell`
+--
+
+INSERT INTO `masary_sell` (`id_masary_sell`, `date_masary_sell`, `amount_masary_sell`, `id_Suppliers`, `id_pos`) VALUES
+(1, '2022-06-24', 1000.00, 1, 1),
+(2, '2022-06-26', 10000.00, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -322,6 +438,24 @@ CREATE TABLE `paymentreceipt` (
   `id_Suppliers` bigint(255) DEFAULT NULL,
   `isActive` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `pos`
+--
+
+CREATE TABLE `pos` (
+  `id_pos` int(11) NOT NULL,
+  `name_pos` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `pos`
+--
+
+INSERT INTO `pos` (`id_pos`, `name_pos`) VALUES
+(1, 'مصاري');
 
 -- --------------------------------------------------------
 
@@ -442,7 +576,20 @@ INSERT INTO `salesinvoic` (`id_salesInvoic`, `date_salesInvoic`, `type_salesInvo
 (2, '2022-06-19', 'كاش', 1, 75.00, 0.00, 75.00, 0.00, 'فاتورة مبيعات نقدية2', 1),
 (3, '2022-06-19', 'كاش', 1, 75.00, 0.00, 75.00, 0.00, 'فاتورة مبيعات نقدية3', 1),
 (4, '2022-06-21', 'كاش', 1, 50.00, 0.00, 50.00, 0.00, 'فاتورة مبيعات نقدية4', 1),
-(5, '2022-06-21', 'كاش', 1, 50.00, 0.00, 50.00, 0.00, 'فاتورة مبيعات نقدية5', 1);
+(5, '2022-06-21', 'كاش', 1, 50.00, 0.00, 50.00, 0.00, 'فاتورة مبيعات نقدية5', 1),
+(6, '2022-06-22', 'كاش', 1, 70.00, 0.00, 70.00, 0.00, 'فاتورة مبيعات نقدية6', 1),
+(7, '2022-06-22', 'كاش', 1, 25.00, 0.00, 25.00, 0.00, 'فاتورة مبيعات نقدية7', 1),
+(8, '2022-06-22', 'كاش', 1, 25.00, 0.00, 25.00, 0.00, 'فاتورة مبيعات نقدية8', 1),
+(9, '2022-06-22', 'كاش', 1, 25.00, 0.00, 25.00, 0.00, 'فاتورة مبيعات نقدية9', 1),
+(10, '2022-06-22', 'كاش', 1, 25.00, 0.00, 25.00, 0.00, 'فاتورة مبيعات نقدية10', 1),
+(11, '2022-06-22', 'كاش', 1, 25.00, 0.00, 25.00, 0.00, 'فاتورة مبيعات نقدية11', 1),
+(12, '2022-06-22', 'كاش', 1, 30.00, 0.00, 30.00, 0.00, 'فاتورة مبيعات نقدية12', 1),
+(13, '2022-06-22', 'كاش', 1, 40.00, 0.00, 40.00, 0.00, 'فاتورة مبيعات نقدية13', 1),
+(14, '2022-06-22', 'كاش', 1, 40.00, 0.00, 40.00, 0.00, 'فاتورة مبيعات نقدية14', 1),
+(15, '2022-06-26', 'كاش', 1, 100.00, 0.00, 100.00, 0.00, 'فاتورة مبيعات نقدية15', 1),
+(16, '2022-06-26', 'كاش', 1, 60.00, 0.00, 60.00, 0.00, 'فاتورة مبيعات نقدية16', 1),
+(17, '2022-06-26', 'كاش', 1, 50.00, 0.00, 50.00, 0.00, 'فاتورة مبيعات نقدية17', 1),
+(18, '2022-06-27', 'كاش', 1, 100.00, 0.00, 100.00, 0.00, 'فاتورة مبيعات نقدية18', 1);
 
 -- --------------------------------------------------------
 
@@ -543,6 +690,78 @@ INSERT INTO `users` (`username`, `passwod`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `utility_masary`
+--
+
+CREATE TABLE `utility_masary` (
+  `id_utility_masary` int(11) NOT NULL,
+  `name_utility_masary` varchar(512) DEFAULT NULL,
+  `note_utility` varchar(512) DEFAULT NULL,
+  `cost_by_perse` double(10,2) DEFAULT NULL,
+  `price` double NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `utility_masary`
+--
+
+INSERT INTO `utility_masary` (`id_utility_masary`, `name_utility_masary`, `note_utility`, `cost_by_perse`, `price`) VALUES
+(20, 'كروت اورنج', 'LE 2.50', 0.00, 2.5),
+(21, 'كروت اورنج', 'LE 5', 0.00, 5),
+(22, 'كروت اورنج', 'LE 7', 0.00, 7),
+(23, 'كروت اورنج', 'LE 9', 0.00, 9),
+(24, 'كروت اورنج', 'LE 10', 0.00, 10),
+(25, 'كروت اورنج', 'LE 13.5', 0.00, 13.5),
+(26, 'كروت اورنج', 'LE 15', 0.00, 15),
+(27, 'كروت اورنج', 'LE 18.5', 0.00, 18.5),
+(28, 'كروت اورنج', 'LE 20', 0.00, 20),
+(29, 'كروت اورنج', 'LE 25', 0.00, 25),
+(30, 'كروت اورنج', 'LE 28', 0.00, 28),
+(31, 'كروت اورنج', 'LE 35', 0.00, 35),
+(32, 'كروت اورنج', 'LE 42', 0.00, 42),
+(33, 'كروت اورنج', 'LE 50', 0.00, 50),
+(34, 'كروت اورنج', 'LE 100', 0.00, 100),
+(35, 'كروت اتصالات', '2.5', 0.00, 2.5),
+(36, 'كروت اتصالات', '5', 0.00, 5),
+(37, 'كروت اتصالات', '7', 0.00, 7),
+(38, 'كروت اتصالات', '9', 0.00, 9),
+(39, 'كروت اتصالات', '10', 0.00, 10),
+(40, 'كروت اتصالات', '13.5', 0.00, 13.5),
+(41, 'كروت اتصالات', '15', 0.00, 15),
+(42, 'كروت اتصالات', '25', 0.00, 25),
+(43, 'كروت اتصالات', '30', 0.00, 30),
+(44, 'كروت اتصالات', '50', 0.00, 50),
+(45, 'كروت اتصالات', '100', 0.00, 0),
+(46, 'كروت فودافون', 'فكة 2.5', 0.00, 0),
+(47, 'كروت فودافون', 'فكة5', 0.00, 0),
+(48, 'كروت فودافون', 'فكة 9', 0.00, 0),
+(49, 'كروت فودافون', 'فكة 10', 0.00, 0),
+(50, 'كروت فودافون', 'فكة 13.5', 0.00, 0),
+(51, 'كروت فودافون', 'فكة 15', 0.00, 0),
+(52, 'كروت فودافون', 'كارت 10', 0.00, 0),
+(53, 'كروت فودافون', 'كارت 15', 0.00, 0),
+(54, 'كروت فودافون', 'كارت 25', 0.00, 0),
+(55, 'كروت فودافون', 'كارت 50', 0.00, 0),
+(56, 'كروت فودافون', 'كارت 100', 0.00, 0),
+(57, 'كروت WE', '5 كارت', 0.00, 0),
+(58, 'كروت WE', '7 كارت', 0.00, 0),
+(59, 'كروت WE', '9 كارت', 0.00, 0),
+(60, 'كروت WE', '10 كارت', 0.00, 0),
+(61, 'كروت WE', '15 كارت', 0.00, 0),
+(62, 'كروت WE', '25 كارت', 0.00, 0),
+(63, 'كروت WE', '30 كارت', 0.00, 0),
+(64, 'كروت WE', '40 كارت', 0.00, 0),
+(65, 'كروت WE', '50 كارت', 0.00, 0),
+(66, 'كروت WE', '60 كارت', 0.00, 0),
+(67, 'كروت WE', '75 كارت', 0.00, 0),
+(68, 'كروت WE', '75 كارت', 0.00, 0),
+(69, 'كروت WE', '100 كارت', 0.00, 0),
+(70, 'كروت WE', '150 كارت', 0.00, 0),
+(71, 'اتصالات حكاية', 'حكاية 25', 0.00, 25);
+
+-- --------------------------------------------------------
+
+--
 -- Structure for view `calcbalanceitems`
 --
 DROP TABLE IF EXISTS `calcbalanceitems`;
@@ -605,6 +824,12 @@ ALTER TABLE `casher`
   ADD PRIMARY KEY (`id_casher`);
 
 --
+-- Indexes for table `categoryutilites`
+--
+ALTER TABLE `categoryutilites`
+  ADD PRIMARY KEY (`id_category`);
+
+--
 -- Indexes for table `client`
 --
 ALTER TABLE `client`
@@ -648,11 +873,34 @@ ALTER TABLE `itemsonsalesinvoice`
   ADD KEY `id_salesInvoic` (`id_salesInvoic`);
 
 --
+-- Indexes for table `masary_pay`
+--
+ALTER TABLE `masary_pay`
+  ADD PRIMARY KEY (`id_masary_pay`),
+  ADD KEY `id_utility_masary` (`id_utility_masary`),
+  ADD KEY `id_client` (`id_client`),
+  ADD KEY `fk_pos` (`id_pos`);
+
+--
+-- Indexes for table `masary_sell`
+--
+ALTER TABLE `masary_sell`
+  ADD PRIMARY KEY (`id_masary_sell`),
+  ADD KEY `id_Suppliers` (`id_Suppliers`),
+  ADD KEY `fk_pos_sell` (`id_pos`);
+
+--
 -- Indexes for table `paymentreceipt`
 --
 ALTER TABLE `paymentreceipt`
   ADD PRIMARY KEY (`id_PaymentReceipt`),
   ADD KEY `id_Suppliers` (`id_Suppliers`);
+
+--
+-- Indexes for table `pos`
+--
+ALTER TABLE `pos`
+  ADD PRIMARY KEY (`id_pos`);
 
 --
 -- Indexes for table `priselist`
@@ -704,6 +952,12 @@ ALTER TABLE `unit`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `utility_masary`
+--
+ALTER TABLE `utility_masary`
+  ADD PRIMARY KEY (`id_utility_masary`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -711,13 +965,37 @@ ALTER TABLE `unit`
 -- AUTO_INCREMENT for table `casher`
 --
 ALTER TABLE `casher`
-  MODIFY `id_casher` bigint(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=46;
+  MODIFY `id_casher` bigint(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=65;
+
+--
+-- AUTO_INCREMENT for table `categoryutilites`
+--
+ALTER TABLE `categoryutilites`
+  MODIFY `id_category` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT for table `clientaccount`
 --
 ALTER TABLE `clientaccount`
   MODIFY `id_ClientAccount` bigint(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `masary_pay`
+--
+ALTER TABLE `masary_pay`
+  MODIFY `id_masary_pay` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
+
+--
+-- AUTO_INCREMENT for table `masary_sell`
+--
+ALTER TABLE `masary_sell`
+  MODIFY `id_masary_sell` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `pos`
+--
+ALTER TABLE `pos`
+  MODIFY `id_pos` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `purchaseinvoice`
@@ -730,6 +1008,12 @@ ALTER TABLE `purchaseinvoice`
 --
 ALTER TABLE `suppliersaccount`
   MODIFY `id_supplliersAccount` bigint(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `utility_masary`
+--
+ALTER TABLE `utility_masary`
+  MODIFY `id_utility_masary` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
 
 --
 -- Constraints for dumped tables
@@ -762,6 +1046,21 @@ ALTER TABLE `itemsonpurchaseinvoice`
 ALTER TABLE `itemsonsalesinvoice`
   ADD CONSTRAINT `itemsonsalesinvoice_ibfk_1` FOREIGN KEY (`id_items`) REFERENCES `items` (`id_items`),
   ADD CONSTRAINT `itemsonsalesinvoice_ibfk_3` FOREIGN KEY (`id_salesInvoic`) REFERENCES `salesinvoic` (`id_salesInvoic`);
+
+--
+-- Constraints for table `masary_pay`
+--
+ALTER TABLE `masary_pay`
+  ADD CONSTRAINT `fk_pos` FOREIGN KEY (`id_pos`) REFERENCES `pos` (`id_pos`),
+  ADD CONSTRAINT `masary_pay_ibfk_1` FOREIGN KEY (`id_utility_masary`) REFERENCES `utility_masary` (`id_utility_masary`),
+  ADD CONSTRAINT `masary_pay_ibfk_2` FOREIGN KEY (`id_client`) REFERENCES `client` (`id_client`);
+
+--
+-- Constraints for table `masary_sell`
+--
+ALTER TABLE `masary_sell`
+  ADD CONSTRAINT `fk_pos_sell` FOREIGN KEY (`id_pos`) REFERENCES `pos` (`id_pos`),
+  ADD CONSTRAINT `masary_sell_ibfk_1` FOREIGN KEY (`id_Suppliers`) REFERENCES `suppliers` (`id_Suppliers`);
 
 --
 -- Constraints for table `priselist`
@@ -799,7 +1098,7 @@ DELIMITER $$
 --
 -- Events
 --
-CREATE DEFINER=`root`@`localhost` EVENT `finalDay` ON SCHEDULE EVERY 1 DAY STARTS '2022-06-19 00:00:00' ON COMPLETION NOT PRESERVE ENABLE DO INSERT INTO `finallyday`( `dateFinally`, `oldBalance`, `totalimport`, `totalexport` ) VALUES( CURRENT_DATE(),( SELECT f.newbalance FROM finallyday AS f WHERE f.dateFinally = CURRENT_DATE() - INTERVAL 1 DAY), ( SELECT COALESCE(SUM(c.Debit), 0) FROM casher AS c WHERE c.date_casher = CURRENT_DATE()), ( SELECT COALESCE(SUM(c.Creditor), 0) FROM casher AS c WHERE c.date_casher = CURRENT_DATE()) )$$
+CREATE DEFINER=`root`@`localhost` EVENT `finalDay` ON SCHEDULE EVERY '0 1' DAY_HOUR STARTS '2022-06-19 00:00:00' ON COMPLETION NOT PRESERVE ENABLE DO INSERT INTO `finallyday`( `dateFinally`, `oldBalance`, `totalimport`, `totalexport` ) VALUES( CURRENT_DATE(),( SELECT f.newbalance FROM finallyday AS f WHERE f.dateFinally = CURRENT_DATE() - INTERVAL 1 DAY), ( SELECT COALESCE(SUM(c.Debit), 0) FROM casher AS c WHERE c.date_casher = CURRENT_DATE()), ( SELECT COALESCE(SUM(c.Creditor), 0) FROM casher AS c WHERE c.date_casher = CURRENT_DATE()) )$$
 
 CREATE DEFINER=`root`@`localhost` EVENT `updatebalance` ON SCHEDULE EVERY 1 SECOND STARTS '2022-06-19 07:53:05' ON COMPLETION NOT PRESERVE ENABLE DO UPDATE finallyday SET totalimport = (SELECT COALESCE(SUM(c.Debit), 0) FROM casher AS c WHERE c.date_casher = CURRENT_DATE()) , totalexport = (SELECT COALESCE(SUM(c.Creditor), 0) FROM casher AS c WHERE c.date_casher = CURRENT_DATE()) WHERE dateFinally = CURRENT_DATE()$$
 

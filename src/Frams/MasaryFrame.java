@@ -75,19 +75,19 @@ public class MasaryFrame extends javax.swing.JFrame {
 
         txtPanal = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        comUtility = new javax.swing.JComboBox<>();
+        comUtility = new javax.swing.JComboBox<String>();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         txtpriceService = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        combClient = new javax.swing.JComboBox<>();
+        combClient = new javax.swing.JComboBox<String>();
         jLabel5 = new javax.swing.JLabel();
         txtdiscount = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         txtbalance = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         txtAmount = new javax.swing.JTextField();
-        combnote = new javax.swing.JComboBox<>();
+        combnote = new javax.swing.JComboBox<String>();
         txtNote = new javax.swing.JTextField();
         title = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -113,7 +113,7 @@ public class MasaryFrame extends javax.swing.JFrame {
         txtPanal.add(jLabel1);
         jLabel1.setBounds(737, 13, 81, 30);
 
-        comUtility.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comUtility.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         comUtility.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 comUtilityItemStateChanged(evt);
@@ -131,7 +131,7 @@ public class MasaryFrame extends javax.swing.JFrame {
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("مبلغ الخدمة");
+        jLabel3.setText("تكلفة الخدمة");
         jLabel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         txtPanal.add(jLabel3);
         jLabel3.setBounds(141, 13, 95, 30);
@@ -154,7 +154,7 @@ public class MasaryFrame extends javax.swing.JFrame {
         txtPanal.add(jLabel4);
         jLabel4.setBounds(737, 49, 81, 30);
 
-        combClient.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        combClient.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         txtPanal.add(combClient);
         combClient.setBounds(573, 49, 160, 30);
 
@@ -196,7 +196,7 @@ public class MasaryFrame extends javax.swing.JFrame {
         txtPanal.add(txtAmount);
         txtAmount.setBounds(573, 85, 160, 30);
 
-        combnote.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        combnote.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         combnote.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 combnoteItemStateChanged(evt);
@@ -360,9 +360,9 @@ public class MasaryFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(title, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(txtPanal, javax.swing.GroupLayout.DEFAULT_SIZE, 122, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 238, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(txtPanal, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())

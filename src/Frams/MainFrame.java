@@ -496,12 +496,15 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void txtIdItemsKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtIdItemsKeyReleased
         // TODO add your handling code here:
-        Items item = new Items();
-        String id_item = txtIdItems.getText();
-        String name_item = item.getNameItemFromId(id_item);
-        txtnameItem.setText(name_item);
-        txtQut.setText("1");
-        txtPrice.setText(item.getSalesPriceLow(name_item));
+        if((txtIdItems.getText().length()) >= 13){
+            Items item = new Items();
+            String id_item = txtIdItems.getText();
+            String name_item = item.getNameItemFromId(id_item);
+            txtnameItem.setText(name_item);
+            txtQut.setText("1");
+            txtPrice.setText(item.getSalesPriceLow(name_item));
+        }
+
     }//GEN-LAST:event_txtIdItemsKeyReleased
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
@@ -556,7 +559,7 @@ public class MainFrame extends javax.swing.JFrame {
             txtIdItems.setText("");
             txtNowBalance.setText(new CasherClass().getNowBalanceCasher());
            // txtIdItems.setFocusable(true);
-            
+         //txtNowBalance.setText(new CasherClass().getNowBalanceCasher());   
         }
           txtIdItems.requestFocus();
         }
