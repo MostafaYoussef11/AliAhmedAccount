@@ -14,6 +14,8 @@ import java.sql.ResultSetMetaData;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -35,7 +37,8 @@ public class ConnectDB {
         con = (Connection) DriverManager.getConnection("jdbc:mysql://localhost:3306/accountmasrawy?useUnicode=yes&characterEncoding=UTF-8", "root","");
 
       }catch(ClassNotFoundException | SQLException ex){
-          Tools.showErrorMsg(ex.getMessage());
+         // Tools.showErrorMsg(ex.getMessage());
+          Logger.getLogger("SetConnection").log(Level.SEVERE, null, ex);
       }
   
   }
@@ -57,7 +60,7 @@ public class ConnectDB {
           return isTrue;
       }catch(SQLException ex){
          //  System.err.println(ex.getMessage());
-           Tools.showErrorMsg(ex.getMessage());
+            Logger.getLogger("chakeUserName").log(Level.SEVERE, null, ex);
            return isTrue;
        }
   
@@ -71,7 +74,7 @@ public class ConnectDB {
           return true;
       }catch(SQLException ex){
          //  System.err.println(ex.getMessage());
-           Tools.showErrorMsg(ex.getMessage());
+            Logger.getLogger("ExucutQuery").log(Level.SEVERE, null, ex);
            return false;
        }
       
@@ -99,7 +102,7 @@ public class ConnectDB {
            }
            con.close();
        }catch(SQLException ex){
-           Tools.showErrorMsg(ex.getMessage());
+           Logger.getLogger("FillAndCenterTable").log(Level.SEVERE, null, ex);
        }
    } 
   
@@ -121,7 +124,7 @@ public class ConnectDB {
            }
        }
        catch(SQLException ex){
-           Tools.showErrorMsg(ex.getMessage());
+           Logger.getLogger("getLastId").log(Level.SEVERE, null, ex);
            return null;
        }
    } 
@@ -145,9 +148,34 @@ public class ConnectDB {
            ((JLabel)combo.getRenderer()).setHorizontalAlignment(SwingConstants.CENTER);
            combo.setModel(new DefaultComboBoxModel(values));
        }catch(SQLException ex){
-           Tools.showErrorMsg(ex.getMessage());
+           Logger.getLogger("FillCombo").log(Level.SEVERE, null, ex);
        
        }
+   }
+  public static String[] getColumn(String tableName , String coulmName ){
+      String values[];
+      values = new String[0];
+      try{
+           SetConnection();
+           stmt = (Statement) con.createStatement();
+           ResultSet rst;
+           String sql = "SELECT "+coulmName+" FROM "+tableName +";";
+           rst = stmt.executeQuery(sql);
+           rst.last();
+           int c = rst.getRow();
+           rst.beforeFirst();
+           values = new String[c];
+           int i = 0;
+           while(rst.next()){
+               values[i]=rst.getString(1);
+               i++;
+           }
+           con.close();
+       }catch(SQLException ex){
+           Logger.getLogger("FillCombo").log(Level.SEVERE, null, ex);
+       
+       }
+       return values;
    }
  public static void fillComboUnit( String id , JComboBox combo){
        try{
@@ -171,7 +199,7 @@ public class ConnectDB {
            ((JLabel)combo.getRenderer()).setHorizontalAlignment(SwingConstants.CENTER);
            combo.setModel(new DefaultComboBoxModel(values));
        }catch(SQLException ex){
-           Tools.showErrorMsg(ex.getMessage());
+           Logger.getLogger("FillCombUnit").log(Level.SEVERE, null, ex);
        
        }
    }
@@ -180,7 +208,6 @@ public class ConnectDB {
            String id = "";
            SetConnection();
            stmt = (Statement) con.createStatement();
-           //String sql = "SELECT "+tablename+" AS id FROM "+tablename+" where name"+tablename+" ='"+name+"';";
            ResultSet rst = stmt.executeQuery(sql);
            while(rst.next()){
                id = rst.getString("id");
@@ -189,6 +216,7 @@ public class ConnectDB {
            return id;
        
        }catch(SQLException ex){
+          Logger.getLogger("getIdFromName").log(Level.SEVERE, null, ex);
            return "";
        }
    
@@ -207,6 +235,7 @@ public class ConnectDB {
            return id;
        
        }catch(SQLException ex){
+         Logger.getLogger("getIdFromName").log(Level.SEVERE, null, ex);
            return "";
        }
    

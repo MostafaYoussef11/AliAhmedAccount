@@ -12,6 +12,7 @@ import Entity.Items;
 import Entity.ItemsOnInvoice;
 import Entity.SalesInvoic;
 import Utilities.Tools;
+import com.sun.org.apache.bcel.internal.generic.AALOAD;
 import java.awt.ComponentOrientation;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -26,6 +27,7 @@ import java.util.logging.Logger;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import org.omg.CORBA.MARSHAL;
 
 
 /**
@@ -38,7 +40,7 @@ public class MainFrame extends javax.swing.JFrame {
      * Creates new form MainFrame
      */
     Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-    Font font = Tools.font(18f);
+    Font font = Tools.font(14f);
     Thread thread;
     //CheckCasher cash ;
     public MainFrame() {
@@ -46,29 +48,33 @@ public class MainFrame extends javax.swing.JFrame {
         background.setLocation(0, 0);
         background.setSize(dim);
         background.setPreferredSize(dim);
-        ImageIcon bg = new ImageIcon(new ImageIcon(Toolkit.getDefaultToolkit().getClass().getResource("/icons/bg.jpg")).getImage().getScaledInstance(dim.width, dim.height, Image.SCALE_DEFAULT));
+        ImageIcon bg = new ImageIcon(new ImageIcon(Toolkit.getDefaultToolkit().getClass().getResource("/icons/bg4.jpg")).getImage().getScaledInstance(dim.width, dim.height, Image.SCALE_DEFAULT));
         background.setIcon(bg);
-        int x = dim.width - 220;
+        int x = dim.width - 180;
         client.setLocation(x - 20, 40);
         client.setFont(font);
-        items.setLocation(x - 20 , 250);
+        items.setLocation(x - 20 , 220);
         items.setFont(font);
-        suppliers.setLocation(x - 20 , 460);
+        suppliers.setLocation(x - 20 , 400);
         suppliers.setFont(font);
-        x = x - 260;
+        x = x - 220;
         Purchases.setLocation(x, 40);
         Purchases.setFont(font);
-        sales.setLocation(x, 250);
+        sales.setLocation(x, 220);
         sales.setFont(font);
-        Reports.setLocation(x, 460);
+        Reports.setLocation(x, 400);
         Reports.setFont(font);
-        x = x - 240;
+        x = x - 200;
         Payments.setLocation(x, 40);
         Payments.setFont(font);
-        Receipts.setLocation(x, 250);
+        Receipts.setLocation(x, 220);
         Receipts.setFont(font);
+        pos.setLocation(x, 400);
+        pos.setFont(font);
+        selePanal.setLocation(10, 10);
+        txtNowBalance.setLocation(10, dim.height - 130);
         txtIdItems.setFocusable(true);
-        setBalanceCasher();
+        txtNowBalance.setText(new CasherClass().getNowBalanceCasher());
         
         
     };
@@ -91,7 +97,7 @@ public class MainFrame extends javax.swing.JFrame {
         Purchases = new javax.swing.JLabel();
         Reports = new javax.swing.JLabel();
         sales = new javax.swing.JLabel();
-        jPanel1 = new javax.swing.JPanel();
+        selePanal = new javax.swing.JPanel();
         txtIdItems = new javax.swing.JTextField();
         txtnameItem = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -100,6 +106,7 @@ public class MainFrame extends javax.swing.JFrame {
         txtPrice = new javax.swing.JTextField();
         btnSave = new javax.swing.JButton();
         txtNowBalance = new javax.swing.JLabel();
+        pos = new javax.swing.JLabel();
         background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -107,7 +114,6 @@ public class MainFrame extends javax.swing.JFrame {
         getContentPane().setLayout(null);
 
         Receipts.setFont(new java.awt.Font("VIP Hala Bold", 1, 18)); // NOI18N
-        Receipts.setForeground(new java.awt.Color(0, 51, 255));
         Receipts.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Receipts.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/cash.png"))); // NOI18N
         Receipts.setText("تحصيلات");
@@ -124,10 +130,9 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(Receipts);
-        Receipts.setBounds(310, 250, 220, 190);
+        Receipts.setBounds(580, 250, 180, 170);
 
         client.setFont(new java.awt.Font("VIP Hala Bold", 1, 18)); // NOI18N
-        client.setForeground(new java.awt.Color(0, 51, 255));
         client.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         client.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/clint.png"))); // NOI18N
         client.setText("العملاء");
@@ -144,10 +149,9 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(client);
-        client.setBounds(790, 40, 220, 190);
+        client.setBounds(1060, 40, 180, 170);
 
         items.setFont(new java.awt.Font("VIP Hala Bold", 1, 18)); // NOI18N
-        items.setForeground(new java.awt.Color(0, 51, 255));
         items.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         items.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/shelves.png"))); // NOI18N
         items.setText("الاصناف");
@@ -164,10 +168,9 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(items);
-        items.setBounds(790, 250, 220, 190);
+        items.setBounds(1060, 250, 180, 170);
 
         suppliers.setFont(new java.awt.Font("VIP Hala Bold", 1, 18)); // NOI18N
-        suppliers.setForeground(new java.awt.Color(0, 51, 255));
         suppliers.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         suppliers.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/courier.png"))); // NOI18N
         suppliers.setText("الموردين");
@@ -184,10 +187,9 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(suppliers);
-        suppliers.setBounds(790, 470, 220, 190);
+        suppliers.setBounds(1060, 470, 180, 170);
 
         Payments.setFont(new java.awt.Font("VIP Hala Bold", 1, 18)); // NOI18N
-        Payments.setForeground(new java.awt.Color(0, 51, 255));
         Payments.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Payments.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/payment_1.png"))); // NOI18N
         Payments.setText("مدفوعات");
@@ -204,10 +206,9 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(Payments);
-        Payments.setBounds(310, 40, 220, 190);
+        Payments.setBounds(580, 40, 180, 170);
 
         Purchases.setFont(new java.awt.Font("VIP Hala Bold", 1, 18)); // NOI18N
-        Purchases.setForeground(new java.awt.Color(0, 51, 255));
         Purchases.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Purchases.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/selling.png"))); // NOI18N
         Purchases.setText("مشتريات");
@@ -224,10 +225,9 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(Purchases);
-        Purchases.setBounds(550, 40, 220, 190);
+        Purchases.setBounds(820, 40, 180, 170);
 
         Reports.setFont(new java.awt.Font("VIP Hala Bold", 1, 18)); // NOI18N
-        Reports.setForeground(new java.awt.Color(0, 51, 255));
         Reports.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Reports.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/software.png"))); // NOI18N
         Reports.setText("تقارير");
@@ -244,10 +244,9 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(Reports);
-        Reports.setBounds(550, 470, 220, 190);
+        Reports.setBounds(820, 470, 180, 170);
 
         sales.setFont(new java.awt.Font("VIP Hala Bold", 1, 18)); // NOI18N
-        sales.setForeground(new java.awt.Color(0, 51, 255));
         sales.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         sales.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/buy.png"))); // NOI18N
         sales.setText("مبيعات");
@@ -264,9 +263,9 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(sales);
-        sales.setBounds(550, 250, 220, 190);
+        sales.setBounds(820, 250, 180, 170);
 
-        jPanel1.setOpaque(false);
+        selePanal.setOpaque(false);
 
         txtIdItems.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txtIdItems.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -309,42 +308,42 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
-        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
-        jPanel1.setLayout(jPanel1Layout);
-        jPanel1Layout.setHorizontalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        javax.swing.GroupLayout selePanalLayout = new javax.swing.GroupLayout(selePanal);
+        selePanal.setLayout(selePanalLayout);
+        selePanalLayout.setHorizontalGroup(
+            selePanalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(selePanalLayout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(selePanalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtIdItems)
                     .addComponent(txtnameItem, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, selePanalLayout.createSequentialGroup()
                         .addComponent(txtQut)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
+                    .addGroup(selePanalLayout.createSequentialGroup()
                         .addComponent(txtPrice, javax.swing.GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, selePanalLayout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(69, 69, 69))
         );
-        jPanel1Layout.setVerticalGroup(
-            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
+        selePanalLayout.setVerticalGroup(
+            selePanalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(selePanalLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(txtIdItems, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtnameItem, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(selePanalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txtQut, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(selePanalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txtPrice, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE))
                 .addGap(40, 40, 40)
@@ -352,14 +351,41 @@ public class MainFrame extends javax.swing.JFrame {
                 .addContainerGap(26, Short.MAX_VALUE))
         );
 
-        getContentPane().add(jPanel1);
-        jPanel1.setBounds(40, 60, 230, 270);
+        getContentPane().add(selePanal);
+        selePanal.setBounds(40, 60, 230, 270);
 
         txtNowBalance.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         txtNowBalance.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         txtNowBalance.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        txtNowBalance.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtNowBalanceMouseClicked(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                txtNowBalanceMouseExited(evt);
+            }
+        });
         getContentPane().add(txtNowBalance);
-        txtNowBalance.setBounds(60, 600, 260, 100);
+        txtNowBalance.setBounds(20, 650, 260, 100);
+
+        pos.setFont(new java.awt.Font("VIP Hala Bold", 1, 12)); // NOI18N
+        pos.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        pos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/pos-terminal.png"))); // NOI18N
+        pos.setText("مكن الرصيد");
+        pos.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        pos.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        pos.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        pos.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        pos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                posMouseClicked(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                posMouseExited(evt);
+            }
+        });
+        getContentPane().add(pos);
+        pos.setBounds(580, 470, 180, 170);
 
         background.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         background.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -476,8 +502,6 @@ public class MainFrame extends javax.swing.JFrame {
         txtnameItem.setText(name_item);
         txtQut.setText("1");
         txtPrice.setText(item.getSalesPriceLow(name_item));
-        //txtIdItems.setFocusable(false);
-        //btnSave.setFocusable(true);
     }//GEN-LAST:event_txtIdItemsKeyReleased
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
@@ -530,12 +554,37 @@ public class MainFrame extends javax.swing.JFrame {
             txtQut.setText("");
             txtnameItem.setText("");
             txtIdItems.setText("");
+            txtNowBalance.setText(new CasherClass().getNowBalanceCasher());
            // txtIdItems.setFocusable(true);
             
         }
           txtIdItems.requestFocus();
         }
     }//GEN-LAST:event_btnSaveActionPerformed
+
+    private void txtNowBalanceMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtNowBalanceMouseClicked
+        // TODO add your handling code here:
+        clickPanel(txtNowBalance);
+        txtNowBalance.setText(new CasherClass().getNowBalanceCasher());
+         
+    }//GEN-LAST:event_txtNowBalanceMouseClicked
+
+    private void txtNowBalanceMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtNowBalanceMouseExited
+        // TODO add your handling code here:
+        exitPanel(txtNowBalance);
+    }//GEN-LAST:event_txtNowBalanceMouseExited
+
+    private void posMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_posMouseClicked
+        // TODO add your handling code here:
+        clickPanel(pos);
+        PosFrame posf = new PosFrame();
+        Tools.openJFram(posf);
+    }//GEN-LAST:event_posMouseClicked
+
+    private void posMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_posMouseExited
+        // TODO add your handling code here:
+        exitPanel(pos);
+    }//GEN-LAST:event_posMouseExited
     
     private void clickPanel(JLabel lable){
         lable.setBorder(BorderFactory.createLoweredBevelBorder());
@@ -590,8 +639,9 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel items;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JPanel jPanel1;
+    private javax.swing.JLabel pos;
     private javax.swing.JLabel sales;
+    private javax.swing.JPanel selePanal;
     private javax.swing.JLabel suppliers;
     private javax.swing.JTextField txtIdItems;
     private javax.swing.JLabel txtNowBalance;
@@ -600,19 +650,24 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel txtnameItem;
     // End of variables declaration//GEN-END:variables
 
-    private void setBalanceCasher(){
-        Timer t = new Timer();
-        t.schedule(new TimerTask() {
-
-            @Override
-            public void run() {
-                txtNowBalance.setText(new CasherClass().getNowBalanceCasher());
-                run();
-            }
-        }, 5000);
-    
-       
-    }
+//    private void setBalanceCasher(){
+//        Timer t = new Timer();
+//        t.schedule(new TimerTask() {
+//
+//            @Override
+//            public void run() {
+//                try{
+//                    txtNowBalance.setText(new CasherClass().getNowBalanceCasher());
+//                    run();                
+//                }catch(Exception ex){
+//                    Logger.getLogger(getClass().getName()).log(Level.SEVERE, null, ex);
+//                }
+//
+//            }
+//        }, 1000);
+//    
+//       
+//    }
 
 
 

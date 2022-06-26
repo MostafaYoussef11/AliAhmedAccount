@@ -63,22 +63,6 @@ public class CasherClass {
   } 
   
   public String getNowBalanceCasher(){
-//      double debit_day = 0.00;
-//      double credit_day = 0.00;
-//      String sql_old_balance = "SELECT oldBalance as id FROM  finallyday WHERE dateFinally = CURRENT_DATE() ";
-//      String oldBalanceStr = ConnectDB.getIdFromName(sql_old_balance);
-//      double old_balance = Double.parseDouble(oldBalanceStr);
-//      String sql_total_debit = "SELECT COALESCE(SUM(c.Debit), 0) as id FROM casher AS c WHERE c.date_casher = CURRENT_DATE() " ;
-//      String debit_st = ConnectDB.getIdFromName(sql_total_debit);
-//      if(debit_st != null){
-//          debit_day = Double.parseDouble(debit_st);
-//      }
-//      String sql_total_credit = "SELECT COALESCE(SUM(c.Creditor), 0) AS id FROM casher AS c WHERE c.date_casher = CURRENT_DATE() " ;
-//      String credit_st = ConnectDB.getIdFromName(sql_total_credit);
-//      if(credit_st != null){
-//          credit_day = Double.parseDouble(credit_st);
-//      }
-//      double now_balance = old_balance + debit_day - credit_day;
       String sql = "select newbalance as id from finallyday where dateFinally = CURRENT_DATE()";
       String now_balance = ConnectDB.getIdFromName(sql);
       return "الجرد : " + " " + now_balance;

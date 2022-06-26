@@ -112,12 +112,13 @@ public class Tools {
               c.setEnabled(true);
           }
       }
-    for(Component c : txtPanal.getComponents()){
-        if(c.isDisplayable()){
-            c.setEnabled(true);
+    if(txtPanal != null){
+        for(Component c : txtPanal.getComponents()){
+            if(c.isDisplayable()){
+                c.setEnabled(true);
+            }
         }
     }
-  
   }
  public static void CenterTable(String[] coulmnName , JTable table){
         DefaultTableCellRenderer center = new DefaultTableCellRenderer();

@@ -6,7 +6,10 @@
 package accountali;
 
 import Frams.Login;
+import Frams.MasaryFrame;
+import Frams.UtilitiesMasary;
 import Utilities.Tafqeet;
+import Utilities.Tools;
 import java.math.BigDecimal;
 
 /**
@@ -22,7 +25,8 @@ public class AccountAli {
         // TODO code application logic here
         Login l = new Login();
         l.setLocationRelativeTo(null);
-        l.setVisible(true);
+        l.setVisible(true);      
+       
     }
     
 }

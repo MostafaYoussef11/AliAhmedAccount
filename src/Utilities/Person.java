@@ -83,7 +83,10 @@ public abstract class Person{
     }
     public void FillComboName(JComboBox comboName){
         ConnectDB.fillCombo(tableName + " WHERE id_"+tableName +"!= 1 AND isActive = 1", "name_"+tableName, comboName);
-    }    
+    }  
+        public void FillComboAllNameClient(JComboBox comboName){
+        ConnectDB.fillCombo(tableName + " WHERE isActive = 1", "name_"+tableName, comboName);
+    } 
     public boolean ActiveOurDisactive(boolean isActive , String id){
         String sql = "update "+tableName+" set isActive = "+isActive+" where id_"+tableName+" ="+id;
         return ConnectDB.ExucuteAnyQuery(sql);
