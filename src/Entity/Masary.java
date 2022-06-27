@@ -29,14 +29,14 @@ public class Masary {
     private PreparedStatement pstmt;
     private int id_utility_masary;
     private String utility_masary;
-    private double price_masary_pay;  //تكلفة الخدمة    Cost of Service 
+    private double price_masary_pay;  //القيمة 
     private int id_client; 
     private double discount_of_balance; // المخصوم من الرصيد Discount of Balance
     private double amount_masary_pay; // المطلوب من العميل 
-    
+    private String phone;
     public void fillTable(JTable jTable){
-        String sql_select_masary = "SELECT mp.balance , mp.amount_masary_pay , mp.discount_of_balance , c.name_client , mp.price_masary_pay , u.note_utility , u.name_utility_masary, mp.date_masary_pay , mp.id_masary_pay  FROM masary_pay AS mp INNER JOIN client AS c on mp.id_client = c.id_client INNER JOIN utility_masary AS u ON mp.id_utility_masary = u.id_utility_masary";
-        String ColumnName[] = {"الرصيد", "المدفوع", "م الرصيد", "العميل", "مبلغ الخدمة", "البيان", "الخدمة", "التاريخ", "م"};
+        String sql_select_masary = "SELECT mp.balance , mp.amount_masary_pay , mp.discount_of_balance , c.name_client , mp.price_masary_pay , ifnull(mp.phone,u.note_utility), u.name_utility_masary, mp.date_masary_pay , mp.id_masary_pay FROM masary_pay AS mp INNER JOIN client AS c on mp.id_client = c.id_client LEFT JOIN utility_masary AS u ON mp.id_utility_masary = u.id_utility_masary ORDER BY mp.id_masary_pay DESC";
+        String ColumnName[] = {"الرصيد", "المدفوع", "م الرصيد", "العميل", "القيمة", "البيان", "الخدمة", "التاريخ", "م"};
         ConnectDB.fillAndCenterTable(sql_select_masary, jTable, ColumnName);
     }
     
@@ -66,7 +66,8 @@ public class Masary {
      try{
          con = ConnectDB.getCon();
          con.setAutoCommit(false);
-         String sql_insert_masaryPay = "INSERT INTO masary_pay ( `id_utility_masary`, `price_masary_pay`, `id_client`, `discount_of_balance`, `amount_masary_pay`,`balance`) VALUES (?,?,?,?,?,?)";
+         String sql_insert_masaryPay;
+         sql_insert_masaryPay = "INSERT INTO masary_pay ( `id_utility_masary`, `price_masary_pay`, `id_client`, `discount_of_balance`, `amount_masary_pay`,`balance`,`phone`) VALUES (?,?,?,?,?,?,?)";
          pstmt = (PreparedStatement) con.prepareStatement(sql_insert_masaryPay, Statement.RETURN_GENERATED_KEYS);
          pstmt.setInt(1, id_utility_masary);
          pstmt.setDouble(2, price_masary_pay);
@@ -75,8 +76,7 @@ public class Masary {
          pstmt.setDouble(5, amount_masary_pay);
          newbalance = getfirstBalance() - discount_of_balance;
          pstmt.setDouble(6, newbalance);
-         //pstmt.setDate(1,);
-         
+         pstmt.setString(7, utility_masary);
          int rowAffact = pstmt.executeUpdate();  
          ResultSet rst = pstmt.getGeneratedKeys();
          if(rst.next()){
@@ -112,6 +112,14 @@ public class Masary {
      }
     
       return  isSave;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
     
     

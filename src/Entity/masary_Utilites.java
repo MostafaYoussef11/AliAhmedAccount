@@ -78,7 +78,7 @@ public class masary_Utilites {
     public double getCost_by_perse() {
         return cost_by_perse;
     }
-    public double getCost_by_perse(String noteUtilites) {
+    public double getCost(String noteUtilites) {
         String cost = ConnectDB.getIdFromName("select cost_by_perse as id from utility_masary where note_utility = '"+noteUtilites+"'");
         double costbyperse;
         try{
@@ -139,15 +139,32 @@ public class masary_Utilites {
     }
     
     public int getIdByNote(String note){
-        int id = 0;
-        String sql_select = "SELECT id_utility_masary AS id FROM utility_masary WHERE note_utility='"+note+"'";
-        String id_st = ConnectDB.getIdFromName(sql_select);
-        if(id_st != null) {
-            id = Integer.parseInt(id_st);
-        } else {
-            id = 0;
+        int id ;
+        if(note.isEmpty()){
+            return 0;
+        }else{
+            String sql_select = "SELECT id_utility_masary AS id FROM utility_masary WHERE note_utility='"+note+"'";
+            String id_st = ConnectDB.getIdFromName(sql_select);
+            if(id_st != null) {
+                id = Integer.parseInt(id_st);
+            } else {
+                id = 0;
+            }
+            return id;
         }
-
-        return id;
+        
+    }
+    
+    public String getPriceByNote(String note){
+        String sql_selectPrice = "SELECT price As id FROM utility_masary WHERE note_utility='"+note+"'";
+        return ConnectDB.getIdFromName(sql_selectPrice);
+    }
+    
+    public boolean isRequierPhoneNumber(String name_utility){
+        boolean isRequier = false;
+        String sql_select = "SELECT requier_phone AS id FROM categoryutilites WHERE name_category='"+name_utility+"'";
+        String requierStr = ConnectDB.getIdFromName(sql_select);
+        if(requierStr.equals("1")) isRequier = true;
+        return isRequier;
     }
 }

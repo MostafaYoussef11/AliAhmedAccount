@@ -65,6 +65,6 @@ public class CasherClass {
   public String getNowBalanceCasher(){
       String sql = "select newbalance as id from finallyday where dateFinally = CURRENT_DATE()";
       String now_balance = ConnectDB.getIdFromName(sql);
-      return "الجرد : " + " " + now_balance;
+      return " " + now_balance;
   }
 }

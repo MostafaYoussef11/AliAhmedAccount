@@ -12,6 +12,7 @@ import java.awt.Component;
 import java.awt.Font;
 import java.awt.Point;
 import java.awt.event.ActionListener;
+import java.text.DecimalFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ComboBoxEditor;
@@ -30,9 +31,12 @@ public class MasaryFrame extends javax.swing.JFrame {
     masary_Utilites masary_util;
     Entity.Masary masary;
     private double costService;
+    private boolean is_requier_phone_number = false;
+    private static final DecimalFormat df = new DecimalFormat("0.00");
+
     public MasaryFrame() {
         initComponents();
-        txtNote.setVisible(false);
+        
         font = Tools.font(24f);
         title.setFont(font);
         masary_util = new masary_Utilites();
@@ -42,27 +46,25 @@ public class MasaryFrame extends javax.swing.JFrame {
     }
 
     private void newMasaray(){
+        Tools.disableButOpen(btPanel);
         client.FillComboAllNameClient(combClient);
         masary_util.fillComboCategoryUtilites(comUtility);
         String nameUtility = comUtility.getSelectedItem().toString();
-        masary_util.fillComboUtilites(combnote , nameUtility);  
+        masary_util.fillComboUtilites(combnote , nameUtility);
         String note = combnote.getSelectedItem().toString();
-        costService = masary_util.getCost_by_perse(note);
-        Tools.disableButOpen(btPanel);
-        try{
-            double price = Double.parseDouble(txtpriceService.getText());
-            double discount = price + (price * costService);
-            txtdiscount.setText(discount+"");
-        }
-        catch(NumberFormatException ex){
-        
-        }
         String balance = String.valueOf(masary.getfirstBalance());
+        is_requier_phone_number = masary_util.isRequierPhoneNumber(nameUtility);
+        lb_phone.setEnabled(is_requier_phone_number);
+        txtPhone.setEnabled(is_requier_phone_number);
         txtbalance.setText(balance);
         masary.fillTable(jTable1);
-        txtAmount.setText("0.00");
-        txtpriceService.setText("0.00");
-        txtdiscount.setText("0.00");
+        String price = masary_util.getPriceByNote(note);
+        txtAmount.setText(price);
+        txtCount.setText("1");
+        txtPhone.setText("");
+        txtdiscount.setText(String.valueOf(masary_util.getCost(note)));
+        txtAmount.requestFocus();
+        txtAmount.selectAll();
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -75,20 +77,21 @@ public class MasaryFrame extends javax.swing.JFrame {
 
         txtPanal = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        comUtility = new javax.swing.JComboBox<String>();
+        comUtility = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        txtpriceService = new javax.swing.JTextField();
+        txtCount = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        combClient = new javax.swing.JComboBox<String>();
+        combClient = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
         txtdiscount = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         txtbalance = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         txtAmount = new javax.swing.JTextField();
-        combnote = new javax.swing.JComboBox<String>();
-        txtNote = new javax.swing.JTextField();
+        combnote = new javax.swing.JComboBox<>();
+        lb_phone = new javax.swing.JLabel();
+        txtPhone = new javax.swing.JTextField();
         title = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -111,104 +114,111 @@ public class MasaryFrame extends javax.swing.JFrame {
         jLabel1.setText("الخدمة");
         jLabel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         txtPanal.add(jLabel1);
-        jLabel1.setBounds(737, 13, 81, 30);
+        jLabel1.setBounds(725, 13, 100, 35);
 
-        comUtility.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comUtility.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         comUtility.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 comUtilityItemStateChanged(evt);
             }
         });
         txtPanal.add(comUtility);
-        comUtility.setBounds(573, 13, 160, 30);
+        comUtility.setBounds(560, 13, 160, 35);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("بيان");
         jLabel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         txtPanal.add(jLabel2);
-        jLabel2.setBounds(452, 13, 117, 30);
+        jLabel2.setBounds(420, 13, 130, 35);
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("تكلفة الخدمة");
+        jLabel3.setText("القيمة");
         jLabel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         txtPanal.add(jLabel3);
-        jLabel3.setBounds(141, 13, 95, 30);
+        jLabel3.setBounds(141, 13, 95, 35);
 
-        txtpriceService.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        txtpriceService.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtpriceService.setText("0.00");
-        txtpriceService.addKeyListener(new java.awt.event.KeyAdapter() {
+        txtCount.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        txtCount.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtCount.setText("1");
+        txtCount.addKeyListener(new java.awt.event.KeyAdapter() {
             public void keyReleased(java.awt.event.KeyEvent evt) {
-                txtpriceServiceKeyReleased(evt);
+                txtCountKeyReleased(evt);
             }
         });
-        txtPanal.add(txtpriceService);
-        txtpriceService.setBounds(12, 13, 123, 30);
+        txtPanal.add(txtCount);
+        txtCount.setBounds(12, 13, 123, 35);
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("العميل");
         jLabel4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         txtPanal.add(jLabel4);
-        jLabel4.setBounds(737, 49, 81, 30);
+        jLabel4.setBounds(725, 55, 100, 35);
 
-        combClient.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        combClient.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         txtPanal.add(combClient);
-        combClient.setBounds(573, 49, 160, 30);
+        combClient.setBounds(560, 55, 160, 35);
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setText("المخصوم من الرصيد");
         jLabel5.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         txtPanal.add(jLabel5);
-        jLabel5.setBounds(452, 49, 117, 30);
+        jLabel5.setBounds(420, 95, 130, 35);
 
         txtdiscount.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         txtdiscount.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtPanal.add(txtdiscount);
-        txtdiscount.setBounds(240, 49, 208, 30);
+        txtdiscount.setBounds(240, 95, 175, 35);
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setText("الرصيد السابق");
         jLabel6.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         txtPanal.add(jLabel6);
-        jLabel6.setBounds(141, 49, 95, 30);
+        jLabel6.setBounds(141, 95, 95, 35);
 
         txtbalance.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         txtbalance.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         txtbalance.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         txtPanal.add(txtbalance);
-        txtbalance.setBounds(12, 49, 123, 30);
+        txtbalance.setBounds(12, 95, 123, 35);
 
         jLabel8.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel8.setText("المبلغ المدفوع");
         jLabel8.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         txtPanal.add(jLabel8);
-        jLabel8.setBounds(737, 85, 81, 30);
+        jLabel8.setBounds(725, 95, 100, 35);
 
         txtAmount.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         txtAmount.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtAmount.setText("0.00");
         txtPanal.add(txtAmount);
-        txtAmount.setBounds(573, 85, 160, 30);
+        txtAmount.setBounds(560, 95, 160, 35);
 
-        combnote.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        combnote.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         combnote.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 combnoteItemStateChanged(evt);
             }
         });
         txtPanal.add(combnote);
-        combnote.setBounds(240, 13, 208, 30);
+        combnote.setBounds(240, 13, 175, 35);
 
-        txtNote.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        txtNote.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtPanal.add(txtNote);
-        txtNote.setBounds(240, 10, 208, 30);
+        lb_phone.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        lb_phone.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        lb_phone.setText("رقم العميل");
+        lb_phone.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        txtPanal.add(lb_phone);
+        lb_phone.setBounds(420, 55, 130, 35);
+
+        txtPhone.setFont(new java.awt.Font("Lucida Calligraphy", 1, 12)); // NOI18N
+        txtPhone.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtPanal.add(txtPhone);
+        txtPhone.setBounds(12, 55, 402, 35);
 
         title.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         title.setText("مبيعات مصاري");
@@ -218,7 +228,7 @@ public class MasaryFrame extends javax.swing.JFrame {
 
             },
             new String [] {
-                "الرصيد", "المدفوع", "م الرصيد", "العميل", "مبلغ الخدمة", "البيان", "الخدمة", "التاريخ", "م"
+                "الرصيد", "المدفوع", "م الرصيد", "العميل", "القيمة", "البيان", "الخدمة", "التاريخ", "م"
             }
         ) {
             Class[] types = new Class [] {
@@ -361,7 +371,7 @@ public class MasaryFrame extends javax.swing.JFrame {
                 .addComponent(title, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtPanal, javax.swing.GroupLayout.PREFERRED_SIZE, 139, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 28, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 199, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(btPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -378,29 +388,30 @@ public class MasaryFrame extends javax.swing.JFrame {
     private void btsaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btsaveActionPerformed
         double price_masary_pay = 0 , discount_of_balance = 0, amount_masary_pay = 0 ;
         int id_client = 1;
-        String not_utilitiy;
-        if(combnote.isVisible()){
-            not_utilitiy = combnote.getSelectedItem().toString();
-        }else{
-            not_utilitiy = txtNote.getText();
-        }
-         
+        String not_utilitiy = combnote.getSelectedItem().toString();
         try{
-            price_masary_pay = Double.parseDouble(txtpriceService.getText());
+            price_masary_pay = Double.parseDouble(txtCount.getText());
             discount_of_balance = Double.parseDouble(txtdiscount.getText());
             amount_masary_pay = Double.parseDouble(txtAmount.getText());
             String client_s = new ClientPerson().getIdByName(combClient.getSelectedItem().toString());
             id_client = Integer.parseInt(client_s);
-        }catch(NumberFormatException ex){
-            
+        }catch(NumberFormatException ex){  
             Logger.getLogger("Masary").log(Level.SEVERE, null, ex);
         }
-        masary.setId_utility_masary(not_utilitiy);
-        masary.setUtility_masary(not_utilitiy);
         masary.setAmount_masary_pay(amount_masary_pay);
         masary.setDiscount_of_balance(discount_of_balance);
         masary.setPrice_masary_pay(price_masary_pay);
         masary.setId_client(id_client);
+        if(txtPhone.isEnabled()){
+            masary.setPhone(txtPhone.getText());
+            masary.setUtility_masary(txtPhone.getText());
+            masary.setId_utility_masary(not_utilitiy);
+        }
+        else{
+            masary.setPhone(null);
+            masary.setId_utility_masary(not_utilitiy);
+            masary.setUtility_masary(not_utilitiy);
+        }
         
         if(masary.Save()){
             Tools.showInfoMsg("تم الحفظ", "حفظ");
@@ -436,55 +447,40 @@ public class MasaryFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         String nameCategoray = comUtility.getSelectedItem().toString();
         masary_util.fillComboUtilites(combnote, nameCategoray);
-        if(combnote.getItemCount() == 0){
-            Point p = combnote.getLocation();
-            combnote.setVisible(false);
-            txtNote.setLocation(p);
-            txtNote.setVisible(true);
-        }else{
-            txtNote.setVisible(false);
-            combnote.setVisible(true);
-        }
+        String note = combnote.getSelectedItem().toString();
+        String price = masary_util.getPriceByNote(note);
+        String disc = df.format(masary_util.getCost(note));
+        txtdiscount.setText(disc);
+        txtAmount.setText(price);
+        txtAmount.requestFocus();
+        txtAmount.selectAll();
+        is_requier_phone_number = masary_util.isRequierPhoneNumber(nameCategoray);
+        lb_phone.setEnabled(is_requier_phone_number);
+        txtPhone.setEnabled(is_requier_phone_number);
     }//GEN-LAST:event_comUtilityItemStateChanged
 
-    private void txtpriceServiceKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtpriceServiceKeyReleased
-        // TODO add your handling code here:
-        String note ;
-        if(combnote.isVisible()){
-            note = combnote.getSelectedItem().toString();
-        }else{
-            note = txtNote.getText();
-        }
+    private void txtCountKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtCountKeyReleased
         try{
-            costService = masary_util.getCost_by_perse(note);
-            double price = Double.parseDouble(txtpriceService.getText());
-            double discount = price + (price * costService);
-            txtdiscount.setText(discount+"");
+            double val = Double.parseDouble(txtCount.getText());
+            String note = combnote.getSelectedItem().toString();
+            double CostOfService = masary_util.getCost(note);
+            double discount = CostOfService * val;
+            double price = Double.parseDouble(masary_util.getPriceByNote(note)) * val;
+            txtAmount.setText(price+"");
+            txtdiscount.setText(df.format(discount));
+        }catch(NumberFormatException ex){
+        
         }
-        catch(NumberFormatException ex){
-            txtdiscount.setText(txtpriceService.getText());
-            Logger.getLogger("Masary").log(Level.SEVERE, null, ex);
-        }
-    }//GEN-LAST:event_txtpriceServiceKeyReleased
+    }//GEN-LAST:event_txtCountKeyReleased
 
     private void combnoteItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_combnoteItemStateChanged
         // TODO add your handling code here:
-        String note ;
-        if(combnote.isVisible()){
-            note = combnote.getSelectedItem().toString();
-        }else{
-            note = txtNote.getText();
-        }
-        try{
-            costService = masary_util.getCost_by_perse(note);
-            double price = Double.parseDouble(txtpriceService.getText());
-            double discount = price + (price * costService);
-            txtdiscount.setText(discount+"");
-        }
-        catch(NumberFormatException ex){
-            txtdiscount.setText(txtpriceService.getText());
-            Logger.getLogger("Masary").log(Level.SEVERE, null, ex);
-        }
+        String note = combnote.getSelectedItem().toString() ;
+        String price = masary_util.getPriceByNote(note);
+        txtdiscount.setText(String.valueOf(masary_util.getCost(note)));
+        txtAmount.setText(price);
+        txtAmount.requestFocus();
+        txtAmount.selectAll();
     }//GEN-LAST:event_combnoteItemStateChanged
 
     /**
@@ -544,12 +540,13 @@ public class MasaryFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JLabel lb_phone;
     private javax.swing.JLabel title;
     private javax.swing.JTextField txtAmount;
-    private javax.swing.JTextField txtNote;
+    private javax.swing.JTextField txtCount;
     private javax.swing.JPanel txtPanal;
+    private javax.swing.JTextField txtPhone;
     private javax.swing.JLabel txtbalance;
     private javax.swing.JTextField txtdiscount;
-    private javax.swing.JTextField txtpriceService;
     // End of variables declaration//GEN-END:variables
 }
