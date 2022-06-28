@@ -7,13 +7,15 @@ package Entity;
 
 import Utilities.ConnectDB;
 import Utilities.Person;
+import javax.swing.JComboBox;
+import javax.swing.JTable;
 
 /**
  *
  * @author mosta
  */
 public class Suppliers extends Person{
-    
+    private String id_supplier_type , name_supplier_type;
     public Suppliers() {
         super("Suppliers");
     }
@@ -25,11 +27,11 @@ public class Suppliers extends Person{
     public double calcBalanceSupplier(String nameSupplier){
         double debit , Creditor  , First_Balance = 0;
         String id_Supplier = getIdByName(nameSupplier);
-        String firstBalance = getFirstBalance(id_Supplier);
-        if(firstBalance == null){
+        String firstbalance = getFirstBalance(id_Supplier);
+        if(firstbalance == null){
             First_Balance = 0;
         }else{
-            First_Balance = Double.parseDouble(firstBalance);
+            First_Balance = Double.parseDouble(firstbalance);
         }
          
         String sqlDebit = ConnectDB.getIdFromName("SELECT SUM(Debit) as id FROM debitandcreditorsupplier WHERE id_Suppliers="+id_Supplier);
@@ -47,16 +49,44 @@ public class Suppliers extends Person{
         double newBalance = First_Balance + Creditor - debit;
         return newBalance;
     }
-
-//    public boolean UpdateSupplierAccount(String id){
-//        String sql_update_supplier_account = "UPDATE `suppliersaccount` SET `date_suppliersAccount`=?,`Debit`=?,`Creditor`=?,`id_Suppliers`=?,"
-//                + "`id_purchaseInvoice`=?,`note`= ? WHERE `id_supplliersAccount`="+id;
-//    }
-    
-    // get id_supplierAccount from `id_purchaseInvoice`  Or `id_paymentReceipt`
-    
+    public void fillComboTypeSupplier(JComboBox comboBox){
+        ConnectDB.fillCombo("supplier_type", "name_supplier_type", comboBox);
+    }
     public String getIdSupplliersAccountFromIdPayReceipt(String id_paymentReceipt){
         String sql = "SELECT `id_supplliersAccount` AS id FROM `suppliersaccount` WHERE `id_paymentReceipt`="+id_paymentReceipt;
         return ConnectDB.getIdFromName(sql);
     }
+    public void SetNameSupplierType(String name_supplier_type){
+        this.name_supplier_type = name_supplier_type;
+    }
+    private String getIdSupplierType(){
+        String sql_select_id = "SELECT id_supplier_type AS id FROM supplier_type WHERE name_supplier_type ='"+name_supplier_type+"'";
+        return ConnectDB.getIdFromName(sql_select_id);
+    }
+    public String getIdSupplierType(String nameSupplierType){
+        String sql_select_id = "SELECT id_supplier_type AS id FROM supplier_type WHERE name_supplier_type ='"+nameSupplierType+"'";
+        return ConnectDB.getIdFromName(sql_select_id);
+    }
+    @Override
+    public boolean Save(){
+        String sql;
+        sql = "INSERT INTO Suppliers"+
+            " VALUES ("+id_person+",'"+name+"','"+phone+"','"+address+"','"+idInternational+"',"+firstBalance+","+getIdSupplierType()+" , isActive = 1)";
+        return ConnectDB.ExucuteAnyQuery(sql);
+    }
+    @Override
+    public boolean Update(String id){
+      String sql = "update "+tableName+" set name_"+tableName+"='"+name+"' , phone='"+phone+"' , address='"+address+"' , idNational = '"+idInternational+"' , firstBalance='"+firstBalance+"',"+"id_supplier_type ="+getIdSupplierType()+" where id_"+tableName+" ="+id;
+      return ConnectDB.ExucuteAnyQuery(sql);
+    }
+    
+    @Override
+    public void filTable(JTable table) {
+        String sql = "select firstBalance , t.name_supplier_type ,idNational , address , phone , name_"+tableName+" , id_"+tableName+" from Suppliers AS s INNER JOIN supplier_type AS t ON s.id_supplier_type = t.id_supplier_type where s.isActive = 1";
+        String[] coulmnName = {"رصيد سابق","النوع", "رقم قومي", "عنوان", "هاتف", "الاسم", "مسلسل"};
+        ConnectDB.fillAndCenterTable(sql, table, coulmnName);
+    }
+    public void FillComboAllNameSupplierByType(JComboBox comboName , int id_supplier_type){
+        ConnectDB.fillCombo(tableName + " WHERE isActive = 1 AND id_supplier_type = "+id_supplier_type, "name_"+tableName, comboName);
+    } 
 }

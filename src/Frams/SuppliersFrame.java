@@ -37,6 +37,7 @@ public class SuppliersFrame extends javax.swing.JFrame {
         Tools.disableButOpen(btPanel);
         txtFirsbalance.setText("0.00");
         s.filTable(jTable1);
+        s.fillComboTypeSupplier(combtype);
         btprint.setEnabled(true);
     }
 
@@ -62,6 +63,7 @@ public class SuppliersFrame extends javax.swing.JFrame {
         txtINational = new javax.swing.JTextField();
         jLabel7 = new javax.swing.JLabel();
         txtFirsbalance = new javax.swing.JTextField();
+        combtype = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         btPanel = new javax.swing.JPanel();
@@ -130,6 +132,8 @@ public class SuppliersFrame extends javax.swing.JFrame {
         txtFirsbalance.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         txtFirsbalance.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
+        combtype.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
         javax.swing.GroupLayout txtPanelLayout = new javax.swing.GroupLayout(txtPanel);
         txtPanel.setLayout(txtPanelLayout);
         txtPanelLayout.setHorizontalGroup(
@@ -137,15 +141,18 @@ public class SuppliersFrame extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, txtPanelLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(txtPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtName)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, txtPanelLayout.createSequentialGroup()
+                    .addGroup(txtPanelLayout.createSequentialGroup()
                         .addGroup(txtPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtAdrees, javax.swing.GroupLayout.DEFAULT_SIZE, 273, Short.MAX_VALUE)
                             .addComponent(txtFirsbalance))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(txtPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jLabel7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 130, Short.MAX_VALUE)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(txtPanelLayout.createSequentialGroup()
+                        .addComponent(combtype, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(txtName, javax.swing.GroupLayout.PREFERRED_SIZE, 240, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(txtPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addGroup(txtPanelLayout.createSequentialGroup()
@@ -172,7 +179,8 @@ public class SuppliersFrame extends javax.swing.JFrame {
                     .addComponent(txtId, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txtName, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(combtype))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(txtPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -196,11 +204,11 @@ public class SuppliersFrame extends javax.swing.JFrame {
 
             },
             new String [] {
-                "رصيد سابق", "رقم قومي", "عنوان", "هاتف", "الاسم", "مسلسل"
+                "رصيد سابق", "النوع", "رقم قومي", "عنوان", "هاتف", "الاسم", "مسلسل"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false
+                false, false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -219,13 +227,15 @@ public class SuppliersFrame extends javax.swing.JFrame {
             jTable1.getColumnModel().getColumn(1).setResizable(false);
             jTable1.getColumnModel().getColumn(1).setPreferredWidth(100);
             jTable1.getColumnModel().getColumn(2).setResizable(false);
-            jTable1.getColumnModel().getColumn(2).setPreferredWidth(150);
+            jTable1.getColumnModel().getColumn(2).setPreferredWidth(100);
             jTable1.getColumnModel().getColumn(3).setResizable(false);
-            jTable1.getColumnModel().getColumn(3).setPreferredWidth(100);
+            jTable1.getColumnModel().getColumn(3).setPreferredWidth(150);
             jTable1.getColumnModel().getColumn(4).setResizable(false);
-            jTable1.getColumnModel().getColumn(4).setPreferredWidth(150);
+            jTable1.getColumnModel().getColumn(4).setPreferredWidth(100);
             jTable1.getColumnModel().getColumn(5).setResizable(false);
-            jTable1.getColumnModel().getColumn(5).setPreferredWidth(50);
+            jTable1.getColumnModel().getColumn(5).setPreferredWidth(150);
+            jTable1.getColumnModel().getColumn(6).setResizable(false);
+            jTable1.getColumnModel().getColumn(6).setPreferredWidth(50);
         }
 
         getContentPane().add(jScrollPane1);
@@ -369,11 +379,13 @@ public class SuppliersFrame extends javax.swing.JFrame {
        String phone = txtMobil.getText();
        String address = txtAdrees.getText();
        String idNational = txtINational.getText();
+       String name_supplier_type = combtype.getSelectedItem().toString();
        double firstBalance = Double.valueOf(txtFirsbalance.getText());
         if(name.equals("")){
              Tools.showErrorMsg("اسم العميل غير مكتوب");
         }else{
             s.setData(id_client,name,phone,address,idNational,firstBalance);
+            s.SetNameSupplierType(name_supplier_type);
             if(s.Save()){
                 Tools.showInfoMsg("تم الحفظ بنجاح", "حفظ");
                 txtId.setText(s.lastid());
@@ -404,8 +416,10 @@ public class SuppliersFrame extends javax.swing.JFrame {
        String phone = txtMobil.getText();
        String address = txtAdrees.getText();
        String idNational = txtINational.getText();
+       String name_supplier_type = combtype.getSelectedItem().toString();
        double firstBalance = Double.valueOf(txtFirsbalance.getText());
        s.setData(id_client,name,phone,address,idNational,firstBalance);
+       s.SetNameSupplierType(name_supplier_type);
         if(s.Update(id_client)){
                 Tools.showInfoMsg("تم تحديث البيانات  بنجاح", "تحديث بيانات");
                 txtId.setText(s.lastid());
@@ -552,6 +566,7 @@ public class SuppliersFrame extends javax.swing.JFrame {
     private javax.swing.JButton btprint;
     private javax.swing.JButton btsave;
     private javax.swing.JButton btupdate;
+    private javax.swing.JComboBox<String> combtype;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;

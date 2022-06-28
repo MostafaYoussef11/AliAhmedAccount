@@ -13,12 +13,12 @@ import javax.swing.JTable;
  * @author mosta
  */
 public abstract class Person{
-    String id_person;
-    String name;
-    String phone;
-    String address;
-    String idInternational;
-    double firstBalance;
+    public String id_person;
+    public String name;
+    public String phone;
+    public String address;
+    public String idInternational;
+    public double firstBalance;
     public String tableName;
 
     public Person(String tableName) {
@@ -84,7 +84,7 @@ public abstract class Person{
     public void FillComboName(JComboBox comboName){
         ConnectDB.fillCombo(tableName + " WHERE id_"+tableName +"!= 1 AND isActive = 1", "name_"+tableName, comboName);
     }  
-        public void FillComboAllNameClient(JComboBox comboName){
+    public void FillComboAllNameClient(JComboBox comboName){
         ConnectDB.fillCombo(tableName + " WHERE isActive = 1", "name_"+tableName, comboName);
     } 
     public boolean ActiveOurDisactive(boolean isActive , String id){

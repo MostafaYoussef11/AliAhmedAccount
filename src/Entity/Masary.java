@@ -35,8 +35,8 @@ public class Masary {
     private double amount_masary_pay; // المطلوب من العميل 
     private String phone;
     public void fillTable(JTable jTable){
-        String sql_select_masary = "SELECT mp.balance , mp.amount_masary_pay , mp.discount_of_balance , c.name_client , mp.price_masary_pay , ifnull(mp.phone,u.note_utility), u.name_utility_masary, mp.date_masary_pay , mp.id_masary_pay FROM masary_pay AS mp INNER JOIN client AS c on mp.id_client = c.id_client LEFT JOIN utility_masary AS u ON mp.id_utility_masary = u.id_utility_masary ORDER BY mp.id_masary_pay DESC";
-        String ColumnName[] = {"الرصيد", "المدفوع", "م الرصيد", "العميل", "القيمة", "البيان", "الخدمة", "التاريخ", "م"};
+        String sql_select_masary = "SELECT mp.balance , mp.amount_masary_pay , mp.discount_of_balance , c.name_client , mp.price_masary_pay , ifnull(mp.phone,u.note_utility), u.name_utility_masary, mp.time_masary_pay ,mp.date_masary_pay , mp.id_masary_pay FROM masary_pay AS mp INNER JOIN client AS c on mp.id_client = c.id_client LEFT JOIN utility_masary AS u ON mp.id_utility_masary = u.id_utility_masary ORDER BY mp.id_masary_pay DESC";
+        String ColumnName[] = {"الرصيد", "المدفوع", "م الرصيد", "العميل", "القيمة", "البيان", "الخدمة","الوقت", "التاريخ", "م"};
         ConnectDB.fillAndCenterTable(sql_select_masary, jTable, ColumnName);
     }
     

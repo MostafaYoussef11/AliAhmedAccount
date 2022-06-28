@@ -6,7 +6,11 @@
 package Frams;
 
 import Utilities.Tools;
+import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Image;
+import java.awt.Toolkit;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -18,10 +22,18 @@ public class PosFrame extends javax.swing.JFrame {
      * Creates new form PosFrame
      */
     Font font;
+    Dimension dim = new Dimension( 1270, 784);
     public PosFrame() {
         initComponents();
         font = Tools.font(16f);
-        setSize(1090, 425);
+        
+        setSize(dim);
+        background.setLocation(0, 0);
+        background.setSize(dim);
+        background.setPreferredSize(dim);
+        ImageIcon bg = new ImageIcon(new ImageIcon(Toolkit.getDefaultToolkit().getClass().getResource("/icons/bg4.jpg")).getImage().getScaledInstance(dim.width, dim.height, Image.SCALE_DEFAULT));
+        background.setIcon(bg);
+        
         Btn_masary_pay.setFont(font);
         Btn_utilitesMasary.setFont(font);
         Btn_masary_sell.setFont(font);
@@ -29,6 +41,18 @@ public class PosFrame extends javax.swing.JFrame {
         Btn_Bee_pay.setFont(font);
         Btn_Bee_sell.setFont(font);
         Btn_utilitesBee.setFont(font);
+        
+        Btn_Aman_pay.setFont(font);
+        Btn_Aman_sell.setFont(font);
+        Btn_utilitesAman.setFont(font);
+        
+        Btn_Fawry_pay.setFont(font);
+        Btn_Fawry_sell.setFont(font);
+        Btn_utilitesFawry.setFont(font);
+        
+        Btn_Opay_pay.setFont(font);
+        Btn_Opay_sell.setFont(font);
+        Btn_utilitesOpay.setFont(font);
     }
 
     /**
@@ -50,10 +74,27 @@ public class PosFrame extends javax.swing.JFrame {
         Btn_utilitesBee = new javax.swing.JButton();
         Btn_Bee_pay = new javax.swing.JButton();
         Btn_Bee_sell = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        jPanel3 = new javax.swing.JPanel();
+        Btn_utilitesFawry = new javax.swing.JButton();
+        Btn_Fawry_pay = new javax.swing.JButton();
+        Btn_Fawry_sell = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
+        jPanel4 = new javax.swing.JPanel();
+        Btn_utilitesAman = new javax.swing.JButton();
+        Btn_Aman_pay = new javax.swing.JButton();
+        Btn_Aman_sell = new javax.swing.JButton();
+        jLabel5 = new javax.swing.JLabel();
+        jPanel5 = new javax.swing.JPanel();
+        Btn_utilitesOpay = new javax.swing.JButton();
+        Btn_Opay_pay = new javax.swing.JButton();
+        Btn_Opay_sell = new javax.swing.JButton();
+        background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         getContentPane().setLayout(null);
 
+        jPanel1.setOpaque(false);
         jPanel1.setLayout(null);
 
         Btn_utilitesMasary.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/utility.png"))); // NOI18N
@@ -64,9 +105,10 @@ public class PosFrame extends javax.swing.JFrame {
             }
         });
         jPanel1.add(Btn_utilitesMasary);
-        Btn_utilitesMasary.setBounds(20, 10, 250, 50);
+        Btn_utilitesMasary.setBounds(10, 10, 250, 50);
 
         Btn_masary_pay.setForeground(new java.awt.Color(0, 0, 255));
+        Btn_masary_pay.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/pos32.png"))); // NOI18N
         Btn_masary_pay.setText("مبيعات مصاري");
         Btn_masary_pay.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -74,9 +116,10 @@ public class PosFrame extends javax.swing.JFrame {
             }
         });
         jPanel1.add(Btn_masary_pay);
-        Btn_masary_pay.setBounds(20, 60, 250, 50);
+        Btn_masary_pay.setBounds(10, 65, 250, 50);
 
         Btn_masary_sell.setForeground(new java.awt.Color(255, 51, 102));
+        Btn_masary_sell.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/posPay.png"))); // NOI18N
         Btn_masary_sell.setText("مشتريات مصاري");
         Btn_masary_sell.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -84,22 +127,24 @@ public class PosFrame extends javax.swing.JFrame {
             }
         });
         jPanel1.add(Btn_masary_sell);
-        Btn_masary_sell.setBounds(20, 110, 250, 50);
+        Btn_masary_sell.setBounds(10, 120, 250, 50);
 
         getContentPane().add(jPanel1);
-        jPanel1.setBounds(640, 180, 290, 170);
+        jPanel1.setBounds(910, 150, 270, 180);
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/bgms.png"))); // NOI18N
         jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jLabel1.setIconTextGap(1);
         getContentPane().add(jLabel1);
-        jLabel1.setBounds(600, 10, 400, 170);
+        jLabel1.setBounds(850, 20, 400, 100);
 
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/beelogo.png"))); // NOI18N
         getContentPane().add(jLabel2);
-        jLabel2.setBounds(10, 20, 420, 130);
+        jLabel2.setBounds(10, 20, 400, 100);
+
+        jPanel2.setOpaque(false);
 
         Btn_utilitesBee.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/utility.png"))); // NOI18N
         Btn_utilitesBee.setText("Bee خدمات ");
@@ -110,6 +155,7 @@ public class PosFrame extends javax.swing.JFrame {
         });
 
         Btn_Bee_pay.setForeground(new java.awt.Color(0, 0, 255));
+        Btn_Bee_pay.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/pos32.png"))); // NOI18N
         Btn_Bee_pay.setText("Bee مبيعات");
         Btn_Bee_pay.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -118,6 +164,7 @@ public class PosFrame extends javax.swing.JFrame {
         });
 
         Btn_Bee_sell.setForeground(new java.awt.Color(255, 51, 102));
+        Btn_Bee_sell.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/posPay.png"))); // NOI18N
         Btn_Bee_sell.setText("Bee مشتريات");
         Btn_Bee_sell.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -140,15 +187,199 @@ public class PosFrame extends javax.swing.JFrame {
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
+                .addContainerGap()
                 .addComponent(Btn_utilitesBee, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(5, 5, 5)
                 .addComponent(Btn_Bee_pay, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(5, 5, 5)
                 .addComponent(Btn_Bee_sell, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(20, 20, 20))
+                .addContainerGap())
         );
 
         getContentPane().add(jPanel2);
-        jPanel2.setBounds(70, 160, 270, 180);
+        jPanel2.setBounds(80, 150, 270, 180);
+
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/fawry-ar1-removebg-preview.png"))); // NOI18N
+        getContentPane().add(jLabel3);
+        jLabel3.setBounds(20, 380, 400, 100);
+
+        jPanel3.setOpaque(false);
+
+        Btn_utilitesFawry.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/utility.png"))); // NOI18N
+        Btn_utilitesFawry.setText(" خدمات فوري ");
+        Btn_utilitesFawry.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Btn_utilitesFawryActionPerformed(evt);
+            }
+        });
+
+        Btn_Fawry_pay.setForeground(new java.awt.Color(0, 0, 255));
+        Btn_Fawry_pay.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/pos32.png"))); // NOI18N
+        Btn_Fawry_pay.setText(" مبيعات فوري");
+        Btn_Fawry_pay.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Btn_Fawry_payActionPerformed(evt);
+            }
+        });
+
+        Btn_Fawry_sell.setForeground(new java.awt.Color(255, 51, 102));
+        Btn_Fawry_sell.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/posPay.png"))); // NOI18N
+        Btn_Fawry_sell.setText(" مشتريات فوري");
+        Btn_Fawry_sell.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Btn_Fawry_sellActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(Btn_Fawry_pay, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
+                    .addComponent(Btn_Fawry_sell, javax.swing.GroupLayout.DEFAULT_SIZE, 250, Short.MAX_VALUE)
+                    .addComponent(Btn_utilitesFawry, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(Btn_utilitesFawry, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(5, 5, 5)
+                .addComponent(Btn_Fawry_pay, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(Btn_Fawry_sell, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        getContentPane().add(jPanel3);
+        jPanel3.setBounds(80, 520, 270, 180);
+
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/aman.png"))); // NOI18N
+        jLabel4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        getContentPane().add(jLabel4);
+        jLabel4.setBounds(850, 380, 400, 100);
+
+        jPanel4.setOpaque(false);
+
+        Btn_utilitesAman.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/utility.png"))); // NOI18N
+        Btn_utilitesAman.setText(" خدمات امان ");
+        Btn_utilitesAman.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Btn_utilitesAmanActionPerformed(evt);
+            }
+        });
+
+        Btn_Aman_pay.setForeground(new java.awt.Color(0, 0, 255));
+        Btn_Aman_pay.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/pos32.png"))); // NOI18N
+        Btn_Aman_pay.setText(" مبيعات امان");
+        Btn_Aman_pay.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Btn_Aman_payActionPerformed(evt);
+            }
+        });
+
+        Btn_Aman_sell.setForeground(new java.awt.Color(255, 51, 102));
+        Btn_Aman_sell.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/posPay.png"))); // NOI18N
+        Btn_Aman_sell.setText(" مشتريات امان");
+        Btn_Aman_sell.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Btn_Aman_sellActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
+        jPanel4.setLayout(jPanel4Layout);
+        jPanel4Layout.setHorizontalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(Btn_utilitesAman, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Btn_Aman_pay, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Btn_Aman_sell, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+        );
+        jPanel4Layout.setVerticalGroup(
+            jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel4Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(Btn_utilitesAman, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(5, 5, 5)
+                .addComponent(Btn_Aman_pay, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(5, 5, 5)
+                .addComponent(Btn_Aman_sell, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
+        getContentPane().add(jPanel4);
+        jPanel4.setBounds(910, 520, 270, 180);
+
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/dark-logo.png"))); // NOI18N
+        getContentPane().add(jLabel5);
+        jLabel5.setBounds(440, 20, 400, 100);
+
+        jPanel5.setOpaque(false);
+
+        Btn_utilitesOpay.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/utility.png"))); // NOI18N
+        Btn_utilitesOpay.setText("OPay خدمات ");
+        Btn_utilitesOpay.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Btn_utilitesOpayActionPerformed(evt);
+            }
+        });
+
+        Btn_Opay_pay.setForeground(new java.awt.Color(0, 0, 255));
+        Btn_Opay_pay.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/pos32.png"))); // NOI18N
+        Btn_Opay_pay.setText("OPay مبيعات");
+        Btn_Opay_pay.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Btn_Opay_payActionPerformed(evt);
+            }
+        });
+
+        Btn_Opay_sell.setForeground(new java.awt.Color(255, 51, 102));
+        Btn_Opay_sell.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/posPay.png"))); // NOI18N
+        Btn_Opay_sell.setText("OPay مشتريات");
+        Btn_Opay_sell.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                Btn_Opay_sellActionPerformed(evt);
+            }
+        });
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(Btn_utilitesOpay, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Btn_Opay_pay, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(Btn_Opay_sell, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(Btn_utilitesOpay, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(5, 5, 5)
+                .addComponent(Btn_Opay_pay, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(5, 5, 5)
+                .addComponent(Btn_Opay_sell, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        getContentPane().add(jPanel5);
+        jPanel5.setBounds(500, 150, 270, 180);
+        getContentPane().add(background);
+        background.setBounds(0, 0, 0, 0);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -162,13 +393,15 @@ public class PosFrame extends javax.swing.JFrame {
 
     private void Btn_masary_payActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_masary_payActionPerformed
         // TODO add your handling code here:
-        MasaryFrame mf = new MasaryFrame();
+        MasarypayFrame mf = new MasarypayFrame();
         Tools.openJFram(mf);
         dispose();
     }//GEN-LAST:event_Btn_masary_payActionPerformed
 
     private void Btn_masary_sellActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_masary_sellActionPerformed
         // TODO add your handling code here:
+        MasarySellFrame msf = new MasarySellFrame();
+        Tools.openJFram(msf, "مشتريات مصاري");
     }//GEN-LAST:event_Btn_masary_sellActionPerformed
 
     private void Btn_utilitesBeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_utilitesBeeActionPerformed
@@ -182,6 +415,42 @@ public class PosFrame extends javax.swing.JFrame {
     private void Btn_Bee_sellActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_Bee_sellActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_Btn_Bee_sellActionPerformed
+
+    private void Btn_utilitesFawryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_utilitesFawryActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Btn_utilitesFawryActionPerformed
+
+    private void Btn_Fawry_payActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_Fawry_payActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Btn_Fawry_payActionPerformed
+
+    private void Btn_Fawry_sellActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_Fawry_sellActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Btn_Fawry_sellActionPerformed
+
+    private void Btn_utilitesAmanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_utilitesAmanActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Btn_utilitesAmanActionPerformed
+
+    private void Btn_Aman_payActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_Aman_payActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Btn_Aman_payActionPerformed
+
+    private void Btn_Aman_sellActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_Aman_sellActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Btn_Aman_sellActionPerformed
+
+    private void Btn_utilitesOpayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_utilitesOpayActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Btn_utilitesOpayActionPerformed
+
+    private void Btn_Opay_payActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_Opay_payActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Btn_Opay_payActionPerformed
+
+    private void Btn_Opay_sellActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_Opay_sellActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_Btn_Opay_sellActionPerformed
 
     /**
      * @param args the command line arguments
@@ -219,15 +488,31 @@ public class PosFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton Btn_Aman_pay;
+    private javax.swing.JButton Btn_Aman_sell;
     private javax.swing.JButton Btn_Bee_pay;
     private javax.swing.JButton Btn_Bee_sell;
+    private javax.swing.JButton Btn_Fawry_pay;
+    private javax.swing.JButton Btn_Fawry_sell;
+    private javax.swing.JButton Btn_Opay_pay;
+    private javax.swing.JButton Btn_Opay_sell;
     private javax.swing.JButton Btn_masary_pay;
     private javax.swing.JButton Btn_masary_sell;
+    private javax.swing.JButton Btn_utilitesAman;
     private javax.swing.JButton Btn_utilitesBee;
+    private javax.swing.JButton Btn_utilitesFawry;
     private javax.swing.JButton Btn_utilitesMasary;
+    private javax.swing.JButton Btn_utilitesOpay;
+    private javax.swing.JLabel background;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     // End of variables declaration//GEN-END:variables
 }

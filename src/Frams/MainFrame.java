@@ -50,21 +50,21 @@ public class MainFrame extends javax.swing.JFrame {
         background.setPreferredSize(dim);
         ImageIcon bg = new ImageIcon(new ImageIcon(Toolkit.getDefaultToolkit().getClass().getResource("/icons/bg4.jpg")).getImage().getScaledInstance(dim.width, dim.height, Image.SCALE_DEFAULT));
         background.setIcon(bg);
-        int x = dim.width - 170;
+        int x = dim.width - 180;
         client.setLocation(x , 40);
         client.setFont(font);
         items.setLocation(x , 200);
         items.setFont(font);
         suppliers.setLocation(x  , 360);
         suppliers.setFont(font);
-        x = x - 170;
+        x = x - 180;
         Purchases.setLocation(x, 40);
         Purchases.setFont(font);
         sales.setLocation(x, 200);
         sales.setFont(font);
         Reports.setLocation(x, 360);
         Reports.setFont(font);
-        x = x - 170;
+        x = x - 180;
         Payments.setLocation(x, 40);
         Payments.setFont(font);
         Receipts.setLocation(x, 200);
@@ -72,7 +72,7 @@ public class MainFrame extends javax.swing.JFrame {
         pos.setLocation(x, 360);
         pos.setFont(font);
         
-        x = x-170;
+        x = x-180;
         fees.setLocation(x, 40);
         fees.setFont(font);
         loan.setLocation(x, 200);
@@ -81,7 +81,7 @@ public class MainFrame extends javax.swing.JFrame {
         VCash.setFont(font);
         
         selePanal.setLocation(10, 10);
-        txtNowBalance.setLocation(10, dim.height - 130);
+        txtNowBalance.setLocation(10, dim.height - 170);
         txtIdItems.setFocusable(true);
         txtNowBalance.setText(new CasherClass().getNowBalanceCasher());
         
@@ -147,7 +147,7 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(Receipts);
-        Receipts.setBounds(760, 200, 150, 150);
+        Receipts.setBounds(760, 200, 170, 150);
 
         client.setFont(new java.awt.Font("VIP Hala Bold", 1, 18)); // NOI18N
         client.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -166,7 +166,7 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(client);
-        client.setBounds(1100, 30, 150, 150);
+        client.setBounds(1100, 30, 170, 150);
 
         items.setFont(new java.awt.Font("VIP Hala Bold", 1, 18)); // NOI18N
         items.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -185,7 +185,7 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(items);
-        items.setBounds(1100, 200, 150, 150);
+        items.setBounds(1100, 200, 170, 150);
 
         suppliers.setFont(new java.awt.Font("VIP Hala Bold", 1, 18)); // NOI18N
         suppliers.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -204,7 +204,7 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(suppliers);
-        suppliers.setBounds(1100, 370, 150, 150);
+        suppliers.setBounds(1100, 370, 170, 150);
 
         Payments.setFont(new java.awt.Font("VIP Hala Bold", 1, 18)); // NOI18N
         Payments.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -223,7 +223,7 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(Payments);
-        Payments.setBounds(760, 30, 150, 150);
+        Payments.setBounds(760, 30, 170, 150);
 
         Purchases.setFont(new java.awt.Font("VIP Hala Bold", 1, 18)); // NOI18N
         Purchases.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -242,7 +242,7 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(Purchases);
-        Purchases.setBounds(930, 30, 150, 150);
+        Purchases.setBounds(930, 30, 170, 150);
 
         Reports.setFont(new java.awt.Font("VIP Hala Bold", 1, 18)); // NOI18N
         Reports.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -261,7 +261,7 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(Reports);
-        Reports.setBounds(930, 370, 150, 150);
+        Reports.setBounds(930, 370, 170, 150);
 
         sales.setFont(new java.awt.Font("VIP Hala Bold", 1, 18)); // NOI18N
         sales.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -280,7 +280,7 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(sales);
-        sales.setBounds(930, 200, 150, 150);
+        sales.setBounds(930, 200, 170, 150);
 
         selePanal.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         selePanal.setOpaque(false);
@@ -372,10 +372,10 @@ public class MainFrame extends javax.swing.JFrame {
         getContentPane().add(selePanal);
         selePanal.setBounds(40, 60, 230, 230);
 
-        txtNowBalance.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
+        txtNowBalance.setFont(new java.awt.Font("Tahoma", 1, 48)); // NOI18N
         txtNowBalance.setForeground(new java.awt.Color(0, 0, 255));
-        txtNowBalance.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        txtNowBalance.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/deposit.png"))); // NOI18N
+        txtNowBalance.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        txtNowBalance.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/deposit .png"))); // NOI18N
         txtNowBalance.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         txtNowBalance.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         txtNowBalance.setIconTextGap(8);
@@ -388,7 +388,7 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(txtNowBalance);
-        txtNowBalance.setBounds(20, 650, 260, 100);
+        txtNowBalance.setBounds(20, 610, 380, 140);
 
         pos.setFont(new java.awt.Font("VIP Hala Bold", 1, 18)); // NOI18N
         pos.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -407,7 +407,7 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(pos);
-        pos.setBounds(760, 370, 150, 150);
+        pos.setBounds(760, 370, 170, 150);
 
         fees.setFont(new java.awt.Font("VIP Hala Bold", 1, 18)); // NOI18N
         fees.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -426,7 +426,7 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(fees);
-        fees.setBounds(580, 30, 150, 150);
+        fees.setBounds(580, 30, 170, 150);
 
         loan.setFont(new java.awt.Font("VIP Hala Bold", 1, 18)); // NOI18N
         loan.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -445,7 +445,7 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(loan);
-        loan.setBounds(580, 200, 150, 150);
+        loan.setBounds(580, 200, 170, 150);
 
         VCash.setFont(new java.awt.Font("VIP Hala Bold", 1, 18)); // NOI18N
         VCash.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -464,7 +464,7 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(VCash);
-        VCash.setBounds(580, 370, 150, 150);
+        VCash.setBounds(580, 370, 170, 150);
 
         background.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         background.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -686,6 +686,8 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void VCashMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_VCashMouseClicked
         // TODO add your handling code here:
+        clickPanel(VCash);
+        
     }//GEN-LAST:event_VCashMouseClicked
 
     private void VCashMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_VCashMouseExited

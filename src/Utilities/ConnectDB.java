@@ -82,7 +82,7 @@ public class ConnectDB {
   }
   
   
-  public static void fillAndCenterTable(String sql , JTable table , String[] coulmnName){
+  public static void fillAndCenterTable(String sql , JTable table , String[] columnName){
        try{
            SetConnection();
            stmt = (Statement) con.createStatement();
@@ -91,7 +91,9 @@ public class ConnectDB {
            Vector v = new Vector();
            int count = rstmd.getColumnCount();
            DefaultTableModel model = (DefaultTableModel) table.getModel();
-           Tools.CenterTable(coulmnName, table);
+//           table.setOpaque(false);
+//           table.setShowGrid(false);
+           Tools.CenterTable(columnName, table);
            model.setRowCount(0);
            while(rst.next()){
                v = new Vector(count);

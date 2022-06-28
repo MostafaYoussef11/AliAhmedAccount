@@ -14,6 +14,7 @@ import static java.awt.Component.CENTER_ALIGNMENT;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.FontFormatException;
+import java.awt.Image;
 import java.awt.Toolkit;
 import java.io.BufferedInputStream;
 import java.io.FileInputStream;
@@ -123,11 +124,22 @@ public class Tools {
  public static void CenterTable(String[] coulmnName , JTable table){
         DefaultTableCellRenderer center = new DefaultTableCellRenderer();
         center.setHorizontalAlignment(DefaultTableCellRenderer.CENTER);
+//        center.setOpaque(false);
         int count = coulmnName.length;
         for(int i = 0 ; i< count ; i++){
             table.getColumn(coulmnName[i]).setCellRenderer(center);
         }
+
+
+        
     }
+  public static void setBackground(JLabel background , Dimension dim , String nameImage){
+        background.setLocation(0, 0);
+        background.setSize(dim);
+        background.setPreferredSize(dim);
+        ImageIcon bg = new ImageIcon(new ImageIcon(Toolkit.getDefaultToolkit().getClass().getResource("/icons/"+nameImage)).getImage().getScaledInstance(dim.width, dim.height, Image.SCALE_DEFAULT));
+        background.setIcon(bg);
+  }
  
     public static String payMethod(PaymentMethod payMethod){
         String paymethod = "";
