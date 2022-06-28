@@ -20,7 +20,7 @@ import javax.swing.JTable;
  *
  * @author mosta
  */
-public class Masary {
+public class MasaryPay {
     private double newbalance = 0.00;
     private double pay = 0.00;
     private double sell = 0.00;
@@ -105,10 +105,10 @@ public class Masary {
              con.rollback();
              con.close();
          } catch (SQLException ex1) {
-             Logger.getLogger(Masary.class.getName()).log(Level.SEVERE, null, ex1);
+             Logger.getLogger(MasaryPay.class.getName()).log(Level.SEVERE, null, ex1);
          }
          isSave = false;
-         Logger.getLogger(Masary.class.getName()).log(Level.SEVERE, null, ex);
+         Logger.getLogger(MasaryPay.class.getName()).log(Level.SEVERE, null, ex);
      }
     
       return  isSave;

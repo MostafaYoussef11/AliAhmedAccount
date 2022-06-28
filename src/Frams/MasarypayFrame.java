@@ -30,7 +30,7 @@ public class MasarypayFrame extends javax.swing.JFrame {
     Font font;
     ClientPerson client;
     masary_Utilites masary_util;
-    Entity.Masary masary;
+    Entity.MasaryPay masary;
     private double costService;
     private boolean is_requier_phone_number = false;
     private final DecimalFormat decf;
@@ -44,7 +44,7 @@ public class MasarypayFrame extends javax.swing.JFrame {
         title.setFont(font);
         masary_util = new masary_Utilites();
         client = new ClientPerson();
-        masary = new Entity.Masary();
+        masary = new Entity.MasaryPay();
         newMasaray();
     }
 

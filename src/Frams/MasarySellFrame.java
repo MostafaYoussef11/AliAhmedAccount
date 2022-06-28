@@ -33,7 +33,7 @@ public class MasarySellFrame extends javax.swing.JFrame {
     public MasarySellFrame() {
         initComponents();
         setSize(dim);
-        Tools.setBackground(background, dim, "bgsellmasa.jpg");
+        Tools.setBackground(background, dim, "16165.jpg");
         font = Tools.font(32f);
         txt_title.setFont(font);
         msc = new masarySellClass();
@@ -54,9 +54,9 @@ public class MasarySellFrame extends javax.swing.JFrame {
         txt_title = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        comb_recharge_type = new javax.swing.JComboBox<>();
+        comb_recharge_type = new javax.swing.JComboBox<String>();
         jLabel2 = new javax.swing.JLabel();
-        comb_to_account = new javax.swing.JComboBox<>();
+        comb_to_account = new javax.swing.JComboBox<String>();
         jLabel3 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
@@ -91,7 +91,7 @@ public class MasarySellFrame extends javax.swing.JFrame {
         jLabel1.setText("التوريد");
         jLabel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        comb_recharge_type.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comb_recharge_type.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         comb_recharge_type.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 comb_recharge_typeItemStateChanged(evt);
@@ -103,7 +103,7 @@ public class MasarySellFrame extends javax.swing.JFrame {
         jLabel2.setText("من حساب");
         jLabel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        comb_to_account.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comb_to_account.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -139,7 +139,7 @@ public class MasarySellFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jTextField1)
+                        .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)

@@ -119,6 +119,7 @@ public class MainFrame extends javax.swing.JFrame {
         fees = new javax.swing.JLabel();
         loan = new javax.swing.JLabel();
         VCash = new javax.swing.JLabel();
+        counter = new javax.swing.JLabel();
         background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -466,6 +467,11 @@ public class MainFrame extends javax.swing.JFrame {
         getContentPane().add(VCash);
         VCash.setBounds(580, 370, 170, 150);
 
+        counter.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        counter.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/counter.png"))); // NOI18N
+        getContentPane().add(counter);
+        counter.setBounds(420, 600, 128, 140);
+
         background.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         background.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         getContentPane().add(background);
@@ -687,11 +693,14 @@ public class MainFrame extends javax.swing.JFrame {
     private void VCashMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_VCashMouseClicked
         // TODO add your handling code here:
         clickPanel(VCash);
-        
+        menuCashFrame mcf = new menuCashFrame();
+        Tools.openJFram(mcf);
+                
     }//GEN-LAST:event_VCashMouseClicked
 
     private void VCashMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_VCashMouseExited
         // TODO add your handling code here:
+        exitPanel(VCash);
     }//GEN-LAST:event_VCashMouseExited
 
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
@@ -750,6 +759,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel background;
     private javax.swing.JButton btnSave;
     private javax.swing.JLabel client;
+    private javax.swing.JLabel counter;
     private javax.swing.JLabel fees;
     private javax.swing.JLabel items;
     private javax.swing.JLabel jLabel2;

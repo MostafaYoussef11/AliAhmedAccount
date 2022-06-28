@@ -14,12 +14,13 @@ import javax.swing.JTable;
  * @author mosta
  */
 public class masarySellClass {
-    private double value_masary_sell;
-    private double amount_masary_sell;
-    private int id_recharge_type;
-    private String name_recharge_type;
-    private int id_supplier;
-    private int id_pos;
+    
+//    private double value_masary_sell;
+//    private double amount_masary_sell;
+//    private int id_recharge_type;
+//    private String name_recharge_type;
+//    private int id_supplier;
+//    private int id_pos;
     
     public void fillComboRechargeType(JComboBox box){
         ConnectDB.fillCombo("recharge_type", "name_recharge_type", box);
