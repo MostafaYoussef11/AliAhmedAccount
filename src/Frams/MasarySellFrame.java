@@ -6,6 +6,7 @@
 package Frams;
 
 import Entity.CasherClass;
+import Entity.PosSell;
 import Entity.Suppliers;
 import Entity.VFCashClass;
 import Entity.masarySellClass;
@@ -30,6 +31,7 @@ public class MasarySellFrame extends javax.swing.JFrame {
     masarySellClass msc;
     Suppliers suppliers;
     Dimension dim = new Dimension(870, 600);
+    PosSell masary;
     public MasarySellFrame() {
         initComponents();
         setSize(dim);
@@ -39,6 +41,7 @@ public class MasarySellFrame extends javax.swing.JFrame {
         msc = new masarySellClass();
         suppliers = new Suppliers();
         vcash = new VFCashClass();
+        masary = new PosSell("مصاري");
         newSell();
     }
 
@@ -54,15 +57,15 @@ public class MasarySellFrame extends javax.swing.JFrame {
         txt_title = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        comb_recharge_type = new javax.swing.JComboBox<String>();
+        comb_recharge_type = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
-        comb_to_account = new javax.swing.JComboBox<String>();
+        comb_to_account = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        txt_value = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        txt_amount = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        jTextField3 = new javax.swing.JTextField();
+        txt_note = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         btPanel = new javax.swing.JPanel();
@@ -91,7 +94,7 @@ public class MasarySellFrame extends javax.swing.JFrame {
         jLabel1.setText("التوريد");
         jLabel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        comb_recharge_type.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comb_recharge_type.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         comb_recharge_type.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 comb_recharge_typeItemStateChanged(evt);
@@ -103,33 +106,33 @@ public class MasarySellFrame extends javax.swing.JFrame {
         jLabel2.setText("من حساب");
         jLabel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        comb_to_account.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comb_to_account.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel3.setText("القيمة");
         jLabel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        jTextField1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jTextField1.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField1.setText("0.00");
+        txt_value.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        txt_value.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txt_value.setText("0.00");
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("المبلغ");
         jLabel4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        jTextField2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jTextField2.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField2.setText("0.00");
+        txt_amount.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        txt_amount.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txt_amount.setText("0.00");
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setText("البيان");
         jLabel5.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        jTextField3.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        jTextField3.setText("شحن ماكينة مصاري");
+        txt_note.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txt_note.setText("شحن ماكينة مصاري");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -139,12 +142,12 @@ public class MasarySellFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE)
+                        .addComponent(txt_value, javax.swing.GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(comb_to_account, javax.swing.GroupLayout.PREFERRED_SIZE, 150, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jTextField3))
+                    .addComponent(txt_note))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 100, Short.MAX_VALUE)
@@ -156,7 +159,7 @@ public class MasarySellFrame extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                        .addComponent(jTextField2)
+                        .addComponent(txt_amount)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
@@ -171,13 +174,13 @@ public class MasarySellFrame extends javax.swing.JFrame {
                     .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(comb_to_account)
                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE))
+                    .addComponent(txt_value, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jTextField2, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+                    .addComponent(txt_amount, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
                     .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jTextField3))
+                    .addComponent(txt_note))
                 .addContainerGap())
         );
 
@@ -353,6 +356,10 @@ public class MasarySellFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnewActionPerformed
 
     private void btsaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btsaveActionPerformed
+        boolean isSave = false;
+        String name_recharge_type = comb_recharge_type.getSelectedItem().toString();
+        double value = Double.parseDouble(txt_value.getText());
+        double amount = Double.parseDouble(txt_amount.getText());
         
     }//GEN-LAST:event_btsaveActionPerformed
 
@@ -439,9 +446,9 @@ public class MasarySellFrame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField txt_amount;
+    private javax.swing.JTextField txt_note;
     private javax.swing.JLabel txt_title;
+    private javax.swing.JTextField txt_value;
     // End of variables declaration//GEN-END:variables
 }

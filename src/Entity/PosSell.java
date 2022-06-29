@@ -40,9 +40,22 @@ public class PosSell {
     //constractor method
     public PosSell(String name_pos) {
         this.name_pos = name_pos;
+        this.id_pos = Integer.parseInt("SELECT id_pos AS id FROM pos where name_pos='"+name_pos+"'");
     }
 
-    
+    public void SetDataAndgeter(double value,double amount , String  name_recharge_type , String name_Suppliers , String number_VF_cash ){
+        
+        this.value_masary_sell = value;
+        this.amount_masary_sell = amount;
+        this.name_Suppliers = name_Suppliers;
+        this.name_recharge_type = name_recharge_type;
+        this.number_VF_cash = number_VF_cash;
+        
+        id_recharge_type = Integer.parseInt(ConnectDB.getIdFrmName("recharge_type", name_recharge_type));
+        if(name_Suppliers != null) id_Suppliers = Integer.parseInt(new Suppliers().getIdByName(name_Suppliers));
+        if(number_VF_cash != null) id_VF_cash = Integer.parseInt(ConnectDB.getIdFromName("SELECT id_VF_cash AS id FROM VF_cash WHERE number_VF_cash ='"+number_VF_cash+"'"));
+        
+    }
     public String getName_pos() {
         return name_pos;
     }
@@ -108,38 +121,20 @@ public class PosSell {
     
     public boolean Save(){
         boolean isSave = false;
-//        
-//        try {
-//            con = ConnectDB.getCon();
-//            con.setAutoCommit(false);
-//            String sql_insert_ms = "INSERT INTO `masary_sell` (`value_masary_sell`, `amount_masary_sell`,"
-//                    + " `id_recharge_type`, `id_Suppliers`, `id_VF_cash` ,`id_pos`) "
-//                    + "VALUES (?,?,?,?,?)";
-//            pstmt = con.prepareStatement(sql_insert_ms, Statement.RETURN_GENERATED_KEYS);
-//            
-//            pstmt.setDouble(1, value_masary_sell);
-//            pstmt.setDouble(2, amount_masary_sell);
-//            pstmt.setInt(3, id_recharge_type);
-//            pstmt.setInt(5,id_VF_cash);
-//            pstmt.setInt(6, id_pos);
-//            
-//            switch(id_recharge_type){
-//                case 1:
-//                   SaveCash();
-//                   pstmt.setInt(4, 1);
-//                   break;
-//                
-//            }
-//            
-//        } catch (SQLException ex) {
-//            Logger.getLogger(MasarySell.class.getName()).log(Level.SEVERE, null, ex);
-//        }
+     switch(id_recharge_type){
+        case 1:
+          isSave = SaveCash();
+          break;
+        case 2:
+          isSave = SaveAccountSupplier();
+          break;
+                
+      }
        return isSave;
     }
 
     private boolean SaveCash() {
         boolean isSave = false;
-        
         try {
             con = ConnectDB.getCon();
             con.setAutoCommit(false);
@@ -147,7 +142,6 @@ public class PosSell {
                     + " `id_recharge_type`, `id_Suppliers`,`id_pos`) "
                     + "VALUES (?,?,?,?,?)";
             pstmt = con.prepareStatement(sql_insert_ms, Statement.RETURN_GENERATED_KEYS);
-            
             pstmt.setDouble(1, value_masary_sell);
             pstmt.setDouble(2, amount_masary_sell);
             pstmt.setInt(3, id_recharge_type);
@@ -161,11 +155,52 @@ public class PosSell {
                 pstmc = con.prepareStatement(sql_insert_casher);
                 pstmc.setDouble(1, amount_masary_sell);
                 pstmc.setString(2, "شحن ماكينة"+name_pos);
+                pstmc.setInt(3, id_masary_sell);
+                int row_insert = pstmc.executeUpdate();
+                if(row_insert == 1){
+                    isSave = true;
+                }
             }
             
         } catch (SQLException ex) {
             Logger.getLogger(PosSell.class.getName()).log(Level.SEVERE, null, ex);
         }
        return isSave;
+    }
+
+    private boolean SaveAccountSupplier() {
+        boolean isSave = false;
+        try {
+            con = ConnectDB.getCon();
+            con.setAutoCommit(false);
+            String sql_insert_ms = "INSERT INTO `masary_sell` (`value_masary_sell`, `amount_masary_sell`,"
+                    + " `id_recharge_type`, `id_Suppliers`,`id_pos`) "
+                    + "VALUES (?,?,?,?,?)";
+            pstmt = con.prepareStatement(sql_insert_ms, Statement.RETURN_GENERATED_KEYS);
+            pstmt.setDouble(1, value_masary_sell);
+            pstmt.setDouble(2, amount_masary_sell);
+            pstmt.setInt(3, id_recharge_type);
+            pstmt.setInt(4, id_Suppliers);
+            pstmt.setInt(5, id_pos);
+            int row_inserted = pstmt.executeUpdate();
+            if(row_inserted == 1){
+                rst = pstmt.getGeneratedKeys();
+                int id_masary_sell = rst.getInt(1);
+                String sql_insert_supp_account = "INSERT INTO `suppliersaccount` (`Creditor`, `id_Suppliers`, `id_masary_sell`, `note`) VALUES (?,?,?,?)";
+                pstmc = con.prepareStatement(sql_insert_supp_account);
+                pstmc.setDouble(1, amount_masary_sell);
+                pstmc.setInt(2, id_Suppliers);
+                pstmc.setInt(3, id_masary_sell);
+                pstmc.setString(458, "شحن ماكينة"+name_pos);
+                int row_insert = pstmc.executeUpdate();
+                if(row_insert == 1){
+                    isSave = true;
+                }               
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(PosSell.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       return isSave; 
     }
 }

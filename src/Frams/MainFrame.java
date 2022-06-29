@@ -80,7 +80,7 @@ public class MainFrame extends javax.swing.JFrame {
         VCash.setLocation(x, 360);
         VCash.setFont(font);
         
-        selePanal.setLocation(10, 10);
+        selePanal.setLocation(30, 40);
         txtNowBalance.setLocation(10, dim.height - 170);
         txtIdItems.setFocusable(true);
         txtNowBalance.setText(new CasherClass().getNowBalanceCasher());
@@ -371,7 +371,7 @@ public class MainFrame extends javax.swing.JFrame {
         );
 
         getContentPane().add(selePanal);
-        selePanal.setBounds(40, 60, 230, 230);
+        selePanal.setBounds(30, 30, 230, 230);
 
         txtNowBalance.setFont(new java.awt.Font("Tahoma", 1, 48)); // NOI18N
         txtNowBalance.setForeground(new java.awt.Color(0, 0, 255));

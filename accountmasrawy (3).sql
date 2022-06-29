@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 28, 2022 at 01:51 PM
+-- Generation Time: Jun 29, 2022 at 12:16 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 7.3.27
 
@@ -125,7 +125,8 @@ INSERT INTO `casher` (`id_casher`, `date_casher`, `Debit`, `Creditor`, `note`, `
 (75, '2022-06-28', 26.00, NULL, '25', NULL, NULL, NULL, NULL, 27, NULL),
 (76, '2022-06-28', 16.50, NULL, '15', NULL, NULL, NULL, NULL, 28, NULL),
 (77, '2022-06-28', 52.00, NULL, 'LE 50', NULL, NULL, NULL, NULL, 29, NULL),
-(78, '2022-06-28', NULL, 700.00, 'ايصال دفع رقم 1', NULL, NULL, NULL, 1, NULL, NULL);
+(78, '2022-06-28', NULL, 700.00, 'ايصال دفع رقم 1', NULL, NULL, NULL, 1, NULL, NULL),
+(79, '2022-06-28', 11.00, NULL, '10', NULL, NULL, NULL, NULL, 30, NULL);
 
 -- --------------------------------------------------------
 
@@ -237,25 +238,27 @@ CREATE TABLE `finallyday` (
   `oldBalance` double NOT NULL,
   `totalimport` double NOT NULL,
   `totalexport` double NOT NULL,
-  `newbalance` double(10,2) GENERATED ALWAYS AS (`oldBalance` + `totalimport` - `totalexport`) VIRTUAL
+  `newbalance` double(10,2) GENERATED ALWAYS AS (`oldBalance` + `totalimport` - `totalexport`) VIRTUAL,
+  `time_insert` time NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `finallyday`
 --
 
-INSERT INTO `finallyday` (`dateFinally`, `oldBalance`, `totalimport`, `totalexport`) VALUES
-('2022-06-18', 11000, 0, 0),
-('2022-06-19', 11000, 225, 10695),
-('2022-06-20', 530, 0, 0),
-('2022-06-21', 530, 100, 0),
-('2022-06-22', 630, 305, 0),
-('2022-06-23', 935, 0, 0),
-('2022-06-24', 935, 0, 0),
-('2022-06-25', 935, 0, 0),
-('2022-06-26', 935, 415, 0),
-('2022-06-27', 1350, 440.5, 0),
-('2022-06-28', 1790.5, 100.5, 700);
+INSERT INTO `finallyday` (`dateFinally`, `oldBalance`, `totalimport`, `totalexport`, `time_insert`) VALUES
+('2022-06-18', 11000, 0, 0, '02:11:15'),
+('2022-06-19', 11000, 225, 10695, '02:11:15'),
+('2022-06-20', 530, 0, 0, '02:11:15'),
+('2022-06-21', 530, 100, 0, '02:11:15'),
+('2022-06-22', 630, 305, 0, '02:11:15'),
+('2022-06-23', 935, 0, 0, '02:11:15'),
+('2022-06-24', 935, 0, 0, '02:11:15'),
+('2022-06-25', 935, 0, 0, '02:11:15'),
+('2022-06-26', 935, 415, 0, '02:11:15'),
+('2022-06-27', 1350, 440.5, 0, '02:11:15'),
+('2022-06-28', 1790.5, 111.5, 700, '02:11:15'),
+('2022-06-29', 1202, 0, 0, '02:18:11');
 
 -- --------------------------------------------------------
 
@@ -424,7 +427,8 @@ INSERT INTO `masary_pay` (`id_masary_pay`, `date_masary_pay`, `time_masary_pay`,
 (26, '2022-06-28', '00:00:00', 35, 1.00, 1, 2.50, 3.00, 1, 10686.25, '2.5'),
 (27, '2022-06-28', '00:00:00', 42, 1.00, 1, 25.00, 26.00, 1, 10661.25, '25'),
 (28, '2022-06-28', '00:00:00', 41, 1.00, 1, 15.00, 16.50, 1, 10646.25, '15'),
-(29, '2022-06-28', '00:00:00', 33, 1.00, 1, 50.00, 52.00, 1, 10596.25, 'LE 50');
+(29, '2022-06-28', '00:00:00', 33, 1.00, 1, 50.00, 52.00, 1, 10596.25, 'LE 50'),
+(30, '2022-06-28', '16:19:50', 39, 1.00, 1, 10.00, 11.00, 1, 10586.25, '10');
 
 -- --------------------------------------------------------
 
@@ -440,6 +444,7 @@ CREATE TABLE `masary_sell` (
   `amount_masary_sell` double(10,2) DEFAULT NULL,
   `id_recharge_type` int(11) DEFAULT NULL,
   `id_Suppliers` bigint(20) DEFAULT NULL,
+  `id_VF_cash` int(11) DEFAULT NULL,
   `id_pos` int(11) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -447,9 +452,9 @@ CREATE TABLE `masary_sell` (
 -- Dumping data for table `masary_sell`
 --
 
-INSERT INTO `masary_sell` (`id_masary_sell`, `date_masary_sell`, `time_masary_sell`, `value_masary_sell`, `amount_masary_sell`, `id_recharge_type`, `id_Suppliers`, `id_pos`) VALUES
-(1, '2022-06-24', '00:00:00', 0.00, 1000.00, 1, 1, 1),
-(2, '2022-06-26', '00:00:00', 0.00, 10000.00, 1, 1, 1);
+INSERT INTO `masary_sell` (`id_masary_sell`, `date_masary_sell`, `time_masary_sell`, `value_masary_sell`, `amount_masary_sell`, `id_recharge_type`, `id_Suppliers`, `id_VF_cash`, `id_pos`) VALUES
+(1, '2022-06-24', '00:00:00', 0.00, 1000.00, 1, 1, NULL, 1),
+(2, '2022-06-26', '00:00:00', 0.00, 10000.00, 1, 1, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -684,6 +689,7 @@ CREATE TABLE `suppliersaccount` (
   `id_Suppliers` bigint(255) DEFAULT NULL,
   `id_purchaseInvoice` bigint(255) DEFAULT NULL,
   `id_paymentReceipt` bigint(255) DEFAULT NULL,
+  `id_masary_sell` int(11) DEFAULT NULL,
   `note` text DEFAULT NULL,
   `isActive` tinyint(1) DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -692,8 +698,8 @@ CREATE TABLE `suppliersaccount` (
 -- Dumping data for table `suppliersaccount`
 --
 
-INSERT INTO `suppliersaccount` (`id_supplliersAccount`, `date_suppliersAccount`, `Debit`, `Creditor`, `id_Suppliers`, `id_purchaseInvoice`, `id_paymentReceipt`, `note`, `isActive`) VALUES
-(3, '2022-06-28', 700.00, NULL, 2, NULL, 1, 'ايصال دفع رقم 1', 1);
+INSERT INTO `suppliersaccount` (`id_supplliersAccount`, `date_suppliersAccount`, `Debit`, `Creditor`, `id_Suppliers`, `id_purchaseInvoice`, `id_paymentReceipt`, `id_masary_sell`, `note`, `isActive`) VALUES
+(3, '2022-06-28', 700.00, NULL, 2, NULL, 1, NULL, 'ايصال دفع رقم 1', 1);
 
 -- --------------------------------------------------------
 
@@ -771,7 +777,8 @@ CREATE TABLE `users` (
 
 INSERT INTO `users` (`username`, `passwod`) VALUES
 ('ali', 123),
-('0', 0);
+('0', 0),
+('mostafa', 2800);
 
 -- --------------------------------------------------------
 
@@ -996,7 +1003,8 @@ ALTER TABLE `masary_sell`
   ADD PRIMARY KEY (`id_masary_sell`),
   ADD KEY `id_Suppliers` (`id_Suppliers`),
   ADD KEY `fk_pos_sell` (`id_pos`),
-  ADD KEY `fk_recharge_type` (`id_recharge_type`);
+  ADD KEY `fk_recharge_type` (`id_recharge_type`),
+  ADD KEY `fk_vf_cash` (`id_VF_cash`);
 
 --
 -- Indexes for table `paymentreceipt`
@@ -1059,7 +1067,8 @@ ALTER TABLE `suppliersaccount`
   ADD PRIMARY KEY (`id_supplliersAccount`),
   ADD KEY `id_Suppliers` (`id_Suppliers`),
   ADD KEY `id_purchaseInvoice` (`id_purchaseInvoice`),
-  ADD KEY `id_paymentReceipt` (`id_paymentReceipt`);
+  ADD KEY `id_paymentReceipt` (`id_paymentReceipt`),
+  ADD KEY `fk_masary_account` (`id_masary_sell`);
 
 --
 -- Indexes for table `supplier_type`
@@ -1095,7 +1104,7 @@ ALTER TABLE `vf_cash`
 -- AUTO_INCREMENT for table `casher`
 --
 ALTER TABLE `casher`
-  MODIFY `id_casher` bigint(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=79;
+  MODIFY `id_casher` bigint(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=80;
 
 --
 -- AUTO_INCREMENT for table `categoryutilites`
@@ -1113,7 +1122,7 @@ ALTER TABLE `clientaccount`
 -- AUTO_INCREMENT for table `masary_pay`
 --
 ALTER TABLE `masary_pay`
-  MODIFY `id_masary_pay` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
+  MODIFY `id_masary_pay` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
 
 --
 -- AUTO_INCREMENT for table `masary_sell`
@@ -1209,6 +1218,7 @@ ALTER TABLE `masary_pay`
 ALTER TABLE `masary_sell`
   ADD CONSTRAINT `fk_pos_sell` FOREIGN KEY (`id_pos`) REFERENCES `pos` (`id_pos`),
   ADD CONSTRAINT `fk_recharge_type` FOREIGN KEY (`id_recharge_type`) REFERENCES `recharge_type` (`id_recharge_type`),
+  ADD CONSTRAINT `fk_vf_cash` FOREIGN KEY (`id_VF_cash`) REFERENCES `vf_cash` (`id_VF_cash`),
   ADD CONSTRAINT `masary_sell_ibfk_1` FOREIGN KEY (`id_Suppliers`) REFERENCES `suppliers` (`id_Suppliers`);
 
 --
@@ -1245,6 +1255,7 @@ ALTER TABLE `suppliers`
 -- Constraints for table `suppliersaccount`
 --
 ALTER TABLE `suppliersaccount`
+  ADD CONSTRAINT `fk_masary_account` FOREIGN KEY (`id_masary_sell`) REFERENCES `masary_sell` (`id_masary_sell`),
   ADD CONSTRAINT `suppliersaccount_ibfk_1` FOREIGN KEY (`id_Suppliers`) REFERENCES `suppliers` (`id_Suppliers`),
   ADD CONSTRAINT `suppliersaccount_ibfk_2` FOREIGN KEY (`id_purchaseInvoice`) REFERENCES `purchaseinvoice` (`id_purchaseInvoice`),
   ADD CONSTRAINT `suppliersaccount_ibfk_3` FOREIGN KEY (`id_paymentReceipt`) REFERENCES `paymentreceipt` (`id_PaymentReceipt`);
@@ -1253,7 +1264,7 @@ DELIMITER $$
 --
 -- Events
 --
-CREATE DEFINER=`root`@`localhost` EVENT `finalDay` ON SCHEDULE EVERY 1 DAY STARTS '2022-06-19 00:00:00' ON COMPLETION PRESERVE ENABLE DO INSERT INTO `finallyday`( `dateFinally`, `oldBalance`, `totalimport`, `totalexport` ) VALUES( CURRENT_DATE(),( SELECT f.newbalance FROM finallyday AS f WHERE f.dateFinally = CURRENT_DATE() - INTERVAL 1 DAY), ( SELECT COALESCE(SUM(c.Debit), 0) FROM casher AS c WHERE c.date_casher = CURRENT_DATE()), ( SELECT COALESCE(SUM(c.Creditor), 0) FROM casher AS c WHERE c.date_casher = CURRENT_DATE()) )$$
+CREATE DEFINER=`root`@`localhost` EVENT `finalDay` ON SCHEDULE EVERY 1 DAY STARTS '2022-06-19 00:00:00' ON COMPLETION PRESERVE ENABLE DO INSERT INTO `finallyday`( `dateFinally`, `oldBalance`, `totalimport`, `totalexport`,`time_insert` ) VALUES( CURRENT_DATE(),( SELECT f.newbalance FROM finallyday AS f WHERE f.dateFinally = CURRENT_DATE() - INTERVAL 1 DAY), ( SELECT COALESCE(SUM(c.Debit), 0) FROM casher AS c WHERE c.date_casher = CURRENT_DATE()), ( SELECT COALESCE(SUM(c.Creditor), 0) FROM casher AS c WHERE c.date_casher = CURRENT_DATE()),current_timestamp())$$
 
 CREATE DEFINER=`root`@`localhost` EVENT `updatebalance` ON SCHEDULE EVERY 1 SECOND STARTS '2022-06-19 07:53:05' ON COMPLETION NOT PRESERVE ENABLE DO UPDATE finallyday SET totalimport = (SELECT COALESCE(SUM(c.Debit), 0) FROM casher AS c WHERE c.date_casher = CURRENT_DATE()) , totalexport = (SELECT COALESCE(SUM(c.Creditor), 0) FROM casher AS c WHERE c.date_casher = CURRENT_DATE()) WHERE dateFinally = CURRENT_DATE()$$
 
