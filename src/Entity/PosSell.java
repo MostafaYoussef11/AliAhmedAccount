@@ -13,12 +13,14 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JComboBox;
+import javax.swing.JTable;
 
 /**
  *
  * @author mosta
  */
-public class PosSell {
+public abstract class PosSell {
     
     // Variable Seter by User
     private double value_masary_sell; // The value add to balance 
@@ -37,20 +39,29 @@ public class PosSell {
     private Connection con;
     private PreparedStatement pstmt , pstmc;
     private ResultSet rst;
-    //constractor method
-    public PosSell(String name_pos) {
-        this.name_pos = name_pos;
-        this.id_pos = Integer.parseInt("SELECT id_pos AS id FROM pos where name_pos='"+name_pos+"'");
-    }
+    //abstract Method
+    public void fillTable(JTable jTable){
+        String sql_select = "SELECT rt.name_recharge_type , ms.amount_masary_sell , ms.time_masary_sell , ms.date_masary_sell ,ms.id_masary_sell  FROM masary_sell AS ms INNER JOIN recharge_type AS rt ON ms.id_recharge_type = rt.id_recharge_type WHERE ms.id_pos ="+id_pos+" ORDER BY ms.id_masary_sell DESC ";
+        String[] columnName = {"نوع التوريد", "المبلغ", "الوقت", "التاريخ", "م"};
+        ConnectDB.fillAndCenterTable(sql_select, jTable, columnName);
 
-    public void SetDataAndgeter(double value,double amount , String  name_recharge_type , String name_Suppliers , String number_VF_cash ){
-        
+    };
+     
+    //constractor method
+    public PosSell(int id_pos) {
+        this.name_pos = ConnectDB.getIdFromName("SELECT name_pos AS id FROM pos WHERE id_pos = "+id_pos);
+        this.id_pos = id_pos;//Integer.parseInt("SELECT id_pos AS id FROM pos where name_pos='"+name_pos+"'");
+    }
+    public void fillComboRechargeType(JComboBox box){
+        ConnectDB.fillCombo("recharge_type", "name_recharge_type", box);
+    };
+   
+    public void SetDataAndgeter(double value,double amount , String  name_recharge_type , String name_Suppliers , String number_VF_cash ){ 
         this.value_masary_sell = value;
         this.amount_masary_sell = amount;
         this.name_Suppliers = name_Suppliers;
         this.name_recharge_type = name_recharge_type;
         this.number_VF_cash = number_VF_cash;
-        
         id_recharge_type = Integer.parseInt(ConnectDB.getIdFrmName("recharge_type", name_recharge_type));
         if(name_Suppliers != null) id_Suppliers = Integer.parseInt(new Suppliers().getIdByName(name_Suppliers));
         if(number_VF_cash != null) id_VF_cash = Integer.parseInt(ConnectDB.getIdFromName("SELECT id_VF_cash AS id FROM VF_cash WHERE number_VF_cash ='"+number_VF_cash+"'"));
@@ -117,23 +128,8 @@ public class PosSell {
         this.id_pos = id_pos;
     }
     
-    
-    
-    public boolean Save(){
-        boolean isSave = false;
-     switch(id_recharge_type){
-        case 1:
-          isSave = SaveCash();
-          break;
-        case 2:
-          isSave = SaveAccountSupplier();
-          break;
-                
-      }
-       return isSave;
-    }
 
-    private boolean SaveCash() {
+    public boolean SaveCash() {
         boolean isSave = false;
         try {
             con = ConnectDB.getCon();
@@ -148,27 +144,38 @@ public class PosSell {
             pstmt.setInt(4, 1);
             pstmt.setInt(5, id_pos);
             int row_inserted = pstmt.executeUpdate();
-            if(row_inserted == 1){
-                rst = pstmt.getGeneratedKeys();
+            rst = pstmt.getGeneratedKeys();
+            if(rst.next()){
                 int id_masary_sell = rst.getInt(1);
+                if(row_inserted == 1){
                 String sql_insert_casher = "INSERT INTO `casher`(`Creditor`, `note`, `id_masary_sell`) VALUES (?,?,?)";
                 pstmc = con.prepareStatement(sql_insert_casher);
                 pstmc.setDouble(1, amount_masary_sell);
-                pstmc.setString(2, "شحن ماكينة"+name_pos);
+                pstmc.setString(2, "شحن ماكينة "+name_pos);
                 pstmc.setInt(3, id_masary_sell);
                 int row_insert = pstmc.executeUpdate();
-                if(row_insert == 1){
-                    isSave = true;
+                    if(row_insert == 1){
+                        isSave = true;
+                        con.commit();
+                        con.close();
+                    }
                 }
             }
             
+            
         } catch (SQLException ex) {
-            Logger.getLogger(PosSell.class.getName()).log(Level.SEVERE, null, ex);
+            try {
+                Logger.getLogger(PosSell.class.getName()).log(Level.SEVERE, null, ex);
+                con.rollback();
+                con.close();
+            } catch (SQLException ex1) {
+                Logger.getLogger(PosSell.class.getName()).log(Level.SEVERE, null, ex1);
+            }
         }
        return isSave;
     }
 
-    private boolean SaveAccountSupplier() {
+    public boolean SaveAccountSupplier() {
         boolean isSave = false;
         try {
             con = ConnectDB.getCon();
@@ -183,23 +190,34 @@ public class PosSell {
             pstmt.setInt(4, id_Suppliers);
             pstmt.setInt(5, id_pos);
             int row_inserted = pstmt.executeUpdate();
-            if(row_inserted == 1){
-                rst = pstmt.getGeneratedKeys();
+            rst = pstmt.getGeneratedKeys();
+            if(rst.next()){
                 int id_masary_sell = rst.getInt(1);
-                String sql_insert_supp_account = "INSERT INTO `suppliersaccount` (`Creditor`, `id_Suppliers`, `id_masary_sell`, `note`) VALUES (?,?,?,?)";
-                pstmc = con.prepareStatement(sql_insert_supp_account);
-                pstmc.setDouble(1, amount_masary_sell);
-                pstmc.setInt(2, id_Suppliers);
-                pstmc.setInt(3, id_masary_sell);
-                pstmc.setString(458, "شحن ماكينة"+name_pos);
-                int row_insert = pstmc.executeUpdate();
-                if(row_insert == 1){
-                    isSave = true;
-                }               
+                if(row_inserted == 1){
+                    String sql_insert_supp_account = "INSERT INTO `suppliersaccount` (`Creditor`, `id_Suppliers`, `id_masary_sell`, `note`) VALUES (?,?,?,?)";
+                    pstmc = con.prepareStatement(sql_insert_supp_account);
+                    pstmc.setDouble(1, amount_masary_sell);
+                    pstmc.setInt(2, id_Suppliers);
+                    pstmc.setInt(3, id_masary_sell);
+                    pstmc.setString(4, "شحن ماكينة"+name_pos);
+                    int row_insert = pstmc.executeUpdate();
+                    if(row_insert == 1){
+                        isSave = true;
+                        con.commit();
+                        con.close();
+                    }               
+                }
             }
+
             
         } catch (SQLException ex) {
-            Logger.getLogger(PosSell.class.getName()).log(Level.SEVERE, null, ex);
+            try {
+                con.rollback();
+                con.close();
+                Logger.getLogger(PosSell.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex1) {
+                Logger.getLogger(PosSell.class.getName()).log(Level.SEVERE, null, ex1);
+            }
         }
        return isSave; 
     }

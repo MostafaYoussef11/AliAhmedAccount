@@ -15,9 +15,18 @@ import javax.swing.JTable;
  * @author mosta
  */
 public class Suppliers extends Person{
-    private String id_supplier_type , name_supplier_type;
+    private String name_supplier_type;
+    private int id_supplier_type;
     public Suppliers() {
         super("Suppliers");
+    }
+
+    public int getId_supplier_type() {
+        return id_supplier_type;
+    }
+
+    public void setId_supplier_type(int id_supplier_type) {
+        this.id_supplier_type = id_supplier_type;
     }
     
     public String getFirstBalance(String id_Supplier){
@@ -86,7 +95,7 @@ public class Suppliers extends Person{
         String[] coulmnName = {"رصيد سابق","النوع", "رقم قومي", "عنوان", "هاتف", "الاسم", "مسلسل"};
         ConnectDB.fillAndCenterTable(sql, table, coulmnName);
     }
-    public void FillComboAllNameSupplierByType(JComboBox comboName , int id_supplier_type){
-        ConnectDB.fillCombo(tableName + " WHERE isActive = 1 AND id_supplier_type = "+id_supplier_type, "name_"+tableName, comboName);
+    public void FillComboAllNameSupplierByType(JComboBox comboName){
+        ConnectDB.fillCombo(tableName + " WHERE isActive = 1 AND id_supplier_type = "+id_supplier_type , "name_"+tableName, comboName);
     } 
 }

@@ -15,6 +15,8 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 
 /**
@@ -28,20 +30,21 @@ public class MasarySellFrame extends javax.swing.JFrame {
      */
     VFCashClass vcash;
     Font font;
-    masarySellClass msc;
+    masarySellClass masary;
     Suppliers suppliers;
     Dimension dim = new Dimension(870, 600);
-    PosSell masary;
-    public MasarySellFrame() {
+   // PosSell masary;
+    public MasarySellFrame(int type_supplier) {
         initComponents();
         setSize(dim);
         Tools.setBackground(background, dim, "16165.jpg");
         font = Tools.font(32f);
         txt_title.setFont(font);
-        msc = new masarySellClass();
+        masary = new masarySellClass();
         suppliers = new Suppliers();
+        suppliers.setId_supplier_type(type_supplier);
         vcash = new VFCashClass();
-        masary = new PosSell("مصاري");
+       // masary = new PosSell("مصاري" , 1);
         newSell();
     }
 
@@ -343,7 +346,7 @@ public class MasarySellFrame extends javax.swing.JFrame {
                 suppliers.FillComboCash(comb_to_account);
                 break;
             case 1:
-                suppliers.FillComboAllNameSupplierByType(comb_to_account, 4);
+                suppliers.FillComboAllNameSupplierByType(comb_to_account);
                 break;
             default:
                 vcash.fillCombo(comb_to_account);
@@ -358,8 +361,37 @@ public class MasarySellFrame extends javax.swing.JFrame {
     private void btsaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btsaveActionPerformed
         boolean isSave = false;
         String name_recharge_type = comb_recharge_type.getSelectedItem().toString();
-        double value = Double.parseDouble(txt_value.getText());
-        double amount = Double.parseDouble(txt_amount.getText());
+        double value = 0 ; 
+        try{
+            value = Double.parseDouble(txt_value.getText());
+        }catch(NumberFormatException ex){
+            Logger.getLogger("Sell error").log(Level.SEVERE, null, ex);
+        }
+        double amount = 0 ; 
+        try{
+            amount = Double.parseDouble(txt_amount.getText());
+        }catch(NumberFormatException ex){
+            Logger.getLogger("Sell error").log(Level.SEVERE, null, ex);            
+        }
+        String to_account = comb_to_account.getSelectedItem().toString();
+        switch(name_recharge_type){
+            case "نقدي":
+                masary.SetDataAndgeter(value, amount, name_recharge_type, to_account, null);
+                isSave = masary.SaveCash();
+                break;
+            case "مندوب":
+                masary.SetDataAndgeter(value, amount, name_recharge_type, to_account, null);
+                isSave = masary.SaveAccountSupplier();
+                break;
+            default:
+                masary.SetDataAndgeter(value, amount, name_recharge_type, null, to_account);
+                isSave = false; // method add to VF-Cash
+                break;
+        }
+        if(isSave){
+            Tools.showInfoMsg("تم الحفظ بنجاح", "حفظ");
+            newSell();
+        }
         
     }//GEN-LAST:event_btsaveActionPerformed
 
@@ -386,10 +418,11 @@ public class MasarySellFrame extends javax.swing.JFrame {
 
     private void newSell(){
         Tools.disableButOpen(btPanel);
-        msc.fillComboRechargeType(comb_recharge_type);
+        masary.fillComboRechargeType(comb_recharge_type);
         comb_recharge_type.setSelectedIndex(1);
-        msc.fillTable(jTable1);
-        suppliers.FillComboAllNameSupplierByType(comb_to_account, 4);
+        masary.fillTable(jTable1);
+        //suppliers.setId_supplier_type(4);
+        suppliers.FillComboAllNameSupplierByType(comb_to_account);
     }
     /**
      * @param args the command line arguments
@@ -421,7 +454,7 @@ public class MasarySellFrame extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new MasarySellFrame().setVisible(true);
+                new MasarySellFrame(0).setVisible(true);
             }
         });
     }

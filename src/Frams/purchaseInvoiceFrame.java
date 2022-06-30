@@ -1012,13 +1012,15 @@ public class purchaseInvoiceFrame extends javax.swing.JFrame {
                 break;
             case deferred:
                 txtAmountCashing.setEnabled(false);
-                suppliers.FillComboAllNameSupplierByType(comboName,1);
+                suppliers.setId_supplier_type(1);
+                suppliers.FillComboAllNameSupplierByType(comboName);
                 //txtNote.setText("فاتورة مشتريات رقم " +" "+ id_salesInvoic + " - " + comboPaymentMethod.getSelectedItem().toString() + " - " + comboName.getSelectedItem().toString());
                 break;
             case installments:
                 txtAmountCashing.setEnabled(true);
                 //txtNote.setText("فاتورة مشتريات رقم " +" "+ id_salesInvoic + " - " + comboPaymentMethod.getSelectedItem().toString() + " - " + comboName.getSelectedItem().toString());
-                suppliers.FillComboAllNameSupplierByType(comboName,1);
+                suppliers.setId_supplier_type(1);
+                suppliers.FillComboAllNameSupplierByType(comboName);
                 break;
             default:
                 break;

@@ -242,6 +242,8 @@ public class ConnectDB {
        }
    
    }
-  
+ public static void fillPosCombo(JComboBox box){
+     fillCombo("pos", "name_pos", box);
+ }
  
 }

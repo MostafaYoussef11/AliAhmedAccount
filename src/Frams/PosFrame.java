@@ -412,62 +412,93 @@ public class PosFrame extends javax.swing.JFrame {
 
     private void Btn_utilitesMasaryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_utilitesMasaryActionPerformed
         // TODO add your handling code here:
-        UtilitiesMasary u = new UtilitiesMasary();
-        Tools.openJFram(u);
+        UtilitiesMasary u = new UtilitiesMasary(1);
+        Tools.openJFram(u , "خدمات مصاري");
         dispose();
     }//GEN-LAST:event_Btn_utilitesMasaryActionPerformed
 
     private void Btn_masary_payActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_masary_payActionPerformed
         // TODO add your handling code here:
         MasarypayFrame mf = new MasarypayFrame();
-        Tools.openJFram(mf);
+        Tools.openJFram(mf , "مبيعات مصاري");
         dispose();
     }//GEN-LAST:event_Btn_masary_payActionPerformed
 
     private void Btn_masary_sellActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_masary_sellActionPerformed
         // TODO add your handling code here:
-        MasarySellFrame msf = new MasarySellFrame();
+        MasarySellFrame msf = new MasarySellFrame(4);
         Tools.openJFram(msf, "مشتريات مصاري");
     }//GEN-LAST:event_Btn_masary_sellActionPerformed
 
     private void Btn_utilitesBeeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_utilitesBeeActionPerformed
         // TODO add your handling code here:
+        UtilitiesMasary uB = new UtilitiesMasary(2);
+        Tools.openJFram(uB, "Bee خدمات");
+        dispose();
+        
     }//GEN-LAST:event_Btn_utilitesBeeActionPerformed
 
     private void Btn_Bee_payActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_Bee_payActionPerformed
         // TODO add your handling code here:
+        BeepayFrame bpay = new BeepayFrame();
+        Tools.openJFram(bpay, "Bee");
+        dispose();
     }//GEN-LAST:event_Btn_Bee_payActionPerformed
 
     private void Btn_Bee_sellActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_Bee_sellActionPerformed
         // TODO add your handling code here:
+        BeeSellFrame bsf = new BeeSellFrame(5);
+        Tools.openJFram(bsf, "  Bee مشتريات");
+        dispose();
     }//GEN-LAST:event_Btn_Bee_sellActionPerformed
 
     private void Btn_utilitesFawryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_utilitesFawryActionPerformed
         // TODO add your handling code here:
+        UtilitiesMasary uB = new UtilitiesMasary(3);
+        Tools.openJFram(uB, "Fawry خدمات");
+        dispose();
     }//GEN-LAST:event_Btn_utilitesFawryActionPerformed
 
     private void Btn_Fawry_payActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_Fawry_payActionPerformed
         // TODO add your handling code here:
+        FawrypayFrame fpf = new FawrypayFrame();
+        Tools.openJFram(fpf, "Fawry مبيعات");
+        dispose();
     }//GEN-LAST:event_Btn_Fawry_payActionPerformed
 
     private void Btn_Fawry_sellActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_Fawry_sellActionPerformed
         // TODO add your handling code here:
+        FawrySellFrame fsf = new FawrySellFrame(3);
+        Tools.openJFram(fsf, "مشتريات فوري");
+        dispose();
     }//GEN-LAST:event_Btn_Fawry_sellActionPerformed
 
     private void Btn_utilitesAmanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_utilitesAmanActionPerformed
         // TODO add your handling code here:
+        UtilitiesMasary uB = new UtilitiesMasary(5);
+        Tools.openJFram(uB, "Fawry خدمات");
+        dispose();
     }//GEN-LAST:event_Btn_utilitesAmanActionPerformed
 
     private void Btn_Aman_payActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_Aman_payActionPerformed
         // TODO add your handling code here:
+        AmanpayFrame aman = new AmanpayFrame();
+        Tools.openJFram(aman, "Aman مبيعات");
+        dispose();
     }//GEN-LAST:event_Btn_Aman_payActionPerformed
 
     private void Btn_Aman_sellActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_Aman_sellActionPerformed
         // TODO add your handling code here:
+        AmanSellFrame aman = new AmanSellFrame(2);
+        Tools.openJFram(aman, "مشتريات أمان");
+        dispose();       
     }//GEN-LAST:event_Btn_Aman_sellActionPerformed
 
     private void Btn_utilitesOpayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_utilitesOpayActionPerformed
         // TODO add your handling code here:
+        UtilitiesMasary uB = new UtilitiesMasary(4);
+        Tools.openJFram(uB, "OPay خدمات");
+        dispose();
     }//GEN-LAST:event_Btn_utilitesOpayActionPerformed
 
     private void Btn_Opay_payActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_Opay_payActionPerformed

@@ -6,6 +6,7 @@
 package Frams;
 
 import Entity.masary_Utilites;
+import Utilities.ConnectDB;
 import Utilities.Tools;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -21,10 +22,17 @@ public class UtilitiesMasary extends javax.swing.JFrame {
      */
     masary_Utilites util;
     String id_util;
-    public UtilitiesMasary() {
+    int id_pos;
+    public UtilitiesMasary(int id_pos) {
+       
         initComponents();
+        this.id_pos = id_pos;
         newUtilies();
     }
+
+//    public void setId_pos(int id_pos) {
+//        this.id_pos = id_pos;
+//    }
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -50,9 +58,11 @@ public class UtilitiesMasary extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
-        combocategoryutilites = new javax.swing.JComboBox<>();
+        combocategoryutilites = new javax.swing.JComboBox<String>();
         jLabel1 = new javax.swing.JLabel();
         txtprice = new javax.swing.JTextField();
+        jLabel4 = new javax.swing.JLabel();
+        combPos = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -203,7 +213,7 @@ public class UtilitiesMasary extends javax.swing.JFrame {
         jLabel2.setText("الخدمة");
         jLabel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        combocategoryutilites.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        combocategoryutilites.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -212,6 +222,12 @@ public class UtilitiesMasary extends javax.swing.JFrame {
 
         txtprice.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         txtprice.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+
+        jLabel4.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel4.setText("الماكينة");
+
+        combPos.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -232,21 +248,30 @@ public class UtilitiesMasary extends javax.swing.JFrame {
                     .addComponent(jScrollPane1)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(combocategoryutilites, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(txtNote))
+                            .addComponent(txtNote)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(combocategoryutilites, javax.swing.GroupLayout.PREFERRED_SIZE, 309, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(combPos, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(lablenote, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE))))
+                            .addComponent(lablenote, javax.swing.GroupLayout.DEFAULT_SIZE, 143, Short.MAX_VALUE)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
                 .addGap(10, 10, 10))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 35, Short.MAX_VALUE)
-                    .addComponent(combocategoryutilites))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(combocategoryutilites, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 2, Short.MAX_VALUE))
+                    .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(combPos)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtNote, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -260,7 +285,7 @@ public class UtilitiesMasary extends javax.swing.JFrame {
                     .addComponent(txtprice))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 331, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(15, 15, 15)
                 .addComponent(btPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -370,7 +395,7 @@ public class UtilitiesMasary extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new UtilitiesMasary().setVisible(true);
+                new UtilitiesMasary(0).setVisible(true);
             }
         });
     }
@@ -384,10 +409,12 @@ public class UtilitiesMasary extends javax.swing.JFrame {
     private javax.swing.JButton btprint;
     private javax.swing.JButton btsave;
     private javax.swing.JButton btupdate;
+    private javax.swing.JComboBox combPos;
     private javax.swing.JComboBox<String> combocategoryutilites;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     private javax.swing.JLabel lablenote;
@@ -397,9 +424,14 @@ public class UtilitiesMasary extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void newUtilies() {
-        util = new masary_Utilites();
+        ConnectDB.fillPosCombo(combPos);
+      //  Tools.showErrorMsg("id_pos = "+id_pos);
+        //id_pos = Integer.parseInt(ConnectDB.getIdFrmName("pos", combPos.getSelectedItem().toString()));
+        combPos.setSelectedIndex(id_pos - 1);
+        combPos.setEnabled(false);
+        util = new masary_Utilites(id_pos);
         Tools.disableButOpen(btPanel);
-        util.fillComboCategoryUtilites(combocategoryutilites);
+        util.fillComboCategory_Utilites(combocategoryutilites);
         util.fillTable(jTable1);
        // txtName.setText("");
         combocategoryutilites.setEnabled(true);

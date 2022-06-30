@@ -42,7 +42,7 @@ public class MasarypayFrame extends javax.swing.JFrame {
         decf = new DecimalFormat("0.00");
         font = Tools.font(24f);
         title.setFont(font);
-        masary_util = new masary_Utilites();
+        masary_util = new masary_Utilites(1);
         client = new ClientPerson();
         masary = new Entity.MasaryPay();
         newMasaray();
@@ -80,19 +80,19 @@ public class MasarypayFrame extends javax.swing.JFrame {
 
         txtPanal = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        comUtility = new javax.swing.JComboBox<>();
+        comUtility = new javax.swing.JComboBox<String>();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         txtCount = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        combClient = new javax.swing.JComboBox<>();
+        combClient = new javax.swing.JComboBox<String>();
         jLabel5 = new javax.swing.JLabel();
         txtdiscount = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         txtbalance = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         txtAmount = new javax.swing.JTextField();
-        combnote = new javax.swing.JComboBox<>();
+        combnote = new javax.swing.JComboBox<String>();
         lb_phone = new javax.swing.JLabel();
         txtPhone = new javax.swing.JTextField();
         title = new javax.swing.JLabel();
@@ -122,7 +122,7 @@ public class MasarypayFrame extends javax.swing.JFrame {
         txtPanal.add(jLabel1);
         jLabel1.setBounds(725, 13, 100, 35);
 
-        comUtility.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comUtility.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         comUtility.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 comUtilityItemStateChanged(evt);
@@ -163,7 +163,7 @@ public class MasarypayFrame extends javax.swing.JFrame {
         txtPanal.add(jLabel4);
         jLabel4.setBounds(725, 55, 100, 35);
 
-        combClient.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        combClient.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         txtPanal.add(combClient);
         combClient.setBounds(560, 55, 160, 35);
 
@@ -205,7 +205,7 @@ public class MasarypayFrame extends javax.swing.JFrame {
         txtPanal.add(txtAmount);
         txtAmount.setBounds(560, 95, 160, 35);
 
-        combnote.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        combnote.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         combnote.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 combnoteItemStateChanged(evt);
@@ -382,6 +382,7 @@ public class MasarypayFrame extends javax.swing.JFrame {
     private void btsaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btsaveActionPerformed
         double price_masary_pay = 0 , discount_of_balance = 0, amount_masary_pay = 0 ;
         int id_client = 1;
+        boolean isSave = false;
         String not_utilitiy = combnote.getSelectedItem().toString();
         try{
             price_masary_pay = Double.parseDouble(txtCount.getText());
@@ -406,14 +407,19 @@ public class MasarypayFrame extends javax.swing.JFrame {
             masary.setId_utility_masary(not_utilitiy);
             masary.setUtility_masary(not_utilitiy);
         }
-        
-        if(masary.Save()){
+        if(id_client == 1){
+            isSave = masary.SaveCasher();
+        }else{
+            isSave = masary.SaveClients();
+        }
+                    
+        if(isSave){
             Tools.showInfoMsg("تم الحفظ", "حفظ");
             newMasaray();
         }
         else{
             Tools.showErrorMsg("خطأ");
-        }
+        }  
     }//GEN-LAST:event_btsaveActionPerformed
 
     private void bteditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bteditActionPerformed

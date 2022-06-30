@@ -22,29 +22,39 @@ import javax.swing.JTable;
  * @author mosta
  */
 public class masary_Utilites {
-    /**
-     INSERT INTO `utility_masary` (`id_utility_masary`, `name_utility_masary`, `note_utility`, `cost_by_perse`) VALUES ('', NULL, NULL, NULL)
 
-     */
+   
+   // variable Connection
    private Connection con;
    private PreparedStatement pstm;
    private Statement stmt;
+   //variable used
    private int id_utility_masary , id_category;
    private String name_utility_masary , note_utility ;
    private double cost_by_perse ,price;
-
+   private int id_pos;
+   
+   //Constractor Method
+   public masary_Utilites(int id_pos){
+       this.id_pos = id_pos;
+   }
+   
+   //Seter And Getter Method
     public int getId_utility_masary() {
         return id_utility_masary;
     }
-
+    public int getId_pos() {
+        return id_pos;
+    }
+    public void setId_pos(int id_pos) {
+        this.id_pos = id_pos;
+    }
     public int getId_category() {
         return id_category;
     }
-
     public double getPrice() {
         return price;
     }
-
     public void setPrice(double price) {
         this.price = price;
     }
@@ -99,7 +109,7 @@ public class masary_Utilites {
     }
    
     public void fillTable(JTable table){
-        String sql = "SELECT `cost_by_perse`, `note_utility`, `name_utility_masary`,`id_utility_masary` FROM `utility_masary`";
+        String sql = "SELECT `cost_by_perse`, `note_utility`, `name_utility_masary`,`id_utility_masary` FROM `utility_masary` WHERE id_pos="+id_pos;
         String[] coulmnName = {"التكلفة", "البيان", "الخدمة", "م"};
         ConnectDB.fillAndCenterTable(sql, table, coulmnName);
     
@@ -108,13 +118,14 @@ public class masary_Utilites {
        boolean isSave = false;
         try {  
            con = ConnectDB.getCon();
-           String sql_Save = "INSERT INTO `utility_masary` (`name_utility_masary`, `note_utility`, `cost_by_perse`,`price`) VALUES ( ?, ?, ?,? )";
+           String sql_Save = "INSERT INTO `utility_masary` (`name_utility_masary`, `note_utility`, `cost_by_perse`,`price` , `id_pos`) VALUES ( ?, ?, ?,?,? )";
            pstm = con.prepareStatement(sql_Save, Statement.RETURN_GENERATED_KEYS);
            
            pstm.setString(1, name_utility_masary);
            pstm.setString(2, note_utility);
            pstm.setDouble(3, cost_by_perse);
            pstm.setDouble(4, price);
+           pstm.setInt(5, id_pos);
            int rowAffact = pstm.executeUpdate();
            if(rowAffact == 1){
                isSave = true;
@@ -130,12 +141,18 @@ public class masary_Utilites {
         String sql = "DELETE FROM utility_masary WHERE id_utility_masary ="+id_utility_masary;
         return ConnectDB.ExucuteAnyQuery(sql);
     }
-   
+    public void fillComboCategory_Utilites(JComboBox combo){
+        ConnectDB.fillCombo("categoryutilites ", "name_category", combo);
+        //SELECT name_utility_masary FROM 
+        //ConnectDB.fillCombo("`utility_masary` WHERE id_pos = "+id_pos+" GROUP BY name_utility_masary", "name_utility_masary", combo);
+    }   
     public void fillComboCategoryUtilites(JComboBox combo){
-        ConnectDB.fillCombo("categoryutilites", "name_category", combo);
+      //  ConnectDB.fillCombo("categoryutilites ", "name_category", combo);
+        //SELECT name_utility_masary FROM 
+        ConnectDB.fillCombo("`utility_masary` WHERE id_pos = "+id_pos+" GROUP BY name_utility_masary", "name_utility_masary", combo);
     }
     public void fillComboUtilites(JComboBox comb ,String nameCatogry){
-        ConnectDB.fillCombo("utility_masary WHERE name_utility_masary = '"+nameCatogry+"'", "note_utility", comb);
+       ConnectDB.fillCombo("utility_masary WHERE name_utility_masary = '"+nameCatogry+"' AND id_pos="+id_pos, "note_utility", comb);
     }
     
     public int getIdByNote(String note){

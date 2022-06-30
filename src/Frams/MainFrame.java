@@ -10,6 +10,7 @@ import Entity.CheckCasher;
 import Entity.ClientPerson;
 import Entity.Items;
 import Entity.ItemsOnInvoice;
+import Entity.MasaryPay;
 import Entity.SalesInvoic;
 import Utilities.Tools;
 import com.sun.org.apache.bcel.internal.generic.AALOAD;
@@ -18,15 +19,19 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.io.IOException;
 import java.util.Date;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.Vector;
+import java.util.concurrent.ExecutionException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.concurrent.Worker;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
+import javax.swing.SwingWorker;
 import org.omg.CORBA.MARSHAL;
 
 
@@ -84,7 +89,7 @@ public class MainFrame extends javax.swing.JFrame {
         txtNowBalance.setLocation(10, dim.height - 170);
         txtIdItems.setFocusable(true);
         txtNowBalance.setText(new CasherClass().getNowBalanceCasher());
-        
+        txtMasaryBalance.setText(new MasaryPay().getfirstBalance()+"");
         
     };
     
@@ -119,7 +124,10 @@ public class MainFrame extends javax.swing.JFrame {
         fees = new javax.swing.JLabel();
         loan = new javax.swing.JLabel();
         VCash = new javax.swing.JLabel();
+        calc = new javax.swing.JLabel();
         counter = new javax.swing.JLabel();
+        card_10 = new javax.swing.JLabel();
+        txtMasaryBalance = new javax.swing.JLabel();
         background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -467,10 +475,39 @@ public class MainFrame extends javax.swing.JFrame {
         getContentPane().add(VCash);
         VCash.setBounds(580, 370, 170, 150);
 
+        calc.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        calc.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/calculator_1.png"))); // NOI18N
+        calc.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                calcMouseClicked(evt);
+            }
+        });
+        getContentPane().add(calc);
+        calc.setBounds(400, 650, 64, 64);
+
         counter.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        counter.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/counter.png"))); // NOI18N
+        counter.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/counter2.png"))); // NOI18N
         getContentPane().add(counter);
-        counter.setBounds(420, 600, 128, 140);
+        counter.setBounds(470, 650, 64, 64);
+
+        card_10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        card_10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/card10.png"))); // NOI18N
+        card_10.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        card_10.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                card_10MouseClicked(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                card_10MouseExited(evt);
+            }
+        });
+        getContentPane().add(card_10);
+        card_10.setBounds(50, 300, 70, 70);
+
+        txtMasaryBalance.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        txtMasaryBalance.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        getContentPane().add(txtMasaryBalance);
+        txtMasaryBalance.setBounds(120, 300, 120, 70);
 
         background.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         background.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -706,7 +743,86 @@ public class MainFrame extends javax.swing.JFrame {
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
         // TODO add your handling code here:
         txtNowBalance.setText(new CasherClass().getNowBalanceCasher());
+        txtMasaryBalance.setText(new MasaryPay().getfirstBalance()+"");
+
     }//GEN-LAST:event_formWindowActivated
+
+    private void card_10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_card_10MouseClicked
+        // TODO add your handling code here:
+        MasaryPay masary = new MasaryPay();
+        SwingWorker<Boolean,Object> worker = new SwingWorker<Boolean, Object>() {
+
+            @Override
+            protected Boolean doInBackground() throws Exception {
+                clickPanel(card_10);
+                  
+                masary.setId_utility_masary(39);
+                masary.setPrice_masary_pay(10);
+                masary.setDiscount_of_balance(10);
+                masary.setAmount_masary_pay(10);
+                masary.setUtility_masary("10");
+                return masary.SaveCasher();
+            }
+
+            @Override
+            protected void done() {
+                boolean isSave = false;
+                try {
+                    isSave = get();
+                } catch (InterruptedException ex) {
+                    Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+                } catch (ExecutionException ex) {
+                    Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+                }
+                if(isSave){
+                    //Tools.showInfoMsg("Okkkkkkk", "Ok");
+                    exitPanel(card_10);
+                    txtNowBalance.setText(new CasherClass().getNowBalanceCasher());     
+                    txtMasaryBalance.setText(masary.getNewbalance()+"");
+                }
+            
+            }
+            
+            
+            
+            
+            
+        };
+        
+        worker.execute();
+       
+//        if(){
+//            txtNowBalance.setText(new CasherClass().getNowBalanceCasher());
+//            card_10.setText("OK");
+//            try {
+//                Thread.sleep(3000);
+//                card_10.setText(null);
+//            } catch (InterruptedException ex) {
+//                Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+//            }
+//        }
+        
+       
+    }//GEN-LAST:event_card_10MouseClicked
+
+    private void card_10MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_card_10MouseExited
+        // TODO add your handling code here:
+        //exitPanel(calc);
+    }//GEN-LAST:event_card_10MouseExited
+
+    private void calcMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_calcMouseClicked
+//        try {
+//            // TODO add your handling code here:
+//            ProcessBuilder p = new ProcessBuilder("calc.exe");//Runtime.getRuntime().exec("calc.exe");
+//            p.start();
+//        } catch (IOException ex) {
+//            Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+            calcFrame cf = new calcFrame();
+            Tools.openJFram(cf);
+        
+
+    }//GEN-LAST:event_calcMouseClicked
     
     private void clickPanel(JLabel lable){
         lable.setBorder(BorderFactory.createLoweredBevelBorder());
@@ -758,6 +874,8 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel VCash;
     private javax.swing.JLabel background;
     private javax.swing.JButton btnSave;
+    private javax.swing.JLabel calc;
+    private javax.swing.JLabel card_10;
     private javax.swing.JLabel client;
     private javax.swing.JLabel counter;
     private javax.swing.JLabel fees;
@@ -770,6 +888,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JPanel selePanal;
     private javax.swing.JLabel suppliers;
     private javax.swing.JTextField txtIdItems;
+    private javax.swing.JLabel txtMasaryBalance;
     private javax.swing.JLabel txtNowBalance;
     private javax.swing.JTextField txtPrice;
     private javax.swing.JTextField txtQut;
