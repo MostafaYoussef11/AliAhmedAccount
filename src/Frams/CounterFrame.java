@@ -9,6 +9,8 @@ import Utilities.Tools;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Event;
+import java.awt.RenderingHints;
+import java.awt.event.KeyEvent;
 import java.io.File;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -75,7 +77,7 @@ public class CounterFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
-        setPreferredSize(new java.awt.Dimension(400, 460));
+        setPreferredSize(new java.awt.Dimension(400, 420));
         setResizable(false);
 
         txt_200.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
@@ -144,26 +146,56 @@ public class CounterFrame extends javax.swing.JFrame {
         jx200.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
         jx200.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jx200.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jx200.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jx200KeyPressed(evt);
+            }
+        });
 
         jx100.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
         jx100.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jx100.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jx100.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jx100KeyPressed(evt);
+            }
+        });
 
         jx50.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
         jx50.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jx50.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jx50.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jx50KeyPressed(evt);
+            }
+        });
 
         jx_20.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
         jx_20.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jx_20.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jx_20.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jx_20KeyPressed(evt);
+            }
+        });
 
         jx_10.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
         jx_10.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jx_10.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jx_10.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jx_10KeyPressed(evt);
+            }
+        });
 
         jx_5.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
         jx_5.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jx_5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jx_5.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jx_5KeyPressed(evt);
+            }
+        });
 
         jxOne.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
         jxOne.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -263,7 +295,7 @@ public class CounterFrame extends javax.swing.JFrame {
                 .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
@@ -345,6 +377,48 @@ public class CounterFrame extends javax.swing.JFrame {
 
         
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jx200KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jx200KeyPressed
+        // TODO add your handling code here:
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            jx100.requestFocus();
+        }
+    }//GEN-LAST:event_jx200KeyPressed
+
+    private void jx100KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jx100KeyPressed
+        // TODO add your handling code here:
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            jx50.requestFocus();
+        }
+    }//GEN-LAST:event_jx100KeyPressed
+
+    private void jx50KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jx50KeyPressed
+        // TODO add your handling code here:
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            jx_20.requestFocus();
+        }
+    }//GEN-LAST:event_jx50KeyPressed
+
+    private void jx_20KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jx_20KeyPressed
+        // TODO add your handling code here:
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            jx_10.requestFocus();
+        }
+    }//GEN-LAST:event_jx_20KeyPressed
+
+    private void jx_10KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jx_10KeyPressed
+        // TODO add your handling code here:
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            jx_5.requestFocus();
+        }
+    }//GEN-LAST:event_jx_10KeyPressed
+
+    private void jx_5KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jx_5KeyPressed
+        // TODO add your handling code here:
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            jxOne.requestFocus();
+        }
+    }//GEN-LAST:event_jx_5KeyPressed
 
     /**
      * @param args the command line arguments
