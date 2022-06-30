@@ -30,6 +30,7 @@ import java.util.logging.Logger;
 import javafx.concurrent.Worker;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.SwingWorker;
 import org.omg.CORBA.MARSHAL;
@@ -48,6 +49,8 @@ public class MainFrame extends javax.swing.JFrame {
     Font font = Tools.font(14f);
     Thread thread;
     //CheckCasher cash ;
+     calcFrame cf = new calcFrame();
+     CounterFrame cuf = new CounterFrame(); ;//= new CounterFrame();
     public MainFrame() {
         initComponents();
         background.setLocation(0, 0);
@@ -487,6 +490,16 @@ public class MainFrame extends javax.swing.JFrame {
 
         counter.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         counter.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/counter2.png"))); // NOI18N
+        counter.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                counterMouseClicked(evt);
+            }
+        });
+        counter.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                counterKeyPressed(evt);
+            }
+        });
         getContentPane().add(counter);
         counter.setBounds(470, 650, 64, 64);
 
@@ -811,18 +824,31 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_card_10MouseExited
 
     private void calcMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_calcMouseClicked
-//        try {
-//            // TODO add your handling code here:
-//            ProcessBuilder p = new ProcessBuilder("calc.exe");//Runtime.getRuntime().exec("calc.exe");
-//            p.start();
-//        } catch (IOException ex) {
-//            Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-            calcFrame cf = new calcFrame();
-            Tools.openJFram(cf);
-        
-
+        if(!(cf.isVisible())){
+           Tools.openJFram(cf);
+        }else{
+            cf.dispose();
+        }
     }//GEN-LAST:event_calcMouseClicked
+
+    private void counterKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_counterKeyPressed
+       // new Tools().playSound("mc.mp3");
+    }//GEN-LAST:event_counterKeyPressed
+
+    private void counterMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_counterMouseClicked
+        // TODO add your handling code here:
+        double casher = Double.parseDouble(txtNowBalance.getText());
+        
+       if(!(cuf.isVisible())){
+           cuf = new CounterFrame();
+           cuf.setCasher(casher);
+           Tools.openJFram(cuf, "عد الفلوس");          
+       }else{
+           //cuf.setDefaultCloseOperation(JFrame.);
+           cuf.dispose();
+           
+       }
+    }//GEN-LAST:event_counterMouseClicked
     
     private void clickPanel(JLabel lable){
         lable.setBorder(BorderFactory.createLoweredBevelBorder());

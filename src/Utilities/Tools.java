@@ -17,10 +17,12 @@ import java.awt.FontFormatException;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.io.BufferedInputStream;
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStream;
+import java.net.MalformedURLException;
 import java.sql.Connection;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -28,6 +30,15 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.embed.swing.JFXPanel;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.util.Duration;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -51,7 +62,7 @@ import net.sf.jasperreports.view.JasperViewer;
  * @author mosta
  */
 public class Tools {
-    
+    AudioInputStream audioInputStream;
   public static void showErrorMsg(String msg){
       JOptionPane.showMessageDialog(null, msg, "خطأ", JOptionPane.ERROR_MESSAGE);
   }  
@@ -265,4 +276,27 @@ public class Tools {
         }
         return day_ar;
     }
+    public static void runMedia(String bip){
+        JFXPanel jfx = new JFXPanel();
+        String uri = new File(bip).toURI().toString();
+        MediaPlayer media =  new MediaPlayer(new Media(uri));
+        media.setStartTime(Duration.seconds(2));
+        media.play();
+    } 
+    
+    
+    public void playSound(String name) {
+    try {
+        audioInputStream = AudioSystem.getAudioInputStream(new File(getClass().getResource(name).getPath()).getAbsoluteFile());
+        Clip clip = AudioSystem.getClip();
+        clip.open(audioInputStream);
+        clip.start();
+        if(clip.isRunning()){
+            Tools.showErrorMsg("test");
+        }
+    } catch(IOException | LineUnavailableException | UnsupportedAudioFileException e) {
+        System.out.println("Error with playing sound.");
+    }
+}
+
 }

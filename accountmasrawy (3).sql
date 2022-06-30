@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 29, 2022 at 12:16 PM
+-- Generation Time: Jun 30, 2022 at 06:03 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 7.3.27
 
@@ -126,7 +126,124 @@ INSERT INTO `casher` (`id_casher`, `date_casher`, `Debit`, `Creditor`, `note`, `
 (76, '2022-06-28', 16.50, NULL, '15', NULL, NULL, NULL, NULL, 28, NULL),
 (77, '2022-06-28', 52.00, NULL, 'LE 50', NULL, NULL, NULL, NULL, 29, NULL),
 (78, '2022-06-28', NULL, 700.00, 'ايصال دفع رقم 1', NULL, NULL, NULL, 1, NULL, NULL),
-(79, '2022-06-28', 11.00, NULL, '10', NULL, NULL, NULL, NULL, 30, NULL);
+(79, '2022-06-28', 11.00, NULL, '10', NULL, NULL, NULL, NULL, 30, NULL),
+(80, '2022-06-29', NULL, 1000.00, 'شحن ماكينةمصاري', NULL, NULL, NULL, NULL, NULL, 5),
+(81, '2022-06-29', 30.00, NULL, 'حكاية 25', NULL, NULL, NULL, NULL, 31, NULL),
+(82, '2022-06-29', 1500.00, NULL, '01127333021', NULL, NULL, NULL, NULL, 32, NULL),
+(83, '2022-06-29', 11.00, NULL, 'كرت  _ 10', NULL, NULL, NULL, NULL, 33, NULL),
+(84, '2022-06-29', NULL, 1000.00, 'شحن ماكينة Bee', NULL, NULL, NULL, NULL, NULL, 11),
+(85, '2022-06-29', 15.00, NULL, '01127333021', NULL, NULL, NULL, NULL, 34, NULL),
+(86, '2022-06-29', NULL, 1000.00, 'شحن ماكينة Fawry', NULL, NULL, NULL, NULL, NULL, 12),
+(87, '2022-06-29', 1100.00, NULL, 'كرت _ 10', NULL, NULL, NULL, NULL, 35, NULL),
+(88, '2022-06-29', NULL, 500.00, 'شحن ماكينة Fawry', NULL, NULL, NULL, NULL, NULL, 13),
+(89, '2022-06-29', 11.00, NULL, 'كرت _ 10', NULL, NULL, NULL, NULL, 36, NULL),
+(90, '2022-06-29', NULL, 0.00, 'شحن ماكينة أمان', NULL, NULL, NULL, NULL, NULL, 14),
+(91, '2022-06-29', 110.00, NULL, 'كرت _ 10', NULL, NULL, NULL, NULL, 37, NULL),
+(92, '2022-06-29', NULL, 500.00, 'شحن ماكينة أمان', NULL, NULL, NULL, NULL, NULL, 15),
+(93, '2022-06-29', 110.00, NULL, 'كرت _ 10', NULL, NULL, NULL, NULL, 38, NULL),
+(94, '2022-06-29', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 39, NULL),
+(95, '2022-06-29', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 40, NULL),
+(96, '2022-06-29', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 41, NULL),
+(97, '2022-06-29', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 42, NULL),
+(98, '2022-06-29', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 43, NULL),
+(99, '2022-06-29', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 44, NULL),
+(100, '2022-06-29', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 45, NULL),
+(101, '2022-06-29', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 46, NULL),
+(102, '2022-06-29', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 47, NULL),
+(103, '2022-06-29', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 48, NULL),
+(104, '2022-06-30', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 49, NULL),
+(105, '2022-06-30', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 50, NULL),
+(106, '2022-06-30', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 51, NULL),
+(107, '2022-06-30', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 52, NULL),
+(108, '2022-06-30', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 53, NULL),
+(109, '2022-06-30', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 54, NULL),
+(110, '2022-06-30', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 55, NULL),
+(111, '2022-06-30', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 56, NULL),
+(112, '2022-06-30', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 57, NULL),
+(113, '2022-06-30', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 58, NULL),
+(114, '2022-06-30', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 59, NULL),
+(115, '2022-06-30', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 60, NULL),
+(116, '2022-06-30', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 61, NULL),
+(117, '2022-06-30', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 62, NULL),
+(118, '2022-06-30', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 63, NULL),
+(119, '2022-06-30', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 64, NULL),
+(120, '2022-06-30', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 65, NULL),
+(121, '2022-06-30', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 66, NULL),
+(122, '2022-06-30', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 67, NULL),
+(123, '2022-06-30', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 68, NULL),
+(124, '2022-06-30', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 69, NULL),
+(125, '2022-06-30', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 70, NULL),
+(126, '2022-06-30', 11.00, NULL, '10', NULL, NULL, NULL, NULL, 71, NULL),
+(127, '2022-06-30', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 72, NULL),
+(128, '2022-06-30', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 73, NULL),
+(129, '2022-06-30', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 74, NULL),
+(130, '2022-06-30', NULL, 20000.00, 'ايصال دفع رقم 2', NULL, NULL, NULL, 2, NULL, NULL),
+(131, '2022-06-30', 150.00, NULL, '', NULL, NULL, NULL, NULL, 75, NULL),
+(132, '2022-06-30', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 76, NULL),
+(133, '2022-06-30', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 77, NULL),
+(134, '2022-06-30', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 78, NULL),
+(135, '2022-06-30', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 79, NULL),
+(136, '2022-06-30', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 80, NULL),
+(137, '2022-06-30', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 81, NULL),
+(138, '2022-06-30', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 82, NULL),
+(139, '2022-06-30', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 83, NULL),
+(140, '2022-06-30', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 84, NULL),
+(141, '2022-06-30', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 85, NULL),
+(142, '2022-06-30', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 86, NULL),
+(143, '2022-06-30', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 87, NULL),
+(144, '2022-06-30', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 88, NULL),
+(145, '2022-06-30', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 89, NULL),
+(146, '2022-06-30', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 90, NULL),
+(147, '2022-06-30', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 91, NULL),
+(148, '2022-06-30', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 92, NULL),
+(149, '2022-06-30', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 93, NULL),
+(150, '2022-06-30', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 94, NULL),
+(151, '2022-06-30', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 95, NULL),
+(152, '2022-06-30', 15000.00, NULL, '', NULL, NULL, NULL, NULL, 96, NULL),
+(153, '2022-06-30', 7500.00, NULL, '', NULL, NULL, NULL, NULL, 97, NULL),
+(154, '2022-06-30', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 98, NULL),
+(155, '2022-06-30', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 99, NULL),
+(156, '2022-06-30', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 100, NULL),
+(157, '2022-06-30', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 101, NULL),
+(158, '2022-06-30', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 102, NULL),
+(159, '2022-06-30', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 103, NULL),
+(160, '2022-06-30', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 104, NULL),
+(161, '2022-06-30', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 105, NULL),
+(162, '2022-06-30', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 106, NULL),
+(163, '2022-06-30', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 107, NULL),
+(164, '2022-06-30', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 108, NULL),
+(165, '2022-06-30', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 109, NULL),
+(166, '2022-06-30', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 110, NULL),
+(167, '2022-06-30', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 111, NULL),
+(168, '2022-06-30', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 112, NULL);
+
+--
+-- Triggers `casher`
+--
+DELIMITER $$
+CREATE TRIGGER `ubdate_balance_casher` AFTER INSERT ON `casher` FOR EACH ROW BEGIN
+     DECLARE oldbalance DOUBLE ;
+    DECLARE totalDebit double ;
+    DECLARE totalCredit double;
+    -- DECLARE newbalance DOUBLE ;
+        -- set totalDebit
+    SELECT
+        SUM(casher.Debit)
+    INTO @totalDebit
+FROM
+    casher
+WHERE
+    casher.date_casher = CURRENT_DATE() ;
+    -- set new balance
+  SELECT Sum(casher.Creditor) INTO @totalCredit FROM casher WHERE casher.date_casher =CURRENT_DATE();
+SELECT finallyday.oldBalance INTO @oldbalance FROM finallyday WHERE finallyday.dateFinally = CURRENT_DATE();
+UPDATE
+    finallyday
+SET
+   finallyday.totalimport = @totalDebit , finallyday.totalexport = @totalCredit , finallyday.newbalance = (@oldbalance + @totalDebit - @totalCredit) WHERE finallyday.dateFinally = CURRENT_DATE() ;
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -189,6 +306,7 @@ CREATE TABLE `clientaccount` (
   `id_client` bigint(255) DEFAULT NULL,
   `id_salesInvoic` bigint(255) DEFAULT NULL,
   `id_Receipt` bigint(255) DEFAULT NULL,
+  `id_masary_pay` int(11) DEFAULT NULL,
   `note` text DEFAULT NULL,
   `isActive` tinyint(1) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -258,7 +376,8 @@ INSERT INTO `finallyday` (`dateFinally`, `oldBalance`, `totalimport`, `totalexpo
 ('2022-06-26', 935, 415, 0, '02:11:15'),
 ('2022-06-27', 1350, 440.5, 0, '02:11:15'),
 ('2022-06-28', 1790.5, 111.5, 700, '02:11:15'),
-('2022-06-29', 1202, 0, 0, '02:18:11');
+('2022-06-29', 1202, 2987, 4000, '02:18:11'),
+('2022-06-30', 189, 23261, 20000, '00:00:00');
 
 -- --------------------------------------------------------
 
@@ -428,7 +547,89 @@ INSERT INTO `masary_pay` (`id_masary_pay`, `date_masary_pay`, `time_masary_pay`,
 (27, '2022-06-28', '00:00:00', 42, 1.00, 1, 25.00, 26.00, 1, 10661.25, '25'),
 (28, '2022-06-28', '00:00:00', 41, 1.00, 1, 15.00, 16.50, 1, 10646.25, '15'),
 (29, '2022-06-28', '00:00:00', 33, 1.00, 1, 50.00, 52.00, 1, 10596.25, 'LE 50'),
-(30, '2022-06-28', '16:19:50', 39, 1.00, 1, 10.00, 11.00, 1, 10586.25, '10');
+(30, '2022-06-28', '16:19:50', 39, 1.00, 1, 10.00, 11.00, 1, 10586.25, '10'),
+(31, '2022-06-29', '17:11:59', 71, 1.00, 1, 25.00, 30.00, 1, 41561.25, 'حكاية 25'),
+(32, '2022-06-29', '17:12:20', 72, 1000.00, 1, 1430.00, 1500.00, 1, 40131.25, '01127333021'),
+(33, '2022-06-29', '20:28:01', 76, 1.00, 1, 10.00, 11.00, 2, -10, 'كرت  _ 10'),
+(34, '2022-06-29', '20:43:49', 73, 10.00, 1, 14.30, 15.00, 2, 975.7, '01127333021'),
+(35, '2022-06-29', '21:31:31', 77, 100.00, 1, 1000.00, 1100.00, 3, 0, 'كرت _ 10'),
+(36, '2022-06-29', '21:32:41', 77, 1.00, 1, 10.00, 11.00, 3, 490, 'كرت _ 10'),
+(37, '2022-06-29', '22:23:52', 79, 10.00, 1, 100.00, 110.00, 5, -100, 'كرت _ 10'),
+(38, '2022-06-29', '22:24:54', 79, 10.00, 1, 100.00, 110.00, 5, 300, 'كرت _ 10'),
+(39, '2022-06-29', '23:34:08', 39, 10.00, 1, 10.00, 10.00, 1, 40121.25, '10'),
+(40, '2022-06-29', '23:34:47', 39, 10.00, 1, 10.00, 10.00, 1, 40111.25, '10'),
+(41, '2022-06-29', '23:38:01', 39, 10.00, 1, 10.00, 10.00, 1, 40101.25, '10'),
+(42, '2022-06-29', '23:58:47', 39, 10.00, 1, 10.00, 10.00, 1, 40091.25, '10'),
+(43, '2022-06-29', '23:59:22', 39, 10.00, 1, 10.00, 10.00, 1, 40081.25, '10'),
+(44, '2022-06-29', '23:59:25', 39, 10.00, 1, 10.00, 10.00, 1, 40071.25, '10'),
+(45, '2022-06-29', '23:59:27', 39, 10.00, 1, 10.00, 10.00, 1, 40061.25, '10'),
+(46, '2022-06-29', '23:59:29', 39, 10.00, 1, 10.00, 10.00, 1, 40051.25, '10'),
+(47, '2022-06-29', '23:59:30', 39, 10.00, 1, 10.00, 10.00, 1, 40041.25, '10'),
+(48, '2022-06-29', '23:59:32', 39, 10.00, 1, 10.00, 10.00, 1, 40031.25, '10'),
+(49, '2022-06-30', '00:01:21', 39, 10.00, 1, 10.00, 10.00, 1, 40021.25, '10'),
+(50, '2022-06-30', '00:01:24', 39, 10.00, 1, 10.00, 10.00, 1, 40011.25, '10'),
+(51, '2022-06-30', '00:38:48', 39, 10.00, 1, 10.00, 10.00, 1, 40001.25, '10'),
+(52, '2022-06-30', '00:39:14', 39, 10.00, 1, 10.00, 10.00, 1, 39991.25, '10'),
+(53, '2022-06-30', '00:40:20', 39, 10.00, 1, 10.00, 10.00, 1, 39981.25, '10'),
+(54, '2022-06-30', '00:43:54', 39, 10.00, 1, 10.00, 10.00, 1, 39971.25, '10'),
+(55, '2022-06-30', '00:44:56', 39, 10.00, 1, 10.00, 10.00, 1, 39961.25, '10'),
+(56, '2022-06-30', '00:45:01', 39, 10.00, 1, 10.00, 10.00, 1, 39951.25, '10'),
+(57, '2022-06-30', '00:59:13', 39, 10.00, 1, 10.00, 10.00, 1, 39941.25, '10'),
+(58, '2022-06-30', '01:11:14', 39, 10.00, 1, 10.00, 10.00, 1, 39931.25, '10'),
+(59, '2022-06-30', '02:39:49', 39, 10.00, 1, 10.00, 10.00, 1, 39921.25, '10'),
+(60, '2022-06-30', '02:39:52', 39, 10.00, 1, 10.00, 10.00, 1, 39911.25, '10'),
+(61, '2022-06-30', '02:39:54', 39, 10.00, 1, 10.00, 10.00, 1, 39901.25, '10'),
+(62, '2022-06-30', '02:39:55', 39, 10.00, 1, 10.00, 10.00, 1, 39891.25, '10'),
+(63, '2022-06-30', '02:39:56', 39, 10.00, 1, 10.00, 10.00, 1, 39881.25, '10'),
+(64, '2022-06-30', '02:39:57', 39, 10.00, 1, 10.00, 10.00, 1, 39871.25, '10'),
+(65, '2022-06-30', '02:39:59', 39, 10.00, 1, 10.00, 10.00, 1, 39861.25, '10'),
+(66, '2022-06-30', '11:45:36', 39, 10.00, 1, 10.00, 10.00, 1, 39851.25, '10'),
+(67, '2022-06-30', '11:45:44', 39, 10.00, 1, 10.00, 10.00, 1, 39841.25, '10'),
+(68, '2022-06-30', '11:45:45', 39, 10.00, 1, 10.00, 10.00, 1, 39831.25, '10'),
+(69, '2022-06-30', '11:45:47', 39, 10.00, 1, 10.00, 10.00, 1, 39821.25, '10'),
+(70, '2022-06-30', '11:45:49', 39, 10.00, 1, 10.00, 10.00, 1, 39811.25, '10'),
+(71, '2022-06-30', '11:46:34', 39, 1.00, 1, 10.00, 11.00, 1, 39801.25, '10'),
+(72, '2022-06-30', '12:07:37', 39, 10.00, 1, 10.00, 10.00, 1, 39791.25, '10'),
+(73, '2022-06-30', '12:10:13', 39, 10.00, 1, 10.00, 10.00, 1, 39781.25, '10'),
+(74, '2022-06-30', '13:15:31', 39, 10.00, 1, 10.00, 10.00, 1, 39771.25, '10'),
+(75, '2022-06-30', '13:19:38', 73, 100.00, 1, 143.00, 150.00, 2, 832.7, ''),
+(76, '2022-06-30', '13:19:48', 39, 10.00, 1, 10.00, 10.00, 1, 39761.25, '10'),
+(77, '2022-06-30', '13:25:37', 39, 10.00, 1, 10.00, 10.00, 1, 39751.25, '10'),
+(78, '2022-06-30', '13:25:53', 39, 10.00, 1, 10.00, 10.00, 1, 39741.25, '10'),
+(79, '2022-06-30', '13:25:53', 39, 10.00, 1, 10.00, 10.00, 1, 39731.25, '10'),
+(80, '2022-06-30', '13:31:51', 39, 10.00, 1, 10.00, 10.00, 1, 39721.25, '10'),
+(81, '2022-06-30', '13:31:52', 39, 10.00, 1, 10.00, 10.00, 1, 39711.25, '10'),
+(82, '2022-06-30', '13:31:53', 39, 10.00, 1, 10.00, 10.00, 1, 39701.25, '10'),
+(83, '2022-06-30', '13:31:54', 39, 10.00, 1, 10.00, 10.00, 1, 39691.25, '10'),
+(84, '2022-06-30', '13:31:54', 39, 10.00, 1, 10.00, 10.00, 1, 39681.25, '10'),
+(85, '2022-06-30', '13:31:54', 39, 10.00, 1, 10.00, 10.00, 1, 39671.25, '10'),
+(86, '2022-06-30', '13:31:55', 39, 10.00, 1, 10.00, 10.00, 1, 39661.25, '10'),
+(87, '2022-06-30', '13:31:55', 39, 10.00, 1, 10.00, 10.00, 1, 39651.25, '10'),
+(88, '2022-06-30', '13:31:55', 39, 10.00, 1, 10.00, 10.00, 1, 39641.25, '10'),
+(89, '2022-06-30', '13:31:55', 39, 10.00, 1, 10.00, 10.00, 1, 39631.25, '10'),
+(90, '2022-06-30', '13:31:56', 39, 10.00, 1, 10.00, 10.00, 1, 39621.25, '10'),
+(91, '2022-06-30', '13:31:56', 39, 10.00, 1, 10.00, 10.00, 1, 39611.25, '10'),
+(92, '2022-06-30', '13:31:56', 39, 10.00, 1, 10.00, 10.00, 1, 39601.25, '10'),
+(93, '2022-06-30', '13:31:57', 39, 10.00, 1, 10.00, 10.00, 1, 39591.25, '10'),
+(94, '2022-06-30', '13:31:57', 39, 10.00, 1, 10.00, 10.00, 1, 39581.25, '10'),
+(95, '2022-06-30', '13:31:57', 39, 10.00, 1, 10.00, 10.00, 1, 39571.25, '10'),
+(96, '2022-06-30', '13:32:47', 73, 10000.00, 1, 14300.00, 15000.00, 1, 25271.25, ''),
+(97, '2022-06-30', '13:33:18', 73, 5000.00, 1, 7150.00, 7500.00, 1, 18121.25, ''),
+(98, '2022-06-30', '13:33:31', 39, 10.00, 1, 10.00, 10.00, 1, 18111.25, '10'),
+(99, '2022-06-30', '13:33:32', 39, 10.00, 1, 10.00, 10.00, 1, 18101.25, '10'),
+(100, '2022-06-30', '13:33:35', 39, 10.00, 1, 10.00, 10.00, 1, 18091.25, '10'),
+(101, '2022-06-30', '13:34:32', 39, 10.00, 1, 10.00, 10.00, 1, 18081.25, '10'),
+(102, '2022-06-30', '13:35:01', 39, 10.00, 1, 10.00, 10.00, 1, 18071.25, '10'),
+(103, '2022-06-30', '13:35:03', 39, 10.00, 1, 10.00, 10.00, 1, 18061.25, '10'),
+(104, '2022-06-30', '13:35:04', 39, 10.00, 1, 10.00, 10.00, 1, 18051.25, '10'),
+(105, '2022-06-30', '13:35:05', 39, 10.00, 1, 10.00, 10.00, 1, 18041.25, '10'),
+(106, '2022-06-30', '13:35:06', 39, 10.00, 1, 10.00, 10.00, 1, 18031.25, '10'),
+(107, '2022-06-30', '13:35:07', 39, 10.00, 1, 10.00, 10.00, 1, 18021.25, '10'),
+(108, '2022-06-30', '13:35:08', 39, 10.00, 1, 10.00, 10.00, 1, 18011.25, '10'),
+(109, '2022-06-30', '13:35:08', 39, 10.00, 1, 10.00, 10.00, 1, 18001.25, '10'),
+(110, '2022-06-30', '13:35:09', 39, 10.00, 1, 10.00, 10.00, 1, 17991.25, '10'),
+(111, '2022-06-30', '13:35:10', 39, 10.00, 1, 10.00, 10.00, 1, 17981.25, '10'),
+(112, '2022-06-30', '14:43:06', 39, 10.00, 1, 10.00, 10.00, 1, 17971.25, '10');
 
 -- --------------------------------------------------------
 
@@ -454,7 +655,48 @@ CREATE TABLE `masary_sell` (
 
 INSERT INTO `masary_sell` (`id_masary_sell`, `date_masary_sell`, `time_masary_sell`, `value_masary_sell`, `amount_masary_sell`, `id_recharge_type`, `id_Suppliers`, `id_VF_cash`, `id_pos`) VALUES
 (1, '2022-06-24', '00:00:00', 0.00, 1000.00, 1, 1, NULL, 1),
-(2, '2022-06-26', '00:00:00', 0.00, 10000.00, 1, 1, NULL, 1);
+(2, '2022-06-26', '00:00:00', 0.00, 10000.00, 1, 1, NULL, 1),
+(5, '2022-06-29', '15:08:14', 1000.00, 1000.00, 1, 1, NULL, 1),
+(9, '2022-06-29', '15:20:20', 30000.00, 30000.00, 2, 3, NULL, 1),
+(10, '2022-06-29', '19:20:57', 500.00, 0.00, 2, 4, NULL, 2),
+(11, '2022-06-29', '20:43:15', 1000.00, 1000.00, 1, 1, NULL, 2),
+(12, '2022-06-29', '21:27:15', 1000.00, 1000.00, 1, 1, NULL, 3),
+(13, '2022-06-29', '21:32:30', 500.00, 500.00, 1, 1, NULL, 3),
+(14, '2022-06-29', '22:22:38', 5000.00, 0.00, 1, 1, NULL, 5),
+(15, '2022-06-29', '22:24:20', 500.00, 500.00, 1, 1, NULL, 5);
+
+--
+-- Triggers `masary_sell`
+--
+DELIMITER $$
+CREATE TRIGGER `upDate_balance` AFTER INSERT ON `masary_sell` FOR EACH ROW BEGIN
+    DECLARE
+        oldbalance DOUBLE ; DECLARE newbalance DOUBLE ;
+        -- set old balance
+    SELECT
+        masary_pay.balance
+    INTO @oldbalance
+FROM
+    masary_pay
+WHERE
+    masary_pay.id_masary_pay = (SELECT MAX(mpay.id_masary_pay) FROM masary_pay AS mpay) AND masary_pay.id_pos = 1 ;
+    -- set new balance
+    IF @oldbalance != NULL THEN
+UPDATE
+    masary_pay
+SET
+    masary_pay.balance = @oldbalance +(
+    SELECT
+        masary_sell.value_masary_sell
+    FROM
+        masary_sell AS sell
+    WHERE
+        sell.id_masary_sell = (SELECT MAX(sell2.id_masary_sell) FROM masary_sell AS sell2) AND sell.id_pos = 1
+) ;
+END IF ;
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -475,7 +717,8 @@ CREATE TABLE `paymentreceipt` (
 --
 
 INSERT INTO `paymentreceipt` (`id_PaymentReceipt`, `date_PaymentReceipt`, `amount`, `id_Suppliers`, `isActive`) VALUES
-(1, '2022-06-28', 700.00, 2, 1);
+(1, '2022-06-28', 700.00, 2, 1),
+(2, '2022-06-30', 20000.00, 3, 1);
 
 -- --------------------------------------------------------
 
@@ -493,7 +736,11 @@ CREATE TABLE `pos` (
 --
 
 INSERT INTO `pos` (`id_pos`, `name_pos`) VALUES
-(1, 'مصاري');
+(1, 'مصاري'),
+(2, 'Bee'),
+(3, 'Fawry'),
+(4, 'OPay'),
+(5, 'أمان');
 
 -- --------------------------------------------------------
 
@@ -673,7 +920,10 @@ CREATE TABLE `suppliers` (
 INSERT INTO `suppliers` (`id_Suppliers`, `name_Suppliers`, `phone`, `address`, `idNational`, `firstBalance`, `id_supplier_type`, `isActive`) VALUES
 (1, 'مورد نقدي', NULL, NULL, NULL, NULL, 0, 1),
 (2, 'صالح - هاي كوليتي', '01114040701', 'دراو', '', 0.00, 1, 1),
-(3, 'نور العزالي', '01128331345', 'ادفو', '', 0.00, 4, 1);
+(3, 'نور العزالي', '01128331345', 'ادفو', '', 0.00, 4, 1),
+(4, 'ريمون', '01211158058', 'كوم امبو', NULL, 0.00, 5, 1),
+(5, 'عاصم', '01141182640', 'ادفو', NULL, 1500.00, 6, 1),
+(6, 'محمد كرار', '01146212212', 'ادفو', '', 20000.00, 3, 1);
 
 -- --------------------------------------------------------
 
@@ -699,7 +949,10 @@ CREATE TABLE `suppliersaccount` (
 --
 
 INSERT INTO `suppliersaccount` (`id_supplliersAccount`, `date_suppliersAccount`, `Debit`, `Creditor`, `id_Suppliers`, `id_purchaseInvoice`, `id_paymentReceipt`, `id_masary_sell`, `note`, `isActive`) VALUES
-(3, '2022-06-28', 700.00, NULL, 2, NULL, 1, NULL, 'ايصال دفع رقم 1', 1);
+(3, '2022-06-28', 700.00, NULL, 2, NULL, 1, NULL, 'ايصال دفع رقم 1', 1),
+(4, NULL, NULL, 30000.00, 3, NULL, NULL, 9, 'شحن ماكينةمصاري', 1),
+(5, NULL, NULL, 0.00, 4, NULL, NULL, 10, 'شحن ماكينةBee', 1),
+(6, '2022-06-30', 20000.00, NULL, 3, NULL, 2, NULL, 'ايصال دفع رقم 2', 1);
 
 -- --------------------------------------------------------
 
@@ -791,66 +1044,74 @@ CREATE TABLE `utility_masary` (
   `name_utility_masary` varchar(512) DEFAULT NULL,
   `note_utility` varchar(512) DEFAULT NULL,
   `cost_by_perse` double(10,2) DEFAULT NULL,
-  `price` double NOT NULL
+  `price` double NOT NULL,
+  `id_pos` int(11) NOT NULL DEFAULT 1
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `utility_masary`
 --
 
-INSERT INTO `utility_masary` (`id_utility_masary`, `name_utility_masary`, `note_utility`, `cost_by_perse`, `price`) VALUES
-(20, 'كروت اورنج', 'LE 2.50', 2.50, 3),
-(21, 'كروت اورنج', 'LE 5', 5.00, 6),
-(22, 'كروت اورنج', 'LE 7', 7.00, 8),
-(23, 'كروت اورنج', 'LE 9', 9.00, 10),
-(24, 'كروت اورنج', 'LE 10', 10.00, 11),
-(25, 'كروت اورنج', 'LE 13.5', 13.50, 15),
-(26, 'كروت اورنج', 'LE 15', 15.00, 16),
-(27, 'كروت اورنج', 'LE 18.5', 18.50, 20),
-(28, 'كروت اورنج', 'LE 20', 20.00, 22),
-(29, 'كروت اورنج', 'LE 25', 25.00, 26),
-(30, 'كروت اورنج', 'LE 28', 28.00, 30),
-(31, 'كروت اورنج', 'LE 35', 35.00, 37),
-(32, 'كروت اورنج', 'LE 42', 42.00, 45),
-(33, 'كروت اورنج', 'LE 50', 50.00, 52),
-(34, 'كروت اورنج', 'LE 100', 100.00, 105),
-(35, 'كروت اتصالات', '2.5', 2.50, 3),
-(36, 'كروت اتصالات', '5', 5.00, 6),
-(37, 'كروت اتصالات', '7', 7.00, 8),
-(38, 'كروت اتصالات', '9', 9.00, 10),
-(39, 'كروت اتصالات', '10', 10.00, 11),
-(40, 'كروت اتصالات', '13.5', 13.50, 15),
-(41, 'كروت اتصالات', '15', 15.00, 16),
-(42, 'كروت اتصالات', '25', 25.00, 26),
-(43, 'كروت اتصالات', '30', 30.00, 32),
-(44, 'كروت اتصالات', '50', 50.00, 52),
-(45, 'كروت اتصالات', '100', 100.00, 105),
-(46, 'كروت فودافون', 'فكة 2.5', 2.50, 3),
-(47, 'كروت فودافون', 'فكة5', 5.00, 6),
-(48, 'كروت فودافون', 'فكة 9', 9.00, 10),
-(49, 'كروت فودافون', 'فكة 10', 10.00, 11),
-(50, 'كروت فودافون', 'فكة 13.5', 13.50, 15),
-(51, 'كروت فودافون', 'فكة 15', 15.00, 16),
-(52, 'كروت فودافون', 'كارت 10', 10.00, 11),
-(53, 'كروت فودافون', 'كارت 15', 15.00, 16),
-(54, 'كروت فودافون', 'كارت 25', 25.00, 26),
-(55, 'كروت فودافون', 'كارت 50', 50.00, 52),
-(56, 'كروت فودافون', 'كارت 100', 100.00, 105),
-(57, 'كروت WE', '5 كارت', 5.00, 6),
-(58, 'كروت WE', '7 كارت', 7.00, 8),
-(59, 'كروت WE', '9 كارت', 9.00, 10),
-(60, 'كروت WE', '10 كارت', 10.00, 11),
-(61, 'كروت WE', '15 كارت', 15.00, 16),
-(62, 'كروت WE', '25 كارت', 25.00, 26),
-(63, 'كروت WE', '30 كارت', 30.00, 32),
-(64, 'كروت WE', '40 كارت', 40.00, 42),
-(65, 'كروت WE', '50 كارت', 50.00, 52),
-(66, 'كروت WE', '60 كارت', 60.00, 65),
-(67, 'كروت WE', '75 كارت', 75.00, 80),
-(69, 'كروت WE', '100 كارت', 100.00, 105),
-(70, 'كروت WE', '150 كارت', 150.00, 155),
-(71, 'اتصالات حكاية', 'حكاية 25', 25.00, 30),
-(72, 'شحن', 'شحن اتصالات', 1.43, 1.5);
+INSERT INTO `utility_masary` (`id_utility_masary`, `name_utility_masary`, `note_utility`, `cost_by_perse`, `price`, `id_pos`) VALUES
+(20, 'كروت اورنج', 'LE 2.50', 2.50, 3, 1),
+(21, 'كروت اورنج', 'LE 5', 5.00, 6, 1),
+(22, 'كروت اورنج', 'LE 7', 7.00, 8, 1),
+(23, 'كروت اورنج', 'LE 9', 9.00, 10, 1),
+(24, 'كروت اورنج', 'LE 10', 10.00, 11, 1),
+(25, 'كروت اورنج', 'LE 13.5', 13.50, 15, 1),
+(26, 'كروت اورنج', 'LE 15', 15.00, 16, 1),
+(27, 'كروت اورنج', 'LE 18.5', 18.50, 20, 1),
+(28, 'كروت اورنج', 'LE 20', 20.00, 22, 1),
+(29, 'كروت اورنج', 'LE 25', 25.00, 26, 1),
+(30, 'كروت اورنج', 'LE 28', 28.00, 30, 1),
+(31, 'كروت اورنج', 'LE 35', 35.00, 37, 1),
+(32, 'كروت اورنج', 'LE 42', 42.00, 45, 1),
+(33, 'كروت اورنج', 'LE 50', 50.00, 52, 1),
+(34, 'كروت اورنج', 'LE 100', 100.00, 105, 1),
+(35, 'كروت اتصالات', '2.5', 2.50, 3, 1),
+(36, 'كروت اتصالات', '5', 5.00, 6, 1),
+(37, 'كروت اتصالات', '7', 7.00, 8, 1),
+(38, 'كروت اتصالات', '9', 9.00, 10, 1),
+(39, 'كروت اتصالات', '10', 10.00, 11, 1),
+(40, 'كروت اتصالات', '13.5', 13.50, 15, 1),
+(41, 'كروت اتصالات', '15', 15.00, 16, 1),
+(42, 'كروت اتصالات', '25', 25.00, 26, 1),
+(43, 'كروت اتصالات', '30', 30.00, 32, 1),
+(44, 'كروت اتصالات', '50', 50.00, 52, 1),
+(45, 'كروت اتصالات', '100', 100.00, 105, 1),
+(46, 'كروت فودافون', 'فكة 2.5', 2.50, 3, 1),
+(47, 'كروت فودافون', 'فكة5', 5.00, 6, 1),
+(48, 'كروت فودافون', 'فكة 9', 9.00, 10, 1),
+(49, 'كروت فودافون', 'فكة 10', 10.00, 11, 1),
+(50, 'كروت فودافون', 'فكة 13.5', 13.50, 15, 1),
+(51, 'كروت فودافون', 'فكة 15', 15.00, 16, 1),
+(52, 'كروت فودافون', 'كارت 10', 10.00, 11, 1),
+(53, 'كروت فودافون', 'كارت 15', 15.00, 16, 1),
+(54, 'كروت فودافون', 'كارت 25', 25.00, 26, 1),
+(55, 'كروت فودافون', 'كارت 50', 50.00, 52, 1),
+(56, 'كروت فودافون', 'كارت 100', 100.00, 105, 1),
+(57, 'كروت WE', '5 كارت', 5.00, 6, 1),
+(58, 'كروت WE', '7 كارت', 7.00, 8, 1),
+(59, 'كروت WE', '9 كارت', 9.00, 10, 1),
+(60, 'كروت WE', '10 كارت', 10.00, 11, 1),
+(61, 'كروت WE', '15 كارت', 15.00, 16, 1),
+(62, 'كروت WE', '25 كارت', 25.00, 26, 1),
+(63, 'كروت WE', '30 كارت', 30.00, 32, 1),
+(64, 'كروت WE', '40 كارت', 40.00, 42, 1),
+(65, 'كروت WE', '50 كارت', 50.00, 52, 1),
+(66, 'كروت WE', '60 كارت', 60.00, 65, 1),
+(67, 'كروت WE', '75 كارت', 75.00, 80, 1),
+(69, 'كروت WE', '100 كارت', 100.00, 105, 1),
+(70, 'كروت WE', '150 كارت', 150.00, 155, 1),
+(71, 'اتصالات حكاية', 'حكاية 25', 25.00, 30, 1),
+(72, 'شحن', 'شحن اتصالات', 1.43, 1.5, 1),
+(73, 'شحن', 'شحن اتصالات', 1.43, 1.5, 2),
+(74, 'شحن', 'شحن اورنج', 1.43, 1.5, 2),
+(75, 'شحن', 'شحن وي', 1.00, 1, 2),
+(76, 'كروت اتصالات', 'كرت  _ 10', 10.00, 11, 2),
+(77, 'كروت اتصالات', 'كرت _ 10', 10.00, 11, 3),
+(78, 'كروت اتصالات', 'كرت 10', 10.00, 11, 4),
+(79, 'كروت اتصالات', 'كرت _ 10', 10.00, 11, 5);
 
 -- --------------------------------------------------------
 
@@ -957,7 +1218,8 @@ ALTER TABLE `clientaccount`
   ADD PRIMARY KEY (`id_ClientAccount`),
   ADD KEY `id_salesInvoic` (`id_salesInvoic`),
   ADD KEY `id_client` (`id_client`),
-  ADD KEY `id_Receipt` (`id_Receipt`);
+  ADD KEY `id_Receipt` (`id_Receipt`),
+  ADD KEY `fk_masary` (`id_masary_pay`);
 
 --
 -- Indexes for table `finallyday`
@@ -1087,7 +1349,8 @@ ALTER TABLE `unit`
 -- Indexes for table `utility_masary`
 --
 ALTER TABLE `utility_masary`
-  ADD PRIMARY KEY (`id_utility_masary`);
+  ADD PRIMARY KEY (`id_utility_masary`),
+  ADD KEY `fk_pos_utiltiy` (`id_pos`);
 
 --
 -- Indexes for table `vf_cash`
@@ -1104,7 +1367,7 @@ ALTER TABLE `vf_cash`
 -- AUTO_INCREMENT for table `casher`
 --
 ALTER TABLE `casher`
-  MODIFY `id_casher` bigint(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=80;
+  MODIFY `id_casher` bigint(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=169;
 
 --
 -- AUTO_INCREMENT for table `categoryutilites`
@@ -1122,19 +1385,19 @@ ALTER TABLE `clientaccount`
 -- AUTO_INCREMENT for table `masary_pay`
 --
 ALTER TABLE `masary_pay`
-  MODIFY `id_masary_pay` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id_masary_pay` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=113;
 
 --
 -- AUTO_INCREMENT for table `masary_sell`
 --
 ALTER TABLE `masary_sell`
-  MODIFY `id_masary_sell` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_masary_sell` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `pos`
 --
 ALTER TABLE `pos`
-  MODIFY `id_pos` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_pos` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `purchaseinvoice`
@@ -1152,7 +1415,7 @@ ALTER TABLE `recharge_type`
 -- AUTO_INCREMENT for table `suppliersaccount`
 --
 ALTER TABLE `suppliersaccount`
-  MODIFY `id_supplliersAccount` bigint(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id_supplliersAccount` bigint(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `supplier_type`
@@ -1164,7 +1427,7 @@ ALTER TABLE `supplier_type`
 -- AUTO_INCREMENT for table `utility_masary`
 --
 ALTER TABLE `utility_masary`
-  MODIFY `id_utility_masary` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
+  MODIFY `id_utility_masary` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=80;
 
 --
 -- AUTO_INCREMENT for table `vf_cash`
@@ -1182,7 +1445,8 @@ ALTER TABLE `vf_cash`
 ALTER TABLE `clientaccount`
   ADD CONSTRAINT `clientaccount_ibfk_1` FOREIGN KEY (`id_salesInvoic`) REFERENCES `salesinvoic` (`id_salesInvoic`),
   ADD CONSTRAINT `clientaccount_ibfk_2` FOREIGN KEY (`id_client`) REFERENCES `client` (`id_client`),
-  ADD CONSTRAINT `clientaccount_ibfk_3` FOREIGN KEY (`id_Receipt`) REFERENCES `receipt` (`id_Receipt`);
+  ADD CONSTRAINT `clientaccount_ibfk_3` FOREIGN KEY (`id_Receipt`) REFERENCES `receipt` (`id_Receipt`),
+  ADD CONSTRAINT `fk_masary` FOREIGN KEY (`id_masary_pay`) REFERENCES `masary_pay` (`id_masary_pay`);
 
 --
 -- Constraints for table `items`
@@ -1260,13 +1524,17 @@ ALTER TABLE `suppliersaccount`
   ADD CONSTRAINT `suppliersaccount_ibfk_2` FOREIGN KEY (`id_purchaseInvoice`) REFERENCES `purchaseinvoice` (`id_purchaseInvoice`),
   ADD CONSTRAINT `suppliersaccount_ibfk_3` FOREIGN KEY (`id_paymentReceipt`) REFERENCES `paymentreceipt` (`id_PaymentReceipt`);
 
+--
+-- Constraints for table `utility_masary`
+--
+ALTER TABLE `utility_masary`
+  ADD CONSTRAINT `fk_pos_utiltiy` FOREIGN KEY (`id_pos`) REFERENCES `pos` (`id_pos`);
+
 DELIMITER $$
 --
 -- Events
 --
-CREATE DEFINER=`root`@`localhost` EVENT `finalDay` ON SCHEDULE EVERY 1 DAY STARTS '2022-06-19 00:00:00' ON COMPLETION PRESERVE ENABLE DO INSERT INTO `finallyday`( `dateFinally`, `oldBalance`, `totalimport`, `totalexport`,`time_insert` ) VALUES( CURRENT_DATE(),( SELECT f.newbalance FROM finallyday AS f WHERE f.dateFinally = CURRENT_DATE() - INTERVAL 1 DAY), ( SELECT COALESCE(SUM(c.Debit), 0) FROM casher AS c WHERE c.date_casher = CURRENT_DATE()), ( SELECT COALESCE(SUM(c.Creditor), 0) FROM casher AS c WHERE c.date_casher = CURRENT_DATE()),current_timestamp())$$
-
-CREATE DEFINER=`root`@`localhost` EVENT `updatebalance` ON SCHEDULE EVERY 1 SECOND STARTS '2022-06-19 07:53:05' ON COMPLETION NOT PRESERVE ENABLE DO UPDATE finallyday SET totalimport = (SELECT COALESCE(SUM(c.Debit), 0) FROM casher AS c WHERE c.date_casher = CURRENT_DATE()) , totalexport = (SELECT COALESCE(SUM(c.Creditor), 0) FROM casher AS c WHERE c.date_casher = CURRENT_DATE()) WHERE dateFinally = CURRENT_DATE()$$
+CREATE DEFINER=`root`@`localhost` EVENT `finalDay` ON SCHEDULE EVERY 1 DAY STARTS '2022-06-19 22:00:00' ON COMPLETION PRESERVE ENABLE DO INSERT INTO `finallyday`( `dateFinally`, `oldBalance`, `totalimport`, `totalexport`,`time_insert` ) VALUES( CURRENT_DATE(),( SELECT f.newbalance FROM finallyday AS f WHERE f.dateFinally = CURRENT_DATE() - INTERVAL 1 DAY), ( SELECT COALESCE(SUM(c.Debit), 0) FROM casher AS c WHERE c.date_casher = CURRENT_DATE()), ( SELECT COALESCE(SUM(c.Creditor), 0) FROM casher AS c WHERE c.date_casher = CURRENT_DATE()),current_timestamp())$$
 
 DELIMITER ;
 COMMIT;

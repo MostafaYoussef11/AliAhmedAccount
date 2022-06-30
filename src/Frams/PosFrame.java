@@ -503,10 +503,16 @@ public class PosFrame extends javax.swing.JFrame {
 
     private void Btn_Opay_payActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_Opay_payActionPerformed
         // TODO add your handling code here:
+        OpaypayFrame op = new OpaypayFrame();
+        Tools.openJFram(op, "OPay مبيعات");
+        dispose();
     }//GEN-LAST:event_Btn_Opay_payActionPerformed
 
     private void Btn_Opay_sellActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_Opay_sellActionPerformed
         // TODO add your handling code here:
+        OpaySellFrame os = new OpaySellFrame(6);
+        Tools.openJFram(os,"OPay مشتريات");
+        dispose();
     }//GEN-LAST:event_Btn_Opay_sellActionPerformed
 
     /**

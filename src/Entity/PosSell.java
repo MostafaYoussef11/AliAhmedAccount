@@ -174,7 +174,6 @@ public abstract class PosSell {
         }
        return isSave;
     }
-
     public boolean SaveAccountSupplier() {
         boolean isSave = false;
         try {
