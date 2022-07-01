@@ -5,6 +5,7 @@
  */
 package Frams;
 
+import Entity.PosClass;
 import Entity.masary_Utilites;
 import Utilities.ConnectDB;
 import Utilities.Tools;
@@ -424,9 +425,10 @@ public class UtilitiesMasary extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void newUtilies() {
-        ConnectDB.fillPosCombo(combPos);
+        //ConnectDB.fillPosCombo(combPos);
       //  Tools.showErrorMsg("id_pos = "+id_pos);
         //id_pos = Integer.parseInt(ConnectDB.getIdFrmName("pos", combPos.getSelectedItem().toString()));
+        new PosClass().fillCombo(combPos);
         combPos.setSelectedIndex(id_pos - 1);
         combPos.setEnabled(false);
         util = new masary_Utilites(id_pos);

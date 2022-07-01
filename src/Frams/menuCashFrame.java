@@ -76,7 +76,7 @@ public class menuCashFrame extends javax.swing.JFrame {
 
         receive.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         receive.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/online-banking.png"))); // NOI18N
-        receive.setText("سحب - استقبال");
+        receive.setText(" ارسال");
         receive.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         receive.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         receive.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -93,7 +93,7 @@ public class menuCashFrame extends javax.swing.JFrame {
 
         send.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         send.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/wallet_1.png"))); // NOI18N
-        send.setText("ايداع - ارسال");
+        send.setText("استقبال");
         send.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         send.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         send.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -110,7 +110,7 @@ public class menuCashFrame extends javax.swing.JFrame {
 
         charging.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         charging.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/wallet_mob_1.png"))); // NOI18N
-        charging.setText("شحن محفظة");
+        charging.setText("ايداع - سحب");
         charging.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         charging.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         charging.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);

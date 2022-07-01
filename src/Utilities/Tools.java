@@ -26,8 +26,11 @@ import java.net.MalformedURLException;
 import java.sql.Connection;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.embed.swing.JFXPanel;
@@ -42,11 +45,18 @@ import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.ListSelectionModel;
+import javax.swing.RowFilter;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableCellRenderer;
+import javax.swing.table.TableModel;
+import javax.swing.table.TableRowSorter;
 import net.sf.jasperreports.engine.JRException;
 import net.sf.jasperreports.engine.JasperCompileManager;
 import net.sf.jasperreports.engine.JasperFillManager;
@@ -286,17 +296,85 @@ public class Tools {
     
     
     public void playSound(String name) {
-    try {
-        audioInputStream = AudioSystem.getAudioInputStream(new File(getClass().getResource(name).getPath()).getAbsoluteFile());
-        Clip clip = AudioSystem.getClip();
-        clip.open(audioInputStream);
-        clip.start();
-        if(clip.isRunning()){
-            Tools.showErrorMsg("test");
+        try {
+            audioInputStream = AudioSystem.getAudioInputStream(new File(getClass().getResource(name).getPath()).getAbsoluteFile());
+            Clip clip = AudioSystem.getClip();
+            clip.open(audioInputStream);
+            clip.start();
+            if(clip.isRunning()){
+                Tools.showErrorMsg("test");
+            }
+        } catch(IOException | LineUnavailableException | UnsupportedAudioFileException e) {
+            System.out.println("Error with playing sound.");
         }
-    } catch(IOException | LineUnavailableException | UnsupportedAudioFileException e) {
-        System.out.println("Error with playing sound.");
     }
-}
+    
+    public static void SearchField(JTable table , JTextField txtsearch){
+       TableRowSorter<TableModel> rowSorter = new TableRowSorter<>(table.getModel());
+        table.setRowSorter(rowSorter);
+        txtsearch.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+               String text = txtsearch.getText();
+
+                if (text.trim().length() == 0) {
+                    rowSorter.setRowFilter(null);
+                } else {
+                    rowSorter.setRowFilter(RowFilter.regexFilter("(?i)" + text));
+                }
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+              String text = txtsearch.getText();
+                if (text.trim().length() == 0) {
+                    rowSorter.setRowFilter(null);
+                } else {
+                    rowSorter.setRowFilter(RowFilter.regexFilter("(?i)" + text));
+                }
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+        });
+    
+    }
+ /**   
+    public static void SearchFieldFromList(JList table , JTextField txtsearch){
+
+        ArrayList list = table.g`
+        txtsearch.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+               String text = txtsearch.getText();
+
+                if (text.trim().length() == 0) {
+//                    rowSorter.setRowFilter(null);
+                       Collections.sort(table.getModel());
+                       fireContentsChanged(this, 0, songs.size());
+                } else {
+                    //rowSorter.setRowFilter(RowFilter.regexFilter("(?i)" + text));
+                }
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+              String text = txtsearch.getText();
+                if (text.trim().length() == 0) {
+                    //rowSorter.setRowFilter(null);
+                } else {
+                    //rowSorter.setRowFilter(RowFilter.regexFilter("(?i)" + text));
+                }
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+        });
+    
+    }**/
 
 }

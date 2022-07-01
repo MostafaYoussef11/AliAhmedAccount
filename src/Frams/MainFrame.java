@@ -12,6 +12,7 @@ import Entity.Items;
 import Entity.ItemsOnInvoice;
 import Entity.MasaryPay;
 import Entity.SalesInvoic;
+import Utilities.MyCalculator;
 import Utilities.Tools;
 import com.sun.org.apache.bcel.internal.generic.AALOAD;
 import java.awt.ComponentOrientation;
@@ -824,8 +825,10 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_card_10MouseExited
 
     private void calcMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_calcMouseClicked
+
         if(!(cf.isVisible())){
-           Tools.openJFram(cf);
+             Tools.openJFram(cf);
+        
         }else{
             cf.dispose();
         }

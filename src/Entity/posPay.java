@@ -11,9 +11,15 @@ import com.mysql.jdbc.Statement;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultListModel;
+import javax.swing.JList;
 import javax.swing.JTable;
+import javax.swing.ListModel;
+import javax.swing.event.ListDataListener;
 
 /**
  *
@@ -35,12 +41,14 @@ public abstract class posPay {
     private double amount_masary_pay; // المطلوب من العميل 
     private String phone;
     private int id_pos;
+   
     
     //constractor Method
     public posPay(int id_pos){
         this.id_pos = id_pos;
     }
     
+    public enum charage{ cash , mob};
     //Abstract Method
     public void fillTable(JTable jTable){
         String sql_select_masary = "SELECT mp.balance , mp.amount_masary_pay , mp.discount_of_balance , c.name_client , mp.price_masary_pay , ifnull(mp.phone,u.note_utility), u.name_utility_masary, mp.time_masary_pay ,mp.date_masary_pay , mp.id_masary_pay FROM masary_pay AS mp INNER JOIN client AS c on mp.id_client = c.id_client LEFT JOIN utility_masary AS u ON mp.id_utility_masary = u.id_utility_masary WHERE mp.id_pos = "+id_pos+" ORDER BY mp.id_masary_pay DESC";
@@ -177,6 +185,36 @@ public abstract class posPay {
         firstbalance = sell - pay;
         return firstbalance;
     }
+    
+    //method Fill JList phoneNumber
+    public List<String> Phoneslist(charage charahe){
+         List<String> model = null;
+        try {
+            con = ConnectDB.getCon();
+            Statement stm = (Statement) con.createStatement();
+            model = new ArrayList<>();
+            String sql = "";
+            switch(charahe){
+                case cash:
+                    sql = "Select number_VF_cash from VF_cash";
+                    break;
+                case mob:
+                    sql = "SELECT phone FROM masary_pay GROUP BY phone";
+                    break;
+            }
+            ResultSet rst = stm.executeQuery(sql);
+            String value;
+            while (rst.next()) {
+                value = rst.getString(1);
+                model.add(value);
+            }
+            con.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(posPay.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return model;
+    }
+    
     // Geter and Setter Methods
     //this method set id utility by note
     public void setId_utility_masary(String note) {

@@ -56,7 +56,7 @@
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/Icons/online-banking.png"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="&#x633;&#x62d;&#x628; - &#x627;&#x633;&#x62a;&#x642;&#x628;&#x627;&#x644;"/>
+        <Property name="text" type="java.lang.String" value=" &#x627;&#x631;&#x633;&#x627;&#x644;"/>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.BevelBorderInfo">
             <BevelBorder/>
@@ -81,7 +81,7 @@
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/Icons/wallet_1.png"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="&#x627;&#x64a;&#x62f;&#x627;&#x639; - &#x627;&#x631;&#x633;&#x627;&#x644;"/>
+        <Property name="text" type="java.lang.String" value="&#x627;&#x633;&#x62a;&#x642;&#x628;&#x627;&#x644;"/>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.BevelBorderInfo">
             <BevelBorder/>
@@ -106,7 +106,7 @@
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/Icons/wallet_mob_1.png"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="&#x634;&#x62d;&#x646; &#x645;&#x62d;&#x641;&#x638;&#x629;"/>
+        <Property name="text" type="java.lang.String" value="&#x627;&#x64a;&#x62f;&#x627;&#x639; - &#x633;&#x62d;&#x628;"/>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.BevelBorderInfo">
             <BevelBorder/>
