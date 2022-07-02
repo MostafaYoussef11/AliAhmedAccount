@@ -6,11 +6,13 @@
 package Entity;
 
 import Utilities.ConnectDB;
-import com.mysql.jdbc.PreparedStatement;
-import com.mysql.jdbc.Statement;
+//import com.mysql.jdbc.PreparedStatement;
+//import com.mysql.jdbc.Statement;
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -41,11 +43,20 @@ public abstract class posPay {
     private double amount_masary_pay; // المطلوب من العميل 
     private String phone;
     private int id_pos;
+    private boolean is_requer_phone_num;
    
     
     //constractor Method
     public posPay(int id_pos){
         this.id_pos = id_pos;
+    }
+
+    public boolean isIs_requer_phone_num() {
+        return is_requer_phone_num;
+    }
+
+    public void setIs_requer_phone_num(boolean is_requer_phone_num) {
+        this.is_requer_phone_num = is_requer_phone_num;
     }
     
     public enum charage{ cash , mob};
@@ -90,6 +101,12 @@ public abstract class posPay {
                  pstmt.setString(2, utility_masary);
                  pstmt.setInt(3, id_masary_pay);
                  if(pstmt.executeUpdate() == 1){
+                    if(is_requer_phone_num){
+                        String sql_inser_num = "INSERT INTO `phone_numbers` (`numbers`) VALUES(?)";
+                        PreparedStatement pst = con.prepareStatement(sql_inser_num);
+                        pst.setString(1, phone);
+                        pst.executeUpdate();
+                    }
                     con.commit();
                     isSave = true;
                     con.close();
@@ -141,6 +158,12 @@ public abstract class posPay {
                  pstmt.setInt(3, id_masary_pay);
                  pstmt.setString(4, utility_masary);
                  if(pstmt.executeUpdate() == 1){
+                    if(is_requer_phone_num){
+                        String sql_inser_num = "INSERT INTO `phone_numbers` (`numbers`) VALUES(?)";
+                        PreparedStatement pst = con.prepareStatement(sql_inser_num);
+                        pst.setString(1, phone);
+                        pst.executeUpdate();
+                    }
                     con.commit();
                     isSave = true;
                     con.close();
@@ -291,6 +314,28 @@ public abstract class posPay {
     }
     public void setId_pos(int id_pos) {
         this.id_pos = id_pos;
+    }
+    
+    public List<String> PhoneNumberList(){
+       List<String> Utilities = new ArrayList<String>();
+        try {
+            con = ConnectDB.getCon();
+            Statement stmt = (com.mysql.jdbc.Statement) con.createStatement();
+            String sql = "SELECT numbers FROM `phone_numbers`";
+            //String sql = "SELECT name_items FROM `items`";
+            //int i = 0;
+            ResultSet rst = stmt.executeQuery(sql);
+            String elment;
+            while (rst.next()) {
+                elment = rst.getString(1);
+                Utilities.add(elment);
+            }
+           
+            con.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(PosClass.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return Utilities;
     }
     
 }

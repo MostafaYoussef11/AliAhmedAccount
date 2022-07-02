@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.4
+-- version 5.0.2
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 30, 2022 at 06:03 PM
--- Server version: 10.4.17-MariaDB
--- PHP Version: 7.3.27
+-- Generation Time: Jul 03, 2022 at 12:24 AM
+-- Server version: 10.4.13-MariaDB
+-- PHP Version: 7.2.31
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -215,7 +215,9 @@ INSERT INTO `casher` (`id_casher`, `date_casher`, `Debit`, `Creditor`, `note`, `
 (165, '2022-06-30', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 109, NULL),
 (166, '2022-06-30', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 110, NULL),
 (167, '2022-06-30', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 111, NULL),
-(168, '2022-06-30', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 112, NULL);
+(168, '2022-06-30', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 112, NULL),
+(169, '2022-07-01', 15.00, NULL, '01127333021', NULL, NULL, NULL, NULL, 113, NULL),
+(170, '2022-07-01', 1.50, NULL, '01063734632', NULL, NULL, NULL, NULL, 114, NULL);
 
 --
 -- Triggers `casher`
@@ -268,6 +270,23 @@ INSERT INTO `categoryutilites` (`id_category`, `name_category`, `requier_phone`)
 (4, 'كروت فودافون', 0),
 (9, 'اتصالات حكاية', 0),
 (10, 'شحن', 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `charagewallet`
+--
+
+CREATE TABLE `charagewallet` (
+  `id_charageWallet` int(11) NOT NULL,
+  `date_charageWallet` date DEFAULT curdate(),
+  `time_charageWallet` time DEFAULT curtime(),
+  `id_VF_Cash` int(11) NOT NULL,
+  `amount` double(10,2) NOT NULL,
+  `id_pos` int(11) NOT NULL,
+  `balance_befor` double(10,2) DEFAULT NULL,
+  `balance_after` double(10,2) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
@@ -377,7 +396,10 @@ INSERT INTO `finallyday` (`dateFinally`, `oldBalance`, `totalimport`, `totalexpo
 ('2022-06-27', 1350, 440.5, 0, '02:11:15'),
 ('2022-06-28', 1790.5, 111.5, 700, '02:11:15'),
 ('2022-06-29', 1202, 2987, 4000, '02:18:11'),
-('2022-06-30', 189, 23261, 20000, '00:00:00');
+('2022-06-30', 189, 23261, 20000, '00:00:00'),
+('2022-07-01', 3450, 16.5, 0, '00:00:00'),
+('2022-07-02', 3466.5, 0, 0, '21:43:15'),
+('2022-07-03', 3466.5, 0, 0, '00:00:00');
 
 -- --------------------------------------------------------
 
@@ -629,7 +651,9 @@ INSERT INTO `masary_pay` (`id_masary_pay`, `date_masary_pay`, `time_masary_pay`,
 (109, '2022-06-30', '13:35:08', 39, 10.00, 1, 10.00, 10.00, 1, 18001.25, '10'),
 (110, '2022-06-30', '13:35:09', 39, 10.00, 1, 10.00, 10.00, 1, 17991.25, '10'),
 (111, '2022-06-30', '13:35:10', 39, 10.00, 1, 10.00, 10.00, 1, 17981.25, '10'),
-(112, '2022-06-30', '14:43:06', 39, 10.00, 1, 10.00, 10.00, 1, 17971.25, '10');
+(112, '2022-06-30', '14:43:06', 39, 10.00, 1, 10.00, 10.00, 1, 17971.25, '10'),
+(113, '2022-07-01', '16:24:47', 73, 10.00, 1, 14.30, 15.00, 1, 17956.95, '01127333021'),
+(114, '2022-07-01', '16:30:21', 73, 1.00, 1, 1.43, 1.50, 1, 17955.52, '01063734632');
 
 -- --------------------------------------------------------
 
@@ -679,7 +703,7 @@ CREATE TRIGGER `upDate_balance` AFTER INSERT ON `masary_sell` FOR EACH ROW BEGIN
 FROM
     masary_pay
 WHERE
-    masary_pay.id_masary_pay = (SELECT MAX(mpay.id_masary_pay) FROM masary_pay AS mpay) AND masary_pay.id_pos = 1 ;
+    masary_pay.id_masary_pay = (SELECT MAX(mpay.id_masary_pay) FROM masary_pay AS mpay)  ;
     -- set new balance
     IF @oldbalance != NULL THEN
 UPDATE
@@ -691,7 +715,7 @@ SET
     FROM
         masary_sell AS sell
     WHERE
-        sell.id_masary_sell = (SELECT MAX(sell2.id_masary_sell) FROM masary_sell AS sell2) AND sell.id_pos = 1
+        sell.id_masary_sell = (SELECT MAX(sell2.id_masary_sell) FROM masary_sell AS sell2)
 ) ;
 END IF ;
 END
@@ -719,6 +743,24 @@ CREATE TABLE `paymentreceipt` (
 INSERT INTO `paymentreceipt` (`id_PaymentReceipt`, `date_PaymentReceipt`, `amount`, `id_Suppliers`, `isActive`) VALUES
 (1, '2022-06-28', 700.00, 2, 1),
 (2, '2022-06-30', 20000.00, 3, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `phone_numbers`
+--
+
+CREATE TABLE `phone_numbers` (
+  `numbers` varchar(14) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `phone_numbers`
+--
+
+INSERT INTO `phone_numbers` (`numbers`) VALUES
+('st01063734632'),
+('st01127333021');
 
 -- --------------------------------------------------------
 
@@ -1142,7 +1184,7 @@ INSERT INTO `vf_cash` (`id_VF_cash`, `number_VF_cash`, `name_owner`, `id_interna
 --
 DROP TABLE IF EXISTS `calcbalanceitems`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `calcbalanceitems`  AS SELECT `pur`.`id` AS `id`, `pur`.`name_items` AS `name_items`, ifnull(cast(`pur`.`firstbalance` as double(10,2)),0) AS `firstBalance`, ifnull(cast(`pur`.`qyt_pursh` as double(10,2)),0) AS `purchase`, ifnull(cast(`sal`.`qyt_sales` as double(10,2)),0) AS `Sales`, cast(ifnull(`pur`.`firstbalance`,0) + ifnull(`pur`.`qyt_pursh`,0) - ifnull(`sal`.`qyt_sales`,0) as double(10,2)) AS `nowBalance` FROM (`calcbalance_purchase` `pur` left join `calcbalance_sales` `sal` on(`sal`.`id` = `pur`.`id`)) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `calcbalanceitems`  AS  select `pur`.`id` AS `id`,`pur`.`name_items` AS `name_items`,ifnull(cast(`pur`.`firstbalance` as double(10,2)),0) AS `firstBalance`,ifnull(cast(`pur`.`qyt_pursh` as double(10,2)),0) AS `purchase`,ifnull(cast(`sal`.`qyt_sales` as double(10,2)),0) AS `Sales`,cast(ifnull(`pur`.`firstbalance`,0) + ifnull(`pur`.`qyt_pursh`,0) - ifnull(`sal`.`qyt_sales`,0) as double(10,2)) AS `nowBalance` from (`calcbalance_purchase` `pur` left join `calcbalance_sales` `sal` on(`sal`.`id` = `pur`.`id`)) ;
 
 -- --------------------------------------------------------
 
@@ -1151,7 +1193,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `calcbalance_purchase`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `calcbalance_purchase`  AS SELECT `items`.`id_items` AS `id`, `items`.`name_items` AS `name_items`, sum(case when `p`.`name_items` = (select `un`.`low` from `unititems` `un` where `un`.`id_items` = `p`.`id_items`) then `p`.`qyt` / (select `un`.`val` from `unititems` `un` where `un`.`id_items` = `p`.`id_items`) else `p`.`qyt` end) AS `qyt_pursh`, `items`.`firstbalance` AS `firstbalance` FROM (`items` join `itemsonpurchaseinvoice` `p` on(`p`.`id_items` = `items`.`id_items`)) GROUP BY `items`.`id_items` ORDER BY `items`.`id_items` ASC ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `calcbalance_purchase`  AS  select `items`.`id_items` AS `id`,`items`.`name_items` AS `name_items`,sum(case when `p`.`name_items` = (select `un`.`low` from `unititems` `un` where `un`.`id_items` = `p`.`id_items`) then `p`.`qyt` / (select `un`.`val` from `unititems` `un` where `un`.`id_items` = `p`.`id_items`) else `p`.`qyt` end) AS `qyt_pursh`,`items`.`firstbalance` AS `firstbalance` from (`items` join `itemsonpurchaseinvoice` `p` on(`p`.`id_items` = `items`.`id_items`)) group by `items`.`id_items` order by `items`.`id_items` ;
 
 -- --------------------------------------------------------
 
@@ -1160,7 +1202,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `calcbalance_sales`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `calcbalance_sales`  AS SELECT `items`.`id_items` AS `id`, `items`.`name_items` AS `name_items`, sum(case when `i`.`name_unit` = (select `un`.`low` from `unititems` `un` where `un`.`id_items` = `i`.`id_items`) then `i`.`qyt` / (select `u`.`val` from `unititems` `u` where `u`.`id_items` = `i`.`id_items`) else `i`.`qyt` end) AS `qyt_sales`, `items`.`firstbalance` AS `firstbalance` FROM (`items` join `itemsonsalesinvoice` `i` on(`i`.`id_items` = `items`.`id_items`)) GROUP BY `items`.`id_items` ORDER BY `items`.`id_items` ASC ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `calcbalance_sales`  AS  select `items`.`id_items` AS `id`,`items`.`name_items` AS `name_items`,sum(case when `i`.`name_unit` = (select `un`.`low` from `unititems` `un` where `un`.`id_items` = `i`.`id_items`) then `i`.`qyt` / (select `u`.`val` from `unititems` `u` where `u`.`id_items` = `i`.`id_items`) else `i`.`qyt` end) AS `qyt_sales`,`items`.`firstbalance` AS `firstbalance` from (`items` join `itemsonsalesinvoice` `i` on(`i`.`id_items` = `items`.`id_items`)) group by `items`.`id_items` order by `items`.`id_items` ;
 
 -- --------------------------------------------------------
 
@@ -1169,7 +1211,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `debitandcreditorclient`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `debitandcreditorclient`  AS SELECT `ac`.`date_ClientAccount` AS `date_ClientAccount`, `ac`.`Debit` AS `Debit`, `ac`.`Creditor` AS `Creditor`, `ac`.`id_client` AS `id_client`, `c`.`name_client` AS `name_client`, `ac`.`id_salesInvoic` AS `id_salesInvoic`, `ac`.`id_Receipt` AS `id_Receipt`, `ac`.`note` AS `note` FROM (`clientaccount` `ac` join `client` `c` on(`ac`.`id_client` = `c`.`id_client`)) WHERE `ac`.`isActive` = 1 ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `debitandcreditorclient`  AS  select `ac`.`date_ClientAccount` AS `date_ClientAccount`,`ac`.`Debit` AS `Debit`,`ac`.`Creditor` AS `Creditor`,`ac`.`id_client` AS `id_client`,`c`.`name_client` AS `name_client`,`ac`.`id_salesInvoic` AS `id_salesInvoic`,`ac`.`id_Receipt` AS `id_Receipt`,`ac`.`note` AS `note` from (`clientaccount` `ac` join `client` `c` on(`ac`.`id_client` = `c`.`id_client`)) where `ac`.`isActive` = 1 ;
 
 -- --------------------------------------------------------
 
@@ -1178,7 +1220,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `debitandcreditorsupplier`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `debitandcreditorsupplier`  AS SELECT `ac`.`date_suppliersAccount` AS `date_suppliersAccount`, `ac`.`Debit` AS `Debit`, `ac`.`Creditor` AS `Creditor`, `ac`.`id_Suppliers` AS `id_Suppliers`, `sup`.`name_Suppliers` AS `name_Suppliers`, `ac`.`id_purchaseInvoice` AS `id_purchaseInvoice`, `ac`.`id_paymentReceipt` AS `id_paymentReceipt`, `ac`.`note` AS `note` FROM (`suppliersaccount` `ac` join `suppliers` `sup` on(`ac`.`id_Suppliers` = `sup`.`id_Suppliers`)) WHERE `ac`.`isActive` = 1 ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `debitandcreditorsupplier`  AS  select `ac`.`date_suppliersAccount` AS `date_suppliersAccount`,`ac`.`Debit` AS `Debit`,`ac`.`Creditor` AS `Creditor`,`ac`.`id_Suppliers` AS `id_Suppliers`,`sup`.`name_Suppliers` AS `name_Suppliers`,`ac`.`id_purchaseInvoice` AS `id_purchaseInvoice`,`ac`.`id_paymentReceipt` AS `id_paymentReceipt`,`ac`.`note` AS `note` from (`suppliersaccount` `ac` join `suppliers` `sup` on(`ac`.`id_Suppliers` = `sup`.`id_Suppliers`)) where `ac`.`isActive` = 1 ;
 
 -- --------------------------------------------------------
 
@@ -1204,6 +1246,14 @@ ALTER TABLE `casher`
 --
 ALTER TABLE `categoryutilites`
   ADD PRIMARY KEY (`id_category`);
+
+--
+-- Indexes for table `charagewallet`
+--
+ALTER TABLE `charagewallet`
+  ADD PRIMARY KEY (`id_charageWallet`),
+  ADD KEY `id_pos` (`id_pos`),
+  ADD KEY `id_VF_Cash` (`id_VF_Cash`);
 
 --
 -- Indexes for table `client`
@@ -1274,6 +1324,12 @@ ALTER TABLE `masary_sell`
 ALTER TABLE `paymentreceipt`
   ADD PRIMARY KEY (`id_PaymentReceipt`),
   ADD KEY `id_Suppliers` (`id_Suppliers`);
+
+--
+-- Indexes for table `phone_numbers`
+--
+ALTER TABLE `phone_numbers`
+  ADD UNIQUE KEY `numbers` (`numbers`);
 
 --
 -- Indexes for table `pos`
@@ -1367,13 +1423,19 @@ ALTER TABLE `vf_cash`
 -- AUTO_INCREMENT for table `casher`
 --
 ALTER TABLE `casher`
-  MODIFY `id_casher` bigint(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=169;
+  MODIFY `id_casher` bigint(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=171;
 
 --
 -- AUTO_INCREMENT for table `categoryutilites`
 --
 ALTER TABLE `categoryutilites`
   MODIFY `id_category` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+
+--
+-- AUTO_INCREMENT for table `charagewallet`
+--
+ALTER TABLE `charagewallet`
+  MODIFY `id_charageWallet` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `clientaccount`
@@ -1385,7 +1447,7 @@ ALTER TABLE `clientaccount`
 -- AUTO_INCREMENT for table `masary_pay`
 --
 ALTER TABLE `masary_pay`
-  MODIFY `id_masary_pay` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=113;
+  MODIFY `id_masary_pay` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=115;
 
 --
 -- AUTO_INCREMENT for table `masary_sell`
@@ -1438,6 +1500,13 @@ ALTER TABLE `vf_cash`
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `charagewallet`
+--
+ALTER TABLE `charagewallet`
+  ADD CONSTRAINT `charagewallet_ibfk_1` FOREIGN KEY (`id_pos`) REFERENCES `pos` (`id_pos`),
+  ADD CONSTRAINT `charagewallet_ibfk_2` FOREIGN KEY (`id_VF_Cash`) REFERENCES `vf_cash` (`id_VF_cash`);
 
 --
 -- Constraints for table `clientaccount`
@@ -1534,7 +1603,7 @@ DELIMITER $$
 --
 -- Events
 --
-CREATE DEFINER=`root`@`localhost` EVENT `finalDay` ON SCHEDULE EVERY 1 DAY STARTS '2022-06-19 22:00:00' ON COMPLETION PRESERVE ENABLE DO INSERT INTO `finallyday`( `dateFinally`, `oldBalance`, `totalimport`, `totalexport`,`time_insert` ) VALUES( CURRENT_DATE(),( SELECT f.newbalance FROM finallyday AS f WHERE f.dateFinally = CURRENT_DATE() - INTERVAL 1 DAY), ( SELECT COALESCE(SUM(c.Debit), 0) FROM casher AS c WHERE c.date_casher = CURRENT_DATE()), ( SELECT COALESCE(SUM(c.Creditor), 0) FROM casher AS c WHERE c.date_casher = CURRENT_DATE()),current_timestamp())$$
+CREATE DEFINER=`root`@`localhost` EVENT `finalDay` ON SCHEDULE EVERY 1 DAY STARTS '2022-06-19 00:00:00' ON COMPLETION PRESERVE ENABLE DO INSERT INTO `finallyday`( `dateFinally`, `oldBalance`, `totalimport`, `totalexport`,`time_insert` ) VALUES( CURRENT_DATE(),( SELECT f.newbalance FROM finallyday AS f WHERE f.dateFinally = CURRENT_DATE() - INTERVAL 1 DAY), ( SELECT COALESCE(SUM(c.Debit), 0) FROM casher AS c WHERE c.date_casher = CURRENT_DATE()), ( SELECT COALESCE(SUM(c.Creditor), 0) FROM casher AS c WHERE c.date_casher = CURRENT_DATE()),current_timestamp())$$
 
 DELIMITER ;
 COMMIT;

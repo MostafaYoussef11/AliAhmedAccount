@@ -6,6 +6,8 @@
 package Frams;
 
 import Entity.ClientPerson;
+import Entity.PosClass;
+import Entity.charageWallet;
 import Entity.masary_Utilites;
 import Entity.posPay;
 import Utilities.Autocomplete;
@@ -15,6 +17,9 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Point;
 import java.awt.event.ActionListener;
+import java.awt.event.InputEvent;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
@@ -39,6 +44,7 @@ public class MasarypayFrame extends javax.swing.JFrame {
     private double costService;
     private boolean is_requier_phone_number = false;
     private final DecimalFormat decf;
+    Autocomplete autocomplete;
     Dimension dim = new Dimension(870, 530);
     public MasarypayFrame() {
         initComponents();
@@ -74,6 +80,13 @@ public class MasarypayFrame extends javax.swing.JFrame {
         txtdiscount.setText(String.valueOf(masary_util.getCost(note)));
         txtAmount.requestFocus();
         txtAmount.selectAll();
+        
+        List<String> phones = masary.PhoneNumberList();
+        autocomplete = new Autocomplete(txtPhone, phones);
+         txtPhone.getDocument().addDocumentListener(autocomplete);
+//            txtPhone.getInputMap().put(KeyStroke.getKeyStroke("TAB"), "commit");
+//            txtPhone.getActionMap().put("commit", autocomplete.new CommitAction());  
+        
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -86,19 +99,19 @@ public class MasarypayFrame extends javax.swing.JFrame {
 
         txtPanal = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        comUtility = new javax.swing.JComboBox<>();
+        comUtility = new javax.swing.JComboBox<String>();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         txtCount = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        combClient = new javax.swing.JComboBox<>();
+        combClient = new javax.swing.JComboBox<String>();
         jLabel5 = new javax.swing.JLabel();
         txtdiscount = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         txtbalance = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         txtAmount = new javax.swing.JTextField();
-        combnote = new javax.swing.JComboBox<>();
+        combnote = new javax.swing.JComboBox<String>();
         lb_phone = new javax.swing.JLabel();
         txtPhone = new javax.swing.JTextField();
         title = new javax.swing.JLabel();
@@ -128,7 +141,7 @@ public class MasarypayFrame extends javax.swing.JFrame {
         txtPanal.add(jLabel1);
         jLabel1.setBounds(725, 13, 100, 35);
 
-        comUtility.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comUtility.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         comUtility.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 comUtilityItemStateChanged(evt);
@@ -169,7 +182,7 @@ public class MasarypayFrame extends javax.swing.JFrame {
         txtPanal.add(jLabel4);
         jLabel4.setBounds(725, 55, 100, 35);
 
-        combClient.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        combClient.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         txtPanal.add(combClient);
         combClient.setBounds(560, 55, 160, 35);
 
@@ -211,7 +224,7 @@ public class MasarypayFrame extends javax.swing.JFrame {
         txtPanal.add(txtAmount);
         txtAmount.setBounds(560, 95, 160, 35);
 
-        combnote.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        combnote.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         combnote.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 combnoteItemStateChanged(evt);
@@ -229,6 +242,14 @@ public class MasarypayFrame extends javax.swing.JFrame {
 
         txtPhone.setFont(new java.awt.Font("Lucida Calligraphy", 1, 12)); // NOI18N
         txtPhone.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtPhone.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtPhoneKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtPhoneKeyTyped(evt);
+            }
+        });
         txtPanal.add(txtPhone);
         txtPhone.setBounds(12, 55, 402, 35);
 
@@ -407,6 +428,7 @@ public class MasarypayFrame extends javax.swing.JFrame {
             masary.setPhone(txtPhone.getText());
             masary.setUtility_masary(txtPhone.getText());
             masary.setId_utility_masary(not_utilitiy);
+            masary.setIs_requer_phone_num(true);
         }
         else{
             masary.setPhone(null);
@@ -463,19 +485,7 @@ public class MasarypayFrame extends javax.swing.JFrame {
         is_requier_phone_number = masary_util.isRequierPhoneNumber(nameCategoray);
         if(is_requier_phone_number){
             lb_phone.setEnabled(is_requier_phone_number);
-            txtPhone.setEnabled(is_requier_phone_number);
-            posPay.charage c;
-            if(nameCategoray.equals("كاش")){
-                 c = posPay.charage.cash;
-            }else{
-                c = posPay.charage.mob;
-            }
-            List<String> phones = masary.Phoneslist(c);
-            txtPhone.setFocusTraversalKeysEnabled(false);
-            Autocomplete autocomplete = new Autocomplete(txtPhone, phones);
-            txtPhone.getDocument().addDocumentListener(autocomplete);
-            txtPhone.getInputMap().put(KeyStroke.getKeyStroke("TAB"), "commit");
-            txtPhone.getActionMap().put("commit", autocomplete.new CommitAction());
+            txtPhone.setEnabled(is_requier_phone_number);  
         }
 
  
@@ -505,6 +515,21 @@ public class MasarypayFrame extends javax.swing.JFrame {
         txtAmount.requestFocus();
         txtAmount.selectAll();
     }//GEN-LAST:event_combnoteItemStateChanged
+
+    private void txtPhoneKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPhoneKeyTyped
+
+
+    }//GEN-LAST:event_txtPhoneKeyTyped
+
+    private void txtPhoneKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPhoneKeyReleased
+        // TODO add your handling code here:
+               ///AuotComplect
+//            txtPhone.setFocusTraversalKeysEnabled(false);
+//            txtPhone.getDocument().addDocumentListener(autocomplete);
+//            txtPhone.getInputMap().put(KeyStroke.getKeyStroke("TAB"), "commit");
+//            txtPhone.getActionMap().put("commit", autocomplete.new CommitAction());      
+ 
+    }//GEN-LAST:event_txtPhoneKeyReleased
 
     /**
      * @param args the command line arguments
