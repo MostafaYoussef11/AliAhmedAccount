@@ -3,12 +3,16 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/F:/masrawy%20new%20account/src/Entity/posPay.java</file>
-            <file>file:/F:/masrawy%20new%20account/src/Entity/PosClass.java</file>
-            <file>file:/F:/masrawy%20new%20account/src/Entity/charageWallet.java</file>
-            <file>file:/F:/masrawy%20new%20account/src/Frams/MasarypayFrame.java</file>
-            <file>file:/F:/masrawy%20new%20account/src/Utilities/Autocomplete.java</file>
-            <file>file:/F:/masrawy%20new%20account/src/Frams/MainFrame.java</file>
+            <file>file:/E:/masrawyAccountBranch/AliAhmedAccount/src/Frams/menuCashFrame.java</file>
+            <file>file:/E:/masrawyAccountBranch/AliAhmedAccount/src/Entity/TransactionVCashAndPos.java</file>
+            <file>file:/E:/masrawyAccountBranch/AliAhmedAccount/src/Entity/PosClass.java</file>
+            <file>file:/E:/masrawyAccountBranch/AliAhmedAccount/src/Entity/ChargeWalletClass.java</file>
+            <file>file:/E:/masrawyAccountBranch/AliAhmedAccount/src/Utilities/ConnectDB.java</file>
+            <file>file:/E:/masrawyAccountBranch/AliAhmedAccount/src/Utilities/Tools.java</file>
+            <file>file:/E:/masrawyAccountBranch/AliAhmedAccount/src/Frams/chargingWalletFrame.java</file>
+            <file>file:/E:/masrawyAccountBranch/AliAhmedAccount/src/Entity/MasaryPay.java</file>
+            <file>file:/E:/masrawyAccountBranch/AliAhmedAccount/src/Entity/VFCashClass.java</file>
+            <file>file:/E:/masrawyAccountBranch/AliAhmedAccount/src/Entity/posPay.java</file>
         </group>
     </open-files>
 </project-private>

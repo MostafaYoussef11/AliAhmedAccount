@@ -5,6 +5,7 @@
  */
 package Frams;
 
+import Entity.ChargeWalletClass;
 import Utilities.Tools;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -23,15 +24,19 @@ public class menuCashFrame extends javax.swing.JFrame {
     /**
      * Creates new form menuCashFrame
      */
-    Dimension dim = new Dimension(600, 400);
+    Dimension dim = new Dimension(600, 500);
     Font font = Tools.font(16f);
     public menuCashFrame() {
         initComponents();
         setSize(dim);
         addSim.setFont(font);
         receive.setFont(font);
-        charging.setFont(font);
+        cridetAtm.setFont(font);
         send.setFont(font);
+        charging.setFont(font);
+        cridetAtm.setFont(font);
+        debit_atm.setFont(font);
+        toPos.setFont(font);
         background.setLocation(0, 0);
         background.setSize(dim);
         background.setPreferredSize(dim);
@@ -51,7 +56,10 @@ public class menuCashFrame extends javax.swing.JFrame {
         addSim = new javax.swing.JLabel();
         receive = new javax.swing.JLabel();
         send = new javax.swing.JLabel();
+        cridetAtm = new javax.swing.JLabel();
         charging = new javax.swing.JLabel();
+        debit_atm = new javax.swing.JLabel();
+        toPos = new javax.swing.JLabel();
         background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -72,7 +80,7 @@ public class menuCashFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(addSim);
-        addSim.setBounds(390, 20, 180, 130);
+        addSim.setBounds(400, 20, 180, 130);
 
         receive.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         receive.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/online-banking.png"))); // NOI18N
@@ -89,7 +97,7 @@ public class menuCashFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(receive);
-        receive.setBounds(50, 20, 180, 130);
+        receive.setBounds(210, 170, 180, 130);
 
         send.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         send.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/wallet_1.png"))); // NOI18N
@@ -106,11 +114,29 @@ public class menuCashFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(send);
-        send.setBounds(390, 220, 180, 130);
+        send.setBounds(400, 170, 180, 130);
+
+        cridetAtm.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        cridetAtm.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/atm.png"))); // NOI18N
+        cridetAtm.setText("سحب من - ATM");
+        cridetAtm.setToolTipText("");
+        cridetAtm.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        cridetAtm.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        cridetAtm.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        cridetAtm.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                cridetAtmMouseClicked(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                cridetAtmMouseExited(evt);
+            }
+        });
+        getContentPane().add(cridetAtm);
+        cridetAtm.setBounds(20, 170, 180, 130);
 
         charging.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         charging.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/wallet_mob_1.png"))); // NOI18N
-        charging.setText("ايداع - سحب");
+        charging.setText("ايداع");
         charging.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         charging.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         charging.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -123,7 +149,43 @@ public class menuCashFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(charging);
-        charging.setBounds(50, 220, 180, 130);
+        charging.setBounds(210, 20, 180, 130);
+
+        debit_atm.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        debit_atm.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/atm.png"))); // NOI18N
+        debit_atm.setText("ايداع من - ATM");
+        debit_atm.setToolTipText("");
+        debit_atm.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        debit_atm.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        debit_atm.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        debit_atm.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                debit_atmMouseClicked(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                debit_atmMouseExited(evt);
+            }
+        });
+        getContentPane().add(debit_atm);
+        debit_atm.setBounds(400, 320, 180, 130);
+
+        toPos.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        toPos.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/pos2.png"))); // NOI18N
+        toPos.setText("سحب");
+        toPos.setToolTipText("");
+        toPos.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        toPos.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        toPos.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        toPos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                toPosMouseClicked(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                toPosMouseExited(evt);
+            }
+        });
+        getContentPane().add(toPos);
+        toPos.setBounds(20, 20, 180, 130);
         getContentPane().add(background);
         background.setBounds(0, 0, 0, 0);
 
@@ -159,13 +221,45 @@ public class menuCashFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_sendMouseExited
 
-    private void chargingMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_chargingMouseClicked
+    private void cridetAtmMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cridetAtmMouseClicked
         // TODO add your handling code here:
+//        clickPanel(charging);
+//        chargingWalletFrame chwallet = new chargingWalletFrame();
+//        Tools.openJFram(chwallet, "ايداع - سحب ");
+    }//GEN-LAST:event_cridetAtmMouseClicked
+
+    private void cridetAtmMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cridetAtmMouseExited
+        // TODO add your handling code here:
+        exitPanel(cridetAtm);
+    }//GEN-LAST:event_cridetAtmMouseExited
+
+    private void chargingMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_chargingMouseClicked
+            clickPanel(charging);
+        chargingWalletFrame chwallet = new chargingWalletFrame();
+        Tools.openJFram(chwallet, "شحن محفظة"); 
+       
     }//GEN-LAST:event_chargingMouseClicked
 
     private void chargingMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_chargingMouseExited
         // TODO add your handling code here:
+        exitPanel(charging);
     }//GEN-LAST:event_chargingMouseExited
+
+    private void debit_atmMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_debit_atmMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_debit_atmMouseClicked
+
+    private void debit_atmMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_debit_atmMouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_debit_atmMouseExited
+
+    private void toPosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_toPosMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_toPosMouseClicked
+
+    private void toPosMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_toPosMouseExited
+        // TODO add your handling code here:
+    }//GEN-LAST:event_toPosMouseExited
 
     /**
      * @param args the command line arguments
@@ -211,7 +305,10 @@ public class menuCashFrame extends javax.swing.JFrame {
     private javax.swing.JLabel addSim;
     private javax.swing.JLabel background;
     private javax.swing.JLabel charging;
+    private javax.swing.JLabel cridetAtm;
+    private javax.swing.JLabel debit_atm;
     private javax.swing.JLabel receive;
     private javax.swing.JLabel send;
+    private javax.swing.JLabel toPos;
     // End of variables declaration//GEN-END:variables
 }

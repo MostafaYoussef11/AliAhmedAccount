@@ -6,12 +6,14 @@
 package Entity;
 
 import Utilities.ConnectDB;
-import com.mysql.jdbc.Statement;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
+import java.util.TreeSet;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JComboBox;
@@ -26,6 +28,7 @@ public class PosClass {
     private Connection con;
     private Statement stmt;
     private ResultSet rst;
+    //private Set<String> Numbers;
     public void fillCombo(JComboBox comb){
         ConnectDB.fillCombo("pos", "name_pos", comb);
     }
@@ -36,8 +39,8 @@ public class PosClass {
     public void fillCombNoteUtitilyByIdPos(int id_pos,JComboBox box){
         ConnectDB.fillCombo("utility_masary WHERE id_pos="+id_pos,"note_utility" , box);
     }
-    public List<String> NoteUtiliteyList(int id_pos){
-       List<String> Utilities = new ArrayList<String>();
+    public Set<String> NoteUtiliteyList(int id_pos){
+        Set<String> Numbers = new TreeSet<String>();
         try {
             
             con = ConnectDB.getCon();
@@ -48,13 +51,13 @@ public class PosClass {
             String elment;
             while (rst.next()) {
                 elment = rst.getString(1);
-                Utilities.add(elment);
+                Numbers.add(elment);
             }
            
             con.close();
         } catch (SQLException ex) {
             Logger.getLogger(PosClass.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return Utilities;
+        return Numbers;
     }
 }

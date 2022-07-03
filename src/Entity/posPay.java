@@ -22,6 +22,7 @@ import javax.swing.JList;
 import javax.swing.JTable;
 import javax.swing.ListModel;
 import javax.swing.event.ListDataListener;
+import java.util.*;
 
 /**
  *
@@ -81,12 +82,12 @@ public abstract class posPay {
                  + "( `id_utility_masary`, `price_masary_pay`, `id_client`, "
                  + "`discount_of_balance`, `amount_masary_pay`, `id_pos` ,`balance`,`phone`) VALUES (?,?,?,?,?,?,?,?)";
          pstmt = (PreparedStatement) con.prepareStatement(sql_insert_masaryPay, Statement.RETURN_GENERATED_KEYS);
-         pstmt.setInt(1, id_utility_masary);
-         pstmt.setDouble(2, price_masary_pay);
-         pstmt.setInt(3, 1);
-         pstmt.setDouble(4, discount_of_balance);
-         pstmt.setDouble(5, amount_masary_pay);
-         newbalance = getfirstBalance() - discount_of_balance;
+         pstmt.setInt(1, id_utility_masary);          //id_utility_masary
+         pstmt.setDouble(2, price_masary_pay);        //price_masary_pay
+         pstmt.setInt(3, 1);                          // id_casher
+         pstmt.setDouble(4, discount_of_balance);     // discountOfBalance
+         pstmt.setDouble(5, amount_masary_pay);        // amount_masary_pay
+         newbalance = getfirstBalance() - discount_of_balance; 
          pstmt.setInt(6, id_pos);
          pstmt.setDouble(7, newbalance);
          pstmt.setString(8, utility_masary);
@@ -210,33 +211,33 @@ public abstract class posPay {
     }
     
     //method Fill JList phoneNumber
-    public List<String> Phoneslist(charage charahe){
-         List<String> model = null;
-        try {
-            con = ConnectDB.getCon();
-            Statement stm = (Statement) con.createStatement();
-            model = new ArrayList<>();
-            String sql = "";
-            switch(charahe){
-                case cash:
-                    sql = "Select number_VF_cash from VF_cash";
-                    break;
-                case mob:
-                    sql = "SELECT phone FROM masary_pay GROUP BY phone";
-                    break;
-            }
-            ResultSet rst = stm.executeQuery(sql);
-            String value;
-            while (rst.next()) {
-                value = rst.getString(1);
-                model.add(value);
-            }
-            con.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(posPay.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return model;
-    }
+//    public List<String> Phoneslist(charage charahe){
+//         List<String> model = null;
+//        try {
+//            con = ConnectDB.getCon();
+//            Statement stm = (Statement) con.createStatement();
+//            model = new ArrayList<>();
+//            String sql = "";
+//            switch(charahe){
+//                case cash:
+//                    sql = "Select number_VF_cash from VF_cash";
+//                    break;
+//                case mob:
+//                    sql = "SELECT phone FROM masary_pay GROUP BY phone";
+//                    break;
+//            }
+//            ResultSet rst = stm.executeQuery(sql);
+//            String value;
+//            while (rst.next()) {
+//                value = rst.getString(1);
+//                model.add(value);
+//            }
+//            con.close();
+//        } catch (SQLException ex) {
+//            Logger.getLogger(posPay.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        return model;
+//    }
     
     // Geter and Setter Methods
     //this method set id utility by note
@@ -320,15 +321,14 @@ public abstract class posPay {
        List<String> Utilities = new ArrayList<String>();
         try {
             con = ConnectDB.getCon();
-            Statement stmt = (com.mysql.jdbc.Statement) con.createStatement();
-            String sql = "SELECT numbers FROM `phone_numbers`";
-            //String sql = "SELECT name_items FROM `items`";
-            //int i = 0;
-            ResultSet rst = stmt.executeQuery(sql);
+            com.mysql.jdbc.Statement stmt = (com.mysql.jdbc.Statement) con.createStatement();
+            //String sql_items = "SELECT name_items FROM `items`";
+            ResultSet rst = stmt.executeQuery("SELECT name_items FROM `items`");
             String elment;
             while (rst.next()) {
                 elment = rst.getString(1);
                 Utilities.add(elment);
+                
             }
            
             con.close();

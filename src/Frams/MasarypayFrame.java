@@ -6,27 +6,19 @@
 package Frams;
 
 import Entity.ClientPerson;
-import Entity.PosClass;
-import Entity.charageWallet;
 import Entity.masary_Utilites;
-import Entity.posPay;
 import Utilities.Autocomplete;
 import Utilities.Tools;
-import java.awt.Component;
+import com.ibm.icu.lang.UScript;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.Point;
-import java.awt.event.ActionListener;
-import java.awt.event.InputEvent;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
 import java.text.DecimalFormat;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.ComboBoxEditor;
 import javax.swing.KeyStroke;
+
 
 /**
  *
@@ -46,6 +38,7 @@ public class MasarypayFrame extends javax.swing.JFrame {
     private final DecimalFormat decf;
     Autocomplete autocomplete;
     Dimension dim = new Dimension(870, 530);
+    private List<String> Nums;
     public MasarypayFrame() {
         initComponents();
         setSize(dim);
@@ -57,6 +50,7 @@ public class MasarypayFrame extends javax.swing.JFrame {
         client = new ClientPerson();
         masary = new Entity.MasaryPay();
         newMasaray();
+        
     }
 
     private void newMasaray(){
@@ -80,12 +74,17 @@ public class MasarypayFrame extends javax.swing.JFrame {
         txtdiscount.setText(String.valueOf(masary_util.getCost(note)));
         txtAmount.requestFocus();
         txtAmount.selectAll();
-        
-        List<String> phones = masary.PhoneNumberList();
-        autocomplete = new Autocomplete(txtPhone, phones);
-         txtPhone.getDocument().addDocumentListener(autocomplete);
-//            txtPhone.getInputMap().put(KeyStroke.getKeyStroke("TAB"), "commit");
-//            txtPhone.getActionMap().put("commit", autocomplete.new CommitAction());  
+        Nums = masary.PhoneNumberList();
+        int size = Nums.size();
+        System.out.println("id:"+size);
+        for(int i = 0 ; i<size;i++){
+            System.out.println(Nums.get(i));
+        }
+//        List<String> phones = masary.PhoneNumberList();
+        autocomplete = new Autocomplete(txtPhone, Nums);
+//        txtPhone.getDocument().addDocumentListener(autocomplete);
+//        txtPhone.getInputMap().put(KeyStroke.getKeyStroke("TAB"), "commit");
+//        txtPhone.getActionMap().put("commit", autocomplete.new CommitAction());  
         
     }
     /**
@@ -517,17 +516,18 @@ public class MasarypayFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_combnoteItemStateChanged
 
     private void txtPhoneKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPhoneKeyTyped
-
+//        autocomplete = new Autocomplete(txtPhone, Nums);
+//        txtPhone.getDocument().addDocumentListener(autocomplete);
+//        txtPhone.getInputMap().put(KeyStroke.getKeyStroke("TAB"), "commit");
+//        txtPhone.getActionMap().put("commit", autocomplete.new CommitAction());
 
     }//GEN-LAST:event_txtPhoneKeyTyped
 
     private void txtPhoneKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtPhoneKeyReleased
-        // TODO add your handling code here:
-               ///AuotComplect
-//            txtPhone.setFocusTraversalKeysEnabled(false);
-//            txtPhone.getDocument().addDocumentListener(autocomplete);
-//            txtPhone.getInputMap().put(KeyStroke.getKeyStroke("TAB"), "commit");
-//            txtPhone.getActionMap().put("commit", autocomplete.new CommitAction());      
+//         txtPhone.getDocument().addDocumentListener(autocomplete);
+//        txtPhone.getInputMap().put(KeyStroke.getKeyStroke("TAB"), "commit");
+//        txtPhone.getActionMap().put("commit", autocomplete.new CommitAction());  
+        
  
     }//GEN-LAST:event_txtPhoneKeyReleased
 
