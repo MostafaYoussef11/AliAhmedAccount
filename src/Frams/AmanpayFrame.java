@@ -44,7 +44,7 @@ public class AmanpayFrame extends javax.swing.JFrame {
     public AmanpayFrame() {
         initComponents();
         comUtility.addActionListener((ActionEvent e) -> {
-            if(comUtility.getSelectedItem().equals("فودافون كاش")){
+        if(comUtility.getSelectedItem().equals("فودافون كاش")){
                   this.dispose();
                   Tools.openJFram(new chargingWalletFrame(id_pos), "شحن محفظة");
             }

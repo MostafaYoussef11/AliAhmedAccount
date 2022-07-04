@@ -432,7 +432,7 @@ public class ReciptFrame extends javax.swing.JFrame {
         );
 
         getContentPane().add(btPanel);
-        btPanel.setBounds(10, 630, 770, 61);
+        btPanel.setBounds(10, 635, 770, 61);
         getContentPane().add(background);
         background.setBounds(0, 0, 0, 0);
 

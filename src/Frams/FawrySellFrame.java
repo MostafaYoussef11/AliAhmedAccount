@@ -35,6 +35,7 @@ public class FawrySellFrame extends javax.swing.JFrame {
     FawrySell fawry;
     Suppliers suppliers;
     Dimension dim = new Dimension(870, 600);
+    private final int id_pos = 3;
    // PosSell masary;
     public FawrySellFrame(int type_supplier) {
         initComponents();
@@ -385,8 +386,8 @@ public class FawrySellFrame extends javax.swing.JFrame {
                 isSave = fawry.SaveAccountSupplier();
                 break;
             default:
-                fawry.SetDataAndgeter(value, amount, name_recharge_type, null, to_account);
-                isSave = false; // method add to VF-Cash
+                fawry.setDataUseSave(value, amount, to_account, id_pos);
+                isSave = fawry.SaveVFCash(); // method add to VF-Cash
                 break;
         }
         if(isSave){

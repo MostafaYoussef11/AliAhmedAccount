@@ -6,6 +6,7 @@
 package Frams;
 
 import Entity.PosClass;
+import Entity.PosSell;
 import Entity.TransactionVCashAndPos;
 import Entity.VFCashClass;
 import Entity.posPay;
@@ -29,7 +30,7 @@ public class withdrawWalletFrame extends javax.swing.JFrame {
     private int id_pos;
     private String namePos;
     private TransactionVCashAndPos trans;
-    
+    private PosSell ps;
     public withdrawWalletFrame(int id_pos) {
         initComponents();
         this.id_pos = id_pos;
@@ -347,6 +348,7 @@ public class withdrawWalletFrame extends javax.swing.JFrame {
         namePos = combPos.getSelectedItem().toString();
         id_pos = Integer.parseInt(pos.getIdPosFromNamePos(namePos));
         pp = new posPay(id_pos){};
+        ps = new PosSell(id_pos) {};
         txtPos_balance.setText(pp.getfirstBalance()+"");
         String number_wallet = combNumber.getSelectedItem().toString();
         txtVF_balance.setText(vf.getNowBalance(number_wallet)+"");
@@ -360,13 +362,24 @@ public class withdrawWalletFrame extends javax.swing.JFrame {
     private void btsaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btsaveActionPerformed
         String st_balanceWallet = txtVF_balance.getText();
         String st_val = txtValu.getText();
+        
+        String st_price = txtPrice.getText();  // add to Pos balance
+        double value_masary_sell = Double.parseDouble(st_price); // add to Pos balance
+        
         double balanceWallet = Double.parseDouble(st_balanceWallet);
-        double valDiscofWallet = Double.parseDouble(st_val);
+        double valDiscofWallet = Double.parseDouble(st_val);  // amont and discount from wallet
+        
+        String number_VF_cash = combNumber.getSelectedItem().toString();
         if(valDiscofWallet > balanceWallet){
             Tools.showErrorMsg("رصيد المحفظة لا يكفي");
         
         }else{
-            
+            ps.setDataUseSave(value_masary_sell,valDiscofWallet , number_VF_cash, id_pos);
+            boolean isSave = ps.SaveVFCash();
+            if(isSave){
+                Tools.showInfoMsg("تم الحفظ", "حفظ");
+                setNewTransaction();
+            }
         }
         
     }//GEN-LAST:event_btsaveActionPerformed

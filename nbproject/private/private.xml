@@ -3,15 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/E:/masrawyAccountBranch/AliAhmedAccount/src/Frams/MainFrame.java</file>
-            <file>file:/E:/masrawyAccountBranch/AliAhmedAccount/src/Frams/menuCashFrame.java</file>
-            <file>file:/E:/masrawyAccountBranch/AliAhmedAccount/src/Entity/TransactionVCashAndPos.java</file>
-            <file>file:/E:/masrawyAccountBranch/AliAhmedAccount/src/Icons/calculator_1.png</file>
-            <file>file:/E:/masrawyAccountBranch/AliAhmedAccount/src/Entity/PosSell.java</file>
-            <file>file:/E:/masrawyAccountBranch/AliAhmedAccount/src/Utilities/Tools.java</file>
-            <file>file:/E:/masrawyAccountBranch/AliAhmedAccount/src/Frams/chargingWalletFrame.java</file>
-            <file>file:/E:/masrawyAccountBranch/AliAhmedAccount/src/Frams/withdrawWalletFrame.java</file>
-            <file>file:/E:/masrawyAccountBranch/AliAhmedAccount/src/Frams/BeepayFrame.java</file>
+            <file>file:/F:/masrawy%20new%20account/src/Frams/MasarySellFrame.java</file>
+            <file>file:/F:/masrawy%20new%20account/src/Frams/SendCashFrame.java</file>
+            <file>file:/F:/masrawy%20new%20account/src/Frams/FawrySellFrame.java</file>
+            <file>file:/F:/masrawy%20new%20account/src/Frams/OpaypayFrame.java</file>
+            <file>file:/F:/masrawy%20new%20account/src/Frams/MainFrame.java</file>
         </group>
     </open-files>
 </project-private>

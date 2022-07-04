@@ -34,6 +34,7 @@ public class BeeSellFrame extends javax.swing.JFrame {
     BeeSell Bee;
     Suppliers suppliers;
     Dimension dim = new Dimension(870, 600);
+    private final int id_pos = 2;
    // PosSell masary;
     public BeeSellFrame(int type_supplier) {
         initComponents();
@@ -384,8 +385,8 @@ public class BeeSellFrame extends javax.swing.JFrame {
                 isSave = Bee.SaveAccountSupplier();
                 break;
             default:
-                Bee.SetDataAndgeter(value, amount, name_recharge_type, null, to_account);
-                isSave = false; // method add to VF-Cash
+                Bee.setDataUseSave(value, amount, to_account, id_pos);
+                isSave = Bee.SaveVFCash(); // method add to VF-Cash
                 break;
         }
         if(isSave){

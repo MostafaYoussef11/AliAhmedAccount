@@ -6,6 +6,7 @@
 package Entity;
 
 import Utilities.ConnectDB;
+import Utilities.Tools;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -66,7 +67,22 @@ public class CasherClass {
   
   public String getNowBalanceCasher(){
       String sql = "select newbalance as id from finallyday where dateFinally = CURRENT_DATE()";
-      String now_balance = ConnectDB.getIdFromName(sql);
+      String now_balance = ConnectDB.getIdFromName(sql);      
+      if(now_balance.isEmpty()){
+          //finesh the day rum event finally Day 
+          String sql_finaly_day = "INSERT INTO `finallyday`( `dateFinally`, `oldBalance`, `totalimport`,"
+                  + " `totalexport`,`time_insert` ) VALUES( CURRENT_DATE(),"
+                  + "( SELECT f.newbalance FROM finallyday AS f WHERE f.dateFinally = CURRENT_DATE() - INTERVAL 1 DAY)"
+                  + ", ( SELECT COALESCE(SUM(c.Debit), 0) FROM casher AS c WHERE c.date_casher = CURRENT_DATE()),"
+                  + " ( SELECT COALESCE(SUM(c.Creditor), 0) FROM casher AS c WHERE c.date_casher = CURRENT_DATE())"
+                  + ",current_timestamp())"; 
+         boolean is_insert = ConnectDB.ExucuteAnyQuery(sql_finaly_day);
+         if(is_insert){
+             now_balance = ConnectDB.getIdFromName(sql);
+         }
+ 
+      }
+
       double nbalance = Double.parseDouble(now_balance);
       NumberFormat formatter =  new DecimalFormat("0.00");
       formatter.format(nbalance);

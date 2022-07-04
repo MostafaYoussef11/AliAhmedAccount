@@ -18,6 +18,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
@@ -36,9 +37,16 @@ public class AmanSellFrame extends javax.swing.JFrame {
     AmanSell aman;
     Suppliers suppliers;
     Dimension dim = new Dimension(870, 600);
+    private final int id_pos = 5;
    // PosSell masary;
     public AmanSellFrame(int type_supplier) {
         initComponents();
+//        comUtility.addActionListener((ActionEvent e) -> {
+//        if(comUtility.getSelectedItem().equals("فودافون كاش")){
+//                  this.dispose();
+//                  Tools.openJFram(new chargingWalletFrame(id_pos), "شحن محفظة");
+//            }
+//        });
         setSize(dim);
         Tools.setBackground(background, dim, "16165.jpg");
         font = Tools.font(32f);
@@ -386,8 +394,8 @@ public class AmanSellFrame extends javax.swing.JFrame {
                 isSave = aman.SaveAccountSupplier();
                 break;
             default:
-                aman.SetDataAndgeter(value, amount, name_recharge_type, null, to_account);
-                isSave = false; // method add to VF-Cash
+                aman.setDataUseSave(value, amount, to_account, id_pos );
+                isSave = aman.SaveVFCash(); // method add to VF-Cash
                 break;
         }
         if(isSave){

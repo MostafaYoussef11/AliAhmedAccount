@@ -33,6 +33,7 @@ public class MasarySellFrame extends javax.swing.JFrame {
     masarySellClass masary;
     Suppliers suppliers;
     Dimension dim = new Dimension(870, 600);
+    private final int id_pos = 1;
    // PosSell masary;
     public MasarySellFrame(int type_supplier) {
         initComponents();
@@ -384,8 +385,8 @@ public class MasarySellFrame extends javax.swing.JFrame {
                 isSave = masary.SaveAccountSupplier();
                 break;
             default:
-                masary.SetDataAndgeter(value, amount, name_recharge_type, null, to_account);
-                isSave = false; // method add to VF-Cash
+                masary.setDataUseSave(value, amount, to_account, id_pos);//SetDataAndgeter(value, amount, name_recharge_type, null, to_account);
+                isSave = masary.SaveVFCash(); // method add to VF-Cash
                 break;
         }
         if(isSave){

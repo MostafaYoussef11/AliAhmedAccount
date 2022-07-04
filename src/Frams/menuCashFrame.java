@@ -29,9 +29,9 @@ public class menuCashFrame extends javax.swing.JFrame {
         initComponents();
         setSize(dim);
         addSim.setFont(font);
-        receive.setFont(font);
+        Send.setFont(font);
         cridetAtm.setFont(font);
-        send.setFont(font);
+        Receive.setFont(font);
         charging.setFont(font);
         cridetAtm.setFont(font);
         debit_atm.setFont(font);
@@ -53,8 +53,8 @@ public class menuCashFrame extends javax.swing.JFrame {
     private void initComponents() {
 
         addSim = new javax.swing.JLabel();
-        receive = new javax.swing.JLabel();
-        send = new javax.swing.JLabel();
+        Send = new javax.swing.JLabel();
+        Receive = new javax.swing.JLabel();
         cridetAtm = new javax.swing.JLabel();
         charging = new javax.swing.JLabel();
         debit_atm = new javax.swing.JLabel();
@@ -81,39 +81,39 @@ public class menuCashFrame extends javax.swing.JFrame {
         getContentPane().add(addSim);
         addSim.setBounds(400, 20, 180, 130);
 
-        receive.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        receive.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/online-banking.png"))); // NOI18N
-        receive.setText(" ارسال");
-        receive.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        receive.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        receive.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        receive.addMouseListener(new java.awt.event.MouseAdapter() {
+        Send.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Send.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/online-banking.png"))); // NOI18N
+        Send.setText(" ارسال");
+        Send.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        Send.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        Send.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        Send.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                receiveMouseClicked(evt);
+                SendMouseClicked(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                receiveMouseExited(evt);
+                SendMouseExited(evt);
             }
         });
-        getContentPane().add(receive);
-        receive.setBounds(210, 170, 180, 130);
+        getContentPane().add(Send);
+        Send.setBounds(210, 170, 180, 130);
 
-        send.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        send.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/wallet_1.png"))); // NOI18N
-        send.setText("استقبال");
-        send.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        send.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        send.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        send.addMouseListener(new java.awt.event.MouseAdapter() {
+        Receive.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Receive.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/wallet_1.png"))); // NOI18N
+        Receive.setText("استقبال");
+        Receive.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        Receive.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        Receive.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        Receive.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                sendMouseClicked(evt);
+                ReceiveMouseClicked(evt);
             }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                sendMouseExited(evt);
+                ReceiveMouseExited(evt);
             }
         });
-        getContentPane().add(send);
-        send.setBounds(400, 170, 180, 130);
+        getContentPane().add(Receive);
+        Receive.setBounds(400, 170, 180, 130);
 
         cridetAtm.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         cridetAtm.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/atm.png"))); // NOI18N
@@ -204,21 +204,27 @@ public class menuCashFrame extends javax.swing.JFrame {
         exitPanel(addSim);
     }//GEN-LAST:event_addSimMouseExited
 
-    private void receiveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_receiveMouseClicked
+    private void SendMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SendMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_receiveMouseClicked
+       // clickPanel(receive);
+        clickPanel(Send);
+        SendCashFrame sent = new SendCashFrame();
+        Tools.openJFram(sent, "ارسال كاش");
+        
+    }//GEN-LAST:event_SendMouseClicked
 
-    private void receiveMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_receiveMouseExited
+    private void SendMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SendMouseExited
         // TODO add your handling code here:
-    }//GEN-LAST:event_receiveMouseExited
+        exitPanel(Send);
+    }//GEN-LAST:event_SendMouseExited
 
-    private void sendMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sendMouseClicked
+    private void ReceiveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ReceiveMouseClicked
         // TODO add your handling code here:
-    }//GEN-LAST:event_sendMouseClicked
+    }//GEN-LAST:event_ReceiveMouseClicked
 
-    private void sendMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sendMouseExited
+    private void ReceiveMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ReceiveMouseExited
         // TODO add your handling code here:
-    }//GEN-LAST:event_sendMouseExited
+    }//GEN-LAST:event_ReceiveMouseExited
 
     private void cridetAtmMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cridetAtmMouseClicked
         // TODO add your handling code here:
@@ -305,13 +311,13 @@ public class menuCashFrame extends javax.swing.JFrame {
         lable.setBorder(BorderFactory.createRaisedSoftBevelBorder());
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel Receive;
+    private javax.swing.JLabel Send;
     private javax.swing.JLabel addSim;
     private javax.swing.JLabel background;
     private javax.swing.JLabel charging;
     private javax.swing.JLabel cridetAtm;
     private javax.swing.JLabel debit_atm;
-    private javax.swing.JLabel receive;
-    private javax.swing.JLabel send;
     private javax.swing.JLabel toPos;
     // End of variables declaration//GEN-END:variables
 }

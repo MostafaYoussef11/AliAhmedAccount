@@ -196,7 +196,7 @@ public abstract class posPay {
     return isSave;    
  }
 public boolean SaveVFCash(){
-boolean isSave = false;
+    boolean isSave = false;
     try{
          con = ConnectDB.getCon();
          con.setAutoCommit(false);
@@ -236,10 +236,8 @@ boolean isSave = false;
 
                 if(pstmt.executeUpdate() == 1){
                     double nBalance = new VFCashClass().getNowBalance(phone);
-                    String sql_Update_balance ="UPDATE vf_cash SET vf_cash.now_balance = ? where id_VF_cash = "+id_VF_cash;
                     String sqlupdate = "UPDATE `vf_cash` SET `now_balance` = ? WHERE `vf_cash`.`id_VF_cash` = ?";
-                    pstmt = con.prepareStatement(sqlupdate);
-                    
+                    pstmt = con.prepareStatement(sqlupdate);                    
                     pstmt.setDouble(1, nBalance);
                     pstmt.setInt(2, id_VF_cash);
                     int saved = pstmt.executeUpdate();

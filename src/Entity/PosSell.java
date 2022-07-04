@@ -6,6 +6,7 @@
 package Entity;
 
 import Utilities.ConnectDB;
+import Utilities.Tools;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -148,16 +149,31 @@ public abstract class PosSell {
             if(rst.next()){
                 int id_masary_sell = rst.getInt(1);
                 if(row_inserted == 1){
-                String sql_insert_casher = "INSERT INTO `casher`(`Creditor`, `note`, `id_masary_sell`) VALUES (?,?,?)";
+                String sql_insert_casher ="INSERT INTO `vf_transaction_po` ("
+                                  + " `type_transaction`, `id_VF_cash`, "
+                                  + "`id_pos`, `price`, `id_masary_sell`) "
+                                  + "VALUES (?,?,?,?,?)";
                 pstmc = con.prepareStatement(sql_insert_casher);
-                pstmc.setDouble(1, amount_masary_sell);
-                pstmc.setString(2, "شحن ماكينة "+name_pos);
-                pstmc.setInt(3, id_masary_sell);
+                pstmc.setString(1, "Withdraw");
+                pstmc.setInt(2, id_VF_cash);
+                pstmc.setInt(3, id_pos);
+                pstmc.setDouble(4, amount_masary_sell);
+                pstmc.setInt(5, id_masary_sell);
                 int row_insert = pstmc.executeUpdate();
                     if(row_insert == 1){
-                        isSave = true;
-                        con.commit();
-                        con.close();
+                        double nBalance = new VFCashClass().getNowBalance(number_VF_cash);
+                        String sqlupdate = "UPDATE `vf_cash` SET `now_balance` = ? WHERE `vf_cash`.`id_VF_cash` = ?";
+                        pstmt = con.prepareStatement(sqlupdate);                    
+                        pstmt.setDouble(1, nBalance);
+                        pstmt.setInt(2, id_VF_cash);
+                        int saved = pstmt.executeUpdate();
+                        if(saved == 1){
+                            con.commit();
+                            con.close();
+                            isSave =true;
+                        }else{
+                            Tools.showErrorMsg("no ubdate");
+                        }
                     }
                 }
             }
@@ -221,6 +237,95 @@ public abstract class PosSell {
        return isSave; 
     }
     
+    public void setDataUseSave(double value , double amount , String number_VF_cash , int id_pos){
+            this.value_masary_sell = value;
+            this.amount_masary_sell = amount;
+            this.number_VF_cash = number_VF_cash;
+            this.id_VF_cash = new VFCashClass().getId_VF_ByNumber(number_VF_cash);
+            this.id_pos = id_pos;
+    } 
     
+    public boolean SaveVFCash(){
+        boolean isSave = false;
+        try {
+            con = ConnectDB.getCon();
+            con.setAutoCommit(false);
+            String sql_insert_ms = "INSERT INTO `masary_sell` (`value_masary_sell`, `amount_masary_sell`,"
+                    + " `id_recharge_type`, `id_Suppliers`,`id_pos`) "
+                    + "VALUES (?,?,?,?,?)";
+            pstmt = con.prepareStatement(sql_insert_ms, Statement.RETURN_GENERATED_KEYS);
+            pstmt.setDouble(1, value_masary_sell);  //value   it`s mean the values add to balance Pos
+            pstmt.setDouble(2, amount_masary_sell);  // amount  it`s meaen the values dicount from wallet and the cost
+            pstmt.setInt(3, 3);
+            pstmt.setInt(4, 1);
+            pstmt.setInt(5, id_pos);
+            int row_inserted = pstmt.executeUpdate();
+            rst = pstmt.getGeneratedKeys();
+            if(rst.next()){         
+                int id_VF_cash = new VFCashClass().getId_VF_ByNumber(number_VF_cash);
+                int id_masary_pay = rst.getInt(1);
+                if(row_inserted == 1){
+                    String sql_inser_ = "INSERT INTO `vf_transaction_po` ("
+                                      + " `type_transaction`, `id_VF_cash`, "
+                                      + "`id_pos`, `price`, `id_masary_sell`) "
+                                      + "VALUES (?,?,?,?,?)";
+                    pstmt = con.prepareStatement(sql_inser_);
+                    pstmt.setString(1, "Withdraw");
+                    pstmt.setInt(2, id_VF_cash);
+                    pstmt.setInt(3, id_pos);
+                    pstmt.setDouble(4, amount_masary_sell);
+                    pstmt.setInt(5, id_masary_pay);
+
+                    if(pstmt.executeUpdate() == 1){
+                        double nBalance = new VFCashClass().getNowBalance(number_VF_cash);
+                        String sqlupdate = "UPDATE `vf_cash` SET `now_balance` = ? WHERE `vf_cash`.`id_VF_cash` = ?";
+                        pstmt = con.prepareStatement(sqlupdate);                    
+                        pstmt.setDouble(1, nBalance);
+                        pstmt.setInt(2, id_VF_cash);
+                        int saved = pstmt.executeUpdate();
+                        if(saved == 1){
+                            con.commit();
+                            con.close();
+                            isSave =true;
+                        }else{
+                            Tools.showErrorMsg("no ubdate");
+                        }
+
+                
+                }
+            }
+                
+                
+//                int id_masary_sell = rst.getInt(1);
+//                if(row_inserted == 1){
+//                String sql_insert_casher = "INSERT INTO `casher`(`Creditor`, `note`, `id_masary_sell`) VALUES (?,?,?)";
+//                pstmc = con.prepareStatement(sql_insert_casher);
+//                pstmc.setDouble(1, amount_masary_sell);
+//                pstmc.setString(2, "شحن ماكينة "+name_pos);
+//                pstmc.setInt(3, id_masary_sell);
+//                int row_insert = pstmc.executeUpdate();
+//                    if(row_insert == 1){
+//                        isSave = true;
+//                        con.commit();
+//                        con.close();
+//                    }
+//                }
+            }
+            
+            
+        } catch (SQLException ex) {
+            try {
+                Logger.getLogger(PosSell.class.getName()).log(Level.SEVERE, null, ex);
+                con.rollback();
+                con.close();
+            } catch (SQLException ex1) {
+                Logger.getLogger(PosSell.class.getName()).log(Level.SEVERE, null, ex1);
+            }
+        }
+       return isSave;
+    
+    
+    
+    }
     
 }
