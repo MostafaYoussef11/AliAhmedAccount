@@ -73,7 +73,7 @@ public class CounterFrame extends javax.swing.JFrame {
         jx_5 = new javax.swing.JFormattedTextField();
         jxOne = new javax.swing.JFormattedTextField();
         txtTotal = new javax.swing.JLabel();
-        jButton1 = new javax.swing.JButton();
+        btnCalc = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setUndecorated(true);
@@ -200,6 +200,11 @@ public class CounterFrame extends javax.swing.JFrame {
         jxOne.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
         jxOne.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         jxOne.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jxOne.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                jxOneKeyPressed(evt);
+            }
+        });
 
         txtTotal.setFont(new java.awt.Font("Times New Roman", 3, 36)); // NOI18N
         txtTotal.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -207,11 +212,16 @@ public class CounterFrame extends javax.swing.JFrame {
         txtTotal.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED));
         txtTotal.setOpaque(true);
 
-        jButton1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButton1.setText("احسب");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnCalc.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        btnCalc.setText("احسب");
+        btnCalc.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnCalcActionPerformed(evt);
+            }
+        });
+        btnCalc.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                btnCalcKeyPressed(evt);
             }
         });
 
@@ -250,7 +260,7 @@ public class CounterFrame extends javax.swing.JFrame {
                             .addComponent(jx_10, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jx_5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jxOne, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(btnCalc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addGap(16, 16, 16))
         );
         layout.setVerticalGroup(
@@ -294,14 +304,14 @@ public class CounterFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(txtTotal, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(btnCalc, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void btnCalcActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCalcActionPerformed
         // TODO add your handling code here:
         //media.setStartTime(Duration.seconds(2));
        // Tools.showErrorMsg(media.getStatus().name());|| media.getStatus() == MediaPlayer.Status.STOPPED
@@ -376,7 +386,7 @@ public class CounterFrame extends javax.swing.JFrame {
         }
 
         
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnCalcActionPerformed
 
     private void jx200KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jx200KeyPressed
         // TODO add your handling code here:
@@ -420,6 +430,16 @@ public class CounterFrame extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_jx_5KeyPressed
 
+    private void jxOneKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jxOneKeyPressed
+        // TODO add your handling code here:
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER) btnCalc.requestFocus();
+    }//GEN-LAST:event_jxOneKeyPressed
+
+    private void btnCalcKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_btnCalcKeyPressed
+        // TODO add your handling code here:
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER) btnCalcActionPerformed(null);
+    }//GEN-LAST:event_btnCalcKeyPressed
+
     /**
      * @param args the command line arguments
      */
@@ -456,7 +476,7 @@ public class CounterFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnCalc;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel2;

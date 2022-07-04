@@ -104,8 +104,31 @@ public class VFCashClass {
         this.sim = sim;
     }
     
-    public String getBalanceWallet(String number){
-        return ConnectDB.getIdFromName("SELECT now_balance AS id FROM vf_cash WHERE number_VF_cash ='"+number+"'");
+    private double getFirstBalanceWallet(String number){
+        String fbalance = ConnectDB.getIdFromName("SELECT balance AS id FROM vf_cash WHERE number_VF_cash ='"+number+"'");
+        return Double.parseDouble(fbalance);
+    }
+    private double getTotalDeposit(String number){
+        int idVFcash = getId_VF_ByNumber(number);
+        String sql_sum_deposit = "SELECT IFNULL(SUM(price),0) AS id FROM vf_transaction_po WHERE type_transaction = 'Deposit' And id_VF_cash = "+idVFcash;
+        return Double.parseDouble(ConnectDB.getIdFromName(sql_sum_deposit));
+    }
+    private double getTotalWithdraw(String number){
+        int idVFcash = getId_VF_ByNumber(number);
+        String sql_sum_withdraw = "SELECT IFNULL(SUM(price),0) AS id FROM vf_transaction_po WHERE type_transaction = 'Withdraw' And id_VF_cash = "+idVFcash;
+        return Double.parseDouble(ConnectDB.getIdFromName(sql_sum_withdraw));
+    }
+    public double getNowBalance(String number){
+        double fBalance= getFirstBalanceWallet(number);
+        double deposit = getTotalDeposit(number);
+        double withdraw = getTotalWithdraw(number);
+        double nowBalance = fBalance + deposit - withdraw;
+        return nowBalance;
+    }
+    public int getId_VF_ByNumber(String number){
+        String sql_select = "SELECT id_VF_cash  AS id FROM vf_cash WHERE number_VF_cash ='"+number+"'";
+        String id = ConnectDB.getIdFromName(sql_select);
+        return Integer.parseInt(id);
     }
     
 }

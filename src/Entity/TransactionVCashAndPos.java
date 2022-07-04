@@ -9,6 +9,7 @@ import Utilities.ConnectDB;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import javax.swing.JTable;
 
 /**
  *
@@ -19,6 +20,7 @@ public class TransactionVCashAndPos {
 
     private enum type_transaction {Deposit,Withdraw};
     private int id_pos;
+    private int id_VF_cash;
     private String name_pos;
     private String number;
     private double befor_balance;
@@ -32,7 +34,7 @@ public class TransactionVCashAndPos {
     private Connection con;
     private PreparedStatement pstm;
 
-    private void Setname_pos(String name_pos){
+    public void Setname_pos(String name_pos){
         this.name_pos = name_pos;
     }
     private int getIdPos() {
@@ -43,23 +45,24 @@ public class TransactionVCashAndPos {
     }
     
     public boolean SaveDeposit(){
-        boolean isSave = false;
-        try{
-            con = ConnectDB.getCon();
-            con.setAutoCommit(false);
-            ///set data
-            id_pos = getIdPos();
-            pp = new posPay(id_pos) {};
-            
-            String sql = "";
-        
-        }catch(SQLException ex){
-        
-        }
-    
-        return isSave;
+        id_pos = getIdPos();
+        pp = new posPay(id_pos) {};
+        pp.setPrice_masary_pay(price);
+        pp.setDiscount_of_balance(price);
+        pp.setPhone(number);
+        return pp.SaveVFCash();
+    }
+    public void Set_Price(String price){
+        this.price = Double.parseDouble(price);
+    }
+    public void Set_number(String number){
+        this.number =  number;
     }
     
+    public void fillTable(JTable table){
+        String[] columnName = {"المبلغ", "الرقم", "المكنة", "التاريخ", "م"};
+        String sql = "SELECT trans.price, v.number_VF_cash, pos.name_pos, trans.date_transaction, trans.id_transaction FROM vf_transaction_po AS trans INNER JOIN pos ON trans.id_pos = pos.id_pos INNER JOIN vf_cash AS v ON trans.id_VF_cash = v.id_VF_cash";
+        ConnectDB.fillAndCenterTable(sql, table, columnName);
     
-    
+    }
 }

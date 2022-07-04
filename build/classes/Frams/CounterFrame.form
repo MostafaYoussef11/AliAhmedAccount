@@ -63,7 +63,7 @@
                           <Component id="jxOne" alignment="1" min="-2" pref="100" max="-2" attributes="0"/>
                       </Group>
                   </Group>
-                  <Component id="jButton1" alignment="1" max="32767" attributes="0"/>
+                  <Component id="btnCalc" alignment="1" max="32767" attributes="0"/>
               </Group>
               <EmptySpace min="-2" pref="16" max="-2" attributes="0"/>
           </Group>
@@ -117,7 +117,7 @@
               <EmptySpace max="-2" attributes="0"/>
               <Component id="txtTotal" min="-2" pref="57" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
-              <Component id="jButton1" min="-2" pref="45" max="-2" attributes="0"/>
+              <Component id="btnCalc" min="-2" pref="45" max="-2" attributes="0"/>
               <EmptySpace max="-2" attributes="0"/>
           </Group>
       </Group>
@@ -407,6 +407,9 @@
           <Font name="Tahoma" size="14" style="1"/>
         </Property>
       </Properties>
+      <Events>
+        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="jxOneKeyPressed"/>
+      </Events>
     </Component>
     <Component class="javax.swing.JLabel" name="txtTotal">
       <Properties>
@@ -423,7 +426,7 @@
         <Property name="opaque" type="boolean" value="true"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="jButton1">
+    <Component class="javax.swing.JButton" name="btnCalc">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Tahoma" size="14" style="1"/>
@@ -431,7 +434,8 @@
         <Property name="text" type="java.lang.String" value="&#x627;&#x62d;&#x633;&#x628;"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton1ActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnCalcActionPerformed"/>
+        <EventHandler event="keyPressed" listener="java.awt.event.KeyListener" parameters="java.awt.event.KeyEvent" handler="btnCalcKeyPressed"/>
       </Events>
     </Component>
   </SubComponents>

@@ -175,8 +175,17 @@ public class Items implements Ent{
     }
     public String getSalesPriceLow(String nameItems){
         String id_items = getIdItemsFromName(nameItems);
-        String sql = "select sale_price_low as id from priselist where id_items="+id_items+" ORDER BY last_edit DESC LIMIT 1 ; ";
-        return ConnectDB.getIdFromName(sql);
+        String  price = "0.0";
+        if(!(id_items == null)){
+            String sql = "select sale_price_low as id from priselist where id_items="+id_items+" ORDER BY last_edit DESC LIMIT 1 ; ";
+            try{
+                price = ConnectDB.getIdFromName(sql);
+            }catch(Exception ex){
+                System.err.println(ex.getMessage());
+                price = "0";
+            }        
+        }
+        return price;
     }
     
     public String getSalesPriceHightOrLow(String nameItems , String type){

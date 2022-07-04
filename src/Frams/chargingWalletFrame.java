@@ -6,6 +6,7 @@
 package Frams;
 
 import Entity.PosClass;
+import Entity.TransactionVCashAndPos;
 import Entity.VFCashClass;
 import Entity.posPay;
 import Utilities.Tools;
@@ -27,8 +28,10 @@ public class chargingWalletFrame extends javax.swing.JFrame {
     private posPay pp;
     private int id_pos;
     private String namePos;
+    private TransactionVCashAndPos trans;
     public chargingWalletFrame() {
         initComponents();
+        trans = new TransactionVCashAndPos();
         setNewTransaction();
         Font f = Tools.font(16f);
         titel.setFont(f);
@@ -46,9 +49,9 @@ public class chargingWalletFrame extends javax.swing.JFrame {
         titel = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        combPos = new javax.swing.JComboBox<>();
+        combPos = new javax.swing.JComboBox<String>();
         jLabel2 = new javax.swing.JLabel();
-        combNumber = new javax.swing.JComboBox<>();
+        combNumber = new javax.swing.JComboBox<String>();
         jLabel3 = new javax.swing.JLabel();
         txtprice = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
@@ -82,7 +85,7 @@ public class chargingWalletFrame extends javax.swing.JFrame {
         jLabel1.setText("المكنة");
         jLabel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        combPos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        combPos.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         combPos.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 combPosItemStateChanged(evt);
@@ -93,7 +96,7 @@ public class chargingWalletFrame extends javax.swing.JFrame {
         jLabel2.setText("المحفظة");
         jLabel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        combNumber.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        combNumber.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         combNumber.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 combNumberItemStateChanged(evt);
@@ -176,21 +179,10 @@ public class chargingWalletFrame extends javax.swing.JFrame {
 
             },
             new String [] {
-                "الرصيد", "المبلغ", "الرقم", "المكنة", "م"
+                "المبلغ", "الرقم", "المكنة", "التاريخ", "م"
             }
-        ) {
-            boolean[] canEdit = new boolean [] {
-                false, true, true, true, true
-            };
-
-            public boolean isCellEditable(int rowIndex, int columnIndex) {
-                return canEdit [columnIndex];
-            }
-        });
+        ));
         jScrollPane1.setViewportView(jTable1);
-        if (jTable1.getColumnModel().getColumnCount() > 0) {
-            jTable1.getColumnModel().getColumn(0).setResizable(false);
-        }
 
         getContentPane().add(jScrollPane1);
         jScrollPane1.setBounds(10, 152, 830, 350);
@@ -318,7 +310,7 @@ public class chargingWalletFrame extends javax.swing.JFrame {
         this.setSize(dim);
         Tools.disableButOpen(btPanel);
         Tools.setBackground(background, dim, "23.jpg");
-        
+        trans.fillTable(jTable1);
         vf = new VFCashClass();
         pos = new PosClass();
         vf.fillCombo(combNumber);
@@ -328,7 +320,7 @@ public class chargingWalletFrame extends javax.swing.JFrame {
         pp = new posPay(id_pos){};
         txtPos_balance.setText(pp.getfirstBalance()+"");
         String number_wallet = combNumber.getSelectedItem().toString();
-        txtVF_balance.setText(vf.getBalanceWallet(number_wallet));
+        txtVF_balance.setText(vf.getNowBalance(number_wallet)+"");
         txtprice.setText("0.00");
     }
     private void btnewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnewActionPerformed
@@ -336,7 +328,14 @@ public class chargingWalletFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnewActionPerformed
 
     private void btsaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btsaveActionPerformed
-
+        String name_pos = combPos.getSelectedItem().toString();
+        trans.Setname_pos(name_pos);
+        trans.Set_Price(txtprice.getText());
+        trans.Set_number(combNumber.getSelectedItem().toString());
+        if(trans.SaveDeposit()){
+            Tools.showInfoMsg("تم الحفظ", namePos);
+            setNewTransaction();
+        }
     }//GEN-LAST:event_btsaveActionPerformed
 
     private void bteditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bteditActionPerformed
@@ -371,8 +370,9 @@ public class chargingWalletFrame extends javax.swing.JFrame {
     private void combNumberItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_combNumberItemStateChanged
         // TODO add your handling code here:
         String number = combNumber.getSelectedItem().toString();
-        String balance = vf.getBalanceWallet(number);
-        txtVF_balance.setText(balance);
+        double balance = vf.getNowBalance(number);
+        txtVF_balance.setText(balance+"");
+        
     }//GEN-LAST:event_combNumberItemStateChanged
 
     /**
@@ -436,11 +436,11 @@ public class chargingWalletFrame extends javax.swing.JFrame {
     private javax.swing.JTextField txtprice;
     // End of variables declaration//GEN-END:variables
     
-    private void newChargWallet(){
-        Tools.disableButOpen(btPanel);
-        
-    
-    }
+//    private void newChargWallet(){
+//        Tools.disableButOpen(btPanel);
+//        
+//    
+//    }
 
 
 }

@@ -5,7 +5,6 @@
  */
 package Frams;
 
-import Entity.ChargeWalletClass;
 import Utilities.Tools;
 import java.awt.Dimension;
 import java.awt.Font;

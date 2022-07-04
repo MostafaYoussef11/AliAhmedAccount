@@ -172,6 +172,24 @@ public class masary_Utilites {
         
     }
     
+        public int getIdNoteVFCash(String note){
+        int id ;
+        if(note.isEmpty()){
+            return 0;
+        }else{
+            String sql_select = "SELECT id_utility_masary AS id FROM utility_masary WHERE note_utility='"+note+"' and id_pos="+id_pos;
+            String id_st = ConnectDB.getIdFromName(sql_select);
+            if(id_st != null) {
+                id = Integer.parseInt(id_st);
+            } else {
+                id = 0;
+            }
+            return id;
+        }
+        
+    }
+    
+    
     public String getPriceByNote(String note){
         String sql_selectPrice = "SELECT price As id FROM utility_masary WHERE note_utility='"+note+"'";
         return ConnectDB.getIdFromName(sql_selectPrice);

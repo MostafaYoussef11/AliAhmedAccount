@@ -6,6 +6,7 @@
 package Entity;
 
 import Utilities.ConnectDB;
+import Utilities.Tools;
 //import com.mysql.jdbc.PreparedStatement;
 //import com.mysql.jdbc.Statement;
 import java.sql.Connection;
@@ -13,6 +14,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -89,7 +91,10 @@ public abstract class posPay {
          pstmt.setDouble(5, amount_masary_pay);        // amount_masary_pay
          newbalance = getfirstBalance() - discount_of_balance; 
          pstmt.setInt(6, id_pos);
-         pstmt.setDouble(7, newbalance);
+         DecimalFormat format = new DecimalFormat("0.00");
+         String newBalance = format.format(newbalance);
+            //System.out.println(newBalance);
+         pstmt.setString(7, newBalance);
          pstmt.setString(8, utility_masary);
          int rowAffact = pstmt.executeUpdate();  
          ResultSet rst = pstmt.getGeneratedKeys();
@@ -129,7 +134,7 @@ public abstract class posPay {
     }
     //Save when id_clien not equal 1 it's mean this transaction is client depit not casher
     public boolean SaveClients(){
- boolean isSave = false;
+    boolean isSave = false;
     try{
          con = ConnectDB.getCon();
          con.setAutoCommit(false);
@@ -143,9 +148,13 @@ public abstract class posPay {
          pstmt.setInt(3, 1);
          pstmt.setDouble(4, discount_of_balance);
          pstmt.setDouble(5, amount_masary_pay);
+         DecimalFormat format = new DecimalFormat("0.00");
+         
          newbalance = getfirstBalance() - discount_of_balance;
+         String newBalance = format.format(newbalance);
+         
          pstmt.setInt(6, id_pos);
-         pstmt.setDouble(7, newbalance);
+         pstmt.setString(7, newBalance);
          pstmt.setString(8, utility_masary);
          int rowAffact = pstmt.executeUpdate();  
          ResultSet rst = pstmt.getGeneratedKeys();
@@ -186,7 +195,82 @@ public abstract class posPay {
     }
     return isSave;    
  }
+public boolean SaveVFCash(){
+boolean isSave = false;
+    try{
+         con = ConnectDB.getCon();
+         con.setAutoCommit(false);
+         String sql_insert_masaryPay;
+         sql_insert_masaryPay = "INSERT INTO masary_pay "
+                 + "( `id_utility_masary`, `price_masary_pay`, `id_client`, "
+                 + "`discount_of_balance`, `amount_masary_pay`, `id_pos` ,`balance`,`phone`) VALUES (?,?,?,?,?,?,?,?)";
+         pstmt = (PreparedStatement) con.prepareStatement(sql_insert_masaryPay, Statement.RETURN_GENERATED_KEYS);
+         pstmt.setInt(1, new masary_Utilites(id_pos).getIdByNote("ايداع"));
+         pstmt.setDouble(2, price_masary_pay);
+         pstmt.setInt(3, 1);
+         pstmt.setDouble(4, discount_of_balance);
+         pstmt.setDouble(5, 0);
+         newbalance = getfirstBalance() - discount_of_balance;
+         DecimalFormat format = new DecimalFormat("0.00");
+         String newBalance = format.format(newbalance);
+         pstmt.setInt(6, id_pos);
+         pstmt.setString(7, newBalance);
+         pstmt.setString(8, "ايداع فودافون كاش");
+         int rowAffact = pstmt.executeUpdate();  
+         ResultSet rst = pstmt.getGeneratedKeys();
+         if(rst.next()){
+            
+            int id_VF_cash = new VFCashClass().getId_VF_ByNumber(phone);
+            int id_masary_pay = rst.getInt(1);
+            if(rowAffact == 1){
+                String sql_inser_ = "INSERT INTO `vf_transaction_po` ("
+                                  + " `type_transaction`, `id_VF_cash`, "
+                                  + "`id_pos`, `price`, `id_masary_pay`) "
+                                  + "VALUES (?,?,?,?,?)";
+                pstmt = con.prepareStatement(sql_inser_);
+                pstmt.setString(1, "Deposit");
+                pstmt.setInt(2, id_VF_cash);
+                pstmt.setInt(3, id_pos);
+                pstmt.setDouble(4, discount_of_balance);
+                pstmt.setInt(5, id_masary_pay);
+
+                if(pstmt.executeUpdate() == 1){
+                    double nBalance = new VFCashClass().getNowBalance(phone);
+                    String sql_Update_balance ="UPDATE vf_cash SET vf_cash.now_balance = ? where id_VF_cash = "+id_VF_cash;
+                    String sqlupdate = "UPDATE `vf_cash` SET `now_balance` = ? WHERE `vf_cash`.`id_VF_cash` = ?";
+                    pstmt = con.prepareStatement(sqlupdate);
+                    
+                    pstmt.setDouble(1, nBalance);
+                    pstmt.setInt(2, id_VF_cash);
+                    int saved = pstmt.executeUpdate();
+                    if(saved == 1){
+                        con.commit();
+                        con.close();
+                        isSave =true;
+                    }else{
+                        Tools.showErrorMsg("no ubdate");
+                    }
+                    
+                
+                }
+            }
+     }
+
+    }
+    catch(SQLException ex){
+      try {
+            con.rollback();
+            con.close();
+         } 
+      catch (SQLException ex1) {
+            Logger.getLogger(MasaryPay.class.getName()).log(Level.SEVERE, null, ex1);
+        }
+        isSave = false;
+        Logger.getLogger(MasaryPay.class.getName()).log(Level.SEVERE, null, ex);
+    }
+    return isSave;        
     
+}
     
     // get Balance Machein befor transaction
     public double getfirstBalance(){
@@ -207,7 +291,9 @@ public abstract class posPay {
             System.out.print("sell = null");
         }
         firstbalance = sell - pay;
-        return firstbalance;
+        DecimalFormat format = new DecimalFormat("0.00");
+        String fbalance = format.format(firstbalance);
+        return Double.parseDouble(fbalance);
     }
     
     //method Fill JList phoneNumber
@@ -317,25 +403,25 @@ public abstract class posPay {
         this.id_pos = id_pos;
     }
     
-    public List<String> PhoneNumberList(){
-       List<String> Utilities = new ArrayList<String>();
-        try {
-            con = ConnectDB.getCon();
-            com.mysql.jdbc.Statement stmt = (com.mysql.jdbc.Statement) con.createStatement();
-            //String sql_items = "SELECT name_items FROM `items`";
-            ResultSet rst = stmt.executeQuery("SELECT name_items FROM `items`");
-            String elment;
-            while (rst.next()) {
-                elment = rst.getString(1);
-                Utilities.add(elment);
-                
-            }
-           
-            con.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(PosClass.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return Utilities;
-    }
+//    public List<String> PhoneNumberList(){
+//       List<String> Utilities = new ArrayList<String>();
+//        try {
+//            con = ConnectDB.getCon();
+//            com.mysql.jdbc.Statement stmt = (com.mysql.jdbc.Statement) con.createStatement();
+//            //String sql_items = "SELECT name_items FROM `items`";
+//            ResultSet rst = stmt.executeQuery("SELECT name_items FROM `items`");
+//            String elment;
+//            while (rst.next()) {
+//                elment = rst.getString(1);
+//                Utilities.add(elment);
+//                
+//            }
+//           
+//            con.close();
+//        } catch (SQLException ex) {
+//            Logger.getLogger(PosClass.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//        return Utilities;
+//    }
     
 }

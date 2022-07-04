@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jun 30, 2022 at 02:06 AM
+-- Generation Time: Jul 04, 2022 at 01:59 AM
 -- Server version: 10.4.13-MariaDB
 -- PHP Version: 7.2.31
 
@@ -160,7 +160,107 @@ INSERT INTO `casher` (`id_casher`, `date_casher`, `Debit`, `Creditor`, `note`, `
 (110, '2022-06-30', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 55, NULL),
 (111, '2022-06-30', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 56, NULL),
 (112, '2022-06-30', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 57, NULL),
-(113, '2022-06-30', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 58, NULL);
+(113, '2022-06-30', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 58, NULL),
+(114, '2022-06-30', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 59, NULL),
+(115, '2022-06-30', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 60, NULL),
+(116, '2022-06-30', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 61, NULL),
+(117, '2022-06-30', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 62, NULL),
+(118, '2022-06-30', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 63, NULL),
+(119, '2022-06-30', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 64, NULL),
+(120, '2022-06-30', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 65, NULL),
+(121, '2022-06-30', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 66, NULL),
+(122, '2022-06-30', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 67, NULL),
+(123, '2022-06-30', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 68, NULL),
+(124, '2022-06-30', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 69, NULL),
+(125, '2022-06-30', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 70, NULL),
+(126, '2022-06-30', 11.00, NULL, '10', NULL, NULL, NULL, NULL, 71, NULL),
+(127, '2022-06-30', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 72, NULL),
+(128, '2022-06-30', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 73, NULL),
+(129, '2022-06-30', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 74, NULL),
+(130, '2022-06-30', NULL, 20000.00, 'ايصال دفع رقم 2', NULL, NULL, NULL, 2, NULL, NULL),
+(131, '2022-06-30', 150.00, NULL, '', NULL, NULL, NULL, NULL, 75, NULL),
+(132, '2022-06-30', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 76, NULL),
+(133, '2022-06-30', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 77, NULL),
+(134, '2022-06-30', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 78, NULL),
+(135, '2022-06-30', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 79, NULL),
+(136, '2022-06-30', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 80, NULL),
+(137, '2022-06-30', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 81, NULL),
+(138, '2022-06-30', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 82, NULL),
+(139, '2022-06-30', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 83, NULL),
+(140, '2022-06-30', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 84, NULL),
+(141, '2022-06-30', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 85, NULL),
+(142, '2022-06-30', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 86, NULL),
+(143, '2022-06-30', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 87, NULL),
+(144, '2022-06-30', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 88, NULL),
+(145, '2022-06-30', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 89, NULL),
+(146, '2022-06-30', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 90, NULL),
+(147, '2022-06-30', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 91, NULL),
+(148, '2022-06-30', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 92, NULL),
+(149, '2022-06-30', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 93, NULL),
+(150, '2022-06-30', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 94, NULL),
+(151, '2022-06-30', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 95, NULL),
+(152, '2022-06-30', 15000.00, NULL, '', NULL, NULL, NULL, NULL, 96, NULL),
+(153, '2022-06-30', 7500.00, NULL, '', NULL, NULL, NULL, NULL, 97, NULL),
+(154, '2022-06-30', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 98, NULL),
+(155, '2022-06-30', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 99, NULL),
+(156, '2022-06-30', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 100, NULL),
+(157, '2022-06-30', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 101, NULL),
+(158, '2022-06-30', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 102, NULL),
+(159, '2022-06-30', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 103, NULL),
+(160, '2022-06-30', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 104, NULL),
+(161, '2022-06-30', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 105, NULL),
+(162, '2022-06-30', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 106, NULL),
+(163, '2022-06-30', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 107, NULL),
+(164, '2022-06-30', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 108, NULL),
+(165, '2022-06-30', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 109, NULL),
+(166, '2022-06-30', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 110, NULL),
+(167, '2022-06-30', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 111, NULL),
+(168, '2022-06-30', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 112, NULL),
+(169, '2022-07-01', 15.00, NULL, '01127333021', NULL, NULL, NULL, NULL, 113, NULL),
+(170, '2022-07-01', 1.50, NULL, '01063734632', NULL, NULL, NULL, NULL, 114, NULL),
+(171, '2022-07-03', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 127, NULL),
+(172, '2022-07-03', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 128, NULL),
+(173, '2022-07-03', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 129, NULL),
+(174, '2022-07-03', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 130, NULL),
+(175, '2022-07-03', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 131, NULL),
+(176, '2022-07-03', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 132, NULL),
+(177, '2022-07-03', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 133, NULL),
+(178, '2022-07-03', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 134, NULL),
+(179, '2022-07-03', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 135, NULL),
+(180, '2022-07-03', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 136, NULL),
+(181, '2022-07-03', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 137, NULL),
+(182, '2022-07-03', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 138, NULL),
+(183, '2022-07-03', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 139, NULL),
+(184, '2022-07-04', 25.00, NULL, 'فاتورة مبيعات نقدية19', NULL, NULL, 19, NULL, NULL, NULL),
+(185, '2022-07-04', 10.00, NULL, '10', NULL, NULL, NULL, NULL, 142, NULL);
+
+--
+-- Triggers `casher`
+--
+DELIMITER $$
+CREATE TRIGGER `ubdate_balance_casher` AFTER INSERT ON `casher` FOR EACH ROW BEGIN
+     DECLARE oldbalance DOUBLE ;
+    DECLARE totalDebit double ;
+    DECLARE totalCredit double;
+    -- DECLARE newbalance DOUBLE ;
+        -- set totalDebit
+    SELECT
+        SUM(casher.Debit)
+    INTO @totalDebit
+FROM
+    casher
+WHERE
+    casher.date_casher = CURRENT_DATE() ;
+    -- set new balance
+  SELECT Sum(casher.Creditor) INTO @totalCredit FROM casher WHERE casher.date_casher =CURRENT_DATE();
+SELECT finallyday.oldBalance INTO @oldbalance FROM finallyday WHERE finallyday.dateFinally = CURRENT_DATE();
+UPDATE
+    finallyday
+SET
+   finallyday.totalimport = @totalDebit , finallyday.totalexport = @totalCredit , finallyday.newbalance = (@oldbalance + @totalDebit - @totalCredit) WHERE finallyday.dateFinally = CURRENT_DATE() ;
+END
+$$
+DELIMITER ;
 
 -- --------------------------------------------------------
 
@@ -184,7 +284,8 @@ INSERT INTO `categoryutilites` (`id_category`, `name_category`, `requier_phone`)
 (3, 'كروت WE', 0),
 (4, 'كروت فودافون', 0),
 (9, 'اتصالات حكاية', 0),
-(10, 'شحن', 1);
+(10, 'شحن', 1),
+(11, 'فودافون كاش', 1);
 
 -- --------------------------------------------------------
 
@@ -294,7 +395,11 @@ INSERT INTO `finallyday` (`dateFinally`, `oldBalance`, `totalimport`, `totalexpo
 ('2022-06-27', 1350, 440.5, 0, '02:11:15'),
 ('2022-06-28', 1790.5, 111.5, 700, '02:11:15'),
 ('2022-06-29', 1202, 2987, 4000, '02:18:11'),
-('2022-06-30', 189, 100, 0, '00:00:00');
+('2022-06-30', 189, 23261, 20000, '00:00:00'),
+('2022-07-01', 3450, 16.5, 0, '00:00:00'),
+('2022-07-02', 3466.5, 0, 0, '21:43:15'),
+('2022-07-03', 3466.5, 130, 0, '00:00:00'),
+('2022-07-04', 3596.5, 35, 0, '00:10:36');
 
 -- --------------------------------------------------------
 
@@ -425,7 +530,8 @@ INSERT INTO `itemsonsalesinvoice` (`id`, `id_items`, `name_items`, `qyt`, `name_
 (1, 6949810510177, 'شاحن سيارة Smart 3.0', 1.00, 'قطعة', 100.00, 0.00, 100.00, 15),
 (1, 6949810510177, 'شاحن سيارة Smart 3.0', 1.00, 'قطعة', 60.00, 0.00, 60.00, 16),
 (1, 6949810510177, 'شاحن سيارة Smart 3.0', 1.00, 'قطعة', 50.00, 0.00, 50.00, 17),
-(1, 6949810510177, 'شاحن سيارة Smart 3.0', 1.00, 'قطعة', 100.00, 0.00, 100.00, 18);
+(1, 6949810510177, 'شاحن سيارة Smart 3.0', 1.00, 'قطعة', 100.00, 0.00, 100.00, 18),
+(1, 6949810502219, 'كبل ستار L21A', 1.00, 'قطعة', 25.00, 0.00, 25.00, 19);
 
 -- --------------------------------------------------------
 
@@ -444,7 +550,7 @@ CREATE TABLE `masary_pay` (
   `amount_masary_pay` double(10,2) DEFAULT NULL,
   `id_pos` int(11) NOT NULL DEFAULT 1,
   `balance` double NOT NULL,
-  `phone` varchar(11) DEFAULT NULL
+  `phone` varchar(255) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
@@ -492,7 +598,82 @@ INSERT INTO `masary_pay` (`id_masary_pay`, `date_masary_pay`, `time_masary_pay`,
 (55, '2022-06-30', '00:44:56', 39, 10.00, 1, 10.00, 10.00, 1, 39961.25, '10'),
 (56, '2022-06-30', '00:45:01', 39, 10.00, 1, 10.00, 10.00, 1, 39951.25, '10'),
 (57, '2022-06-30', '00:59:13', 39, 10.00, 1, 10.00, 10.00, 1, 39941.25, '10'),
-(58, '2022-06-30', '01:11:14', 39, 10.00, 1, 10.00, 10.00, 1, 39931.25, '10');
+(58, '2022-06-30', '01:11:14', 39, 10.00, 1, 10.00, 10.00, 1, 39931.25, '10'),
+(59, '2022-06-30', '02:39:49', 39, 10.00, 1, 10.00, 10.00, 1, 39921.25, '10'),
+(60, '2022-06-30', '02:39:52', 39, 10.00, 1, 10.00, 10.00, 1, 39911.25, '10'),
+(61, '2022-06-30', '02:39:54', 39, 10.00, 1, 10.00, 10.00, 1, 39901.25, '10'),
+(62, '2022-06-30', '02:39:55', 39, 10.00, 1, 10.00, 10.00, 1, 39891.25, '10'),
+(63, '2022-06-30', '02:39:56', 39, 10.00, 1, 10.00, 10.00, 1, 39881.25, '10'),
+(64, '2022-06-30', '02:39:57', 39, 10.00, 1, 10.00, 10.00, 1, 39871.25, '10'),
+(65, '2022-06-30', '02:39:59', 39, 10.00, 1, 10.00, 10.00, 1, 39861.25, '10'),
+(66, '2022-06-30', '11:45:36', 39, 10.00, 1, 10.00, 10.00, 1, 39851.25, '10'),
+(67, '2022-06-30', '11:45:44', 39, 10.00, 1, 10.00, 10.00, 1, 39841.25, '10'),
+(68, '2022-06-30', '11:45:45', 39, 10.00, 1, 10.00, 10.00, 1, 39831.25, '10'),
+(69, '2022-06-30', '11:45:47', 39, 10.00, 1, 10.00, 10.00, 1, 39821.25, '10'),
+(70, '2022-06-30', '11:45:49', 39, 10.00, 1, 10.00, 10.00, 1, 39811.25, '10'),
+(71, '2022-06-30', '11:46:34', 39, 1.00, 1, 10.00, 11.00, 1, 39801.25, '10'),
+(72, '2022-06-30', '12:07:37', 39, 10.00, 1, 10.00, 10.00, 1, 39791.25, '10'),
+(73, '2022-06-30', '12:10:13', 39, 10.00, 1, 10.00, 10.00, 1, 39781.25, '10'),
+(74, '2022-06-30', '13:15:31', 39, 10.00, 1, 10.00, 10.00, 1, 39771.25, '10'),
+(75, '2022-06-30', '13:19:38', 73, 100.00, 1, 143.00, 150.00, 2, 832.7, ''),
+(76, '2022-06-30', '13:19:48', 39, 10.00, 1, 10.00, 10.00, 1, 39761.25, '10'),
+(77, '2022-06-30', '13:25:37', 39, 10.00, 1, 10.00, 10.00, 1, 39751.25, '10'),
+(78, '2022-06-30', '13:25:53', 39, 10.00, 1, 10.00, 10.00, 1, 39741.25, '10'),
+(79, '2022-06-30', '13:25:53', 39, 10.00, 1, 10.00, 10.00, 1, 39731.25, '10'),
+(80, '2022-06-30', '13:31:51', 39, 10.00, 1, 10.00, 10.00, 1, 39721.25, '10'),
+(81, '2022-06-30', '13:31:52', 39, 10.00, 1, 10.00, 10.00, 1, 39711.25, '10'),
+(82, '2022-06-30', '13:31:53', 39, 10.00, 1, 10.00, 10.00, 1, 39701.25, '10'),
+(83, '2022-06-30', '13:31:54', 39, 10.00, 1, 10.00, 10.00, 1, 39691.25, '10'),
+(84, '2022-06-30', '13:31:54', 39, 10.00, 1, 10.00, 10.00, 1, 39681.25, '10'),
+(85, '2022-06-30', '13:31:54', 39, 10.00, 1, 10.00, 10.00, 1, 39671.25, '10'),
+(86, '2022-06-30', '13:31:55', 39, 10.00, 1, 10.00, 10.00, 1, 39661.25, '10'),
+(87, '2022-06-30', '13:31:55', 39, 10.00, 1, 10.00, 10.00, 1, 39651.25, '10'),
+(88, '2022-06-30', '13:31:55', 39, 10.00, 1, 10.00, 10.00, 1, 39641.25, '10'),
+(89, '2022-06-30', '13:31:55', 39, 10.00, 1, 10.00, 10.00, 1, 39631.25, '10'),
+(90, '2022-06-30', '13:31:56', 39, 10.00, 1, 10.00, 10.00, 1, 39621.25, '10'),
+(91, '2022-06-30', '13:31:56', 39, 10.00, 1, 10.00, 10.00, 1, 39611.25, '10'),
+(92, '2022-06-30', '13:31:56', 39, 10.00, 1, 10.00, 10.00, 1, 39601.25, '10'),
+(93, '2022-06-30', '13:31:57', 39, 10.00, 1, 10.00, 10.00, 1, 39591.25, '10'),
+(94, '2022-06-30', '13:31:57', 39, 10.00, 1, 10.00, 10.00, 1, 39581.25, '10'),
+(95, '2022-06-30', '13:31:57', 39, 10.00, 1, 10.00, 10.00, 1, 39571.25, '10'),
+(96, '2022-06-30', '13:32:47', 73, 10000.00, 1, 14300.00, 15000.00, 1, 25271.25, ''),
+(97, '2022-06-30', '13:33:18', 73, 5000.00, 1, 7150.00, 7500.00, 1, 18121.25, ''),
+(98, '2022-06-30', '13:33:31', 39, 10.00, 1, 10.00, 10.00, 1, 18111.25, '10'),
+(99, '2022-06-30', '13:33:32', 39, 10.00, 1, 10.00, 10.00, 1, 18101.25, '10'),
+(100, '2022-06-30', '13:33:35', 39, 10.00, 1, 10.00, 10.00, 1, 18091.25, '10'),
+(101, '2022-06-30', '13:34:32', 39, 10.00, 1, 10.00, 10.00, 1, 18081.25, '10'),
+(102, '2022-06-30', '13:35:01', 39, 10.00, 1, 10.00, 10.00, 1, 18071.25, '10'),
+(103, '2022-06-30', '13:35:03', 39, 10.00, 1, 10.00, 10.00, 1, 18061.25, '10'),
+(104, '2022-06-30', '13:35:04', 39, 10.00, 1, 10.00, 10.00, 1, 18051.25, '10'),
+(105, '2022-06-30', '13:35:05', 39, 10.00, 1, 10.00, 10.00, 1, 18041.25, '10'),
+(106, '2022-06-30', '13:35:06', 39, 10.00, 1, 10.00, 10.00, 1, 18031.25, '10'),
+(107, '2022-06-30', '13:35:07', 39, 10.00, 1, 10.00, 10.00, 1, 18021.25, '10'),
+(108, '2022-06-30', '13:35:08', 39, 10.00, 1, 10.00, 10.00, 1, 18011.25, '10'),
+(109, '2022-06-30', '13:35:08', 39, 10.00, 1, 10.00, 10.00, 1, 18001.25, '10'),
+(110, '2022-06-30', '13:35:09', 39, 10.00, 1, 10.00, 10.00, 1, 17991.25, '10'),
+(111, '2022-06-30', '13:35:10', 39, 10.00, 1, 10.00, 10.00, 1, 17981.25, '10'),
+(112, '2022-06-30', '14:43:06', 39, 10.00, 1, 10.00, 10.00, 1, 17971.25, '10'),
+(113, '2022-07-01', '16:24:47', 73, 10.00, 1, 14.30, 15.00, 1, 17956.95, '01127333021'),
+(114, '2022-07-01', '16:30:21', 73, 1.00, 1, 1.43, 1.50, 1, 17955.52, '01063734632'),
+(115, '2022-07-03', '18:10:40', 83, 7955.00, 1, 7955.00, 0.00, 1, 10000.52, 'ايداع فودافون كاش'),
+(125, '2022-07-03', '21:09:12', 83, 50.00, 1, 50.00, 0.00, 1, 9950.52, 'ايداع فودافون كاش'),
+(126, '2022-07-03', '21:33:59', 83, 950.00, 1, 950.00, 0.00, 1, 9000.52, 'ايداع فودافون كاش'),
+(127, '2022-07-03', '21:57:28', 39, 10.00, 1, 10.00, 10.00, 1, 8990.519999999997, '10'),
+(128, '2022-07-03', '22:03:33', 39, 10.00, 1, 10.00, 10.00, 1, 8980.52, '10'),
+(129, '2022-07-03', '22:11:26', 39, 10.00, 1, 10.00, 10.00, 1, 8970.52, '10'),
+(130, '2022-07-03', '22:32:08', 39, 10.00, 1, 10.00, 10.00, 1, 8960.52, '10'),
+(131, '2022-07-03', '22:32:12', 39, 10.00, 1, 10.00, 10.00, 1, 8950.52, '10'),
+(132, '2022-07-03', '22:32:14', 39, 10.00, 1, 10.00, 10.00, 1, 8940.52, '10'),
+(133, '2022-07-03', '22:32:14', 39, 10.00, 1, 10.00, 10.00, 1, 8930.52, '10'),
+(134, '2022-07-03', '22:32:14', 39, 10.00, 1, 10.00, 10.00, 1, 8920.52, '10'),
+(135, '2022-07-03', '22:32:15', 39, 10.00, 1, 10.00, 10.00, 1, 8910.52, '10'),
+(136, '2022-07-03', '22:32:15', 39, 10.00, 1, 10.00, 10.00, 1, 8900.52, '10'),
+(137, '2022-07-03', '22:32:15', 39, 10.00, 1, 10.00, 10.00, 1, 8890.52, '10'),
+(138, '2022-07-03', '22:32:15', 39, 10.00, 1, 10.00, 10.00, 1, 8880.52, '10'),
+(139, '2022-07-03', '22:32:15', 39, 10.00, 1, 10.00, 10.00, 1, 8870.52, '10'),
+(140, '2022-07-03', '23:46:37', 83, 800.00, 1, 800.00, 0.00, 1, 8070.52, 'ايداع فودافون كاش'),
+(141, '2022-07-04', '00:11:58', 83, 200.00, 1, 200.00, 0.00, 2, 632.7, 'ايداع فودافون كاش'),
+(142, '2022-07-04', '01:58:53', 39, 10.00, 1, 10.00, 10.00, 1, 8060.52, '10');
 
 -- --------------------------------------------------------
 
@@ -542,7 +723,7 @@ CREATE TRIGGER `upDate_balance` AFTER INSERT ON `masary_sell` FOR EACH ROW BEGIN
 FROM
     masary_pay
 WHERE
-    masary_pay.id_masary_pay = (SELECT MAX(mpay.id_masary_pay) FROM masary_pay AS mpay) AND masary_pay.id_pos = 1 ;
+    masary_pay.id_masary_pay = (SELECT MAX(mpay.id_masary_pay) FROM masary_pay AS mpay)  ;
     -- set new balance
     IF @oldbalance != NULL THEN
 UPDATE
@@ -554,7 +735,7 @@ SET
     FROM
         masary_sell AS sell
     WHERE
-        sell.id_masary_sell = (SELECT MAX(sell2.id_masary_sell) FROM masary_sell AS sell2) AND sell.id_pos = 1
+        sell.id_masary_sell = (SELECT MAX(sell2.id_masary_sell) FROM masary_sell AS sell2)
 ) ;
 END IF ;
 END
@@ -580,7 +761,29 @@ CREATE TABLE `paymentreceipt` (
 --
 
 INSERT INTO `paymentreceipt` (`id_PaymentReceipt`, `date_PaymentReceipt`, `amount`, `id_Suppliers`, `isActive`) VALUES
-(1, '2022-06-28', 700.00, 2, 1);
+(1, '2022-06-28', 700.00, 2, 1),
+(2, '2022-06-30', 20000.00, 3, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `phone_numbers`
+--
+
+CREATE TABLE `phone_numbers` (
+  `numbers` varchar(14) DEFAULT NULL,
+  `name` varchar(255) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `phone_numbers`
+--
+
+INSERT INTO `phone_numbers` (`numbers`, `name`) VALUES
+('1063734632', 'mostafa'),
+('1127333021', 'Ahmed'),
+('010020995035', 'hasan'),
+('01111322051', 'ashraf');
 
 -- --------------------------------------------------------
 
@@ -756,7 +959,8 @@ INSERT INTO `salesinvoic` (`id_salesInvoic`, `date_salesInvoic`, `type_salesInvo
 (15, '2022-06-26', 'كاش', 1, 100.00, 0.00, 100.00, 0.00, 'فاتورة مبيعات نقدية15', 1),
 (16, '2022-06-26', 'كاش', 1, 60.00, 0.00, 60.00, 0.00, 'فاتورة مبيعات نقدية16', 1),
 (17, '2022-06-26', 'كاش', 1, 50.00, 0.00, 50.00, 0.00, 'فاتورة مبيعات نقدية17', 1),
-(18, '2022-06-27', 'كاش', 1, 100.00, 0.00, 100.00, 0.00, 'فاتورة مبيعات نقدية18', 1);
+(18, '2022-06-27', 'كاش', 1, 100.00, 0.00, 100.00, 0.00, 'فاتورة مبيعات نقدية18', 1),
+(19, '2022-07-04', 'كاش', 1, 25.00, 0.00, 25.00, 0.00, 'فاتورة مبيعات نقدية19', 1);
 
 -- --------------------------------------------------------
 
@@ -813,7 +1017,8 @@ CREATE TABLE `suppliersaccount` (
 INSERT INTO `suppliersaccount` (`id_supplliersAccount`, `date_suppliersAccount`, `Debit`, `Creditor`, `id_Suppliers`, `id_purchaseInvoice`, `id_paymentReceipt`, `id_masary_sell`, `note`, `isActive`) VALUES
 (3, '2022-06-28', 700.00, NULL, 2, NULL, 1, NULL, 'ايصال دفع رقم 1', 1),
 (4, NULL, NULL, 30000.00, 3, NULL, NULL, 9, 'شحن ماكينةمصاري', 1),
-(5, NULL, NULL, 0.00, 4, NULL, NULL, 10, 'شحن ماكينةBee', 1);
+(5, NULL, NULL, 0.00, 4, NULL, NULL, 10, 'شحن ماكينةBee', 1),
+(6, '2022-06-30', 20000.00, NULL, 3, NULL, 2, NULL, 'ايصال دفع رقم 2', 1);
 
 -- --------------------------------------------------------
 
@@ -972,7 +1177,18 @@ INSERT INTO `utility_masary` (`id_utility_masary`, `name_utility_masary`, `note_
 (76, 'كروت اتصالات', 'كرت  _ 10', 10.00, 11, 2),
 (77, 'كروت اتصالات', 'كرت _ 10', 10.00, 11, 3),
 (78, 'كروت اتصالات', 'كرت 10', 10.00, 11, 4),
-(79, 'كروت اتصالات', 'كرت _ 10', 10.00, 11, 5);
+(79, 'كروت اتصالات', 'كرت _ 10', 10.00, 11, 5),
+(80, 'فودافون كاش', 'ايداع', 1.00, 1, 1),
+(81, 'فودافون كاش', 'ايداع', 1.00, 1, 2),
+(82, 'فودافون كاش', 'ايداع', 1.00, 1, 3),
+(83, 'فودافون كاش', 'ايداع', 1.00, 1, 5),
+(84, 'فودافون كاش', 'سحب', 1.00, 0.01, 1),
+(85, 'فودافون كاش', 'سحب', 1.00, 0.01, 2),
+(86, 'فودافون كاش', 'سحب', 1.00, 0.01, 3),
+(87, 'فودافون كاش', 'سحب', 1.00, 0.01, 5),
+(88, 'شحن', 'شحن فودافون', 1.43, 1.5, 1),
+(89, 'شحن', 'شحن اورنج', 1.43, 1.5, 1),
+(90, 'شحن', 'شحن WE', 1.00, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -986,15 +1202,46 @@ CREATE TABLE `vf_cash` (
   `name_owner` varchar(255) NOT NULL,
   `id_international` varchar(14) NOT NULL,
   `sim` varchar(22) DEFAULT NULL,
-  `balance` double(10,2) DEFAULT 0.00
+  `balance` double(10,2) DEFAULT 0.00,
+  `now_balance` double NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 --
 -- Dumping data for table `vf_cash`
 --
 
-INSERT INTO `vf_cash` (`id_VF_cash`, `number_VF_cash`, `name_owner`, `id_international`, `sim`, `balance`) VALUES
-(1, '010-14864061', 'احمد بغدادي جاد عثمان', '29804222800197', '89200-22022-89364-0978', 0.00);
+INSERT INTO `vf_cash` (`id_VF_cash`, `number_VF_cash`, `name_owner`, `id_international`, `sim`, `balance`, `now_balance`) VALUES
+(1, '010-14864061', 'احمد بغدادي جاد عثمان', '29804222800197', '89200-22022-89364-0978', 50.00, 8055),
+(2, '010-32064920', 'اشرف محمد احمد محمد', '28710022800194', '89200-22022-81925-1975', 5000.00, 5800);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `vf_transaction_po`
+--
+
+CREATE TABLE `vf_transaction_po` (
+  `id_transaction` int(11) NOT NULL,
+  `date_transaction` date DEFAULT curdate(),
+  `time_transaction` time DEFAULT curtime(),
+  `type_transaction` enum('Deposit','Withdraw') DEFAULT NULL,
+  `id_VF_cash` int(11) DEFAULT NULL,
+  `id_pos` int(11) DEFAULT NULL,
+  `price` double(10,2) DEFAULT NULL,
+  `id_masary_pay` int(11) DEFAULT NULL,
+  `id_masary_sell` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+--
+-- Dumping data for table `vf_transaction_po`
+--
+
+INSERT INTO `vf_transaction_po` (`id_transaction`, `date_transaction`, `time_transaction`, `type_transaction`, `id_VF_cash`, `id_pos`, `price`, `id_masary_pay`, `id_masary_sell`) VALUES
+(1, '2022-07-03', '18:10:40', 'Deposit', 1, 1, 7955.00, 115, NULL),
+(11, '2022-07-03', '21:09:12', 'Deposit', 1, 1, 50.00, 125, NULL),
+(12, '2022-07-03', '21:33:59', 'Deposit', 1, 1, 950.00, 126, NULL),
+(13, '2022-07-03', '23:46:37', 'Deposit', 2, 1, 800.00, 140, NULL),
+(14, '2022-07-04', '00:11:58', 'Deposit', 2, 2, 200.00, 141, NULL);
 
 -- --------------------------------------------------------
 
@@ -1137,6 +1384,12 @@ ALTER TABLE `paymentreceipt`
   ADD KEY `id_Suppliers` (`id_Suppliers`);
 
 --
+-- Indexes for table `phone_numbers`
+--
+ALTER TABLE `phone_numbers`
+  ADD UNIQUE KEY `numbers` (`numbers`);
+
+--
 -- Indexes for table `pos`
 --
 ALTER TABLE `pos`
@@ -1221,6 +1474,16 @@ ALTER TABLE `vf_cash`
   ADD UNIQUE KEY `number_VF_cash` (`number_VF_cash`);
 
 --
+-- Indexes for table `vf_transaction_po`
+--
+ALTER TABLE `vf_transaction_po`
+  ADD PRIMARY KEY (`id_transaction`),
+  ADD KEY `id_VF_cash` (`id_VF_cash`),
+  ADD KEY `id_pos` (`id_pos`),
+  ADD KEY `id_masary_pay` (`id_masary_pay`),
+  ADD KEY `id_masary_sell` (`id_masary_sell`);
+
+--
 -- AUTO_INCREMENT for dumped tables
 --
 
@@ -1228,13 +1491,13 @@ ALTER TABLE `vf_cash`
 -- AUTO_INCREMENT for table `casher`
 --
 ALTER TABLE `casher`
-  MODIFY `id_casher` bigint(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=114;
+  MODIFY `id_casher` bigint(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=186;
 
 --
 -- AUTO_INCREMENT for table `categoryutilites`
 --
 ALTER TABLE `categoryutilites`
-  MODIFY `id_category` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id_category` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `clientaccount`
@@ -1246,7 +1509,7 @@ ALTER TABLE `clientaccount`
 -- AUTO_INCREMENT for table `masary_pay`
 --
 ALTER TABLE `masary_pay`
-  MODIFY `id_masary_pay` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
+  MODIFY `id_masary_pay` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=143;
 
 --
 -- AUTO_INCREMENT for table `masary_sell`
@@ -1276,7 +1539,7 @@ ALTER TABLE `recharge_type`
 -- AUTO_INCREMENT for table `suppliersaccount`
 --
 ALTER TABLE `suppliersaccount`
-  MODIFY `id_supplliersAccount` bigint(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_supplliersAccount` bigint(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `supplier_type`
@@ -1288,13 +1551,19 @@ ALTER TABLE `supplier_type`
 -- AUTO_INCREMENT for table `utility_masary`
 --
 ALTER TABLE `utility_masary`
-  MODIFY `id_utility_masary` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=80;
+  MODIFY `id_utility_masary` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=91;
 
 --
 -- AUTO_INCREMENT for table `vf_cash`
 --
 ALTER TABLE `vf_cash`
-  MODIFY `id_VF_cash` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id_VF_cash` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+
+--
+-- AUTO_INCREMENT for table `vf_transaction_po`
+--
+ALTER TABLE `vf_transaction_po`
+  MODIFY `id_transaction` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- Constraints for dumped tables
@@ -1391,13 +1660,20 @@ ALTER TABLE `suppliersaccount`
 ALTER TABLE `utility_masary`
   ADD CONSTRAINT `fk_pos_utiltiy` FOREIGN KEY (`id_pos`) REFERENCES `pos` (`id_pos`);
 
+--
+-- Constraints for table `vf_transaction_po`
+--
+ALTER TABLE `vf_transaction_po`
+  ADD CONSTRAINT `vf_transaction_po_ibfk_1` FOREIGN KEY (`id_VF_cash`) REFERENCES `vf_cash` (`id_VF_cash`),
+  ADD CONSTRAINT `vf_transaction_po_ibfk_2` FOREIGN KEY (`id_pos`) REFERENCES `pos` (`id_pos`),
+  ADD CONSTRAINT `vf_transaction_po_ibfk_3` FOREIGN KEY (`id_masary_pay`) REFERENCES `masary_pay` (`id_masary_pay`),
+  ADD CONSTRAINT `vf_transaction_po_ibfk_4` FOREIGN KEY (`id_masary_sell`) REFERENCES `masary_sell` (`id_masary_sell`);
+
 DELIMITER $$
 --
 -- Events
 --
-CREATE DEFINER=`root`@`localhost` EVENT `finalDay` ON SCHEDULE EVERY 1 DAY STARTS '2022-06-19 22:00:00' ON COMPLETION PRESERVE ENABLE DO INSERT INTO `finallyday`( `dateFinally`, `oldBalance`, `totalimport`, `totalexport`,`time_insert` ) VALUES( CURRENT_DATE(),( SELECT f.newbalance FROM finallyday AS f WHERE f.dateFinally = CURRENT_DATE() - INTERVAL 1 DAY), ( SELECT COALESCE(SUM(c.Debit), 0) FROM casher AS c WHERE c.date_casher = CURRENT_DATE()), ( SELECT COALESCE(SUM(c.Creditor), 0) FROM casher AS c WHERE c.date_casher = CURRENT_DATE()),current_timestamp())$$
-
-CREATE DEFINER=`root`@`localhost` EVENT `updatebalance` ON SCHEDULE EVERY 1 SECOND STARTS '2022-06-19 07:53:05' ON COMPLETION NOT PRESERVE ENABLE DO UPDATE finallyday SET totalimport = (SELECT COALESCE(SUM(c.Debit), 0) FROM casher AS c WHERE c.date_casher = CURRENT_DATE()) , totalexport = (SELECT COALESCE(SUM(c.Creditor), 0) FROM casher AS c WHERE c.date_casher = CURRENT_DATE()) WHERE dateFinally = CURRENT_DATE()$$
+CREATE DEFINER=`root`@`localhost` EVENT `finalDay` ON SCHEDULE EVERY 24 HOUR STARTS '2022-07-03 00:01:00' ON COMPLETION PRESERVE ENABLE DO INSERT INTO `finallyday`( `dateFinally`, `oldBalance`, `totalimport`, `totalexport`,`time_insert` ) VALUES( CURRENT_DATE(),( SELECT f.newbalance FROM finallyday AS f WHERE f.dateFinally = CURRENT_DATE() - INTERVAL 1 DAY), ( SELECT COALESCE(SUM(c.Debit), 0) FROM casher AS c WHERE c.date_casher = CURRENT_DATE()), ( SELECT COALESCE(SUM(c.Creditor), 0) FROM casher AS c WHERE c.date_casher = CURRENT_DATE()),current_timestamp())$$
 
 DELIMITER ;
 COMMIT;

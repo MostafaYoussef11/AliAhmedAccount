@@ -286,28 +286,28 @@ public class Tools {
         }
         return day_ar;
     }
-    public static void runMedia(String bip){
-        JFXPanel jfx = new JFXPanel();
-        String uri = new File(bip).toURI().toString();
-        MediaPlayer media =  new MediaPlayer(new Media(uri));
-        media.setStartTime(Duration.seconds(2));
-        media.play();
-    } 
+//    public static void runMedia(String bip){
+//        JFXPanel jfx = new JFXPanel();
+//        String uri = new File(bip).toURI().toString();
+//        MediaPlayer media =  new MediaPlayer(new Media(uri));
+//        media.setStartTime(Duration.seconds(2));
+//        media.play();
+//    } 
     
     
-    public void playSound(String name) {
-        try {
-            audioInputStream = AudioSystem.getAudioInputStream(new File(getClass().getResource(name).getPath()).getAbsoluteFile());
-            Clip clip = AudioSystem.getClip();
-            clip.open(audioInputStream);
-            clip.start();
-            if(clip.isRunning()){
-                Tools.showErrorMsg("test");
-            }
-        } catch(IOException | LineUnavailableException | UnsupportedAudioFileException e) {
-            System.out.println("Error with playing sound.");
-        }
-    }
+//    public void playSound(String name) {
+//        try {
+//            audioInputStream = AudioSystem.getAudioInputStream(new File(getClass().getResource(name).getPath()).getAbsoluteFile());
+//            Clip clip = AudioSystem.getClip();
+//            clip.open(audioInputStream);
+//            clip.start();
+//            if(clip.isRunning()){
+//                Tools.showErrorMsg("test");
+//            }
+//        } catch(IOException | LineUnavailableException | UnsupportedAudioFileException e) {
+//            System.out.println("Error with playing sound.");
+//        }
+//    }
     
     public static void SearchField(JTable table , JTextField txtsearch){
        TableRowSorter<TableModel> rowSorter = new TableRowSorter<>(table.getModel());

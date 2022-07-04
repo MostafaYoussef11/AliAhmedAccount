@@ -74,14 +74,14 @@ public class MasarypayFrame extends javax.swing.JFrame {
         txtdiscount.setText(String.valueOf(masary_util.getCost(note)));
         txtAmount.requestFocus();
         txtAmount.selectAll();
-        Nums = masary.PhoneNumberList();
-        int size = Nums.size();
-        System.out.println("id:"+size);
-        for(int i = 0 ; i<size;i++){
-            System.out.println(Nums.get(i));
-        }
+//        Nums = masary.PhoneNumberList();
+//        int size = Nums.size();
+//        System.out.println("id:"+size);
+//        for(int i = 0 ; i<size;i++){
+//            System.out.println(Nums.get(i));
+//        }
 //        List<String> phones = masary.PhoneNumberList();
-        autocomplete = new Autocomplete(txtPhone, Nums);
+//        autocomplete = new Autocomplete(txtPhone, Nums);
 //        txtPhone.getDocument().addDocumentListener(autocomplete);
 //        txtPhone.getInputMap().put(KeyStroke.getKeyStroke("TAB"), "commit");
 //        txtPhone.getActionMap().put("commit", autocomplete.new CommitAction());  
@@ -113,6 +113,7 @@ public class MasarypayFrame extends javax.swing.JFrame {
         combnote = new javax.swing.JComboBox<String>();
         lb_phone = new javax.swing.JLabel();
         txtPhone = new javax.swing.JTextField();
+        comvf = new javax.swing.JComboBox();
         title = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
@@ -251,6 +252,10 @@ public class MasarypayFrame extends javax.swing.JFrame {
         });
         txtPanal.add(txtPhone);
         txtPhone.setBounds(12, 55, 402, 35);
+
+        comvf.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        txtPanal.add(comvf);
+        comvf.setBounds(12, 55, 400, 35);
 
         getContentPane().add(txtPanal);
         txtPanal.setBounds(10, 67, 830, 139);
@@ -428,12 +433,14 @@ public class MasarypayFrame extends javax.swing.JFrame {
             masary.setUtility_masary(txtPhone.getText());
             masary.setId_utility_masary(not_utilitiy);
             masary.setIs_requer_phone_num(true);
+        
         }
         else{
             masary.setPhone(null);
             masary.setId_utility_masary(not_utilitiy);
             masary.setUtility_masary(not_utilitiy);
         }
+        
         if(id_client == 1){
             isSave = masary.SaveCasher();
         }else{
@@ -582,6 +589,7 @@ public class MasarypayFrame extends javax.swing.JFrame {
     private javax.swing.JComboBox<String> comUtility;
     private javax.swing.JComboBox<String> combClient;
     private javax.swing.JComboBox<String> combnote;
+    private javax.swing.JComboBox comvf;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

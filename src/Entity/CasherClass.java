@@ -10,6 +10,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.text.DecimalFormat;
+import java.text.NumberFormat;
 
 
 /**
@@ -65,6 +67,10 @@ public class CasherClass {
   public String getNowBalanceCasher(){
       String sql = "select newbalance as id from finallyday where dateFinally = CURRENT_DATE()";
       String now_balance = ConnectDB.getIdFromName(sql);
-      return " " + now_balance;
+      double nbalance = Double.parseDouble(now_balance);
+      NumberFormat formatter =  new DecimalFormat("0.00");
+      formatter.format(nbalance);
+      
+      return " " + nbalance;
   }
 }

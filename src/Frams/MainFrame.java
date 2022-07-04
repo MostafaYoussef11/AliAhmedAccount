@@ -12,6 +12,7 @@ import Entity.Items;
 import Entity.ItemsOnInvoice;
 import Entity.MasaryPay;
 import Entity.SalesInvoic;
+import Entity.masary_Utilites;
 import Utilities.MyCalculator;
 import Utilities.Tools;
 import com.sun.org.apache.bcel.internal.generic.AALOAD;
@@ -94,7 +95,9 @@ public class MainFrame extends javax.swing.JFrame {
         txtIdItems.setFocusable(true);
         txtNowBalance.setText(new CasherClass().getNowBalanceCasher());
         txtMasaryBalance.setText(new MasaryPay().getfirstBalance()+"");
-        
+        new masary_Utilites(1).fillComboUtilites(comboNoteUtiltiy, "شحن");
+        settxtnumer();
+        txtIdItems.requestFocus();
     };
     
     
@@ -132,6 +135,11 @@ public class MainFrame extends javax.swing.JFrame {
         counter = new javax.swing.JLabel();
         card_10 = new javax.swing.JLabel();
         txtMasaryBalance = new javax.swing.JLabel();
+        comboNoteUtiltiy = new javax.swing.JComboBox();
+        txtNmber = new javax.swing.JFormattedTextField();
+        txtvalue = new javax.swing.JFormattedTextField();
+        txtAmount = new javax.swing.JFormattedTextField();
+        txt_discount = new javax.swing.JLabel();
         background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -516,12 +524,53 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(card_10);
-        card_10.setBounds(50, 300, 70, 70);
+        card_10.setBounds(50, 370, 70, 70);
 
         txtMasaryBalance.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         txtMasaryBalance.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        txtMasaryBalance.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         getContentPane().add(txtMasaryBalance);
-        txtMasaryBalance.setBounds(120, 300, 120, 70);
+        txtMasaryBalance.setBounds(50, 290, 200, 70);
+
+        comboNoteUtiltiy.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboNoteUtiltiy.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                comboNoteUtiltiyItemStateChanged(evt);
+            }
+        });
+        getContentPane().add(comboNoteUtiltiy);
+        comboNoteUtiltiy.setBounds(125, 370, 125, 30);
+
+        try {
+            txtNmber.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###-########")));
+        } catch (java.text.ParseException ex) {
+            ex.printStackTrace();
+        }
+        txtNmber.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtNmber.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+        txtNmber.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        getContentPane().add(txtNmber);
+        txtNmber.setBounds(125, 405, 125, 35);
+
+        txtvalue.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
+        txtvalue.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtvalue.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+        txtvalue.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        getContentPane().add(txtvalue);
+        txtvalue.setBounds(152, 445, 98, 35);
+
+        txtAmount.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
+        txtAmount.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtAmount.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+        txtAmount.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        getContentPane().add(txtAmount);
+        txtAmount.setBounds(100, 485, 120, 30);
+
+        txt_discount.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        txt_discount.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        txt_discount.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        getContentPane().add(txt_discount);
+        txt_discount.setBounds(50, 445, 98, 35);
 
         background.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         background.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -852,7 +901,36 @@ public class MainFrame extends javax.swing.JFrame {
            
        }
     }//GEN-LAST:event_counterMouseClicked
+
+    private void comboNoteUtiltiyItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboNoteUtiltiyItemStateChanged
+        // TODO add your handling code here:
+        settxtnumer();
+        
+    }//GEN-LAST:event_comboNoteUtiltiyItemStateChanged
     
+    private void settxtnumer(){
+        String utility = comboNoteUtiltiy.getSelectedItem().toString();
+        switch(utility){
+            case "شحن اتصالات":
+                txtNmber.setText("011");
+                break;
+            case "شحن فودافون":
+                txtNmber.setText("010");
+                break;
+            case "شحن اورنج":
+                txtNmber.setText("012");
+                break;
+            case "شحن WE":
+                txtNmber.setText("015");
+                break;
+            default:
+                txtNmber.setText("");
+                break;
+                
+        }
+        txtNmber.requestFocus();
+        
+    }
     private void clickPanel(JLabel lable){
         lable.setBorder(BorderFactory.createLoweredBevelBorder());
     }
@@ -906,6 +984,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel calc;
     private javax.swing.JLabel card_10;
     private javax.swing.JLabel client;
+    private javax.swing.JComboBox comboNoteUtiltiy;
     private javax.swing.JLabel counter;
     private javax.swing.JLabel fees;
     private javax.swing.JLabel items;
@@ -916,12 +995,16 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel sales;
     private javax.swing.JPanel selePanal;
     private javax.swing.JLabel suppliers;
+    private javax.swing.JFormattedTextField txtAmount;
     private javax.swing.JTextField txtIdItems;
     private javax.swing.JLabel txtMasaryBalance;
+    private javax.swing.JFormattedTextField txtNmber;
     private javax.swing.JLabel txtNowBalance;
     private javax.swing.JTextField txtPrice;
     private javax.swing.JTextField txtQut;
+    private javax.swing.JLabel txt_discount;
     private javax.swing.JLabel txtnameItem;
+    private javax.swing.JFormattedTextField txtvalue;
     // End of variables declaration//GEN-END:variables
 
 //    private void setBalanceCasher(){
