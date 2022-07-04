@@ -29,8 +29,10 @@ public class chargingWalletFrame extends javax.swing.JFrame {
     private int id_pos;
     private String namePos;
     private TransactionVCashAndPos trans;
-    public chargingWalletFrame() {
+    
+    public chargingWalletFrame(int id_pos) {
         initComponents();
+        this.id_pos = id_pos;
         trans = new TransactionVCashAndPos();
         setNewTransaction();
         Font f = Tools.font(16f);
@@ -310,11 +312,12 @@ public class chargingWalletFrame extends javax.swing.JFrame {
         this.setSize(dim);
         Tools.disableButOpen(btPanel);
         Tools.setBackground(background, dim, "23.jpg");
-        trans.fillTable(jTable1);
+        trans.fillTable(jTable1 , TransactionVCashAndPos.type_transaction.Deposit);
         vf = new VFCashClass();
         pos = new PosClass();
         vf.fillCombo(combNumber);
         pos.fillCombo(combPos);
+        combPos.setSelectedIndex(id_pos-1);
         namePos = combPos.getSelectedItem().toString();
         id_pos = Integer.parseInt(pos.getIdPosFromNamePos(namePos));
         pp = new posPay(id_pos){};
@@ -405,7 +408,7 @@ public class chargingWalletFrame extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new chargingWalletFrame().setVisible(true);
+                new chargingWalletFrame(0).setVisible(true);
             }
         });
     }

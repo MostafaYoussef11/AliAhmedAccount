@@ -234,7 +234,7 @@ public class menuCashFrame extends javax.swing.JFrame {
 
     private void chargingMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_chargingMouseClicked
             clickPanel(charging);
-        chargingWalletFrame chwallet = new chargingWalletFrame();
+        chargingWalletFrame chwallet = new chargingWalletFrame(1);
         Tools.openJFram(chwallet, "شحن محفظة"); 
        
     }//GEN-LAST:event_chargingMouseClicked
@@ -254,10 +254,14 @@ public class menuCashFrame extends javax.swing.JFrame {
 
     private void toPosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_toPosMouseClicked
         // TODO add your handling code here:
+        clickPanel(toPos);
+        withdrawWalletFrame withd = new withdrawWalletFrame(1);
+        Tools.openJFram(withd, "سحب من محفظة");
     }//GEN-LAST:event_toPosMouseClicked
 
     private void toPosMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_toPosMouseExited
         // TODO add your handling code here:
+        exitPanel(toPos);
     }//GEN-LAST:event_toPosMouseExited
 
     /**

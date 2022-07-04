@@ -190,9 +190,10 @@ public class masary_Utilites {
     }
     
     
-    public String getPriceByNote(String note){
+    public double getPriceByNote(String note){
         String sql_selectPrice = "SELECT price As id FROM utility_masary WHERE note_utility='"+note+"'";
-        return ConnectDB.getIdFromName(sql_selectPrice);
+        String price_st = ConnectDB.getIdFromName(sql_selectPrice);
+        return Double.parseDouble(price_st);
     }
     
     public boolean isRequierPhoneNumber(String name_utility){

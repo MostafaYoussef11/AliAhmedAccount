@@ -11,8 +11,11 @@ import Entity.ClientPerson;
 import Entity.Items;
 import Entity.ItemsOnInvoice;
 import Entity.MasaryPay;
+import Entity.PosClass;
 import Entity.SalesInvoic;
 import Entity.masary_Utilites;
+import Entity.posPay;
+import Utilities.ConnectDB;
 import Utilities.MyCalculator;
 import Utilities.Tools;
 import com.sun.org.apache.bcel.internal.generic.AALOAD;
@@ -31,9 +34,11 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.concurrent.Worker;
 import javax.swing.BorderFactory;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.SwingWorker;
 import org.omg.CORBA.MARSHAL;
 
@@ -50,6 +55,8 @@ public class MainFrame extends javax.swing.JFrame {
     Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
     Font font = Tools.font(14f);
     Thread thread;
+    private double cost , price;
+    private int id_pos = 1;
     //CheckCasher cash ;
      calcFrame cf = new calcFrame();
      CounterFrame cuf = new CounterFrame(); ;//= new CounterFrame();
@@ -97,6 +104,7 @@ public class MainFrame extends javax.swing.JFrame {
         txtMasaryBalance.setText(new MasaryPay().getfirstBalance()+"");
         new masary_Utilites(1).fillComboUtilites(comboNoteUtiltiy, "شحن");
         settxtnumer();
+        txtvalue.setText("0");
         txtIdItems.requestFocus();
     };
     
@@ -135,11 +143,14 @@ public class MainFrame extends javax.swing.JFrame {
         counter = new javax.swing.JLabel();
         card_10 = new javax.swing.JLabel();
         txtMasaryBalance = new javax.swing.JLabel();
+        logo = new javax.swing.JLabel();
         comboNoteUtiltiy = new javax.swing.JComboBox();
         txtNmber = new javax.swing.JFormattedTextField();
         txtvalue = new javax.swing.JFormattedTextField();
         txtAmount = new javax.swing.JFormattedTextField();
         txt_discount = new javax.swing.JLabel();
+        jButton1 = new javax.swing.JButton();
+        vf_cash = new javax.swing.JLabel();
         background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -470,8 +481,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         VCash.setFont(new java.awt.Font("VIP Hala Bold", 1, 18)); // NOI18N
         VCash.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        VCash.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/wallet_mob.png"))); // NOI18N
-        VCash.setText("فودافون كاش");
+        VCash.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/vf-cash.png"))); // NOI18N
         VCash.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         VCash.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         VCash.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -524,13 +534,25 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(card_10);
-        card_10.setBounds(50, 370, 70, 70);
+        card_10.setBounds(50, 425, 70, 70);
 
         txtMasaryBalance.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         txtMasaryBalance.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         txtMasaryBalance.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        txtMasaryBalance.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtMasaryBalanceMouseClicked(evt);
+            }
+        });
         getContentPane().add(txtMasaryBalance);
-        txtMasaryBalance.setBounds(50, 290, 200, 70);
+        txtMasaryBalance.setBounds(50, 350, 205, 70);
+
+        logo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/masary-logo.png"))); // NOI18N
+        logo.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        logo.setPreferredSize(new java.awt.Dimension(200, 70));
+        getContentPane().add(logo);
+        logo.setBounds(50, 275, 200, 70);
 
         comboNoteUtiltiy.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         comboNoteUtiltiy.addItemListener(new java.awt.event.ItemListener() {
@@ -539,7 +561,7 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(comboNoteUtiltiy);
-        comboNoteUtiltiy.setBounds(125, 370, 125, 30);
+        comboNoteUtiltiy.setBounds(130, 425, 125, 32);
 
         try {
             txtNmber.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###-########")));
@@ -550,27 +572,47 @@ public class MainFrame extends javax.swing.JFrame {
         txtNmber.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         txtNmber.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         getContentPane().add(txtNmber);
-        txtNmber.setBounds(125, 405, 125, 35);
+        txtNmber.setBounds(130, 462, 125, 32);
 
         txtvalue.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
         txtvalue.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtvalue.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         txtvalue.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        txtvalue.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtvalueKeyReleased(evt);
+            }
+        });
         getContentPane().add(txtvalue);
-        txtvalue.setBounds(152, 445, 98, 35);
+        txtvalue.setBounds(150, 500, 105, 35);
 
         txtAmount.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
         txtAmount.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtAmount.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         txtAmount.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         getContentPane().add(txtAmount);
-        txtAmount.setBounds(100, 485, 120, 30);
+        txtAmount.setBounds(150, 540, 105, 35);
 
         txt_discount.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         txt_discount.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         txt_discount.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         getContentPane().add(txt_discount);
-        txt_discount.setBounds(50, 445, 98, 35);
+        txt_discount.setBounds(50, 500, 98, 35);
+
+        jButton1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/save.png"))); // NOI18N
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+        getContentPane().add(jButton1);
+        jButton1.setBounds(50, 540, 95, 35);
+
+        vf_cash.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        vf_cash.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/vf-cash.png"))); // NOI18N
+        getContentPane().add(vf_cash);
+        vf_cash.setBounds(540, 650, 64, 64);
 
         background.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         background.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -794,7 +836,7 @@ public class MainFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         clickPanel(VCash);
         menuCashFrame mcf = new menuCashFrame();
-        Tools.openJFram(mcf);
+        Tools.openJFram(mcf , " فودافون كاش" ,"wallet_mob");
                 
     }//GEN-LAST:event_VCashMouseClicked
 
@@ -806,25 +848,34 @@ public class MainFrame extends javax.swing.JFrame {
     private void formWindowActivated(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowActivated
         // TODO add your handling code here:
         txtNowBalance.setText(new CasherClass().getNowBalanceCasher());
-        txtMasaryBalance.setText(new MasaryPay().getfirstBalance()+"");
+        txtMasaryBalance.setText(new posPay(id_pos) {
+        }.getfirstBalance()+"");
 
     }//GEN-LAST:event_formWindowActivated
 
     private void card_10MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_card_10MouseClicked
         // TODO add your handling code here:
-        MasaryPay masary = new MasaryPay();
+        posPay cardPay = new posPay(id_pos) {
+        };
         SwingWorker<Boolean,Object> worker = new SwingWorker<Boolean, Object>() {
 
             @Override
             protected Boolean doInBackground() throws Exception {
                 clickPanel(card_10);
-                  
-                masary.setId_utility_masary(39);
-                masary.setPrice_masary_pay(10);
-                masary.setDiscount_of_balance(10);
-                masary.setAmount_masary_pay(10);
-                masary.setUtility_masary("10");
-                return masary.SaveCasher();
+//                  
+//                masary.setId_utility_masary(39);
+//                masary.setPrice_masary_pay(10);
+//                masary.setDiscount_of_balance(10);
+//                masary.setAmount_masary_pay(10);
+//                masary.setUtility_masary("10");
+                    String idUm = ConnectDB.getIdFromName("SELECT id_utility_masary AS id FROM utility_masary WHERE note_utility ='كرت  _ 10' AND id_pos = "+id_pos);
+                    int id_utility_masary = Integer.parseInt(idUm);
+                    cardPay.setId_utility_masary(id_utility_masary);
+                    cardPay.setPrice_masary_pay(10);
+                    cardPay.setDiscount_of_balance(10);
+                    cardPay.setAmount_masary_pay(10);
+                    cardPay.setUtility_masary("كرت  _ 10");
+                return cardPay.SaveCasher();
             }
 
             @Override
@@ -841,7 +892,7 @@ public class MainFrame extends javax.swing.JFrame {
                     //Tools.showInfoMsg("Okkkkkkk", "Ok");
                     exitPanel(card_10);
                     txtNowBalance.setText(new CasherClass().getNowBalanceCasher());     
-                    txtMasaryBalance.setText(masary.getNewbalance()+"");
+                    txtMasaryBalance.setText(cardPay.getNewbalance()+"");
                 }
             
             }
@@ -850,22 +901,9 @@ public class MainFrame extends javax.swing.JFrame {
             
             
             
-        };
-        
+        };   
         worker.execute();
-       
-//        if(){
-//            txtNowBalance.setText(new CasherClass().getNowBalanceCasher());
-//            card_10.setText("OK");
-//            try {
-//                Thread.sleep(3000);
-//                card_10.setText(null);
-//            } catch (InterruptedException ex) {
-//                Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
-//            }
-//        }
-        
-       
+    
     }//GEN-LAST:event_card_10MouseClicked
 
     private void card_10MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_card_10MouseExited
@@ -876,7 +914,7 @@ public class MainFrame extends javax.swing.JFrame {
     private void calcMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_calcMouseClicked
 
         if(!(cf.isVisible())){
-             Tools.openJFram(cf);
+             Tools.openJFram(cf,"حاسبة","calculator");
         
         }else{
             cf.dispose();
@@ -907,9 +945,61 @@ public class MainFrame extends javax.swing.JFrame {
         settxtnumer();
         
     }//GEN-LAST:event_comboNoteUtiltiyItemStateChanged
+
+    private void txtvalueKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtvalueKeyReleased
+        // TODO add your handling code here:
+        double value = Double.parseDouble(txtvalue.getText());
+        double discount = value * cost;
+        txt_discount.setText(discount+"");
+        double price_to_value = value * price;
+        txtAmount.setText(price_to_value+"");
+    }//GEN-LAST:event_txtvalueKeyReleased
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        posPay posp = new posPay(id_pos) {};
+        String utility_masary = comboNoteUtiltiy.getSelectedItem().toString();
+        int id_utility_masary = new masary_Utilites(id_pos).getIdByNote(utility_masary);
+        //price_masary_pay   value
+        double price_masary_pay = Double.parseDouble(txtvalue.getText());
+        //discount_of_balance
+        double discount_of_balance = Double.parseDouble(txt_discount.getText());
+        //amount_masary_pay
+        double amount_masary_pay = Double.parseDouble(txtAmount.getText());
+        posp.setId_utility_masary(id_utility_masary);
+        posp.setPrice_masary_pay(price_masary_pay);
+        posp.setDiscount_of_balance(discount_of_balance);
+        posp.setAmount_masary_pay(amount_masary_pay);
+        posp.setUtility_masary(utility_masary);
+        boolean isSaved = posp.SaveCasher();
+        if(isSaved){
+            txtvalue.setText("0");
+            txtAmount.setText("");
+            txt_discount.setText("");
+            txtNmber.setText("");
+            txtMasaryBalance.setText(posp.getNewbalance()+"");
+            txtNowBalance.setText(new CasherClass().getNowBalanceCasher());
+            txtIdItems.requestFocus();
+        }
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void txtMasaryBalanceMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtMasaryBalanceMouseClicked
+        // TODO add your handling code here:
+        String [] selectionValues = ConnectDB.getColumn("pos", "name_pos");
+        String master = selectionValues[0];
+        ImageIcon icon = new ImageIcon(new ImageIcon(Toolkit.getDefaultToolkit().getClass().getResource("/icons/pos.png")).getImage());
+        Object name_pos = JOptionPane.showInputDialog(this, "اختر ماكينة الشحن", "تغيير المكنة", JOptionPane.OK_CANCEL_OPTION, icon, selectionValues, master);
+        String id_pos_st = new PosClass().getIdPosFromNamePos(name_pos.toString());
+        id_pos = Integer.parseInt(id_pos_st);
+        ImageIcon iconlogo = new ImageIcon(new ImageIcon(Toolkit.getDefaultToolkit().getClass().getResource("/icons/"+id_pos_st+".png")).getImage());
+        logo.setIcon(iconlogo);
+    }//GEN-LAST:event_txtMasaryBalanceMouseClicked
     
     private void settxtnumer(){
+        masary_Utilites utilit = new masary_Utilites(id_pos);
         String utility = comboNoteUtiltiy.getSelectedItem().toString();
+        price = utilit.getPriceByNote(utility);
+        cost = utilit.getCost(utility);
         switch(utility){
             case "شحن اتصالات":
                 txtNmber.setText("011");
@@ -988,9 +1078,11 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel counter;
     private javax.swing.JLabel fees;
     private javax.swing.JLabel items;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel loan;
+    private javax.swing.JLabel logo;
     private javax.swing.JLabel pos;
     private javax.swing.JLabel sales;
     private javax.swing.JPanel selePanal;
@@ -1005,6 +1097,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel txt_discount;
     private javax.swing.JLabel txtnameItem;
     private javax.swing.JFormattedTextField txtvalue;
+    private javax.swing.JLabel vf_cash;
     // End of variables declaration//GEN-END:variables
 
 //    private void setBalanceCasher(){

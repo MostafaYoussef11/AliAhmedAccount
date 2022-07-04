@@ -16,6 +16,7 @@ import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Point;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.DecimalFormat;
 import java.util.logging.Level;
@@ -35,18 +36,25 @@ public class AmanpayFrame extends javax.swing.JFrame {
     ClientPerson client;
     masary_Utilites Bee_util;
     Amanpay aman;
+    private final int id_pos = 5;
     private double costService;
     private boolean is_requier_phone_number = false;
     private final DecimalFormat decf;
     Dimension dim = new Dimension(870, 530);
     public AmanpayFrame() {
         initComponents();
+        comUtility.addActionListener((ActionEvent e) -> {
+            if(comUtility.getSelectedItem().equals("فودافون كاش")){
+                  this.dispose();
+                  Tools.openJFram(new chargingWalletFrame(id_pos), "شحن محفظة");
+            }
+        });
         setSize(dim);
         Tools.setBackground(background, dim, "5630974.jpg");
         decf = new DecimalFormat("0.00");
         font = Tools.font(24f);
         title.setFont(font);
-        Bee_util = new masary_Utilites(5);
+        Bee_util = new masary_Utilites(id_pos);
         client = new ClientPerson();
         aman = new Amanpay();
         newMasaray();
@@ -65,8 +73,8 @@ public class AmanpayFrame extends javax.swing.JFrame {
         txtPhone.setEnabled(is_requier_phone_number);
         txtbalance.setText(balance);
         aman.fillTable(jTable1);
-        String price = Bee_util.getPriceByNote(note);
-        txtAmount.setText(price);
+        double price = Bee_util.getPriceByNote(note);
+        txtAmount.setText(price+"");
         txtCount.setText("1");
         txtPhone.setText("");
         txtdiscount.setText(String.valueOf(Bee_util.getCost(note)));
@@ -452,10 +460,10 @@ public class AmanpayFrame extends javax.swing.JFrame {
         String nameCategoray = comUtility.getSelectedItem().toString();
         Bee_util.fillComboUtilites(combnote, nameCategoray);
         String note = combnote.getSelectedItem().toString();
-        String price = Bee_util.getPriceByNote(note);
+        double price = Bee_util.getPriceByNote(note);
         String disc = decf.format(Bee_util.getCost(note));
         txtdiscount.setText(disc);
-        txtAmount.setText(price);
+        txtAmount.setText(price+"");
         txtAmount.requestFocus();
         txtAmount.selectAll();
         is_requier_phone_number = Bee_util.isRequierPhoneNumber(nameCategoray);
@@ -469,7 +477,7 @@ public class AmanpayFrame extends javax.swing.JFrame {
             String note = combnote.getSelectedItem().toString();
             double CostOfService = Bee_util.getCost(note);
             double discount = CostOfService * val;
-            double price = Double.parseDouble(Bee_util.getPriceByNote(note)) * val;
+            double price = Bee_util.getPriceByNote(note) * val;
             txtAmount.setText(price+"");
             txtdiscount.setText(decf.format(discount));
         }catch(NumberFormatException ex){
@@ -480,9 +488,9 @@ public class AmanpayFrame extends javax.swing.JFrame {
     private void combnoteItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_combnoteItemStateChanged
         // TODO add your handling code here:
         String note = combnote.getSelectedItem().toString() ;
-        String price = Bee_util.getPriceByNote(note);
+        double price = Bee_util.getPriceByNote(note);
         txtdiscount.setText(String.valueOf(Bee_util.getCost(note)));
-        txtAmount.setText(price);
+        txtAmount.setText(price+"");
         txtAmount.requestFocus();
         txtAmount.selectAll();
     }//GEN-LAST:event_combnoteItemStateChanged

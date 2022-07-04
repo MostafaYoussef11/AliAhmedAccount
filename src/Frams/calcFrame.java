@@ -5,6 +5,8 @@
  */
 package Frams;
 
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
 import java.sql.Array;
 
 /**
@@ -17,10 +19,12 @@ public class calcFrame extends javax.swing.JFrame {
      * Creates new form calcFrame
      */
     double firstNum , secndNum;
-    String Opretor = "";
+    char Opretor ;
+    
     String Ms = "";
     public calcFrame() {
         initComponents();
+        txtScreen.requestFocus();
     }
 
     /**
@@ -62,7 +66,16 @@ public class calcFrame extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTextArea1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-        setType(java.awt.Window.Type.POPUP);
+        setResizable(false);
+        setType(java.awt.Window.Type.UTILITY);
+        addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                formKeyReleased(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                formKeyTyped(evt);
+            }
+        });
 
         jPanel1.setBackground(new java.awt.Color(0, 0, 0));
         jPanel1.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.LOWERED));
@@ -74,17 +87,26 @@ public class calcFrame extends javax.swing.JFrame {
         txtScreen.setForeground(new java.awt.Color(0, 204, 51));
         txtScreen.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         txtScreen.setVerticalAlignment(javax.swing.SwingConstants.TOP);
+        txtScreen.setFocusTraversalPolicyProvider(true);
         txtScreen.setOpaque(true);
+        txtScreen.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtScreenKeyPressed(evt);
+            }
+            public void keyTyped(java.awt.event.KeyEvent evt) {
+                txtScreenKeyTyped(evt);
+            }
+        });
         jPanel1.add(txtScreen);
-        txtScreen.setBounds(0, 0, 370, 88);
+        txtScreen.setBounds(0, 0, 370, 70);
 
         txtResult.setBackground(new java.awt.Color(0, 0, 0));
-        txtResult.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        txtResult.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
         txtResult.setForeground(new java.awt.Color(255, 255, 255));
         txtResult.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         txtResult.setOpaque(true);
         jPanel1.add(txtResult);
-        txtResult.setBounds(0, 83, 370, 40);
+        txtResult.setBounds(0, 63, 370, 60);
 
         bt7.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         bt7.setText("7");
@@ -317,7 +339,7 @@ public class calcFrame extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
     private void bt7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt7ActionPerformed
         // TODO add your handling code here:
         String screen = txtScreen.getText();
@@ -396,7 +418,8 @@ public class calcFrame extends javax.swing.JFrame {
 
     private void bt0ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bt0ActionPerformed
         // TODO add your handling code here:
-         String screen = txtScreen.getText();
+         String screen = txtScreen.getText(); 
+
         if(screen.isEmpty()){
            // txtScreen.setText("0.");
         }else{
@@ -424,29 +447,26 @@ public class calcFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btclerActionPerformed
 
     private void btminActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btminActionPerformed
-        // TODO add your handling code here:
-          Opretor = "-";
+          Opretor = '-';
           getResult(Opretor);
-         //  Ms += Opretor;
+       
     }//GEN-LAST:event_btminActionPerformed
 
     private void btPActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btPActionPerformed
         // TODO add your handling code here:
-        Opretor = "+";
+        Opretor = '+';
         getResult(Opretor);
-      //  Ms += Opretor;
     }//GEN-LAST:event_btPActionPerformed
 
     private void btmActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btmActionPerformed
         // TODO add your handling code here:
-        Opretor = "*";
+        Opretor = '*';
         getResult(Opretor);
-      //  Ms += Opretor;
     }//GEN-LAST:event_btmActionPerformed
 
     private void btqActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btqActionPerformed
         // TODO add your handling code here:
-        Opretor = "/";
+        Opretor = '/';
         getResult(Opretor);
        // Ms += Opretor;
     }//GEN-LAST:event_btqActionPerformed
@@ -454,8 +474,6 @@ public class calcFrame extends javax.swing.JFrame {
     private void bteqalActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bteqalActionPerformed
         // TODO add your handling code here:
         getResult(Opretor);
-//        Ms += "=";
-//        Ms +="\n"+ txtResult.getText();
     }//GEN-LAST:event_bteqalActionPerformed
 
     private void saveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_saveActionPerformed
@@ -467,6 +485,57 @@ public class calcFrame extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_saveActionPerformed
+
+    private void txtScreenKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtScreenKeyTyped
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_txtScreenKeyTyped
+
+    private void formKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyTyped
+        // TODO add your handling code here:
+         if( evt.getKeyCode() == KeyEvent.VK_0 || evt.getKeyCode() == KeyEvent.VK_1 || evt.getKeyCode() == KeyEvent.VK_2 || evt.getKeyCode() == KeyEvent.VK_3 || evt.getKeyCode() == KeyEvent.VK_4 || evt.getKeyCode() == KeyEvent.VK_5 || evt.getKeyCode() == KeyEvent.VK_6 || evt.getKeyCode() == KeyEvent.VK_7 || evt.getKeyCode() == KeyEvent.VK_8 || evt.getKeyCode() == KeyEvent.VK_9 ){
+                    String screen = txtScreen.getText();
+                    screen += evt.getKeyChar();
+                    txtScreen.setText(screen);
+            }
+    }//GEN-LAST:event_formKeyTyped
+
+    private void formKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_formKeyReleased
+
+    }//GEN-LAST:event_formKeyReleased
+
+    private void txtScreenKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtScreenKeyPressed
+
+        if(!save.isSelected()){
+            
+            if( evt.getKeyChar() == '0'|| evt.getKeyChar() == '1' || evt.getKeyChar() == '2' || evt.getKeyChar() == '3' || evt.getKeyChar() == '4' || evt.getKeyChar() == '5' || evt.getKeyChar() == '6' || evt.getKeyChar() == '7' || evt.getKeyChar() == '8' || evt.getKeyChar() == '9' ){
+                    String screen = txtScreen.getText();
+                    screen += evt.getKeyChar();
+                    txtScreen.setText(screen);
+                    Ms += evt.getKeyChar();
+            }else if(evt.getKeyChar() == '+' || evt.getKeyChar() == '-' || evt.getKeyChar() == '*' || evt.getKeyChar() == '/'){
+                 Opretor = evt.getKeyChar();
+                 getResult(Opretor);
+                 Ms += evt.getKeyChar();
+            }else if(evt.getKeyChar() == '=' || evt.getKeyCode() == KeyEvent.VK_ENTER){
+                    getResult(Opretor);
+                     Ms += "=";
+                     Ms += txtResult.getText();
+            }
+        }
+        else{
+            if(evt.getKeyChar() == KeyEvent.VK_ESCAPE){
+                txtScreen.setText("");
+                save.setSelected(false);
+                txtScreen.requestFocus();
+                 return;
+            }
+           
+        }
+    
+        
+        
+    }//GEN-LAST:event_txtScreenKeyPressed
 
     /**
      * @param args the command line arguments
@@ -530,7 +599,7 @@ public class calcFrame extends javax.swing.JFrame {
     private javax.swing.JLabel txtScreen;
     // End of variables declaration//GEN-END:variables
 
-    private void getResult(String opretor){
+    private void getResult(char opretor){
         String screen = txtScreen.getText();
         String result = txtResult.getText();
         
@@ -553,17 +622,17 @@ public class calcFrame extends javax.swing.JFrame {
                secndNum = Double.parseDouble(screen);
                double r = 0;
                 switch(opretor){
-                    case "-":
+                    case '-':
                         r = firstNum - secndNum;
                         break;
-                    case "+":
+                    case '+':
                         r = firstNum + secndNum;
                         break;
-                    case "*":
+                    case '*':
                         r = firstNum * secndNum;
                         break;
-                    case "/":
-                        r = firstNum - secndNum;
+                    case '/':
+                        r = firstNum / secndNum;
                         break;
                     default:
                         r = 0;
@@ -573,68 +642,24 @@ public class calcFrame extends javax.swing.JFrame {
                 firstNum = r;
                 txtResult.setText(r+"");
                 txtScreen.setText("");
-                if(!(Ms.isEmpty())){
-                    String substring = "";
-                    char[] a = Ms.toCharArray();
-                    int lastindex = a.length - 1;
-                    char c = a[lastindex];
-                    if(c == '+' || c == '-' || c == '*' || c == '/' || c == '='){
-                         substring = Ms.substring(0, lastindex);
-                         Ms = substring;
-                    }
-                    
-                    Ms+=opretor;
-                    
-                }
+//                if(!(Ms.isEmpty())){
+//                    String substring = "";
+//                    char[] a = Ms.toCharArray();
+//                    int lastindex = a.length - 1;
+//                    char c = a[lastindex];
+//                    if(c == '+' || c == '-' || c == '*' || c == '/' || c == '='){
+//                         substring = Ms.substring(0, lastindex);
+//                         Ms = substring;
+//                    }
+//                    
+//                    Ms+=opretor;
+//                    
+//                }
                 
             }
         
         }
         
-//        String screen = txtScreen.getText();
-//        String result = txtResult.getText();
-//        if(screen.isEmpty()){
-//            
-//            if(!(result.isEmpty())){
-//                txtScreen.setText(result);
-//                txtResult.setText("");
-//            }
-//
-//        }
-//        else{
-//            if(result.isEmpty()){
-//                firstNum = Double.parseDouble(screen);
-//                txtResult.setText(screen);
-//                txtScreen.setText("");
-//                
-//            }
-//            else{
-//                   secndNum = Double.parseDouble(screen);
-//                    double r = 0 ;
-//                    switch(opretor){
-//                        case "-":
-//                            r = firstNum - secndNum;
-//                            break;
-//                        case "+":
-//                            r = firstNum + secndNum;
-//                            break;
-//                        case "*":
-//                            r = firstNum * secndNum;
-//                            break;
-//                        case "÷":
-//                            r = firstNum - secndNum;
-//                            break;
-//                        default:
-//                            r = 0;
-//                            break;
-//                            
-//                    }
-//                    this.Opretor = opretor;
-//                    txtResult.setText(r+"");
-//                    txtScreen.setText("");
-//                
-//            }
-//        } 
     }
 
 }

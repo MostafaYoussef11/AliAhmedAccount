@@ -8,7 +8,6 @@ package Entity;
 import Utilities.ConnectDB;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
-import java.sql.SQLException;
 import javax.swing.JTable;
 
 /**
@@ -18,7 +17,7 @@ import javax.swing.JTable;
 public class TransactionVCashAndPos {
 
 
-    private enum type_transaction {Deposit,Withdraw};
+    public enum type_transaction {Deposit,Withdraw};
     private int id_pos;
     private int id_VF_cash;
     private String name_pos;
@@ -59,10 +58,11 @@ public class TransactionVCashAndPos {
         this.number =  number;
     }
     
-    public void fillTable(JTable table){
+    public void fillTable(JTable table , type_transaction type){
+        String type_trans ="";
         String[] columnName = {"المبلغ", "الرقم", "المكنة", "التاريخ", "م"};
-        String sql = "SELECT trans.price, v.number_VF_cash, pos.name_pos, trans.date_transaction, trans.id_transaction FROM vf_transaction_po AS trans INNER JOIN pos ON trans.id_pos = pos.id_pos INNER JOIN vf_cash AS v ON trans.id_VF_cash = v.id_VF_cash";
+        if(type == type_transaction.Deposit) type_trans = "Deposit"; else type_trans = "Withdraw";
+        String sql = "SELECT trans.price, v.number_VF_cash, pos.name_pos, trans.date_transaction, trans.id_transaction FROM vf_transaction_po AS trans INNER JOIN pos ON trans.id_pos = pos.id_pos INNER JOIN vf_cash AS v ON trans.id_VF_cash = v.id_VF_cash WHERE trans.type_transaction = '"+type_trans+"' ORDER BY trans.date_transaction DESC";
         ConnectDB.fillAndCenterTable(sql, table, columnName);
-    
     }
 }
