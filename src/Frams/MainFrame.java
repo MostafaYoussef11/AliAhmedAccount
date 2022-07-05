@@ -106,6 +106,7 @@ public class MainFrame extends javax.swing.JFrame {
         settxtnumer();
         txtvalue.setText("0");
         txtIdItems.requestFocus();
+        Tools.txtNumberClient(txtNmber, this, 0, 0);
     };
     
     
@@ -145,12 +146,12 @@ public class MainFrame extends javax.swing.JFrame {
         txtMasaryBalance = new javax.swing.JLabel();
         logo = new javax.swing.JLabel();
         comboNoteUtiltiy = new javax.swing.JComboBox();
-        txtNmber = new javax.swing.JFormattedTextField();
         txtvalue = new javax.swing.JFormattedTextField();
         txtAmount = new javax.swing.JFormattedTextField();
         txt_discount = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         vf_cash = new javax.swing.JLabel();
+        txtNmber = new javax.swing.JTextField();
         background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -563,17 +564,6 @@ public class MainFrame extends javax.swing.JFrame {
         getContentPane().add(comboNoteUtiltiy);
         comboNoteUtiltiy.setBounds(130, 425, 125, 32);
 
-        try {
-            txtNmber.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("###-########")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        txtNmber.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtNmber.setDisabledTextColor(new java.awt.Color(0, 0, 0));
-        txtNmber.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        getContentPane().add(txtNmber);
-        txtNmber.setBounds(130, 462, 125, 32);
-
         txtvalue.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
         txtvalue.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtvalue.setDisabledTextColor(new java.awt.Color(0, 0, 0));
@@ -613,6 +603,12 @@ public class MainFrame extends javax.swing.JFrame {
         vf_cash.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/vf-cash.png"))); // NOI18N
         getContentPane().add(vf_cash);
         vf_cash.setBounds(540, 650, 64, 64);
+
+        txtNmber.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        txtNmber.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtNmber.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+        getContentPane().add(txtNmber);
+        txtNmber.setBounds(132, 460, 123, 35);
 
         background.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         background.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -948,7 +944,13 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void txtvalueKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtvalueKeyReleased
         // TODO add your handling code here:
-        double value = Double.parseDouble(txtvalue.getText());
+        String value_st = txtvalue.getText();
+        double value;
+        if(value_st.isEmpty()){
+                value = 0;
+        }else{
+           value  = Double.parseDouble(value_st);
+        }
         double discount = value * cost;
         txt_discount.setText(discount+"");
         double price_to_value = value * price;
@@ -966,11 +968,20 @@ public class MainFrame extends javax.swing.JFrame {
         double discount_of_balance = Double.parseDouble(txt_discount.getText());
         //amount_masary_pay
         double amount_masary_pay = Double.parseDouble(txtAmount.getText());
+        // phone number
+        String phone = txtNmber.getText();
         posp.setId_utility_masary(id_utility_masary);
         posp.setPrice_masary_pay(price_masary_pay);
         posp.setDiscount_of_balance(discount_of_balance);
         posp.setAmount_masary_pay(amount_masary_pay);
-        posp.setUtility_masary(utility_masary);
+        posp.setIs_requer_phone_num(true);
+        if(phone.isEmpty()){
+            posp.setUtility_masary(utility_masary);
+        }else{
+            posp.setUtility_masary(phone);
+            posp.setPhone(phone);
+        }
+        
         boolean isSaved = posp.SaveCasher();
         if(isSaved){
             txtvalue.setText("0");
@@ -980,6 +991,7 @@ public class MainFrame extends javax.swing.JFrame {
             txtMasaryBalance.setText(posp.getNewbalance()+"");
             txtNowBalance.setText(new CasherClass().getNowBalanceCasher());
             txtIdItems.requestFocus();
+            settxtnumer();
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -1018,6 +1030,7 @@ public class MainFrame extends javax.swing.JFrame {
                 break;
                 
         }
+        Tools.txtNumberClient(txtNmber, this, 0, 0);
         txtNmber.requestFocus();
         
     }
@@ -1090,7 +1103,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JFormattedTextField txtAmount;
     private javax.swing.JTextField txtIdItems;
     private javax.swing.JLabel txtMasaryBalance;
-    private javax.swing.JFormattedTextField txtNmber;
+    private javax.swing.JTextField txtNmber;
     private javax.swing.JLabel txtNowBalance;
     private javax.swing.JTextField txtPrice;
     private javax.swing.JTextField txtQut;

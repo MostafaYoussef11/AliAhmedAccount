@@ -47,11 +47,19 @@ public abstract class posPay {
     private String phone;
     private int id_pos;
     private boolean is_requer_phone_num;
-   
+    private String id_category;
     
     //constractor Method
     public posPay(int id_pos){
         this.id_pos = id_pos;
+    }
+
+    public String getId_category() {
+        return id_category;
+    }
+
+    public void setId_category(String id_category) {
+        this.id_category = id_category;
     }
 
     public boolean isIs_requer_phone_num() {
@@ -98,6 +106,7 @@ public abstract class posPay {
          pstmt.setString(8, utility_masary);
          int rowAffact = pstmt.executeUpdate();  
          ResultSet rst = pstmt.getGeneratedKeys();
+        
          if(rst.next()){
             int id_masary_pay = rst.getInt(1);
             if(rowAffact == 1){
@@ -108,6 +117,7 @@ public abstract class posPay {
                  pstmt.setInt(3, id_masary_pay);
                  if(pstmt.executeUpdate() == 1){
                     if(is_requer_phone_num){
+                         System.out.println("Entity.posPay.SaveClients()" + "  "+phone);
                         String sql_inser_num = "INSERT INTO `phone_numbers` (`numbers`) VALUES(?)";
                         PreparedStatement pst = con.prepareStatement(sql_inser_num);
                         pst.setString(1, phone);
@@ -169,6 +179,7 @@ public abstract class posPay {
                  pstmt.setString(4, utility_masary);
                  if(pstmt.executeUpdate() == 1){
                     if(is_requer_phone_num){
+                        System.out.println("Entity.posPay.SaveClients()" + "  "+phone);
                         String sql_inser_num = "INSERT INTO `phone_numbers` (`numbers`) VALUES(?)";
                         PreparedStatement pst = con.prepareStatement(sql_inser_num);
                         pst.setString(1, phone);
@@ -401,25 +412,6 @@ public boolean SaveVFCash(){
         this.id_pos = id_pos;
     }
     
-//    public List<String> PhoneNumberList(){
-//       List<String> Utilities = new ArrayList<String>();
-//        try {
-//            con = ConnectDB.getCon();
-//            com.mysql.jdbc.Statement stmt = (com.mysql.jdbc.Statement) con.createStatement();
-//            //String sql_items = "SELECT name_items FROM `items`";
-//            ResultSet rst = stmt.executeQuery("SELECT name_items FROM `items`");
-//            String elment;
-//            while (rst.next()) {
-//                elment = rst.getString(1);
-//                Utilities.add(elment);
-//                
-//            }
-//           
-//            con.close();
-//        } catch (SQLException ex) {
-//            Logger.getLogger(PosClass.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//        return Utilities;
-//    }
+
     
 }

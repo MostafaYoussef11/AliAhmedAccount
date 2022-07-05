@@ -5,17 +5,21 @@
  */
 package Utilities;
 
+import Entity.PosClass;
 import Frams.MainFrame;
 import Frams.SearchPurchaseFrame;
 import com.toedter.calendar.JDateChooser;
 import com.toedter.calendar.JTextFieldDateEditor;
+import java.awt.Color;
 import java.awt.Component;
 import static java.awt.Component.CENTER_ALIGNMENT;
+import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.FontFormatException;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.Window;
 import java.io.BufferedInputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -24,6 +28,8 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.net.MalformedURLException;
 import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -341,6 +347,37 @@ public class Tools {
         });
     
     }
+    
+    public static ArrayList<String> PhoneNumberList(){
+       ArrayList<String> numbers;
+        numbers = new ArrayList<String>();
+        try {
+            Connection conn = ConnectDB.getCon();
+            com.mysql.jdbc.Statement stmt = (com.mysql.jdbc.Statement) conn.createStatement();
+            //String sql_items = "SELECT name_items FROM `items`";
+            ResultSet rst = stmt.executeQuery("SELECT numbers  FROM phone_numbers");
+            String elment;
+            while (rst.next()) {
+                elment = rst.getString(1);
+                numbers.add(elment);
+                
+            }
+           
+            conn.close();
+        } catch (SQLException ex) {
+            Logger.getLogger(PosClass.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return numbers;
+    }
+    
+    public static void txtNumberClient(JTextField textField,Window mainWindow ,int windowX , int windowY ){
+        AutoSuggestor autoSuggestor = new AutoSuggestor(textField, mainWindow, null, Color.WHITE.brighter(), Color.BLUE, Color.red, 0.75f);
+        ArrayList<String> listNumber = PhoneNumberList();
+        autoSuggestor.setDictionary(listNumber);
+        autoSuggestor.setLocation(windowY, windowX);
+    }
+    
+    
  /**   
     public static void SearchFieldFromList(JList table , JTextField txtsearch){
 

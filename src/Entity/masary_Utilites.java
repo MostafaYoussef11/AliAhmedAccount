@@ -203,4 +203,11 @@ public class masary_Utilites {
         if(requierStr.equals("1")) isRequier = true;
         return isRequier;
     }
+        public boolean isRequierPhoneNumberById(String 	id_category){
+        boolean isRequier = false;
+        String sql_select = "SELECT requier_phone AS id FROM categoryutilites WHERE id_category="+id_category;
+        String requierStr = ConnectDB.getIdFromName(sql_select);
+        if(requierStr.equals("1")) isRequier = true;
+        return isRequier;
+    }
 }

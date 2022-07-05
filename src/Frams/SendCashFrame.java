@@ -7,14 +7,19 @@ package Frams;
 
 import Entity.ClientPerson;
 import Entity.VFCashClass;
+import Utilities.AutoSuggestor;
 import Utilities.Person;
 import Utilities.Tools;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.Formatter;
+import javax.swing.SwingUtilities;
 
 /**
  *
@@ -67,7 +72,6 @@ public class SendCashFrame extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         txtBalance = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
-        txtNumberClient = new javax.swing.JFormattedTextField();
         jLabel5 = new javax.swing.JLabel();
         txt_valu = new javax.swing.JFormattedTextField();
         jLabel6 = new javax.swing.JLabel();
@@ -78,6 +82,7 @@ public class SendCashFrame extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         comboClient = new javax.swing.JComboBox();
         txt_amount = new javax.swing.JFormattedTextField();
+        txtNumberClient = new javax.swing.JTextField();
         btPanel = new javax.swing.JPanel();
         btnew = new javax.swing.JButton();
         btsave = new javax.swing.JButton();
@@ -120,14 +125,6 @@ public class SendCashFrame extends javax.swing.JFrame {
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel4.setText("المرسل اليه");
         jLabel4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-
-        try {
-            txtNumberClient.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.MaskFormatter("01#-########")));
-        } catch (java.text.ParseException ex) {
-            ex.printStackTrace();
-        }
-        txtNumberClient.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txtNumberClient.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -178,6 +175,9 @@ public class SendCashFrame extends javax.swing.JFrame {
         txt_amount.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         txt_amount.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
 
+        txtNumberClient.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        txtNumberClient.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+
         javax.swing.GroupLayout PaneltxtLayout = new javax.swing.GroupLayout(Paneltxt);
         Paneltxt.setLayout(PaneltxtLayout);
         PaneltxtLayout.setHorizontalGroup(
@@ -199,10 +199,10 @@ public class SendCashFrame extends javax.swing.JFrame {
                     .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(PaneltxtLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(combVFNumber, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtNumberClient, javax.swing.GroupLayout.DEFAULT_SIZE, 203, Short.MAX_VALUE)
-                    .addComponent(txt_cost)
-                    .addComponent(txt_amount))
+                    .addComponent(combVFNumber, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_cost, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_amount, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtNumberClient, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 203, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(PaneltxtLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
@@ -221,12 +221,12 @@ public class SendCashFrame extends javax.swing.JFrame {
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(txtBalance, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(PaneltxtLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(PaneltxtLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(PaneltxtLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(txtNumberClient, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(txt_valu, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_valu)
+                    .addComponent(txtNumberClient, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(PaneltxtLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -325,19 +325,19 @@ public class SendCashFrame extends javax.swing.JFrame {
             btPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btPanelLayout.createSequentialGroup()
                 .addGap(17, 17, 17)
-                .addComponent(btexit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btexit, javax.swing.GroupLayout.DEFAULT_SIZE, 87, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btprint, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btprint, javax.swing.GroupLayout.DEFAULT_SIZE, 89, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btdel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btdel, javax.swing.GroupLayout.DEFAULT_SIZE, 83, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btupdate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btupdate, javax.swing.GroupLayout.DEFAULT_SIZE, 91, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btedit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btedit, javax.swing.GroupLayout.DEFAULT_SIZE, 87, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btsave, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btsave, javax.swing.GroupLayout.DEFAULT_SIZE, 86, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnew, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(btnew, javax.swing.GroupLayout.DEFAULT_SIZE, 83, Short.MAX_VALUE)
                 .addGap(17, 17, 17))
         );
         btPanelLayout.setVerticalGroup(
@@ -373,7 +373,7 @@ public class SendCashFrame extends javax.swing.JFrame {
         jScrollPane1.setViewportView(jTable1);
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(10, 266, 680, 300);
+        jScrollPane1.setBounds(10, 266, 680, 310);
 
         background.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         background.setToolTipText("");
@@ -491,7 +491,7 @@ public class SendCashFrame extends javax.swing.JFrame {
     private javax.swing.JTable jTable1;
     private javax.swing.JLabel titel;
     private javax.swing.JLabel txtBalance;
-    private javax.swing.JFormattedTextField txtNumberClient;
+    private javax.swing.JTextField txtNumberClient;
     private javax.swing.JFormattedTextField txt_amount;
     private javax.swing.JFormattedTextField txt_cost;
     private javax.swing.JFormattedTextField txt_discont;
@@ -502,6 +502,13 @@ public class SendCashFrame extends javax.swing.JFrame {
         vf.fillCombo(combVFNumber);
         balance = vf.getNowBalance(combVFNumber.getSelectedItem().toString());
         txtBalance.setText(balance+"");
+        Tools.disableButOpen(btPanel);
+        txtNumberClient.setText("");
+        txt_valu.setText("");
+        txt_discont.setText("");
+        txt_cost.setText("");
+        txt_amount.setText("");
+        Tools.txtNumberClient(txtNumberClient, this ,680 ,222);
         
     }
 

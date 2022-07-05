@@ -9,7 +9,14 @@ import Frams.Login;
 import Frams.MasarySellFrame;
 import Frams.VFCashFrame;
 import Frams.menuCashFrame;
+import Utilities.AutoSuggestor;
 import Utilities.Tools;
+import java.awt.Color;
+import java.util.ArrayList;
+import javax.swing.JFrame;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+import javax.swing.SwingUtilities;
 
 
 /**
@@ -21,13 +28,18 @@ public class AccountAli {
     /**
      * @param args the command line arguments
      */
+
     public static void main(String[] args) {
-        // TODO code application logic here
         Login l = new Login();
         l.setLocationRelativeTo(null);
-        l.setVisible(true); 
-        //Tools.openJFram(new menuCashFrame());
-       
+        l.setVisible(true);
+//        SwingUtilities.invokeLater(new Runnable() {
+//            @Override
+//            public void run() {
+//                new AccountAli();
+//            }
+//        });
+        
     }
     
 }
