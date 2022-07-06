@@ -39,6 +39,8 @@ import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JWindow;
 import javax.swing.SwingWorker;
 import org.omg.CORBA.MARSHAL;
 
@@ -57,11 +59,14 @@ public class MainFrame extends javax.swing.JFrame {
     Thread thread;
     private double cost , price;
     private int id_pos = 1;
+    
     //CheckCasher cash ;
      calcFrame cf = new calcFrame();
-     CounterFrame cuf = new CounterFrame(); ;//= new CounterFrame();
+     CounterFrame cuf = new CounterFrame(); 
+     CashTransfair c;
     public MainFrame() {
         initComponents();
+        
         background.setLocation(0, 0);
         background.setSize(dim);
         background.setPreferredSize(dim);
@@ -107,6 +112,7 @@ public class MainFrame extends javax.swing.JFrame {
         txtvalue.setText("0");
         txtIdItems.requestFocus();
         Tools.txtNumberClient(txtNmber, this, 0, 0);
+        c = new CashTransfair(this,vf_cash);
     };
     
     
@@ -601,6 +607,11 @@ public class MainFrame extends javax.swing.JFrame {
 
         vf_cash.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         vf_cash.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/vf-cash.png"))); // NOI18N
+        vf_cash.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                vf_cashMouseClicked(evt);
+            }
+        });
         getContentPane().add(vf_cash);
         vf_cash.setBounds(540, 650, 64, 64);
 
@@ -1006,6 +1017,12 @@ public class MainFrame extends javax.swing.JFrame {
         ImageIcon iconlogo = new ImageIcon(new ImageIcon(Toolkit.getDefaultToolkit().getClass().getResource("/icons/"+id_pos_st+".png")).getImage());
         logo.setIcon(iconlogo);
     }//GEN-LAST:event_txtMasaryBalanceMouseClicked
+
+    private void vf_cashMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_vf_cashMouseClicked
+        // TODO add your handling code here:
+        
+        c.ShowPopUpWindow();
+    }//GEN-LAST:event_vf_cashMouseClicked
     
     private void settxtnumer(){
         masary_Utilites utilit = new masary_Utilites(id_pos);
