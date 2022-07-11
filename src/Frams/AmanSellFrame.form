@@ -137,6 +137,9 @@
                 <StringItem index="3" value="Item 4"/>
               </StringArray>
             </Property>
+            <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="comb_to_account"/>
+            </Property>
           </Properties>
           <Events>
             <EventHandler event="itemStateChanged" listener="java.awt.event.ItemListener" parameters="java.awt.event.ItemEvent" handler="comb_recharge_typeItemStateChanged"/>
@@ -169,6 +172,9 @@
                 <StringItem index="3" value="Item 4"/>
               </StringArray>
             </Property>
+            <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="txt_value"/>
+            </Property>
           </Properties>
           <AuxValues>
             <AuxValue name="JavaCodeGenerator_TypeParameters" type="java.lang.String" value="&lt;String&gt;"/>
@@ -195,6 +201,9 @@
             </Property>
             <Property name="horizontalAlignment" type="int" value="0"/>
             <Property name="text" type="java.lang.String" value="0.00"/>
+            <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="txt_amount"/>
+            </Property>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel4">
@@ -218,6 +227,9 @@
             </Property>
             <Property name="horizontalAlignment" type="int" value="0"/>
             <Property name="text" type="java.lang.String" value="0.00"/>
+            <Property name="nextFocusableComponent" type="java.awt.Component" editor="org.netbeans.modules.form.ComponentChooserEditor">
+              <ComponentRef name="btsave"/>
+            </Property>
           </Properties>
         </Component>
         <Component class="javax.swing.JLabel" name="jLabel5">
@@ -237,7 +249,7 @@
         <Component class="javax.swing.JTextField" name="txt_note">
           <Properties>
             <Property name="horizontalAlignment" type="int" value="0"/>
-            <Property name="text" type="java.lang.String" value="&#x634;&#x62d;&#x646; &#x645;&#x627;&#x643;&#x64a;&#x646;&#x629; &#x645;&#x635;&#x627;&#x631;&#x64a;"/>
+            <Property name="text" type="java.lang.String" value="&#x634;&#x62d;&#x646; &#x645;&#x627;&#x643;&#x64a;&#x646;&#x629; &#x623;&#x645;&#x627;&#x646;"/>
           </Properties>
         </Component>
       </SubComponents>

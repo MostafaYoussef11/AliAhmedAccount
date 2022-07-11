@@ -51,9 +51,9 @@ public class chargingWalletFrame extends javax.swing.JFrame {
         titel = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        combPos = new javax.swing.JComboBox<String>();
+        combPos = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
-        combNumber = new javax.swing.JComboBox<String>();
+        combNumber = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
         txtprice = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
@@ -87,7 +87,7 @@ public class chargingWalletFrame extends javax.swing.JFrame {
         jLabel1.setText("المكنة");
         jLabel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        combPos.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        combPos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         combPos.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 combPosItemStateChanged(evt);
@@ -98,7 +98,7 @@ public class chargingWalletFrame extends javax.swing.JFrame {
         jLabel2.setText("المحفظة");
         jLabel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        combNumber.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        combNumber.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         combNumber.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 combNumberItemStateChanged(evt);
@@ -183,7 +183,15 @@ public class chargingWalletFrame extends javax.swing.JFrame {
             new String [] {
                 "المبلغ", "الرقم", "المكنة", "التاريخ", "م"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
 
         getContentPane().add(jScrollPane1);

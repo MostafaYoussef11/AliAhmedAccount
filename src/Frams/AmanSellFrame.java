@@ -70,9 +70,9 @@ public class AmanSellFrame extends javax.swing.JFrame {
         txt_title = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        comb_recharge_type = new javax.swing.JComboBox<String>();
+        comb_recharge_type = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
-        comb_to_account = new javax.swing.JComboBox<String>();
+        comb_to_account = new javax.swing.JComboBox<>();
         jLabel3 = new javax.swing.JLabel();
         txt_value = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
@@ -107,7 +107,8 @@ public class AmanSellFrame extends javax.swing.JFrame {
         jLabel1.setText("التوريد");
         jLabel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        comb_recharge_type.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comb_recharge_type.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comb_recharge_type.setNextFocusableComponent(comb_to_account);
         comb_recharge_type.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 comb_recharge_typeItemStateChanged(evt);
@@ -119,7 +120,8 @@ public class AmanSellFrame extends javax.swing.JFrame {
         jLabel2.setText("من حساب");
         jLabel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        comb_to_account.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comb_to_account.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comb_to_account.setNextFocusableComponent(txt_value);
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -129,6 +131,7 @@ public class AmanSellFrame extends javax.swing.JFrame {
         txt_value.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         txt_value.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txt_value.setText("0.00");
+        txt_value.setNextFocusableComponent(txt_amount);
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -138,6 +141,7 @@ public class AmanSellFrame extends javax.swing.JFrame {
         txt_amount.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         txt_amount.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txt_amount.setText("0.00");
+        txt_amount.setNextFocusableComponent(btsave);
 
         jLabel5.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -145,7 +149,7 @@ public class AmanSellFrame extends javax.swing.JFrame {
         jLabel5.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         txt_note.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txt_note.setText("شحن ماكينة مصاري");
+        txt_note.setText("شحن ماكينة أمان");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);

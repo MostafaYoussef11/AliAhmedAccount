@@ -5,44 +5,24 @@
  */
 package Frams;
 
-import Entity.CasherClass;
-import Entity.CheckCasher;
-import Entity.ClientPerson;
-import Entity.Items;
-import Entity.ItemsOnInvoice;
-import Entity.MasaryPay;
-import Entity.PosClass;
-import Entity.SalesInvoic;
-import Entity.masary_Utilites;
-import Entity.posPay;
-import Utilities.ConnectDB;
-import Utilities.MyCalculator;
-import Utilities.Tools;
-import com.sun.org.apache.bcel.internal.generic.AALOAD;
-import java.awt.ComponentOrientation;
+import Entity.*;
+import Utilities.*;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.Toolkit;
-import java.io.IOException;
-import java.util.Date;
-import java.util.Timer;
-import java.util.TimerTask;
-import java.util.Vector;
+import java.text.SimpleDateFormat;
+import java.util.*;
 import java.util.concurrent.ExecutionException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javafx.concurrent.Worker;
 import javax.swing.BorderFactory;
-import javax.swing.Icon;
 import javax.swing.ImageIcon;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.JWindow;
 import javax.swing.SwingWorker;
-import org.omg.CORBA.MARSHAL;
+
 
 
 /**
@@ -54,19 +34,27 @@ public class MainFrame extends javax.swing.JFrame {
     /**
      * Creates new form MainFrame
      */
-    Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
-    Font font = Tools.font(14f);
-    Thread thread;
+    private final Dimension dim = Toolkit.getDefaultToolkit().getScreenSize();
+    private final Font font = Tools.font(14f);
+    private Thread thread;
     private double cost , price;
     private int id_pos = 1;
+    private final  JWindow winCahse , winFastCashSend;
+    private final calcFrame cf = new calcFrame();
+    private final CounterFrame cuf = new CounterFrame(); 
+    private FastCashSendPanel c;
+    private final Timer timer;
+    // set Jframe variable 
+    private final ClintFrame cnt = new ClintFrame();
+    private final itemsFrame itemsFrame = new itemsFrame();
+    private final ReciptFrame reciptF = new ReciptFrame();
+    private final SuppliersFrame SuppliersF = new SuppliersFrame();
+    private final PaymentReciptFrame payRecipt = new PaymentReciptFrame();
+    private final purchaseInvoiceFrame purchfrm = new purchaseInvoiceFrame();
+    private final  RebortsFrame report = new RebortsFrame();
     
-    //CheckCasher cash ;
-     calcFrame cf = new calcFrame();
-     CounterFrame cuf = new CounterFrame(); 
-     CashTransfair c;
     public MainFrame() {
         initComponents();
-        
         background.setLocation(0, 0);
         background.setSize(dim);
         background.setPreferredSize(dim);
@@ -93,7 +81,6 @@ public class MainFrame extends javax.swing.JFrame {
         Receipts.setFont(font);
         pos.setLocation(x, 320);
         pos.setFont(font);
-        
         x = x-140;
         fees.setLocation(x, 40);
         fees.setFont(font);
@@ -101,9 +88,8 @@ public class MainFrame extends javax.swing.JFrame {
         loan.setFont(font);
         VCash.setLocation(x, 320);
         VCash.setFont(font);
-        
-        selePanal.setLocation(30, 40);
-        txtNowBalance.setLocation(10, dim.height - 170);
+        selePanal.setLocation(10, 40);
+        txtNowBalance.setBounds(10, dim.height - 180 , 390, 120);
         txtIdItems.setFocusable(true);
         txtNowBalance.setText(new CasherClass().getNowBalanceCasher());
         txtMasaryBalance.setText(new MasaryPay().getfirstBalance()+"");
@@ -112,8 +98,88 @@ public class MainFrame extends javax.swing.JFrame {
         txtvalue.setText("0");
         txtIdItems.requestFocus();
         Tools.txtNumberClient(txtNmber, this, 0, 0);
-        c = new CashTransfair(this,vf_cash);
+        winFastCashSend = new JWindow(this);
+        winCahse = new JWindow(this);
+        String info = "User Name : "+saveData.getUserName();
+        int x_info = -2;
+        int y_info = calc.getY() + calc.getHeight()+5;
+        int width_info = dim.width - x_info ;
+        Barpanel.setBounds(x_info, y_info, width_info  , 30);
+        Barpanel.setBorder(BorderFactory.createLoweredBevelBorder());
+        Barpanel.setOpaque(false);
+        txtinfoUser.setLocation(10, 0);
+        txtTimer.setLocation(Barpanel.getWidth() / 2, 0);
+        int x_timer = (dim.width / 2) - 80 ;
+        txtTimer.setBounds(x_timer, 0, 160, 30);
+        txtinfoUser.setText(info);
+        NotifcationClass notifcationClass = new NotifcationClass(this ,Butt_notification);
+        timer = new Timer();
+        timer.schedule(notifcationClass, 3000, 3000);
+        clockTime();
+        txtinformationPos.setBounds(Barpanel.getWidth() - 310 , 0, 300, 30);
+        informationPosAndCasher();
+        //System.out.println(" InfoUser  X :" + txtinfoUser.getX() +" info Y : " + txtinfoUser.getY()+ "Time x : " + txtTimer.getX());
     };
+    
+    private void clockTime(){
+        Timer timeclock = new Timer();
+        timeclock.schedule(new TimerTask() {
+            @Override
+            public void run() {
+                Date d = new Date();
+                SimpleDateFormat sdf = new SimpleDateFormat("hh:mm:ss");
+                SimpleDateFormat ss = new SimpleDateFormat("SS");
+                SimpleDateFormat sd = new SimpleDateFormat("YYYY-MM-dd");
+                String timenow = sdf.format(d);
+                String datenow = sd.format(d);
+                int x_user = Integer.parseInt(ss.format(d)) / 100;
+                txtTimer.setText(timenow);
+                txtDate.setText(datenow);
+                txtinfoUser.setLocation(x_user, x_user);
+            }
+        }, 10,10);
+    }
+    
+    private void informationPosAndCasher(){
+        
+        Timer info = new Timer();
+        info.schedule(new TimerTask() {
+            int idPos = 0;
+            String infoPos;
+            @Override
+            public void run() {
+                getinfo();
+            }
+            
+            private void getinfo(){
+                switch (idPos) {
+                    case 6:
+                        infoPos = "الرصيد في الجرد الاول : "+new CasherClass().getNowBalanceCasher();
+                        txtinformationPos.setText(infoPos);
+                        txtinformationPos.setIcon(new ImageIcon(getClass().getResource("/icons/cashier.png")));
+                        idPos = 0;
+                        break;
+                    case 0:
+                        infoPos = "الرصيد في جرد الثاني = " + new CasherClass().getBalanceCasherTwo();
+                        txtinformationPos.setText(infoPos);
+                        txtinformationPos.setIcon(new ImageIcon(getClass().getResource("/icons/safe-box.png")));
+                        idPos = 1;
+                        break;
+                    default:
+                        infoPos = "الرصيد في ماكينة  ";
+                        infoPos += ConnectDB.getIdFromName("SELECT name_pos As id FROM pos WHERE id_pos = " + idPos);
+                        infoPos += " = "+new posPay(idPos) {}.getfirstBalance() + "";
+                        txtinformationPos.setText(infoPos);
+                        txtinformationPos.setIcon(new ImageIcon(getClass().getResource("/icons/pos24.png")));
+                        idPos++;
+                        break;
+                }
+
+
+            }
+            
+        }, 1000,4000); 
+    }
     
     
     /**
@@ -158,6 +224,12 @@ public class MainFrame extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         vf_cash = new javax.swing.JLabel();
         txtNmber = new javax.swing.JTextField();
+        Butt_notification = new javax.swing.JLabel();
+        Barpanel = new javax.swing.JPanel();
+        txtinfoUser = new javax.swing.JLabel();
+        txtTimer = new javax.swing.JLabel();
+        txtinformationPos = new javax.swing.JLabel();
+        txtDate = new javax.swing.JLabel();
         background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -409,7 +481,7 @@ public class MainFrame extends javax.swing.JFrame {
         );
 
         getContentPane().add(selePanal);
-        selePanal.setBounds(30, 30, 230, 230);
+        selePanal.setBounds(10, 30, 230, 230);
 
         txtNowBalance.setFont(new java.awt.Font("Tahoma", 1, 48)); // NOI18N
         txtNowBalance.setForeground(new java.awt.Color(0, 0, 255));
@@ -417,7 +489,7 @@ public class MainFrame extends javax.swing.JFrame {
         txtNowBalance.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/deposit .png"))); // NOI18N
         txtNowBalance.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         txtNowBalance.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-        txtNowBalance.setIconTextGap(8);
+        txtNowBalance.setIconTextGap(30);
         txtNowBalance.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 txtNowBalanceMouseClicked(evt);
@@ -512,7 +584,7 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(calc);
-        calc.setBounds(400, 650, 64, 64);
+        calc.setBounds(400, 645, 64, 64);
 
         counter.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         counter.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/counter2.png"))); // NOI18N
@@ -527,7 +599,7 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(counter);
-        counter.setBounds(470, 650, 64, 64);
+        counter.setBounds(470, 645, 64, 64);
 
         card_10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         card_10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/card10.png"))); // NOI18N
@@ -541,7 +613,7 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(card_10);
-        card_10.setBounds(50, 425, 70, 70);
+        card_10.setBounds(10, 425, 70, 70);
 
         txtMasaryBalance.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         txtMasaryBalance.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -552,14 +624,14 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(txtMasaryBalance);
-        txtMasaryBalance.setBounds(50, 350, 205, 70);
+        txtMasaryBalance.setBounds(10, 350, 205, 70);
 
         logo.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         logo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/masary-logo.png"))); // NOI18N
         logo.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         logo.setPreferredSize(new java.awt.Dimension(200, 70));
         getContentPane().add(logo);
-        logo.setBounds(50, 275, 200, 70);
+        logo.setBounds(10, 275, 200, 70);
 
         comboNoteUtiltiy.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         comboNoteUtiltiy.addItemListener(new java.awt.event.ItemListener() {
@@ -568,7 +640,7 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(comboNoteUtiltiy);
-        comboNoteUtiltiy.setBounds(130, 425, 125, 32);
+        comboNoteUtiltiy.setBounds(90, 425, 125, 32);
 
         txtvalue.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
         txtvalue.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -580,20 +652,20 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(txtvalue);
-        txtvalue.setBounds(150, 500, 105, 35);
+        txtvalue.setBounds(115, 500, 100, 35);
 
         txtAmount.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
         txtAmount.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtAmount.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         txtAmount.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         getContentPane().add(txtAmount);
-        txtAmount.setBounds(150, 540, 105, 35);
+        txtAmount.setBounds(115, 540, 100, 35);
 
         txt_discount.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         txt_discount.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         txt_discount.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         getContentPane().add(txt_discount);
-        txt_discount.setBounds(50, 500, 98, 35);
+        txt_discount.setBounds(10, 500, 100, 35);
 
         jButton1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/save.png"))); // NOI18N
@@ -603,7 +675,7 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(jButton1);
-        jButton1.setBounds(50, 540, 95, 35);
+        jButton1.setBounds(10, 540, 100, 35);
 
         vf_cash.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         vf_cash.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/vf-cash.png"))); // NOI18N
@@ -613,13 +685,58 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(vf_cash);
-        vf_cash.setBounds(540, 650, 64, 64);
+        vf_cash.setBounds(540, 645, 64, 64);
 
         txtNmber.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         txtNmber.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtNmber.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         getContentPane().add(txtNmber);
-        txtNmber.setBounds(132, 460, 123, 35);
+        txtNmber.setBounds(90, 460, 125, 35);
+
+        Butt_notification.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        Butt_notification.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/bell.png"))); // NOI18N
+        getContentPane().add(Butt_notification);
+        Butt_notification.setBounds(610, 645, 64, 64);
+
+        Barpanel.setLayout(null);
+
+        txtinfoUser.setFont(new java.awt.Font("VIP Hala Bold", 0, 14)); // NOI18N
+        txtinfoUser.setForeground(new java.awt.Color(0, 0, 255));
+        txtinfoUser.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
+        txtinfoUser.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/account.png"))); // NOI18N
+        txtinfoUser.setIconTextGap(10);
+        Barpanel.add(txtinfoUser);
+        txtinfoUser.setBounds(10, 0, 240, 30);
+
+        txtTimer.setFont(new java.awt.Font("Felix Titling", 1, 18)); // NOI18N
+        txtTimer.setForeground(new java.awt.Color(0, 51, 255));
+        txtTimer.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        txtTimer.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/clock.png"))); // NOI18N
+        txtTimer.setText("00:00:00");
+        txtTimer.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        txtTimer.setIconTextGap(20);
+        Barpanel.add(txtTimer);
+        txtTimer.setBounds(593, 0, 130, 30);
+
+        txtinformationPos.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        txtinformationPos.setForeground(new java.awt.Color(0, 51, 255));
+        txtinformationPos.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        txtinformationPos.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        txtinformationPos.setIconTextGap(10);
+        Barpanel.add(txtinformationPos);
+        txtinformationPos.setBounds(1020, 0, 250, 30);
+
+        txtDate.setFont(new java.awt.Font("Felix Titling", 1, 18)); // NOI18N
+        txtDate.setForeground(new java.awt.Color(0, 51, 255));
+        txtDate.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        txtDate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/calendar.png"))); // NOI18N
+        txtDate.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        txtDate.setIconTextGap(10);
+        Barpanel.add(txtDate);
+        txtDate.setBounds(727, 0, 250, 30);
+
+        getContentPane().add(Barpanel);
+        Barpanel.setBounds(-5, 760, 1270, 30);
 
         background.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         background.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -630,24 +747,27 @@ public class MainFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void clientMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clientMouseClicked
-        // TODO add your handling code here:
-        clickPanel(client);
-        ClintFrame c = new ClintFrame();
-        Tools.openJFram(c, "العملاء");
+        clickPanel(client);    
+        if(cnt.isVisible())
+        {
+            cnt.show();
+        }else{
+            Tools.openJFram(cnt, "العملاء" , "consumer");
+        }
     }//GEN-LAST:event_clientMouseClicked
 
     private void clientMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_clientMouseExited
-        // TODO add your handling code here:
+
         exitPanel(client);
     }//GEN-LAST:event_clientMouseExited
 
     private void itemsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_itemsMouseClicked
-        // TODO add your handling code here:
         clickPanel(items);
-        itemsFrame items = new itemsFrame();
-        Tools.openJFram(items, "الاصناف");
-        
-        
+        if(itemsFrame.isVisible()){
+            itemsFrame.show();
+        }else{
+            Tools.openJFram(itemsFrame, "الاصناف" , "trolley");
+        } 
     }//GEN-LAST:event_itemsMouseClicked
 
     private void itemsMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_itemsMouseExited
@@ -656,22 +776,26 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_itemsMouseExited
 
     private void ReceiptsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ReceiptsMouseClicked
-        // TODO add your handling code here:
-        clickPanel(Receipts);
-        ReciptFrame r = new ReciptFrame();
-        Tools.openJFram(r, "استلام نقدية");
+         clickPanel(Receipts);
+         if(reciptF.isVisible()){
+                reciptF.show();
+         }else{
+             Tools.openJFram(reciptF, "استلام نقدية","receipt");
+         }
     }//GEN-LAST:event_ReceiptsMouseClicked
 
     private void ReceiptsMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ReceiptsMouseExited
-        // TODO add your handling code here:
         exitPanel(Receipts);
     }//GEN-LAST:event_ReceiptsMouseExited
 
     private void suppliersMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_suppliersMouseClicked
         // TODO add your handling code here:
         clickPanel(suppliers);
-        SuppliersFrame sf = new SuppliersFrame();
-        Tools.openJFram(sf, "الموردين");
+        if(SuppliersF.isVisible()){
+            SuppliersF.show();
+        }else{
+            Tools.openJFram(SuppliersF, "الموردين","boss");
+        }
     }//GEN-LAST:event_suppliersMouseClicked
 
     private void suppliersMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_suppliersMouseExited
@@ -680,9 +804,11 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_suppliersMouseExited
 
     private void PaymentsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PaymentsMouseClicked
-        // TODO add your handling code here:
-        PaymentReciptFrame payRecipt = new PaymentReciptFrame();
-        Tools.openJFram(payRecipt, "ايصال دفع نقدية");
+        if(payRecipt.isVisible()){
+            payRecipt.setVisible(true);
+        }else{
+            Tools.openJFram(payRecipt, "ايصال دفع نقدية","receipt_1");
+        }  
     }//GEN-LAST:event_PaymentsMouseClicked
 
     private void PaymentsMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PaymentsMouseExited
@@ -691,24 +817,27 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_PaymentsMouseExited
 
     private void PurchasesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PurchasesMouseClicked
-        // TODO add your handling code here:
-        purchaseInvoiceFrame purchfrm = new purchaseInvoiceFrame();
-        Tools.openJFram(purchfrm, "فواتير المشتريات");
+        if(purchfrm.isVisible()){
+            purchfrm.show();
+        }else{
+            Tools.openJFram(purchfrm, "فواتير المشتريات" , "procurement");       
+        }
     }//GEN-LAST:event_PurchasesMouseClicked
 
     private void PurchasesMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_PurchasesMouseExited
-        // TODO add your handling code here:
         exitPanel(Purchases);
     }//GEN-LAST:event_PurchasesMouseExited
 
     private void ReportsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ReportsMouseClicked
-        // TODO add your handling code here:
-        RebortsFrame rebort = new RebortsFrame();
-        Tools.openJFram(rebort, "التقارير");
+       if(report.isVisible()){
+           report.show();
+       }else{
+         Tools.openJFram(report, "التقارير" , "business-report_1");
+       }
+        
     }//GEN-LAST:event_ReportsMouseClicked
 
     private void ReportsMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ReportsMouseExited
-        // TODO add your handling code here:
         exitPanel(Reports);
     }//GEN-LAST:event_ReportsMouseExited
 
@@ -801,9 +930,20 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void txtNowBalanceMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtNowBalanceMouseClicked
         // TODO add your handling code here:
-        clickPanel(txtNowBalance);
-        txtNowBalance.setText(new CasherClass().getNowBalanceCasher());
-         
+        clickPanel(txtNowBalance); 
+        if(winCahse.isVisible()){
+             winCahse.setVisible(false);
+        }else{
+            CasherTowPanel cash = new CasherTowPanel();
+            cash.setVisible(true);
+            winCahse.setSize(475, 165);
+            winCahse.setOpacity(0.75f);
+            winCahse.setLocation(400 , 450);
+            winCahse.getContentPane().add(cash);
+            winCahse.repaint();
+            winCahse.setVisible(true);       
+        }
+        txtNowBalance.setText(new CasherClass().getNowBalanceCasher());  
     }//GEN-LAST:event_txtNowBalanceMouseClicked
 
     private void txtNowBalanceMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtNowBalanceMouseExited
@@ -825,14 +965,20 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void feesMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_feesMouseClicked
         // TODO add your handling code here:
+        clickPanel(fees);
+        expensFrame cf = new expensFrame();
+        Tools.openJFram(cf, "المصروفات","expense_64");
     }//GEN-LAST:event_feesMouseClicked
 
     private void feesMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_feesMouseExited
         // TODO add your handling code here:
+        exitPanel(fees);
     }//GEN-LAST:event_feesMouseExited
 
     private void loanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_loanMouseClicked
         // TODO add your handling code here:
+        MenusolfandOtherFrame solfa = new MenusolfandOtherFrame();
+        Tools.openJFram(solfa , "سلف و عهد" ,"payment");
     }//GEN-LAST:event_loanMouseClicked
 
     private void loanMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_loanMouseExited
@@ -937,7 +1083,7 @@ public class MainFrame extends javax.swing.JFrame {
         double casher = Double.parseDouble(txtNowBalance.getText());
         
        if(!(cuf.isVisible())){
-           cuf = new CounterFrame();
+//           cuf = new CounterFrame();
            cuf.setCasher(casher);
            Tools.openJFram(cuf, "عد الفلوس");          
        }else{
@@ -1019,9 +1165,25 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_txtMasaryBalanceMouseClicked
 
     private void vf_cashMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_vf_cashMouseClicked
-        // TODO add your handling code here:
+
+       if(winFastCashSend.isVisible()){
+             winFastCashSend.setVisible(false);
+             //winFastCashSend = new JWindow(this);
+        }else{
+            FastCashSendPanel cash = new FastCashSendPanel();
+            cash.setVisible(true);
+            winFastCashSend.setSize(475, 125);
+            winFastCashSend.setOpacity(0.75f);
+            int x = vf_cash.getX() + vf_cash.getWidth() ;
+            int y = vf_cash.getY() - vf_cash.getHeight();
+            winFastCashSend.setLocation(x, y);
+            winFastCashSend.getContentPane().add(cash);
+            winFastCashSend.repaint();
+            winFastCashSend.setVisible(true);       
+        }
+        txtNowBalance.setText(new CasherClass().getNowBalanceCasher());  
+
         
-        c.ShowPopUpWindow();
     }//GEN-LAST:event_vf_cashMouseClicked
     
     private void settxtnumer(){
@@ -1094,6 +1256,8 @@ public class MainFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel Barpanel;
+    private javax.swing.JLabel Butt_notification;
     private javax.swing.JLabel Payments;
     private javax.swing.JLabel Purchases;
     private javax.swing.JLabel Receipts;
@@ -1118,13 +1282,17 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JPanel selePanal;
     private javax.swing.JLabel suppliers;
     private javax.swing.JFormattedTextField txtAmount;
+    private javax.swing.JLabel txtDate;
     private javax.swing.JTextField txtIdItems;
     private javax.swing.JLabel txtMasaryBalance;
     private javax.swing.JTextField txtNmber;
     private javax.swing.JLabel txtNowBalance;
     private javax.swing.JTextField txtPrice;
     private javax.swing.JTextField txtQut;
+    private javax.swing.JLabel txtTimer;
     private javax.swing.JLabel txt_discount;
+    private javax.swing.JLabel txtinfoUser;
+    private javax.swing.JLabel txtinformationPos;
     private javax.swing.JLabel txtnameItem;
     private javax.swing.JFormattedTextField txtvalue;
     private javax.swing.JLabel vf_cash;

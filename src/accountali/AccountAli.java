@@ -31,15 +31,7 @@ public class AccountAli {
 
     public static void main(String[] args) {
         Login l = new Login();
-        l.setLocationRelativeTo(null);
-        l.setVisible(true);
-//        SwingUtilities.invokeLater(new Runnable() {
-//            @Override
-//            public void run() {
-//                new AccountAli();
-//            }
-//        });
-        
+        Tools.openJFram(l, "تسجيل الدخول", "account");
     }
     
 }

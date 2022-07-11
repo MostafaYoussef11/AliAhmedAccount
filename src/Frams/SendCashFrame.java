@@ -6,20 +6,15 @@
 package Frams;
 
 import Entity.ClientPerson;
+import Entity.Send_receiveCash;
 import Entity.VFCashClass;
-import Utilities.AutoSuggestor;
-import Utilities.Person;
 import Utilities.Tools;
-import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
-import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.Formatter;
-import javax.swing.SwingUtilities;
+
 
 /**
  *
@@ -35,6 +30,7 @@ public class SendCashFrame extends javax.swing.JFrame {
     private VFCashClass vf;
     private ClientPerson client;
     private double balance , cost , value , amount , discount_from_balance;
+    Send_receiveCash send;// = new Send_receiveCash();
     public SendCashFrame() {
         initComponents();
         setSize(715, 690);
@@ -361,16 +357,36 @@ public class SendCashFrame extends javax.swing.JFrame {
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "المبلغ", "القيمة", "المحفظة", "الوقت", "التاريخ", "م"
             }
-        ));
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Double.class, java.lang.Double.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Integer.class
+            };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jScrollPane1.setViewportView(jTable1);
+        if (jTable1.getColumnModel().getColumnCount() > 0) {
+            jTable1.getColumnModel().getColumn(0).setResizable(false);
+            jTable1.getColumnModel().getColumn(1).setResizable(false);
+            jTable1.getColumnModel().getColumn(2).setResizable(false);
+            jTable1.getColumnModel().getColumn(3).setResizable(false);
+            jTable1.getColumnModel().getColumn(4).setResizable(false);
+            jTable1.getColumnModel().getColumn(5).setResizable(false);
+        }
 
         getContentPane().add(jScrollPane1);
         jScrollPane1.setBounds(10, 266, 680, 310);
@@ -390,7 +406,26 @@ public class SendCashFrame extends javax.swing.JFrame {
 
     private void btsaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btsaveActionPerformed
         // TODO add your handling code here:
-     
+        balance = Double.parseDouble(txtBalance.getText());
+        discount_from_balance = Double.parseDouble(txt_discont.getText());
+        if(discount_from_balance > balance){
+            Tools.showErrorMsg("رصيد المحفظة لا يكفي");
+        }else{
+            
+           amount = Double.parseDouble(txt_amount.getText());
+           String Number_VF = combVFNumber.getSelectedItem().toString();
+           String Number_client = txtNumberClient.getText();
+           String name_client = comboClient.getSelectedItem().toString();
+           send.SetDataSend(discount_from_balance, amount, Number_VF, Number_client, name_client);
+           if(send.SaveSendTransaction()){
+               Tools.showInfoMsg("تم الاسال", "تحويل كاش");
+               setNewTransSend();
+           }else{
+               Tools.showErrorMsg("خطأ في الارسال");
+           }       
+        
+        }
+
     }//GEN-LAST:event_btsaveActionPerformed
 
     private void bteditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bteditActionPerformed
@@ -417,14 +452,22 @@ public class SendCashFrame extends javax.swing.JFrame {
     private void txt_valuKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_valuKeyReleased
         // TODO add your handling code here:
         value = Double.parseDouble(txt_valu.getText());
-        cost = value * 0.005;
-        if(cost > 10){
-            cost = 10;
+        String NumberClient = txtNumberClient.getText();
+        String ClientNetwork = NumberClient.substring(0, 3);
+        String NumberVF = combVFNumber.getSelectedItem().toString();
+        String Network = NumberVF.substring(0, 3);
+        if(ClientNetwork.equals(Network)){
+            cost = 1;
+        }else{
+            cost = value * 0.005;
+            if(cost > 10){
+                cost = 10;
+            }
         }
         txt_cost.setText(cost+"");
         discount_from_balance = value + cost;
         txt_discont.setText(discount_from_balance+"");
-        amount = discount_from_balance + (discount_from_balance*0.015);
+        amount = discount_from_balance + (discount_from_balance*0.010);
         DecimalFormat format = new DecimalFormat("0");
         String st_amount = format.format(amount);
         txt_amount.setText(st_amount);
@@ -499,6 +542,7 @@ public class SendCashFrame extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void setNewTransSend(){
+        send = new Send_receiveCash();
         vf.fillCombo(combVFNumber);
         balance = vf.getNowBalance(combVFNumber.getSelectedItem().toString());
         txtBalance.setText(balance+"");
@@ -509,7 +553,7 @@ public class SendCashFrame extends javax.swing.JFrame {
         txt_cost.setText("");
         txt_amount.setText("");
         Tools.txtNumberClient(txtNumberClient, this ,680 ,222);
-        
+        send.fillTableSend(jTable1);
     }
 
 }

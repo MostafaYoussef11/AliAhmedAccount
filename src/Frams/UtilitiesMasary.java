@@ -59,7 +59,7 @@ public class UtilitiesMasary extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jLabel2 = new javax.swing.JLabel();
-        combocategoryutilites = new javax.swing.JComboBox<String>();
+        combocategoryutilites = new javax.swing.JComboBox<>();
         jLabel1 = new javax.swing.JLabel();
         txtprice = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
@@ -201,7 +201,15 @@ public class UtilitiesMasary extends javax.swing.JFrame {
             new String [] {
                 "التكلفة", "البيان", "الخدمة", "م"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTable1MouseClicked(evt);
@@ -214,7 +222,7 @@ public class UtilitiesMasary extends javax.swing.JFrame {
         jLabel2.setText("الخدمة");
         jLabel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        combocategoryutilites.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        combocategoryutilites.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);

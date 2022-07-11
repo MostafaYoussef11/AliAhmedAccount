@@ -7,24 +7,16 @@ package Entity;
 
 import Utilities.ConnectDB;
 import Utilities.Tools;
-//import com.mysql.jdbc.PreparedStatement;
-//import com.mysql.jdbc.Statement;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.DefaultListModel;
-import javax.swing.JList;
 import javax.swing.JTable;
-import javax.swing.ListModel;
-import javax.swing.event.ListDataListener;
-import java.util.*;
+
 
 /**
  *
@@ -110,17 +102,13 @@ public abstract class posPay {
          if(rst.next()){
             int id_masary_pay = rst.getInt(1);
             if(rowAffact == 1){
-                 String sql_insert_casher = "INSERT INTO `casher` (`Debit`, `note`,`id_masary_pay`) VALUES (?,?,?)";
-                 pstmt = (PreparedStatement) con.prepareStatement(sql_insert_casher);
-                 pstmt.setDouble(1,amount_masary_pay);
-                 pstmt.setString(2, utility_masary);
-                 pstmt.setInt(3, id_masary_pay);
-                 if(pstmt.executeUpdate() == 1){
+                 int rowAffectCasher = new CasherClass().SavedCasherTransaction(TypeCasherTransaction.PosPay, amount_masary_pay, utility_masary, id_masary_pay);
+                 if(rowAffectCasher == 1){
                     if(is_requer_phone_num){
                          System.out.println("Entity.posPay.SaveClients()" + "  "+phone);
                         String sql_inser_num = "INSERT INTO `phone_numbers` (`numbers`) VALUES(?)";
                         PreparedStatement pst = con.prepareStatement(sql_inser_num);
-                        pst.setString(1, phone);
+                        pst.setString(1, phone.trim());
                         pst.executeUpdate();
                     }
                     con.commit();
@@ -182,7 +170,7 @@ public abstract class posPay {
                         System.out.println("Entity.posPay.SaveClients()" + "  "+phone);
                         String sql_inser_num = "INSERT INTO `phone_numbers` (`numbers`) VALUES(?)";
                         PreparedStatement pst = con.prepareStatement(sql_inser_num);
-                        pst.setString(1, phone);
+                        pst.setString(1, phone.trim());
                         pst.executeUpdate();
                     }
                     con.commit();
@@ -246,21 +234,9 @@ public boolean SaveVFCash(){
                 pstmt.setInt(5, id_masary_pay);
 
                 if(pstmt.executeUpdate() == 1){
-                    double nBalance = new VFCashClass().getNowBalance(phone);
-                    String sqlupdate = "UPDATE `vf_cash` SET `now_balance` = ? WHERE `vf_cash`.`id_VF_cash` = ?";
-                    pstmt = con.prepareStatement(sqlupdate);                    
-                    pstmt.setDouble(1, nBalance);
-                    pstmt.setInt(2, id_VF_cash);
-                    int saved = pstmt.executeUpdate();
-                    if(saved == 1){
                         con.commit();
                         con.close();
-                        isSave =true;
-                    }else{
-                        Tools.showErrorMsg("no ubdate");
-                    }
-                    
-                
+                        isSave =true; 
                 }
             }
      }
@@ -291,13 +267,13 @@ public boolean SaveVFCash(){
             pay = Double.parseDouble(sum_pay);
         } else {
             pay = 0;
-            System.out.print("pay = null");
+//            System.out.print("pay = null");
         }
         if(sum_sell != null) {
             sell = Double.parseDouble(sum_sell);
         } else {
             sell = 0;
-            System.out.print("sell = null");
+//            System.out.print("sell = null");
         }
         firstbalance = sell - pay;
         DecimalFormat format = new DecimalFormat("0.00");

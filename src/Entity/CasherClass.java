@@ -7,12 +7,15 @@ package Entity;
 
 import Utilities.ConnectDB;
 import Utilities.Tools;
+import Utilities.saveData;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.DecimalFormat;
 import java.text.NumberFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 /**
@@ -21,7 +24,7 @@ import java.text.NumberFormat;
  */
 public class CasherClass {
     private String TableName = "casher";
-    private Connection con;
+    private Connection con , conn;
     private PreparedStatement pstm;
     
   public String getNoteFromIdPaymentRecipt(String id_PaymentRecipt){
@@ -72,7 +75,7 @@ public class CasherClass {
           //finesh the day rum event finally Day 
           String sql_finaly_day = "INSERT INTO `finallyday`( `dateFinally`, `oldBalance`, `totalimport`,"
                   + " `totalexport`,`time_insert` ) VALUES( CURRENT_DATE(),"
-                  + "( SELECT f.newbalance FROM finallyday AS f WHERE f.dateFinally = CURRENT_DATE() - INTERVAL 1 DAY)"
+                  + "IFNULL(( SELECT f.newbalance FROM finallyday AS f WHERE f.dateFinally = CURRENT_DATE() - INTERVAL 1 DAY),0)"
                   + ", ( SELECT COALESCE(SUM(c.Debit), 0) FROM casher AS c WHERE c.date_casher = CURRENT_DATE()),"
                   + " ( SELECT COALESCE(SUM(c.Creditor), 0) FROM casher AS c WHERE c.date_casher = CURRENT_DATE())"
                   + ",current_timestamp())"; 
@@ -89,4 +92,118 @@ public class CasherClass {
       
       return " " + nbalance;
   }
+  
+  
+  public int SavedCasherTransaction(TypeCasherTransaction type , double amount , String note , int id){
+      int rowAffect = 0;
+      String sql_insert_casher = "";
+      switch(type){
+          case PosPay:
+              sql_insert_casher = "INSERT INTO `casher` (`Debit`, `note`,`id_users`, `id_masary_pay`) VALUES (?,?,?,?)";
+              break;
+          case PosSell:
+              sql_insert_casher = "INSERT INTO `casher` (`Creditor`, `note`,`id_users`,`id_masary_sell`) VALUES (?,?,?,?)";
+              break;
+          case PaymentReceipt:
+              sql_insert_casher = "INSERT INTO `casher` (`Creditor`, `note`,`id_users`,`id_PaymentReceipt`) VALUES (?,?,?,?)";
+              break;
+          case Receipt :
+              sql_insert_casher = "INSERT INTO `casher` (`Debit`, `note`,`id_users`,`id_Receipt`) VALUES (?,?,?,?)";
+              break;
+          case PurchaseInvoice:
+              sql_insert_casher = "INSERT INTO `casher` (`Creditor`, `note`,`id_users`,`id_purchaseInvoice`) VALUES (?,?,?,?)";
+              break;
+          case SalesInvoic:
+              sql_insert_casher = "INSERT INTO `casher` (`Debit`, `note`,`id_users`,`id_salesInvoic`) VALUES (?,?,?,?)";
+              break; 
+          case Send_VF:
+               sql_insert_casher = "INSERT INTO `casher` (`Debit`, `note`,`id_users`,`id_Send_Receive`) VALUES (?,?,?,?)";
+              break; 
+          case Receive_VF:
+              sql_insert_casher = "INSERT INTO `casher` (`Creditor`, `note`,`id_users`,`id_Send_Receive`) VALUES (?,?,?,?)";
+              break;  
+          case Fees:
+              sql_insert_casher = "INSERT INTO `casher` (`Creditor`, `note`,`id_users`,`id_fees`) VALUES (?,?,?,?)";
+              break;  
+          case CasherTwoCredit:
+              sql_insert_casher = "INSERT INTO `casher` (`Creditor`, `note`,`id_users`) VALUES (?,?,?)";
+              break; 
+          case CasherTwoDebit:
+               sql_insert_casher = "INSERT INTO `casher` (`Debit`, `note`,`id_users`) VALUES (?,?,?,?)";
+              break; 
+          case Solfa:
+              sql_insert_casher = "INSERT INTO `casher` (`Debit`, `note`,`id_users`,`id_Solf`) VALUES (?,?,?,?)";
+              break; 
+      }
+      try{
+          con = ConnectDB.getCon();
+          pstm = con.prepareStatement(sql_insert_casher);
+          pstm.setDouble(1, amount);
+          switch (type) {
+              case CasherTwoCredit:
+                  pstm.setString(2, note);
+                  pstm.setInt(3, saveData.getIdUser());
+                  break;
+              case CasherTwoDebit:
+                  pstm.setString(2, note);
+                  pstm.setInt(3, saveData.getIdUser());
+                  break;
+              default:
+                  pstm.setString(2, note);
+                  pstm.setInt(3, saveData.getIdUser());
+                  pstm.setInt(4, id);
+                  break;
+          }
+          rowAffect = pstm.executeUpdate();
+      } catch (SQLException ex) {
+              Logger.getLogger(CasherClass.class.getName()).log(Level.SEVERE, null, ex);
+      }
+      return rowAffect;
+  
+  }
+ public double getBalanceCasherTwo(){
+     double BalanceCasher;
+     BalanceCasher = 0.00;
+     String sql = "Select Balance as id from cashertwobalance";
+     String balance = ConnectDB.getIdFromName(sql);
+     if(!(balance.equals(""))){
+        BalanceCasher = Double.parseDouble(balance);
+     }
+     return BalanceCasher;
+ } 
+  
+  
+ public boolean SaveTransactionBetweenCasher(double amount , TypeCasherTransaction type){
+     boolean isSave = false;
+     int  rowCahserAffect = 0;
+     String sql_insert = "";
+     try{
+         conn = ConnectDB.getCon();
+         conn.setAutoCommit(false);
+         switch(type){
+             case CasherTwoCredit:
+                 rowCahserAffect = SavedCasherTransaction(type, amount, "ترحيل الي جرد الثاني", 0);
+                 sql_insert = "INSERT INTO `cashertwo` (`Debit`) VALUES (?)";
+                 break;
+             case CasherTwoDebit:
+                 rowCahserAffect = SavedCasherTransaction(type, amount, "سحب من جرد الثاني", 0);
+                 sql_insert = "INSERT INTO `cashertwo` (`Creditor`) VALUES (?)";
+                 break;                
+         }
+         PreparedStatement _pstm = conn.prepareStatement(sql_insert);
+         _pstm.setDouble(1, amount);
+         
+         if(rowCahserAffect == 1){
+             int rowSave = _pstm.executeUpdate();
+             if(rowSave == 1){
+                conn.commit();
+                conn.close();
+                isSave = true;
+             } 
+         }
+     }  catch (SQLException ex) {
+             Logger.getLogger(CasherClass.class.getName()).log(Level.SEVERE, null, ex);
+     }
+     return isSave;
+ }
 }

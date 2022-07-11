@@ -220,10 +220,14 @@ public class menuCashFrame extends javax.swing.JFrame {
 
     private void ReceiveMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ReceiveMouseClicked
         // TODO add your handling code here:
+        clickPanel(Receive);
+        RecieveFrame recieve = new RecieveFrame();
+        Tools.openJFram(recieve, "استقبال أموال");
     }//GEN-LAST:event_ReceiveMouseClicked
 
     private void ReceiveMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ReceiveMouseExited
         // TODO add your handling code here:
+        exitPanel(Receive);
     }//GEN-LAST:event_ReceiveMouseExited
 
     private void cridetAtmMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cridetAtmMouseClicked

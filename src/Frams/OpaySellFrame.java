@@ -137,7 +137,7 @@ public class OpaySellFrame extends javax.swing.JFrame {
         jLabel5.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         txt_note.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txt_note.setText("شحن ماكينة مصاري");
+        txt_note.setText("شحن ماكينة OPay");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);

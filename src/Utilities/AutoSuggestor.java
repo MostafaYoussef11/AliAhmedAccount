@@ -310,7 +310,7 @@ public class AutoSuggestor {
         autoSuggestionPopUpWindow.setMinimumSize(new Dimension(textField.getWidth(), 35));
         autoSuggestionPopUpWindow.revalidate();
         autoSuggestionPopUpWindow.repaint();
-
+        System.out.println("x = " + windowX +" y : " + windowY);
     }
 
     public final void setDictionary(ArrayList<String> words) {

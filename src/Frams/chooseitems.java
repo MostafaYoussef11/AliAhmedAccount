@@ -115,11 +115,12 @@ public class chooseitems extends javax.swing.JFrame {
         // TODO add your handling code here:
         String name_item = jComboBox1.getSelectedItem().toString();
         String id_item_str = item.getIdItemsFromName(name_item);
-        int id_items = Integer.parseInt(id_item_str);
+        //int id_items = Integer.parseInt(id_item_str);
         String sql = "SELECT * FROM `calcbalanceitems` where id = $P{id_items}";
         InputStream stream = getClass().getResourceAsStream("/Reborts/oneItemReport.jrxml");
         HashMap para = new HashMap();
-        para.put("id_items", id_items);
+        para.put("id_items", id_item_str);
+//        para.put("id_items", id_items_str);
         Tools.Printer(sql, stream, para);
     }//GEN-LAST:event_jButton1ActionPerformed
 

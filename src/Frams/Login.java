@@ -10,11 +10,9 @@ package Frams;
 import Utilities.ConnectDB;
 import Utilities.Tools;
 import java.awt.Color;
-import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
-import javax.swing.ImageIcon;
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
+
 
 
 /**
@@ -28,10 +26,9 @@ public class Login extends javax.swing.JFrame {
      */
     @SuppressWarnings("OverridableMethodCallInConstructor")
     public Login() {
-        setUndecorated(true);
+        super.setUndecorated(true);
         initComponents();
-   //     setIconImage(new ImageIcon(Toolkit.getDefaultToolkit().getClass().getResource("/iconApp/laptop.png")).getImage());
-        setBackground(new Color(0.0f, 0.0f, 0.0f, 0.05f));
+        setBackground(new Color(0.0f, 0.0f, 0.0f, 0.02f));
     }
     public static String getServer(){
          
@@ -144,10 +141,8 @@ public class Login extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        // TODO add your handling code here:
         dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
-    //public static String dt,usrname;
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         CheckUserAndPass();
     }//GEN-LAST:event_jButton1ActionPerformed
@@ -161,7 +156,7 @@ public class Login extends javax.swing.JFrame {
 
     private void jButton1KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jButton1KeyPressed
         // TODO add your handling code here:
-                if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
             CheckUserAndPass();
         }
     }//GEN-LAST:event_jButton1KeyPressed
@@ -222,7 +217,6 @@ public class Login extends javax.swing.JFrame {
            Tools.showErrorMsg("اسم المستخدم أو كلمة المرور غير مكتوب");
         }else{
             if(ConnectDB.chakeusername(user, passwod)){
-                 //Tools.showInfoMsg("تم تسجيل الدخول", user);
                 MainFrame mf = new MainFrame();
                 mf.setExtendedState(JFrame.MAXIMIZED_BOTH);
                 String nameIcon = "laptop";
@@ -231,6 +225,7 @@ public class Login extends javax.swing.JFrame {
                 dispose();
             }else{
                 Tools.showErrorMsg("اسم المستخدم أو كلمة السر غير صحيح");
+                
             }
         
         }

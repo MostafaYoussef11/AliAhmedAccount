@@ -99,7 +99,7 @@ public class itemsFrame extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
-        ComboNameItems = new javax.swing.JComboBox<String>();
+        ComboNameItems = new javax.swing.JComboBox<>();
         jLabel10 = new javax.swing.JLabel();
         txtDate = new com.toedter.calendar.JDateChooser();
         jPanel5 = new javax.swing.JPanel();
@@ -233,7 +233,15 @@ public class itemsFrame extends javax.swing.JFrame {
             new String [] {
                 "القيمة", "الصغري", "الكبري", "id"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         jTable1.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTable1MouseClicked(evt);
@@ -610,7 +618,7 @@ public class itemsFrame extends javax.swing.JFrame {
         jLabel9.setText("اسم الصنف");
         jLabel9.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        ComboNameItems.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        ComboNameItems.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         ComboNameItems.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 ComboNameItemsItemStateChanged(evt);

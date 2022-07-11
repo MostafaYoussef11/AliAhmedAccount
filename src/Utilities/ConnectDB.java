@@ -46,8 +46,10 @@ public class ConnectDB {
       SetConnection();
       return con;
   }
+ 
   public static boolean chakeusername(String username, String passwod){
       boolean isTrue = false;
+      int idUser = 0;
       try{
           SetConnection();
           stmt = con.createStatement();
@@ -55,7 +57,9 @@ public class ConnectDB {
           ResultSet rst = stmt.executeQuery(sql);
           if(rst.next()){
               isTrue = true;
+              idUser = rst.getInt(1);
           }
+          saveData.SetSaveData(idUser, username);
           con.close();
           return isTrue;
       }catch(SQLException ex){
@@ -206,8 +210,9 @@ public class ConnectDB {
        }
    }
  public static String getIdFromName(String sql){
-       try{
-           String id = "";
+     String id = "";
+     try{
+           
            SetConnection();
            stmt = (Statement) con.createStatement();
            ResultSet rst = stmt.executeQuery(sql);
@@ -215,12 +220,11 @@ public class ConnectDB {
                id = rst.getString("id");
            }
            con.close();
-           return id;
-       
        }catch(SQLException ex){
           Logger.getLogger("getIdFromName").log(Level.SEVERE, null, ex);
-           return "";
+           id = "";
        }
+     return id;
    
    }   
   public static String getIdFrmName(String tablename , String name){

@@ -91,19 +91,19 @@ public class BeepayFrame extends javax.swing.JFrame {
 
         txtPanal = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        comUtility = new javax.swing.JComboBox<String>();
+        comUtility = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         txtCount = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        combClient = new javax.swing.JComboBox<String>();
+        combClient = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
         txtdiscount = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
         txtbalance = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
         txtAmount = new javax.swing.JTextField();
-        combnote = new javax.swing.JComboBox<String>();
+        combnote = new javax.swing.JComboBox<>();
         lb_phone = new javax.swing.JLabel();
         txtPhone = new javax.swing.JTextField();
         title = new javax.swing.JLabel();
@@ -133,7 +133,7 @@ public class BeepayFrame extends javax.swing.JFrame {
         txtPanal.add(jLabel1);
         jLabel1.setBounds(725, 13, 100, 35);
 
-        comUtility.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comUtility.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         comUtility.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 comUtilityItemStateChanged(evt);
@@ -174,7 +174,7 @@ public class BeepayFrame extends javax.swing.JFrame {
         txtPanal.add(jLabel4);
         jLabel4.setBounds(725, 55, 100, 35);
 
-        combClient.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        combClient.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         txtPanal.add(combClient);
         combClient.setBounds(560, 55, 160, 35);
 
@@ -216,7 +216,7 @@ public class BeepayFrame extends javax.swing.JFrame {
         txtPanal.add(txtAmount);
         txtAmount.setBounds(560, 95, 160, 35);
 
-        combnote.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        combnote.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         combnote.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 combnoteItemStateChanged(evt);
@@ -256,9 +256,16 @@ public class BeepayFrame extends javax.swing.JFrame {
             Class[] types = new Class [] {
                 java.lang.Double.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
             };
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false, false, false, false, false, false
+            };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
+            }
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
             }
         });
         jScrollPane1.setViewportView(jTable1);
