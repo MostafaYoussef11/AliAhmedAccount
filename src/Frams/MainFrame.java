@@ -94,7 +94,7 @@ public class MainFrame extends javax.swing.JFrame {
         txtNowBalance.setText(new CasherClass().getNowBalanceCasher());
         txtMasaryBalance.setText(new MasaryPay().getfirstBalance()+"");
         new masary_Utilites(1).fillComboUtilites(comboNoteUtiltiy, "شحن");
-        settxtnumer();
+        //settxtnumer();
         txtvalue.setText("0");
         txtIdItems.requestFocus();
         Tools.txtNumberClient(txtNmber, this, 0, 0);
@@ -111,6 +111,8 @@ public class MainFrame extends javax.swing.JFrame {
         txtTimer.setLocation(Barpanel.getWidth() / 2, 0);
         int x_timer = (dim.width / 2) - 80 ;
         txtTimer.setBounds(x_timer, 0, 160, 30);
+        x_timer += 165;
+        txtDate.setBounds(x_timer, 0, 200, 30);
         txtinfoUser.setText(info);
         NotifcationClass notifcationClass = new NotifcationClass(this ,Butt_notification);
         timer = new Timer();
@@ -1191,24 +1193,24 @@ public class MainFrame extends javax.swing.JFrame {
         String utility = comboNoteUtiltiy.getSelectedItem().toString();
         price = utilit.getPriceByNote(utility);
         cost = utilit.getCost(utility);
-        switch(utility){
-            case "شحن اتصالات":
-                txtNmber.setText("011");
-                break;
-            case "شحن فودافون":
-                txtNmber.setText("010");
-                break;
-            case "شحن اورنج":
-                txtNmber.setText("012");
-                break;
-            case "شحن WE":
-                txtNmber.setText("015");
-                break;
-            default:
-                txtNmber.setText("");
-                break;
-                
-        }
+//        switch(utility){
+//            case "شحن اتصالات":
+//                txtNmber.setText("011");
+//                break;
+//            case "شحن فودافون":
+//                txtNmber.setText("010");
+//                break;
+//            case "شحن اورنج":
+//                txtNmber.setText("012");
+//                break;
+//            case "شحن WE":
+//                txtNmber.setText("015");
+//                break;
+//            default:
+//                txtNmber.setText("");
+//                break;
+//                
+//        }
         Tools.txtNumberClient(txtNmber, this, 0, 0);
         txtNmber.requestFocus();
         

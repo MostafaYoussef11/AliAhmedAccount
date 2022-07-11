@@ -61,22 +61,22 @@ public class PaymentRecipt extends MoneyTransfer{
             pstm.setInt(4, id_Sup);
             int row_effect = pstm.executeUpdate();
             if(row_effect == 1){
-               sql = "INSERT INTO `casher` (`date_casher`,`Creditor`, `note`,`id_PaymentReceipt`) VALUES (?,?,?,?)";
-               pstm = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-               pstm.setString(1, date_proc);
-               pstm.setDouble(2, amount);
-               pstm.setString(3, not);
-               pstm.setInt(4, id_recipt_payment);
-               row_effect = pstm.executeUpdate();
+//               sql = "INSERT INTO `casher` (`date_casher`,`Creditor`, `note`,`id_PaymentReceipt`) VALUES (?,?,?,?)";
+//               pstm = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+//               pstm.setString(1, date_proc);
+//               pstm.setDouble(2, amount);
+//               pstm.setString(3, not);
+//               pstm.setInt(4, id_recipt_payment);
+               row_effect = new CasherClass().SavedCasherTransaction(TypeCasherTransaction.PaymentReceipt, amount, not, id_recipt_payment); //pstm.executeUpdate();
                if(row_effect == 1){
                    String sql_insert_sup_account = "INSERT INTO `suppliersaccount` (`date_suppliersAccount`, `Debit`,`id_Suppliers`, `id_paymentReceipt`, `note`) VALUES (?,?,?,?,?)";
-                   pstm = con.prepareStatement(sql_insert_sup_account, Statement.RETURN_GENERATED_KEYS);
-                   pstm.setString(1,date_proc );
-                   pstm.setDouble(2, amount);
-                   pstm.setInt(3, id_Sup);
-                   pstm.setInt(4, id_recipt_payment);
-                   pstm.setString(5, not);
-                   row_effect = pstm.executeUpdate();
+                   PreparedStatement pstmt = con.prepareStatement(sql_insert_sup_account, Statement.RETURN_GENERATED_KEYS);
+                   pstmt.setString(1,date_proc );
+                   pstmt.setDouble(2, amount);
+                   pstmt.setInt(3, id_Sup);
+                   pstmt.setInt(4, id_recipt_payment);
+                   pstmt.setString(5, not);
+                   row_effect = pstmt.executeUpdate();
                    if(row_effect == 1){
                        boolean isFilter = FilterAccount(type_filter);
                        if(isFilter){
@@ -102,25 +102,25 @@ public class PaymentRecipt extends MoneyTransfer{
             case Clear:
                 sql = "UPDATE suppliersaccount SET isActive = 0 WHERE id_Suppliers = ?";
                 try {
-                    pstm = (PreparedStatement) con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-                    pstm.setInt(1, getId_Suppliers());
-                    rowEffect = pstm.executeUpdate();
+                   PreparedStatement pstm_clear = (PreparedStatement) con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+                    pstm_clear.setInt(1, getId_Suppliers());
+                    rowEffect = pstm_clear.executeUpdate();
                     if(rowEffect > 0){
                         sql = "UPDATE suppliers SET firstBalance = ? WHERE id_Suppliers = ?";
-                        pstm = (PreparedStatement) con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-                        pstm.setDouble(1, getNewBalance());
-                        pstm.setInt(2, getId_Suppliers());
-                        int row = pstm.executeUpdate();
+                        PreparedStatement pstm_US = (PreparedStatement) con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+                        pstm_US.setDouble(1, getNewBalance());
+                        pstm_US.setInt(2, getId_Suppliers());
+                        int row = pstm_US.executeUpdate();
                         if(row == 1){
                             sql = "UPDATE paymentreceipt SET isActive = 0 WHERE id_Suppliers = ? ";
-                            pstm = (PreparedStatement) con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-                            pstm.setInt(1,getId_Suppliers() );
-                            row = pstm.executeUpdate();
+                            PreparedStatement UPpstm = (PreparedStatement) con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+                            UPpstm.setInt(1,getId_Suppliers() );
+                            row = UPpstm.executeUpdate();
                             if(row > 0 ){
                                 sql = "UPDATE purchaseinvoice SET isActive = 0 WHERE id_Suppliers = ?";
-                                pstm = (PreparedStatement) con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-                                pstm.setInt(1, getId_Suppliers());
-                                row = pstm.executeUpdate();
+                                PreparedStatement Upc_pstm = (PreparedStatement) con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+                                Upc_pstm.setInt(1, getId_Suppliers());
+                                row = Upc_pstm.executeUpdate();
                                 if(row > 0 ){
                                     isclear = true;
                                 }
@@ -138,24 +138,24 @@ public class PaymentRecipt extends MoneyTransfer{
             case End :
                     sql = "DELETE FROM suppliersaccount WHERE id_Suppliers = ?";
                 try {
-                    pstm = (PreparedStatement) con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-                    pstm.setInt(1, getId_Suppliers());
-                    rowEffect = pstm.executeUpdate();
+                    PreparedStatement Del_pstm = (PreparedStatement) con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+                    Del_pstm.setInt(1, getId_Suppliers());
+                    rowEffect = Del_pstm.executeUpdate();
                     if(rowEffect > 0){
                         sql = "DELETE FROM purchaseinvoice WHERE id_Suppliers = ?";
-                        pstm = (PreparedStatement) con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-                        pstm.setInt(1, getId_Suppliers());
-                        int row = pstm.executeUpdate();
+                        PreparedStatement del_Puc_pstm = (PreparedStatement) con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+                        del_Puc_pstm.setInt(1, getId_Suppliers());
+                        int row = del_Puc_pstm.executeUpdate();
                         if(row > 0){
                             sql = "DELETE FROM paymentreceipt WHERE id_Suppliers = ? ";
-                            pstm = (PreparedStatement) con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-                            pstm.setInt(1,getId_Suppliers() );
-                            row = pstm.executeUpdate();
+                            PreparedStatement del_Pay_pstm = (PreparedStatement) con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+                            del_Pay_pstm.setInt(1,getId_Suppliers() );
+                            row = del_Pay_pstm.executeUpdate();
                             if(row > 0 ){
                               sql = "DELETE FROM suppliers WHERE id_Suppliers = ?";
-                              pstm = (PreparedStatement) con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-                              pstm.setInt(1, getId_Suppliers());
-                              row = pstm.executeUpdate();
+                              PreparedStatement del_su_pstm = (PreparedStatement) con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+                              del_su_pstm.setInt(1, getId_Suppliers());
+                              row = del_su_pstm.executeUpdate();
                               if(row == 1 ){
                                     isclear = true;
                                 }

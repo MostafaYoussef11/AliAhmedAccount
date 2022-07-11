@@ -164,10 +164,12 @@ public class CasherClass {
  public double getBalanceCasherTwo(){
      double BalanceCasher;
      BalanceCasher = 0.00;
-     String sql = "Select Balance as id from cashertwobalance";
+     String sql = "Select ifnull(Balance,0) as id from cashertwobalance";
      String balance = ConnectDB.getIdFromName(sql);
      if(!(balance.equals(""))){
         BalanceCasher = Double.parseDouble(balance);
+     }else{
+         BalanceCasher = 0.00;
      }
      return BalanceCasher;
  } 

@@ -5,8 +5,10 @@
  */
 package accountali;
 
+import Frams.BeepayFrame;
 import Frams.Login;
 import Frams.MasarySellFrame;
+import Frams.OpaypayFrame;
 import Frams.VFCashFrame;
 import Frams.menuCashFrame;
 import Utilities.AutoSuggestor;
@@ -31,6 +33,9 @@ public class AccountAli {
 
     public static void main(String[] args) {
         Login l = new Login();
+        BeepayFrame o = new BeepayFrame();
+        
+        
         Tools.openJFram(l, "تسجيل الدخول", "account");
     }
     

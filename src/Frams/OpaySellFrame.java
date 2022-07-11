@@ -9,6 +9,8 @@ import Entity.AmanSell;
 import Entity.BeeSell;
 import Entity.CasherClass;
 import Entity.FawrySell;
+import Entity.OPaySell;
+import Entity.OPaypay;
 import Entity.PosSell;
 import Entity.Suppliers;
 import Entity.VFCashClass;
@@ -33,7 +35,7 @@ public class OpaySellFrame extends javax.swing.JFrame {
      */
     VFCashClass vcash;
     Font font;
-    AmanSell aman;
+    OPaySell OPay;
     Suppliers suppliers;
     Dimension dim = new Dimension(870, 600);
    // PosSell masary;
@@ -43,7 +45,7 @@ public class OpaySellFrame extends javax.swing.JFrame {
         Tools.setBackground(background, dim, "16165.jpg");
         font = Tools.font(32f);
         txt_title.setFont(font);
-        aman = new AmanSell();
+        OPay = new OPaySell();
         suppliers = new Suppliers();
         suppliers.setId_supplier_type(type_supplier);
         vcash = new VFCashClass();
@@ -378,15 +380,15 @@ public class OpaySellFrame extends javax.swing.JFrame {
         String to_account = comb_to_account.getSelectedItem().toString();
         switch(name_recharge_type){
             case "نقدي":
-                aman.SetDataAndgeter(value, amount, name_recharge_type, to_account, null);
-                isSave = aman.SaveCash();
+                OPay.SetDataAndgeter(value, amount, name_recharge_type, to_account, null);
+                isSave = OPay.SaveCash();
                 break;
             case "مندوب":
-                aman.SetDataAndgeter(value, amount, name_recharge_type, to_account, null);
-                isSave = aman.SaveAccountSupplier();
+                OPay.SetDataAndgeter(value, amount, name_recharge_type, to_account, null);
+                isSave = OPay.SaveAccountSupplier();
                 break;
             default:
-                aman.SetDataAndgeter(value, amount, name_recharge_type, null, to_account);
+                OPay.SetDataAndgeter(value, amount, name_recharge_type, null, to_account);
                 isSave = false; // method add to VF-Cash
                 break;
         }
@@ -420,10 +422,11 @@ public class OpaySellFrame extends javax.swing.JFrame {
 
     private void newSell(){
         Tools.disableButOpen(btPanel);
-        aman.fillComboRechargeType(comb_recharge_type);
+        OPay.fillComboRechargeType(comb_recharge_type);
         comb_recharge_type.setSelectedIndex(1);
-        aman.fillTable(jTable1);
-        
+        OPay.fillTable(jTable1);
+        txt_amount.setText("0.00");
+        txt_value.setText("0.00");
         suppliers.FillComboAllNameSupplierByType(comb_to_account);
     }
     /**

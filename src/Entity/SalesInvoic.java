@@ -61,13 +61,13 @@ public class SalesInvoic extends invoice{
             rowAffected = 0 ;
            switch(getPaymentMethod()){  
                case cash:
-                 String sqlInsertCasher ="INSERT INTO `casher` (`date_casher`, `Debit`, `note`,`id_salesInvoic`) VALUES (?,?,?,?)";
-                 pstcasher = con.prepareStatement(sqlInsertCasher, Statement.RETURN_GENERATED_KEYS);
-                 pstcasher.setString(1, getDate_invoice());
-                 pstcasher.setDouble(2, getCashAmount());
-                 pstcasher.setString(3,getNote());
-                 pstcasher.setString(4, getId_invoice());
-                 rowAffected = pstcasher.executeUpdate();
+//                 String sqlInsertCasher ="INSERT INTO `casher` (`date_casher`, `Debit`, `note`,`id_salesInvoic`) VALUES (?,?,?,?)";
+//                 pstcasher = con.prepareStatement(sqlInsertCasher, Statement.RETURN_GENERATED_KEYS);
+//                 pstcasher.setString(1, getDate_invoice());
+//                 pstcasher.setDouble(2, getCashAmount());
+//                 pstcasher.setString(3,getNote());
+//                 pstcasher.setString(4, getId_invoice());
+                 rowAffected = new CasherClass().SavedCasherTransaction(TypeCasherTransaction.SalesInvoic, getCashAmount(), getNote(),Integer.parseInt(getId_invoice()));//pstcasher.executeUpdate();
                  break;
                case deferred:
                    String sqlInserClientAccount = "INSERT INTO `clientaccount` (`date_ClientAccount`, `Debit`,`id_client`, `id_salesInvoic`, `note`) "

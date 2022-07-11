@@ -18,11 +18,19 @@ public abstract class MoneyTransfer {
     private String date_process;
     private double Debit , Creditor , amount , newBalance;
     private String note;
-    private int id_client , id_Suppliers , id_Receipt , id_PaymentReceipt  ;
+    private int id_client , id_Suppliers , id_Receipt , id_PaymentReceipt , id_user ;
     
     public boolean Save(){return false;};
     public boolean Delete(String id){return false;};
     public boolean Update(String id){return false;};
+
+    public int getId_user() {
+        return id_user;
+    }
+
+    public void setId_user(int id_user) {
+        this.id_user = id_user;
+    }
 
     public double getNewBalance() {
         return newBalance;

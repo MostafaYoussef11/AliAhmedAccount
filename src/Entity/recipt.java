@@ -19,13 +19,14 @@ import javax.swing.JTable;
 
 /**
  *
- * @author mosta
+ * @author mosta 
  */
 public class recipt extends MoneyTransfer{
     private TypeOfFilter type;
     private Connection con;
     private PreparedStatement pstm;
     private ResultSet rst;
+    
     public void fillTalble(JTable table){
         String sql = "SELECT r.amount , c.name_client , r.date_Receipt , r.id_Receipt FROM receipt r INNER JOIN client c on r.id_client = c.id_client where r.isActive = 1";
         String[] coulmnName = { "المبلغ", "العميل", "التاريخ", "رقم"};
@@ -43,13 +44,13 @@ public class recipt extends MoneyTransfer{
         try{
             con = ConnectDB.getCon();
             con.setAutoCommit(false);
-            String sqlInser = "INSERT INTO `casher` (`date_casher`, `Debit`, `note`,`id_Receipt`) VALUES (?,?,?,?)";
-            pstm = (PreparedStatement) con.prepareStatement(sqlInser, Statement.RETURN_GENERATED_KEYS);
-            pstm.setString(1, getDate_process());
-            pstm.setDouble(2, getAmount());
-            pstm.setString(3, getNote());
-            pstm.setInt(4, getId_Receipt());
-            int rowAffect = pstm.executeUpdate();
+//            String sqlInser = "INSERT INTO `casher` (`date_casher`, `Debit`, `note` , `id_users`,`id_Receipt`) VALUES (?,?,?,?,?)";
+//            pstm = (PreparedStatement) con.prepareStatement(sqlInser, Statement.RETURN_GENERATED_KEYS);
+//            pstm.setString(1, getDate_process());
+//            pstm.setDouble(2, getAmount());
+//            pstm.setString(3, getNote());
+//            pstm.setInt(4, getId_Receipt());
+            int rowAffect = new CasherClass().SavedCasherTransaction(TypeCasherTransaction.Receipt, getAmount(), getNote(), getId_Receipt()); //pstm.executeUpdate();
             if(rowAffect == 1){
                 String sqlInserrecipt = "INSERT INTO `receipt` (`id_Receipt`, `date_Receipt`, `amount`, `id_client`) VALUES (?,?,?,?)";
                 pstm = (PreparedStatement) con.prepareStatement(sqlInserrecipt, Statement.RETURN_GENERATED_KEYS);
@@ -87,7 +88,7 @@ public class recipt extends MoneyTransfer{
             } catch (SQLException ex) {
                 Logger.getLogger(recipt.class.getName()).log(Level.SEVERE, null, ex);
             }
-           
+            Logger.getLogger(recipt.class.getName()).log(Level.SEVERE, null, exception);
         }
         return isSaved;
             //return super.Save(); //To change body of generated methods, choose Tools | Templates.

@@ -140,7 +140,7 @@ public abstract class posPay {
          sql_insert_masaryPay = "INSERT INTO masary_pay "
                  + "( `id_utility_masary`, `price_masary_pay`, `id_client`, "
                  + "`discount_of_balance`, `amount_masary_pay`, `id_pos` ,`balance`,`phone`) VALUES (?,?,?,?,?,?,?,?)";
-         pstmt = (PreparedStatement) con.prepareStatement(sql_insert_masaryPay, Statement.RETURN_GENERATED_KEYS);
+         pstmt = con.prepareStatement(sql_insert_masaryPay, Statement.RETURN_GENERATED_KEYS);
          pstmt.setInt(1, id_utility_masary);
          pstmt.setDouble(2, price_masary_pay);
          pstmt.setInt(3, 1);
@@ -156,16 +156,21 @@ public abstract class posPay {
          pstmt.setString(8, utility_masary);
          int rowAffact = pstmt.executeUpdate();  
          ResultSet rst = pstmt.getGeneratedKeys();
+         int id_masary_pay = 0;
          if(rst.next()){
-            int id_masary_pay = rst.getInt(1);
-            if(rowAffact == 1){
-                 String sql_insert_clientAccount = "INSERT INTO `clientaccount` (`Debit`,`id_client`,id_masary_pay`, `note`) VALUES (?,?,?,?)";
-                 pstmt = (PreparedStatement) con.prepareStatement(sql_insert_clientAccount);
-                 pstmt.setDouble(1,amount_masary_pay);
-                 pstmt.setInt(2, id_client);
-                 pstmt.setInt(3, id_masary_pay);
-                 pstmt.setString(4, utility_masary);
-                 if(pstmt.executeUpdate() == 1){
+            id_masary_pay = rst.getInt(1);
+         }
+         if(rowAffact == 1){
+             /*
+             INSERT INTO `clientaccount` (`Debit`, `id_client` , `id_masary_pay`,`note`) VALUES (?,?,?,?):
+             **/
+                 String sql_insert_clientAccount = "INSERT INTO `clientaccount` (`Debit`, `id_client` , `id_masary_pay`,`note`) VALUES (?,?,?,?)";
+                 PreparedStatement pstmtm = con.prepareStatement(sql_insert_clientAccount);
+                 pstmtm.setDouble(1,price_masary_pay);
+                 pstmtm.setInt(2, id_client);
+                 pstmtm.setInt(3, id_masary_pay);
+                 pstmtm.setString(4, utility_masary);
+                 if(pstmtm.executeUpdate() == 1){
                     if(is_requer_phone_num){
                         System.out.println("Entity.posPay.SaveClients()" + "  "+phone);
                         String sql_inser_num = "INSERT INTO `phone_numbers` (`numbers`) VALUES(?)";
@@ -178,8 +183,6 @@ public abstract class posPay {
                     con.close();
                  }
             }
-     }
-
     }
     catch(SQLException ex){
       try {
@@ -261,7 +264,7 @@ public boolean SaveVFCash(){
     public double getfirstBalance(){
         String sql_get_sum_pay = "SELECT SUM(discount_of_balance) AS id FROM masary_pay WHERE id_pos="+id_pos;
         String sum_pay = ConnectDB.getIdFromName(sql_get_sum_pay);
-        String sql_get_sum_sell = "SELECT SUM(amount_masary_sell) AS id FROM masary_sell WHERE id_pos="+id_pos;
+        String sql_get_sum_sell = "SELECT SUM(value_masary_sell) AS id FROM masary_sell WHERE id_pos="+id_pos;
         String sum_sell = ConnectDB.getIdFromName(sql_get_sum_sell);
         if (sum_pay != null) {
             pay = Double.parseDouble(sum_pay);
