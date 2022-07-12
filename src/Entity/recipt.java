@@ -44,12 +44,6 @@ public class recipt extends MoneyTransfer{
         try{
             con = ConnectDB.getCon();
             con.setAutoCommit(false);
-//            String sqlInser = "INSERT INTO `casher` (`date_casher`, `Debit`, `note` , `id_users`,`id_Receipt`) VALUES (?,?,?,?,?)";
-//            pstm = (PreparedStatement) con.prepareStatement(sqlInser, Statement.RETURN_GENERATED_KEYS);
-//            pstm.setString(1, getDate_process());
-//            pstm.setDouble(2, getAmount());
-//            pstm.setString(3, getNote());
-//            pstm.setInt(4, getId_Receipt());
             int rowAffect = new CasherClass().SavedCasherTransaction(TypeCasherTransaction.Receipt, getAmount(), getNote(), getId_Receipt()); //pstm.executeUpdate();
             if(rowAffect == 1){
                 String sqlInserrecipt = "INSERT INTO `receipt` (`id_Receipt`, `date_Receipt`, `amount`, `id_client`) VALUES (?,?,?,?)";
@@ -63,13 +57,13 @@ public class recipt extends MoneyTransfer{
                 if(roweffect == 1){
                     String sqlInserClienAccount = "INSERT INTO `clientaccount` (`date_ClientAccount`,`Creditor`, `id_client`,`id_Receipt`, `note`) "
                                                 + "VALUES (?,?,?,?,?)";
-                    pstm = (PreparedStatement) con.prepareStatement(sqlInserClienAccount, Statement.RETURN_GENERATED_KEYS);
-                    pstm.setString(1, getDate_process());
-                    pstm.setDouble(2, getAmount());
-                    pstm.setInt(3, getId_client());
-                    pstm.setInt(4, getId_Receipt());
-                    pstm.setString(5, getNote());
-                    int row = pstm.executeUpdate();
+                    PreparedStatement pstm_client_account = (PreparedStatement) con.prepareStatement(sqlInserClienAccount, Statement.RETURN_GENERATED_KEYS);
+                    pstm_client_account.setString(1, getDate_process());
+                    pstm_client_account.setDouble(2, getAmount());
+                    pstm_client_account.setInt(3, getId_client());
+                    pstm_client_account.setInt(4, getId_Receipt());
+                    pstm_client_account.setString(5, getNote());
+                    int row = pstm_client_account.executeUpdate();
                     if(row == 1){
                         if(FilterAccount(type)){
                              con.commit();
@@ -102,25 +96,25 @@ public class recipt extends MoneyTransfer{
                 sql = "UPDATE clientaccount SET isActive = 0 WHERE id_client = ?";
        
             try {
-                pstm = (PreparedStatement) con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-                pstm.setInt(1, getId_client());
-                rowEffect = pstm.executeUpdate();
+                PreparedStatement pstm_Update_clear = (PreparedStatement) con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+                pstm_Update_clear.setInt(1, getId_client());
+                rowEffect = pstm_Update_clear.executeUpdate();
                 if(rowEffect > 0){
                     sql = "UPDATE client SET firstBalance = ? WHERE id_client = ?";
-                    pstm = (PreparedStatement) con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-                    pstm.setDouble(1, getNewBalance());
-                    pstm.setInt(2, getId_client());
-                    int row = pstm.executeUpdate();
+                    PreparedStatement pstm_up_client = (PreparedStatement) con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+                    pstm_up_client.setDouble(1, getNewBalance());
+                    pstm_up_client.setInt(2, getId_client());
+                    int row = pstm_up_client.executeUpdate();
                     if(row == 1){
                         sql = "UPDATE receipt SET isActive = 0 WHERE id_client = ? ";
-                        pstm = (PreparedStatement) con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-                        pstm.setInt(1, getId_client());
-                        row = pstm.executeUpdate();
+                        PreparedStatement pstm_update_receipt = (PreparedStatement) con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+                        pstm_update_receipt.setInt(1, getId_client());
+                        row = pstm_update_receipt.executeUpdate();
                         if(row > 0 ){
                             sql = "UPDATE salesinvoic SET isActive = 0 WHERE id_client = ?";
-                            pstm = (PreparedStatement) con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-                            pstm.setInt(1, getId_client());
-                            row = pstm.executeUpdate();
+                            PreparedStatement pstm_sales_invoice = (PreparedStatement) con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+                            pstm_sales_invoice.setInt(1, getId_client());
+                            row = pstm_sales_invoice.executeUpdate();
                             if(row > 0 ){
                                 isclear = true;
                             }

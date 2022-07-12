@@ -109,7 +109,7 @@ public class SalesInvoiceFrame extends javax.swing.JFrame {
         high_name_unit = new Items().getHightUnitFromId(id);
         try{
           balance = sales.chackBalanceForItems(items.getIdItemsFromName(comboItems.getSelectedItem().toString()));
-            if(balance != null){
+            if(balance.length() != 0){
                 balanceItem = Double.parseDouble(balance); 
             }
             else{

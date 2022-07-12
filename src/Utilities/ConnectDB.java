@@ -246,6 +246,13 @@ public class ConnectDB {
        }
    
    }
+   public static void close(Connection connection) throws SQLException {
+        if (connection != null && !connection.isClosed()) {
+            connection.close();
+        }
+        connection = null;
+    }
+  
 // public static void fillPosCombo(JComboBox box){
 //     fillCombo("pos", "name_pos", box);
 // }

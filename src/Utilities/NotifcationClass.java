@@ -84,34 +84,39 @@ public final class NotifcationClass extends TimerTask{
 
     private ArrayList fillArrayList() throws SQLException{
         ArrayList<NotifacionList> notifList = new ArrayList<NotifacionList>();
-        try {
-            con = ConnectDB.getCon();
+        Connection connection = null;
+        PreparedStatement pstm = null;
+        ResultSet rst = null;
+        try {          
+            connection = ConnectDB.getCon();
             String datePay = Tools.dateSql(new Date());
             String sql = "SELECT note FROM `notifcation` WHERE date_notifcation = ?";//where date_notifcation = "+datePay;
-            PreparedStatement pstm = con.prepareStatement(sql);
+            pstm = connection.prepareStatement(sql);
             pstm.setString(1, datePay);
-            ResultSet rst = pstm.executeQuery();
-            //notifList = new ArrayList<>();
+            rst = pstm.executeQuery();
             while(rst.next()){
                 notif = new NotifacionList(rst.getString(1));
                 notifList.add(notif);
             }
-           
-            if(notif != null){
-                closeConnectionIfOpen(con);
-            }
-             con.close();
+            ConnectDB.close(connection);
         } catch (SQLException ex) {
+            ConnectDB.close(connection);
             Logger.getLogger(NotifcationClass.class.getName()).log(Level.SEVERE, null, ex);
-            con.close();
-          
+        } finally{
+            if(rst != null){
+                rst.close();
+            }
+            if(pstm != null){
+                 pstm.close();
+            }
+            if(connection != null){
+                ConnectDB.close(connection);
+            }
+        
         }
-        con.close();
         return notifList;
     }
-    private void closeConnectionIfOpen(Connection con){
-        Something instance = new Something(con);
-    }
+
     @Override
     public void run() {
         try {
@@ -166,39 +171,9 @@ public final class NotifcationClass extends TimerTask{
 
 
 class NotifacionList{
-    //String datePay;
     String Note;
-
-
     public NotifacionList(String Note ) {
-        //this.datePay = datePay;
         this.Note = Note;
-      
     }
-
-
-    
-    
-}
-
-
-class Something{
-    private final Connection connection;
-    public Something(Connection con) {
-        this.connection = con;
-    }
-
-    @Override
-    protected void finalize() throws Throwable {
-        try {
-            if(this.connection != null){
-                connection.close();
-            }
-        } finally {
-            super.finalize();
-        }
-           
-    }
-    
-
+ 
 }

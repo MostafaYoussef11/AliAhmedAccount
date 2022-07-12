@@ -5,9 +5,6 @@
  */
 package Entity;
 
-import Utilities.ConnectDB;
-import javax.swing.JComboBox;
-import javax.swing.JTable;
 
 /**
  *
