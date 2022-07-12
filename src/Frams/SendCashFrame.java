@@ -552,7 +552,7 @@ public class SendCashFrame extends javax.swing.JFrame {
         txt_discont.setText("");
         txt_cost.setText("");
         txt_amount.setText("");
-        Tools.txtNumberClient(txtNumberClient, this ,680 ,222);
+        Tools.txtNumberClient(txt_valu,txtNumberClient, this ,680 ,222);
         send.fillTableSend(jTable1);
     }
 

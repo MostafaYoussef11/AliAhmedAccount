@@ -166,17 +166,21 @@ public abstract class posPay {
              **/
                  String sql_insert_clientAccount = "INSERT INTO `clientaccount` (`Debit`, `id_client` , `id_masary_pay`,`note`) VALUES (?,?,?,?)";
                  PreparedStatement pstmtm = con.prepareStatement(sql_insert_clientAccount);
-                 pstmtm.setDouble(1,price_masary_pay);
+                 pstmtm.setDouble(1,amount_masary_pay);
                  pstmtm.setInt(2, id_client);
                  pstmtm.setInt(3, id_masary_pay);
                  pstmtm.setString(4, utility_masary);
                  if(pstmtm.executeUpdate() == 1){
                     if(is_requer_phone_num){
-                        System.out.println("Entity.posPay.SaveClients()" + "  "+phone);
-                        String sql_inser_num = "INSERT INTO `phone_numbers` (`numbers`) VALUES(?)";
-                        PreparedStatement pst = con.prepareStatement(sql_inser_num);
-                        pst.setString(1, phone.trim());
-                        pst.executeUpdate();
+                        if(phone.length() < 10){
+                                System.out.println("Entity.posPay.SaveClients()" + "  Number Phoen is Less Than 10 "+phone);
+                        }else{
+                            String sql_inser_num = "INSERT INTO `phone_numbers` (`numbers`) VALUES(?)";
+                            PreparedStatement pst = con.prepareStatement(sql_inser_num);
+                            pst.setString(1, phone.trim());
+                            pst.executeUpdate();
+                        }
+
                     }
                     con.commit();
                     isSave = true;

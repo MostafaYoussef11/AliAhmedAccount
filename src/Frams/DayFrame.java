@@ -53,6 +53,8 @@ public class DayFrame extends javax.swing.JFrame {
         txt_Send_VfCash = new javax.swing.JLabel();
         jLabel10 = new javax.swing.JLabel();
         txt_Solfa = new javax.swing.JLabel();
+        jLabel17 = new javax.swing.JLabel();
+        txt_credit = new javax.swing.JLabel();
         export_panel = new javax.swing.JPanel();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -65,6 +67,8 @@ public class DayFrame extends javax.swing.JFrame {
         txt_Receive_VfCash = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
         txt_Feeses = new javax.swing.JLabel();
+        jLabel18 = new javax.swing.JLabel();
+        txt_debit = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jLabel13 = new javax.swing.JLabel();
         txt_Old_Balance = new javax.swing.JLabel();
@@ -129,6 +133,15 @@ public class DayFrame extends javax.swing.JFrame {
         txt_Solfa.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         txt_Solfa.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
+        jLabel17.setFont(new java.awt.Font("Traditional Arabic", 1, 18)); // NOI18N
+        jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel17.setText("سحب من  الجرد2");
+        jLabel17.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        txt_credit.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        txt_credit.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        txt_credit.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
         javax.swing.GroupLayout import_panelLayout = new javax.swing.GroupLayout(import_panel);
         import_panel.setLayout(import_panelLayout);
         import_panelLayout.setHorizontalGroup(
@@ -156,7 +169,11 @@ public class DayFrame extends javax.swing.JFrame {
                     .addGroup(import_panelLayout.createSequentialGroup()
                         .addComponent(txt_Solfa, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(import_panelLayout.createSequentialGroup()
+                        .addComponent(txt_credit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         import_panelLayout.setVerticalGroup(
@@ -165,25 +182,29 @@ public class DayFrame extends javax.swing.JFrame {
                 .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(import_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txt_POS_PAY, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_POS_PAY, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(import_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txt_Sales, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_Sales, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(import_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txt_Recipt, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_Recipt, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(import_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txt_Send_VfCash, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_Send_VfCash, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(import_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txt_Solfa, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 17, Short.MAX_VALUE))
+                    .addComponent(txt_Solfa, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(import_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txt_credit, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel17, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 11, Short.MAX_VALUE))
         );
 
         export_panel.setBackground(new java.awt.Color(255, 255, 255));
@@ -238,6 +259,15 @@ public class DayFrame extends javax.swing.JFrame {
         txt_Feeses.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         txt_Feeses.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
+        jLabel18.setFont(new java.awt.Font("Traditional Arabic", 1, 18)); // NOI18N
+        jLabel18.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel18.setText("ايداع جرد 2");
+        jLabel18.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        txt_debit.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        txt_debit.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        txt_debit.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
         javax.swing.GroupLayout export_panelLayout = new javax.swing.GroupLayout(export_panel);
         export_panel.setLayout(export_panelLayout);
         export_panelLayout.setHorizontalGroup(
@@ -265,7 +295,11 @@ public class DayFrame extends javax.swing.JFrame {
                     .addGroup(export_panelLayout.createSequentialGroup()
                         .addComponent(txt_Feeses, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(export_panelLayout.createSequentialGroup()
+                        .addComponent(txt_debit, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         export_panelLayout.setVerticalGroup(
@@ -274,24 +308,28 @@ public class DayFrame extends javax.swing.JFrame {
                 .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 75, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(export_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txt_POS_Sell, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_POS_Sell, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(export_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txt_Purchases, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_Purchases, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(export_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txt_Payment, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_Payment, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(export_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txt_Receive_VfCash, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_Receive_VfCash, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(export_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txt_Feeses, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(txt_Feeses, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
+                .addGroup(export_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(txt_debit, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel18, javax.swing.GroupLayout.PREFERRED_SIZE, 40, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
@@ -414,7 +452,7 @@ public class DayFrame extends javax.swing.JFrame {
                     .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(15, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
@@ -469,13 +507,15 @@ public class DayFrame extends javax.swing.JFrame {
                         "(SELECT IFNULL(SUM(Debit),0) FROM casher WHERE id_salesInvoic IS NOT NULL AND date_casher = curdate()) AS Sales ," +
                         "(SELECT IFNULL(SUM(Debit),0) FROM casher WHERE id_Send_Receive IS NOT NULL AND date_casher = curdate()) AS Send_VfCash ," +
                         "(SELECT IFNULL(SUM(Debit),0) FROM casher WHERE id_Solf IS NOT NULL AND date_casher = curdate()) AS Solfa ," +
-                        "(SELECT POS_PAY +Recipt+Sales+ Send_VfCash + Solfa) AS Total_Import," +
+                        "(SELECT IFNULL(SUM(Creditor),0) FROM cashertwo WHERE cashertwo.date_Casher = curdate()) AS credit," +
+                        "(SELECT POS_PAY +Recipt+Sales+ Send_VfCash + Solfa + credit ) AS Total_Import," +
                         "(SELECT IFNULL(SUM(Creditor),0) FROM casher WHERE id_masary_sell IS NOT NULL AND date_casher = curdate()) AS POS_Sell ," +
                         "(SELECT IFNULL(SUM(Creditor),0) FROM casher WHERE id_PaymentReceipt IS NOT NULL AND date_casher = curdate()) AS Payment, " +
                         "(SELECT IFNULL(SUM(Creditor),0) FROM casher WHERE id_purchaseInvoice IS NOT NULL AND date_casher = curdate()) AS Purchases," +
                         "(SELECT IFNULL(SUM(Creditor),0) FROM casher WHERE id_Send_Receive IS NOT NULL AND date_casher = curdate()) AS Receive_VfCash," +
-                        "(SELECT IFNULL(SUM(Creditor),0) FROM casher WHERE id_fees IS NOT NULL AND date_casher = curdate()) AS Feeses ," +
-                        "(SELECT POS_Sell + Payment +  Purchases +Receive_VfCash + Feeses ) AS Total_Export ," +
+                        "(SELECT IFNULL(SUM(Creditor),0) FROM casher WHERE id_fees IS NOT NULL AND date_casher = curdate()) AS Feeses," +
+                        "(SELECT IFNULL(SUM(Debit),0) FROM cashertwo WHERE cashertwo.date_Casher = curdate()) AS debit," +
+                        "(SELECT POS_Sell + Payment +  Purchases +Receive_VfCash + Feeses + debit ) AS Total_Export ," +
                         "(SELECT IFNULL(oldBalance,0) FROM finallyday WHERE dateFinally = curdate()) AS Old_Balance," +
                         "(SELECT Old_Balance + Total_Import - Total_Export) AS Balance";
             PreparedStatement pstmt = con.prepareStatement(sql);
@@ -487,12 +527,14 @@ public class DayFrame extends javax.swing.JFrame {
                 txt_Sales.setText(rst.getString("Sales"));
                 txt_Send_VfCash.setText(rst.getString("Send_VfCash"));
                 txt_Solfa.setText(rst.getString("Solfa"));
+                txt_credit.setText(rst.getString("credit"));
                 // Export الصادر
                 txt_POS_Sell.setText(rst.getString("POS_Sell"));
                 txt_Payment.setText(rst.getString("Payment"));
                 txt_Purchases.setText(rst.getString("Purchases"));
                 txt_Receive_VfCash.setText(rst.getString("Receive_VfCash"));
                 txt_Feeses.setText(rst.getString("Feeses"));
+                txt_debit.setText(rst.getString("debit"));
                 // Total and Balance
                 txt_Old_Balance.setText(rst.getString("Old_Balance"));
                 txt_Total_Import.setText(rst.getString("Total_Import"));
@@ -517,6 +559,8 @@ public class DayFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
     private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -539,5 +583,7 @@ public class DayFrame extends javax.swing.JFrame {
     private javax.swing.JLabel txt_Solfa;
     private javax.swing.JLabel txt_Total_Export;
     private javax.swing.JLabel txt_Total_Import;
+    private javax.swing.JLabel txt_credit;
+    private javax.swing.JLabel txt_debit;
     // End of variables declaration//GEN-END:variables
 }

@@ -329,8 +329,8 @@ public class Tools {
         }
         return numbers;
     }
-  public static void txtNumberClient(JTextField textField,Window mainWindow ,int windowX , int windowY ){
-        AutoSuggestor autoSuggestor = new AutoSuggestor(textField, mainWindow, null, Color.WHITE.brighter(), Color.BLUE, Color.red, 0.75f);
+  public static void txtNumberClient(JTextField other,JTextField textField,Window mainWindow ,int windowX , int windowY ){
+        AutoSuggestor autoSuggestor = new AutoSuggestor(other,textField, mainWindow, null, Color.WHITE.brighter(), Color.BLUE, Color.red, 0.75f);
         ArrayList<String> listNumber = PhoneNumberList();
         autoSuggestor.setDictionary(listNumber);
         autoSuggestor.setLocation(windowY, windowX);

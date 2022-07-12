@@ -227,24 +227,41 @@ public class ConnectDB {
      return id;
    
    }   
-  public static String getIdFrmName(String tablename , String name){
-       try{
-           String id = "";
-           SetConnection();
-           stmt = (Statement) con.createStatement();
+  public static String getIdFrmName(String tablename , String name) throws SQLException{
+      Connection conn = null;
+      Statement stm = null;
+      ResultSet rs = null;
+      String id = "";
+      try{
+           
+           conn = getCon();
+           stm = conn.createStatement();
            String sql = "SELECT id_"+tablename+" AS id FROM "+tablename+" where name_"+tablename+" ='"+name+"';";
-           ResultSet rst = stmt.executeQuery(sql);
-           while(rst.next()){
-               id = rst.getString("id");
+           rs = stm.executeQuery(sql);
+           while(rs.next()){
+               id = rs.getString("id");
            }
-           con.close();
-           return id;
+           conn.close();
+          
        
-       }catch(SQLException ex){
-         Logger.getLogger("getIdFromName").log(Level.SEVERE, null, ex);
-           return "";
        }
-   
+       catch(SQLException ex){
+              close(conn);
+              Logger.getLogger("getIdFromName").log(Level.SEVERE, null, ex);
+          
+       }
+       finally{
+            if(rs != null){
+                rs.close();
+            }
+            if(stm != null){
+                stm.close();
+            }
+            if(conn != null){
+                close(conn);
+            }
+       }
+        return id;
    }
    public static void close(Connection connection) throws SQLException {
         if (connection != null && !connection.isClosed()) {

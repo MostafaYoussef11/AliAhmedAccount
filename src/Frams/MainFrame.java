@@ -11,6 +11,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.awt.event.KeyEvent;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.concurrent.ExecutionException;
@@ -22,6 +23,8 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JWindow;
 import javax.swing.SwingWorker;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
 
 
@@ -94,10 +97,10 @@ public class MainFrame extends javax.swing.JFrame {
         txtNowBalance.setText(new CasherClass().getNowBalanceCasher());
         txtMasaryBalance.setText(new MasaryPay().getfirstBalance()+"");
         new masary_Utilites(1).fillComboUtilites(comboNoteUtiltiy, "شحن");
-        //settxtnumer();
+        settxtnumer();
         txtvalue.setText("0");
         txtIdItems.requestFocus();
-        Tools.txtNumberClient(txtNmber, this, 0, 0);
+        Tools.txtNumberClient(txtIdItems,txtNmber, this, 0, 0);
         winFastCashSend = new JWindow(this);
         winCahse = new JWindow(this);
         String info = "User Name : "+saveData.getUserName();
@@ -120,16 +123,6 @@ public class MainFrame extends javax.swing.JFrame {
         clockTime();
         txtinformationPos.setBounds(Barpanel.getWidth() - 310 , 0, 300, 30);
         informationPosAndCasher();
-        ////
-            
-            
-            
-           
-           
-            
-            
-        
-        //System.out.println(" InfoUser  X :" + txtinfoUser.getX() +" info Y : " + txtinfoUser.getY()+ "Time x : " + txtTimer.getX());
     };
     
   private void clockTime(){
@@ -702,6 +695,11 @@ public class MainFrame extends javax.swing.JFrame {
         txtNmber.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         txtNmber.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtNmber.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+        txtNmber.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txtNmberKeyPressed(evt);
+            }
+        });
         getContentPane().add(txtNmber);
         txtNmber.setBounds(90, 460, 125, 35);
 
@@ -1179,6 +1177,11 @@ public class MainFrame extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_btn_balanceMouseClicked
+
+    private void txtNmberKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtNmberKeyPressed
+        // TODO add your handling code here:
+      
+    }//GEN-LAST:event_txtNmberKeyPressed
     
     private void settxtnumer(){
         masary_Utilites utilit = new masary_Utilites(id_pos);
@@ -1203,9 +1206,8 @@ public class MainFrame extends javax.swing.JFrame {
                 break;
                 
         }
-        Tools.txtNumberClient(txtNmber, this, 0, 0);
-        txtNmber.requestFocus();
-        
+        Tools.txtNumberClient(txtIdItems,txtNmber, this, 0, 0);
+        txtNmber.requestFocus();   
     }
     private void clickPanel(JLabel lable){
         lable.setBorder(BorderFactory.createLoweredBevelBorder());

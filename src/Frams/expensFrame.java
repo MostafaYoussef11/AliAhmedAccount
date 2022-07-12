@@ -293,7 +293,7 @@ public class expensFrame extends javax.swing.JFrame {
         txt_amount.setText("0.00");
         fees.fillComboFromCategory(comboCategory);
         ArrayList<String> words = fees.notsFees();
-        AutoSuggestor suggest = new AutoSuggestor(txtNote,this , null, Color.WHITE.brighter(), Color.BLUE, Color.red, 0.75f);
+        AutoSuggestor suggest = new AutoSuggestor(txt_amount,txtNote,this , null, Color.WHITE.brighter(), Color.BLUE, Color.red, 0.75f);
         suggest.setDictionary(words);
         //x = 352 y : 229
        // suggest.setLocation(352, 229);

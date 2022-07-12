@@ -41,6 +41,7 @@ public class AutoSuggestor {
     private final ArrayList<String> dictionary = new ArrayList<>();
     private int currentIndexOfSpace, tW, tH;
     private int window_y , window_x;
+    private JTextField textOther;
     private DocumentListener documentListener = new DocumentListener() {
         @Override
         public void insertUpdate(DocumentEvent de) {
@@ -60,20 +61,18 @@ public class AutoSuggestor {
     private final Color suggestionsTextColor;
     private final Color suggestionFocusedColor;
 
-    public AutoSuggestor(JTextField textField, Window mainWindow, ArrayList<String> words, Color popUpBackground, Color textColor, Color suggestionFocusedColor, float opacity) {
+    public AutoSuggestor(JTextField textOther,JTextField textField, Window mainWindow, ArrayList<String> words, Color popUpBackground, Color textColor, Color suggestionFocusedColor, float opacity) {
         this.textField = textField;
         this.suggestionsTextColor = textColor;
         this.container = mainWindow;
         this.suggestionFocusedColor = suggestionFocusedColor;
         this.textField.getDocument().addDocumentListener(documentListener);
-
         setDictionary(words);
-
         typedWord = "";
         currentIndexOfSpace = 0;
         tW = 0;
         tH = 0;
-
+        this.textOther = textOther;
         autoSuggestionPopUpWindow = new JWindow(mainWindow);
         autoSuggestionPopUpWindow.setOpacity(opacity);
 
@@ -104,7 +103,19 @@ public class AutoSuggestor {
                 }
             }
         });
-
+        //////
+        textField.getInputMap(JComponent.WHEN_FOCUSED).put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0, true), "Esc released");
+        textField.getActionMap().put("Esc released", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {//focuses the first label on popwindow
+               // textField.setText("");
+                container.toFront();
+                autoSuggestionPopUpWindow.dispose();
+                suggestionsPanel.setVisible(false);
+                textOther.requestFocusInWindow();
+            }
+        });
+        /////
         suggestionsPanel.getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT).put(KeyStroke.getKeyStroke(KeyEvent.VK_UP, 0, true), "Up released");
         suggestionsPanel.getActionMap().put("Up released", new AbstractAction() {
             int lastFocusableIndex___ = 0;

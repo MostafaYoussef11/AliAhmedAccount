@@ -65,7 +65,7 @@ public class MasarypayFrame extends javax.swing.JFrame {
     private void newMasaray(){
         
         Tools.disableButOpen(btPanel);
-        Tools.txtNumberClient(txtPhone, this, 275, 290);
+        Tools.txtNumberClient(txtAmount,txtPhone, this, 275, 290);
         client.FillComboAllNameClient(combClient);
         masary_util.fillComboCategoryUtilites(comUtility);
         String nameUtility = comUtility.getSelectedItem().toString();

@@ -137,11 +137,11 @@ public final class NotifcationClass extends TimerTask{
                 }
                 
             }else{ 
-                System.out.println("arrySize == oldSize");
+                //System.out.println("arrySize == oldSize");
                 return;
             }
-            count++;
-            System.out.println("count : " + count + " Array Size = " + size + " Old size = " + temp_size);
+//            count++;
+//            System.out.println("count : " + count + " Array Size = " + size + " Old size = " + temp_size);
         } catch (SQLException ex) {
             Logger.getLogger(NotifcationClass.class.getName()).log(Level.SEVERE, null, ex);
         }
