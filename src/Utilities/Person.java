@@ -5,6 +5,7 @@
  */
 package Utilities;
 
+import java.sql.SQLException;
 import javax.swing.JComboBox;
 import javax.swing.JTable;
 
@@ -72,7 +73,7 @@ public abstract class Person{
         return ConnectDB.LastId(tableName, "id_"+tableName);
     }
     
-    public String getIdByName(String name){
+    public String getIdByName(String name) throws SQLException{
         String id = ConnectDB.getIdFrmName(tableName, name);
         return id;
     }

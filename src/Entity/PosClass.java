@@ -33,7 +33,7 @@ public class PosClass {
         ConnectDB.fillCombo("pos", "name_pos", comb);
     }
     
-    public String getIdPosFromNamePos(String namePos){
+    public String getIdPosFromNamePos(String namePos) throws SQLException{
        return ConnectDB.getIdFrmName("pos", namePos);
     }
     public void fillCombNoteUtitilyByIdPos(int id_pos,JComboBox box){

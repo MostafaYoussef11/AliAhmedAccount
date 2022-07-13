@@ -12,7 +12,10 @@ import java.awt.Dimension;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.text.DecimalFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JLabel;
 import javax.swing.plaf.basic.BasicComboPopup;
 
@@ -142,12 +145,16 @@ public class FastCashSendPanel extends javax.swing.JPanel {
         }else{
             Send_receiveCash send = new Send_receiveCash();
             send.SetDataSend(value, amount, NmberVF,Number_client, "عميل نقدي");
-            if(send.SaveSendTransaction()){
-                txtAmount.setText("0.00");
-                txtDiscount.setText("0.00");
-                txtNumberClient.setText("");
-                txtValue.setText("0.00");
-            }        
+            try {
+                if(send.SaveSendTransaction()){
+                    txtAmount.setText("0.00");
+                    txtDiscount.setText("0.00");
+                    txtNumberClient.setText("");
+                    txtValue.setText("0.00");        
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(FastCashSendPanel.class.getName()).log(Level.SEVERE, null, ex);
+            }
         
         }
 

@@ -11,8 +11,11 @@ import Utilities.Tools;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -55,7 +58,7 @@ public class RecieveFrame extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        comboWallt = new javax.swing.JComboBox<>();
+        comboWallt = new javax.swing.JComboBox<String>();
         jLabel2 = new javax.swing.JLabel();
         txt_amount = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
@@ -76,7 +79,6 @@ public class RecieveFrame extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("استقبال اموال");
-        setAlwaysOnTop(true);
         setIconImages(null);
         setLocationByPlatform(true);
         setPreferredSize(new java.awt.Dimension(720, 500));
@@ -92,7 +94,7 @@ public class RecieveFrame extends javax.swing.JFrame {
         jLabel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jLabel1.setFocusable(false);
 
-        comboWallt.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboWallt.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         comboWallt.setNextFocusableComponent(txt_value);
         comboWallt.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -108,7 +110,7 @@ public class RecieveFrame extends javax.swing.JFrame {
         txt_amount.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         txt_amount.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txt_amount.setText("0.00");
-        txt_amount.setToolTipText("المبلغ المرسل للمحفظة");
+        txt_amount.setToolTipText("المبلغ الذي استلمه العميل");
         txt_amount.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         txt_amount.setMargin(new java.awt.Insets(5, 2, 2, 5));
         txt_amount.setName("txtValue"); // NOI18N
@@ -357,7 +359,18 @@ public class RecieveFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnewActionPerformed
 
     private void btsaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btsaveActionPerformed
-        
+        double value = Double.parseDouble(txt_value.getText());
+        double amount = Double.parseDouble(txt_amount.getText());
+        String numberVF = comboWallt.getSelectedItem().toString();
+        receive.SetDataSend(value, amount,numberVF, "", "");
+        try {
+            if(receive.SaveRecieveTransaction()){
+                Tools.showInfoMsg("تم استقبال المبلغ بنجاح", "استقبال فلوس");
+                SetnewRecieveTransaction();
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(RecieveFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btsaveActionPerformed
 
     private void bteditActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_bteditActionPerformed

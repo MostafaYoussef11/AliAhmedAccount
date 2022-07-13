@@ -13,7 +13,10 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.text.DecimalFormat;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 /**
@@ -417,12 +420,15 @@ public class SendCashFrame extends javax.swing.JFrame {
            String Number_client = txtNumberClient.getText();
            String name_client = comboClient.getSelectedItem().toString();
            send.SetDataSend(discount_from_balance, amount, Number_VF, Number_client, name_client);
-           if(send.SaveSendTransaction()){
-               Tools.showInfoMsg("تم الاسال", "تحويل كاش");
-               setNewTransSend();
-           }else{
-               Tools.showErrorMsg("خطأ في الارسال");
-           }       
+            try {
+                if(send.SaveSendTransaction()){
+                    Tools.showInfoMsg("تم الاسال", "تحويل كاش");
+                    setNewTransSend();
+                }else{
+                    Tools.showErrorMsg("خطأ في الارسال");       
+                }} catch (SQLException ex) {
+                Logger.getLogger(SendCashFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
         
         }
 

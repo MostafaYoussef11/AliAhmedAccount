@@ -57,7 +57,7 @@ public abstract class PosSell {
         ConnectDB.fillCombo("recharge_type", "name_recharge_type", box);
     };
    
-    public void SetDataAndgeter(double value,double amount , String  name_recharge_type , String name_Suppliers , String number_VF_cash ){ 
+    public void SetDataAndgeter(double value,double amount , String  name_recharge_type , String name_Suppliers , String number_VF_cash ) throws SQLException{ 
         this.value_masary_sell = value;
         this.amount_masary_sell = amount;
         this.name_Suppliers = name_Suppliers;

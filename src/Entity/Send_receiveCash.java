@@ -65,49 +65,80 @@ public class Send_receiveCash {
         this.amount_Send_Receive = amount;
         this.Number_VF_cash = Number_VF;
         this.id_VF_cash = vf.getId_VF_ByNumber(Number_VF);
-        this.id_client = Integer.parseInt(client.getIdByName(name_client));
+        if(name_client.length() == 0) {
+            this.id_client = 1 ;
+        }
+        else
+        {
+            this.id_client = Integer.parseInt(client.getIdByName(name_client));
+        }
         this.Number_client = Number_client;
     }
-    public boolean SaveSendTransaction(){
+    public boolean SaveSendTransaction() throws SQLException{
         boolean isSaved = false;
-        try{
-            con = ConnectDB.getCon();
-            con.setAutoCommit(false);
-            String sql_insertSend = "INSERT INTO `send_receive` ( `type_Send_Receive`, `value_Send_Receive`, `amount_Send_Receive`, `id_VF_cash`,"
-                    + "`Number_client`, `id_client`) VALUES (?,?,?,?,?,?)";
-            pstmt_send = con.prepareStatement(sql_insertSend, Statement.RETURN_GENERATED_KEYS);
-            pstmt_send.setString(1, "Send");
-            pstmt_send.setDouble(2, value_Send_Receive);
-            pstmt_send.setDouble(3, amount_Send_Receive);
-            pstmt_send.setInt(4, id_VF_cash);
-            pstmt_send.setString(5, Number_client);
-            pstmt_send.setInt(6, id_client);
-            int rowAffectSend = pstmt_send.executeUpdate();
-            ResultSet rst = pstmt_send.getGeneratedKeys();
-            if(rowAffectSend == 1){
-                int id_send = 0;
-                while(rst.next()){
-                    id_send = rst.getInt(1);
-                }
-              int rowAffectCasher = casher.SavedCasherTransaction(TypeCasherTransaction.Send_VF, amount_Send_Receive, "تحويل فودافون كاش " + Number_client, id_send);
-              if(rowAffectCasher == 1){
-                    con.commit();
-                    con.close();
-                    isSaved = true;
-              }
-            }
-            
-        } catch (SQLException ex) {
-            try {
-                con.rollback();
-                con.close();
-                Logger.getLogger(Send_receiveCash.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (SQLException ex1) {
-                Logger.getLogger(Send_receiveCash.class.getName()).log(Level.SEVERE, null, ex1);
-            }
+        int id_send = GetIntInsertTransaction("Send");
+        int rowAffectCasher = casher.SavedCasherTransaction(TypeCasherTransaction.Send_VF, amount_Send_Receive, "تحويل فودافون كاش " + Number_client, id_send);
+        if(rowAffectCasher == 1){
+              isSaved = true;
         }
+        return isSaved;
+    }
+    
+    
+    public boolean SaveRecieveTransaction() throws SQLException{
+        boolean isSaved = false;
+          int id_send = GetIntInsertTransaction("Receive");
+          int rowAffectCasher = casher.SavedCasherTransaction(TypeCasherTransaction.Receive_VF, amount_Send_Receive, "تحويل فودافون كاش " + Number_client, id_send);
+          if(rowAffectCasher == 1){
+                isSaved = true;
+          }  
     
         return isSaved;
     }
+    
+    // Returen id_SentRecive
+    
+    private int GetIntInsertTransaction(String type) throws SQLException{
+            int id_send_receive = 0;
+           try{
+                con = ConnectDB.getCon();
+                con.setAutoCommit(false);
+                String sql_insertSend = "INSERT INTO `send_receive` ( `type_Send_Receive`, `value_Send_Receive`, `amount_Send_Receive`, `id_VF_cash`,"
+                        + "`Number_client`, `id_client`) VALUES (?,?,?,?,?,?)";
+                pstmt_send = con.prepareStatement(sql_insertSend, Statement.RETURN_GENERATED_KEYS);
+                pstmt_send.setString(1, type);
+                pstmt_send.setDouble(2, value_Send_Receive);
+                pstmt_send.setDouble(3, amount_Send_Receive);
+                pstmt_send.setInt(4, id_VF_cash);
+                pstmt_send.setString(5, Number_client);
+                pstmt_send.setInt(6, id_client);
+                int rowAffectSend = pstmt_send.executeUpdate();
+                ResultSet rst = pstmt_send.getGeneratedKeys();
+                if(rowAffectSend == 1){
+                    //int id_send = 0;
+                    while(rst.next()){
+                        id_send_receive = rst.getInt(1);
+                    }
+                    con.commit();
+                }
+                con.close();
+           }catch(SQLException ex){
+                con.rollback();
+                con.close();
+                Logger.getLogger(Send_receiveCash.class.getName()).log(Level.SEVERE, null, ex);
+               
+           }
+           finally{
+               if(pstmt_send != null){
+                   pstmt_send.close();
+               }
+               if(con != null){
+                   con.close();
+               }
+              
+           }
+         return id_send_receive;
+    }
+    
     
 }

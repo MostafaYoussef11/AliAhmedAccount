@@ -7,12 +7,16 @@ package Entity;
 
 import Utilities.ConnectDB;
 import Utilities.Tools;
+import com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException;
+import com.sun.org.apache.bcel.internal.generic.BREAKPOINT;
+import java.nio.file.FileVisitResult;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JTable;
@@ -104,16 +108,47 @@ public abstract class posPay {
             if(rowAffact == 1){
                  int rowAffectCasher = new CasherClass().SavedCasherTransaction(TypeCasherTransaction.PosPay, amount_masary_pay, utility_masary, id_masary_pay);
                  if(rowAffectCasher == 1){
-                    if(is_requer_phone_num){
-                         System.out.println("Entity.posPay.SaveClients()" + "  "+phone);
-                        String sql_inser_num = "INSERT INTO `phone_numbers` (`numbers`) VALUES(?)";
-                        PreparedStatement pst = con.prepareStatement(sql_inser_num);
-                        pst.setString(1, phone.trim());
-                        pst.executeUpdate();
-                    }
-                    con.commit();
-                    isSave = true;
-                    con.close();
+                     con.commit();
+                     isSave = true;
+                     con.close();
+                     
+                     
+//                    if(is_requer_phone_num){
+//                      if(phone.length() == 0){
+//                             System.out.println("الرقم غير مكتوب"); 
+//                        }else{  
+//                            ArrayList<String> Phones = Tools.PhoneNumberList();
+//                            if(Phones.contains(phone)){
+//                              System.out.println("الرقم مسجل"); 
+//                            }
+//                           String sql_inser_num = "INSERT INTO `phone_numbers` (`numbers`) VALUES(?)";
+//                           PreparedStatement pst = con.prepareStatement(sql_inser_num);
+//                           pst.setString(1, phone.trim());
+//                           try{
+//                               pst.executeUpdate();
+//                            }catch(SQLException ex){
+//                               //throw new ArrayIndexOutOfBoundsException(phone);
+//                              System.out.println("الرقم مسجل");  
+//                            }finally{
+//                                 con.commit();
+//                                 isSave = true;
+//                                 con.close();                      
+//                           }
+//                         }
+//                      if(con != null){
+//                         con.commit();
+//                         isSave = true;
+//                         con.close();
+//                      }
+//
+//                    }
+//                    else{
+//                       con.commit();
+//                       isSave = true;
+//                       con.close();
+//                    }
+// 
+                     
                  }
             }
          }
