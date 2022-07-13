@@ -21,5 +21,8 @@ public enum TypeCasherTransaction {
     Fees  ,        // Fees Creditor
     CasherTwoCredit,
     CasherTwoDebit,
-    Solfa
+    Solfa,
+    Paydebt,    // سداد السلف   /// Creditor
+    deficiency,  // عجز الجرد  // Creditor
+    excess       // زيادة في الجرد// Debit
 }

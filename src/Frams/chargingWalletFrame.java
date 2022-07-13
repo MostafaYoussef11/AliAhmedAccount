@@ -12,6 +12,9 @@ import Entity.posPay;
 import Utilities.Tools;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -34,7 +37,11 @@ public class chargingWalletFrame extends javax.swing.JFrame {
         initComponents();
         this.id_pos = id_pos;
         trans = new TransactionVCashAndPos();
-        setNewTransaction();
+        try {
+            setNewTransaction();
+        } catch (SQLException ex) {
+            Logger.getLogger(chargingWalletFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
         Font f = Tools.font(16f);
         titel.setFont(f);
     }
@@ -316,7 +323,7 @@ public class chargingWalletFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
      Dimension dim = new Dimension(870, 620);
     //SET ALL DATA
-    private void setNewTransaction(){
+    private void setNewTransaction() throws SQLException{
         this.setSize(dim);
         Tools.disableButOpen(btPanel);
         Tools.setBackground(background, dim, "23.jpg");
@@ -339,13 +346,17 @@ public class chargingWalletFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnewActionPerformed
 
     private void btsaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btsaveActionPerformed
-        String name_pos = combPos.getSelectedItem().toString();
-        trans.Setname_pos(name_pos);
-        trans.Set_Price(txtprice.getText());
-        trans.Set_number(combNumber.getSelectedItem().toString());
-        if(trans.SaveDeposit()){
-            Tools.showInfoMsg("تم الحفظ", namePos);
-            setNewTransaction();
+        try {
+            String name_pos = combPos.getSelectedItem().toString();
+            trans.Setname_pos(name_pos);
+            trans.Set_Price(txtprice.getText());
+            trans.Set_number(combNumber.getSelectedItem().toString());
+            if(trans.SaveDeposit()){
+                Tools.showInfoMsg("تم الحفظ", namePos);
+                setNewTransaction();
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(chargingWalletFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_btsaveActionPerformed
 
@@ -371,11 +382,15 @@ public class chargingWalletFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btprintActionPerformed
 
     private void combPosItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_combPosItemStateChanged
-        // TODO add your handling code here:
-        String name_pos = combPos.getSelectedItem().toString();
-        id_pos = Integer.parseInt(pos.getIdPosFromNamePos(name_pos));
-        String balance = new posPay(id_pos) {}.getfirstBalance()+"";
-        txtPos_balance.setText(balance);
+        try {
+            // TODO add your handling code here:
+            String name_pos = combPos.getSelectedItem().toString();
+            id_pos = Integer.parseInt(pos.getIdPosFromNamePos(name_pos));
+            String balance = new posPay(id_pos) {}.getfirstBalance()+"";
+            txtPos_balance.setText(balance);
+        } catch (SQLException ex) {
+            Logger.getLogger(chargingWalletFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_combPosItemStateChanged
 
     private void combNumberItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_combNumberItemStateChanged

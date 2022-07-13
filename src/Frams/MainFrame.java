@@ -12,6 +12,7 @@ import java.awt.Font;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.concurrent.ExecutionException;
@@ -42,7 +43,7 @@ public class MainFrame extends javax.swing.JFrame {
     private Thread thread;
     private double cost , price;
     private int id_pos = 1;
-    private final  JWindow winCahse , winFastCashSend;
+    private final  JWindow winCahse , winFastCashSend , windeficiencyExcess;
     private calcFrame cf = new calcFrame();
     private CounterFrame cuf = new CounterFrame(); 
     private FastCashSendPanel c;
@@ -103,6 +104,7 @@ public class MainFrame extends javax.swing.JFrame {
         Tools.txtNumberClient(txtIdItems,txtNmber, this, 0, 0);
         winFastCashSend = new JWindow(this);
         winCahse = new JWindow(this);
+        windeficiencyExcess = new JWindow(this);
         String info = "User Name : "+saveData.getUserName();
         int x_info = -2;
         int y_info = txtNowBalance.getY() + txtNowBalance.getHeight()+5;
@@ -235,6 +237,7 @@ public class MainFrame extends javax.swing.JFrame {
         txtinformationPos = new javax.swing.JLabel();
         txtDate = new javax.swing.JLabel();
         btn_balance = new javax.swing.JLabel();
+        bt_deficiency_excess = new javax.swing.JLabel();
         background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -758,6 +761,21 @@ public class MainFrame extends javax.swing.JFrame {
         getContentPane().add(btn_balance);
         btn_balance.setBounds(670, 600, 64, 64);
 
+        bt_deficiency_excess.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        bt_deficiency_excess.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/bar-graph.png"))); // NOI18N
+        bt_deficiency_excess.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                bt_deficiency_excessMouseClicked(evt);
+            }
+        });
+        bt_deficiency_excess.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                bt_deficiency_excessKeyPressed(evt);
+            }
+        });
+        getContentPane().add(bt_deficiency_excess);
+        bt_deficiency_excess.setBounds(740, 600, 64, 64);
+
         background.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         background.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         getContentPane().add(background);
@@ -787,9 +805,13 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_itemsMouseExited
 
     private void ReceiptsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ReceiptsMouseClicked
-         clickPanel(Receipts);
-         reciptF = new ReciptFrame();
-         Tools.openJFram(reciptF, "استلام نقدية","receipt");
+        try {
+            clickPanel(Receipts);
+            reciptF = new ReciptFrame();
+            Tools.openJFram(reciptF, "استلام نقدية","receipt");
+        } catch (SQLException ex) {
+            Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_ReceiptsMouseClicked
 
     private void ReceiptsMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_ReceiptsMouseExited
@@ -1132,15 +1154,19 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void txtMasaryBalanceMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtMasaryBalanceMouseClicked
-        // TODO add your handling code here:
-        String [] selectionValues = ConnectDB.getColumn("pos", "name_pos");
-        String master = selectionValues[0];
-        ImageIcon icon = new ImageIcon(new ImageIcon(Toolkit.getDefaultToolkit().getClass().getResource("/icons/pos.png")).getImage());
-        Object name_pos = JOptionPane.showInputDialog(this, "اختر ماكينة الشحن", "تغيير المكنة", JOptionPane.OK_CANCEL_OPTION, icon, selectionValues, master);
-        String id_pos_st = new PosClass().getIdPosFromNamePos(name_pos.toString());
-        id_pos = Integer.parseInt(id_pos_st);
-        ImageIcon iconlogo = new ImageIcon(new ImageIcon(Toolkit.getDefaultToolkit().getClass().getResource("/icons/"+id_pos_st+".png")).getImage());
-        logo.setIcon(iconlogo);
+        try {
+            // TODO add your handling code here:
+            String [] selectionValues = ConnectDB.getColumn("pos", "name_pos");
+            String master = selectionValues[0];
+            ImageIcon icon = new ImageIcon(new ImageIcon(Toolkit.getDefaultToolkit().getClass().getResource("/icons/pos.png")).getImage());
+            Object name_pos = JOptionPane.showInputDialog(this, "اختر ماكينة الشحن", "تغيير المكنة", JOptionPane.OK_CANCEL_OPTION, icon, selectionValues, master);
+            String id_pos_st = new PosClass().getIdPosFromNamePos(name_pos.toString());
+            id_pos = Integer.parseInt(id_pos_st);
+            ImageIcon iconlogo = new ImageIcon(new ImageIcon(Toolkit.getDefaultToolkit().getClass().getResource("/icons/"+id_pos_st+".png")).getImage());
+            logo.setIcon(iconlogo);
+        } catch (SQLException ex) {
+            Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_txtMasaryBalanceMouseClicked
 
     private void vf_cashMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_vf_cashMouseClicked
@@ -1182,6 +1208,31 @@ public class MainFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
       
     }//GEN-LAST:event_txtNmberKeyPressed
+
+    private void bt_deficiency_excessKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_bt_deficiency_excessKeyPressed
+        // TODO add your handling code here:
+
+    }//GEN-LAST:event_bt_deficiency_excessKeyPressed
+
+    private void bt_deficiency_excessMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_bt_deficiency_excessMouseClicked
+        // TODO add your handling code here:
+       if(windeficiencyExcess.isVisible()){
+             windeficiencyExcess.setVisible(false);
+             //winFastCashSend = new JWindow(this);
+        }else{
+            deficiency_excessPanel cash = new deficiency_excessPanel();
+            cash.setVisible(true);
+            windeficiencyExcess.setSize(400,140);
+            windeficiencyExcess.setOpacity(0.75f);
+            int x = vf_cash.getX();
+            int y = bt_deficiency_excess.getY() - 150;
+            windeficiencyExcess.setLocation(x, y);
+            windeficiencyExcess.getContentPane().add(cash);
+            windeficiencyExcess.repaint();
+            windeficiencyExcess.setVisible(true);       
+        }
+        
+    }//GEN-LAST:event_bt_deficiency_excessMouseClicked
     
     private void settxtnumer(){
         masary_Utilites utilit = new masary_Utilites(id_pos);
@@ -1260,6 +1311,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel Reports;
     private javax.swing.JLabel VCash;
     private javax.swing.JLabel background;
+    private javax.swing.JLabel bt_deficiency_excess;
     private javax.swing.JButton btnSave;
     private javax.swing.JLabel btn_balance;
     private javax.swing.JLabel calc;

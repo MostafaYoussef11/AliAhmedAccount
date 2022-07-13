@@ -32,6 +32,7 @@ public class Send_receiveCash {
     private final VFCashClass vf = new VFCashClass();
     private final ClientPerson client = new ClientPerson();
     private final CasherClass casher = new CasherClass();
+    private final Suppliers suppliers = new Suppliers();
     /**
      INSERT INTO `send_receive` (
      * , `type_Send_Receive`, `value_Send_Receive`, `amount_Send_Receive`, `id_VF_cash`, 
@@ -55,12 +56,12 @@ public class Send_receiveCash {
     }
    public void fillTableRecive(JTable table){
         String[] columnName = { "استلم النقديه", "المبلغ", "القيمة", "المحفظة", "الوقت", "التاريخ", "المسلسل"};
-        String sql_select = "SELECT send.amount_Send_Receive , send.value_Send_Receive , v.number_VF_cash , send.time_Send_Receive"
+        String sql_select = "SELECT send.take_money , send.amount_Send_Receive , send.value_Send_Receive , v.number_VF_cash , send.time_Send_Receive"
                 + " , send.date_Send_Receive , send.id_Send_Receive FROM send_receive AS send INNER JOIN vf_cash AS v ON "
                 + "send.id_VF_cash = v.id_VF_cash WHERE send.type_Send_Receive = 'Receive' ORDER BY send.date_Send_Receive DESC; ";
         ConnectDB.fillAndCenterTable(sql_select, table, columnName);
     }
-    public void SetDataSend(double value , double amount , String Number_VF , String Number_client , String name_client){
+    public void SetDataSend(double value , double amount , String Number_VF , String Number_client , String name_client) throws SQLException{
         this.value_Send_Receive = value;
         this.amount_Send_Receive = amount;
         this.Number_VF_cash = Number_VF;
@@ -140,5 +141,64 @@ public class Send_receiveCash {
          return id_send_receive;
     }
     
-    
+   public boolean SaveRecivedFromSupplier(double value , double amount , String  number_Vf , String name_supplier){
+        boolean isSave = false;
+        Connection conn = null;
+       try {
+            
+            conn = ConnectDB.getCon();
+            conn.setAutoCommit(false);
+            int id_vf = vf.getId_VF_ByNumber(number_Vf);
+            String id_suplier = suppliers.getIdByName(name_supplier);
+            String sql_recive = "INSERT INTO `send_receive` (`type_Send_Receive`, `value_Send_Receive`, "
+                              + "`amount_Send_Receive`, `id_VF_cash`,`id_Suppliers`) VALUES (?,?,?,?,?)";
+            PreparedStatement pstm = conn.prepareStatement(sql_recive, Statement.RETURN_GENERATED_KEYS);
+            pstm.setString(1, "Receive");
+            pstm.setDouble(2, value);
+            pstm.setDouble(3, amount);
+            pstm.setInt(4, id_vf);
+            pstm.setString(5, id_suplier);
+            int row_affect = pstm.executeUpdate();
+            int id_recive = 0;
+            ResultSet rst = pstm.getGeneratedKeys();
+            if(row_affect == 1){
+                while(rst.next()){
+                    id_recive = rst.getInt(1);
+                }
+                String sql_supaccount = "INSERT INTO `suppliersaccount` (`Creditor`, `id_Suppliers`,"
+                                      + " `id_Send_Receive`, `note`) VALUES (?,?,?,?)";
+                PreparedStatement pstm_supaccount = conn.prepareStatement(sql_supaccount, Statement.RETURN_GENERATED_KEYS);
+                pstm_supaccount.setDouble(1, amount);
+                pstm_supaccount.setString(2, id_suplier);
+                pstm_supaccount.setInt(3, id_recive);
+                pstm_supaccount.setString(4, "شحن محفظة " + number_Vf);
+                int row_sup = pstm_supaccount.executeUpdate();
+                if(row_sup == 1){
+                    isSave = true;
+                    conn.commit();
+                    conn.close();
+                }
+                
+            }}
+        catch (SQLException ex) {
+            try {
+                conn.rollback();
+                conn.close();
+                
+                Logger.getLogger(Send_receiveCash.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex1) {
+                Logger.getLogger(Send_receiveCash.class.getName()).log(Level.SEVERE, null, ex1);
+            }
+        }finally{
+            try {
+                
+                conn.close();
+                
+            } catch (SQLException ex) {
+                Logger.getLogger(Send_receiveCash.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        
+        }
+        return isSave;
+   }
 }

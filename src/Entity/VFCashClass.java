@@ -39,14 +39,14 @@ public class VFCashClass {
        boolean isSave = false;
         try {
             Connection con = ConnectDB.getCon();
-            String sql_insert = "INSERT INTO `vf_cash` (`number_VF_cash`, `name_owner`, `id_international`, `sim`,`balance`,`now_balance`) VALUES (?,?,?,?,?,?)";
+            String sql_insert = "INSERT INTO `vf_cash` (`number_VF_cash`, `name_owner`, `id_international`, `sim`,`balance`) VALUES (?,?,?,?,?)";
             PreparedStatement pstmt = con.prepareStatement(sql_insert);
             pstmt.setString(1, number_VF_cash);
             pstmt.setString(2, name_owner);
             pstmt.setString(3, id_international);
             pstmt.setString(4, sim);
             pstmt.setDouble(5, balance);
-            pstmt.setDouble(6, balance);
+           
             if(pstmt.executeUpdate() == 1){
                 isSave = true;
                 con.close();

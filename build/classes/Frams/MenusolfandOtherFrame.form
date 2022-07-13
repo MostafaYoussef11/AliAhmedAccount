@@ -116,6 +116,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="&#x633;&#x62f;&#x627;&#x62f;"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="solfa_pay_btnActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>

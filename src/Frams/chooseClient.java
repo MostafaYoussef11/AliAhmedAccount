@@ -10,7 +10,10 @@ import Utilities.Tafqeet;
 import Utilities.Tools;
 import java.io.InputStream;
 import java.math.BigDecimal;
+import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -110,18 +113,22 @@ public class chooseClient extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        String name_client = jComboBox1.getSelectedItem().toString();
-        String id_client = client.getIdByName(name_client);
-        int idClient = Integer.parseInt(id_client);
-        String sql = "SELECT ac.id_client , c.firstBalance , c.name_client ,c.address,c.phone, SUM(ac.Debit) As Debit, Sum(ac.Creditor) as Creditor from clientaccount ac "
-                        + " INNER JOIN client c ON c.id_client = ac.id_client where ac.id_client = $P{id_client} and ac.isActive = 1"; //
-        InputStream strem = getClass().getResourceAsStream("/Reborts/ClientReport.jrxml");
-        HashMap para = new HashMap();
-        para.put("id_client", idClient);
-        double new_balance = client.calcBalanceClient(name_client);
-        para.put("Tafqeet", Tafqeet.doTafqeet(new BigDecimal(new_balance)));
-        Tools.Printer(sql, strem, para);            
+        try {
+            // TODO add your handling code here:
+            String name_client = jComboBox1.getSelectedItem().toString();
+            String id_client = client.getIdByName(name_client);
+            int idClient = Integer.parseInt(id_client);
+            String sql = "SELECT ac.id_client , c.firstBalance , c.name_client ,c.address,c.phone, SUM(ac.Debit) As Debit, Sum(ac.Creditor) as Creditor from clientaccount ac "
+                    + " INNER JOIN client c ON c.id_client = ac.id_client where ac.id_client = $P{id_client} and ac.isActive = 1"; //
+            InputStream strem = getClass().getResourceAsStream("/Reborts/ClientReport.jrxml");
+            HashMap para = new HashMap();
+            para.put("id_client", idClient);
+            double new_balance = client.calcBalanceClient(name_client);
+            para.put("Tafqeet", Tafqeet.doTafqeet(new BigDecimal(new_balance)));            
+            Tools.Printer(sql, strem, para);
+        } catch (SQLException ex) {
+            Logger.getLogger(chooseClient.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

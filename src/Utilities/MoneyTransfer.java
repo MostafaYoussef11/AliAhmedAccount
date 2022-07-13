@@ -7,6 +7,7 @@ package Utilities;
 
 import Entity.ClientPerson;
 import Entity.Suppliers;
+import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -40,11 +41,11 @@ public abstract class MoneyTransfer {
         this.newBalance = newBalance;
     }
     
-    public void SetIdClientFromName(String name_client){
+    public void SetIdClientFromName(String name_client) throws SQLException{
         String idclient = new ClientPerson().getIdByName(name_client);
         setId_client(Integer.parseInt(idclient));
     }
-    public void SetIdSuppliersFromName(String name_suppliers){
+    public void SetIdSuppliersFromName(String name_suppliers) throws SQLException{
         String id_Supplier = new Suppliers().getIdByName(name_suppliers);
         int id_Supp = Integer.parseInt(id_Supplier);
         this.id_Suppliers = id_Supp;

@@ -11,7 +11,10 @@ import Utilities.Tafqeet;
 import Utilities.Tools;
 import java.io.InputStream;
 import java.math.BigDecimal;
+import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -111,15 +114,19 @@ public class chooseSuppliers extends javax.swing.JFrame {
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-        String name_client = jComboBox1.getSelectedItem().toString();
-        String id_supplier_str = suppliers.getIdByName(name_client);
-        int id_suppliers = Integer.parseInt(id_supplier_str);
-        String sql =  "SELECT  s.name_Suppliers , s.phone , s.address ,s.firstBalance , SUM(ac.Creditor) creditor , SUM(ac.Debit) debit FROM suppliers s INNER JOIN suppliersaccount ac ON s.id_Suppliers = ac.id_Suppliers where s.id_Suppliers = $P{id_Suppliers} and ac.isActive = 1 and s.isActive = 1";
-        InputStream stream = getClass().getResourceAsStream("/Reborts/SupplierReport.jrxml");
-        HashMap para = new HashMap();
-        para.put("id_Suppliers", id_suppliers);
-        Tools.Printer(sql, stream, para);    
+        try {
+            // TODO add your handling code here:
+            String name_client = jComboBox1.getSelectedItem().toString();
+            String id_supplier_str = suppliers.getIdByName(name_client);
+            int id_suppliers = Integer.parseInt(id_supplier_str);
+            String sql =  "SELECT  s.name_Suppliers , s.phone , s.address ,s.firstBalance , SUM(ac.Creditor) creditor , SUM(ac.Debit) debit FROM suppliers s INNER JOIN suppliersaccount ac ON s.id_Suppliers = ac.id_Suppliers where s.id_Suppliers = $P{id_Suppliers} and ac.isActive = 1 and s.isActive = 1";
+            InputStream stream = getClass().getResourceAsStream("/Reborts/SupplierReport.jrxml");
+            HashMap para = new HashMap();
+            para.put("id_Suppliers", id_suppliers);    
+            Tools.Printer(sql, stream, para);
+        } catch (SQLException ex) {
+            Logger.getLogger(chooseSuppliers.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

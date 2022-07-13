@@ -143,15 +143,20 @@ public class FastCashSendPanel extends javax.swing.JPanel {
         if(balanceWallet < value){
             Tools.showErrorMsg("رصيد المحفظة غير كافي للتحويل");
         }else{
-            Send_receiveCash send = new Send_receiveCash();
-            send.SetDataSend(value, amount, NmberVF,Number_client, "عميل نقدي");
             try {
-                if(send.SaveSendTransaction()){
-                    txtAmount.setText("0.00");
-                    txtDiscount.setText("0.00");
-                    txtNumberClient.setText("");
-                    txtValue.setText("0.00");        
+                Send_receiveCash send = new Send_receiveCash();
+                send.SetDataSend(value, amount, NmberVF,Number_client, "عميل نقدي");
+                try {
+                    if(send.SaveSendTransaction()){
+                        txtAmount.setText("0.00");        
+                        txtDiscount.setText("0.00");
+                        txtNumberClient.setText("");
+                        txtValue.setText("0.00");
+                    }
+                } catch (SQLException ex) {
+                    Logger.getLogger(FastCashSendPanel.class.getName()).log(Level.SEVERE, null, ex);
                 }
+                
             } catch (SQLException ex) {
                 Logger.getLogger(FastCashSendPanel.class.getName()).log(Level.SEVERE, null, ex);
             }

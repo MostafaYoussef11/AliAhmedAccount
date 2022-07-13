@@ -13,6 +13,7 @@ import Utilities.TypeOfFilter;
 import java.awt.ComponentOrientation;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
@@ -33,7 +34,7 @@ public class ReciptFrame extends javax.swing.JFrame {
     private double OldBalance , newBalance , amount ;
     private TypeOfFilter type_filter;
     
-    public ReciptFrame() {
+    public ReciptFrame() throws SQLException {
         initComponents();
         setSize(820, 740);
         background.setLocation(0, 0);
@@ -439,7 +440,7 @@ public class ReciptFrame extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void newRecipt(){
+    private void newRecipt() throws SQLException{
         cp = new ClientPerson();
         r = new recipt();
         lab_balance.setText("الرصيد");
@@ -461,54 +462,63 @@ public class ReciptFrame extends javax.swing.JFrame {
         
     }
     private void btnewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnewActionPerformed
-        // TODO add your handling code here:
-        newRecipt();
+        try {
+            // TODO add your handling code here:
+            newRecipt();
+        } catch (SQLException ex) {
+            Logger.getLogger(ReciptFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnewActionPerformed
 
     private void btsaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btsaveActionPerformed
-        // TODO add your handling code here:
-        id_recipt = txt_id_reciept.getText();
-        date_recipt = Tools.dateSql(txt_Date_Process.getDate()); 
-        name_client = com_Name_Client.getSelectedItem().toString();
-        id_client = cp.getIdByName(name_client);
-        notes = txt_note.getText();
-        String amountst = txt_Amount.getText();
-        try{
-            OldBalance = Double.parseDouble(txt_balance.getText());
-        }catch(NumberFormatException ex){
-            OldBalance = 0.00;
-        }
-        try{OldBalance = Double.parseDouble(txt_balance.getText());
+        try{                                       
+            // TODO add your handling code here:
+            id_recipt = txt_id_reciept.getText();
+            date_recipt = Tools.dateSql(txt_Date_Process.getDate());
+            name_client = com_Name_Client.getSelectedItem().toString();
+            id_client = cp.getIdByName(name_client);
+            notes = txt_note.getText();
+            String amountst = txt_Amount.getText();
+            try{
+                OldBalance = Double.parseDouble(txt_balance.getText());
+            }catch(NumberFormatException ex){
+                OldBalance = 0.00;
+            }
+            try{OldBalance = Double.parseDouble(txt_balance.getText());
             amount = Double.parseDouble(amountst);
-        }catch(NumberFormatException ex){
-            amount = 0;
-             System.err.println(amountst);
-             Tools.showErrorMsg(ex.getMessage());
+            }catch(NumberFormatException ex){
+                amount = 0;
+                System.err.println(amountst);
+                Tools.showErrorMsg(ex.getMessage());
+            }
+            newBalance = OldBalance - amount;
+            if(radio_Payment.isSelected()){
+                type_filter = TypeOfFilter.Payment;
+            }else if(radio_Clear.isSelected()){
+                type_filter = TypeOfFilter.Clear;
+            }else{
+                type_filter = TypeOfFilter.End;
+            }
+            
+            //set data
+            r.setAmount(amount);
+            r.setCreditor(amount);
+            r.setDate_process(date_recipt);
+            r.setId_Receipt(Integer.parseInt(id_recipt));
+            r.setId_client(Integer.parseInt(id_client));
+            r.setNote(notes);
+            r.setType(type_filter);
+            r.setNewBalance(newBalance);
+            if(r.Save()){
+                Tools.showInfoMsg("تم الحفظ بنجاح و الرصيد الحالي = " + newBalance, "حفظ");
+                newRecipt();
+            }else{
+                Tools.showErrorMsg("خطأ في الحفظ");
+            }
+            
+        }catch(SQLException ex){
+            Logger.getLogger(ReciptFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
-         newBalance = OldBalance - amount;
-         if(radio_Payment.isSelected()){
-             type_filter = TypeOfFilter.Payment;
-         }else if(radio_Clear.isSelected()){
-               type_filter = TypeOfFilter.Clear;
-         }else{
-             type_filter = TypeOfFilter.End;
-         }
-         
-         //set data 
-         r.setAmount(amount);
-         r.setCreditor(amount);
-         r.setDate_process(date_recipt);
-         r.setId_Receipt(Integer.parseInt(id_recipt));
-         r.setId_client(Integer.parseInt(id_client));
-         r.setNote(notes);
-         r.setType(type_filter);
-         r.setNewBalance(newBalance);
-         if(r.Save()){
-             Tools.showInfoMsg("تم الحفظ بنجاح و الرصيد الحالي = " + newBalance, "حفظ");
-             newRecipt();
-         }else{
-             Tools.showErrorMsg("خطأ في الحفظ");
-         }
          
     }//GEN-LAST:event_btsaveActionPerformed
 
@@ -538,12 +548,16 @@ public class ReciptFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btprintActionPerformed
 
     private void com_Name_ClientItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_com_Name_ClientItemStateChanged
-        // TODO add your handling code here:
-        txt_balance.setText(cp.calcBalanceClient(com_Name_Client.getSelectedItem().toString())+"");
-        txt_Amount.setText("0.00");
-        Tools.CenterJDateChos(txt_Date_Process);
-        txt_id_reciept.setText(r.getLastReceiptId());
-        txt_note.setText("دفعة من حساب " + " " + com_Name_Client.getSelectedItem().toString());
+        try {
+            // TODO add your handling code here:
+            txt_balance.setText(cp.calcBalanceClient(com_Name_Client.getSelectedItem().toString())+"");
+            txt_Amount.setText("0.00");
+            Tools.CenterJDateChos(txt_Date_Process);
+            txt_id_reciept.setText(r.getLastReceiptId());
+            txt_note.setText("دفعة من حساب " + " " + com_Name_Client.getSelectedItem().toString());
+        } catch (SQLException ex) {
+            Logger.getLogger(ReciptFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_com_Name_ClientItemStateChanged
 
     private void radio_ClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radio_ClearActionPerformed
@@ -590,6 +604,8 @@ public class ReciptFrame extends javax.swing.JFrame {
                 newBalance = OldBalance + amount;
             }catch(NumberFormatException ex){
                 Logger.getLogger(getClass().getName()).log(Level.SEVERE, null  , ex);
+            } catch (SQLException ex) {
+                Logger.getLogger(ReciptFrame.class.getName()).log(Level.SEVERE, null, ex);
             }
             txt_balance.setText(newBalance+"");
             lab_balance.setText("رصيد ق الدفع");
@@ -627,7 +643,11 @@ public class ReciptFrame extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new ReciptFrame().setVisible(true);
+                try {
+                    new ReciptFrame().setVisible(true);
+                } catch (SQLException ex) {
+                    Logger.getLogger(ReciptFrame.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         });
     }

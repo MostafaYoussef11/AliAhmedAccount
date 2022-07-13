@@ -6,6 +6,7 @@
 package Frams;
 
 import Utilities.Tools;
+import com.sun.org.apache.bcel.internal.generic.AALOAD;
 import java.awt.Dimension;
 
 /**
@@ -74,6 +75,11 @@ public class MenusolfandOtherFrame extends javax.swing.JFrame {
         solfa_pay_btn.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         solfa_pay_btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/income.png"))); // NOI18N
         solfa_pay_btn.setText("سداد");
+        solfa_pay_btn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                solfa_pay_btnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -217,6 +223,12 @@ public class MenusolfandOtherFrame extends javax.swing.JFrame {
         SolfaFrame solfa = new SolfaFrame();
         Tools.openJFram(solfa, "سلفة جديدة", "payment");
     }//GEN-LAST:event_solfa_new_btnActionPerformed
+
+    private void solfa_pay_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_solfa_pay_btnActionPerformed
+        // TODO add your handling code here:
+        paydebtFrame p = new paydebtFrame();
+        Tools.openJFram(p);
+    }//GEN-LAST:event_solfa_pay_btnActionPerformed
 
     /**
      * @param args the command line arguments

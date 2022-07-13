@@ -17,6 +17,7 @@ import java.awt.Font;
 import java.awt.Point;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.text.DecimalFormat;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -411,6 +412,8 @@ public class FawrypayFrame extends javax.swing.JFrame {
             id_client = Integer.parseInt(client_s);
         }catch(NumberFormatException ex){  
             Logger.getLogger("Masary").log(Level.SEVERE, null, ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(FawrypayFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
         fawry.setAmount_masary_pay(amount_masary_pay);
         fawry.setDiscount_of_balance(discount_of_balance);

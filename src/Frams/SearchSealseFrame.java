@@ -184,7 +184,7 @@ public class SearchSealseFrame extends javax.swing.JFrame {
             para.put("id_salesInvoice", id_invoicBil);//id_salesInvoice
             double amount = Total_amount - discont;
             para.put("Tafqeet", Tafqeet.doTafqeet(new BigDecimal(amount)));
-            InputStream stream =getClass().getResourceAsStream("/Reborts/SalesInvoicReport.jrxml");
+            InputStream stream = getClass().getResourceAsStream("/Reborts/SalesInvoicReport.jrxml");
             Tools.Printer(sql, stream, para);
         }
     }//GEN-LAST:event_btprintActionPerformed

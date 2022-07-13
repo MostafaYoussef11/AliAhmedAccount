@@ -14,7 +14,10 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.io.InputStream;
 import java.math.BigDecimal;
+import java.sql.SQLException;
 import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 
 /**
@@ -460,15 +463,19 @@ public class ClintFrame extends javax.swing.JFrame {
             if(txtid == null){
                  Tools.showErrorMsg("الرجاء تحديد اسم العميل");
             }else{
-                int id_client = Integer.parseInt(txtid);
-                String sql = "SELECT ac.id_client , c.firstBalance , c.name_client ,c.address,c.phone, SUM(ac.Debit) As Debit, Sum(ac.Creditor) as Creditor from clientaccount ac "
-                        + " INNER JOIN client c ON c.id_client = ac.id_client where ac.id_client = $P{id_client} and ac.isActive = 1"; //
-                InputStream strem = getClass().getResourceAsStream("/Reborts/ClientReport.jrxml");
-                HashMap para = new HashMap();
-                para.put("id_client", id_client);
-                double new_balance = c.calcBalanceClient(txtName.getText());
-                para.put("Tafqeet", Tafqeet.doTafqeet(new BigDecimal(new_balance)));
-                Tools.Printer(sql, strem, para);            
+                try {
+                    int id_client = Integer.parseInt(txtid);
+                    String sql = "SELECT ac.id_client , c.firstBalance , c.name_client ,c.address,c.phone, SUM(ac.Debit) As Debit, Sum(ac.Creditor) as Creditor from clientaccount ac "
+                            + " INNER JOIN client c ON c.id_client = ac.id_client where ac.id_client = $P{id_client} and ac.isActive = 1"; //
+                    InputStream strem = getClass().getResourceAsStream("/Reborts/ClientReport.jrxml");
+                    HashMap para = new HashMap();
+                    para.put("id_client", id_client);
+                    double new_balance = c.calcBalanceClient(txtName.getText());
+                    para.put("Tafqeet", Tafqeet.doTafqeet(new BigDecimal(new_balance)));            
+                    Tools.Printer(sql, strem, para);
+                } catch (SQLException ex) {
+                    Logger.getLogger(ClintFrame.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
 
         }

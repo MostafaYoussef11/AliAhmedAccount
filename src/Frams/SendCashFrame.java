@@ -419,14 +419,15 @@ public class SendCashFrame extends javax.swing.JFrame {
            String Number_VF = combVFNumber.getSelectedItem().toString();
            String Number_client = txtNumberClient.getText();
            String name_client = comboClient.getSelectedItem().toString();
-           send.SetDataSend(discount_from_balance, amount, Number_VF, Number_client, name_client);
             try {
+                send.SetDataSend(discount_from_balance, amount, Number_VF, Number_client, name_client);
                 if(send.SaveSendTransaction()){
                     Tools.showInfoMsg("تم الاسال", "تحويل كاش");
                     setNewTransSend();
                 }else{
                     Tools.showErrorMsg("خطأ في الارسال");       
-                }} catch (SQLException ex) {
+                }}
+            catch (SQLException ex) {
                 Logger.getLogger(SendCashFrame.class.getName()).log(Level.SEVERE, null, ex);
             }
         

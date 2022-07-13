@@ -15,6 +15,7 @@ import java.sql.Statement;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JComboBox;
 import javax.swing.JTable;
 
 /**
@@ -87,7 +88,117 @@ public class SolafClass {
            }
            return isSave;
        }
+    
+    public double getAmountSolfa(int id_Solf) throws SQLException{
+       Connection con = ConnectDB.getCon();
+       PreparedStatement pstm = null;
+       ResultSet rst = null ;
+       double amount_Solfa = 0;
+       try{
+           con.setAutoCommit(false);
+           String sql_statment = "SELECT  `amount_Solf` FROM `solf` WHERE `id_Solf` = "+id_Solf;
+           pstm = con.prepareStatement(sql_statment);
+           rst = pstm.executeQuery();
+           while(rst.next()){
+             amount_Solfa = rst.getDouble(1);
+           }
+           con.commit();
+           con.close();
+       }catch(SQLException ex){
+           con.rollback();
+           con.close();
        
+       }finally{
+           if(con != null){
+               con.close();
+           }
+           if(rst != null){
+               rst.close();
+           }
+           if(pstm != null){
+               pstm.close();
+           }
+       }
+       return amount_Solfa;
+    }
+    
+    public String getDatePaySolfa(int id_Solf) throws SQLException{
+       Connection con = ConnectDB.getCon();
+       PreparedStatement pstm = null;
+       ResultSet rst = null ;
+       String datePay = "";
+       try{
+           con.setAutoCommit(false);
+           String sql_statment = "SELECT  `datePay_Solf` FROM `solf` WHERE `id_Solf` = "+id_Solf;
+           pstm = con.prepareStatement(sql_statment);
+           rst = pstm.executeQuery();
+           while(rst.next()){
+             datePay = rst.getString(1);
+           }
+           con.commit();
+           con.close();
+       }catch(SQLException ex){
+           con.rollback();
+           con.close();
        
+       }finally{
+           if(con != null){
+               con.close();
+           }
+           if(rst != null){
+               rst.close();
+           }
+           if(pstm != null){
+               pstm.close();
+           }
+       }
+       return datePay; 
+    
+    }
+    
+    
+    public String getNameSolfa(int id_Solf) throws SQLException{
+       Connection con = ConnectDB.getCon();
+       PreparedStatement pstm = null;
+       ResultSet rst = null ;
+       String name_Solf = "";
+       try{
+           con.setAutoCommit(false);
+           String sql_statment = "SELECT  `name_Solf` FROM `solf` WHERE `id_Solf` = "+id_Solf;
+           pstm = con.prepareStatement(sql_statment);
+           rst = pstm.executeQuery();
+           while(rst.next()){
+             name_Solf = rst.getString(1);
+           }
+           con.commit();
+           con.close();
+       }catch(SQLException ex){
+           con.rollback();
+           con.close();
+       
+       }finally{
+           if(con != null){
+               con.close();
+           }
+           if(rst != null){
+               rst.close();
+           }
+           if(pstm != null){
+               pstm.close();
+           }
+       }
+       return name_Solf; 
+    
+    
+    }
+    
+    
+    public void fillCombo(JComboBox comboBox){
+        ConnectDB.fillCombo("solf where isActive = 1", "name_Solf", comboBox);
+    
+    }
 
+    public String getIdSolfFromName(String name_Solf) throws SQLException{
+        return ConnectDB.getIdFrmName("Solf", name_Solf);
+    }
 }

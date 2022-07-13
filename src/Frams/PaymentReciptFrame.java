@@ -18,6 +18,7 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.io.InputStream;
 import java.math.BigDecimal;
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -450,19 +451,23 @@ public class PaymentReciptFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void newRecipt(){
-        suppliers  = new Suppliers();
-        pay_recipt = new PaymentRecipt();
-        pay_recipt.fillTalble(jTable1);
-        txt_note.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
-        Tools.disableButOpen(btPanel);
-        suppliers.FillComboName(com_Name_Suppliers);
-        txt_balance.setText(suppliers.calcBalanceSupplier(com_Name_Suppliers.getSelectedItem().toString())+"");
-        txt_Amount.setText("0.00");
-        Tools.CenterJDateChos(txt_Date_Process);
-        id_reciept = pay_recipt.getLastPaymentReceiptId();
-        txt_id_reciept.setText(id_reciept);
-        noteText = "ايصال دفع رقم " + id_reciept;
-        txt_note.setText(noteText);
+        try {
+            suppliers  = new Suppliers();
+            pay_recipt = new PaymentRecipt();
+            pay_recipt.fillTalble(jTable1);
+            txt_note.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
+            Tools.disableButOpen(btPanel);
+            suppliers.FillComboName(com_Name_Suppliers);
+            txt_balance.setText(suppliers.calcBalanceSupplier(com_Name_Suppliers.getSelectedItem().toString())+"");
+            txt_Amount.setText("0.00");
+            Tools.CenterJDateChos(txt_Date_Process);
+            id_reciept = pay_recipt.getLastPaymentReceiptId();
+            txt_id_reciept.setText(id_reciept);
+            noteText = "ايصال دفع رقم " + id_reciept;
+            txt_note.setText(noteText);
+        } catch (SQLException ex) {
+            Logger.getLogger(PaymentReciptFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     private void btnewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnewActionPerformed
         // TODO add your handling code here:
@@ -489,26 +494,38 @@ public class PaymentReciptFrame extends javax.swing.JFrame {
         else{
 
             if(radio_Payment.isSelected()){
-                 type_filter = TypeOfFilter.Payment;
-                 savedRecipt();
+                try {
+                    type_filter = TypeOfFilter.Payment;
+                    savedRecipt();
+                } catch (SQLException ex) {
+                    Logger.getLogger(PaymentReciptFrame.class.getName()).log(Level.SEVERE, null, ex);
+                }
              }else if(radio_Clear.isSelected()){
                    type_filter = TypeOfFilter.Clear;
                    int isOk = JOptionPane.showConfirmDialog(this, "سوف يقوم هذا الاختيار بالتصفية المالية للمورد . هل انت متاكد", "تصفية مالية", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
                    if(isOk == JOptionPane.YES_OPTION){
-                       savedRecipt();
+                       try {
+                           savedRecipt();
+                       } catch (SQLException ex) {
+                           Logger.getLogger(PaymentReciptFrame.class.getName()).log(Level.SEVERE, null, ex);
+                       }
                    }
              }else{
                  type_filter = TypeOfFilter.End;
                  int isOk = JOptionPane.showConfirmDialog(this, "سوف يقوم هذا الاختيار بحذف كل فواتير و ايصالات المورد . هل انت متاكد", "تصفية  نهائية", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE);
                  if(isOk == JOptionPane.YES_OPTION){
-                       savedRecipt();
+                     try {
+                         savedRecipt();
+                     } catch (SQLException ex) {
+                         Logger.getLogger(PaymentReciptFrame.class.getName()).log(Level.SEVERE, null, ex);
+                     }
                    }               
              }
         }
 
         
     }//GEN-LAST:event_btsaveActionPerformed
-    private void savedRecipt(){
+    private void savedRecipt() throws SQLException{
       pay_recipt.setId_PaymentReceipt(Integer.parseInt(id_reciept));
       pay_recipt.setDate_process(date);
       pay_recipt.setAmount(amount);
@@ -554,27 +571,31 @@ public class PaymentReciptFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_bteditActionPerformed
 
     private void btupdateActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btupdateActionPerformed
-        // TODO add your handling code here:
-        int id_supplier = Integer.parseInt(suppliers.getIdByName(com_Name_Suppliers.getSelectedItem().toString()));
-        String id_paymentRecipt = txt_id_reciept.getText();
-        String amount = txt_Amount.getText();
-        String date = Tools.dateSql(txt_Date_Process.getDate());
-        String note = txt_note.getText();
-        pay_recipt.setId_PaymentReceipt(Integer.parseInt(id_paymentRecipt));
-        pay_recipt.setDate_process(date);
-        pay_recipt.setAmount(Double.parseDouble(amount));
-        pay_recipt.setId_Suppliers(id_supplier);
-        pay_recipt.setNote(note);
-        int confirm = JOptionPane.showConfirmDialog(null, "هل ترغب في تحديث الايصال ؟", "تحديث", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
-        if(confirm == JOptionPane.YES_OPTION){
-            if(pay_recipt.Update(id_paymentRecipt)){
-                   Tools.showInfoMsg("تم التحديث بنجاح", "تحديث");
-                   newRecipt();
+        try {
+            // TODO add your handling code here:
+            int id_supplier = Integer.parseInt(suppliers.getIdByName(com_Name_Suppliers.getSelectedItem().toString()));
+            String id_paymentRecipt = txt_id_reciept.getText();
+            String amount = txt_Amount.getText();
+            String date = Tools.dateSql(txt_Date_Process.getDate());
+            String note = txt_note.getText();
+            pay_recipt.setId_PaymentReceipt(Integer.parseInt(id_paymentRecipt));
+            pay_recipt.setDate_process(date);
+            pay_recipt.setAmount(Double.parseDouble(amount));
+            pay_recipt.setId_Suppliers(id_supplier);
+            pay_recipt.setNote(note);
+            int confirm = JOptionPane.showConfirmDialog(null, "هل ترغب في تحديث الايصال ؟", "تحديث", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE);
+            if(confirm == JOptionPane.YES_OPTION){
+                if(pay_recipt.Update(id_paymentRecipt)){
+                    Tools.showInfoMsg("تم التحديث بنجاح", "تحديث");
+                    newRecipt();
+                }else{
+                    Tools.showErrorMsg("خطأ في التحديث");
+                }
             }else{
-               Tools.showErrorMsg("خطأ في التحديث");
+                newRecipt();
             }
-        }else{
-            newRecipt();
+        } catch (SQLException ex) {
+            Logger.getLogger(PaymentReciptFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
         
     }//GEN-LAST:event_btupdateActionPerformed
@@ -625,11 +646,15 @@ public class PaymentReciptFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btprintActionPerformed
 
     private void com_Name_SuppliersItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_com_Name_SuppliersItemStateChanged
-        // TODO add your handling code here:
-        txt_balance.setText(suppliers.calcBalanceSupplier(com_Name_Suppliers.getSelectedItem().toString())+"");
-        txt_Amount.setText("0.00");
-        Tools.CenterJDateChos(txt_Date_Process);
-        txt_id_reciept.setText(pay_recipt.getLastPaymentReceiptId());
+        try {
+            // TODO add your handling code here:
+            txt_balance.setText(suppliers.calcBalanceSupplier(com_Name_Suppliers.getSelectedItem().toString())+"");
+            txt_Amount.setText("0.00");
+            Tools.CenterJDateChos(txt_Date_Process);
+            txt_id_reciept.setText(pay_recipt.getLastPaymentReceiptId());
+        } catch (SQLException ex) {
+            Logger.getLogger(PaymentReciptFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_com_Name_SuppliersItemStateChanged
 
     private void radio_ClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_radio_ClearActionPerformed
@@ -658,6 +683,8 @@ public class PaymentReciptFrame extends javax.swing.JFrame {
            newBalance = OldBalance + amount;
         }catch(NumberFormatException ex){
             Logger.getLogger(getClass().getName()).log(Level.WARNING, ex.getMessage(), ex);
+        } catch (SQLException ex) {
+            Logger.getLogger(PaymentReciptFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
         Tools.selectButtonTable(btPanel);
         //Set Txt

@@ -7,6 +7,7 @@ package Entity;
 
 import Utilities.ConnectDB;
 import Utilities.Person;
+import java.sql.SQLException;
 import javax.swing.JComboBox;
 import javax.swing.JTable;
 
@@ -33,7 +34,7 @@ public class Suppliers extends Person{
         String firstbalance = ConnectDB.getIdFromName("SELECT firstBalance AS id FROM suppliers WHERE id_Suppliers="+id_Supplier);
         return firstbalance;
     }
-    public double calcBalanceSupplier(String nameSupplier){
+    public double calcBalanceSupplier(String nameSupplier) throws SQLException{
         double debit , Creditor  , First_Balance = 0;
         String id_Supplier = getIdByName(nameSupplier);
         String firstbalance = getFirstBalance(id_Supplier);

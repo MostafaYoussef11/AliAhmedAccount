@@ -20,8 +20,11 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.io.InputStream;
 import java.math.BigDecimal;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Vector;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JComponent;
@@ -830,7 +833,11 @@ public class purchaseInvoiceFrame extends javax.swing.JFrame {
             invoice.setId_invoice(txtId_Invoice.getText());
             invoice.setDate_invoice(txtDate.getDate());
             invoice.setPaymentMethod(Tools.getPayment(comboPaymentMethod.getSelectedItem().toString()));
-            invoice.setId_Supplier(suppliers.getIdByName(comboName.getSelectedItem().toString()));
+            try {
+                invoice.setId_Supplier(suppliers.getIdByName(comboName.getSelectedItem().toString()));
+            } catch (SQLException ex) {
+                Logger.getLogger(purchaseInvoiceFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
             invoice.setAmount(Double.parseDouble(txtTotalAmount.getText()));
             invoice.setDiscont(Double.parseDouble(txtDiscond.getText()));
             invoice.setCashAmount(Double.parseDouble(txtAmountCashing.getText()));

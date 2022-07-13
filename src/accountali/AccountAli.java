@@ -11,6 +11,7 @@ import Frams.MasarySellFrame;
 import Frams.OpaypayFrame;
 import Frams.VFCashFrame;
 import Frams.menuCashFrame;
+import Frams.paydebtFrame;
 import Utilities.AutoSuggestor;
 import Utilities.Tools;
 import java.awt.Color;
@@ -33,10 +34,10 @@ public class AccountAli {
 
     public static void main(String[] args) {
         Login l = new Login();
-        BeepayFrame o = new BeepayFrame();
+        paydebtFrame o = new paydebtFrame();
         
-        
-        Tools.openJFram(l, "تسجيل الدخول", "account");
+        Tools.openJFram(o);
+        //Tools.openJFram(l, "تسجيل الدخول", "account");
     }
     
 }

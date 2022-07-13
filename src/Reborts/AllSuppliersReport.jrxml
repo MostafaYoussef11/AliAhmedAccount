@@ -4,9 +4,9 @@
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<queryString>
-		<![CDATA[SELECT sup.id_Suppliers  id, SUM(sup.Debit) debit , SUM(sup.Creditor) creditor , sup.name_Suppliers  , s.firstBalance FROM debitandcreditorsupplier sup INNER JOIN suppliers s ON sup.id_Suppliers = s.id_Suppliers]]>
+		<![CDATA[SELECT sup.id_Suppliers AS id, COALESCE(SUM(sup.Debit),0) AS debit , COALESCE(SUM(sup.Creditor),0) AS creditor , sup.name_Suppliers  , s.firstBalance FROM debitandcreditorsupplier AS sup left  JOIN suppliers s ON sup.id_Suppliers = s.id_Suppliers GROUP BY id]]>
 	</queryString>
-	<field name="id" class="java.lang.Integer"/>
+	<field name="id" class="java.lang.Long"/>
 	<field name="debit" class="java.lang.Double">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>

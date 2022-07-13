@@ -19,6 +19,7 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.io.InputStream;
 import java.math.BigDecimal;
+import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.Vector;
 import java.util.logging.Level;
@@ -832,46 +833,50 @@ public class SalesInvoiceFrame extends javax.swing.JFrame {
         if(size == 0){
             Tools.showErrorMsg("لا توجد اصناف بالفاتورة");
         }else{
-            sales.setValues(valuesItems);
-            sales.setId_invoice(txtId_Invoice.getText());
-            sales.setDate_invoice(txtDate.getDate());
-            sales.setPaymentMethod(Tools.getPayment(comboPaymentMethod.getSelectedItem().toString()));
-            sales.setId_client(new ClientPerson().getIdByName(comboName.getSelectedItem().toString()));
-            sales.setAmount(Double.parseDouble(txtTotalAmount.getText()));
-            sales.setDiscont(Double.parseDouble(txtDiscond.getText()));
-            sales.setCashAmount(Double.parseDouble(txtAmountCashing.getText()));
-            sales.setRemainingAmount(Double.parseDouble(txtRemainingAmount.getText()));
-            sales.setNote(txtNote.getText());
-            //sales.setIsFilter(false);
-            if(sales.Save()){
-               // Tools.showInfoMsg("تم الحفظ بنجاح", "حفظ فاتورة");
-                int isPrint = JOptionPane.showConfirmDialog(null,"تم الحفظ بنجاح . "+ "هل تريد طباعة الفاتورة ؟ ", "طباعة فاتورة", JOptionPane.YES_NO_OPTION);
-                if(isPrint == JOptionPane.YES_OPTION){
-                    String sql = "SELECT s.id_salesInvoic , s.date_salesInvoic , s.type_salesInvoic , c.name_client , s.totalAmount , s.discount , s.amountCash , s.amountLater , s.note FROM salesinvoic s"
-                            + " INNER JOIN client c on s.id_client = c.id_client where id_salesinvoic=$P{id_salesInvoice}";
-                    HashMap para = new HashMap();
-                    int id_invoicBil = Integer.parseInt(sales.getId_invoice());
-                    para.put("id_salesInvoice", id_invoicBil);
-                    double amount = sales.getAmount() - sales.getDiscont();
-                    String tafqeet = "";
-                    try{
-                        tafqeet = Tafqeet.doTafqeet(new BigDecimal(amount));
-                    }catch(NullPointerException ex){
-                        tafqeet = "";
-                        Logger.getLogger("salseInvoic").warning(ex.getMessage());
+            try {
+                sales.setValues(valuesItems);
+                sales.setId_invoice(txtId_Invoice.getText());
+                sales.setDate_invoice(txtDate.getDate());
+                sales.setPaymentMethod(Tools.getPayment(comboPaymentMethod.getSelectedItem().toString()));
+                sales.setId_client(new ClientPerson().getIdByName(comboName.getSelectedItem().toString()));
+                sales.setAmount(Double.parseDouble(txtTotalAmount.getText()));
+                sales.setDiscont(Double.parseDouble(txtDiscond.getText()));
+                sales.setCashAmount(Double.parseDouble(txtAmountCashing.getText()));
+                sales.setRemainingAmount(Double.parseDouble(txtRemainingAmount.getText()));
+                sales.setNote(txtNote.getText());
+                //sales.setIsFilter(false);
+                if(sales.Save()){
+                    // Tools.showInfoMsg("تم الحفظ بنجاح", "حفظ فاتورة");
+                    int isPrint = JOptionPane.showConfirmDialog(null,"تم الحفظ بنجاح . "+ "هل تريد طباعة الفاتورة ؟ ", "طباعة فاتورة", JOptionPane.YES_NO_OPTION);
+                    if(isPrint == JOptionPane.YES_OPTION){
+                        String sql = "SELECT s.id_salesInvoic , s.date_salesInvoic , s.type_salesInvoic , c.name_client , s.totalAmount , s.discount , s.amountCash , s.amountLater , s.note FROM salesinvoic s"
+                                + " INNER JOIN client c on s.id_client = c.id_client where id_salesinvoic=$P{id_salesInvoice}";
+                        HashMap para = new HashMap();
+                        int id_invoicBil = Integer.parseInt(sales.getId_invoice());
+                        para.put("id_salesInvoice", id_invoicBil);
+                        double amount = sales.getAmount() - sales.getDiscont();
+                        String tafqeet = "";
+                        try{
+                            tafqeet = Tafqeet.doTafqeet(new BigDecimal(amount));
+                        }catch(NullPointerException ex){
+                            tafqeet = "";
+                            Logger.getLogger("salseInvoic").warning(ex.getMessage());
+                        }
+                        para.put("Tafqeet",tafqeet );
+                        InputStream stream =getClass().getResourceAsStream("/Reborts/SalesInvoicReport.jrxml");
+                        Tools.Printer(sql, stream, para);
                     }
-                    para.put("Tafqeet",tafqeet );
-                    InputStream stream =getClass().getResourceAsStream("/Reborts/SalesInvoicReport.jrxml");
-                    Tools.Printer(sql, stream, para);
+                    newInvoice();
+                    txtTotalAmount.setText("0.00");
+                    txtDiscond.setText("0.00");
+                    txtAmountCashing.setText("0.00");
+                    txtRemainingAmount.setText("0.00");
+                    
+                }else{
+                    Tools.showErrorMsg("خطأ");
                 }
-                newInvoice();
-                txtTotalAmount.setText("0.00");
-                txtDiscond.setText("0.00");
-                txtAmountCashing.setText("0.00");
-                txtRemainingAmount.setText("0.00");
-                
-            }else{
-                Tools.showErrorMsg("خطأ");
+            } catch (SQLException ex) {
+                Logger.getLogger(SalesInvoiceFrame.class.getName()).log(Level.SEVERE, null, ex);
             }
             
         }

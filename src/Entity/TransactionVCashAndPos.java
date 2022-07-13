@@ -8,6 +8,7 @@ package Entity;
 import Utilities.ConnectDB;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.SQLException;
 import javax.swing.JTable;
 
 /**
@@ -36,14 +37,14 @@ public class TransactionVCashAndPos {
     public void Setname_pos(String name_pos){
         this.name_pos = name_pos;
     }
-    private int getIdPos() {
+    private int getIdPos() throws SQLException {
         pc = new PosClass();
         String id_pos_St =  pc.getIdPosFromNamePos(name_pos);
         int idPos = Integer.parseInt(id_pos_St);
         return idPos;
     }
     
-    public boolean SaveDeposit(){
+    public boolean SaveDeposit() throws SQLException{
         id_pos = getIdPos();
         pp = new posPay(id_pos) {};
         pp.setPrice_masary_pay(price);

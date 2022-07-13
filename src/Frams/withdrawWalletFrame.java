@@ -13,6 +13,9 @@ import Entity.posPay;
 import Utilities.Tools;
 import java.awt.Dimension;
 import java.awt.Font;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -354,7 +357,11 @@ public class withdrawWalletFrame extends javax.swing.JFrame {
         pos.fillCombo(combPos);
         combPos.setSelectedIndex(id_pos-1);
         namePos = combPos.getSelectedItem().toString();
-        id_pos = Integer.parseInt(pos.getIdPosFromNamePos(namePos));
+        try {
+            id_pos = Integer.parseInt(pos.getIdPosFromNamePos(namePos));
+        } catch (SQLException ex) {
+            Logger.getLogger(withdrawWalletFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
         pp = new posPay(id_pos){};
         ps = new PosSell(id_pos) {};
         txtPos_balance.setText(pp.getfirstBalance()+"");
@@ -414,11 +421,15 @@ public class withdrawWalletFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btprintActionPerformed
 
     private void combPosItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_combPosItemStateChanged
-        // TODO add your handling code here:
-        String name_pos = combPos.getSelectedItem().toString();
-        id_pos = Integer.parseInt(pos.getIdPosFromNamePos(name_pos));
-        String balance = new posPay(id_pos) {}.getfirstBalance()+"";
-        txtPos_balance.setText(balance);
+        try {
+            // TODO add your handling code here:
+            String name_pos = combPos.getSelectedItem().toString();
+            id_pos = Integer.parseInt(pos.getIdPosFromNamePos(name_pos));
+            String balance = new posPay(id_pos) {}.getfirstBalance()+"";
+            txtPos_balance.setText(balance);
+        } catch (SQLException ex) {
+            Logger.getLogger(withdrawWalletFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_combPosItemStateChanged
 
     private void combNumberItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_combNumberItemStateChanged

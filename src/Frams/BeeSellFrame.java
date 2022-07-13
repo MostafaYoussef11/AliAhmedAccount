@@ -16,6 +16,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.Toolkit;
+import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.ImageIcon;
@@ -360,38 +361,43 @@ public class BeeSellFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_btnewActionPerformed
 
     private void btsaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btsaveActionPerformed
-        boolean isSave = false;
-        String name_recharge_type = comb_recharge_type.getSelectedItem().toString();
-        double value = 0 ; 
-        try{
-            value = Double.parseDouble(txt_value.getText());
-        }catch(NumberFormatException ex){
-            Logger.getLogger("Sell error").log(Level.SEVERE, null, ex);
-        }
-        double amount = 0 ; 
-        try{
-            amount = Double.parseDouble(txt_amount.getText());
-        }catch(NumberFormatException ex){
-            Logger.getLogger("Sell error").log(Level.SEVERE, null, ex);            
-        }
-        String to_account = comb_to_account.getSelectedItem().toString();
-        switch(name_recharge_type){
-            case "نقدي":
-                Bee.SetDataAndgeter(value, amount, name_recharge_type, to_account, null);
-                isSave = Bee.SaveCash();
-                break;
-            case "مندوب":
-                Bee.SetDataAndgeter(value, amount, name_recharge_type, to_account, null);
-                isSave = Bee.SaveAccountSupplier();
-                break;
-            default:
-                Bee.setDataUseSave(value, amount, to_account, id_pos);
-                isSave = Bee.SaveVFCash(); // method add to VF-Cash
-                break;
-        }
-        if(isSave){
-            Tools.showInfoMsg("تم الحفظ بنجاح", "حفظ");
-            newSell();
+        try{                                       
+            boolean isSave = false;
+            String name_recharge_type = comb_recharge_type.getSelectedItem().toString();
+            double value = 0 ;
+            try{
+                value = Double.parseDouble(txt_value.getText());
+            }catch(NumberFormatException ex){
+                Logger.getLogger("Sell error").log(Level.SEVERE, null, ex);
+            }
+            double amount = 0 ;
+            try{
+                amount = Double.parseDouble(txt_amount.getText());
+            }catch(NumberFormatException ex){
+                Logger.getLogger("Sell error").log(Level.SEVERE, null, ex);
+            }
+            String to_account = comb_to_account.getSelectedItem().toString();
+            switch(name_recharge_type){
+                case "نقدي":
+                    Bee.SetDataAndgeter(value, amount, name_recharge_type, to_account, null);
+                    isSave = Bee.SaveCash();
+                    break;
+                case "مندوب":
+                    Bee.SetDataAndgeter(value, amount, name_recharge_type, to_account, null);
+                    isSave = Bee.SaveAccountSupplier();
+                    break;
+                default:
+                    Bee.setDataUseSave(value, amount, to_account, id_pos);
+                    isSave = Bee.SaveVFCash(); // method add to VF-Cash
+                    break;
+            }
+            if(isSave){
+                Tools.showInfoMsg("تم الحفظ بنجاح", "حفظ");
+                newSell();
+            }
+            
+        }catch(SQLException ex){
+            Logger.getLogger(BeeSellFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
         
     }//GEN-LAST:event_btsaveActionPerformed
