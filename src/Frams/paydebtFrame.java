@@ -8,6 +8,9 @@ package Frams;
 import Entity.SolafClass;
 import Entity.paydebt;
 import Utilities.Tools;
+import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -25,19 +28,52 @@ public class paydebtFrame extends javax.swing.JFrame {
     int id_solf;
     double balance ;
     SolafClass solf;
+    Dimension dim = new Dimension(690, 580);
+    paydebt pay ;// = new paydebt();
     public paydebtFrame() {
           initComponents();
+          super.setSize(dim);
+          Tools.setBackground(background, dim, "2500.jpg");
+          
           setnewpay();
+          combName.addActionListener(new ActionListener() {
+              @Override
+              public void actionPerformed(ActionEvent e) {
+                name = combName.getSelectedItem().toString();
+                  try {
+                      id_Solfa_Str = solf.getIdSolfFromName(name);
+                  } catch (SQLException ex) {
+                      Logger.getLogger(paydebtFrame.class.getName()).log(Level.SEVERE, null, ex);
+                  }
+                id_solf = Integer.parseInt(id_Solfa_Str);
+                  try { 
+                      txtBalance.setText(solf.getAmountSolfa(id_solf)+"");
+//     throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                  } catch (SQLException ex) {
+                      Logger.getLogger(paydebtFrame.class.getName()).log(Level.SEVERE, null, ex);
+                  }
+              }
+          });
     }
     private void setnewpay(){
+        pay = new paydebt();
        try {
             solf = new SolafClass();
             solf.fillCombo(combName);
-            name = combName.getSelectedItem().toString();
-            id_Solfa_Str = solf.getIdSolfFromName(name);
-            id_solf = Integer.parseInt(id_Solfa_Str);
-            txtBalance.setText(solf.getAmountSolfa(id_solf)+"");
+            if(combName.getItemCount() == 0){
+                Tools.showErrorMsg("لاتوجد بيانات");
+                combName.addItem("لا توجد بيانات");
+                combName.setEnabled(false);
+                //this.disable();
+            }else{
+               name = combName.getSelectedItem().toString();
+               id_Solfa_Str = solf.getIdSolfFromName(name);
+               id_solf = Integer.parseInt(id_Solfa_Str);
+               txtBalance.setText(solf.getAmountSolfa(id_solf)+"");           
+            }
             Tools.disableButOpen(btPanel);
+            txtAmount.setText("0.00");
+            pay.fillTable(jTable1);
         } catch (SQLException ex) {
             Logger.getLogger(paydebtFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -69,8 +105,14 @@ public class paydebtFrame extends javax.swing.JFrame {
         btdel = new javax.swing.JButton();
         btexit = new javax.swing.JButton();
         btprint = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
+        background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        getContentPane().setLayout(null);
+
+        jPanel1.setOpaque(false);
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("الاسم");
@@ -105,19 +147,19 @@ public class paydebtFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txtBalance, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtDate, javax.swing.GroupLayout.DEFAULT_SIZE, 188, Short.MAX_VALUE))
+                    .addComponent(txtDate, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, 147, Short.MAX_VALUE)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(combName, 0, 153, Short.MAX_VALUE)
+                    .addComponent(combName, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txtAmount))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, 133, Short.MAX_VALUE))
+                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -137,6 +179,9 @@ public class paydebtFrame extends javax.swing.JFrame {
                     .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
+
+        getContentPane().add(jPanel1);
+        jPanel1.setBounds(10, 11, 655, 88);
 
         btPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         btPanel.setOpaque(false);
@@ -248,28 +293,33 @@ public class paydebtFrame extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(btPanel, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 108, Short.MAX_VALUE)
-                .addComponent(btPanel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
+        getContentPane().add(btPanel);
+        btPanel.setBounds(10, 470, 655, 61);
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "الباقي", "الاسم", "المبلغ", "التاريخ", "م"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, true, true
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        jScrollPane1.setViewportView(jTable1);
+
+        getContentPane().add(jScrollPane1);
+        jScrollPane1.setBounds(10, 105, 655, 359);
+
+        background.setText("jLabel3");
+        getContentPane().add(background);
+        background.setBounds(0, 0, 34, 14);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -280,7 +330,7 @@ public class paydebtFrame extends javax.swing.JFrame {
 
     private void btsaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btsaveActionPerformed
         try {
-            paydebt pay = new paydebt();
+           
             id_solf = Integer.parseInt(solf.getIdSolfFromName(combName.getSelectedItem().toString()));
             boolean isSave = pay.savePay(id_solf, Double.parseDouble(txtAmount.getText()),txtDate.getDate());
             if(isSave){
@@ -351,6 +401,7 @@ public class paydebtFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel background;
     private javax.swing.JPanel btPanel;
     private javax.swing.JButton btdel;
     private javax.swing.JButton btedit;
@@ -365,6 +416,8 @@ public class paydebtFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
     private javax.swing.JTextField txtAmount;
     private javax.swing.JLabel txtBalance;
     private com.toedter.calendar.JDateChooser txtDate;

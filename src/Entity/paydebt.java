@@ -16,6 +16,7 @@ import java.sql.Statement;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JTable;
 
 /**
  *
@@ -31,12 +32,12 @@ public class paydebt {
     private double amount ;
     private String datePay_Solf;
     
-    private Connection con;
-    private PreparedStatement pstm , pstm_casher , pstm_Update_notifaction;
+    private Connection con = null;
+    private PreparedStatement pstm , pstm_casher , pstm_Update_notifaction , pstm_Update_delete_Solfa = null;
     private ResultSet rst;
     
-    private CasherClass casher;
-    private SolafClass  solf;
+    private final CasherClass casher;
+    private final SolafClass  solf;
     
     public paydebt(){
         casher = new CasherClass();
@@ -68,24 +69,36 @@ public class paydebt {
                 pstm_casher = con.prepareStatement(sql_casher, Statement.RETURN_GENERATED_KEYS);
                 pstm_casher.setDouble(1, amount); // credit
                 pstm_casher.setString(2, "سداد مبلغ السلفة" + " " + amount);  // note
-                pstm_casher.setInt(3, saveData.getIdUser()); // id_user
+                pstm_casher.setInt(3, 0); // id_user
                 pstm_casher.setInt(4, id_paydebt);
                 int row_cahser_Affect = pstm_casher.executeUpdate();
                 // update Or Delete notification
                 if(row_cahser_Affect == 1){
+                    //int rowUpdate = 0;
                 // لو لم يتم دفع المبلغ بالكامل
+                double newAmount = Solfa_amount - amount;
                    if(amount < Solfa_amount){
                   // update Notification
-                    double newAmount = Solfa_amount - amount;
-                    String Sql_Update = "UPDATE `notifcation` SET  `date_notifcation`= ?,`note`= ? WHERE `id_Solf` = ?";
+                    
+                    String Sql_Update = "UPDATE `notifcation` SET  `date_notifcation`= ? ,`note`= ? WHERE `id_Solf` = ?";
                     pstm_Update_notifaction = con.prepareStatement(Sql_Update, Statement.RETURN_GENERATED_KEYS);
                     pstm_Update_notifaction.setString(1, date_pay);
-                    pstm_Update_notifaction.setString(2, "موعد سداد مبلغ " + newAmount + " " + solf.getNameSolfa(id_Solf));
+                    String nots = "موعد سداد مبلغ " + newAmount + " " + solf.getNameSolfa(id_Solf); 
+                    pstm_Update_notifaction.setString(2, nots);
                     pstm_Update_notifaction.setInt(3, id_Solf);
-                    isSave = pstm_Update_notifaction.execute();
-                    if(isSave){
-                        con.commit();
-                        con.close();
+                    int rowUpdate = pstm_Update_notifaction.executeUpdate();
+                    if(rowUpdate == 1){
+                        // Update amount on Solf
+                        String sql_update_Solf = "UPDATE `solf` SET `amount_Solf`= ? WHERE `id_Solf` = ?";
+                        pstm_Update_delete_Solfa = con.prepareStatement(sql_update_Solf, Statement.RETURN_GENERATED_KEYS);
+                        pstm_Update_delete_Solfa.setDouble(1,newAmount);
+                        pstm_Update_delete_Solfa.setInt(2, id_Solf);
+                        int row_solfAffect = pstm_Update_delete_Solfa.executeUpdate();
+                        if(row_solfAffect == 1){
+                            isSave = true;
+                            con.commit();
+                            con.close();
+                        }
                     }
                   }
               // المبلغ كامل
@@ -93,12 +106,21 @@ public class paydebt {
                   String sql_delete = "DELETE FROM `notifcation` WHERE id_Solf = ? ";
                   pstm_Update_notifaction = con.prepareStatement(sql_delete);
                   pstm_Update_notifaction.setInt(1, id_Solf);
-                  isSave = pstm_Update_notifaction.execute();
-                  if(isSave){
-                      con.commit();
-                      con.close();
+                  int rowUpdate = pstm_Update_notifaction.executeUpdate();
+                  if(rowUpdate == 1){
+                      // not active Solfa
+                      String sql_update_solf = "UPDATE `solf` SET `isActive`= ?  , `amount_Solf`= ? WHERE `id_Solf` = ?";
+                      pstm_Update_delete_Solfa = con.prepareStatement(sql_update_solf, Statement.RETURN_GENERATED_KEYS);
+                      pstm_Update_delete_Solfa.setBoolean(1, false);
+                      pstm_Update_delete_Solfa.setDouble(2, newAmount);
+                      pstm_Update_delete_Solfa.setInt(3, id_Solf);
+                      int rowSolfAffect = pstm_Update_delete_Solfa.executeUpdate();
+                      if(rowSolfAffect == 1){
+                            isSave = true;
+                                con.commit();
+                                con.close();                           
+                      }
                   }
-              
               }
             }
           }
@@ -108,7 +130,8 @@ public class paydebt {
             con.close();
             Logger.getLogger(paydebt.class.getName()).log(Level.SEVERE, null, ex);
         }finally{
-            if(pstm != null || pstm_casher != null || pstm_Update_notifaction != null){
+            if(pstm != null || pstm_casher != null || pstm_Update_notifaction != null || pstm_Update_delete_Solfa != null){
+                pstm.close();
                 pstm.close();
                 pstm_Update_notifaction.close();
                 pstm_casher.close();
@@ -123,14 +146,11 @@ public class paydebt {
         
       return isSave;  
     }
-    
-    public boolean updateNotification(int id_solf){
-      boolean isUpdate = false;
-//      try{
-//          con = ConnectDB.getCon();
-//          String sql_update = "";
-//      
-//      }  
-      return isUpdate;
+ 
+    public void fillTable(JTable table){
+        String sql_select = "SELECT s.amount_Solf , s.name_Solf , pd.amount , pd.date_paydebt , pd.id_paydebt FROM paydebt AS pd INNER JOIN solf AS s ON pd.id_Solf = s.id_Solf";
+        String columnName[] = { "الباقي", "الاسم", "المبلغ", "التاريخ", "م"};
+        ConnectDB.fillAndCenterTable(sql_select, table, columnName);
     }
+
 }

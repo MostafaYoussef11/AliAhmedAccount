@@ -154,8 +154,11 @@ public class ConnectDB {
            ((JLabel)combo.getRenderer()).setHorizontalAlignment(SwingConstants.CENTER);
            combo.setModel(new DefaultComboBoxModel(values));
        }catch(SQLException ex){
+           String[] items = {"لا توجد اختيارات"};
+           combo.setModel(new DefaultComboBoxModel(items));
+           
            Logger.getLogger("FillCombo").log(Level.SEVERE, null, ex);
-       
+                //throw ex ;
        }
    }
   public static String[] getColumn(String tableName , String coulmName ){
@@ -242,8 +245,6 @@ public class ConnectDB {
                id = rs.getString("id");
            }
            conn.close();
-          
-       
        }
        catch(SQLException ex){
               close(conn);

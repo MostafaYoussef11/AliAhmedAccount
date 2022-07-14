@@ -36,8 +36,8 @@ public class AccountAli {
         Login l = new Login();
         paydebtFrame o = new paydebtFrame();
         
-        Tools.openJFram(o);
-        //Tools.openJFram(l, "تسجيل الدخول", "account");
+       // Tools.openJFram(o);
+       Tools.openJFram(l, "تسجيل الدخول", "account");
     }
     
 }

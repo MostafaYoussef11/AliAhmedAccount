@@ -201,4 +201,110 @@ public class SolafClass {
     public String getIdSolfFromName(String name_Solf) throws SQLException{
         return ConnectDB.getIdFrmName("Solf", name_Solf);
     }
+    
+ public boolean updateAmountSolfa(int id_solf , double newAmount){
+      boolean isUpdate = false;
+        //Connection connection = null;// ConnectDB.getCon();
+        //Statement pstm = null;
+          String sql = "UPDATE `solf` SET `amount_Solf`= ? WHERE `id_Solf` = ?";
+          isUpdate = ConnectDB.ExucuteAnyQuery(sql);
+          return isUpdate;
+//        try{
+          //  connection = ConnectDB.getCon();
+          
+           // pstm = connection.createStatement();
+//            pstm.setDouble(1, newAmount);
+//            pstm.setInt(2, id_solf);
+          // int rowAffect =  pstm.executeUpdate(sql);
+          
+//                isUpdate = true;
+//                pstm.close();
+//                connection.close();
+            
+        
+//        }catch(SQLException ex){
+//          try {   
+//              if(connection != null){
+//                    connection.close();
+//              }
+//              if(pstm != null){
+//                    pstm.close();
+//              }
+//              Logger.getLogger(getClass().getName()).log(Level.SEVERE, null, ex);
+//
+//          } catch (SQLException ex1) {
+//              Logger.getLogger(SolafClass.class.getName()).log(Level.SEVERE, null, ex1);
+//          }
+//        }finally{
+//            if(pstm != null){
+//                try {
+//                    pstm.close();
+//                } catch (SQLException ex) {
+//                    Logger.getLogger(SolafClass.class.getName()).log(Level.SEVERE, null, ex);
+//                }
+//            }
+//            if(connection != null){
+//                try {
+//                    connection.close();
+//                } catch (SQLException ex) {
+//                    Logger.getLogger(SolafClass.class.getName()).log(Level.SEVERE, null, ex);
+//                }
+//            }
+//        
+//        }
+      
+//      return isUpdate;
+    }
+ 
+   public boolean updateActiveSolfa(int id_solf , boolean isActive){
+      boolean isUpdate = false;
+        Connection connection = null;// ConnectDB.getCon();
+        PreparedStatement pstm = null;
+        try{
+            connection = ConnectDB.getCon();
+            String sql = "UPDATE `solf` SET `isActive`= ? WHERE `id_Solf` = ?";
+            pstm = connection.prepareStatement(sql);
+            pstm.setBoolean(1, isActive);
+            pstm.setInt(2, id_solf);
+            int rowAffect = pstm.executeUpdate();
+            if(rowAffect == 1){
+                isUpdate = true;
+                pstm.close();
+                connection.close();
+            }
+        
+        }catch(SQLException ex){
+          try {   
+              if(connection != null){
+                    connection.close();
+              }
+              if(pstm != null){
+                    pstm.close();
+              }
+              Logger.getLogger(getClass().getName()).log(Level.SEVERE, null, ex);
+
+          } catch (SQLException ex1) {
+              Logger.getLogger(SolafClass.class.getName()).log(Level.SEVERE, null, ex1);
+          }
+        }finally{
+            if(pstm != null){
+                try {
+                    pstm.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(SolafClass.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+            if(connection != null){
+                try {
+                    connection.close();
+                } catch (SQLException ex) {
+                    Logger.getLogger(SolafClass.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        
+        }
+      
+      return isUpdate;
+    }
+ 
 }
