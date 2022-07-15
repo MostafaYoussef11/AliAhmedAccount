@@ -44,7 +44,7 @@ public class RecieveFrame extends javax.swing.JFrame {
     private void SetnewRecieveTransaction(){
         vf.fillCombo(comboWallt);
         supplier.setId_supplier_type(8);
-        supplier.FillComboAllNameSupplierByType(compsup);
+        supplier.FillComboName(compsup);
         id_vf = vf.getId_VF_ByNumber(comboWallt.getSelectedItem().toString());
         limet = 100000 - vf.getLamiteOfMonth_SendAndWithdraw(id_vf);
         St_limet = "الحد الاقصي المتبقي  للسحب : " + limet;

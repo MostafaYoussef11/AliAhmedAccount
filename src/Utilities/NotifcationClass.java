@@ -94,10 +94,13 @@ public final class NotifcationClass extends TimerTask{
             pstm = connection.prepareStatement(sql);
             pstm.setString(1, datePay);
             rst = pstm.executeQuery();
-            while(rst.next()){
+            if(rst != null){
+              while(rst.next()){
                 notif = new NotifacionList(rst.getString(1));
                 notifList.add(notif);
+              }
             }
+
             ConnectDB.close(connection);
         } catch (SQLException ex) {
             ConnectDB.close(connection);
