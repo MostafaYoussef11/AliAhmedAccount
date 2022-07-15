@@ -3,10 +3,23 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/E:/Masrawy/Account/src/Frams/Login.java</file>
-            <file>file:/E:/Masrawy/Account/src/accountali/AccountAli.java</file>
-            <file>file:/E:/Masrawy/Account/src/Reborts/itemReport.jrxml</file>
-            <file>file:/E:/Masrawy/Account/src/Utilities/NotifcationClass.java</file>
+            <file>file:/E:/masrawyAccountBranch/AliAhmedAccount/src/Entity/PaymentRecipt.java</file>
+            <file>file:/E:/masrawyAccountBranch/AliAhmedAccount/src/Utilities/NotifcationClass.java</file>
+            <file>file:/E:/masrawyAccountBranch/AliAhmedAccount/src/Entity/PosSell.java</file>
+            <file>file:/E:/masrawyAccountBranch/AliAhmedAccount/src/Entity/recipt.java</file>
+            <file>file:/E:/masrawyAccountBranch/AliAhmedAccount/src/Entity/SalesInvoic.java</file>
+            <file>file:/E:/masrawyAccountBranch/AliAhmedAccount/src/Entity/SolafClass.java</file>
+            <file>file:/E:/masrawyAccountBranch/AliAhmedAccount/src/Entity/VFCashClass.java</file>
+            <file>file:/E:/masrawyAccountBranch/AliAhmedAccount/src/Frams/SendCashFrame.java</file>
+            <file>file:/E:/masrawyAccountBranch/AliAhmedAccount/src/Frams/paydebtFrame.java</file>
+            <file>file:/E:/masrawyAccountBranch/AliAhmedAccount/src/Entity/Send_receiveCash.java</file>
+            <file>file:/E:/masrawyAccountBranch/AliAhmedAccount/src/Utilities/AutoSuggestor.java</file>
+            <file>file:/E:/masrawyAccountBranch/AliAhmedAccount/src/Frams/FastCashSendPanel.java</file>
+            <file>file:/E:/masrawyAccountBranch/AliAhmedAccount/src/Entity/FeesClass.java</file>
+            <file>file:/E:/masrawyAccountBranch/AliAhmedAccount/src/Entity/deficiency_excess.java</file>
+            <file>file:/E:/masrawyAccountBranch/AliAhmedAccount/src/Entity/CasherClass.java</file>
+            <file>file:/E:/masrawyAccountBranch/AliAhmedAccount/src/Entity/purchaseInvoice.java</file>
+            <file>file:/E:/masrawyAccountBranch/AliAhmedAccount/src/Entity/posPay.java</file>
         </group>
     </open-files>
 </project-private>

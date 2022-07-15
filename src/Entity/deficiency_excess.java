@@ -33,6 +33,7 @@ public class deficiency_excess {
     public boolean SaveDeficiency () throws SQLException{
         boolean isSave = false;
         Connection con = ConnectDB.getCon();
+        con.setAutoCommit(false);
         String sql = "INSERT INTO `deficiency_excess`(`debit`, `note`) VALUES(?,?)";
         PreparedStatement pstmt = con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
         pstmt.setDouble(1, amount);
@@ -43,9 +44,17 @@ public class deficiency_excess {
             while (rst.next()) {
                 this.id_deficiency_excess = rst.getInt(1);
             }
-           int inserCasher =  new CasherClass().SavedCasherTransaction(TypeCasherTransaction.deficiency, amount, note, id_deficiency_excess);
+           int inserCasher =0;
+           PreparedStatement pstmCasher =  new CasherClass().SavedCasherTransaction(TypeCasherTransaction.deficiency, amount, note, id_deficiency_excess ,con);
+           inserCasher = pstmCasher.executeUpdate();
            if(inserCasher == 1){
+               con.commit();
+               con.close();
                isSave = true;
+           }else{
+               con.rollback();
+               con.close();
+               isSave = false;
            }
         }
     
@@ -55,6 +64,7 @@ public class deficiency_excess {
     public boolean SaveExcess () throws SQLException{
         boolean isSave = false;
         Connection con = ConnectDB.getCon();
+        con.setAutoCommit(false);
         String sql = "INSERT INTO `deficiency_excess`(`credit`, `note`) VALUES(?,?)";
         PreparedStatement pstmt = con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
         pstmt.setDouble(1, amount);
@@ -65,9 +75,15 @@ public class deficiency_excess {
             while (rst.next()) {
                 this.id_deficiency_excess = rst.getInt(1);
             }
-           int inserCasher =  new CasherClass().SavedCasherTransaction(TypeCasherTransaction.excess, amount, note, id_deficiency_excess);
+           int inserCasher  =  new CasherClass().SavedCasherTransaction(TypeCasherTransaction.excess, amount, note, id_deficiency_excess , con).executeUpdate();
            if(inserCasher == 1){
+               con.commit();
+               con.close();
                isSave = true;
+           }else{
+               con.rollback();
+               con.close();
+               isSave = false;
            }
         }
     

@@ -32,7 +32,7 @@ public class SolafClass {
        private String note_Solf ;//varchar(512)
        //Variable To Connection
        private Connection con;
-       private PreparedStatement pstmt;
+       private PreparedStatement pstmt , pstmCasher;
        private final CasherClass casher = new CasherClass();
        private TypeCasherTransaction type = TypeCasherTransaction.Solfa;
        
@@ -68,7 +68,8 @@ public class SolafClass {
                        id_Solfa = rst.getInt(1);
                       
                    }
-                  int rowCasher = casher.SavedCasherTransaction(type, amount_Solf, name_Solf + " " + note_Solf, id_Solfa);
+                  pstmCasher = casher.SavedCasherTransaction(type, amount_Solf, name_Solf + " " + note_Solf, id_Solfa ,con);
+                  int rowCasher = pstmCasher.executeUpdate();
                   if(rowCasher == 1){
                       isSave = true;
                       con.commit();

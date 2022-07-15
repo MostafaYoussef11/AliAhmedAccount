@@ -414,22 +414,26 @@ public class SendCashFrame extends javax.swing.JFrame {
         if(discount_from_balance > balance){
             Tools.showErrorMsg("رصيد المحفظة لا يكفي");
         }else{
-            
-           amount = Double.parseDouble(txt_amount.getText());
-           String Number_VF = combVFNumber.getSelectedItem().toString();
-           String Number_client = txtNumberClient.getText();
-           String name_client = comboClient.getSelectedItem().toString();
-            try {
-                send.SetDataSend(discount_from_balance, amount, Number_VF, Number_client, name_client);
-                if(send.SaveSendTransaction()){
-                    Tools.showInfoMsg("تم الاسال", "تحويل كاش");
-                    setNewTransSend();
-                }else{
-                    Tools.showErrorMsg("خطأ في الارسال");       
-                }}
-            catch (SQLException ex) {
-                Logger.getLogger(SendCashFrame.class.getName()).log(Level.SEVERE, null, ex);
-            }
+           // Client is Cash Money  عميل نقدي
+            //System.out.println(getClass().getSimpleName() +"  " + comboClient.getSelectedItem().toString() + " index =  " + comboClient.getSelectedIndex() );
+          if(comboClient.getSelectedIndex() == 0){
+            amount = Double.parseDouble(txt_amount.getText());
+            String Number_VF = combVFNumber.getSelectedItem().toString();
+            String Number_client = txtNumberClient.getText();
+            String name_client = comboClient.getSelectedItem().toString();
+             try {
+                 send.SetDataSend(discount_from_balance, amount, Number_VF, Number_client, name_client);
+                 if(send.SaveSendAndReciveTransaction("Send")){
+                     Tools.showInfoMsg("تم الاسال", "تحويل كاش");
+                     setNewTransSend();
+                 }else{
+                     Tools.showErrorMsg("خطأ في الارسال");       
+                 }}
+             catch (SQLException ex) {
+                 Logger.getLogger(SendCashFrame.class.getName()).log(Level.SEVERE, null, ex);
+             }           
+           } 
+
         
         }
 

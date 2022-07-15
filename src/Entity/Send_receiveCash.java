@@ -75,32 +75,32 @@ public class Send_receiveCash {
         }
         this.Number_client = Number_client;
     }
-    public boolean SaveSendTransaction() throws SQLException{
-        boolean isSaved = false;
-        int id_send = GetIntInsertTransaction("Send");
-        int rowAffectCasher = casher.SavedCasherTransaction(TypeCasherTransaction.Send_VF, amount_Send_Receive, "تحويل فودافون كاش " + Number_client, id_send);
-        if(rowAffectCasher == 1){
-              isSaved = true;
-        }
-        return isSaved;
-    }
+//    public boolean SaveSendTransaction() throws SQLException{
+//        boolean isSaved = false;
+//        int id_send = GetIntInsertTransaction("Send");
+//        int rowAffectCasher = casher.SavedCasherTransaction(TypeCasherTransaction.Send_VF, amount_Send_Receive, "تحويل فودافون كاش " + Number_client, id_send);
+//        if(rowAffectCasher == 1){
+//              isSaved = true;
+//        }
+//        return isSaved;
+//    }
     
-    
-    public boolean SaveRecieveTransaction() throws SQLException{
-        boolean isSaved = false;
-          int id_send = GetIntInsertTransaction("Receive");
-          int rowAffectCasher = casher.SavedCasherTransaction(TypeCasherTransaction.Receive_VF, amount_Send_Receive, "تحويل فودافون كاش " + Number_client, id_send);
-          if(rowAffectCasher == 1){
-                isSaved = true;
-          }  
-    
-        return isSaved;
-    }
+//    
+//    public boolean SaveRecieveTransaction() throws SQLException{
+//        boolean isSaved = false;
+//          int id_send = GetIntInsertTransaction("Receive");
+//          int rowAffectCasher = casher.SavedCasherTransaction(TypeCasherTransaction.Receive_VF, amount_Send_Receive, "تحويل فودافون كاش " + Number_client, id_send);
+//          if(rowAffectCasher == 1){
+//                isSaved = true;
+//          }  
+//    
+//        return isSaved;
+//    }
     
     // Returen id_SentRecive
     
-    private int GetIntInsertTransaction(String type) throws SQLException{
-            int id_send_receive = 0;
+    public boolean SaveSendAndReciveTransaction(String type) throws SQLException{
+           boolean isSaved = false;
            try{
                 con = ConnectDB.getCon();
                 con.setAutoCommit(false);
@@ -116,13 +116,25 @@ public class Send_receiveCash {
                 int rowAffectSend = pstmt_send.executeUpdate();
                 ResultSet rst = pstmt_send.getGeneratedKeys();
                 if(rowAffectSend == 1){
-                    //int id_send = 0;
+                    int id_send = 0;
                     while(rst.next()){
-                        id_send_receive = rst.getInt(1);
+                        id_send = rst.getInt(1);
                     }
-                    con.commit();
+                  switch(type){
+                      case "Receive" :
+                        pstmt_casher = casher.SavedCasherTransaction(TypeCasherTransaction.Receive_VF, amount_Send_Receive, "تحويل فودافون كاش " + Number_client, id_send, con);
+                        break;
+                       case "Send":
+                        pstmt_casher = casher.SavedCasherTransaction(TypeCasherTransaction.Send_VF, amount_Send_Receive, "تحويل فودافون كاش " + Number_client, id_send, con);
+                        break;
+                  } 
+                  if(pstmt_casher.executeUpdate() == 1){
+                      isSaved = true;
+                      con.commit();
+                      con.close();
+                  }    
                 }
-                con.close();
+                
            }catch(SQLException ex){
                 con.rollback();
                 con.close();
@@ -130,7 +142,8 @@ public class Send_receiveCash {
                
            }
            finally{
-               if(pstmt_send != null){
+               if(pstmt_send != null || pstmt_casher != null){
+                   pstmt_casher.close();
                    pstmt_send.close();
                }
                if(con != null){
@@ -138,7 +151,7 @@ public class Send_receiveCash {
                }
               
            }
-         return id_send_receive;
+         return isSaved;
     }
     
    public boolean SaveRecivedFromSupplier(double value , double amount , String  number_Vf , String name_supplier){

@@ -24,7 +24,7 @@ import javax.swing.JTable;
 public class recipt extends MoneyTransfer{
     private TypeOfFilter type;
     private Connection con;
-    private PreparedStatement pstm;
+    private PreparedStatement pstm , pstm_Casher;
     private ResultSet rst;
     
     public void fillTalble(JTable table){
@@ -44,7 +44,9 @@ public class recipt extends MoneyTransfer{
         try{
             con = ConnectDB.getCon();
             con.setAutoCommit(false);
-            int rowAffect = new CasherClass().SavedCasherTransaction(TypeCasherTransaction.Receipt, getAmount(), getNote(), getId_Receipt()); //pstm.executeUpdate();
+            int rowAffect;
+            pstm_Casher = new CasherClass().SavedCasherTransaction(TypeCasherTransaction.Receipt, getAmount(), getNote(), getId_Receipt() ,con);
+            rowAffect = pstm.executeUpdate();
             if(rowAffect == 1){
                 String sqlInserrecipt = "INSERT INTO `receipt` (`id_Receipt`, `date_Receipt`, `amount`, `id_client`) VALUES (?,?,?,?)";
                 pstm = (PreparedStatement) con.prepareStatement(sqlInserrecipt, Statement.RETURN_GENERATED_KEYS);
@@ -52,9 +54,9 @@ public class recipt extends MoneyTransfer{
                 pstm.setString(2, getDate_process());
                 pstm.setDouble(3, getAmount());
                 pstm.setInt(4, getId_client());
-                int roweffect = pstm.executeUpdate();
+                int roweffectReceipt = pstm.executeUpdate();
                 rst = pstm.getGeneratedKeys();
-                if(roweffect == 1){
+                if(roweffectReceipt == 1){
                     String sqlInserClienAccount = "INSERT INTO `clientaccount` (`date_ClientAccount`,`Creditor`, `id_client`,`id_Receipt`, `note`) "
                                                 + "VALUES (?,?,?,?,?)";
                     PreparedStatement pstm_client_account = (PreparedStatement) con.prepareStatement(sqlInserClienAccount, Statement.RETURN_GENERATED_KEYS);

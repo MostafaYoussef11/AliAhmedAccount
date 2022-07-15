@@ -94,80 +94,34 @@ public class CasherClass {
   }
   
   
-  public int SavedCasherTransaction(TypeCasherTransaction type , double amount , String note , int id){
+  public PreparedStatement SavedCasherTransaction(TypeCasherTransaction type , double amount , String note , int id , Connection con){
       int rowAffect = 0;
-      String sql_insert_casher = "";
-      switch(type){
-          case PosPay:  //id_masary_pay  17 Row
-              sql_insert_casher = "INSERT INTO `casher` (`Debit`, `note`,`id_users`, `id_masary_pay`) VALUES (?,?,?,?)";
-              break;
-          case Receipt : //id_Receipt 21
-              sql_insert_casher = "INSERT INTO `casher` (`Debit`, `note`,`id_users`,`id_Receipt`) VALUES (?,?,?,?)";
-              break;
-          case SalesInvoic: //id_salesInvoic
-              sql_insert_casher = "INSERT INTO `casher` (`Debit`, `note`,`id_users`,`id_salesInvoic`) VALUES (?,?,?,?)";
-              break; 
-          case Send_VF: // id_Send_Receive 3 
-               sql_insert_casher = "INSERT INTO `casher` (`Debit`, `note`,`id_users`,`id_Send_Receive`) VALUES (?,?,?,?)";
-              break; 
-          case CasherTwoDebit: // 
-               sql_insert_casher = "INSERT INTO `casher` (`Debit`, `note`,`id_users`) VALUES (?,?,?)";
-              break; 
-          case Solfa: // id_Solf 1 
-              sql_insert_casher = "INSERT INTO `casher` (`Debit`, `note`,`id_users`,`id_Solf`) VALUES (?,?,?,?)";
-              break; 
-          case excess: // في حالة الزيادة
-               sql_insert_casher = "INSERT INTO `casher` (`Debit`, `note`,`id_users`,`id_deficiency_excess`) VALUES (?,?,?,?)";
-              break;  
-          case PosSell: // id_masary_sell 1
-              sql_insert_casher = "INSERT INTO `casher` (`Creditor`, `note`,`id_users`,`id_masary_sell`) VALUES (?,?,?,?)";
-              break;
-          case PaymentReceipt: // id_PaymentReceipt
-              sql_insert_casher = "INSERT INTO `casher` (`Creditor`, `note`,`id_users`,`id_PaymentReceipt`) VALUES (?,?,?,?)";
-              break;
-          case PurchaseInvoice://id_purchaseInvoice
-              sql_insert_casher = "INSERT INTO `casher` (`Creditor`, `note`,`id_users`,`id_purchaseInvoice`) VALUES (?,?,?,?)";
-              break;
-          case Receive_VF: // id_Send_Receive
-              sql_insert_casher = "INSERT INTO `casher` (`Creditor`, `note`,`id_users`,`id_Send_Receive`) VALUES (?,?,?,?)";
-              break;  
-          case Fees: //id_fees
-              sql_insert_casher = "INSERT INTO `casher` (`Creditor`, `note`,`id_users`,`id_fees`) VALUES (?,?,?,?)";
-              break;  
-          case CasherTwoCredit:
-              sql_insert_casher = "INSERT INTO `casher` (`Creditor`, `note`,`id_users`) VALUES (?,?,?)";
-              break;
-          case deficiency :  // في حالة العجز
-               sql_insert_casher = "INSERT INTO `casher` (`Creditor`, `note`,`id_users`,`id_deficiency_excess`) VALUES (?,?,?,?)";
-               break;
-          case Paydebt:
-              sql_insert_casher = "INSERT INTO `casher` (`Creditor`, `note`,`id_users`,`id_paydebt`) VALUES (?,?,?,?)";
-              break;
-      }
+      String sql_insert_casher = getSQlStatement(type);
+      PreparedStatement pstmt = null;
       try{
-          con = ConnectDB.getCon();
-          pstm = con.prepareStatement(sql_insert_casher);
-          pstm.setDouble(1, amount);
+         // con = ConnectDB.getCon();
+          pstmt = con.prepareStatement(sql_insert_casher);
+          pstmt.setDouble(1, amount);
           switch (type) {
               case CasherTwoCredit:
-                  pstm.setString(2, note);
-                  pstm.setInt(3, saveData.getIdUser());
+                  pstmt.setString(2, note);
+                  pstmt.setInt(3, saveData.getIdUser());
                   break;
               case CasherTwoDebit:
-                  pstm.setString(2, note);
-                  pstm.setInt(3, saveData.getIdUser());
+                  pstmt.setString(2, note);
+                  pstmt.setInt(3, saveData.getIdUser());
                   break;
               default:
-                  pstm.setString(2, note);
-                  pstm.setInt(3, saveData.getIdUser());
-                  pstm.setInt(4, id);
+                  pstmt.setString(2, note);
+                  pstmt.setInt(3, saveData.getIdUser());
+                  pstmt.setInt(4, id);
                   break;
           }
-          rowAffect = pstm.executeUpdate();
+          //rowAffect = pstm.executeUpdate();
       } catch (SQLException ex) {
               Logger.getLogger(CasherClass.class.getName()).log(Level.SEVERE, null, ex);
       }
-      return rowAffect;
+      return pstmt;
   
   }
  public double getBalanceCasherTwo(){
@@ -186,18 +140,22 @@ public class CasherClass {
   
  public boolean SaveTransactionBetweenCasher(double amount , TypeCasherTransaction type){
      boolean isSave = false;
-     int  rowCahserAffect = 0;
+     PreparedStatement pstmcash ;
+     int rowCahserAffect = 0;
+     
      String sql_insert = "";
      try{
          conn = ConnectDB.getCon();
          conn.setAutoCommit(false);
          switch(type){
              case CasherTwoCredit:
-                 rowCahserAffect = SavedCasherTransaction(type, amount, "ترحيل الي جرد الثاني", 0);
+                 pstmcash = SavedCasherTransaction(type, amount, "ترحيل الي جرد الثاني", 0 , conn);
+                 rowCahserAffect = pstmcash.executeUpdate();
                  sql_insert = "INSERT INTO `cashertwo` (`Debit`) VALUES (?)";
                  break;
              case CasherTwoDebit:
-                 rowCahserAffect = SavedCasherTransaction(type, amount, "سحب من جرد الثاني", 0);
+                 pstmcash = SavedCasherTransaction(type, amount, "سحب من جرد الثاني", 0 ,conn);
+                 rowCahserAffect = pstmcash.executeUpdate();
                  sql_insert = "INSERT INTO `cashertwo` (`Creditor`) VALUES (?)";
                  break;                
          }
@@ -270,4 +228,56 @@ public class CasherClass {
       }
       return sql_insert_casher;
   }
+  
+  
+  /**
+         switch(type){
+          case PosPay:  //id_masary_pay  17 Row
+              sql_insert_casher = "INSERT INTO `casher` (`Debit`, `note`,`id_users`, `id_masary_pay`) VALUES (?,?,?,?)";
+              break;
+          case Receipt : //id_Receipt 21
+              sql_insert_casher = "INSERT INTO `casher` (`Debit`, `note`,`id_users`,`id_Receipt`) VALUES (?,?,?,?)";
+              break;
+          case SalesInvoic: //id_salesInvoic
+              sql_insert_casher = "INSERT INTO `casher` (`Debit`, `note`,`id_users`,`id_salesInvoic`) VALUES (?,?,?,?)";
+              break; 
+          case Send_VF: // id_Send_Receive 3 
+               sql_insert_casher = "INSERT INTO `casher` (`Debit`, `note`,`id_users`,`id_Send_Receive`) VALUES (?,?,?,?)";
+              break; 
+          case CasherTwoDebit: // 
+               sql_insert_casher = "INSERT INTO `casher` (`Debit`, `note`,`id_users`) VALUES (?,?,?)";
+              break; 
+          case Solfa: // id_Solf 1 
+              sql_insert_casher = "INSERT INTO `casher` (`Debit`, `note`,`id_users`,`id_Solf`) VALUES (?,?,?,?)";
+              break; 
+          case excess: // في حالة الزيادة
+               sql_insert_casher = "INSERT INTO `casher` (`Debit`, `note`,`id_users`,`id_deficiency_excess`) VALUES (?,?,?,?)";
+              break;  
+          case PosSell: // id_masary_sell 1
+              sql_insert_casher = "INSERT INTO `casher` (`Creditor`, `note`,`id_users`,`id_masary_sell`) VALUES (?,?,?,?)";
+              break;
+          case PaymentReceipt: // id_PaymentReceipt
+              sql_insert_casher = "INSERT INTO `casher` (`Creditor`, `note`,`id_users`,`id_PaymentReceipt`) VALUES (?,?,?,?)";
+              break;
+          case PurchaseInvoice://id_purchaseInvoice
+              sql_insert_casher = "INSERT INTO `casher` (`Creditor`, `note`,`id_users`,`id_purchaseInvoice`) VALUES (?,?,?,?)";
+              break;
+          case Receive_VF: // id_Send_Receive
+              sql_insert_casher = "INSERT INTO `casher` (`Creditor`, `note`,`id_users`,`id_Send_Receive`) VALUES (?,?,?,?)";
+              break;  
+          case Fees: //id_fees
+              sql_insert_casher = "INSERT INTO `casher` (`Creditor`, `note`,`id_users`,`id_fees`) VALUES (?,?,?,?)";
+              break;  
+          case CasherTwoCredit:
+              sql_insert_casher = "INSERT INTO `casher` (`Creditor`, `note`,`id_users`) VALUES (?,?,?)";
+              break;
+          case deficiency :  // في حالة العجز
+               sql_insert_casher = "INSERT INTO `casher` (`Creditor`, `note`,`id_users`,`id_deficiency_excess`) VALUES (?,?,?,?)";
+               break;
+          case Paydebt:
+              sql_insert_casher = "INSERT INTO `casher` (`Creditor`, `note`,`id_users`,`id_paydebt`) VALUES (?,?,?,?)";
+              break;
+      }
+   
+   */
 }

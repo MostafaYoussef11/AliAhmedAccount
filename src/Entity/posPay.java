@@ -29,7 +29,7 @@ import javax.swing.JTable;
 public abstract class posPay {
     
     private Connection con;
-    private PreparedStatement pstmt;
+    private PreparedStatement pstmt ,pstmt_casher;
     private double newbalance ;
     private double pay ;
     private double sell ;
@@ -80,6 +80,7 @@ public abstract class posPay {
     //this method when cash money transaction thie id_client = 1
     public boolean SaveCasher(){
         boolean isSave = false;
+        CasherClass casher = new CasherClass();
         try{
          con = ConnectDB.getCon();
          con.setAutoCommit(false);
@@ -106,7 +107,10 @@ public abstract class posPay {
          if(rst.next()){
             int id_masary_pay = rst.getInt(1);
             if(rowAffact == 1){
-                 int rowAffectCasher = new CasherClass().SavedCasherTransaction(TypeCasherTransaction.PosPay, amount_masary_pay, utility_masary, id_masary_pay);
+                pstmt_casher = casher.SavedCasherTransaction(TypeCasherTransaction.PosPay, amount_masary_pay, utility_masary, id_masary_pay, con);
+                int rowAffectCasher = pstmt_casher.executeUpdate();
+                //String sql_insert_Casher = casher.getSQlStatement(TypeCasherTransaction.PosPay);
+                 //int rowAffectCasher = new CasherClass().SavedCasherTransaction(TypeCasherTransaction.PosPay, amount_masary_pay, utility_masary, id_masary_pay);
                  if(rowAffectCasher == 1){
                      con.commit();
                      isSave = true;

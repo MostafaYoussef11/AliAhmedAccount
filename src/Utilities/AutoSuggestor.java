@@ -104,17 +104,18 @@ public class AutoSuggestor {
             }
         });
         //////
-        textField.getInputMap(JComponent.WHEN_FOCUSED).put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0, true), "Esc released");
-        textField.getActionMap().put("Esc released", new AbstractAction() {
-            @Override
-            public void actionPerformed(ActionEvent ae) {//focuses the first label on popwindow
-               // textField.setText("");
-                container.toFront();
-                autoSuggestionPopUpWindow.dispose();
-                suggestionsPanel.setVisible(false);
-                textOther.requestFocusInWindow();
-            }
-        });
+//        textField.getInputMap(JComponent.WHEN_FOCUSED).put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0, true), "Esc released");
+//        textField.getActionMap().put("Esc released", new AbstractAction() {
+//            @Override
+//            public void actionPerformed(ActionEvent ae) {//focuses the first label on popwindow
+//               // textField.setText("");
+//                
+//                getAutoSuggestionPopUpWindow().setVisible(false);
+//                suggestionsPanel.setVisible(false);
+//                getContainer().toFront();
+//                textOther.requestFocusInWindow();
+//            }
+//        });
         /////
         suggestionsPanel.getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT).put(KeyStroke.getKeyStroke(KeyEvent.VK_UP, 0, true), "Up released");
         suggestionsPanel.getActionMap().put("Up released", new AbstractAction() {
@@ -227,6 +228,18 @@ public class AutoSuggestor {
                 }
             }
         });
+        
+         suggestionsPanel.getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0, true), "ESC released");
+        suggestionsPanel.getActionMap().put("ESC released", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                //replaceWithSuggestedText();
+                textField.setText("");
+                getOtherText().requestFocusInWindow();
+                autoSuggestionPopUpWindow.setVisible(false);
+            }
+        });
+        
     }
 
     private void setFocusToTextField() {
@@ -345,6 +358,9 @@ public class AutoSuggestor {
     public JTextField getTextField() {
         return textField;
     }
+    public JTextField getOtherText(){
+        return textOther;
+    }
 
     public void addToDictionary(String word) {
         dictionary.add(word);
@@ -382,6 +398,7 @@ class SuggestionLabel extends JLabel {
     private boolean focused = false;
     private final JWindow autoSuggestionsPopUpWindow;
     private final JTextField textField;
+    private final JTextField otherText;
     private final AutoSuggestor autoSuggestor;
     private Color suggestionsTextColor, suggestionBorderColor;
 
@@ -391,6 +408,7 @@ class SuggestionLabel extends JLabel {
         this.suggestionsTextColor = suggestionsTextColor;
         this.autoSuggestor = autoSuggestor;
         this.textField = autoSuggestor.getTextField();
+        this.otherText = autoSuggestor.getOtherText();
         this.suggestionBorderColor = borderColor;
         this.autoSuggestionsPopUpWindow = autoSuggestor.getAutoSuggestionPopUpWindow();
 
@@ -418,6 +436,27 @@ class SuggestionLabel extends JLabel {
             @Override
             public void actionPerformed(ActionEvent ae) {
                 replaceWithSuggestedText();
+                autoSuggestionsPopUpWindow.setVisible(false);
+            }
+        });
+        
+        getInputMap(JComponent.WHEN_IN_FOCUSED_WINDOW).put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0, true), "ESC released");
+        getActionMap().put("ESC released", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                replaceWithSuggestedText();
+                textField.setText("");
+                otherText.requestFocusInWindow();
+                autoSuggestionsPopUpWindow.setVisible(false);
+            }
+        });
+        getInputMap(JComponent.WHEN_ANCESTOR_OF_FOCUSED_COMPONENT).put(KeyStroke.getKeyStroke(KeyEvent.VK_ESCAPE, 0, true), "ESC released");
+        getActionMap().put("ESC released", new AbstractAction() {
+            @Override
+            public void actionPerformed(ActionEvent ae) {
+                replaceWithSuggestedText();
+                textField.setText("");
+                otherText.requestFocusInWindow();
                 autoSuggestionsPopUpWindow.setVisible(false);
             }
         });

@@ -23,10 +23,10 @@ import javax.swing.JTable;
  */
 public class PaymentRecipt extends MoneyTransfer{
     private Connection con;
-    private PreparedStatement pstm;
+    private PreparedStatement pstm , pstm_Casher;
     private ResultSet rst;
     private TypeOfFilter type_filter;
-    private CasherClass casher = new CasherClass();
+    private CasherClass casher;// = new CasherClass();
     public void fillTalble(JTable table){
         String sql = "SELECT r.amount , c.name_Suppliers , r.date_PaymentReceipt , r.id_PaymentReceipt FROM paymentreceipt r INNER JOIN suppliers c on r.id_Suppliers = c.id_Suppliers where r.isActive = 1";
         String[] coulmnName = { "المبلغ", "العميل", "التاريخ", "رقم"};
@@ -43,6 +43,7 @@ public class PaymentRecipt extends MoneyTransfer{
     
     @Override
     public boolean Save() {
+        casher = new CasherClass();
         String date_proc = getDate_process();
         double  amount = getAmount();
         int id_recipt_payment = getId_PaymentReceipt();
@@ -61,8 +62,9 @@ public class PaymentRecipt extends MoneyTransfer{
             pstm.setInt(4, id_Sup);
             int row_effect = pstm.executeUpdate();
             if(row_effect == 1){
-               row_effect = new CasherClass().SavedCasherTransaction(TypeCasherTransaction.PaymentReceipt, amount, not, id_recipt_payment); //pstm.executeUpdate();
-               if(row_effect == 1){
+                pstm_Casher = new CasherClass().SavedCasherTransaction(TypeCasherTransaction.PaymentReceipt, amount, not, id_recipt_payment ,con);
+               int Casher_row_effect = pstm_Casher.executeUpdate();
+               if(Casher_row_effect == 1){
                    String sql_insert_sup_account = "INSERT INTO `suppliersaccount` (`date_suppliersAccount`, `Debit`,`id_Suppliers`, `id_paymentReceipt`, `note`) VALUES (?,?,?,?,?)";
                    PreparedStatement pstmt = con.prepareStatement(sql_insert_sup_account, Statement.RETURN_GENERATED_KEYS);
                    pstmt.setString(1,date_proc );
@@ -172,6 +174,7 @@ public class PaymentRecipt extends MoneyTransfer{
     
     @Override
     public boolean Delete(String id) {
+        casher = new CasherClass();
         setId_PaymentReceipt(Integer.parseInt(id));
         boolean isDel = false;
         int row_affect = 0;

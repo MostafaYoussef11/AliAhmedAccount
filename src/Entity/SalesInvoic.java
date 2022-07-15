@@ -61,7 +61,8 @@ public class SalesInvoic extends invoice{
             rowAffected = 0 ;
            switch(getPaymentMethod()){  
                case cash:
-                 rowAffected = new CasherClass().SavedCasherTransaction(TypeCasherTransaction.SalesInvoic, getCashAmount(), getNote(),Integer.parseInt(getId_invoice()));//pstcasher.executeUpdate();
+                 pstcasher = new CasherClass().SavedCasherTransaction(TypeCasherTransaction.SalesInvoic, getCashAmount(), getNote(),Integer.parseInt(getId_invoice()),con);//
+                 rowAffected = pstcasher.executeUpdate();
                  break;
                case deferred:
                    String sqlInserClientAccount = "INSERT INTO `clientaccount` (`date_ClientAccount`, `Debit`,`id_client`, `id_salesInvoic`, `note`) "
@@ -75,16 +76,20 @@ public class SalesInvoic extends invoice{
                    rowAffected = pstcasher.executeUpdate();
                    break;
                case installments:
-                  new CasherClass().SavedCasherTransaction(TypeCasherTransaction.SalesInvoic, getCashAmount(), getNote(),Integer.parseInt(getId_invoice()));
-                 String sqlInserClientAccountInstallmen = "INSERT INTO `clientaccount` (`date_ClientAccount`, `Debit`,`id_client`, `id_salesInvoic`, `note`) "
-                           + "VALUES (?,?,?,?,?)";
-                 pstcasher = con.prepareStatement(sqlInserClientAccountInstallmen, Statement.RETURN_GENERATED_KEYS);
-                 pstcasher.setString(1, getDate_invoice());
-                 pstcasher.setDouble(2, getRemainingAmount());
-                 pstcasher.setString(3, getId_client());
-                 pstcasher.setString(4, getId_invoice());
-                 pstcasher.setString(5, getNote());
-                 rowAffected = pstcasher.executeUpdate();
+                 PreparedStatement pstmtCasher = new CasherClass().SavedCasherTransaction(TypeCasherTransaction.SalesInvoic, getCashAmount(), getNote(),Integer.parseInt(getId_invoice()),con);
+                 int rowCasherAffect = pstmtCasher.executeUpdate();
+                 if(rowCasherAffect == 1){
+                    String sqlInserClientAccountInstallmen = "INSERT INTO `clientaccount` (`date_ClientAccount`, `Debit`,`id_client`, `id_salesInvoic`, `note`) "
+                             + "VALUES (?,?,?,?,?)";
+                   pstcasher = con.prepareStatement(sqlInserClientAccountInstallmen, Statement.RETURN_GENERATED_KEYS);
+                   pstcasher.setString(1, getDate_invoice());
+                   pstcasher.setDouble(2, getRemainingAmount());
+                   pstcasher.setString(3, getId_client());
+                   pstcasher.setString(4, getId_invoice());
+                   pstcasher.setString(5, getNote());
+                   rowAffected = pstcasher.executeUpdate();
+                 }
+
                  //System.out.println("Installments ClientAccount : " + rowAffected);  
                  break;
            }

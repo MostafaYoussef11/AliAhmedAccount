@@ -24,7 +24,7 @@ import javax.swing.JTable;
 public class FeesClass {
     private String name_expenseCategory;
     private Connection con;
-    private PreparedStatement pstmt;
+    private PreparedStatement pstmt , pstmt_Casher;
     
     public void fillComboFromCategory(JComboBox combo){
         ConnectDB.fillCombo("expensescategory", "name_expensesCategory", combo);
@@ -78,7 +78,9 @@ public class FeesClass {
                 while(rst.next()){
                    id_fees = rst.getInt(1);
                 }
-               int rowAffectCasher =  new CasherClass().SavedCasherTransaction(TypeCasherTransaction.Fees, amount, note, id_fees);
+               
+               pstmt_Casher = new CasherClass().SavedCasherTransaction(TypeCasherTransaction.Fees, amount, note, id_fees ,con);
+               int rowAffectCasher = pstmt_Casher.executeUpdate() ;
                if(rowAffectCasher == 1){
                    con.commit();
                    con.close();

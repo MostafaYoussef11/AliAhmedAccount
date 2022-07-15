@@ -8,6 +8,7 @@ package Frams;
 import Entity.Send_receiveCash;
 import Entity.VFCashClass;
 import Utilities.Tools;
+import com.ibm.icu.lang.UScript;
 import java.awt.Dimension;
 import java.awt.Window;
 import java.awt.event.ActionEvent;
@@ -35,18 +36,8 @@ public class FastCashSendPanel extends javax.swing.JPanel {
         initComponents();
         setSize(dim);
         Tools.setBackground(background, dim, "bg4.jpg");
-        vf = new VFCashClass();
-        vf.fillCombo(comVFNumber);
-       String numberVf = comVFNumber.getSelectedItem().toString();
-       String stBalance1 = vf.getNowBalanceWalletFromTable(numberVf);
-       balanceWallet = Double.parseDouble(stBalance1);
-        comVFNumber.setToolTipText("الرصيد الحالي للمحفظة : " + stBalance1);
-        comVFNumber.addActionListener((ActionEvent e) -> {
-           String numberVf1 = comVFNumber.getSelectedItem().toString();
-           String stBalance = vf.getNowBalanceWalletFromTable(numberVf1);
-           balanceWallet = Double.parseDouble(stBalance);
-            comVFNumber.setToolTipText("الرصيد الحالي للمحفظة : " + stBalance);
-        });
+        
+        setnewCashSend();
         
         
     }
@@ -132,36 +123,56 @@ public class FastCashSendPanel extends javax.swing.JPanel {
         // TODO add your handling code here:
         
     }//GEN-LAST:event_txtNumberClientKeyTyped
-
+    private void setnewCashSend(){
+        vf = new VFCashClass();
+        vf.fillCombo(comVFNumber);
+       String numberVf = comVFNumber.getSelectedItem().toString();
+       balanceWallet = vf.getNowBalance(numberVf);
+        comVFNumber.setToolTipText("الرصيد الحالي للمحفظة : " + balanceWallet);
+        comVFNumber.addActionListener((ActionEvent e) -> {
+           String numberVf1 = comVFNumber.getSelectedItem().toString();
+           balanceWallet = vf.getNowBalance(numberVf1);
+            comVFNumber.setToolTipText("الرصيد الحالي للمحفظة : " + balanceWallet);
+        });
+        txtAmount.setText("");
+        txtDiscount.setText("");
+        txtNumberClient.setText("");
+        txtValue.setText("");
+    }
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        
-        double value = Double.parseDouble(txtDiscount.getText());
-        double amount = Double.parseDouble(txtAmount.getText());
-        String Number_client = txtNumberClient.getText();
-        String NmberVF = comVFNumber.getSelectedItem().toString();
-        if(balanceWallet < value){
-            Tools.showErrorMsg("رصيد المحفظة غير كافي للتحويل");
+        String discount = txtDiscount.getText();
+        String amountSt = txtAmount.getText();
+        if(discount.length() == 0 || amountSt.length() == 0 ){
+            Tools.showErrorMsg("الميلغ غير مكتوب");  
         }else{
-            try {
-                Send_receiveCash send = new Send_receiveCash();
-                send.SetDataSend(value, amount, NmberVF,Number_client, "عميل نقدي");
+            double value = Double.parseDouble(discount);
+            double amount = Double.parseDouble(amountSt);
+            String Number_client = txtNumberClient.getText();
+            String NmberVF = comVFNumber.getSelectedItem().toString();
+            if(balanceWallet < value){
+                Tools.showErrorMsg("رصيد المحفظة غير كافي للتحويل");
+            }else{
                 try {
-                    if(send.SaveSendTransaction()){
-                        txtAmount.setText("0.00");        
-                        txtDiscount.setText("0.00");
-                        txtNumberClient.setText("");
-                        txtValue.setText("0.00");
+                    Send_receiveCash send = new Send_receiveCash();
+                    send.SetDataSend(value, amount, NmberVF,Number_client, "عميل نقدي");
+                    try {
+                        if(send.SaveSendAndReciveTransaction("Send")){
+                            Tools.showInfoMsg("تمت العملية بنجاح", "ارسال كاش");
+                            setnewCashSend();
+                        }
+                    } catch (SQLException ex) {
+                        Logger.getLogger(FastCashSendPanel.class.getName()).log(Level.SEVERE, null, ex);
                     }
+
                 } catch (SQLException ex) {
                     Logger.getLogger(FastCashSendPanel.class.getName()).log(Level.SEVERE, null, ex);
                 }
-                
-            } catch (SQLException ex) {
-                Logger.getLogger(FastCashSendPanel.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        
+                setnewCashSend();
+
+            }        
         }
+
 
     }//GEN-LAST:event_jButton1ActionPerformed
 

@@ -57,7 +57,8 @@ public class purchaseInvoice extends invoice{
                 int rowAffected = 0 ;
                 switch(getPaymentMethod()){  
                     case cash:
-                      rowAffected = new CasherClass().SavedCasherTransaction(TypeCasherTransaction.PurchaseInvoice, getCashAmount(), getNote(), Integer.parseInt(getId_invoice()));//pstcasher.executeUpdate();
+                      pstcasher = new CasherClass().SavedCasherTransaction(TypeCasherTransaction.PurchaseInvoice, getCashAmount(), getNote(), Integer.parseInt(getId_invoice()),con);
+                       rowAffected = pstcasher.executeUpdate();
                       break;
                     case deferred:
                         String sqlInserClientAccount = "INSERT INTO `suppliersaccount` (`date_suppliersAccount`, `Creditor`,`id_Suppliers`, `id_purchaseInvoice`,`note`) "
@@ -71,16 +72,20 @@ public class purchaseInvoice extends invoice{
                         rowAffected = pstcasher.executeUpdate();
                         break;
                     case installments:
-                      new CasherClass().SavedCasherTransaction(TypeCasherTransaction.PurchaseInvoice, getCashAmount(), getNote(), Integer.parseInt(getId_invoice()));
-                      String sqlInserClientAccountInstallmen = "INSERT INTO `suppliersaccount` (`date_suppliersAccount`, `Creditor`,`id_Suppliers`, `id_purchaseInvoice`,`note`) "
-                                + "VALUES (?,?,?,?,?)";
-                      pstcasher = con.prepareStatement(sqlInserClientAccountInstallmen, Statement.RETURN_GENERATED_KEYS);
-                      pstcasher.setString(1, getDate_invoice());
-                      pstcasher.setDouble(2, getRemainingAmount());
-                      pstcasher.setString(3, getId_Supplier());
-                      pstcasher.setString(4, getId_invoice());
-                      pstcasher.setString(5, getNote());
-                      rowAffected = pstcasher.executeUpdate();
+                      PreparedStatement pstm_purch = new CasherClass().SavedCasherTransaction(TypeCasherTransaction.PurchaseInvoice, getCashAmount(), getNote(), Integer.parseInt(getId_invoice()),con);
+                      int rowPurchase = pstm_purch.executeUpdate();
+                      if(rowPurchase == 1){
+                            String sqlInserClientAccountInstallmen = "INSERT INTO `suppliersaccount` (`date_suppliersAccount`, `Creditor`,`id_Suppliers`, `id_purchaseInvoice`,`note`) "
+                                      + "VALUES (?,?,?,?,?)";
+                            pstcasher = con.prepareStatement(sqlInserClientAccountInstallmen, Statement.RETURN_GENERATED_KEYS);
+                            pstcasher.setString(1, getDate_invoice());
+                            pstcasher.setDouble(2, getRemainingAmount());
+                            pstcasher.setString(3, getId_Supplier());
+                            pstcasher.setString(4, getId_invoice());
+                            pstcasher.setString(5, getNote());
+                            rowAffected = pstcasher.executeUpdate();                      
+                      }
+
                       break;
                 }
                 if(rowAffected == 1){

@@ -40,7 +40,7 @@ public final class NotifcationClass extends TimerTask{
     private Connection con;
     private  JWindow autoPoupWindo;
     private  JPanel AllFieldpanel;
-    
+    private ArrayList<NotifacionList> notifList;
     TimerTask task;
     int count = 0;
     int size = 0;
@@ -83,7 +83,7 @@ public final class NotifcationClass extends TimerTask{
     }
 
     private ArrayList fillArrayList() throws SQLException{
-        ArrayList<NotifacionList> notifList = new ArrayList<NotifacionList>();
+        notifList = new ArrayList<NotifacionList>();
         Connection connection = null;
         PreparedStatement pstm = null;
         ResultSet rst = null;
@@ -94,14 +94,15 @@ public final class NotifcationClass extends TimerTask{
             pstm = connection.prepareStatement(sql);
             pstm.setString(1, datePay);
             rst = pstm.executeQuery();
-            if(rst != null){
+            if(rst.getRow() != 0 ){
               while(rst.next()){
                 notif = new NotifacionList(rst.getString(1));
                 notifList.add(notif);
               }
+              ConnectDB.close(connection);
             }
 
-            ConnectDB.close(connection);
+            
         } catch (SQLException ex) {
             ConnectDB.close(connection);
             Logger.getLogger(NotifcationClass.class.getName()).log(Level.SEVERE, null, ex);
@@ -120,6 +121,8 @@ public final class NotifcationClass extends TimerTask{
         return notifList;
     }
 
+    
+    
     @Override
     public void run() {
         try {
@@ -152,18 +155,22 @@ public final class NotifcationClass extends TimerTask{
 }
     
     public void showPopuMenuNotification(){
-        if(autoPoupWindo.isVisible()){
-            autoPoupWindo.setVisible(false);
-            autoPoupWindo.dispose();
-        }
-        else{
-            autoPoupWindo.add(AllFieldpanel);
-            int height = (31 * size) - 1;
-            autoPoupWindo.setSize(320,height);
-            autoPoupWindo.setLocation(button.getLocation().x + 32 , button.getLocation().y-height +35 );
-            autoPoupWindo.setVisible(true);
-            autoPoupWindo.revalidate();
-            autoPoupWindo.repaint();               
+        if(notifList == null){
+            Tools.showErrorMsg("لا توجد اشعارات");
+        }else{
+            if(autoPoupWindo.isVisible()){
+                autoPoupWindo.setVisible(false);
+                autoPoupWindo.dispose();
+            }
+            else{
+                autoPoupWindo.add(AllFieldpanel);
+                int height = (31 * size) - 1;
+                autoPoupWindo.setSize(320,height);
+                autoPoupWindo.setLocation(button.getLocation().x + 32 , button.getLocation().y-height +35 );
+                autoPoupWindo.setVisible(true);
+                autoPoupWindo.revalidate();
+                autoPoupWindo.repaint();               
+            }        
         }
    
     }

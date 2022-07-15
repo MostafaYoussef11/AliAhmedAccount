@@ -161,12 +161,14 @@ public abstract class PosSell {
 //                pstmc.setInt(3, id_pos);
 //                pstmc.setDouble(4, amount_masary_sell);
 //                pstmc.setInt(5, id_masary_sell);
-                int row_insert = new CasherClass().SavedCasherTransaction(TypeCasherTransaction.PosSell, amount_masary_sell, name_pos, id_masary_sell);
-                    if(row_insert == 1){
-                          con.commit();
-                          con.close();
-                          isSave =true;
-                    }
+                //int row_insert = 0;
+                PreparedStatement pstmCasher = new CasherClass().SavedCasherTransaction(TypeCasherTransaction.PosSell, amount_masary_sell, name_pos, id_masary_sell,con);
+                int row_insert = pstmCasher.executeUpdate();
+                if(row_insert == 1){
+                  con.commit();
+                  con.close();
+                  isSave =true;
+                }
                 }
             }
             

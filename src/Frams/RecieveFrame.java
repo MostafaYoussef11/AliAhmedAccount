@@ -63,7 +63,7 @@ public class RecieveFrame extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        comboWallt = new javax.swing.JComboBox<String>();
+        comboWallt = new javax.swing.JComboBox<>();
         jLabel2 = new javax.swing.JLabel();
         txt_amount = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
@@ -100,7 +100,7 @@ public class RecieveFrame extends javax.swing.JFrame {
         jLabel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jLabel1.setFocusable(false);
 
-        comboWallt.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboWallt.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         comboWallt.setNextFocusableComponent(txt_value);
         comboWallt.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
@@ -389,7 +389,7 @@ public class RecieveFrame extends javax.swing.JFrame {
           try {                                       
                 receive.SetDataSend(value, amount,numberVF, "", "");
                 try {
-                    if(receive.SaveRecieveTransaction()){
+                    if(receive.SaveSendAndReciveTransaction("Receive")){
                         Tools.showInfoMsg("تم استقبال المبلغ بنجاح", "استقبال فلوس");
                         SetnewRecieveTransaction();
                     }
