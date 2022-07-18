@@ -182,7 +182,7 @@ public abstract class posPay {
          pstmt = con.prepareStatement(sql_insert_masaryPay, Statement.RETURN_GENERATED_KEYS);
          pstmt.setInt(1, id_utility_masary);
          pstmt.setDouble(2, price_masary_pay);
-         pstmt.setInt(3, 1);
+         pstmt.setInt(3, id_client);
          pstmt.setDouble(4, discount_of_balance);
          pstmt.setDouble(5, amount_masary_pay);
          DecimalFormat format = new DecimalFormat("0.00");

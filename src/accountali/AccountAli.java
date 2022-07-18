@@ -10,6 +10,7 @@ import Frams.Login;
 import Frams.MasarySellFrame;
 import Frams.OpaypayFrame;
 import Frams.VFCashFrame;
+import Frams.itemsFrame;
 import Frams.menuCashFrame;
 import Frams.paydebtFrame;
 import Utilities.AutoSuggestor;
@@ -35,7 +36,7 @@ public class AccountAli {
     public static void main(String[] args) {
         Login l = new Login();
         //paydebtFrame o = new paydebtFrame();
-        
+       // itemsFrame l = new itemsFrame();
        // Tools.openJFram(o);
        Tools.openJFram(l, "تسجيل الدخول", "account");
     }

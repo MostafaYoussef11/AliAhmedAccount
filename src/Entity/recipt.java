@@ -46,7 +46,7 @@ public class recipt extends MoneyTransfer{
             con.setAutoCommit(false);
             int rowAffect;
             pstm_Casher = new CasherClass().SavedCasherTransaction(TypeCasherTransaction.Receipt, getAmount(), getNote(), getId_Receipt() ,con);
-            rowAffect = pstm.executeUpdate();
+            rowAffect = pstm_Casher.executeUpdate();
             if(rowAffect == 1){
                 String sqlInserrecipt = "INSERT INTO `receipt` (`id_Receipt`, `date_Receipt`, `amount`, `id_client`) VALUES (?,?,?,?)";
                 pstm = (PreparedStatement) con.prepareStatement(sqlInserrecipt, Statement.RETURN_GENERATED_KEYS);

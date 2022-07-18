@@ -12,6 +12,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -31,6 +32,7 @@ public class DayFrame extends javax.swing.JFrame {
         export_panel.setBackground(new Color(250, 250, 250, 220));
         super.setBackground(new Color(0.0f, 0.0f, 0.0f, 0.1f));
         getData();
+        to_date.setDate(new Date());
     }
 
     /**
@@ -89,6 +91,8 @@ public class DayFrame extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         from_date = new com.toedter.calendar.JDateChooser();
         to_date = new com.toedter.calendar.JDateChooser();
+        jLabel22 = new javax.swing.JLabel();
+        jLabel23 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
@@ -323,7 +327,7 @@ public class DayFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(export_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, export_panelLayout.createSequentialGroup()
-                        .addComponent(txt_POS_Sell, javax.swing.GroupLayout.DEFAULT_SIZE, 145, Short.MAX_VALUE)
+                        .addComponent(txt_POS_Sell, javax.swing.GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(export_panelLayout.createSequentialGroup()
@@ -392,7 +396,7 @@ public class DayFrame extends javax.swing.JFrame {
                 .addGroup(export_panelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txt_paydeb, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel21, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(0, 18, Short.MAX_VALUE))
+                .addGap(0, 22, Short.MAX_VALUE))
         );
 
         jButton1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
@@ -471,6 +475,16 @@ public class DayFrame extends javax.swing.JFrame {
             }
         });
 
+        jPanel1.setOpaque(false);
+
+        jLabel22.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel22.setText("من");
+        jLabel22.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        jLabel23.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel23.setText("الي");
+        jLabel23.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -478,18 +492,24 @@ public class DayFrame extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(to_date, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 51, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(from_date, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jLabel22, javax.swing.GroupLayout.DEFAULT_SIZE, 49, Short.MAX_VALUE)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(to_date, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(from_date, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(to_date, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(from_date, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel23, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -500,25 +520,27 @@ public class DayFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 189, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txt_Old_Balance, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(export_panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(txt_Total_Import, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(txt_Total_Export, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(txt_Balance, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(import_panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel14, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel15, javax.swing.GroupLayout.DEFAULT_SIZE, 298, Short.MAX_VALUE)
-                            .addComponent(jLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                            .addComponent(jLabel13, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(export_panel, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(import_panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
@@ -526,8 +548,8 @@ public class DayFrame extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(import_panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(export_panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(export_panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(import_panel, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(txt_Old_Balance, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -546,7 +568,7 @@ public class DayFrame extends javax.swing.JFrame {
                     .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 45, Short.MAX_VALUE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -562,60 +584,68 @@ public class DayFrame extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-        String F_date = Tools.dateSql(from_date.getDate());
-        String End_date = Tools.dateSql(to_date.getDate());
-        String term = "date_casher BETWEEN '"+F_date+"' AND '"+End_date+"' ";
-         try {
-            Connection con = ConnectDB.getCon();
-            String sql_term = "SELECT " +
-                            "(SELECT COALESCE(SUM(Debit),0) FROM casher WHERE id_masary_pay IS NOT NULL AND "+term+") AS POS_PAY ," +
-                            "(SELECT COALESCE(SUM(Debit),0) FROM casher WHERE id_Receipt IS NOT NULL AND "+term+") AS Recipt , " +
-                            "(SELECT COALESCE(SUM(Debit),0) FROM casher WHERE id_salesInvoic IS NOT NULL AND "+term+") AS Sales ," +
-                            "(SELECT COALESCE(SUM(Debit),0) FROM casher WHERE id_Send_Receive IS NOT NULL AND "+term+") AS Send_VfCash ," +
-                            "(SELECT COALESCE(SUM(Debit),0) FROM casher WHERE id_Solf IS NOT NULL AND "+term+") AS Solfa ," +
-                            "(SELECT COALESCE(SUM(Creditor),0) FROM cashertwo WHERE cashertwo."+term+") AS credit," +
-                            "(SELECT COALESCE(SUM(Debit),0) FROM casher WHERE id_deficiency_excess IS NOT NULL AND "+term+") AS excess," +
-                            "(SELECT POS_PAY +Recipt+Sales+ Send_VfCash + Solfa + credit + excess ) AS Total_Import," +
-                            "(SELECT COALESCE(SUM(Creditor),0) FROM casher WHERE id_masary_sell IS NOT NULL AND "+term+") AS POS_Sell ," +
-                            "(SELECT COALESCE(SUM(Creditor),0) FROM casher WHERE id_PaymentReceipt IS NOT NULL AND "+term+") AS Payment, " +
-                            "(SELECT COALESCE(SUM(Creditor),0) FROM casher WHERE id_purchaseInvoice IS NOT NULL AND "+term+") AS Purchases," +
-                            "(SELECT COALESCE(SUM(Creditor),0) FROM casher WHERE id_Send_Receive IS NOT NULL AND "+term+") AS Receive_VfCash," +
-                            "(SELECT COALESCE(SUM(Creditor),0) FROM casher WHERE id_fees IS NOT NULL AND "+term+") AS Feeses," +
-                            "(SELECT COALESCE(SUM(Debit),0) FROM cashertwo WHERE cashertwo."+term+") AS debit," +
-                            "(SELECT COALESCE(SUM(Creditor),0) FROM casher WHERE id_paydebt IS NOT NULL AND "+term+") AS paydebt," +
-                            "(SELECT COALESCE(SUM(Creditor),0) FROM casher WHERE id_deficiency_excess IS NOT NULL AND "+term+") AS deficiency," +
-                            "(SELECT POS_Sell + Payment +  Purchases +Receive_VfCash + Feeses + debit + deficiency + paydebt ) AS Total_Export ," +
-                            "(SELECT COALESCE(oldBalance,0) FROM finallyday WHERE dateFinally = '"+F_date+"') AS Old_Balance," +
-                            "(SELECT Old_Balance + Total_Import - Total_Export) AS Balance";
-            PreparedStatement pstmt = con.prepareStatement(sql_term);
-            ResultSet rst = pstmt.executeQuery();
-            while (rst.next()) {
-                // imports الوارد
-                txt_POS_PAY.setText(rst.getString("POS_PAY"));
-                txt_Recipt.setText(rst.getString("Recipt"));
-                txt_Sales.setText(rst.getString("Sales"));
-                txt_Send_VfCash.setText(rst.getString("Send_VfCash"));
-                txt_Solfa.setText(rst.getString("Solfa"));
-                txt_credit.setText(rst.getString("credit"));
-                txt_excess.setText(rst.getString("excess"));
-                // Export الصادر
-                txt_POS_Sell.setText(rst.getString("POS_Sell"));
-                txt_Payment.setText(rst.getString("Payment"));
-                txt_Purchases.setText(rst.getString("Purchases"));
-                txt_Receive_VfCash.setText(rst.getString("Receive_VfCash"));
-                txt_Feeses.setText(rst.getString("Feeses"));
-                txt_debit.setText(rst.getString("debit"));
-                txt_deficiency.setText(rst.getString("deficiency"));
-                txt_paydeb.setText(rst.getString("paydebt"));
-                // Total and Balance
-                txt_Old_Balance.setText(rst.getString("Old_Balance"));
-                txt_Total_Import.setText(rst.getString("Total_Import"));
-                txt_Total_Export.setText(rst.getString("Total_Export"));
-                txt_Balance.setText(rst.getString("Balance"));
-                
+
+        if(from_date.getDate() == null){
+            Tools.showErrorMsg("اكتب بداية الفترة");
+        }else{
+         String F_date = Tools.dateSql(from_date.getDate());
+         String End_date = Tools.dateSql(to_date.getDate());           
+            String term = "date_casher BETWEEN '"+F_date+"' AND '"+End_date+"' ";
+             try {
+                Connection con = ConnectDB.getCon();
+                String sql_term = "SELECT " +
+                                "(SELECT COALESCE(SUM(Debit),0) FROM casher WHERE id_masary_pay IS NOT NULL AND "+term+") AS POS_PAY ," +
+                                "(SELECT COALESCE(SUM(Debit),0) FROM casher WHERE id_Receipt IS NOT NULL AND "+term+") AS Recipt , " +
+                                "(SELECT COALESCE(SUM(Debit),0) FROM casher WHERE id_salesInvoic IS NOT NULL AND "+term+") AS Sales ," +
+                                "(SELECT COALESCE(SUM(Debit),0) FROM casher WHERE id_Send_Receive IS NOT NULL AND "+term+") AS Send_VfCash ," +
+                                "(SELECT COALESCE(SUM(Debit),0) FROM casher WHERE id_Solf IS NOT NULL AND "+term+") AS Solfa ," +
+                                "(SELECT COALESCE(SUM(Creditor),0) FROM cashertwo WHERE cashertwo."+term+") AS credit," +
+                                "(SELECT COALESCE(SUM(Debit),0) FROM casher WHERE id_deficiency_excess IS NOT NULL AND "+term+") AS excess," +
+                                "(SELECT POS_PAY +Recipt+Sales+ Send_VfCash + Solfa + credit + excess ) AS Total_Import," +
+                                "(SELECT COALESCE(SUM(Creditor),0) FROM casher WHERE id_masary_sell IS NOT NULL AND "+term+") AS POS_Sell ," +
+                                "(SELECT COALESCE(SUM(Creditor),0) FROM casher WHERE id_PaymentReceipt IS NOT NULL AND "+term+") AS Payment, " +
+                                "(SELECT COALESCE(SUM(Creditor),0) FROM casher WHERE id_purchaseInvoice IS NOT NULL AND "+term+") AS Purchases," +
+                                "(SELECT COALESCE(SUM(Creditor),0) FROM casher WHERE id_Send_Receive IS NOT NULL AND "+term+") AS Receive_VfCash," +
+                                "(SELECT COALESCE(SUM(Creditor),0) FROM casher WHERE id_fees IS NOT NULL AND "+term+") AS Feeses," +
+                                "(SELECT COALESCE(SUM(Debit),0) FROM cashertwo WHERE cashertwo."+term+") AS debit," +
+                                "(SELECT COALESCE(SUM(Creditor),0) FROM casher WHERE id_paydebt IS NOT NULL AND "+term+") AS paydebt," +
+                                "(SELECT COALESCE(SUM(Creditor),0) FROM casher WHERE id_deficiency_excess IS NOT NULL AND "+term+") AS deficiency," +
+                                "(SELECT POS_Sell + Payment +  Purchases +Receive_VfCash + Feeses + debit + deficiency + paydebt ) AS Total_Export ," +
+                                "(SELECT COALESCE(oldBalance,0) FROM finallyday WHERE dateFinally = '"+F_date+"') AS Old_Balance," +
+                                "(SELECT Old_Balance + Total_Import - Total_Export) AS Balance";
+                PreparedStatement pstmt = con.prepareStatement(sql_term);
+                ResultSet rst = pstmt.executeQuery();
+                while (rst.next()) {
+                    // imports الوارد
+                    txt_POS_PAY.setText(rst.getString("POS_PAY"));
+                    txt_Recipt.setText(rst.getString("Recipt"));
+                    txt_Sales.setText(rst.getString("Sales"));
+                    txt_Send_VfCash.setText(rst.getString("Send_VfCash"));
+                    txt_Solfa.setText(rst.getString("Solfa"));
+                    txt_credit.setText(rst.getString("credit"));
+                    txt_excess.setText(rst.getString("excess"));
+                    // Export الصادر
+                    txt_POS_Sell.setText(rst.getString("POS_Sell"));
+                    txt_Payment.setText(rst.getString("Payment"));
+                    txt_Purchases.setText(rst.getString("Purchases"));
+                    txt_Receive_VfCash.setText(rst.getString("Receive_VfCash"));
+                    txt_Feeses.setText(rst.getString("Feeses"));
+                    txt_debit.setText(rst.getString("debit"));
+                    txt_deficiency.setText(rst.getString("deficiency"));
+                    txt_paydeb.setText(rst.getString("paydebt"));
+                    // Total and Balance
+                    txt_Old_Balance.setText(rst.getString("Old_Balance"));
+                    txt_Total_Import.setText(rst.getString("Total_Import"));
+                    txt_Total_Export.setText(rst.getString("Total_Export"));
+                    txt_Balance.setText(rst.getString("Balance"));
+
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(DayFrame.class.getName()).log(Level.SEVERE, null, ex);
             }
-        } catch (SQLException ex) {
-            Logger.getLogger(DayFrame.class.getName()).log(Level.SEVERE, null, ex);
+
+        
+        
         }
         
     }//GEN-LAST:event_jButton2ActionPerformed
@@ -730,6 +760,8 @@ public class DayFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
+    private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;

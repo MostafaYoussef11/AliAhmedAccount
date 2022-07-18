@@ -1,62 +1,8 @@
 
-UPDATE finallyday AS F1 SET
- F1.oldBalance = IFNULL((SELECT F2.newbalance FROM finallyday AS F2 WHERE F2.dateFinally = F1.dateFinally - INTERVAL 1 DAY ),0) ,
- F1.totalimport = COALESCE((SELECT COALESCE(SUM(C.Debit),0) FROM casher AS C WHERE C.date_casher = F1.dateFinally),0) ,
- F1.totalexport = COALESCE((SELECT COALESCE(SUM(C.Creditor),0) FROM casher AS C WHERE C.date_casher = F1.dateFinally),0) ,
- F1.newbalance = F1.oldBalance + F1.totalimport -F1.totalexport
+UPDATE finallyday AS f SET
+ f.totalimport = (SELECT COALESCE(SUM(c.Debit),0) FROM casher AS c WHERE c.date_casher = f.dateFinally ),
+ f.totalexport = (SELECT COALESCE(SUM(c.Creditor),0) FROM casher AS c WHERE c.date_casher = f.dateFinally)
 
 
-
-
-
-
-
-SET
-    @DATEdAY =(
-    SELECT
-        F.dateFinally
-    FROM
-        finallyday AS F
-    LIMIT 1
-);
-UPDATE
-    finallyday AS F1
-SET
-    F1.oldBalance = IFNULL(
-        (
-        SELECT
-            F2.newbalance
-        FROM
-            finallyday AS F2
-        WHERE
-            F2.dateFinally = @DATEdAY - INTERVAL 1 DAY
-    ),
-    0
-    ),
-    F1.totalimport = COALESCE(
-        (
-        SELECT
-            COALESCE(SUM(C.Debit),
-            0)
-        FROM
-            casher AS C
-        WHERE
-            C.date_casher = @DATEdAY
-    ),
-    0
-    ),
-    F1.totalexport = COALESCE(
-        (
-        SELECT
-            COALESCE(SUM(C.Creditor),
-            0)
-        FROM
-            casher AS C
-        WHERE
-            C.date_casher = @DATEdAY
-    ),
-    0
-    ),
-    F1.newbalance = F1.oldBalance + F1.totalimport - F1.totalexport
-WHERE
-    F1.dateFinally = @DATEdAY
+UPDATE finallyday AS f SET 
+f.oldBalance = (SELECT COALESCE(f2.newbalance , 0) FROM finallyday AS f2 WHERE f2.dateFinally = f.dateFinally - INTERVAL 1 day)

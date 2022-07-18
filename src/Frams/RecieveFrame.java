@@ -12,11 +12,13 @@ import Utilities.Tools;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.beans.PropertyChangeListener;
 import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.Action;
 
 /**
  *
@@ -38,6 +40,7 @@ public class RecieveFrame extends javax.swing.JFrame {
         vf = new VFCashClass();
         receive = new Send_receiveCash();
         supplier = new Suppliers();
+        
        SetnewRecieveTransaction();
     }
 
@@ -51,6 +54,50 @@ public class RecieveFrame extends javax.swing.JFrame {
        // txt_limet.setText(St_limet);
         Tools.disableButOpen(btPanel);  
         receive.fillTableRecive(jTable1);
+//        isTake.setAction(new Action() {
+//
+//            @Override
+//            public Object getValue(String key) {
+//               // super(key);
+//                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//            }
+//
+//            @Override
+//            public void putValue(String key, Object value) {
+//                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//            }
+//
+//            @Override
+//            public void setEnabled(boolean b) {
+//                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//            }
+//
+//            @Override
+//            public boolean isEnabled() {
+//                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//            }
+//
+//            @Override
+//            public void addPropertyChangeListener(PropertyChangeListener listener) {
+//                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//            }
+//
+//            @Override
+//            public void removePropertyChangeListener(PropertyChangeListener listener) {
+//                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//            }
+//
+//            @Override
+//            public void actionPerformed(ActionEvent e) {
+//                if(isTake.isSelected()){
+//                    compsup.setEnabled(false);
+//                }else{
+//                    compsup.setEnabled(false);
+//                }
+//                
+//                // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+//            }
+//        });
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -63,7 +110,7 @@ public class RecieveFrame extends javax.swing.JFrame {
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        comboWallt = new javax.swing.JComboBox<>();
+        comboWallt = new javax.swing.JComboBox<String>();
         jLabel2 = new javax.swing.JLabel();
         txt_amount = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
@@ -100,7 +147,7 @@ public class RecieveFrame extends javax.swing.JFrame {
         jLabel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jLabel1.setFocusable(false);
 
-        comboWallt.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboWallt.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         comboWallt.setNextFocusableComponent(txt_value);
         comboWallt.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {

@@ -7,7 +7,7 @@
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
-		<defaultValueExpression><![CDATA["E:\\AliAhmedAccount\\AliAhmedAccount\\src\\Reborts\\"]]></defaultValueExpression>
+		<defaultValueExpression><![CDATA["E:\\Masrawy\\Account\\src\\Reborts\\"]]></defaultValueExpression>
 	</parameter>
 	<parameter name="Tafqeet" class="java.lang.String"/>
 	<queryString>
@@ -309,6 +309,9 @@
 				</subreportParameter>
 				<subreportParameter name="SUBREPORT_DIR">
 					<subreportParameterExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="Tafqeet">
+					<subreportParameterExpression><![CDATA[$P{Tafqeet}]]></subreportParameterExpression>
 				</subreportParameter>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "ClientReport_subreport1.jasper"]]></subreportExpression>

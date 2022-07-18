@@ -2,12 +2,12 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" whenNoDataType="AllSectionsNoDetail" columnWidth="535" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="3290fda5-1393-400e-9344-921d2c3dd6f5">
 	<property name="ireport.zoom" value="1.5"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="93"/>
+	<property name="ireport.y" value="114"/>
 	<parameter name="id_Suppliers" class="java.lang.Integer">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
-		<defaultValueExpression><![CDATA["E:\\AliAhmedAccount\\AliAhmedAccount\\src\\Reborts\\"]]></defaultValueExpression>
+		<defaultValueExpression><![CDATA["E:\\Masrawy\\Account\\src\\Reborts\\"]]></defaultValueExpression>
 	</parameter>
 	<queryString>
 		<![CDATA[SELECT  s.name_Suppliers , s.phone , s.address ,s.firstBalance , SUM(ac.Creditor) creditor , SUM(ac.Debit) debit FROM suppliers s INNER JOIN suppliersaccount ac ON s.id_Suppliers = ac.id_Suppliers where s.id_Suppliers = $P{id_Suppliers}]]>
@@ -291,11 +291,11 @@
 		<band height="32" splitType="Stretch">
 			<subreport>
 				<reportElement x="0" y="1" width="550" height="30" uuid="45fd55c2-a412-49f5-b689-e3f14153e30b"/>
-				<subreportParameter name="SUBREPORT_DIR">
-					<subreportParameterExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportParameterExpression>
-				</subreportParameter>
 				<subreportParameter name="id_Suppliers">
 					<subreportParameterExpression><![CDATA[$P{id_Suppliers}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="SUBREPORT_DIR">
+					<subreportParameterExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportParameterExpression>
 				</subreportParameter>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "SupplierReport_subreport1.jasper"]]></subreportExpression>
