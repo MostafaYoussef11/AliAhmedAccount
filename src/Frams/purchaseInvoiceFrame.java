@@ -129,15 +129,15 @@ public class purchaseInvoiceFrame extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         txtDate = new com.toedter.calendar.JDateChooser();
         jLabel4 = new javax.swing.JLabel();
-        comboPaymentMethod = new javax.swing.JComboBox<>();
+        comboPaymentMethod = new javax.swing.JComboBox<String>();
         jLabel5 = new javax.swing.JLabel();
-        comboName = new javax.swing.JComboBox<>();
+        comboName = new javax.swing.JComboBox<String>();
         ItemsPanale = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
-        comboItems = new javax.swing.JComboBox<>();
+        comboItems = new javax.swing.JComboBox<String>();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        comboUnit = new javax.swing.JComboBox<>();
+        comboUnit = new javax.swing.JComboBox<String>();
         jLabel9 = new javax.swing.JLabel();
         txtPrice = new javax.swing.JTextField();
         btnItemPanale = new javax.swing.JPanel();
@@ -152,6 +152,7 @@ public class purchaseInvoiceFrame extends javax.swing.JFrame {
         txtCount = new javax.swing.JSpinner();
         txtM = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
+        txtIdItems = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         jLabel13 = new javax.swing.JLabel();
@@ -207,7 +208,7 @@ public class purchaseInvoiceFrame extends javax.swing.JFrame {
         jLabel4.setText("نوع الفاتورة");
         jLabel4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        comboPaymentMethod.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboPaymentMethod.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         comboPaymentMethod.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 comboPaymentMethodItemStateChanged(evt);
@@ -219,7 +220,7 @@ public class purchaseInvoiceFrame extends javax.swing.JFrame {
         jLabel5.setText("اسم المورد");
         jLabel5.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        comboName.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboName.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         comboName.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 comboNameItemStateChanged(evt);
@@ -234,7 +235,7 @@ public class purchaseInvoiceFrame extends javax.swing.JFrame {
         jLabel6.setText("اسم الصنف");
         jLabel6.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        comboItems.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboItems.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         comboItems.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 comboItemsItemStateChanged(evt);
@@ -252,7 +253,7 @@ public class purchaseInvoiceFrame extends javax.swing.JFrame {
         jLabel8.setText("الوحدة");
         jLabel8.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        comboUnit.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comboUnit.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         comboUnit.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 comboUnitItemStateChanged(evt);
@@ -313,7 +314,7 @@ public class purchaseInvoiceFrame extends javax.swing.JFrame {
         btnItemPanaleLayout.setHorizontalGroup(
             btnItemPanaleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(btnItemPanaleLayout.createSequentialGroup()
-                .addContainerGap(44, Short.MAX_VALUE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(btndelItem, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnUpdateItem, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -321,7 +322,7 @@ public class purchaseInvoiceFrame extends javax.swing.JFrame {
                 .addComponent(btnediteItem, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnSaveItem, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(44, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         btnItemPanaleLayout.setVerticalGroup(
             btnItemPanaleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -380,6 +381,14 @@ public class purchaseInvoiceFrame extends javax.swing.JFrame {
         jLabel11.setText("م");
         jLabel11.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
+        txtIdItems.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtIdItems.setToolTipText("");
+        txtIdItems.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtIdItemsKeyReleased(evt);
+            }
+        });
+
         javax.swing.GroupLayout ItemsPanaleLayout = new javax.swing.GroupLayout(ItemsPanale);
         ItemsPanale.setLayout(ItemsPanaleLayout);
         ItemsPanaleLayout.setHorizontalGroup(
@@ -398,23 +407,25 @@ public class purchaseInvoiceFrame extends javax.swing.JFrame {
                         .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.LEADING, ItemsPanaleLayout.createSequentialGroup()
                         .addGroup(ItemsPanaleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtPrice)
+                            .addComponent(txtIdItems))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(ItemsPanaleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(ItemsPanaleLayout.createSequentialGroup()
-                                .addComponent(txtPrice)
+                                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 74, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(comboUnit, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(comboItems, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(ItemsPanaleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(ItemsPanaleLayout.createSequentialGroup()
-                                .addComponent(comboUnit, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 64, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txtCount, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(ItemsPanaleLayout.createSequentialGroup()
-                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 196, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txtM, javax.swing.GroupLayout.PREFERRED_SIZE, 50, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -429,7 +440,8 @@ public class purchaseInvoiceFrame extends javax.swing.JFrame {
                     .addComponent(comboItems, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
                     .addComponent(jLabel6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txtM, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtIdItems))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(ItemsPanaleLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jLabel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -555,10 +567,10 @@ public class purchaseInvoiceFrame extends javax.swing.JFrame {
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 394, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 357, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(ItemsPanale, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -604,7 +616,7 @@ public class purchaseInvoiceFrame extends javax.swing.JFrame {
                                 .addComponent(jScrollPane2)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 346, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addContainerGap(328, Short.MAX_VALUE))
+                .addGap(328, 328, 328))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -851,7 +863,8 @@ public class purchaseInvoiceFrame extends javax.swing.JFrame {
                     String sql = "SELECT ps.id_purchaseInvoice , ps.date_purchaseInvoice , ps.type_purchaseInvoic , s.name_Suppliers , ps.totalAmount , ps.discount , ps.amountCash , ps.amountLater , ps.note"
                             + " FROM purchaseinvoice ps INNER JOIN suppliers s on ps.id_Suppliers = s.id_Suppliers where ps.id_purchaseInvoice=$P{id_purchaseInvoice}";//where ps.id_purchaseInvoice=1
                     HashMap para = new HashMap();
-                    String id_invoicBil = invoice.getId_invoice();
+                    String St_id_invoicBil = invoice.getId_invoice();
+                    int id_invoicBil = Integer.parseInt(St_id_invoicBil);
                     para.put("id_purchaseInvoice", id_invoicBil);
                     try{
                         double amount = invoice.getAmount() - invoice.getDiscont();
@@ -979,7 +992,8 @@ public class purchaseInvoiceFrame extends javax.swing.JFrame {
        valuesItems.add(new ItemsOnInvoice(c, new Items().getIdItemsFromName(values[5]), values[5],Double.parseDouble(txtCount.getValue().toString()),values[3], Double.parseDouble(txtPrice.getText()), Double.parseDouble(txtDiscondItem.getText()), Double.parseDouble(txtSumPrice.getText()), Integer.parseInt(txtId_Invoice.getText())));
        SumTotal();
        c++;
-       txtDiscondItem.setText("0.00"); 
+       txtDiscondItem.setText("0.00");
+       txtIdItems.setText("");
        txtM.setText(c+"");   
     }//GEN-LAST:event_btnSaveItemActionPerformed
 
@@ -1053,6 +1067,15 @@ public class purchaseInvoiceFrame extends javax.swing.JFrame {
 //                break;
 //        }
     }//GEN-LAST:event_comboNameItemStateChanged
+
+    private void txtIdItemsKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtIdItemsKeyReleased
+        // TODO add your handling code here:
+        String code = txtIdItems.getText();
+        if(code.length() >= 13){
+            String itemName = items.getNameItemFromId(code);
+            comboItems.setSelectedItem(itemName);
+        }
+    }//GEN-LAST:event_txtIdItemsKeyReleased
     private void calcSumPrice(){
         String price = txtPrice.getText() ;
         String countStr = txtCount.getValue().toString();
@@ -1158,6 +1181,7 @@ public class purchaseInvoiceFrame extends javax.swing.JFrame {
     private com.toedter.calendar.JDateChooser txtDate;
     private javax.swing.JTextField txtDiscond;
     private javax.swing.JTextField txtDiscondItem;
+    private javax.swing.JTextField txtIdItems;
     private javax.swing.JLabel txtId_Invoice;
     private javax.swing.JLabel txtM;
     private javax.swing.JTextArea txtNote;

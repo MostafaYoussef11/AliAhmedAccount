@@ -243,6 +243,7 @@ public class Tools {
             Logger.getLogger(SearchPurchaseFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
         return font.deriveFont(Font.BOLD, size);
+        //3170333000100887
     }
   public static String getDayName(Date date){
         String day_ar ="";

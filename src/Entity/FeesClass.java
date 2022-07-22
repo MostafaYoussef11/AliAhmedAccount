@@ -51,7 +51,7 @@ public class FeesClass {
     
     }
     public void FillTable(JTable jTable){
-        String sql = "SELECT f.amount , f.note , f.date_fees , f.id_fees FROM fees AS f";
+        String sql = "SELECT f.amount , f.note , f.date_fees , f.id_fees FROM fees AS f ORDER BY f.id_fees DESC";
         String[] columnName = {"المبلغ", "التاريخ", "البيان", "م"};
         ConnectDB.fillAndCenterTable(sql, jTable, columnName);
     

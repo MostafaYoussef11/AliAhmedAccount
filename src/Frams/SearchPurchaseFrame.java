@@ -101,13 +101,14 @@ public class SearchPurchaseFrame extends javax.swing.JFrame {
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         // TODO add your handling code here:
         int row = jTable1.getSelectedRow();
-        String id_invoicBil = jTable1.getValueAt(row, 7).toString();
+        String St_id_invoicBil = jTable1.getValueAt(row, 7).toString();
         double Total_amount = Double.parseDouble(jTable1.getValueAt(row, 3).toString());
         double discont = Double.parseDouble(jTable1.getValueAt(row, 2).toString());
-        System.out.println(id_invoicBil +" " + Total_amount +" "+discont);
+       // System.out.println(St_id_invoicBil +" " + Total_amount +" "+discont);
        String sql = "SELECT ps.id_purchaseInvoice , ps.date_purchaseInvoice , ps.type_purchaseInvoic , s.name_Suppliers , ps.totalAmount , ps.discount , ps.amountCash , ps.amountLater , ps.note"
                   + " FROM purchaseinvoice ps INNER JOIN suppliers s on ps.id_Suppliers = s.id_Suppliers where ps.id_purchaseInvoice=$P{id_purchaseInvoice}";//where ps.id_purchaseInvoice=1
         HashMap para = new HashMap();
+        int id_invoicBil = Integer.parseInt(St_id_invoicBil);
         para.put("id_purchaseInvoice", id_invoicBil);
         double amount = Total_amount - discont;
         para.put("Tafqeet", Tafqeet.doTafqeet(new BigDecimal(amount)));

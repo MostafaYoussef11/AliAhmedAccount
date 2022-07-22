@@ -182,7 +182,7 @@ public abstract class invoice {
     }
 
    public String chackBalanceForItems(String id_items){
-       String sql = "SELECT ifnull(nowBalance,0) AS id FROM calcbalanceitems WHERE id="+id_items;
+       String sql = "SELECT ifnull(balance,0) AS id FROM calcbalanceitems WHERE id_items ="+id_items;
        String balance = ConnectDB.getIdFromName(sql);
        return balance;
    }

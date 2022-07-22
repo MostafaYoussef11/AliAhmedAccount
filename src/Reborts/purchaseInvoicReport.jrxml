@@ -3,18 +3,18 @@
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
-	<parameter name="id_purchaseInvoice" class="java.lang.String">
+	<parameter name="id_purchaseInvoice" class="java.lang.Integer">
 		<parameterDescription><![CDATA[]]></parameterDescription>
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
-		<defaultValueExpression><![CDATA["E:\\AliAhmedAccount\\AliAhmedAccount\\src\\Reborts\\"]]></defaultValueExpression>
+		<defaultValueExpression><![CDATA["E:\\Masrawy\\Account\\src\\Reborts\\"]]></defaultValueExpression>
 	</parameter>
 	<parameter name="Tafqeet" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[SELECT ps.id_purchaseInvoice , ps.date_purchaseInvoice , ps.type_purchaseInvoic , s.name_Suppliers , ps.totalAmount , ps.discount , ps.amountCash , ps.amountLater , ps.note FROM purchaseinvoice ps INNER JOIN suppliers s on ps.id_Suppliers = s.id_Suppliers where ps.id_purchaseInvoice=$P{id_purchaseInvoice}]]>
 	</queryString>
-	<field name="id_purchaseInvoice" class="java.lang.Integer">
+	<field name="id_purchaseInvoice" class="java.lang.Long">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="date_purchaseInvoice" class="java.sql.Date">

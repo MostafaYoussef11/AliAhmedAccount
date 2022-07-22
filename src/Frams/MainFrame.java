@@ -93,7 +93,8 @@ public class MainFrame extends javax.swing.JFrame {
         VCash.setLocation(x, 320);
         VCash.setFont(font);
         selePanal.setLocation(10, 40);
-        txtNowBalance.setBounds(10, dim.height - 180 , 390, 120);
+        txtNowBalance.setBounds(10, dim.height - 180 , 300, 120);
+      //  txtNowBalance.set
         txtIdItems.setFocusable(true);
         txtNowBalance.setText(new CasherClass().getNowBalanceCasher());
         txtMasaryBalance.setText(new MasaryPay().getfirstBalance()+"");
@@ -240,6 +241,8 @@ public class MainFrame extends javax.swing.JFrame {
         btn_balance = new javax.swing.JLabel();
         bt_deficiency_excess = new javax.swing.JLabel();
         btnRturn = new javax.swing.JLabel();
+        btnItemsBalance = new javax.swing.JLabel();
+        btnScann = new javax.swing.JLabel();
         background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -504,13 +507,13 @@ public class MainFrame extends javax.swing.JFrame {
         getContentPane().add(selePanal);
         selePanal.setBounds(10, 30, 230, 230);
 
-        txtNowBalance.setFont(new java.awt.Font("Tahoma", 1, 48)); // NOI18N
+        txtNowBalance.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
         txtNowBalance.setForeground(new java.awt.Color(0, 0, 255));
         txtNowBalance.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        txtNowBalance.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/deposit .png"))); // NOI18N
+        txtNowBalance.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/safe-box_1.png"))); // NOI18N
         txtNowBalance.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         txtNowBalance.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-        txtNowBalance.setIconTextGap(30);
+        txtNowBalance.setIconTextGap(20);
         txtNowBalance.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 txtNowBalanceMouseClicked(evt);
@@ -520,7 +523,7 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(txtNowBalance);
-        txtNowBalance.setBounds(20, 610, 380, 140);
+        txtNowBalance.setBounds(20, 610, 300, 140);
 
         pos.setFont(new java.awt.Font("VIP Hala Bold", 1, 18)); // NOI18N
         pos.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -605,7 +608,7 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(calc);
-        calc.setBounds(400, 600, 64, 64);
+        calc.setBounds(325, 600, 64, 64);
 
         counter.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         counter.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/counter2.png"))); // NOI18N
@@ -620,7 +623,7 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(counter);
-        counter.setBounds(470, 600, 64, 64);
+        counter.setBounds(400, 600, 64, 64);
 
         card_10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         card_10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/card10.png"))); // NOI18N
@@ -706,7 +709,7 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(vf_cash);
-        vf_cash.setBounds(540, 600, 64, 64);
+        vf_cash.setBounds(470, 600, 64, 64);
 
         txtNmber.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         txtNmber.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -722,7 +725,7 @@ public class MainFrame extends javax.swing.JFrame {
         Butt_notification.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Butt_notification.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/bell.png"))); // NOI18N
         getContentPane().add(Butt_notification);
-        Butt_notification.setBounds(610, 600, 64, 64);
+        Butt_notification.setBounds(540, 600, 64, 64);
 
         Barpanel.setLayout(null);
 
@@ -772,7 +775,7 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btn_balance);
-        btn_balance.setBounds(670, 600, 64, 64);
+        btn_balance.setBounds(610, 600, 64, 64);
 
         bt_deficiency_excess.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         bt_deficiency_excess.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/bar-graph.png"))); // NOI18N
@@ -787,7 +790,7 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(bt_deficiency_excess);
-        bt_deficiency_excess.setBounds(740, 600, 64, 64);
+        bt_deficiency_excess.setBounds(680, 600, 64, 64);
 
         btnRturn.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         btnRturn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/packa.png"))); // NOI18N
@@ -797,7 +800,27 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btnRturn);
-        btnRturn.setBounds(820, 600, 64, 64);
+        btnRturn.setBounds(750, 600, 64, 64);
+
+        btnItemsBalance.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnItemsBalance.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/search_1.png"))); // NOI18N
+        btnItemsBalance.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnItemsBalanceMouseClicked(evt);
+            }
+        });
+        getContentPane().add(btnItemsBalance);
+        btnItemsBalance.setBounds(820, 600, 64, 64);
+
+        btnScann.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnScann.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/scanner.png"))); // NOI18N
+        btnScann.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnScannMouseClicked(evt);
+            }
+        });
+        getContentPane().add(btnScann);
+        btnScann.setBounds(890, 600, 64, 64);
 
         background.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         background.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -1285,6 +1308,18 @@ public class MainFrame extends javax.swing.JFrame {
 //        Tools.openJFram(rsf , "" , "");
         Tools.openJFram(rsf, "مردودات المبيعات", "packa");
     }//GEN-LAST:event_btnRturnMouseClicked
+
+    private void btnItemsBalanceMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnItemsBalanceMouseClicked
+        // TODO add your handling code here:
+        balanceItems b = new balanceItems();
+        Tools.openJFram(b, "جرد الاصناف", "search");
+    }//GEN-LAST:event_btnItemsBalanceMouseClicked
+
+    private void btnScannMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnScannMouseClicked
+        // TODO add your handling code here:
+        ItemsPrint ip = new ItemsPrint();
+        Tools.openJFram(ip, "طباعة باركود", "scanner");
+    }//GEN-LAST:event_btnScannMouseClicked
     
     private void settxtnumer(){
         masary_Utilites utilit = new masary_Utilites(id_pos);
@@ -1364,8 +1399,10 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel VCash;
     private javax.swing.JLabel background;
     private javax.swing.JLabel bt_deficiency_excess;
+    private javax.swing.JLabel btnItemsBalance;
     private javax.swing.JLabel btnRturn;
     private javax.swing.JButton btnSave;
+    private javax.swing.JLabel btnScann;
     private javax.swing.JLabel btn_balance;
     private javax.swing.JLabel calc;
     private javax.swing.JLabel card_10;
