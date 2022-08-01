@@ -31,7 +31,6 @@ public class Login extends javax.swing.JFrame {
         setBackground(new Color(0.0f, 0.0f, 0.0f, 0.02f));
     }
     public static String getServer(){
-         
          return Servernum;
          
     }
@@ -225,7 +224,7 @@ public class Login extends javax.swing.JFrame {
                 dispose();
             }else{
                 Tools.showErrorMsg("اسم المستخدم أو كلمة السر غير صحيح");
-                
+                ClearJtext();
             }
         
         }

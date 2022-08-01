@@ -15,6 +15,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -54,7 +55,17 @@ public final class NotifcationClass extends TimerTask{
                     @Override
                     public void mouseClicked(MouseEvent e) {
                         button.setIcon(new ImageIcon(getClass().getResource("/Icons/bell.png"))); 
-                        showPopuMenuNotification();
+                        if(autoPoupWindo != null){
+                            new NotifcationClass(main, button);
+                        }else{
+                            if(size == 0){
+                                Tools.showErrorMsg("لا توجد اشعارات");
+                            }else{
+                                 showPopuMenuNotification();
+                            }
+                            
+                        }
+                       
                       //  throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.  
                     }
 
@@ -86,14 +97,17 @@ public final class NotifcationClass extends TimerTask{
         notifList = new ArrayList<NotifacionList>();
         Connection connection = null;
         PreparedStatement pstm = null;
+        Statement stmt = null;
         ResultSet rst = null;
         try {          
             connection = ConnectDB.getCon();
             String datePay = Tools.dateSql(new Date());
-            String sql = "SELECT note FROM `notifcation` WHERE date_notifcation = ?";//where date_notifcation = "+datePay;
-            pstm = connection.prepareStatement(sql);
-            pstm.setString(1, datePay);
-            rst = pstm.executeQuery();
+            String sql = "SELECT note FROM `notifcation` WHERE date_notifcation ='"+datePay+"'";//where date_notifcation = "+datePay;
+            stmt= connection.createStatement();
+            
+            //pstm = connection.prepareStatement(sql);
+            //pstm.setString(1, datePay);
+            rst = stmt.executeQuery(sql);//pstm.executeQuery();
             if(rst.getRow() != 0 ){
               while(rst.next()){
                 notif = new NotifacionList(rst.getString(1));
@@ -158,11 +172,12 @@ public final class NotifcationClass extends TimerTask{
         if(notifList == null){
             Tools.showErrorMsg("لا توجد اشعارات");
         }else{
-            if(autoPoupWindo.isVisible()){
-                autoPoupWindo.setVisible(false);
-                autoPoupWindo.dispose();
-            }
-            else{
+            //if(autoPoupWindo.isVisible()){
+              //  if(notifList == null)  Tools.showErrorMsg("لا توجد اشعارات");
+                //autoPoupWindo.setVisible(false);
+                //autoPoupWindo.dispose();
+           // }
+           // else{
                 autoPoupWindo.add(AllFieldpanel);
                 int height = (31 * size) - 1;
                 autoPoupWindo.setSize(320,height);
@@ -170,7 +185,7 @@ public final class NotifcationClass extends TimerTask{
                 autoPoupWindo.setVisible(true);
                 autoPoupWindo.revalidate();
                 autoPoupWindo.repaint();               
-            }        
+         //   }        
         }
    
     }

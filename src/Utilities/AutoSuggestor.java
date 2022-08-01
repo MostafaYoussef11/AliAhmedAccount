@@ -334,7 +334,7 @@ public class AutoSuggestor {
         autoSuggestionPopUpWindow.setMinimumSize(new Dimension(textField.getWidth(), 35));
         autoSuggestionPopUpWindow.revalidate();
         autoSuggestionPopUpWindow.repaint();
-        System.out.println("x = " + windowX +" y : " + windowY);
+       // System.out.println("x = " + windowX +" y : " + windowY);
     }
 
     public final void setDictionary(ArrayList<String> words) {
@@ -378,7 +378,7 @@ public class AutoSuggestor {
         for (String word : dictionary) {//get words in the dictionary which we added
             boolean fullymatches = true;
             for (int i = 0; i < typedWord.length(); i++) {//each string in the word
-                System.out.println(typedWord + typedWord.length());
+                //System.out.println(typedWord + typedWord.length());
                 if (!typedWord.toLowerCase().startsWith(String.valueOf(word.toLowerCase().charAt(i)), i)) {//check for match
                     fullymatches = false;
                     break;

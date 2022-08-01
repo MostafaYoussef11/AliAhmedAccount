@@ -101,6 +101,13 @@ public class paydebt {
                         }
                     }
                   }
+              //اصل المبلغ سالب
+                   else if(newAmount < 0){
+                            isSave = true;
+                            con.commit();
+                            con.close();
+                   
+                   }
               // المبلغ كامل
               else{
                   String sql_delete = "DELETE FROM `notifcation` WHERE id_Solf = ? ";

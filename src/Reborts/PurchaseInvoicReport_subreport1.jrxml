@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="SalesInvoicReport_subreport1" columnDirection="RTL" pageWidth="595" pageHeight="842" columnWidth="595" leftMargin="0" rightMargin="0" topMargin="1" bottomMargin="1" uuid="6e3da2c7-c3cf-443b-96c6-70419dd91fbe">
 	<property name="ireport.zoom" value="1.0"/>
-	<property name="ireport.x" value="0"/>
+	<property name="ireport.x" value="120"/>
 	<property name="ireport.y" value="0"/>
 	<parameter name="id_purchaseInvoice" class="java.lang.Integer"/>
 	<queryString>
 		<![CDATA[SELECT * FROM `itemsonpurchaseinvoice` where id_purchaseInvoice = $P{id_purchaseInvoice}]]>
 	</queryString>
-	<field name="id" class="java.lang.Integer">
+	<field name="id" class="java.lang.Long">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="id_items" class="java.lang.Integer">
+	<field name="id_items" class="java.lang.Long">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="name_items" class="java.lang.String">
@@ -19,7 +19,7 @@
 	<field name="qyt" class="java.lang.Double">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="id_unit" class="java.lang.Integer">
+	<field name="name_unit" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="price" class="java.lang.Double">
@@ -31,7 +31,7 @@
 	<field name="Amount" class="java.lang.Double">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="id_purchaseInvoice" class="java.lang.Integer">
+	<field name="id_purchaseInvoice" class="java.lang.Long">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<variable name="qyt_1" class="java.lang.Double" resetType="Column" calculation="Sum">

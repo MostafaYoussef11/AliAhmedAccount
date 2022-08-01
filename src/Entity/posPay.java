@@ -65,6 +65,27 @@ public abstract class posPay {
     public void setIs_requer_phone_num(boolean is_requer_phone_num) {
         this.is_requer_phone_num = is_requer_phone_num;
     }
+
+    private void SavePhoneNumber(String phone) {
+      if(phone.length() == 0){
+             System.out.println("الرقم غير مكتوب"); 
+        }else{  
+            ArrayList<String> Phones = Tools.PhoneNumberList();
+            if(Phones.contains(phone)){
+              System.out.println("الرقم مسجل"); 
+            }else{
+                try{         
+                    String sql_inser_num = "INSERT INTO `phone_numbers` (`numbers`) VALUES(?)";
+                    PreparedStatement pst = con.prepareStatement(sql_inser_num);
+                    pst.setString(1, phone.trim());
+                    pst.executeUpdate();
+                 }catch(SQLException ex){
+                    //throw new ArrayIndexOutOfBoundsException(phone);
+                   System.out.println("الرقم مسجل");  
+                 }
+            }
+         }
+    }
     
     public enum charage{ cash , mob};
     //Abstract Method
@@ -112,6 +133,9 @@ public abstract class posPay {
                 //String sql_insert_Casher = casher.getSQlStatement(TypeCasherTransaction.PosPay);
                  //int rowAffectCasher = new CasherClass().SavedCasherTransaction(TypeCasherTransaction.PosPay, amount_masary_pay, utility_masary, id_masary_pay);
                  if(rowAffectCasher == 1){
+                     if(is_requer_phone_num){
+                       SavePhoneNumber(phone);
+                     }
                      con.commit();
                      isSave = true;
                      con.close();
@@ -182,7 +206,7 @@ public abstract class posPay {
          pstmt = con.prepareStatement(sql_insert_masaryPay, Statement.RETURN_GENERATED_KEYS);
          pstmt.setInt(1, id_utility_masary);
          pstmt.setDouble(2, price_masary_pay);
-         pstmt.setInt(3, 1);
+         pstmt.setInt(3, id_client);
          pstmt.setDouble(4, discount_of_balance);
          pstmt.setDouble(5, amount_masary_pay);
          DecimalFormat format = new DecimalFormat("0.00");

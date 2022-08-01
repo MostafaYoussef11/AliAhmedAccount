@@ -93,7 +93,8 @@ public class MainFrame extends javax.swing.JFrame {
         VCash.setLocation(x, 320);
         VCash.setFont(font);
         selePanal.setLocation(10, 40);
-        txtNowBalance.setBounds(10, dim.height - 180 , 390, 120);
+        txtNowBalance.setBounds(10, dim.height - 180 , 300, 120);
+      //  txtNowBalance.set
         txtIdItems.setFocusable(true);
         txtNowBalance.setText(new CasherClass().getNowBalanceCasher());
         txtMasaryBalance.setText(new MasaryPay().getfirstBalance()+"");
@@ -213,7 +214,7 @@ public class MainFrame extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         txtPrice = new javax.swing.JTextField();
         btnSave = new javax.swing.JButton();
-        txtNowBalance = new javax.swing.JLabel();
+        jButton2 = new javax.swing.JButton();
         pos = new javax.swing.JLabel();
         fees = new javax.swing.JLabel();
         loan = new javax.swing.JLabel();
@@ -238,6 +239,10 @@ public class MainFrame extends javax.swing.JFrame {
         txtDate = new javax.swing.JLabel();
         btn_balance = new javax.swing.JLabel();
         bt_deficiency_excess = new javax.swing.JLabel();
+        btnRturn = new javax.swing.JLabel();
+        btnItemsBalance = new javax.swing.JLabel();
+        btnScann = new javax.swing.JLabel();
+        txtNowBalance = new javax.swing.JLabel();
         background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -404,8 +409,10 @@ public class MainFrame extends javax.swing.JFrame {
         selePanal.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         selePanal.setOpaque(false);
 
-        txtIdItems.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        txtIdItems.setFont(new java.awt.Font("Courier New", 1, 14)); // NOI18N
         txtIdItems.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtIdItems.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+        txtIdItems.setFocusTraversalPolicyProvider(true);
         txtIdItems.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtIdItemsActionPerformed(evt);
@@ -438,10 +445,17 @@ public class MainFrame extends javax.swing.JFrame {
         txtPrice.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
         btnSave.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        btnSave.setText("ترحيل");
+        btnSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/diskette (1).png"))); // NOI18N
         btnSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnSaveActionPerformed(evt);
+            }
+        });
+
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/recycle (2).png"))); // NOI18N
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
             }
         });
 
@@ -461,12 +475,12 @@ public class MainFrame extends javax.swing.JFrame {
                     .addGroup(selePanalLayout.createSequentialGroup()
                         .addComponent(txtPrice, javax.swing.GroupLayout.DEFAULT_SIZE, 117, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 83, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(selePanalLayout.createSequentialGroup()
+                        .addComponent(btnSave)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton2)))
                 .addContainerGap())
-            .addGroup(selePanalLayout.createSequentialGroup()
-                .addGap(54, 54, 54)
-                .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         selePanalLayout.setVerticalGroup(
             selePanalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -484,30 +498,14 @@ public class MainFrame extends javax.swing.JFrame {
                     .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txtPrice, javax.swing.GroupLayout.DEFAULT_SIZE, 36, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(btnSave, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(selePanalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(btnSave, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
         getContentPane().add(selePanal);
         selePanal.setBounds(10, 30, 230, 230);
-
-        txtNowBalance.setFont(new java.awt.Font("Tahoma", 1, 48)); // NOI18N
-        txtNowBalance.setForeground(new java.awt.Color(0, 0, 255));
-        txtNowBalance.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        txtNowBalance.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/deposit .png"))); // NOI18N
-        txtNowBalance.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        txtNowBalance.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
-        txtNowBalance.setIconTextGap(30);
-        txtNowBalance.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                txtNowBalanceMouseClicked(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                txtNowBalanceMouseExited(evt);
-            }
-        });
-        getContentPane().add(txtNowBalance);
-        txtNowBalance.setBounds(20, 610, 380, 140);
 
         pos.setFont(new java.awt.Font("VIP Hala Bold", 1, 18)); // NOI18N
         pos.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -592,7 +590,7 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(calc);
-        calc.setBounds(400, 600, 64, 64);
+        calc.setBounds(325, 600, 64, 64);
 
         counter.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         counter.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/counter2.png"))); // NOI18N
@@ -607,7 +605,7 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(counter);
-        counter.setBounds(470, 600, 64, 64);
+        counter.setBounds(400, 600, 64, 64);
 
         card_10.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         card_10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/card10.png"))); // NOI18N
@@ -693,7 +691,7 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(vf_cash);
-        vf_cash.setBounds(540, 600, 64, 64);
+        vf_cash.setBounds(470, 600, 64, 64);
 
         txtNmber.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         txtNmber.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -709,7 +707,7 @@ public class MainFrame extends javax.swing.JFrame {
         Butt_notification.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         Butt_notification.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/bell.png"))); // NOI18N
         getContentPane().add(Butt_notification);
-        Butt_notification.setBounds(610, 600, 64, 64);
+        Butt_notification.setBounds(540, 600, 64, 64);
 
         Barpanel.setLayout(null);
 
@@ -759,7 +757,7 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(btn_balance);
-        btn_balance.setBounds(670, 600, 64, 64);
+        btn_balance.setBounds(610, 600, 64, 64);
 
         bt_deficiency_excess.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         bt_deficiency_excess.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/bar-graph.png"))); // NOI18N
@@ -774,7 +772,46 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
         getContentPane().add(bt_deficiency_excess);
-        bt_deficiency_excess.setBounds(740, 600, 64, 64);
+        bt_deficiency_excess.setBounds(680, 600, 64, 64);
+
+        btnRturn.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnRturn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/packa.png"))); // NOI18N
+        btnRturn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnRturnMouseClicked(evt);
+            }
+        });
+        getContentPane().add(btnRturn);
+        btnRturn.setBounds(750, 600, 64, 64);
+
+        btnItemsBalance.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnItemsBalance.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/search_1.png"))); // NOI18N
+        btnItemsBalance.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnItemsBalanceMouseClicked(evt);
+            }
+        });
+        getContentPane().add(btnItemsBalance);
+        btnItemsBalance.setBounds(820, 600, 64, 64);
+
+        btnScann.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btnScann.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/scanner.png"))); // NOI18N
+        btnScann.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btnScannMouseClicked(evt);
+            }
+        });
+        getContentPane().add(btnScann);
+        btnScann.setBounds(890, 600, 64, 64);
+
+        txtNowBalance.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
+        txtNowBalance.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        txtNowBalance.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/safe-box_1.png"))); // NOI18N
+        txtNowBalance.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        txtNowBalance.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        txtNowBalance.setIconTextGap(10);
+        getContentPane().add(txtNowBalance);
+        txtNowBalance.setBounds(20, 600, 230, 130);
 
         background.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         background.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
@@ -882,9 +919,20 @@ public class MainFrame extends javax.swing.JFrame {
             Items item = new Items();
             String id_item = txtIdItems.getText();
             String name_item = item.getNameItemFromId(id_item);
-            txtnameItem.setText(name_item);
-            txtQut.setText("1");
-            txtPrice.setText(item.getSalesPriceLow(name_item));
+            if(name_item.isEmpty()){
+                txtnameItem.setText("الصنف غير موجود");
+                txtIdItems.setSelectionStart(0);
+                txtIdItems.setSelectionEnd(13);
+                
+            }else{
+               txtnameItem.setText(name_item);
+               txtQut.setText("1");
+               txtPrice.setText(item.getSalesPriceLow(name_item));
+               txtIdItems.setFocusable(false);
+               txtQut.setSelectionStart(0);
+               txtQut.setSelectionEnd(1);
+            }
+   
         }
 
     }//GEN-LAST:event_txtIdItemsKeyReleased
@@ -936,32 +984,12 @@ public class MainFrame extends javax.swing.JFrame {
             txtIdItems.setText("");
             txtNowBalance.setText(new CasherClass().getNowBalanceCasher());
         }
-          txtIdItems.requestFocus();
+          
+         
         }
+         txtIdItems.setRequestFocusEnabled(true);
+        txtIdItems.requestFocus();
     }//GEN-LAST:event_btnSaveActionPerformed
-
-    private void txtNowBalanceMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtNowBalanceMouseClicked
-        // TODO add your handling code here:
-        clickPanel(txtNowBalance); 
-        if(winCahse.isVisible()){
-             winCahse.setVisible(false);
-        }else{
-            CasherTowPanel cash = new CasherTowPanel();
-            cash.setVisible(true);
-            winCahse.setSize(475, 165);
-            winCahse.setOpacity(0.75f);
-            winCahse.setLocation(400 , 450);
-            winCahse.getContentPane().add(cash);
-            winCahse.repaint();
-            winCahse.setVisible(true);       
-        }
-        txtNowBalance.setText(new CasherClass().getNowBalanceCasher());  
-    }//GEN-LAST:event_txtNowBalanceMouseClicked
-
-    private void txtNowBalanceMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtNowBalanceMouseExited
-        // TODO add your handling code here:
-        exitPanel(txtNowBalance);
-    }//GEN-LAST:event_txtNowBalanceMouseExited
 
     private void posMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_posMouseClicked
         // TODO add your handling code here:
@@ -1233,6 +1261,36 @@ public class MainFrame extends javax.swing.JFrame {
         }
         
     }//GEN-LAST:event_bt_deficiency_excessMouseClicked
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        txtIdItems.setText("");
+        txtIdItems.setFocusable(true);
+        txtnameItem.setText("");
+        txtQut.setText("");
+        txtPrice.setText("");
+        txtIdItems.setRequestFocusEnabled(true);
+        txtIdItems.requestFocus();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void btnRturnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRturnMouseClicked
+        // TODO add your handling code here:
+        ReturnSalesFrame rsf = new ReturnSalesFrame();
+//        Tools.openJFram(rsf , "" , "");
+        Tools.openJFram(rsf, "مردودات المبيعات", "packa");
+    }//GEN-LAST:event_btnRturnMouseClicked
+
+    private void btnItemsBalanceMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnItemsBalanceMouseClicked
+        // TODO add your handling code here:
+        balanceItems b = new balanceItems();
+        Tools.openJFram(b, "جرد الاصناف", "search");
+    }//GEN-LAST:event_btnItemsBalanceMouseClicked
+
+    private void btnScannMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnScannMouseClicked
+        // TODO add your handling code here:
+        ItemsPrint ip = new ItemsPrint();
+        Tools.openJFram(ip, "طباعة باركود", "scanner");
+    }//GEN-LAST:event_btnScannMouseClicked
     
     private void settxtnumer(){
         masary_Utilites utilit = new masary_Utilites(id_pos);
@@ -1312,7 +1370,10 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel VCash;
     private javax.swing.JLabel background;
     private javax.swing.JLabel bt_deficiency_excess;
+    private javax.swing.JLabel btnItemsBalance;
+    private javax.swing.JLabel btnRturn;
     private javax.swing.JButton btnSave;
+    private javax.swing.JLabel btnScann;
     private javax.swing.JLabel btn_balance;
     private javax.swing.JLabel calc;
     private javax.swing.JLabel card_10;
@@ -1322,6 +1383,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel fees;
     private javax.swing.JLabel items;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel loan;

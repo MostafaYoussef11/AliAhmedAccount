@@ -462,7 +462,8 @@ public class SendCashFrame extends javax.swing.JFrame {
 
     private void txt_valuKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_valuKeyReleased
         // TODO add your handling code here:
-        value = Double.parseDouble(txt_valu.getText());
+        String valu = txt_valu.getText();
+        value = Double.parseDouble(valu);
         String NumberClient = txtNumberClient.getText();
         String ClientNetwork = NumberClient.substring(0, 3);
         String NumberVF = combVFNumber.getSelectedItem().toString();

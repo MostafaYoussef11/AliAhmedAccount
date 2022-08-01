@@ -925,7 +925,7 @@ public class SalesInvoiceFrame extends javax.swing.JFrame {
     private void comboItemsItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboItemsItemStateChanged
         // TODO add your handling code here:
         String name_item = comboItems.getSelectedItem().toString();
-        String id = items.getIdItemsFromName(name_item);
+        String id = items.getIdUnitFromNameItems(name_item);
         ConnectDB.fillComboUnit(id, comboUnit);
         high_name_unit = items.getHightUnitFromId(id);
         String priceHigh = items.getSalesPriceHight(name_item);
@@ -936,7 +936,8 @@ public class SalesInvoiceFrame extends javax.swing.JFrame {
         }
         txtCount.setValue(1);
         calcSumPrice();
-        balance = sales.chackBalanceForItems(id);
+        String id_items = items.getIdItemsFromName(name_item);
+        balance = sales.chackBalanceForItems(id_items);
         balanceItem = Double.parseDouble(balance); 
     }//GEN-LAST:event_comboItemsItemStateChanged
 
