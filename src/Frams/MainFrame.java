@@ -806,12 +806,12 @@ public class MainFrame extends javax.swing.JFrame {
 
         txtNowBalance.setFont(new java.awt.Font("Tahoma", 1, 36)); // NOI18N
         txtNowBalance.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        txtNowBalance.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/safe-box_1.png"))); // NOI18N
+        txtNowBalance.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/safe-box.png"))); // NOI18N
         txtNowBalance.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
-        txtNowBalance.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        txtNowBalance.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         txtNowBalance.setIconTextGap(10);
         getContentPane().add(txtNowBalance);
-        txtNowBalance.setBounds(20, 600, 230, 130);
+        txtNowBalance.setBounds(20, 600, 230, 90);
 
         background.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         background.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
