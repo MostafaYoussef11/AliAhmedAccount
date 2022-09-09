@@ -92,6 +92,9 @@ public class MainFrame extends javax.swing.JFrame {
         loan.setFont(font);
         VCash.setLocation(x, 320);
         VCash.setFont(font);
+        x = x -140;
+        goold.setLocation(x, 40);
+        goold.setFont(font);
         selePanal.setLocation(10, 40);
         txtNowBalance.setBounds(10, dim.height - 180 , 300, 120);
       //  txtNowBalance.set
@@ -243,6 +246,7 @@ public class MainFrame extends javax.swing.JFrame {
         btnItemsBalance = new javax.swing.JLabel();
         btnScann = new javax.swing.JLabel();
         txtNowBalance = new javax.swing.JLabel();
+        goold = new javax.swing.JLabel();
         background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -813,6 +817,25 @@ public class MainFrame extends javax.swing.JFrame {
         getContentPane().add(txtNowBalance);
         txtNowBalance.setBounds(20, 600, 230, 90);
 
+        goold.setFont(new java.awt.Font("VIP Hala Bold", 1, 18)); // NOI18N
+        goold.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        goold.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/gold-bars.png"))); // NOI18N
+        goold.setText("الجبل");
+        goold.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        goold.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        goold.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        goold.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        goold.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                gooldMouseClicked(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                gooldMouseExited(evt);
+            }
+        });
+        getContentPane().add(goold);
+        goold.setBounds(440, 30, 130, 130);
+
         background.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         background.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         getContentPane().add(background);
@@ -1291,6 +1314,18 @@ public class MainFrame extends javax.swing.JFrame {
         ItemsPrint ip = new ItemsPrint();
         Tools.openJFram(ip, "طباعة باركود", "scanner");
     }//GEN-LAST:event_btnScannMouseClicked
+
+    private void gooldMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_gooldMouseClicked
+        // TODO add your handling code here:
+        clickPanel(goold);
+        GoldFrame gf = new GoldFrame();
+        Tools.openJFram(gf,"شغل الجبل" , "ingots");
+    }//GEN-LAST:event_gooldMouseClicked
+
+    private void gooldMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_gooldMouseExited
+        // TODO add your handling code here:
+        exitPanel(goold);
+    }//GEN-LAST:event_gooldMouseExited
     
     private void settxtnumer(){
         masary_Utilites utilit = new masary_Utilites(id_pos);
@@ -1381,6 +1416,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JComboBox comboNoteUtiltiy;
     private javax.swing.JLabel counter;
     private javax.swing.JLabel fees;
+    private javax.swing.JLabel goold;
     private javax.swing.JLabel items;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
