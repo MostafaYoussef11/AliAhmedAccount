@@ -5,6 +5,12 @@
  */
 package Frams;
 
+import Utilities.ConnectDB;
+import Utilities.Tools;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+
 
 
 
@@ -247,50 +253,54 @@ public class workGroupFrame extends javax.swing.JFrame {
     private void formWindowOpened(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowOpened
         // TODO add your handling code here:
         SetFrame();
-//        Tools.SearchField(wgroupTable, txtSearch);
+        Tools.SearchField(wgroupTable, txtSearch);
  
     }//GEN-LAST:event_formWindowOpened
     private void SetFrame(){
                 // Fill Table
-//        String[] coulmnName = new String [] {
-//                 "التفعيل", "النظام", "اسم المجموعة", "رقم المجموعة"
-//            };
-//        String sql = "SELECT workgroup.isActive , deal.name_deal ,workgroup.name_workgroup , workgroup.id_workgroup FROM workgroup INNER JOIN deal ON workgroup.id_deal = deal.id_deal ORDER BY id_workgroup DESC ;";
-//        ConectionDataBase.fillAndCenterTable(sql, wgroupTable, coulmnName);
-//        ConectionDataBase.NewfillCombo("deal", "name_deal", jComboBox1);
-//        // disActive Btns
-//        btnDel.setEnabled(false);
-//        btnEdit.setEnabled(false);
-//        btnNew.setEnabled(true);
-//        btnNew.setText("حفظ");
-//        btnRebort.setEnabled(false);
-//        // add id workgroup
-//        String id = ConectionDataBase.AutoId("workgroup", "id_workgroup");
-//        txtid.setText(id);
-//        txtName.setText("");
-//        txtActive.setText("نشط");
+        String[] coulmnName = new String [] {
+                 "التفعيل", "النظام", "اسم المجموعة", "رقم المجموعة"
+            };
+        String sql = "SELECT workgroup.isActive , deal.name_deal ,workgroup.name_workgroup , workgroup.id_workgroup FROM workgroup INNER JOIN deal ON workgroup.id_deal = deal.id_deal ORDER BY id_workgroup DESC ;";
+        ConnectDB.fillAndCenterTable(sql, wgroupTable, coulmnName);
+        ConnectDB.fillCombo("deal", "name_deal", jComboBox1);
+        // disActive Btns
+        btnDel.setEnabled(false);
+        btnEdit.setEnabled(false);
+        btnNew.setEnabled(true);
+        btnNew.setText("حفظ");
+        btnRebort.setEnabled(false);
+        // add id workgroup
+        String id = ConnectDB.LastId("workgroup", "id_workgroup");
+        txtid.setText(id);
+        txtName.setText("");
+        txtActive.setText("نشط");
        
     }
     private void btnNewActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnNewActionPerformed
-        // TODO add your handling code here:
-//        String id = txtid.getText();
-//        String name = txtName.getText();
-//        String id_deal = ConectionDataBase.getIdFrmName("deal", jComboBox1.getSelectedItem().toString());
-//        if( name.isEmpty()){
-//            Tools.ErorBox("اكتب اسم المجموعة");
-//        }
-//        else{
-//        String sql = "INSERT INTO workgroup values("+id+",'"+name+"',"+id_deal+",0);";
-//        boolean isAdd = ConectionDataBase.ExecuteAnyQuery(sql);
-//        if(isAdd){
-//            Tools.MasgBox("تم الحفظ بنجاح");
-//            SetFrame();
-//            
-//        }else{
-//            Tools.ErorBox("خطأ");
-//            SetFrame();
-//        }
-//        }
+        try {
+            // TODO add your handling code here:
+            String id = txtid.getText();
+            String name = txtName.getText();
+            String id_deal = ConnectDB.getIdFrmName("deal", jComboBox1.getSelectedItem().toString());
+            if( name.isEmpty()){
+                Tools.showErrorMsg("اكتب اسم المجموعة");
+            }
+            else{
+                String sql = "INSERT INTO workgroup values("+id+",'"+name+"',"+id_deal+",0);";
+                boolean isAdd = ConnectDB.ExucuteAnyQuery(sql);
+                if(isAdd){
+                    Tools.showInfoMsg("تم الحفظ بنجاح" , "حفظ");
+                    SetFrame();
+                    
+                }else{
+                    Tools.showErrorMsg("خطأ");
+                    SetFrame();
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(workGroupFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_btnNewActionPerformed
 
     private void wgroupTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_wgroupTableMouseClicked
@@ -362,6 +372,9 @@ public class workGroupFrame extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+          deal d = new deal();
+        d.setLocationRelativeTo(null);
+        d.setVisible(true);
 
     }//GEN-LAST:event_jButton1ActionPerformed
 

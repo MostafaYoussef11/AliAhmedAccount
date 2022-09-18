@@ -5,6 +5,11 @@
  */
 package Frams;
 
+import Entity.Suppliers;
+import Entity.goldClasses;
+import Utilities.ConnectDB;
+import Utilities.Tools;
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -16,13 +21,43 @@ import java.util.logging.Logger;
  * @author Mostafa Youssef 
  */
 public class Export extends javax.swing.JFrame {
-
+    goldClasses gold;
+    Suppliers supplier;
     public Export() {
         initComponents();
     }
      
     private void SetNew(){
-        
+        Tools.SearchField(table_export, txtSearch);
+        // table 
+        String sql = "SELECT suppliers.name_Suppliers,exports.note , exports.price_export , account.name_account , exports.date_exports , exports.id_exports FROM exports"
+                    + " INNER JOIN account ON exports.id_account = account.id_account "
+                    +" INNER JOIN suppliers ON exports.id_Suppliers = suppliers.id_Suppliers  "
+                    + " ORDER BY id_exports DESC  ; ";
+        String[] coulmnName = new String [] {"مورد","البيان", "المبلغ", "الحساب", "التاريخ", "رقم"};
+        ConnectDB.fillAndCenterTable(sql, table_export, coulmnName);
+        //txt
+        txtDate.setEnabled(true);
+        String id_Casher = ConnectDB.LastId("casher", "id_casher");
+        txtDaily.setText(id_Casher);
+        txtDate.setDate(new Date());
+        String id = ConnectDB.LastId("exports", "id_exports");
+        txtId.setText(id);
+        txtNote.setEnabled(true);
+        txtPrice.setEnabled(true);
+        txtPrice.setRequestFocusEnabled(true);
+        txtPrice.setText("0.00");
+        txtNote.setText("");
+        comAccount.setEnabled(true);
+        comSupplier.setEnabled(true);
+        ConnectDB.fillCombo("account WHERE isEnable = 0 ","name_account", comAccount);
+        ConnectDB.fillCombo("suppliers", "name_Suppliers", comSupplier);
+        //btns
+        btnNew.setEnabled(false);
+        btnDel.setEnabled(false);
+        btnEdit.setEnabled(false);
+        btnUpdate.setEnabled(false);
+        btnSave.setEnabled(true); 
     
     }
     /**
@@ -42,12 +77,12 @@ public class Export extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         txtPrice = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        comAccount = new javax.swing.JComboBox<>();
+        comAccount = new javax.swing.JComboBox<String>();
         jLabel6 = new javax.swing.JLabel();
         txtNote = new javax.swing.JTextField();
         txtDaily = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
-        comSupplier = new javax.swing.JComboBox<>();
+        comSupplier = new javax.swing.JComboBox<String>();
         jScrollPane1 = new javax.swing.JScrollPane();
         table_export = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
@@ -90,7 +125,7 @@ public class Export extends javax.swing.JFrame {
         jLabel5.setText("الحساب");
         jLabel5.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        comAccount.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comAccount.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setText("البيان");
@@ -105,7 +140,7 @@ public class Export extends javax.swing.JFrame {
         jLabel7.setText("المورد");
         jLabel7.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        comSupplier.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comSupplier.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         comSupplier.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 comSupplierItemStateChanged(evt);
@@ -176,14 +211,14 @@ public class Export extends javax.swing.JFrame {
 
             },
             new String [] {
-                "مورد", "البيان", "المبلغ", "الحساب", "التاريخ", "رقم", "قيد اليومية"
+                "مورد", "البيان", "المبلغ", "الحساب", "التاريخ", "رقم"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Object.class, java.lang.Object.class, java.lang.Double.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
+                java.lang.Object.class, java.lang.Object.class, java.lang.Double.class, java.lang.Object.class, java.lang.Object.class, java.lang.Object.class
             };
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false, false, false, false, false
             };
 
             public Class getColumnClass(int columnIndex) {
@@ -210,9 +245,6 @@ public class Export extends javax.swing.JFrame {
             table_export.getColumnModel().getColumn(5).setMinWidth(50);
             table_export.getColumnModel().getColumn(5).setPreferredWidth(50);
             table_export.getColumnModel().getColumn(5).setMaxWidth(50);
-            table_export.getColumnModel().getColumn(6).setMinWidth(60);
-            table_export.getColumnModel().getColumn(6).setPreferredWidth(60);
-            table_export.getColumnModel().getColumn(6).setMaxWidth(60);
         }
 
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -343,7 +375,35 @@ public class Export extends javax.swing.JFrame {
     }//GEN-LAST:event_btnExitActionPerformed
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
-       
+        try {
+            gold = new goldClasses();
+            supplier = new Suppliers();
+            String amountString = txtPrice.getText();
+            double amount = Double.parseDouble(amountString);
+            String note = txtNote.getText();
+            String nameAccount = comAccount.getSelectedItem().toString();
+            String idAccountStr = gold.getIdAccount(nameAccount);
+            int idAccount = Integer.parseInt(idAccountStr);
+            String nameSupplier = comSupplier.getSelectedItem().toString();
+            String idSupplierStr = supplier.getIdByName(nameSupplier);
+            int idSupplier = Integer.parseInt(idSupplierStr);
+            
+            if(amount == 0){
+                Tools.showErrorMsg("المبلغ غير مكتوب");
+            }else{
+                boolean isSave = gold.SaveExportAccount(amount, idAccount, idSupplier, note);
+                if(isSave){
+                    Tools.showInfoMsg("تم الحفظ بنجاح", "حفظ");
+                    SetNew();
+                }else{
+                    Tools.showErrorMsg("خطأ");
+                }
+                
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Export.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }//GEN-LAST:event_btnSaveActionPerformed
 
     private void table_exportMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_table_exportMouseClicked

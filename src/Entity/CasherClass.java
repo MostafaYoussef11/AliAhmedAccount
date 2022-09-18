@@ -225,59 +225,12 @@ public class CasherClass {
           case Paydebt:
               sql_insert_casher = "INSERT INTO `casher` (`Creditor`, `note`,`id_users`,`id_paydebt`) VALUES (?,?,?,?)";
               break;
+          case accountExport:
+              sql_insert_casher = "INSERT INTO `casher` (`Creditor`, `note`,`id_users`,`id_account`) VALUES (?,?,?,?)";
+              break;
       }
       return sql_insert_casher;
   }
   
-  
-  /**
-         switch(type){
-          case PosPay:  //id_masary_pay  17 Row
-              sql_insert_casher = "INSERT INTO `casher` (`Debit`, `note`,`id_users`, `id_masary_pay`) VALUES (?,?,?,?)";
-              break;
-          case Receipt : //id_Receipt 21
-              sql_insert_casher = "INSERT INTO `casher` (`Debit`, `note`,`id_users`,`id_Receipt`) VALUES (?,?,?,?)";
-              break;
-          case SalesInvoic: //id_salesInvoic
-              sql_insert_casher = "INSERT INTO `casher` (`Debit`, `note`,`id_users`,`id_salesInvoic`) VALUES (?,?,?,?)";
-              break; 
-          case Send_VF: // id_Send_Receive 3 
-               sql_insert_casher = "INSERT INTO `casher` (`Debit`, `note`,`id_users`,`id_Send_Receive`) VALUES (?,?,?,?)";
-              break; 
-          case CasherTwoDebit: // 
-               sql_insert_casher = "INSERT INTO `casher` (`Debit`, `note`,`id_users`) VALUES (?,?,?)";
-              break; 
-          case Solfa: // id_Solf 1 
-              sql_insert_casher = "INSERT INTO `casher` (`Debit`, `note`,`id_users`,`id_Solf`) VALUES (?,?,?,?)";
-              break; 
-          case excess: // في حالة الزيادة
-               sql_insert_casher = "INSERT INTO `casher` (`Debit`, `note`,`id_users`,`id_deficiency_excess`) VALUES (?,?,?,?)";
-              break;  
-          case PosSell: // id_masary_sell 1
-              sql_insert_casher = "INSERT INTO `casher` (`Creditor`, `note`,`id_users`,`id_masary_sell`) VALUES (?,?,?,?)";
-              break;
-          case PaymentReceipt: // id_PaymentReceipt
-              sql_insert_casher = "INSERT INTO `casher` (`Creditor`, `note`,`id_users`,`id_PaymentReceipt`) VALUES (?,?,?,?)";
-              break;
-          case PurchaseInvoice://id_purchaseInvoice
-              sql_insert_casher = "INSERT INTO `casher` (`Creditor`, `note`,`id_users`,`id_purchaseInvoice`) VALUES (?,?,?,?)";
-              break;
-          case Receive_VF: // id_Send_Receive
-              sql_insert_casher = "INSERT INTO `casher` (`Creditor`, `note`,`id_users`,`id_Send_Receive`) VALUES (?,?,?,?)";
-              break;  
-          case Fees: //id_fees
-              sql_insert_casher = "INSERT INTO `casher` (`Creditor`, `note`,`id_users`,`id_fees`) VALUES (?,?,?,?)";
-              break;  
-          case CasherTwoCredit:
-              sql_insert_casher = "INSERT INTO `casher` (`Creditor`, `note`,`id_users`) VALUES (?,?,?)";
-              break;
-          case deficiency :  // في حالة العجز
-               sql_insert_casher = "INSERT INTO `casher` (`Creditor`, `note`,`id_users`,`id_deficiency_excess`) VALUES (?,?,?,?)";
-               break;
-          case Paydebt:
-              sql_insert_casher = "INSERT INTO `casher` (`Creditor`, `note`,`id_users`,`id_paydebt`) VALUES (?,?,?,?)";
-              break;
-      }
-   
-   */
+ 
 }

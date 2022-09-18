@@ -5,7 +5,12 @@
  */
 package Frams;
 
+import Utilities.ConnectDB;
+import Utilities.Tools;
 import java.awt.Toolkit;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.ImageIcon;
 
 
@@ -351,10 +356,92 @@ public class Accounts extends javax.swing.JFrame {
     }//GEN-LAST:event_btnNewActionPerformed
 
     private void SetNew(){
-      
+              
+       String[] coulmnName =  new String [] {
+                "النوع", "الرصيد الحالي", "رصيد اول المدة", "المجموعة", "اسم الحساب", "رقم "
+            };
+       String sql =
+                " SELECT t.name_type , ac.now_balance, ac.balance_account, w.name_workgroup, ac.name_account, ac.id_account"
+                +" FROM account ac"
+                +" JOIN accountworkgroup aw ON ac.id_account = aw.id_account"
+                +" JOIN type t ON ac.id_type = t.id_type"
+                +" JOIN workgroup w ON aw.id_workgroup = w.id_workgroup"
+                +" ORDER BY ac.id_account DESC ;";
+        ConnectDB.fillAndCenterTable(sql, AccontTable, coulmnName);
+        //pB.SetvalProgress(20);
+        ConnectDB.fillCombo("workgroup WHERE isActive = 0 ", "name_workgroup", comWorkgroup);
+       // pB.SetvalProgress(30);
+        ConnectDB.fillCombo("type", "name_type", comType);
+        //pB.SetvalProgress(40);
+       //btn disable
+       addGroup.setEnabled(false);
+       btnDel.setEnabled(false);
+       btnEdit.setEnabled(false);
+       btnSave.setEnabled(false);
+       //pB.SetvalProgress(60);
+       //label and textsiled disable
+       txtOBalance.setEnabled(false);
+       txtId.setEnabled(false);
+       txtName.setEnabled(false);
+       comWorkgroup.setEnabled(false);
+       Tools.SearchField(AccontTable, txtSearch);
+        btnNew.setEnabled(false);
+       // pB.SetvalProgress(80);
+        String id = ConnectDB.LastId("account", "id_account");
+        txtId.setEnabled(true);
+        txtId.setText(id);
+        //pB.SetvalProgress(95);
+        txtOBalance.setEnabled(true);
+        txtOBalance.setText("0.00");
+        txtNBalance.setText("0.00");
+        txtNBalance.setEnabled(false);
+        txtName.setEnabled(true);
+        txtNBalance.setEnabled(true);
+        btnSave.setEnabled(true);
+        btnDel.setEnabled(false); 
+        comWorkgroup.setEnabled(true);
+        comType.setEnabled(true);
+        txtName.setText("");
     }
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
-      
+        try {                                        
+            String id = txtId.getText();
+            String name = txtName.getText();
+            String name_workgroup = comWorkgroup.getSelectedItem().toString();
+            String id_workgroup;
+            id_workgroup = ConnectDB.getIdFrmName("workgroup", name_workgroup); 
+            String Obalance = txtOBalance.getText();
+            String nBalance = txtNBalance.getText();
+            String nameType = comType.getSelectedItem().toString();
+            String id_type = ConnectDB.getIdFrmName("type",nameType );
+            String sql = "INSERT INTO account VALUES("+id+",'"+name+"',"+Obalance+","+id_type+","+nBalance+",0);";
+            String sql_acwork = "INSERT INTO accountworkgroup VALUES("+id+","+id_workgroup+");";
+            // isSaved
+            boolean is_Save = ConnectDB.ExucuteAnyQuery(sql);
+            if(is_Save){
+                if(ConnectDB.ExucuteAnyQuery(sql_acwork)){
+                    Tools.showInfoMsg("تم الحفظ بنجاح" , "حفظ");
+                    txtOBalance.setText("0.00");
+                    txtOBalance.setEnabled(false);
+                    txtId.setText("");
+                    txtId.setEnabled(false);
+                    txtName.setText("");
+                    txtName.setEnabled(false);
+                    SetNew(); 
+                    btnNew.setEnabled(is_Save);
+                }else{
+                    Tools.showErrorMsg("خطا");
+                }
+                
+            }else{
+                Tools.showErrorMsg("خطـأ");
+            }
+            
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(Accounts.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         
     }//GEN-LAST:event_btnSaveActionPerformed
 
@@ -371,7 +458,11 @@ public class Accounts extends javax.swing.JFrame {
     }//GEN-LAST:event_btnDelActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-      
+        type t = new type();
+        t.setLocationRelativeTo(null);
+        t.setIconImage(new ImageIcon(Toolkit.getDefaultToolkit().getClass().getResource("/icons/navigation.png")).getImage());
+        t.setVisible(true);
+        ConnectDB.fillCombo("type","name_type", comType);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void addGroupActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_addGroupActionPerformed

@@ -24,5 +24,6 @@ public enum TypeCasherTransaction {
     Solfa,
     Paydebt,    // سداد السلف   /// Creditor
     deficiency,  // عجز الجرد  // Creditor
-    excess       // زيادة في الجرد// Debit
+    excess,       // زيادة في الجرد// Debit
+    accountExport  // Creditor  Export To Account 
 }
