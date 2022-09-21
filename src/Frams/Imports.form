@@ -325,6 +325,9 @@
           <Properties>
             <Property name="text" type="java.lang.String" value="&#x62a;&#x63a;&#x64a;&#x64a;&#x631; &#x627;&#x644;&#x635;&#x648;&#x631;&#x629;"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btnchanageActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="btnDImage">
           <Properties>

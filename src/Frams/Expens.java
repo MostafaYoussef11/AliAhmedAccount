@@ -5,6 +5,10 @@
  */
 package Frams;
 
+import Entity.goldClasses;
+import Utilities.ConnectDB;
+import Utilities.Tools;
+import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -20,9 +24,10 @@ public class Expens extends javax.swing.JFrame {
     /**
      * Creates new form expels
      */
-   
+    private goldClasses gold;
     public Expens() {
         initComponents();
+        gold = new goldClasses();
     }
 
     /**
@@ -42,11 +47,11 @@ public class Expens extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         txtPrice = new javax.swing.JTextField();
         jLabel5 = new javax.swing.JLabel();
-        txtWorkGroup = new javax.swing.JComboBox<>();
+        txtWorkGroup = new javax.swing.JComboBox<String>();
         jLabel6 = new javax.swing.JLabel();
         txtNote = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        suppCombo = new javax.swing.JComboBox<>();
+        suppCombo = new javax.swing.JComboBox<String>();
         jScrollPane1 = new javax.swing.JScrollPane();
         tableExpens = new javax.swing.JTable();
         jLabel7 = new javax.swing.JLabel();
@@ -105,7 +110,7 @@ public class Expens extends javax.swing.JFrame {
         jLabel2.setText("المورد");
         jLabel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        suppCombo.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        suppCombo.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         suppCombo.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 suppComboItemStateChanged(evt);
@@ -178,11 +183,11 @@ public class Expens extends javax.swing.JFrame {
 
             },
             new String [] {
-                "قيد", "المورد", "البيان", "المجموعة", "المبلغ", "التاريخ", "رقم"
+                "المورد", "البيان", "المجموعة", "المبلغ", "التاريخ", "رقم"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false, false, false
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -197,19 +202,17 @@ public class Expens extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tableExpens);
         if (tableExpens.getColumnModel().getColumnCount() > 0) {
             tableExpens.getColumnModel().getColumn(0).setResizable(false);
-            tableExpens.getColumnModel().getColumn(0).setPreferredWidth(50);
+            tableExpens.getColumnModel().getColumn(0).setPreferredWidth(100);
             tableExpens.getColumnModel().getColumn(1).setResizable(false);
-            tableExpens.getColumnModel().getColumn(1).setPreferredWidth(100);
+            tableExpens.getColumnModel().getColumn(1).setPreferredWidth(250);
             tableExpens.getColumnModel().getColumn(2).setResizable(false);
-            tableExpens.getColumnModel().getColumn(2).setPreferredWidth(250);
+            tableExpens.getColumnModel().getColumn(2).setPreferredWidth(150);
             tableExpens.getColumnModel().getColumn(3).setResizable(false);
-            tableExpens.getColumnModel().getColumn(3).setPreferredWidth(150);
+            tableExpens.getColumnModel().getColumn(3).setPreferredWidth(100);
             tableExpens.getColumnModel().getColumn(4).setResizable(false);
-            tableExpens.getColumnModel().getColumn(4).setPreferredWidth(100);
+            tableExpens.getColumnModel().getColumn(4).setPreferredWidth(120);
             tableExpens.getColumnModel().getColumn(5).setResizable(false);
-            tableExpens.getColumnModel().getColumn(5).setPreferredWidth(120);
-            tableExpens.getColumnModel().getColumn(6).setResizable(false);
-            tableExpens.getColumnModel().getColumn(6).setPreferredWidth(50);
+            tableExpens.getColumnModel().getColumn(5).setPreferredWidth(50);
         }
 
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -361,7 +364,36 @@ public class Expens extends javax.swing.JFrame {
     }//GEN-LAST:event_formWindowOpened
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
-       
+        try {
+            String id , price , id_work , note ,id_Suppliers;
+            id = txtId.getText();
+            int id_expens = Integer.parseInt(id);
+            // SimpleDateFormat format = new SimpleDateFormat("YYYY-MM-dd");
+            // date = SDF.format(txtDate.getDate());
+            price = txtPrice.getText();
+            double priceExpens = Double.parseDouble(price);
+            id_work = ConnectDB.getIdFrmName("workgroup", txtWorkGroup.getSelectedItem().toString());
+            int id_work_group = Integer.parseInt(id_work);
+            note = txtNote.getText();
+            id_Suppliers = ConnectDB.getIdFrmName("suppliers", suppCombo.getSelectedItem().toString());
+            int supplier = Integer.parseInt(id_Suppliers);
+            //id_dai = id_daily.getText();
+            // the Sql Statement
+            // String sql = "INSERT INTO expens VALUES("+id+", '"+date+"',"+price+","+id_work+",'"+note+"',"+id_Suppliers+",0,null,"+id_dai+");";
+            // If Condetion
+            boolean isSaved = gold.SaveExpensGold(priceExpens,id_work_group, note, supplier, id_expens) ; //ConnectDB.ExecuteAnyQuery(sql);
+            if(isSaved){
+                Tools.showInfoMsg("تم الحفظ بنجاح" , "حفظ");
+//            int supplier = Integer.getInteger(id_Suppliers);
+                SetNew();
+            }else{
+                Tools.showErrorMsg("خطأ");
+        }
+        } catch (SQLException ex) {
+            Logger.getLogger(Expens.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+   
         
    
     }//GEN-LAST:event_btnSaveActionPerformed
@@ -397,6 +429,33 @@ public class Expens extends javax.swing.JFrame {
     }//GEN-LAST:event_suppComboActionPerformed
     private void SetNew(){
       
+        btnDel.setEnabled(false);
+        btnEdit.setEnabled(false);
+        btnNew.setEnabled(false);
+        btnUpdate.setEnabled(false);
+        btnSave.setEnabled(true);
+        //Set Table and Text Feild 
+        Tools.SearchField(tableExpens, txtSearch);
+        ConnectDB.fillCombo("workgroup WHERE isActive = 0 ", "name_workgroup", txtWorkGroup);
+         ConnectDB.fillCombo("suppliers", "name_Suppliers", suppCombo);
+        String sql = "SELECT suppliers.name_Suppliers, expens.note , workgroup.name_workgroup , expens.price_expens , expens.date_expens , expens.id_expens FROM expens"
+                + " INNER JOIN workgroup ON expens.id_workgroup = workgroup.id_workgroup "
+                +"  INNER JOIN suppliers ON expens.id_Suppliers = suppliers.id_Suppliers "
+                + "ORDER BY id_expens DESC ;";
+        String[] coulmnName = new String [] { "المورد", "البيان", "المجموعة", "المبلغ", "التاريخ", "رقم"};
+        ConnectDB.fillAndCenterTable(sql, tableExpens, coulmnName);
+        String id = ConnectDB.LastId("expens", "id_expens");
+        txtId.setText(id);
+        txtPrice.setText("0.00");
+        txtNote.setText("");
+        txtDate.setDate(new Date());
+        id_daily.setText(ConnectDB.LastId("casher", "id_casher"));
+        //Enable TxtFeild
+        txtDate.setEnabled(true);
+        txtNote.setEnabled(true);
+        txtPrice.setEnabled(true);
+        txtWorkGroup.setEnabled(true);
+        suppCombo.setEnabled(true);
     }
     /**
      * @param args the command line arguments

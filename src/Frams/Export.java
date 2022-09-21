@@ -387,11 +387,12 @@ public class Export extends javax.swing.JFrame {
             String nameSupplier = comSupplier.getSelectedItem().toString();
             String idSupplierStr = supplier.getIdByName(nameSupplier);
             int idSupplier = Integer.parseInt(idSupplierStr);
-            
+            String id_export = txtId.getText();
+            int id = Integer.parseInt(id_export);
             if(amount == 0){
                 Tools.showErrorMsg("المبلغ غير مكتوب");
             }else{
-                boolean isSave = gold.SaveExportAccount(amount, idAccount, idSupplier, note);
+                boolean isSave = gold.SaveExportAccount(amount, idAccount, idSupplier, note,id);
                 if(isSave){
                     Tools.showInfoMsg("تم الحفظ بنجاح", "حفظ");
                     SetNew();

@@ -5,6 +5,24 @@
  */
 package Frams;
 
+import Entity.goldClasses;
+import Utilities.ConnectDB;
+import Utilities.Tools;
+import java.awt.Image;
+import java.io.File;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JFileChooser;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
+import javax.swing.filechooser.FileFilter;
+import javax.swing.filechooser.FileNameExtensionFilter;
+
 /**
  *
  * @author Mostafa Youssef 
@@ -14,13 +32,82 @@ public class Imports extends javax.swing.JFrame {
     /**
      * Creates new form Imports
      */
-    
+    private goldClasses gold;
     public Imports() {
         initComponents();
+        gold = new goldClasses();
     }
    
     private void SetNew(){
-       
+          
+        txtPrice.getDocument().addDocumentListener(new DocumentListener() {
+            @Override
+            public void insertUpdate(DocumentEvent e) {
+               // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                double wight , price , total;
+                if(txtwight.getText().length()==0){
+                    txtamount.setText("0.00");
+                }
+              else{
+                    wight = Double.valueOf(txtwight.getText());
+                    price = Double.valueOf(txtPrice.getText());
+                    total = wight * price;
+                    txtamount.setText(String.valueOf(total));
+                }
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent e) {
+             //   throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+                double wight , price , total;
+                if(txtPrice.getText().length()==0){
+                    txtamount.setText("0.00");
+                }
+              else{
+                    wight = Double.valueOf(txtwight.getText());
+                    price = Double.valueOf(txtPrice.getText());
+                    total = wight * price;
+                    txtamount.setText(String.valueOf(total));
+                }
+  
+            }
+
+            @Override
+            public void changedUpdate(DocumentEvent e) {
+                throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+            }
+        });
+        // txt 
+        txtPrice.setEnabled(true);
+        txtWorkGroup.setEnabled(true);
+        txtcaliber.setEnabled(true);
+        txtdate.setEnabled(true);
+        txtwight.setEnabled(true);
+        txtPathFile.setText("");
+        labimage.setIcon(null);
+        txtId.setText(ConnectDB.LastId("imports", "id_import"));
+        //pB.SetvalProgress(20);
+        txtdate.setDate(new Date());
+        txtPathFile.setText("");
+        txtPrice.setText("");
+        txtamount.setText("");
+        txtcaliber.setText("");
+        txtwight.setText("");
+        ConnectDB.fillCombo("workgroup WHERE isActive = 0 ", "name_workgroup", txtWorkGroup);
+        //pB.SetvalProgress(50);
+        txtwight.requestFocus();
+        String sql = "Select workgroup.name_workgroup , imports.amount_imports , imports.price_imports , imports.caliber , imports.wight_imports , imports.date_imports , imports.id_import FROM imports INNER JOIN workgroup ON imports.id_workgroup = workgroup.id_workgroup ORDER BY id_import DESC;";
+        String[] coulmnName = new String[]{"المجموعة", "الاجمالي", "سعر الجرام", "العيار", "الوزن", "التاريخ", "رقم"};
+        ConnectDB.fillAndCenterTable(sql, tableImport, coulmnName);
+        //pB.SetvalProgress(70);
+        //btn
+        btnDImage.setEnabled(false);
+        btnDelete.setEnabled(false);
+        btnEdit.setEnabled(false);
+        btnSave.setEnabled(true);
+        btnNew.setEnabled(false);
+        btnUpdate.setEnabled(false);
+        btnchanage.setEnabled(false);
     }
     /**
      * This method is called from within the constructor to initialize the form.
@@ -47,7 +134,7 @@ public class Imports extends javax.swing.JFrame {
         jLabel8 = new javax.swing.JLabel();
         txtamount = new javax.swing.JTextField();
         jLabel9 = new javax.swing.JLabel();
-        txtWorkGroup = new javax.swing.JComboBox<>();
+        txtWorkGroup = new javax.swing.JComboBox<String>();
         btnSelect = new javax.swing.JButton();
         btnchanage = new javax.swing.JButton();
         btnDImage = new javax.swing.JButton();
@@ -128,7 +215,7 @@ public class Imports extends javax.swing.JFrame {
         jLabel9.setText("المجموعة");
         jLabel9.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        txtWorkGroup.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        txtWorkGroup.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         btnSelect.setText("اختيار الصورة");
         btnSelect.addActionListener(new java.awt.event.ActionListener() {
@@ -138,6 +225,11 @@ public class Imports extends javax.swing.JFrame {
         });
 
         btnchanage.setText("تغيير الصورة");
+        btnchanage.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnchanageActionPerformed(evt);
+            }
+        });
 
         btnDImage.setText("حذف الصورة");
 
@@ -403,7 +495,11 @@ public class Imports extends javax.swing.JFrame {
     }//GEN-LAST:event_txtPriceKeyPressed
 
     private void jToggleButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton2ActionPerformed
-      
+        if(txtamount.isEditable()){
+            txtamount.setEditable(false);
+         }else{
+            txtamount.setEditable(true);
+        }      
     }//GEN-LAST:event_jToggleButton2ActionPerformed
 
     private void btnExitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnExitActionPerformed
@@ -412,7 +508,25 @@ public class Imports extends javax.swing.JFrame {
     }//GEN-LAST:event_btnExitActionPerformed
 
     private void btnSelectActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSelectActionPerformed
-       
+        JFileChooser fileChooser = new JFileChooser();
+      //  //E:\xampp\htdocs\masrawyuploads
+        fileChooser.setCurrentDirectory(new File("E:\\xampp\\htdocs\\masrawy\\uploads"));
+  //      fileChooser.setCurrentDirectory(new File(System.getProperty("user.home")));
+        FileFilter filter = new FileNameExtensionFilter(
+            "Image files", ImageIO.getReaderFileSuffixes());
+        fileChooser.setFileFilter(filter);
+        int result = fileChooser.showOpenDialog(this);
+        if (result == JFileChooser.APPROVE_OPTION) {
+           File selectedFile = fileChooser.getSelectedFile(); 
+           txtPathFile.setText(selectedFile.getAbsolutePath());
+         //  URL imageUrl = Imports.class.getResource(selectedFile.getAbsolutePath());
+            ImageIcon icon = new ImageIcon(selectedFile.getAbsolutePath());
+            Image img = icon.getImage(); 
+            Image newimg = img.getScaledInstance(labimage.getWidth(), labimage.getHeight(),  java.awt.Image.SCALE_SMOOTH);
+            icon = new ImageIcon(newimg);
+            labimage.setIcon(icon);
+           
+        }
         
     }//GEN-LAST:event_btnSelectActionPerformed
 
@@ -422,12 +536,62 @@ public class Imports extends javax.swing.JFrame {
     }//GEN-LAST:event_btnNewActionPerformed
 
     private void btnSaveActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSaveActionPerformed
+       double wight = Double.parseDouble(txtwight.getText());
+       int caliber = Integer.parseInt(txtcaliber.getText());
+       double price = Double.parseDouble(txtPrice.getText());
+       double amount = Double.parseDouble(txtamount.getText());
+       String idwork = gold.getIdWorkGroup(txtWorkGroup.getSelectedItem().toString());
+       int id_workGroup = Integer.parseInt(idwork);
+       int id_imports = Integer.parseInt(txtId.getText());
+       String pathImage = txtPathFile.getText();
+       boolean isSave = gold.SaveImportGold(wight, caliber, price, amount, id_workGroup, pathImage, id_imports);
+       if(isSave){
+           Tools.showInfoMsg("تم الحفظ", "حفظ");
+           SetNew();
+       }else{
+           Tools.showErrorMsg("خطأ");
+       }
        
-        
     }//GEN-LAST:event_btnSaveActionPerformed
 
     private void tableImportMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableImportMouseClicked
-     
+        int row = tableImport.getSelectedRow();
+        String id_imports =tableImport.getValueAt(row, 6).toString(); 
+        txtId.setText(id_imports);
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+        Date date = null;
+        try {
+            date = format.parse(tableImport.getValueAt(row, 5).toString());
+        } catch (ParseException ex) {
+            Logger.getLogger(Imports.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        txtdate.setDate(date);
+        txtwight.setText(tableImport.getValueAt(row,4).toString());
+        txtcaliber.setText(tableImport.getValueAt(row, 3).toString());
+        txtPrice.setText(tableImport.getValueAt(row, 2).toString());
+        txtamount.setText(tableImport.getValueAt(row, 1).toString());
+        txtWorkGroup.setSelectedItem(tableImport.getValueAt(row,0));
+        ImageIcon icon = new ImageIcon(gold.getPathImage(id_imports));
+        Image img = icon.getImage(); 
+        Image newimg = img.getScaledInstance(labimage.getWidth(), labimage.getHeight(),  java.awt.Image.SCALE_SMOOTH);
+        icon = new ImageIcon(newimg);
+        labimage.setIcon(icon);
+        btnDImage.setEnabled(true);
+        btnchanage.setEnabled(true);
+        btnSelect.setEnabled(false);
+        btnNew.setEnabled(true);
+        btnSave.setEnabled(false);
+        btnEdit.setEnabled(true);
+        btnUpdate.setEnabled(false);
+        btnDelete.setEnabled(true); 
+        txtId.setEnabled(false);
+        txtPathFile.setText("");
+        txtPrice.setEnabled(false);
+        txtWorkGroup.setEnabled(false);
+        txtamount.setEnabled(false);
+        txtcaliber.setEnabled(false);
+        txtdate.setEnabled(false);
+        txtwight.setEnabled(false);
         
     }//GEN-LAST:event_tableImportMouseClicked
 
@@ -443,6 +607,10 @@ public class Imports extends javax.swing.JFrame {
     private void btnDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnDeleteActionPerformed
      
     }//GEN-LAST:event_btnDeleteActionPerformed
+
+    private void btnchanageActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnchanageActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_btnchanageActionPerformed
 
     
     /**

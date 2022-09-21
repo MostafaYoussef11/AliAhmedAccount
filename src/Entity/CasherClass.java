@@ -201,6 +201,9 @@ public class CasherClass {
           case excess: // في حالة الزيادة
                sql_insert_casher = "INSERT INTO `casher` (`Debit`, `note`,`id_users`,`id_deficiency_excess`) VALUES (?,?,?,?)";
               break;  
+          case importsGold: // imports mony from gold
+              sql_insert_casher = "INSERT INTO `casher` (`Debit`, `note`,`id_users`,`id_imports`) VALUES (?,?,?,?)";
+              break;
           case PosSell: // id_masary_sell 1
               sql_insert_casher = "INSERT INTO `casher` (`Creditor`, `note`,`id_users`,`id_masary_sell`) VALUES (?,?,?,?)";
               break;
@@ -227,6 +230,9 @@ public class CasherClass {
               break;
           case accountExport:
               sql_insert_casher = "INSERT INTO `casher` (`Creditor`, `note`,`id_users`,`id_account`) VALUES (?,?,?,?)";
+              break;
+          case expensGold :
+              sql_insert_casher = "INSERT INTO `casher` (`Creditor`, `note`,`id_users`,`id_expens`) VALUES (?,?,?,?)";
               break;
       }
       return sql_insert_casher;

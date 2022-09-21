@@ -47,7 +47,7 @@ public class MainFrame extends javax.swing.JFrame {
     private calcFrame cf = new calcFrame();
     private CounterFrame cuf = new CounterFrame(); 
     private FastCashSendPanel c;
-    private final Timer timer;
+    //private final Timer timer;
     // set Jframe variable 
     private  ClintFrame cnt ;
     private  itemsFrame itemsFrame ;
@@ -123,9 +123,9 @@ public class MainFrame extends javax.swing.JFrame {
         x_timer += 200;
         txtDate.setBounds(x_timer, 0, 200, 30);
         txtinfoUser.setText(info);
-        NotifcationClass notifcationClass = new NotifcationClass(this ,Butt_notification);
-        timer = new Timer();
-        timer.schedule(notifcationClass, 3000, 3000);
+        //NotifcationClass notifcationClass = new NotifcationClass(this ,Butt_notification);
+        //timer = new Timer();
+        //timer.schedule(notifcationClass, 3000, 3000);
         clockTime();
         txtinformationPos.setBounds(Barpanel.getWidth() - 310 , 0, 300, 30);
         informationPosAndCasher();

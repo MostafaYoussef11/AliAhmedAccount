@@ -25,5 +25,7 @@ public enum TypeCasherTransaction {
     Paydebt,    // سداد السلف   /// Creditor
     deficiency,  // عجز الجرد  // Creditor
     excess,       // زيادة في الجرد// Debit
-    accountExport  // Creditor  Export To Account 
+    accountExport , // Creditor  Export To Account
+    expensGold ,     // Creditor Expens of Gold
+    importsGold      // Debit import mony of Sell Gold
 }
