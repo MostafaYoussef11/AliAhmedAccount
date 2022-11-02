@@ -422,11 +422,13 @@ public class BeepayFrame extends javax.swing.JFrame {
             masary.setPhone(txtPhone.getText());
             masary.setUtility_masary(txtPhone.getText());
             masary.setId_utility_masary(not_utilitiy);
+            masary.setIs_requer_phone_num(true);
         }
         else{
             masary.setPhone(null);
             masary.setId_utility_masary(not_utilitiy);
             masary.setUtility_masary(not_utilitiy);
+            masary.setIs_requer_phone_num(false);
         }
         if(id_client == 1){
             isSave = masary.SaveCasher();

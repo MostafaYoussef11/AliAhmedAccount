@@ -219,9 +219,17 @@ public class ConnectDB {
            SetConnection();
            stmt = (Statement) con.createStatement();
            ResultSet rst = stmt.executeQuery(sql);
-           while(rst.next()){
-               id = rst.getString("id");
+           rst.last();
+           int count = rst.getRow();
+           rst.beforeFirst();
+           if(count > 0){
+             while(rst.next()){
+                id = rst.getString("id");
+             }
+           }else{
+               id = "0";
            }
+           
            con.close();
        }catch(SQLException ex){
           Logger.getLogger("getIdFromName").log(Level.SEVERE, null, ex);

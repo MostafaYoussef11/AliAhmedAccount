@@ -102,6 +102,8 @@ public class MainFrame extends javax.swing.JFrame {
         txtNowBalance.setText(new CasherClass().getNowBalanceCasher());
         txtMasaryBalance.setText(new MasaryPay().getfirstBalance()+"");
         new masary_Utilites(1).fillComboUtilites(comboNoteUtiltiy, "شحن");
+        comboNoteUtiltiy.addItem("اختر نوع الشحن");
+        comboNoteUtiltiy.setSelectedItem("اختر نوع الشحن");
         settxtnumer();
         txtvalue.setText("0");
         txtIdItems.requestFocus();
@@ -814,6 +816,11 @@ public class MainFrame extends javax.swing.JFrame {
         txtNowBalance.setBorder(new javax.swing.border.SoftBevelBorder(javax.swing.border.BevelBorder.RAISED));
         txtNowBalance.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
         txtNowBalance.setIconTextGap(10);
+        txtNowBalance.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtNowBalanceMouseClicked(evt);
+            }
+        });
         getContentPane().add(txtNowBalance);
         txtNowBalance.setBounds(20, 600, 230, 90);
 
@@ -1066,6 +1073,9 @@ public class MainFrame extends javax.swing.JFrame {
         txtNowBalance.setText(new CasherClass().getNowBalanceCasher());
         txtMasaryBalance.setText(new posPay(id_pos) {
         }.getfirstBalance()+"");
+        settxtnumer();
+        txtNmber.setText("");
+        txtIdItems.requestFocusInWindow();
 
     }//GEN-LAST:event_formWindowActivated
 
@@ -1326,6 +1336,32 @@ public class MainFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         exitPanel(goold);
     }//GEN-LAST:event_gooldMouseExited
+
+    private void txtNowBalanceMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtNowBalanceMouseClicked
+        // TODO add your handling code here:
+//        String Balance = new CasherClass().getNowBalanceCasher();
+//        Tools.showErrorMsg(Balance);
+        
+         if(winCahse.isVisible()){
+             winCahse.setVisible(false);
+             exitPanel(txtNowBalance);
+             //winFastCashSend = new JWindow(this);
+        }else{
+             clickPanel(txtNowBalance);
+            CasherTowPanel cash = new CasherTowPanel();
+            cash.setVisible(true);
+            winCahse.setSize(478, 176);
+            winCahse.setOpacity(0.75f);
+            int x = txtNowBalance.getX() + txtNowBalance.getWidth() ;
+            int y = txtNowBalance.getY() - txtNowBalance.getHeight();
+            winCahse.setLocation(x, y);
+            winCahse.getContentPane().add(cash);
+            winCahse.repaint();
+            winCahse.setVisible(true);       
+        }
+        txtNowBalance.setText(new CasherClass().getNowBalanceCasher());  
+
+    }//GEN-LAST:event_txtNowBalanceMouseClicked
     
     private void settxtnumer(){
         masary_Utilites utilit = new masary_Utilites(id_pos);

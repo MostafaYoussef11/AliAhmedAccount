@@ -424,11 +424,13 @@ public class AmanpayFrame extends javax.swing.JFrame {
             aman.setPhone(txtPhone.getText());
             aman.setUtility_masary(txtPhone.getText());
             aman.setId_utility_masary(not_utilitiy);
+            aman.setIs_requer_phone_num(true);
         }
         else{
             aman.setPhone(null);
             aman.setId_utility_masary(not_utilitiy);
             aman.setUtility_masary(not_utilitiy);
+            aman.setIs_requer_phone_num(false);
         }
         if(id_client == 1){
             isSave = aman.SaveCasher();

@@ -10,7 +10,7 @@
 		<defaultValueExpression><![CDATA["E:\\Masrawy\\Account\\src\\Reborts\\"]]></defaultValueExpression>
 	</parameter>
 	<queryString>
-		<![CDATA[SELECT  s.name_Suppliers , s.phone , s.address ,s.firstBalance , SUM(ac.Creditor) creditor , SUM(ac.Debit) debit FROM suppliers s INNER JOIN suppliersaccount ac ON s.id_Suppliers = ac.id_Suppliers where s.id_Suppliers = $P{id_Suppliers}]]>
+		<![CDATA[SELECT  s.name_Suppliers , s.phone , s.address ,s.firstBalance , SUM(ac.Creditor) creditor , SUM(ac.Debit) debit FROM suppliers s INNER JOIN suppliersaccount ac ON s.id_Suppliers = ac.id_Suppliers where s.id_Suppliers = $P{id_Suppliers} and ac.isActive = 1]]>
 	</queryString>
 	<field name="name_Suppliers" class="java.lang.String">
 		<fieldDescription><![CDATA[]]></fieldDescription>

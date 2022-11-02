@@ -441,6 +441,7 @@ public class Expens extends javax.swing.JFrame {
         String sql = "SELECT suppliers.name_Suppliers, expens.note , workgroup.name_workgroup , expens.price_expens , expens.date_expens , expens.id_expens FROM expens"
                 + " INNER JOIN workgroup ON expens.id_workgroup = workgroup.id_workgroup "
                 +"  INNER JOIN suppliers ON expens.id_Suppliers = suppliers.id_Suppliers "
+                +" where expens.isRelay = 0 "
                 + "ORDER BY id_expens DESC ;";
         String[] coulmnName = new String [] { "المورد", "البيان", "المجموعة", "المبلغ", "التاريخ", "رقم"};
         ConnectDB.fillAndCenterTable(sql, tableExpens, coulmnName);

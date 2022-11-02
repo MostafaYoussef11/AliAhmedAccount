@@ -21,11 +21,16 @@ public enum TypeCasherTransaction {
     Fees  ,        // Fees Creditor
     CasherTwoCredit,
     CasherTwoDebit,
-    Solfa,
+    Solfa,  // when i need money
+    Ohda,   // when i get anyone money
+    FilterOhda, // when filter money ohda
     Paydebt,    // سداد السلف   /// Creditor
     deficiency,  // عجز الجرد  // Creditor
     excess,       // زيادة في الجرد// Debit
     accountExport , // Creditor  Export To Account
     expensGold ,     // Creditor Expens of Gold
-    importsGold      // Debit import mony of Sell Gold
+    importsGold ,     // Debit import mony of Sell Gold
+    assetsGold,
+    getLoans,  // Debit imoprt Money of Loans
+    paymentLoans  // Creditor Loans
 }

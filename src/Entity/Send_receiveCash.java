@@ -7,6 +7,7 @@ package Entity;
 
 
 import Utilities.ConnectDB;
+import Utilities.Tools;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -27,7 +28,7 @@ public class Send_receiveCash {
     private String Number_VF_cash, Number_client , name_client , name_supplier;
     private boolean take_money;
     private Connection con;
-    private PreparedStatement pstmt_send , pstmt_casher , pstmt_number;
+    private PreparedStatement pstmt_send , pstmt_casher , pstmt_number , pstmt_Client;
     private Statement stmt; 
     private final VFCashClass vf = new VFCashClass();
     private final ClientPerson client = new ClientPerson();
@@ -51,7 +52,7 @@ public class Send_receiveCash {
         String[] columnName = {"المبلغ", "القيمة", "المحفظة", "الوقت", "التاريخ", "م"};
         String sql_select = "SELECT send.amount_Send_Receive , send.value_Send_Receive , v.number_VF_cash , send.time_Send_Receive"
                 + " , send.date_Send_Receive , send.id_Send_Receive FROM send_receive AS send INNER JOIN vf_cash AS v ON "
-                + "send.id_VF_cash = v.id_VF_cash WHERE send.type_Send_Receive = 'Send' ORDER BY send.date_Send_Receive DESC; ";
+                + "send.id_VF_cash = v.id_VF_cash WHERE send.type_Send_Receive = 'Send' ORDER BY send.id_Send_Receive DESC; ";
         ConnectDB.fillAndCenterTable(sql_select, table, columnName);
     }
    public void fillTableRecive(JTable table){
@@ -75,6 +76,11 @@ public class Send_receiveCash {
         }
         this.Number_client = Number_client;
     }
+    
+    
+    
+    
+    
 //    public boolean SaveSendTransaction() throws SQLException{
 //        boolean isSaved = false;
 //        int id_send = GetIntInsertTransaction("Send");
@@ -129,6 +135,7 @@ public class Send_receiveCash {
                         break;
                   } 
                   if(pstmt_casher.executeUpdate() == 1){
+                      Tools.SavePhoneNumber(Number_VF_cash);
                       isSaved = true;
                       con.commit();
                       con.close();
@@ -213,5 +220,51 @@ public class Send_receiveCash {
         
         }
         return isSave;
+   }
+   
+   public boolean SaveSendToClient(double value , double amount , int id_vf , String number_client , int id_client){
+       boolean isSave =false; 
+       try {
+            con = ConnectDB.getCon();
+            con.setAutoCommit(false);
+            String Sql_insert_send = "INSERT INTO `send_receive` ( `type_Send_Receive`, `value_Send_Receive`, `amount_Send_Receive`, `id_VF_cash`,"
+                        + "`Number_client`, `id_client`) VALUES (?,?,?,?,?,?)";
+            pstmt_send = con.prepareStatement(Sql_insert_send, Statement.RETURN_GENERATED_KEYS);
+            pstmt_send.setString(1, "Send");
+            pstmt_send.setDouble(2, value);
+            pstmt_send.setDouble(3, amount);
+            pstmt_send.setInt(4, id_vf);
+            pstmt_send.setString(5, number_client);
+            pstmt_send.setInt(6, id_client);
+            int rowAffect = pstmt_send.executeUpdate();
+            if(rowAffect == 1){
+              String Sql_insert_client = "INSERT INTO `clientaccount` (`Debit`,`id_client`, `note`) VALUES (?,?,?)";
+              pstmt_Client = con.prepareStatement(Sql_insert_client, Statement.RETURN_GENERATED_KEYS);
+              pstmt_Client.setDouble(1, amount);
+              pstmt_Client.setInt(2, id_client);
+              pstmt_Client.setString(3, "تحويل فودافون كاش رقم " + number_client);
+              int rowClientAffect = pstmt_Client.executeUpdate();
+              if(rowClientAffect == 1){
+                Tools.SavePhoneNumber(number_client);
+                con.commit();
+                con.close();
+                isSave = true;
+              }else{
+                  con.rollback();
+                  con.close();
+                  isSave = false;
+              }
+            }else{
+                con.rollback();
+                con.close();
+                isSave = false;
+            
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Send_receiveCash.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       
+   
+       return isSave;
    }
 }

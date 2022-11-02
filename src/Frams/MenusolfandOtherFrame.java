@@ -114,10 +114,20 @@ public class MenusolfandOtherFrame extends javax.swing.JFrame {
         care_new_btn.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         care_new_btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/loan2.png"))); // NOI18N
         care_new_btn.setText("عهدة جديدة");
+        care_new_btn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                care_new_btnActionPerformed(evt);
+            }
+        });
 
         care_filter_btn.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         care_filter_btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/loan (5).png"))); // NOI18N
         care_filter_btn.setText("تصفية");
+        care_filter_btn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                care_filter_btnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -149,10 +159,20 @@ public class MenusolfandOtherFrame extends javax.swing.JFrame {
         loan_new_btn.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         loan_new_btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/loan1.png"))); // NOI18N
         loan_new_btn.setText("جديد");
+        loan_new_btn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                loan_new_btnActionPerformed(evt);
+            }
+        });
 
         loan_pay_btn.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         loan_pay_btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/loan_pay.png"))); // NOI18N
         loan_pay_btn.setText("سداد");
+        loan_pay_btn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                loan_pay_btnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -229,6 +249,30 @@ public class MenusolfandOtherFrame extends javax.swing.JFrame {
         paydebtFrame p = new paydebtFrame();
         Tools.openJFram(p);
     }//GEN-LAST:event_solfa_pay_btnActionPerformed
+
+    private void care_new_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_care_new_btnActionPerformed
+        // TODO add your handling code here:
+        OhdaFrame o = new OhdaFrame();
+        Tools.openJFram(o, "عهد");
+    }//GEN-LAST:event_care_new_btnActionPerformed
+
+    private void loan_new_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loan_new_btnActionPerformed
+        // TODO add your handling code here:
+        LoansFrame lf = new LoansFrame();
+        Tools.openJFram(lf);
+    }//GEN-LAST:event_loan_new_btnActionPerformed
+
+    private void loan_pay_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_loan_pay_btnActionPerformed
+        // TODO add your handling code here:
+        InstallmentPayFrame ipf = new InstallmentPayFrame();
+        Tools.openJFram(ipf);
+    }//GEN-LAST:event_loan_pay_btnActionPerformed
+
+    private void care_filter_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_care_filter_btnActionPerformed
+        // TODO add your handling code here:
+        FilterOhdaFrame fof = new FilterOhdaFrame();
+        Tools.openJFram(fof);
+    }//GEN-LAST:event_care_filter_btnActionPerformed
 
     /**
      * @param args the command line arguments

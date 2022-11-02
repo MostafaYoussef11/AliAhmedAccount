@@ -71,7 +71,7 @@ public class CasherClass {
   public String getNowBalanceCasher(){
       String sql = "select newbalance as id from finallyday where dateFinally = CURRENT_DATE()";
       String now_balance = ConnectDB.getIdFromName(sql);      
-      if(now_balance.isEmpty()){
+      if(now_balance.isEmpty() || now_balance.equals("0")){
           //finesh the day rum event finally Day 
           String sql_finaly_day = "INSERT INTO `finallyday`( `dateFinally`, `oldBalance`, `totalimport`,"
                   + " `totalexport`,`time_insert` ) VALUES( CURRENT_DATE(),"
@@ -204,6 +204,13 @@ public class CasherClass {
           case importsGold: // imports mony from gold
               sql_insert_casher = "INSERT INTO `casher` (`Debit`, `note`,`id_users`,`id_imports`) VALUES (?,?,?,?)";
               break;
+          case getLoans :
+              sql_insert_casher = "INSERT INTO `casher` (`Debit`, `note`,`id_users`,`id_loans`) VALUES (?,?,?,?)";
+              break;
+          case FilterOhda:
+              sql_insert_casher = "INSERT INTO `casher` (`Debit`, `note`,`id_users`,`id_ohda`) VALUES (?,?,?,?)"; 
+              break;
+           
           case PosSell: // id_masary_sell 1
               sql_insert_casher = "INSERT INTO `casher` (`Creditor`, `note`,`id_users`,`id_masary_sell`) VALUES (?,?,?,?)";
               break;
@@ -228,12 +235,23 @@ public class CasherClass {
           case Paydebt:
               sql_insert_casher = "INSERT INTO `casher` (`Creditor`, `note`,`id_users`,`id_paydebt`) VALUES (?,?,?,?)";
               break;
-          case accountExport:
+          case Ohda: // العهد و المدخرات
+              sql_insert_casher = "INSERT INTO `casher` (`Creditor`, `note`,`id_users`,`id_ohda`) VALUES (?,?,?,?)";
+              break;
+              
+          case accountExport: // مسحوبات العمال و المعدات
               sql_insert_casher = "INSERT INTO `casher` (`Creditor`, `note`,`id_users`,`id_account`) VALUES (?,?,?,?)";
               break;
-          case expensGold :
+          case expensGold :// مصاريف الشغل
               sql_insert_casher = "INSERT INTO `casher` (`Creditor`, `note`,`id_users`,`id_expens`) VALUES (?,?,?,?)";
               break;
+          case assetsGold : // تجهيزات و اساسيات
+             sql_insert_casher = "INSERT INTO `casher` (`Creditor`, `note`,`id_users`,`id_assets`) VALUES (?,?,?,?)";
+              break;
+          
+          case paymentLoans:
+               sql_insert_casher = "INSERT INTO `casher` (`Creditor`, `note`,`id_users`,`id_tableOfLoans`) VALUES (?,?,?,?)";
+              break; 
       }
       return sql_insert_casher;
   }

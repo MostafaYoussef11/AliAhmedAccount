@@ -230,10 +230,12 @@ public class RebortsFrame extends javax.swing.JFrame {
         String sql = "";
         InputStream stream ;
         HashMap para = new HashMap();
+        String sQl_select = "SELECT sup.id_Suppliers AS id, COALESCE(SUM(sup.Debit),0) AS debit , COALESCE(SUM(sup.Creditor),0) AS creditor , sup.name_Suppliers  , s.firstBalance FROM debitandcreditorsupplier AS sup inner  JOIN suppliers s ON sup.id_Suppliers = s.id_Suppliers GROUP BY id";
+        
         sql = "SELECT sup.id_Suppliers id, SUM(sup.Debit) debit , SUM(sup.Creditor) creditor , sup.name_Suppliers , s.firstBalance FROM debitandcreditorsupplier sup"
             + " INNER JOIN suppliers s ON sup.id_Suppliers = s.id_Suppliers";
         stream = getClass().getResourceAsStream("/Reborts/AllSuppliersReport.jrxml");///Reborts/AllClientReport.jrxml
-        Tools.Printer(sql, stream, para);
+        Tools.Printer(sQl_select, stream, para);
     
     }//GEN-LAST:event_btn_report_all_suplliresMouseClicked
 

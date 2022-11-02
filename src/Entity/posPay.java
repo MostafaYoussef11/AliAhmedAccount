@@ -66,26 +66,31 @@ public abstract class posPay {
         this.is_requer_phone_num = is_requer_phone_num;
     }
 
-    private void SavePhoneNumber(String phone) {
-      if(phone.length() == 0){
-             System.out.println("الرقم غير مكتوب"); 
-        }else{  
-            ArrayList<String> Phones = Tools.PhoneNumberList();
-            if(Phones.contains(phone)){
-              System.out.println("الرقم مسجل"); 
-            }else{
-                try{         
-                    String sql_inser_num = "INSERT INTO `phone_numbers` (`numbers`) VALUES(?)";
-                    PreparedStatement pst = con.prepareStatement(sql_inser_num);
-                    pst.setString(1, phone.trim());
-                    pst.executeUpdate();
-                 }catch(SQLException ex){
-                    //throw new ArrayIndexOutOfBoundsException(phone);
-                   System.out.println("الرقم مسجل");  
-                 }
-            }
-         }
-    }
+//    private void SavePhoneNumber(String phone) {
+//      if(phone.length() == 0){
+//             System.out.println("الرقم غير مكتوب"); 
+//        }else{  
+//            ArrayList<String> Phones = Tools.PhoneNumberList();
+//            if(Phones.contains(phone)){
+//              System.out.println("الرقم مسجل"); 
+//            }else{
+//                if(phone.trim().length() < 11){
+//                    System.out.println("الرقم غير مقبول");
+//                }else{
+//                   try{         
+//                    String sql_inser_num = "INSERT INTO `phone_numbers` (`numbers`) VALUES(?)";
+//                    PreparedStatement pst = con.prepareStatement(sql_inser_num);
+//                    pst.setString(1, phone.trim());
+//                    pst.executeUpdate();
+//                  }catch(SQLException ex){
+//                    //throw new ArrayIndexOutOfBoundsException(phone);
+//                   System.out.println("الرقم مسجل");  
+//                    }
+//                }
+//
+//            }
+//         }
+//    }
     
     public enum charage{ cash , mob};
     //Abstract Method
@@ -133,49 +138,14 @@ public abstract class posPay {
                 //String sql_insert_Casher = casher.getSQlStatement(TypeCasherTransaction.PosPay);
                  //int rowAffectCasher = new CasherClass().SavedCasherTransaction(TypeCasherTransaction.PosPay, amount_masary_pay, utility_masary, id_masary_pay);
                  if(rowAffectCasher == 1){
+                     
                      if(is_requer_phone_num){
-                       SavePhoneNumber(phone);
+                         System.out.println("Phone number will Save");
+                         Tools.SavePhoneNumber(phone);
                      }
                      con.commit();
                      isSave = true;
                      con.close();
-                     
-                     
-//                    if(is_requer_phone_num){
-//                      if(phone.length() == 0){
-//                             System.out.println("الرقم غير مكتوب"); 
-//                        }else{  
-//                            ArrayList<String> Phones = Tools.PhoneNumberList();
-//                            if(Phones.contains(phone)){
-//                              System.out.println("الرقم مسجل"); 
-//                            }
-//                           String sql_inser_num = "INSERT INTO `phone_numbers` (`numbers`) VALUES(?)";
-//                           PreparedStatement pst = con.prepareStatement(sql_inser_num);
-//                           pst.setString(1, phone.trim());
-//                           try{
-//                               pst.executeUpdate();
-//                            }catch(SQLException ex){
-//                               //throw new ArrayIndexOutOfBoundsException(phone);
-//                              System.out.println("الرقم مسجل");  
-//                            }finally{
-//                                 con.commit();
-//                                 isSave = true;
-//                                 con.close();                      
-//                           }
-//                         }
-//                      if(con != null){
-//                         con.commit();
-//                         isSave = true;
-//                         con.close();
-//                      }
-//
-//                    }
-//                    else{
-//                       con.commit();
-//                       isSave = true;
-//                       con.close();
-//                    }
-// 
                      
                  }
             }
@@ -306,7 +276,7 @@ public boolean SaveVFCash(){
                 if(pstmt.executeUpdate() == 1){
                         con.commit();
                         con.close();
-                        isSave =true; 
+                        isSave = true; 
                 }
             }
      }
@@ -351,35 +321,7 @@ public boolean SaveVFCash(){
         return Double.parseDouble(fbalance);
     }
     
-    //method Fill JList phoneNumber
-//    public List<String> Phoneslist(charage charahe){
-//         List<String> model = null;
-//        try {
-//            con = ConnectDB.getCon();
-//            Statement stm = (Statement) con.createStatement();
-//            model = new ArrayList<>();
-//            String sql = "";
-//            switch(charahe){
-//                case cash:
-//                    sql = "Select number_VF_cash from VF_cash";
-//                    break;
-//                case mob:
-//                    sql = "SELECT phone FROM masary_pay GROUP BY phone";
-//                    break;
-//            }
-//            ResultSet rst = stm.executeQuery(sql);
-//            String value;
-//            while (rst.next()) {
-//                value = rst.getString(1);
-//                model.add(value);
-//            }
-//            con.close();
-//        } catch (SQLException ex) {
-//            Logger.getLogger(posPay.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//        return model;
-//    }
-    
+
     // Geter and Setter Methods
     //this method set id utility by note
     public void setId_utility_masary(String note) {

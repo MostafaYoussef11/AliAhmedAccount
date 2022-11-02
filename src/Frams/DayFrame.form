@@ -63,28 +63,28 @@
           <Group type="102" alignment="0" attributes="0">
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                  <Component id="export_panel" max="32767" attributes="0"/>
                   <Component id="import_panel" max="32767" attributes="0"/>
+                  <Component id="export_panel" max="32767" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="txt_Old_Balance" alignment="0" min="-2" pref="50" max="-2" attributes="0"/>
-                  <Component id="jLabel13" alignment="0" min="-2" pref="50" max="-2" attributes="0"/>
+                  <Component id="txt_Old_Balance" alignment="0" min="-2" pref="35" max="-2" attributes="0"/>
+                  <Component id="jLabel13" alignment="0" min="-2" pref="35" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="txt_Total_Import" alignment="0" min="-2" pref="50" max="-2" attributes="0"/>
-                  <Component id="jLabel14" alignment="0" min="-2" pref="50" max="-2" attributes="0"/>
+                  <Component id="txt_Total_Import" alignment="0" min="-2" pref="35" max="-2" attributes="0"/>
+                  <Component id="jLabel14" alignment="0" min="-2" pref="35" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="txt_Total_Export" alignment="0" min="-2" pref="50" max="-2" attributes="0"/>
-                  <Component id="jLabel15" alignment="0" min="-2" pref="50" max="-2" attributes="0"/>
+                  <Component id="txt_Total_Export" alignment="0" min="-2" pref="35" max="-2" attributes="0"/>
+                  <Component id="jLabel15" alignment="0" min="-2" pref="35" max="-2" attributes="0"/>
               </Group>
               <EmptySpace max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Component id="txt_Balance" alignment="0" min="-2" pref="50" max="-2" attributes="0"/>
-                  <Component id="jLabel16" alignment="0" min="-2" pref="50" max="-2" attributes="0"/>
+                  <Component id="txt_Balance" alignment="0" min="-2" pref="35" max="-2" attributes="0"/>
+                  <Component id="jLabel16" alignment="0" min="-2" pref="35" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="unrelated" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="0" max="-2" attributes="0">
@@ -196,7 +196,7 @@
                       <Component id="txt_excess" alignment="0" min="-2" pref="35" max="-2" attributes="0"/>
                       <Component id="jLabel19" alignment="0" min="-2" pref="35" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+                  <EmptySpace pref="273" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -510,7 +510,7 @@
                       <Component id="txt_paydeb" alignment="0" min="-2" pref="35" max="-2" attributes="0"/>
                       <Component id="jLabel21" alignment="0" min="-2" pref="35" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="0" pref="22" max="32767" attributes="0"/>
+                  <EmptySpace min="0" pref="232" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -945,7 +945,7 @@
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="from_date" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="jLabel22" pref="49" max="32767" attributes="0"/>
+                  <Component id="jLabel22" pref="48" max="32767" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
               </Group>
           </Group>

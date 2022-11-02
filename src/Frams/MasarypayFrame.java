@@ -459,6 +459,7 @@ public class MasarypayFrame extends javax.swing.JFrame {
             masary.setPhone(null);
             masary.setId_utility_masary(not_utilitiy);
             masary.setUtility_masary(not_utilitiy);
+            masary.setIs_requer_phone_num(false);
         }
         
         if(id_client == 1){

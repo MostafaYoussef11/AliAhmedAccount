@@ -196,29 +196,54 @@ public class goldClasses {
         }
         return isSaveImport;
     }
-    
+
     public String getPathImage(String id_imports){
         String Sql = "Select path as id From imports where id_import ="+id_imports;
         return ConnectDB.getIdFromName(Sql);
     }
-    
-    public boolean SaveAssets(double price , int id_workgroup , String note){
+    //
+    public boolean SaveAssets(double price , int id_workgroup , String note ,int id_suppliers , int id_assets){
         try {
+            casher = new CasherClass();
             con = ConnectDB.getCon();
             con.setAutoCommit(false);
             String sqlInsertAssets = "INSERT INTO `assets` (`price_assets`, `notes`, `id_workgroup`)"
                     + " VALUES (?,?,?)";
-            pstmt = con.prepareStatement(sqlInsertAssets, Statement.RETURN_GENERATED_KEYS);
+            pstmt = con.prepareStatement(sqlInsertAssets, Statement.RETURN_GENERATED_KEYS); 
             pstmt.setDouble(1, price);
             pstmt.setString(2, note);
             pstmt.setInt(3, id_workgroup);
             int rowAssetsAffect = pstmt.executeUpdate();
             if(rowAssetsAffect == 1){
-                
+                int rowAffect = 0;
+                if(id_suppliers == 1){
+                    PreparedStatement pstmtCash = casher.SavedCasherTransaction(TypeCasherTransaction.assetsGold, price, note, id_assets, con);
+                    rowAffect = pstmtCash.executeUpdate();
+                }else{
+                    String SqlInsertSupplierAccount = "INSERT INTO `suppliersaccount` (`Creditor`, `id_Suppliers`,`id_assets`, `note`) VALUES (?,?,?,?)";
+                    PreparedStatement pstmtSuppliers = con.prepareStatement(SqlInsertSupplierAccount, Statement.RETURN_GENERATED_KEYS);
+                    pstmtSuppliers.setDouble(1, price);
+                    pstmtSuppliers.setInt(2, id_suppliers);
+                    pstmtSuppliers.setInt(3, id_assets);
+                    pstmtSuppliers.setString(4, note);
+                    rowAffect = pstmtSuppliers.executeUpdate();
+                }
+                if(rowAffect == 1){
+                   con.commit();
+                   con.close();
+                   isSaveAssets = true;
+                }
             }
             
         } catch (SQLException ex) {
-            Logger.getLogger(goldClasses.class.getName()).log(Level.SEVERE, null, ex);
+            try {
+                con.rollback();
+                con.close();
+                Logger.getLogger(goldClasses.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (SQLException ex1) {
+                Logger.getLogger(goldClasses.class.getName()).log(Level.SEVERE, null, ex1);
+            }
+            isSaveAssets = false;
         }
         return isSaveAssets;
     }

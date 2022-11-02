@@ -425,11 +425,13 @@ public class OpaypayFrame extends javax.swing.JFrame {
             opay.setPhone(txtPhone.getText());
             opay.setUtility_masary(txtPhone.getText());
             opay.setId_utility_masary(not_utilitiy);
+            opay.setIs_requer_phone_num(true);
         }
         else{
             opay.setPhone(null);
             opay.setId_utility_masary(not_utilitiy);
             opay.setUtility_masary(not_utilitiy);
+            opay.setIs_requer_phone_num(false);
         }
         if(id_client == 1){
             isSave = opay.SaveCasher();

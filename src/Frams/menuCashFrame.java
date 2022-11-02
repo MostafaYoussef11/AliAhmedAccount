@@ -232,7 +232,9 @@ public class menuCashFrame extends javax.swing.JFrame {
 
     private void cridetAtmMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_cridetAtmMouseClicked
         // TODO add your handling code here:
-//        clickPanel(charging);
+          clickPanel(cridetAtm);
+          WithdrawATMFrame wAtm = new WithdrawATMFrame();
+          Tools.openJFram(wAtm, "سحب من ال ATM");
 //        chargingWalletFrame chwallet = new chargingWalletFrame();
 //        Tools.openJFram(chwallet, "ايداع - سحب ");
     }//GEN-LAST:event_cridetAtmMouseClicked

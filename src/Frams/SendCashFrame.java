@@ -414,25 +414,40 @@ public class SendCashFrame extends javax.swing.JFrame {
         if(discount_from_balance > balance){
             Tools.showErrorMsg("رصيد المحفظة لا يكفي");
         }else{
-           // Client is Cash Money  عميل نقدي
-            //System.out.println(getClass().getSimpleName() +"  " + comboClient.getSelectedItem().toString() + " index =  " + comboClient.getSelectedIndex() );
-          if(comboClient.getSelectedIndex() == 0){
-            amount = Double.parseDouble(txt_amount.getText());
-            String Number_VF = combVFNumber.getSelectedItem().toString();
-            String Number_client = txtNumberClient.getText();
-            String name_client = comboClient.getSelectedItem().toString();
-             try {
-                 send.SetDataSend(discount_from_balance, amount, Number_VF, Number_client, name_client);
-                 if(send.SaveSendAndReciveTransaction("Send")){
-                     Tools.showInfoMsg("تم الاسال", "تحويل كاش");
-                     setNewTransSend();
-                 }else{
-                     Tools.showErrorMsg("خطأ في الارسال");       
-                 }}
-             catch (SQLException ex) {
-                 Logger.getLogger(SendCashFrame.class.getName()).log(Level.SEVERE, null, ex);
-             }           
-           } 
+            try {
+                // Client is Cash Money  عميل نقدي
+                //System.out.println(getClass().getSimpleName() +"  " + comboClient.getSelectedItem().toString() + " index =  " + comboClient.getSelectedIndex() );
+                amount = Double.parseDouble(txt_amount.getText());
+                String Number_VF = combVFNumber.getSelectedItem().toString();
+                String Number_client = txtNumberClient.getText();
+                String name_client = comboClient.getSelectedItem().toString();
+                int id_client = Integer.parseInt(new ClientPerson().getIdByName(name_client));
+                int id_vf = new VFCashClass().getId_VF_ByNumber(Number_VF);
+                if(comboClient.getSelectedIndex() == 0){
+                    try {
+                        send.SetDataSend(discount_from_balance, amount, Number_VF, Number_client, name_client);
+                        if(send.SaveSendAndReciveTransaction("Send")){
+                            Tools.showInfoMsg("تم الاسال", "تحويل كاش");
+                            setNewTransSend();
+                        }else{
+                            Tools.showErrorMsg("خطأ في الارسال");
+                        }}
+                    catch (SQLException ex) {
+                        Logger.getLogger(SendCashFrame.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }else{
+                    boolean isSave = send.SaveSendToClient(value, amount, id_vf, Number_client, id_client);
+                    if(isSave){
+                        Tools.showInfoMsg("تم الارسال بنجاح", "ارسال كاش");
+                        setNewTransSend();
+                    }else{
+                        Tools.showErrorMsg("خطأ");
+                    }
+                    
+                     
+                } } catch (SQLException ex) {
+                Logger.getLogger(SendCashFrame.class.getName()).log(Level.SEVERE, null, ex);
+            }
 
         
         }
@@ -463,7 +478,11 @@ public class SendCashFrame extends javax.swing.JFrame {
     private void txt_valuKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_valuKeyReleased
         // TODO add your handling code here:
         String valu = txt_valu.getText();
-        value = Double.parseDouble(valu);
+        if(valu.isEmpty()){
+            value = 0;
+        }else{
+            value = Double.parseDouble(valu);
+        }
         String NumberClient = txtNumberClient.getText();
         String ClientNetwork = NumberClient.substring(0, 3);
         String NumberVF = combVFNumber.getSelectedItem().toString();
@@ -479,7 +498,7 @@ public class SendCashFrame extends javax.swing.JFrame {
         txt_cost.setText(cost+"");
         discount_from_balance = value + cost;
         txt_discont.setText(discount_from_balance+"");
-        amount = discount_from_balance + (discount_from_balance*0.010);
+        amount = value + (value * 0.01) ;
         DecimalFormat format = new DecimalFormat("0");
         String st_amount = format.format(amount);
         txt_amount.setText(st_amount);

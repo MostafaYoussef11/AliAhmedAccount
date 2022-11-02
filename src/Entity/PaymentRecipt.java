@@ -23,12 +23,12 @@ import javax.swing.JTable;
  */
 public class PaymentRecipt extends MoneyTransfer{
     private Connection con;
-    private PreparedStatement pstm , pstm_Casher;
+    private PreparedStatement pstm , pstm_Casher ,del_su_pstm, pstm_clear , pstm_US , del_Pay_pstm , UPpstm , Upc_pstm , Del_pstm , del_Puc_pstm;
     private ResultSet rst;
     private TypeOfFilter type_filter;
     private CasherClass casher;// = new CasherClass();
     public void fillTalble(JTable table){
-        String sql = "SELECT r.amount , c.name_Suppliers , r.date_PaymentReceipt , r.id_PaymentReceipt FROM paymentreceipt r INNER JOIN suppliers c on r.id_Suppliers = c.id_Suppliers where r.isActive = 1";
+        String sql = "SELECT r.amount , c.name_Suppliers , r.date_PaymentReceipt , r.id_PaymentReceipt FROM paymentreceipt r INNER JOIN suppliers c on r.id_Suppliers = c.id_Suppliers where r.isActive = 1 ORDER BY r.id_PaymentReceipt DESC";
         String[] coulmnName = { "المبلغ", "العميل", "التاريخ", "رقم"};
         ConnectDB.fillAndCenterTable(sql, table, coulmnName);
     }
@@ -73,8 +73,78 @@ public class PaymentRecipt extends MoneyTransfer{
                    pstmt.setInt(4, id_recipt_payment);
                    pstmt.setString(5, not);
                    row_effect = pstmt.executeUpdate();
+                   boolean isFilter = false;
                    if(row_effect == 1){
-                       boolean isFilter = FilterAccount(type_filter);
+                       switch(type_filter){
+                           case Payment : //دفعة من الحساب
+                               isFilter = true;
+                               break;
+                           case Clear: // تصفية نقدية 
+                               // Update isActive on suppliersaccount
+                               System.out.println("sql_up_supAccount");
+                               String sql_up_supAccount = "UPDATE suppliersaccount SET isActive = 0 WHERE id_Suppliers = ?";
+                               pstm_clear = con.prepareStatement(sql_up_supAccount, Statement.RETURN_GENERATED_KEYS);
+                               pstm_clear.setInt(1, getId_Suppliers());
+                               int rowEffect = pstm_clear.executeUpdate();
+                               System.out.println("Row Affect = " + rowEffect);
+                               if(rowEffect >= 0){
+                                   System.out.println("sql_Sup");
+                                   String sql_Sup = "UPDATE suppliers SET firstBalance = ? WHERE id_Suppliers = ?";
+                                   pstm_US = con.prepareStatement(sql_Sup, Statement.RETURN_GENERATED_KEYS);
+                                   pstm_US.setDouble(1, getNewBalance());
+                                   pstm_US.setInt(2, getId_Suppliers());
+                                   int row = pstm_US.executeUpdate();
+                                   System.out.println("Row Affect suppliers = " + row);
+                                   if(row == 1){
+                                       System.out.println("sql_up_pay");
+                                       String sql_up_pay = "UPDATE paymentreceipt SET isActive = 0 WHERE id_Suppliers = ? ";
+                                       UPpstm = con.prepareStatement(sql_up_pay, Statement.RETURN_GENERATED_KEYS);
+                                       UPpstm.setInt(1,getId_Suppliers());
+                                       int row_pay = UPpstm.executeUpdate();
+                                       System.out.println("Row Affect Paymentreceipt = " + row_pay);
+                                       if(row_pay >= 0 ){
+                                           System.out.println("sql_purch");
+                                           String sql_purch = "UPDATE purchaseinvoice SET isActive = 0 WHERE id_Suppliers = ?";
+                                           Upc_pstm = con.prepareStatement(sql_purch, Statement.RETURN_GENERATED_KEYS);
+                                           Upc_pstm.setInt(1, getId_Suppliers());
+                                           int pur_row = Upc_pstm.executeUpdate();
+                                           if(pur_row >= 0){
+                                               System.out.println("true");
+                                               isFilter = true;
+                                           }
+                                       }
+                                   }
+                               }
+                           break;
+                           case End:
+                              String Sup_sql = "DELETE FROM suppliersaccount WHERE id_Suppliers = ?"; 
+                              Del_pstm = con.prepareStatement(Sup_sql, Statement.RETURN_GENERATED_KEYS);
+                              Del_pstm.setInt(1, getId_Suppliers());
+                              int SuprowEffect = Del_pstm.executeUpdate();
+                              if(SuprowEffect >= 0){
+                                 String Delsql = "DELETE FROM purchaseinvoice WHERE id_Suppliers = ?";
+                                 del_Puc_pstm = con.prepareStatement(Delsql, Statement.RETURN_GENERATED_KEYS);
+                                 del_Puc_pstm.setInt(1, getId_Suppliers());
+                                 int Delrow = del_Puc_pstm.executeUpdate();
+                                 if(Delrow >= 0){
+                                  String DelPsql = "DELETE FROM paymentreceipt WHERE id_Suppliers = ? ";
+                                  del_Pay_pstm = con.prepareStatement(DelPsql, Statement.RETURN_GENERATED_KEYS);
+                                  del_Pay_pstm.setInt(1,getId_Suppliers() );
+                                  int DelProw = del_Pay_pstm.executeUpdate();
+                                  if(DelProw >= 0 ){
+                                     String DelSupsql = "DELETE FROM suppliers WHERE id_Suppliers = ?";
+                                     del_su_pstm = (PreparedStatement) con.prepareStatement(DelSupsql, Statement.RETURN_GENERATED_KEYS);
+                                     del_su_pstm.setInt(1, getId_Suppliers());
+                                    int DelSuprow = del_su_pstm.executeUpdate();
+                                    if(DelSuprow == 1 ){
+                                        isFilter = true;
+                                     }
+
+                                  }   
+                                 }
+                              }
+                       }
+                       
                        if(isFilter){
                             con.commit();
                             isSave = true;
@@ -94,6 +164,7 @@ public class PaymentRecipt extends MoneyTransfer{
         boolean isclear = false;
         String sql = "";
         int rowEffect = 0;
+        
         switch(type){
             case Clear:
                 sql = "UPDATE suppliersaccount SET isActive = 0 WHERE id_Suppliers = ?";

@@ -7,9 +7,9 @@
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
 	<queryString>
-		<![CDATA[SELECT sa.* , s.name_Suppliers from suppliersaccount sa INNER JOIN suppliers s on sa.id_Suppliers = s.id_Suppliers where sa.id_Suppliers = $P{id_Suppliers}]]>
+		<![CDATA[SELECT sa.* , s.name_Suppliers from suppliersaccount sa INNER JOIN suppliers s on sa.id_Suppliers = s.id_Suppliers where sa.id_Suppliers = $P{id_Suppliers} and sa.isActive = 1]]>
 	</queryString>
-	<field name="id_supplliersAccount" class="java.lang.Integer">
+	<field name="id_supplliersAccount" class="java.lang.Long">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="date_suppliersAccount" class="java.sql.Date">
@@ -21,13 +21,28 @@
 	<field name="Creditor" class="java.lang.Double">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="id_Suppliers" class="java.lang.Integer">
+	<field name="id_Suppliers" class="java.lang.Long">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="id_purchaseInvoice" class="java.lang.Integer">
+	<field name="id_purchaseInvoice" class="java.lang.Long">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
-	<field name="id_paymentReceipt" class="java.lang.Integer">
+	<field name="id_paymentReceipt" class="java.lang.Long">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="id_masary_sell" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="id_Send_Receive" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="id_exports" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="id_expens" class="java.lang.Integer">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<field name="id_assets" class="java.lang.Integer">
 		<fieldDescription><![CDATA[]]></fieldDescription>
 	</field>
 	<field name="note" class="java.lang.String">

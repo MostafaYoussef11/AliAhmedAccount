@@ -28,7 +28,7 @@ public class recipt extends MoneyTransfer{
     private ResultSet rst;
     
     public void fillTalble(JTable table){
-        String sql = "SELECT r.amount , c.name_client , r.date_Receipt , r.id_Receipt FROM receipt r INNER JOIN client c on r.id_client = c.id_client where r.isActive = 1";
+        String sql = "SELECT r.amount , c.name_client , r.date_Receipt , r.id_Receipt FROM receipt r INNER JOIN client c on r.id_client = c.id_client where r.isActive = 1 ORDER BY r.id_Receipt DESC";
         String[] coulmnName = { "المبلغ", "العميل", "التاريخ", "رقم"};
         ConnectDB.fillAndCenterTable(sql, table, coulmnName);
     }
