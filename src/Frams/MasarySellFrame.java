@@ -429,6 +429,8 @@ public class MasarySellFrame extends javax.swing.JFrame {
         comb_recharge_type.setSelectedIndex(1);
         masary.fillTable(jTable1);
         //suppliers.setId_supplier_type(4);
+        txt_amount.setText("0.00");
+        txt_value.setText("0.00");
         suppliers.FillComboAllNameSupplierByType(comb_to_account);
     }
     /**

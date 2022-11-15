@@ -83,7 +83,7 @@ public abstract class Person{
         
     }
     public void FillComboName(JComboBox comboName){
-        ConnectDB.fillCombo(tableName + " WHERE id_"+tableName +"!= 1 AND isActive = 1", "name_"+tableName, comboName);
+        ConnectDB.fillCombo(tableName + " WHERE id_"+tableName +"!= 1 AND isActive = 1 ORDER BY name_"+tableName, "name_"+tableName, comboName);
     }  
     public void FillComboAllNameClient(JComboBox comboName){
         ConnectDB.fillCombo(tableName + " WHERE isActive = 1", "name_"+tableName, comboName);

@@ -499,9 +499,9 @@ public class SendCashFrame extends javax.swing.JFrame {
         discount_from_balance = value + cost;
         txt_discont.setText(discount_from_balance+"");
         amount = value + (value * 0.01) ;
-        DecimalFormat format = new DecimalFormat("0");
-        String st_amount = format.format(amount);
-        txt_amount.setText(st_amount);
+        //DecimalFormat format = new DecimalFormat("0");
+        //String st_amount = format.format(amount);
+        txt_amount.setText(amount+"");
         
     }//GEN-LAST:event_txt_valuKeyReleased
 

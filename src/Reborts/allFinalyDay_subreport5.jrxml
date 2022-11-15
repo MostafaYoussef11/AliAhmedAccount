@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="allFinalyDay_subreport5" language="groovy" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="125800bc-fd5e-4c5a-84da-720396af71ba">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString language="SQL">
+		<![CDATA[SELECT
+     vf_transaction_po.`id_transaction` AS vf_transaction_po_id_transaction,
+     vf_transaction_po.`date_transaction` AS vf_transaction_po_date_transaction,
+     vf_transaction_po.`time_transaction` AS vf_transaction_po_time_transaction,
+     vf_transaction_po.`type_transaction` AS vf_transaction_po_type_transaction,
+     vf_transaction_po.`id_VF_cash` AS vf_transaction_po_id_VF_cash,
+     vf_transaction_po.`id_pos` AS vf_transaction_po_id_pos,
+     vf_transaction_po.`price` AS vf_transaction_po_price,
+     vf_transaction_po.`id_masary_pay` AS vf_transaction_po_id_masary_pay,
+     vf_transaction_po.`id_masary_sell` AS vf_transaction_po_id_masary_sell
+FROM
+     `vf_transaction_po` vf_transaction_po]]>
+	</queryString>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

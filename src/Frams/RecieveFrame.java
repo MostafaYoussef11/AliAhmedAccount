@@ -10,6 +10,7 @@ import Entity.Suppliers;
 import Entity.VFCashClass;
 import Utilities.Tools;
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.beans.PropertyChangeListener;
@@ -35,12 +36,15 @@ public class RecieveFrame extends javax.swing.JFrame {
     private String St_limet;
     Send_receiveCash receive;
     Suppliers supplier;
+    Dimension dim;
     public RecieveFrame() {
-        initComponents(); 
+        initComponents();//738, 561
+        dim = new Dimension(750, 590);
         vf = new VFCashClass();
         receive = new Send_receiveCash();
         supplier = new Suppliers();
-        
+        this.setSize(dim);
+        Tools.setBackground(background, dim, "2800.jpg");
        SetnewRecieveTransaction();
     }
 
@@ -115,14 +119,15 @@ public class RecieveFrame extends javax.swing.JFrame {
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         comboWallt = new javax.swing.JComboBox<String>();
+        txtNumVF = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        txt_amount = new javax.swing.JTextField();
-        jLabel3 = new javax.swing.JLabel();
-        isTake = new javax.swing.JCheckBox();
         txt_value = new javax.swing.JTextField();
-        compsup = new javax.swing.JComboBox();
-        jLabel5 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        txt_amount = new javax.swing.JTextField();
         txt_limet = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        compsup = new javax.swing.JComboBox();
+        isTake = new javax.swing.JCheckBox();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
         btPanel = new javax.swing.JPanel();
@@ -133,13 +138,12 @@ public class RecieveFrame extends javax.swing.JFrame {
         btdel = new javax.swing.JButton();
         btexit = new javax.swing.JButton();
         btprint = new javax.swing.JButton();
-        jLabel4 = new javax.swing.JLabel();
+        background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("استقبال اموال");
         setIconImages(null);
         setLocationByPlatform(true);
-        setPreferredSize(new java.awt.Dimension(720, 500));
         setResizable(false);
         getContentPane().setLayout(null);
 
@@ -160,10 +164,26 @@ public class RecieveFrame extends javax.swing.JFrame {
             }
         });
 
+        txtNumVF.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel2.setText("القيمة");
         jLabel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        txt_value.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        txt_value.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txt_value.setText("0.00");
+        txt_value.setToolTipText("المبلغ المرسل للمحفظة");
+        txt_value.setDisabledTextColor(new java.awt.Color(0, 0, 0));
+        txt_value.setName("txtValue"); // NOI18N
+        txt_value.setNextFocusableComponent(txt_amount);
+        txt_value.setSelectionStart(0);
+
+        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setText("المبلغ");
+        jLabel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         txt_amount.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         txt_amount.setHorizontalAlignment(javax.swing.JTextField.CENTER);
@@ -175,10 +195,16 @@ public class RecieveFrame extends javax.swing.JFrame {
         txt_amount.setNextFocusableComponent(isTake);
         txt_amount.setSelectionStart(0);
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setText("المبلغ");
-        jLabel3.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        txt_limet.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        txt_limet.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel5.setText("مورد");
+        jLabel5.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jLabel5.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+
+        compsup.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         isTake.setFont(new java.awt.Font("Traditional Arabic", 1, 18)); // NOI18N
         isTake.setSelected(true);
@@ -196,22 +222,6 @@ public class RecieveFrame extends javax.swing.JFrame {
             }
         });
 
-        txt_value.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
-        txt_value.setHorizontalAlignment(javax.swing.JTextField.CENTER);
-        txt_value.setText("0.00");
-        txt_value.setToolTipText("المبلغ المرسل للمحفظة");
-        txt_value.setDisabledTextColor(new java.awt.Color(0, 0, 0));
-        txt_value.setName("txtValue"); // NOI18N
-        txt_value.setNextFocusableComponent(txt_amount);
-        txt_value.setSelectionStart(0);
-
-        compsup.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
-
-        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setText("مورد");
-        jLabel5.setBorder(javax.swing.BorderFactory.createEtchedBorder());
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -219,24 +229,30 @@ public class RecieveFrame extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(isTake, javax.swing.GroupLayout.DEFAULT_SIZE, 70, Short.MAX_VALUE)
-                    .addComponent(txt_limet, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(compsup, 0, 192, Short.MAX_VALUE)
-                    .addComponent(txt_value))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 92, Short.MAX_VALUE)
-                    .addComponent(jLabel5, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txt_amount)
-                    .addComponent(comboWallt, 0, 225, Short.MAX_VALUE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 61, Short.MAX_VALUE)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addComponent(txt_value, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(comboWallt, javax.swing.GroupLayout.PREFERRED_SIZE, 263, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(isTake)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(compsup, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE))
+                            .addComponent(txt_limet, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(txt_amount)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtNumVF, javax.swing.GroupLayout.PREFERRED_SIZE, 246, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -244,34 +260,33 @@ public class RecieveFrame extends javax.swing.JFrame {
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txt_limet, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(comboWallt, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(txt_value, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(comboWallt, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(txt_value, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(1, 1, 1)
-                        .addComponent(isTake, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(12, 12, 12))
+                    .addComponent(txtNumVF, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txt_limet, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(compsup)
+                    .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(compsup, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txt_amount, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addContainerGap())))
+                            .addComponent(txt_amount, javax.swing.GroupLayout.PREFERRED_SIZE, 34, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(isTake, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
 
         txt_value.getAccessibleContext().setAccessibleName("value");
 
         getContentPane().add(jPanel1);
-        jPanel1.setBounds(10, 11, 680, 95);
+        jPanel1.setBounds(10, 11, 700, 140);
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -308,7 +323,7 @@ public class RecieveFrame extends javax.swing.JFrame {
         }
 
         getContentPane().add(jScrollPane1);
-        jScrollPane1.setBounds(10, 110, 680, 260);
+        jScrollPane1.setBounds(10, 160, 700, 310);
 
         btPanel.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         btPanel.setOpaque(false);
@@ -389,19 +404,19 @@ public class RecieveFrame extends javax.swing.JFrame {
             btPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, btPanelLayout.createSequentialGroup()
                 .addGap(17, 17, 17)
-                .addComponent(btexit, javax.swing.GroupLayout.DEFAULT_SIZE, 87, Short.MAX_VALUE)
+                .addComponent(btexit, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btprint, javax.swing.GroupLayout.DEFAULT_SIZE, 89, Short.MAX_VALUE)
+                .addComponent(btprint, javax.swing.GroupLayout.DEFAULT_SIZE, 92, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btdel, javax.swing.GroupLayout.DEFAULT_SIZE, 83, Short.MAX_VALUE)
+                .addComponent(btdel, javax.swing.GroupLayout.DEFAULT_SIZE, 88, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btupdate, javax.swing.GroupLayout.DEFAULT_SIZE, 91, Short.MAX_VALUE)
+                .addComponent(btupdate, javax.swing.GroupLayout.DEFAULT_SIZE, 94, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btedit, javax.swing.GroupLayout.DEFAULT_SIZE, 87, Short.MAX_VALUE)
+                .addComponent(btedit, javax.swing.GroupLayout.DEFAULT_SIZE, 90, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btsave, javax.swing.GroupLayout.DEFAULT_SIZE, 86, Short.MAX_VALUE)
+                .addComponent(btsave, javax.swing.GroupLayout.DEFAULT_SIZE, 83, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(btnew, javax.swing.GroupLayout.DEFAULT_SIZE, 83, Short.MAX_VALUE)
+                .addComponent(btnew, javax.swing.GroupLayout.DEFAULT_SIZE, 89, Short.MAX_VALUE)
                 .addGap(17, 17, 17))
         );
         btPanelLayout.setVerticalGroup(
@@ -421,12 +436,12 @@ public class RecieveFrame extends javax.swing.JFrame {
         );
 
         getContentPane().add(btPanel);
-        btPanel.setBounds(10, 380, 680, 61);
+        btPanel.setBounds(10, 480, 700, 61);
 
-        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/2800.jpg"))); // NOI18N
-        getContentPane().add(jLabel4);
-        jLabel4.setBounds(0, 0, 700, 450);
+        background.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        background.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/2800.jpg"))); // NOI18N
+        getContentPane().add(background);
+        background.setBounds(0, 0, 10, 20);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -458,7 +473,11 @@ public class RecieveFrame extends javax.swing.JFrame {
             }
 
         }else{
-           boolean isSave = receive.SaveRecivedFromSupplier(value, amount, numberVF, supplierName);
+           String number_Vf_else = txtNumVF.getText();
+           if(id_vf == 9){
+               number_Vf_else = numberVF;
+           } 
+           boolean isSave = receive.SaveRecivedFromSupplier(value, amount, numberVF,number_Vf_else, supplierName);
            if(isSave){
                 Tools.showInfoMsg("تم استقبال المبلغ بنجاح", "استقبال فلوس");
                 SetnewRecieveTransaction();
@@ -494,6 +513,11 @@ public class RecieveFrame extends javax.swing.JFrame {
     private void comboWalltItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_comboWalltItemStateChanged
         // TODO add your handling code here:
         id_vf = vf.getId_VF_ByNumber(comboWallt.getSelectedItem().toString());
+        if(id_vf == 9){
+            txtNumVF.setEnabled(true);
+        }else{
+            txtNumVF.setEnabled(false);
+        }
         limet = 100000 - vf.getLamiteOfMonth_SendAndWithdraw(id_vf);
         if(limet < 10000){
            txt_limet.setBackground(Color.red);
@@ -551,6 +575,7 @@ public class RecieveFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel background;
     private javax.swing.JPanel btPanel;
     private javax.swing.JButton btdel;
     private javax.swing.JButton btedit;
@@ -565,11 +590,11 @@ public class RecieveFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
+    private javax.swing.JTextField txtNumVF;
     private javax.swing.JTextField txt_amount;
     private javax.swing.JLabel txt_limet;
     private javax.swing.JTextField txt_value;

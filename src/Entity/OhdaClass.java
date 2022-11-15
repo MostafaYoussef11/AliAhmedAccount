@@ -136,11 +136,11 @@ public class OhdaClass {
                 int rowUpdate =0 ;
                 String sqlUpdate = "";
                 if(isActive){
-                    sqlUpdate = "DELETE ohda where id_ohda = ? ";
+                    sqlUpdate = "DELETE FROM ohda where id_ohda = ? ";
                     pstm_ohda = con.prepareStatement(sqlUpdate, Statement.RETURN_GENERATED_KEYS);
                     pstm_ohda.setInt(1, id);
                 }else{
-                    sqlUpdate = "UPDATE ohda SET amount_ohda = ? where id_ohda = ?";
+                    sqlUpdate = "UPDATE ohda SET amount_ohda = ? where id_ohda = ?";//id_ohda 
                     pstm_ohda = con.prepareStatement(sqlUpdate, Statement.RETURN_GENERATED_KEYS);
                     pstm_ohda.setDouble(1, newBalance);
                     //pstm_ohda.setBoolean(2, isActive);

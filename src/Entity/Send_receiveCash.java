@@ -161,7 +161,7 @@ public class Send_receiveCash {
          return isSaved;
     }
     
-   public boolean SaveRecivedFromSupplier(double value , double amount , String  number_Vf , String name_supplier){
+   public boolean SaveRecivedFromSupplier(double value , double amount , String  number_Vf , String number_Vf_else, String name_supplier){
         boolean isSave = false;
         Connection conn = null;
        try {
@@ -191,7 +191,12 @@ public class Send_receiveCash {
                 pstm_supaccount.setDouble(1, amount);
                 pstm_supaccount.setString(2, id_suplier);
                 pstm_supaccount.setInt(3, id_recive);
-                pstm_supaccount.setString(4, "شحن محفظة " + number_Vf);
+                if(id_vf == 9){
+                     pstm_supaccount.setString(4, "شحن محفظة " + number_Vf_else);
+                }else{
+                    pstm_supaccount.setString(4, "شحن محفظة " + number_Vf);
+                }
+                
                 int row_sup = pstm_supaccount.executeUpdate();
                 if(row_sup == 1){
                     isSave = true;

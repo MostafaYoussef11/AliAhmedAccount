@@ -74,7 +74,7 @@ public class TransactionVCashAndPos {
        // String type_trans ="";  "المبلغ", "الرقم", "التاريخ", "مسلسل"
         String[] columnName = {"المبلغ", "الرقم", "التاريخ", "مسلسل"};
         //if(type == type_transaction.Deposit) type_trans = "Deposit"; else type_trans = "Withdraw";
-        String sql = "SELECT trans.price, v.number_VF_cash, trans.date_transaction, trans.id_transaction FROM vf_transaction_po AS trans INNER JOIN vf_cash AS v ON trans.id_VF_cash = v.id_VF_cash WHERE trans.type_transaction = 'Withdraw' And trans.id_pos is null ORDER BY trans.id_transaction DESC";//SELECT trans.price, v.number_VF_cash, trans.date_transaction, trans.id_transaction FROM vf_transaction_po AS trans INNER JOIN vf_cash AS v ON trans.id_VF_cash = v.id_VF_cash WHERE trans.type_transaction = 'Withdraw' And trans.id_pos = null ORDER BY trans.id_transaction DESC";
+        String sql = "SELECT trans.price, v.number_VF_cash, trans.date_transaction, trans.id_transaction FROM vf_transaction_po AS trans INNER JOIN vf_cash AS v ON trans.id_VF_cash = v.id_VF_cash WHERE trans.type_transaction = 'Withdraw' And trans.id_pos = 6 ORDER BY trans.id_transaction DESC";//SELECT trans.price, v.number_VF_cash, trans.date_transaction, trans.id_transaction FROM vf_transaction_po AS trans INNER JOIN vf_cash AS v ON trans.id_VF_cash = v.id_VF_cash WHERE trans.type_transaction = 'Withdraw' And trans.id_pos = null ORDER BY trans.id_transaction DESC";
         ConnectDB.fillAndCenterTable(sql, table, columnName);
     }
     public boolean SaveWithdrawATM(String numberVF , double amount , double value ){
@@ -85,11 +85,13 @@ public class TransactionVCashAndPos {
         try {
             con = ConnectDB.getCon();
             con.setAutoCommit(false);
-            String sql_vf_trans = "INSERT INTO `vf_transaction_po` (`type_transaction`, `id_VF_cash`, `price`) VALUES (?,?,?)";
+            String sql_vf_trans = "INSERT INTO `vf_transaction_po` (`type_transaction`, `id_VF_cash`,`id_pos` ,`price`) VALUES (?,?,?,?)";
             pstm = con.prepareStatement(sql_vf_trans, Statement.RETURN_GENERATED_KEYS);
             pstm.setString(1, "Withdraw");
             pstm.setInt(2, id_vf);
-            pstm.setDouble(3, value);
+            pstm.setInt(3, 6);
+            pstm.setDouble(4, value);
+            
             int rowAffect = pstm.executeUpdate();
             int id_trans = 0;
             ResultSet rst = pstm.getGeneratedKeys();

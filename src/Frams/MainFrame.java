@@ -165,7 +165,7 @@ public class MainFrame extends javax.swing.JFrame {
             
             private void getinfo(){
                 switch (idPos) {
-                    case 6:
+                    case 7:
                         infoPos = "الرصيد في الجرد الاول : "+new CasherClass().getNowBalanceCasher();
                         txtinformationPos.setText(infoPos);
                         txtinformationPos.setIcon(new ImageIcon(getClass().getResource("/icons/cashier.png")));
@@ -1221,6 +1221,7 @@ public class MainFrame extends javax.swing.JFrame {
             String master = selectionValues[0];
             ImageIcon icon = new ImageIcon(new ImageIcon(Toolkit.getDefaultToolkit().getClass().getResource("/icons/pos.png")).getImage());
             Object name_pos = JOptionPane.showInputDialog(this, "اختر ماكينة الشحن", "تغيير المكنة", JOptionPane.OK_CANCEL_OPTION, icon, selectionValues, master);
+            
             String id_pos_st = new PosClass().getIdPosFromNamePos(name_pos.toString());
             id_pos = Integer.parseInt(id_pos_st);
             ImageIcon iconlogo = new ImageIcon(new ImageIcon(Toolkit.getDefaultToolkit().getClass().getResource("/icons/"+id_pos_st+".png")).getImage());

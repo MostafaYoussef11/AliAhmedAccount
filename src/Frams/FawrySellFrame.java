@@ -429,7 +429,8 @@ public class FawrySellFrame extends javax.swing.JFrame {
         fawry.fillComboRechargeType(comb_recharge_type);
         comb_recharge_type.setSelectedIndex(1);
         fawry.fillTable(jTable1);
-        
+        txt_amount.setText("0.00");
+        txt_value.setText("0.00");
         suppliers.FillComboAllNameSupplierByType(comb_to_account);
     }
     /**

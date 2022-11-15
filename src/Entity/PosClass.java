@@ -34,7 +34,11 @@ public class PosClass {
     }
     
     public String getIdPosFromNamePos(String namePos) throws SQLException{
-       return ConnectDB.getIdFrmName("pos", namePos);
+       String id = ConnectDB.getIdFrmName("pos", namePos);
+       if(id.isEmpty() || id.equals("")){
+           id = "1";
+       }
+       return id;
     }
     public void fillCombNoteUtitilyByIdPos(int id_pos,JComboBox box){
         ConnectDB.fillCombo("utility_masary WHERE id_pos="+id_pos,"note_utility" , box);
