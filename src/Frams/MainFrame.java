@@ -554,7 +554,7 @@ public class MainFrame extends javax.swing.JFrame {
         loan.setFont(new java.awt.Font("VIP Hala Bold", 1, 18)); // NOI18N
         loan.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         loan.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/loan.png"))); // NOI18N
-        loan.setText("سلف و عهد");
+        loan.setText("حسابات");
         loan.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         loan.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         loan.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);

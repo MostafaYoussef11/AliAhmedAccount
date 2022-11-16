@@ -32,5 +32,7 @@ public enum TypeCasherTransaction {
     importsGold ,     // Debit import mony of Sell Gold
     assetsGold,
     getLoans,  // Debit imoprt Money of Loans
-    paymentLoans  // Creditor Loans
+    paymentLoans , // Creditor Loans
+    debitToBank,  // Creditor ايداع في البنك و خصم من الخزنة
+    creditFromBank // Debit سحب من البنك و ايداع في الخزنة
 }

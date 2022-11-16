@@ -17,8 +17,8 @@ public class MenusolfandOtherFrame extends javax.swing.JFrame {
 
     /**
      * Creates new form MenusolfandOtherFrame
-     */
-    Dimension dim = new Dimension(600, 360);
+     *///570, 467
+    Dimension dim = new Dimension(600, 470);
     public MenusolfandOtherFrame() {
         initComponents();
         setSize(dim);
@@ -47,13 +47,16 @@ public class MenusolfandOtherFrame extends javax.swing.JFrame {
         jPanel4 = new javax.swing.JPanel();
         association_new_btn = new javax.swing.JButton();
         association_pay_btn = new javax.swing.JButton();
+        jPanel5 = new javax.swing.JPanel();
+        newBank_btn = new javax.swing.JButton();
+        association_pay_btn1 = new javax.swing.JButton();
+        association_pay_btn2 = new javax.swing.JButton();
         background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setOpacity(1.0f);
         setResizable(false);
         setSize(new java.awt.Dimension(570, 315));
-        setType(java.awt.Window.Type.UTILITY);
         getContentPane().setLayout(null);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "سلف", javax.swing.border.TitledBorder.RIGHT, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Tahoma", 1, 12))); // NOI18N
@@ -147,7 +150,7 @@ public class MenusolfandOtherFrame extends javax.swing.JFrame {
                 .addComponent(care_new_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(care_filter_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(14, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel2);
@@ -196,7 +199,7 @@ public class MenusolfandOtherFrame extends javax.swing.JFrame {
         );
 
         getContentPane().add(jPanel3);
-        jPanel3.setBounds(10, 11, 232, 165);
+        jPanel3.setBounds(10, 11, 232, 122);
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "جمعيات", javax.swing.border.TitledBorder.RIGHT, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Tahoma", 1, 12))); // NOI18N
         jPanel4.setOpaque(false);
@@ -231,7 +234,55 @@ public class MenusolfandOtherFrame extends javax.swing.JFrame {
         );
 
         getContentPane().add(jPanel4);
-        jPanel4.setBounds(10, 182, 232, 125);
+        jPanel4.setBounds(330, 310, 230, 125);
+
+        jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "بنوك", javax.swing.border.TitledBorder.RIGHT, javax.swing.border.TitledBorder.TOP, new java.awt.Font("Tahoma", 1, 12))); // NOI18N
+        jPanel5.setOpaque(false);
+
+        newBank_btn.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        newBank_btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/team.png"))); // NOI18N
+        newBank_btn.setText("حساب بنكي");
+        newBank_btn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                newBank_btnActionPerformed(evt);
+            }
+        });
+
+        association_pay_btn1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        association_pay_btn1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/borrow (1).png"))); // NOI18N
+        association_pay_btn1.setText("ايداع");
+
+        association_pay_btn2.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        association_pay_btn2.setForeground(new java.awt.Color(255, 0, 0));
+        association_pay_btn2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/borrow (1).png"))); // NOI18N
+        association_pay_btn2.setText("سحب");
+
+        javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
+        jPanel5.setLayout(jPanel5Layout);
+        jPanel5Layout.setHorizontalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(newBank_btn, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(association_pay_btn1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(association_pay_btn2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+        );
+        jPanel5Layout.setVerticalGroup(
+            jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel5Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(newBank_btn, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(association_pay_btn1, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(association_pay_btn2, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+
+        getContentPane().add(jPanel5);
+        jPanel5.setBounds(10, 140, 232, 170);
         getContentPane().add(background);
         background.setBounds(0, 0, 0, 0);
 
@@ -274,6 +325,12 @@ public class MenusolfandOtherFrame extends javax.swing.JFrame {
         Tools.openJFram(fof);
     }//GEN-LAST:event_care_filter_btnActionPerformed
 
+    private void newBank_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_newBank_btnActionPerformed
+        // TODO add your handling code here:
+        BankAcount bank = new BankAcount();
+        Tools.openJFram(bank);
+    }//GEN-LAST:event_newBank_btnActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -312,6 +369,8 @@ public class MenusolfandOtherFrame extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton association_new_btn;
     private javax.swing.JButton association_pay_btn;
+    private javax.swing.JButton association_pay_btn1;
+    private javax.swing.JButton association_pay_btn2;
     private javax.swing.JLabel background;
     private javax.swing.JButton care_filter_btn;
     private javax.swing.JButton care_new_btn;
@@ -319,8 +378,10 @@ public class MenusolfandOtherFrame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JPanel jPanel5;
     private javax.swing.JButton loan_new_btn;
     private javax.swing.JButton loan_pay_btn;
+    private javax.swing.JButton newBank_btn;
     private javax.swing.JButton solfa_delay_btn;
     private javax.swing.JButton solfa_new_btn;
     private javax.swing.JButton solfa_pay_btn;

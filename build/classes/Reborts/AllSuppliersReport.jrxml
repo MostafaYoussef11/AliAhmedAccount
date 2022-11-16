@@ -22,6 +22,18 @@
 	<variable name="balance" class="java.lang.Double">
 		<variableExpression><![CDATA[($F{firstBalance} == null ? 0.00 : $F{firstBalance}) + ($F{creditor} == null ? 0.00 : $F{creditor} )- ($F{debit} == null ? 0.00 : $F{debit})]]></variableExpression>
 	</variable>
+	<variable name="sumBalance" class="java.lang.Double" incrementType="Report" calculation="Sum">
+		<variableExpression><![CDATA[$V{firstBalance_1}+$V{creditor_1}-$V{debit_1}]]></variableExpression>
+	</variable>
+	<variable name="firstBalance_1" class="java.lang.Double" resetType="Page" calculation="Sum">
+		<variableExpression><![CDATA[$F{firstBalance}]]></variableExpression>
+	</variable>
+	<variable name="creditor_1" class="java.lang.Double" resetType="Page" calculation="Sum">
+		<variableExpression><![CDATA[$F{creditor}]]></variableExpression>
+	</variable>
+	<variable name="debit_1" class="java.lang.Double" resetType="Page" calculation="Sum">
+		<variableExpression><![CDATA[$F{debit}]]></variableExpression>
+	</variable>
 	<background>
 		<band splitType="Stretch"/>
 	</background>
@@ -210,7 +222,36 @@
 		<band height="45" splitType="Stretch"/>
 	</columnFooter>
 	<pageFooter>
-		<band height="54" splitType="Stretch"/>
+		<band height="54" splitType="Stretch">
+			<textField>
+				<reportElement x="227" y="0" width="75" height="20" uuid="c017f26b-2115-413c-b911-cad31fe70ad1"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{firstBalance_1}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="152" y="0" width="75" height="20" uuid="d94ded5c-538f-40ca-b1d7-a69bb376e0a6"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{creditor_1}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="77" y="0" width="75" height="20" uuid="3c5839f3-cd1a-4c89-b958-a146ba1e443e"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{debit_1}]]></textFieldExpression>
+			</textField>
+			<textField>
+				<reportElement x="0" y="20" width="100" height="34" uuid="58adb772-a778-49b3-9aab-2c9d4580ddfe"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="12" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{sumBalance}]]></textFieldExpression>
+			</textField>
+		</band>
 	</pageFooter>
 	<summary>
 		<band height="42" splitType="Stretch"/>

@@ -517,7 +517,7 @@
         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
           <Image iconType="3" name="/Icons/loan.png"/>
         </Property>
-        <Property name="text" type="java.lang.String" value="&#x633;&#x644;&#x641; &#x648; &#x639;&#x647;&#x62f;"/>
+        <Property name="text" type="java.lang.String" value="&#x62d;&#x633;&#x627;&#x628;&#x627;&#x62a;"/>
         <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
           <Border info="org.netbeans.modules.form.compat2.border.BevelBorderInfo">
             <BevelBorder/>
