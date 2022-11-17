@@ -8,6 +8,7 @@ package Entity;
 import Utilities.ConnectDB;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
@@ -32,10 +33,17 @@ public class bankAccounts {
       this.first_creditor = first_creditor;
       this.first_debit = first_debit;
   }
-  
+  private int getIdBank(String numberAccount){
+      String idBankStr = ConnectDB.getIdFromName("SELECT `id_bank` As id FROM `bankaccount` WHERE `number_acount` = '"+numberAccount+"'");
+      int id = Integer.parseInt(idBankStr);
+      return id;
+  }
   public void FillComboNameBank(JComboBox combo){
       //String sql = "";
       ConnectDB.fillCombo("nameBank", "name", combo);
+  }
+  public void FillComboNumberBank(JComboBox comb){
+      ConnectDB.fillCombo("bankaccount", "concat(`name_bank` , ' ' , `number_acount`)", comb);
   }
   public void FillJTable(JTable table){
      String sql = "SELECT `first_creditor` , `first_debit` , `name_bank` , `number_acount` FROM `bankaccount`";
@@ -106,7 +114,10 @@ public class bankAccounts {
 
 
 public boolean SaveTransactionBanck(String numberAccount , double amount , String particulars ,typeTransaction type){
-    boolean isSave = false;  
+    boolean isSave = false;
+    double balance = getNowBalance(numberAccount);
+    CasherClass casher = new CasherClass();
+    TypeCasherTransaction casherTransaction = null;
     try {
           con = ConnectDB.getCon();
           con.setAutoCommit(false);
@@ -115,11 +126,41 @@ public boolean SaveTransactionBanck(String numberAccount , double amount , Strin
               case debit :
                   //INSERT INTO `banktransaction` ( `id_bank`, `particulars`, `debit`, `credit`, `balance`) VALUES (?,?,?,?)
                   sqlBank = "INSERT INTO `banktransaction` ( `id_bank`, `particulars`, `debit`,`balance`) VALUES (?,?,?,?)";
+                  casherTransaction = TypeCasherTransaction.debitToBank;
+                  balance = balance + amount;
                   break;
               case credit:
                   sqlBank = "INSERT INTO `banktransaction` ( `id_bank`, `particulars`, `credit`, `balance`) VALUES (?,?,?,?)";
+                  balance = balance - amount;
+                  casherTransaction = TypeCasherTransaction.creditFromBank;
                   break;
           
+          }
+          pstmt = con.prepareStatement(sqlBank, Statement.RETURN_GENERATED_KEYS);
+          pstmt.setInt(1, getIdBank(numberAccount));
+          pstmt.setString(2, particulars);
+          pstmt.setDouble(3, amount);
+          pstmt.setDouble(4, balance);
+          int rowAffect = pstmt.executeUpdate();
+          
+          if(rowAffect == 1){
+              ResultSet rst = pstmt.getGeneratedKeys();
+              int id_transaction = 0 ;   
+              while(rst.next()){
+                  id_transaction = rst.getInt(1);
+              }
+              pstmt_Casher = casher.SavedCasherTransaction(casherTransaction, amount, particulars,id_transaction, con);
+              int rowCasherAffect = pstmt_Casher.executeUpdate();
+              if(rowCasherAffect == 1){
+                  
+                  con.commit();
+                  con.close();
+                  isSave = true;
+              }else{
+                  con.rollback();
+                  con.close();
+                  isSave = false;
+              }
           }
           
     

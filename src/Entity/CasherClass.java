@@ -210,7 +210,11 @@ public class CasherClass {
           case FilterOhda:
               sql_insert_casher = "INSERT INTO `casher` (`Debit`, `note`,`id_users`,`id_ohda`) VALUES (?,?,?,?)"; 
               break;
-           
+          case creditFromBank:
+              sql_insert_casher = "INSERT INTO `casher` (`Debit`, `note`,`id_users`,`id_transaction_fromBank`) VALUES (?,?,?,?)"; 
+              break;
+              
+              
           case PosSell: // id_masary_sell 1
               sql_insert_casher = "INSERT INTO `casher` (`Creditor`, `note`,`id_users`,`id_masary_sell`) VALUES (?,?,?,?)";
               break;
@@ -252,6 +256,10 @@ public class CasherClass {
           case paymentLoans:
                sql_insert_casher = "INSERT INTO `casher` (`Creditor`, `note`,`id_users`,`id_tableOfLoans`) VALUES (?,?,?,?)";
               break; 
+              
+          case debitToBank:
+              sql_insert_casher = "INSERT INTO `casher` (`Creditor`, `note`,`id_users`,`id_transaction_toBank`) VALUES (?,?,?,?)";
+              break;
       }
       return sql_insert_casher;
   }
