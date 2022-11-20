@@ -402,6 +402,9 @@
             </Property>
             <Property name="text" type="java.lang.String" value="&#x627;&#x64a;&#x62f;&#x627;&#x639;"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="association_pay_btn1ActionPerformed"/>
+          </Events>
         </Component>
         <Component class="javax.swing.JButton" name="association_pay_btn2">
           <Properties>

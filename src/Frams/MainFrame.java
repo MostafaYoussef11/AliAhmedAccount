@@ -1221,8 +1221,13 @@ public class MainFrame extends javax.swing.JFrame {
             String master = selectionValues[0];
             ImageIcon icon = new ImageIcon(new ImageIcon(Toolkit.getDefaultToolkit().getClass().getResource("/icons/pos.png")).getImage());
             Object name_pos = JOptionPane.showInputDialog(this, "اختر ماكينة الشحن", "تغيير المكنة", JOptionPane.OK_CANCEL_OPTION, icon, selectionValues, master);
-            
+            if(name_pos == null){
+                name_pos = "ATM";
+            }
             String id_pos_st = new PosClass().getIdPosFromNamePos(name_pos.toString());
+            if(id_pos_st == null){
+                id_pos_st = "6";
+            }
             id_pos = Integer.parseInt(id_pos_st);
             ImageIcon iconlogo = new ImageIcon(new ImageIcon(Toolkit.getDefaultToolkit().getClass().getResource("/icons/"+id_pos_st+".png")).getImage());
             logo.setIcon(iconlogo);
