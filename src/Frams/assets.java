@@ -416,7 +416,8 @@ public class assets extends javax.swing.JFrame {
         txtDaily.setText(id_casher);
         txtnote.setText("");
         txtprice.setText("0.00");
-        ConnectDB.fillCombo("workgroup WHERE isActive = 0", "name_workgroup", comwork);
+        gold.FillComboWorkGroup(comwork);
+        //ConnectDB.fillCombo("workgroup WHERE isActive = 0", "name_workgroup", comwork);
         String sql ="SELECT workgroup.name_workgroup , assets.notes , assets.price_assets , assets.date_assets , assets.id_assets  FROM assets INNER JOIN workgroup ON assets.id_workgroup = workgroup.id_workgroup ORDER BY id_assets DESC ;";
         String[]coulmnName =   new String [] {
                 "المجموعة", "البيان", "المبلغ", "التاريخ", "رقم"

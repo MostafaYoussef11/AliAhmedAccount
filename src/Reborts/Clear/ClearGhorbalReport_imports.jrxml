@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ClearGhorbalReport_imports" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="035139a5-a137-45d5-8d39-e64b9a5aa33d">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="id_workgroup" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT
+     imports.`id_import` AS imports_id_import,
+     imports.`date_imports` AS imports_date_imports,
+     imports.`wight_imports` AS imports_wight_imports,
+     imports.`caliber` AS imports_caliber,
+     imports.`price_imports` AS imports_price_imports,
+     imports.`amount_imports` AS imports_amount_imports,
+     imports.`id_workgroup` AS imports_id_workgroup,
+     imports.`image` AS imports_image,
+     imports.`isRelay` AS imports_isRelay
+FROM
+     `imports` imports
+WHERE
+     id_workgroup = $P{id_workgroup}
+     and isRelay = 0]]>
+	</queryString>
+	<field name="imports_id_import" class="java.lang.Integer"/>
+	<field name="imports_date_imports" class="java.sql.Date"/>
+	<field name="imports_wight_imports" class="java.lang.Double"/>
+	<field name="imports_caliber" class="java.lang.Integer"/>
+	<field name="imports_price_imports" class="java.lang.Double"/>
+	<field name="imports_amount_imports" class="java.lang.Double"/>
+	<field name="imports_id_workgroup" class="java.lang.Integer"/>
+	<field name="imports_image" class="java.lang.Object"/>
+	<field name="imports_isRelay" class="java.lang.Boolean"/>
+	<variable name="note" class="java.lang.String">
+		<variableExpression><![CDATA["فاتورة "+$F{imports_wight_imports}+"جرام "]]></variableExpression>
+	</variable>
+	<variable name="SumWight" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{imports_wight_imports}]]></variableExpression>
+	</variable>
+	<variable name="SumAmount" class="java.lang.Double" calculation="Sum">
+		<variableExpression><![CDATA[$F{imports_amount_imports}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="31" splitType="Stretch">
+			<textField>
+				<reportElement x="0" y="0" width="120" height="30" uuid="a5066050-d7e0-4513-8d32-a7a72e97a180"/>
+				<box>
+					<pen lineWidth="2.0" lineStyle="Double"/>
+					<topPen lineWidth="2.0" lineStyle="Double"/>
+					<leftPen lineWidth="2.0" lineStyle="Double"/>
+					<bottomPen lineWidth="2.0" lineStyle="Double"/>
+					<rightPen lineWidth="2.0" lineStyle="Double"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{note}]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="180" y="0" width="95" height="30" forecolor="#000000" backcolor="#FFFFFF" uuid="7ed8156d-6b67-4490-b009-92a426c68383"/>
+				<box>
+					<pen lineWidth="2.0" lineStyle="Double"/>
+					<topPen lineWidth="2.0" lineStyle="Double"/>
+					<leftPen lineWidth="2.0" lineStyle="Double"/>
+					<bottomPen lineWidth="2.0" lineStyle="Double"/>
+					<rightPen lineWidth="2.0" lineStyle="Double"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="16" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new SimpleDateFormat("YYYY-MM-dd").format($F{imports_date_imports})]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="120" y="0" width="60" height="30" forecolor="#000000" backcolor="#FFFFFF" uuid="81ded864-c8b4-485b-a65e-1415d4a649b5"/>
+				<box>
+					<pen lineWidth="2.0" lineStyle="Double"/>
+					<topPen lineWidth="2.0" lineStyle="Double"/>
+					<leftPen lineWidth="2.0" lineStyle="Double"/>
+					<bottomPen lineWidth="2.0" lineStyle="Double"/>
+					<rightPen lineWidth="2.0" lineStyle="Double"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="16" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{imports_amount_imports}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+	<columnFooter>
+		<band height="78">
+			<textField>
+				<reportElement x="0" y="5" width="170" height="30" uuid="0133fb82-4520-4a57-b4c9-d24052b7851d"/>
+				<box>
+					<pen lineWidth="2.0"/>
+					<topPen lineWidth="2.0"/>
+					<leftPen lineWidth="2.0"/>
+					<bottomPen lineWidth="2.0"/>
+					<rightPen lineWidth="2.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{SumWight}]]></textFieldExpression>
+			</textField>
+			<textField pattern="" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="0" y="35" width="170" height="30" forecolor="#000000" backcolor="#FFFFFF" uuid="920b2ec4-b0de-4bca-ab04-6d6909a50fd6"/>
+				<box>
+					<pen lineWidth="2.0"/>
+					<topPen lineWidth="2.0"/>
+					<leftPen lineWidth="2.0"/>
+					<bottomPen lineWidth="2.0"/>
+					<rightPen lineWidth="2.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="16" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{SumAmount}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Transparent" x="175" y="5" width="100" height="30" forecolor="#000000" backcolor="#FFFFFF" uuid="d71b409a-6774-4832-9f37-a920c75f47d8"/>
+				<box>
+					<pen lineWidth="2.0"/>
+					<topPen lineWidth="2.0"/>
+					<leftPen lineWidth="2.0"/>
+					<bottomPen lineWidth="2.0"/>
+					<rightPen lineWidth="2.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="16" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[اجمالي الوزن]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="175" y="35" width="100" height="30" forecolor="#000000" backcolor="#FFFFFF" uuid="9b74e316-1770-42fa-a0c2-6436b3092bdb"/>
+				<box>
+					<pen lineWidth="2.0"/>
+					<topPen lineWidth="2.0"/>
+					<leftPen lineWidth="2.0"/>
+					<bottomPen lineWidth="2.0"/>
+					<rightPen lineWidth="2.0"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="16" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[اجمالي المبلغ]]></text>
+			</staticText>
+		</band>
+	</columnFooter>
+</jasperReport>

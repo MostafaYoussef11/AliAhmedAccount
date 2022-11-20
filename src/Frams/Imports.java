@@ -93,7 +93,8 @@ public class Imports extends javax.swing.JFrame {
         txtamount.setText("");
         txtcaliber.setText("");
         txtwight.setText("");
-        ConnectDB.fillCombo("workgroup WHERE isActive = 0 ", "name_workgroup", txtWorkGroup);
+        gold.FillComboWorkGroup(txtWorkGroup);
+//ConnectDB.fillCombo("workgroup WHERE isActive = 0 ", "name_workgroup", txtWorkGroup);
         //pB.SetvalProgress(50);
         txtwight.requestFocus();
         String sql = "Select workgroup.name_workgroup , imports.amount_imports , imports.price_imports , imports.caliber , imports.wight_imports , imports.date_imports , imports.id_import FROM imports INNER JOIN workgroup ON imports.id_workgroup = workgroup.id_workgroup where isRelay = 0 ORDER BY id_import DESC;";

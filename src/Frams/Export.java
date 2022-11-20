@@ -50,7 +50,7 @@ public class Export extends javax.swing.JFrame {
         txtNote.setText("");
         comAccount.setEnabled(true);
         comSupplier.setEnabled(true);
-        ConnectDB.fillCombo("account WHERE isEnable = 0 ","name_account", comAccount);
+        ConnectDB.fillCombo("account WHERE isEnable = 1","name_account", comAccount);
         ConnectDB.fillCombo("suppliers", "name_Suppliers", comSupplier);
         //btns
         btnNew.setEnabled(false);

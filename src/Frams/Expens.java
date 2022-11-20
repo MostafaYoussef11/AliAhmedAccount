@@ -436,7 +436,8 @@ public class Expens extends javax.swing.JFrame {
         btnSave.setEnabled(true);
         //Set Table and Text Feild 
         Tools.SearchField(tableExpens, txtSearch);
-        ConnectDB.fillCombo("workgroup WHERE isActive = 0 ", "name_workgroup", txtWorkGroup);
+        gold.FillComboWorkGroup(txtWorkGroup);
+        //ConnectDB.fillCombo("workgroup WHERE isActive = 0 ", "name_workgroup", txtWorkGroup);
          ConnectDB.fillCombo("suppliers", "name_Suppliers", suppCombo);
         String sql = "SELECT suppliers.name_Suppliers, expens.note , workgroup.name_workgroup , expens.price_expens , expens.date_expens , expens.id_expens FROM expens"
                 + " INNER JOIN workgroup ON expens.id_workgroup = workgroup.id_workgroup "

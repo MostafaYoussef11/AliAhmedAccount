@@ -19,7 +19,9 @@ import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JComboBox;
 import javax.swing.JTable;
+import javax.swing.JTextField;
 
 
 /**
@@ -64,6 +66,11 @@ public abstract class posPay {
 
     public void setIs_requer_phone_num(boolean is_requer_phone_num) {
         this.is_requer_phone_num = is_requer_phone_num;
+    }
+    public void viewPhoneNumberClient(JTextField txtPhone , JComboBox combClient){
+        String selectSql = "SELECT `phone` AS id FROM `client` WHERE `name_client`='"+combClient.getSelectedItem().toString()+"'";
+        String phon_number_client = ConnectDB.getIdFromName(selectSql);
+        txtPhone.setText(phon_number_client);
     }
 
 //    private void SavePhoneNumber(String phone) {

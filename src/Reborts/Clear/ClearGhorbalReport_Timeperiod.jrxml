@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="ClearGhorbalReport_Timeperiod" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="37c9be1f-5d72-41dd-ae1d-d7b413f42f1d">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="id_workgroup" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<queryString>
+		<![CDATA[SELECT 
+    max(expens.date_expens),
+    MIN(expens.date_expens) 
+FROM 
+   expens 
+WHERE 
+  expens.id_workgroup=$P{id_workgroup}
+and 
+isRelay = 0]]>
+	</queryString>
+	<field name="max(expens.date_expens)" class="java.sql.Date"/>
+	<field name="MIN(expens.date_expens)" class="java.sql.Date"/>
+	<title>
+		<band height="30" splitType="Stretch">
+			<staticText>
+				<reportElement x="222" y="0" width="80" height="25" uuid="2abc5fcc-e51d-4c6c-a6a2-6a7fb4d72bcd"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[في الفترة من ]]></text>
+			</staticText>
+			<textField>
+				<reportElement mode="Transparent" x="121" y="0" width="100" height="25" forecolor="#000000" backcolor="#FFFFFF" uuid="c348a239-26b7-49fc-a51d-e8deab40e68b"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="16" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new SimpleDateFormat("YYYY-MM-dd").format($F{MIN(expens.date_expens)})]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Transparent" x="100" y="0" width="20" height="25" forecolor="#000000" backcolor="#FFFFFF" uuid="c5f298a1-6acf-42db-a9d4-5a7581d9fcbe"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="16" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[الي]]></text>
+			</staticText>
+			<textField>
+				<reportElement mode="Transparent" x="0" y="0" width="100" height="25" forecolor="#000000" backcolor="#FFFFFF" uuid="e26a55f7-71e9-4b1e-8be0-cfffe205022d"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="16" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[new SimpleDateFormat("YYYY-MM-dd").format($F{max(expens.date_expens)})]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+</jasperReport>

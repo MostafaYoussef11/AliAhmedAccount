@@ -11,10 +11,12 @@ import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JComboBox;
 
 /**
  *
@@ -247,7 +249,160 @@ public class goldClasses {
         }
         return isSaveAssets;
     }
+
+
+    public void FillComboWorkGroup(JComboBox combo){
+       // String sql = "SELECT `name_workgroup` FROM `workgroup` WHERE`isActive`= 1";
+        ConnectDB.fillCombo("workgroup WHERE`isActive`= 1", "name_workgroup", combo);
+    
+    }
+    
+    public double GetSumWights(String id_workGroup){
+        String sql = "SELECT COALESCE(SUM(`wight_imports`),0) AS id FROM `imports` WHERE `isRelay` = 0 AND `id_workgroup` = "+id_workGroup;
+        String str_sum_wight = ConnectDB.getIdFromName(sql);
+        return Double.parseDouble(str_sum_wight);
+    }
+    public double GetSumAmount(String id_workGroup){
+        String sql = "SELECT COALESCE(SUM(`amount_imports`),0) AS id FROM `imports` WHERE `isRelay` = 0 AND `id_workgroup` = "+id_workGroup;
+        String str_sum_amount = ConnectDB.getIdFromName(sql);
+        return Double.parseDouble(str_sum_amount);
+    }
+    public double GetSumExpens(String id_workGroup){
+        //
+        String sql = "SELECT COALESCE(SUM(price_expens),0) As id FROM `expens` WHERE isRelay = 0 AND `id_workgroup` = "+id_workGroup;
+        String str_sum_amount = ConnectDB.getIdFromName(sql);
+        return Double.parseDouble(str_sum_amount);
+    }
+    public int GetCountWorker(String id_workGroup){
+    //SELECT COUNT(`id_account`) FROM `account` WHERE `isEnable` =1 AND `id_type` = 1
+        String sql = "SELECT COUNT(ac.id_account) AS id FROM account ac INNER JOIN accountworkgroup cw ON ac.id_account = cw.id_account WHERE ac.id_type = 1 AND ac.isEnable = 1 AND cw.id_workgroup = "+id_workGroup;
+        String str_Count = ConnectDB.getIdFromName(sql);
+        return Integer.parseInt(str_Count);
+    }
+    
+    
+    public boolean SaveingClear(int id_workGroup , String note , double loaderShare , double thridShare , double oneWorkerShare){
+        boolean isSave = false;
+        try {
+            Connection connection = ConnectDB.getCon();
+            connection.setAutoCommit(false);
+            //INSERT INTO `clear` (`notes`, `loadershare`, `ghorbalshare`, `carshare`, `workershare`) VALUES (?,?,?,?,?)
+            String insertSql = "INSERT INTO `clear` (`notes`, `loadershare`, `ghorbalshare`, `carshare`, `workershare`) VALUES (?,?,?,?,?)";
+            PreparedStatement pstmtClear = connection.prepareStatement(insertSql, Statement.RETURN_GENERATED_KEYS);
+            pstmtClear.setString(1,note);
+            pstmtClear.setDouble(2, loaderShare);
+            pstmtClear.setDouble(3, thridShare);
+            pstmtClear.setDouble(4, thridShare);
+            pstmtClear.setDouble(5, oneWorkerShare);
+            int rowAffect = pstmtClear.executeUpdate();
+            if(rowAffect == 1){
+                int id_clear = 0;
+                ResultSet rst = pstmtClear.getGeneratedKeys();
+                while(rst.next()){
+                    id_clear = rst.getInt(1);
+                }
+                boolean saveWorkerShare = insertClearWorker(id_workGroup, id_clear ,oneWorkerShare,note );
+                if(saveWorkerShare){
+                   // String sql_insert = "INSERT INTO `creditors` (`amount`, `id_account`, `id_clear`, `note`) VALUES (?,?,?,?)";
+                    if(insertClearGhorbal(id_workGroup, id_clear, thridShare, note)){
+                        if(insertClearCar(id_workGroup, id_clear, thridShare, note)){
+                            connection.commit();
+                            connection.close();
+                            isSave = true;
+                        }
+
+                    }
+
+                }
+            }
+            
+          //  System.out.println("Count Worker : " + count_worker);
+        } catch (SQLException ex) {
+            Logger.getLogger(goldClasses.class.getName()).log(Level.SEVERE, null, ex);
+        }
+         return isSave;
+    }
+    public boolean insertClearWorker(int id_workGroup , int id_clear , double amount , String note){
+        boolean isSave = false;
+        try {
+            Connection conn = ConnectDB.getCon();
+            conn.setAutoCommit(false);
+            String sql = "SELECT ac.`id_account` FROM `account` ac INNER JOIN `accountworkgroup` cw ON ac.`id_account` = cw.`id_account` WHERE ac.`id_type` = 1 AND cw.`id_workgroup`= "+id_workGroup;
+            String[] ids_Worker = ConnectDB.getColumn(sql);
+            int count_worker = ids_Worker.length;
+            int c = 0;
+            for(int i = 0 ; i < count_worker ; i++){
+                String sql_insert = "INSERT INTO `creditors` (`amount`, `id_account`, `id_clear`, `note`) VALUES (?,?,?,?)";
+                PreparedStatement pstmWorker = conn.prepareStatement(sql_insert, Statement.RETURN_GENERATED_KEYS);
+                pstmWorker.setDouble(1, amount);
+                pstmWorker.setInt(2, Integer.parseInt(ids_Worker[i]));
+                pstmWorker.setInt(3, id_clear);
+                pstmWorker.setString(4, note);
+                c = c + pstmWorker.executeUpdate();
+            }
+            if(c == count_worker){
+                isSave = true;
+                conn.commit();
+                conn.close();
+            }
+          //  System.out.println("Count Worker : " + count_worker);
+        } catch (SQLException ex) {
+            Logger.getLogger(goldClasses.class.getName()).log(Level.SEVERE, null, ex);
+        }
+         return isSave;
+    }
+    public boolean insertClearGhorbal(int id_workGroup , int id_clear , double amount , String note){
+        boolean isSave = false;
+        try {
+            Connection conn = ConnectDB.getCon();
+            conn.setAutoCommit(false);
+            String sql = "SELECT ac.`id_account` As id FROM `account` ac INNER JOIN `accountworkgroup` cw ON ac.`id_account` = cw.`id_account` WHERE ac.`id_type` = 4 AND  isEnable = 1 AND cw.`id_workgroup`= "+id_workGroup;
+            String sql_insert = "INSERT INTO `creditors` (`amount`, `id_account`, `id_clear`, `note`) VALUES (?,?,?,?)";
+            PreparedStatement pstmWorker = conn.prepareStatement(sql_insert, Statement.RETURN_GENERATED_KEYS);
+            pstmWorker.setDouble(1, amount);
+            pstmWorker.setInt(2, Integer.parseInt(ConnectDB.getIdFromName(sql)));
+            pstmWorker.setInt(3, id_clear);
+            pstmWorker.setString(4, note);
+            int rowAffect = pstmWorker.executeUpdate();
+            if(rowAffect == 1){
+                isSave = true;
+                conn.commit();
+                conn.close();
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(goldClasses.class.getName()).log(Level.SEVERE, null, ex);
+        }
+         return isSave;
+    }
+    public boolean insertClearCar(int id_workGroup , int id_clear , double amount , String note){
+        boolean isSave = false;
+        try {
+            Connection conn = ConnectDB.getCon();
+            conn.setAutoCommit(false);
+            String sql = "SELECT ac.`id_account` As id FROM `account` ac INNER JOIN `accountworkgroup` cw ON ac.`id_account` = cw.`id_account` WHERE ac.`id_type` = 2 AND isEnable = 1 AND cw.`id_workgroup`= "+id_workGroup;
+            String sql_insert = "INSERT INTO `creditors` (`amount`, `id_account`, `id_clear`, `note`) VALUES (?,?,?,?)";
+            PreparedStatement pstmWorker = conn.prepareStatement(sql_insert, Statement.RETURN_GENERATED_KEYS);
+            pstmWorker.setDouble(1, amount);
+            pstmWorker.setInt(2, Integer.parseInt(ConnectDB.getIdFromName(sql)));
+            pstmWorker.setInt(3, id_clear);
+            pstmWorker.setString(4, note);
+            int rowAffect = pstmWorker.executeUpdate();
+            if(rowAffect == 1){
+                 isSave = true;
+                conn.commit();
+                conn.close();
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(goldClasses.class.getName()).log(Level.SEVERE, null, ex);
+        }
+         return isSave;
+    }
+    
 }
+
+
+//SELECT ac.`id_account` FROM `account` ac INNER JOIN `accountworkgroup` cw ON ac.`id_account` = cw.`id_account` WHERE ac.`id_type` = 1 AND cw.`id_workgroup`= 1
+
 
 
 /*

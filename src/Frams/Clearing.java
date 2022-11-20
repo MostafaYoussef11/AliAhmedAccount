@@ -5,6 +5,14 @@
  */
 package Frams;
 
+import Entity.goldClasses;
+import Utilities.Tools;
+import java.io.InputStream;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.HashMap;
+import javafx.scene.chart.PieChart;
+
 /**
  *
  * @author Masrawy
@@ -15,10 +23,10 @@ public class Clearing extends javax.swing.JFrame {
      * Creates new form Clearing
      */
     
-    
+    private goldClasses gold;
     public Clearing() {
         initComponents();
-
+        gold = new goldClasses();
     }
     
 
@@ -730,16 +738,45 @@ public class Clearing extends javax.swing.JFrame {
         setNew();
     }//GEN-LAST:event_formWindowOpened
    
-    private double  total , Expens , amount , expens , mt , anyex;
-    
-    private int workerCount;
+    private double   Expens , amount , mt , anyex;
+    String nameWorkGroup;
+    private int workerCount , id_workGroup , oneThird ,towThird , OneOfTowThird , oneWorker;
     
     private void setNew(){
-       
+       gold.FillComboWorkGroup(comWork);
     }
     
     private void clearingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearingActionPerformed
-       
+        nameWorkGroup = comWork.getSelectedItem().toString();
+        String st_id_workGroup = gold.getIdWorkGroup(nameWorkGroup);
+        id_workGroup = Integer.parseInt(st_id_workGroup);
+        double wights = gold.GetSumWights(st_id_workGroup);
+        txtwight.setText(wights+"");
+        amount = gold.GetSumAmount(st_id_workGroup);
+        txtAmount.setText(amount+"");
+        Expens = gold.GetSumExpens(st_id_workGroup);
+        txtExpention.setText(Expens+"");
+        workerCount = gold.GetCountWorker(st_id_workGroup);
+        txtCount.setText(workerCount+"");
+        
+        // Clering
+        oneThird = (int) (amount / 3);
+         towThird = oneThird * 2;
+        int cleared = (int) (towThird - Expens);
+         OneOfTowThird = cleared / 3;
+         oneWorker = OneOfTowThird / workerCount;
+        
+        String st_OneOfTowThrid = OneOfTowThird+"";
+        txtLoder.setText(oneThird+"");
+        txtTthirds.setText(cleared+"");
+        
+        txtGhorbal.setText(st_OneOfTowThrid);
+        txtCar.setText(st_OneOfTowThrid);
+        txtworks.setText(st_OneOfTowThrid);
+        txtoneWork.setText(oneWorker+"");
+        
+        btnPrint.setEnabled(true);
+        btnClear.setEnabled(true);
     }//GEN-LAST:event_clearingActionPerformed
 
     private void machinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_machinActionPerformed
@@ -748,7 +785,12 @@ public class Clearing extends javax.swing.JFrame {
     }//GEN-LAST:event_machinActionPerformed
 
     private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
-      
+      String note = "تصفية " + comWork.getSelectedItem().toString() + " " + new SimpleDateFormat("dd-MM-yyyy").format(new Date()) + " باجمالي وزن " + txtwight.getText();
+      boolean isSave =   gold.SaveingClear(id_workGroup,note,Double.valueOf(oneThird),Double.valueOf(OneOfTowThird),Double.valueOf(oneWorker));
+      if(isSave){
+          Tools.showInfoMsg("تم الترحيل بنجاح", "حفظ");
+          setNew();
+      }
 
     }//GEN-LAST:event_btnClearActionPerformed
 
@@ -768,7 +810,14 @@ public class Clearing extends javax.swing.JFrame {
     }
     
     private void btnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrintActionPerformed
-      
+        String sql = "SELECT * FROM workgroup ";
+         InputStream stream = getClass().getResourceAsStream("/Reborts/Clear/ClearGhorbalReport.jrxml");
+         HashMap para = new HashMap();
+         para.put("id_workgroup", id_workGroup);
+         para.put("sumImport", amount);
+         para.put("SumExpen", Expens);
+         para.put("CountWorker", workerCount);
+        Tools.Printer(sql, stream, para);
     }//GEN-LAST:event_btnPrintActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed

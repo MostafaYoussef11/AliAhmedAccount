@@ -186,6 +186,31 @@ public class ConnectDB {
        }
        return values;
    }
+    public static String[] getColumn(String sql ){
+      String values[];
+      values = new String[0];
+      try{
+           SetConnection();
+           stmt = (Statement) con.createStatement();
+           ResultSet rst;
+           //String sql = "SELECT "+coulmName+" FROM "+tableName +";";
+           rst = stmt.executeQuery(sql);
+           rst.last();
+           int c = rst.getRow();
+           rst.beforeFirst();
+           values = new String[c];
+           int i = 0;
+           while(rst.next()){
+               values[i]=rst.getString(1);
+               i++;
+           }
+           con.close();
+       }catch(SQLException ex){
+           Logger.getLogger("FillCombo").log(Level.SEVERE, null, ex);
+       
+       }
+       return values;
+   }
  public static void fillComboUnit( String id , JComboBox combo){
        try{
            SetConnection();
@@ -219,6 +244,7 @@ public class ConnectDB {
            SetConnection();
            stmt = (Statement) con.createStatement();
            ResultSet rst = stmt.executeQuery(sql);
+           
            rst.last();
            int count = rst.getRow();
            rst.beforeFirst();
@@ -232,7 +258,8 @@ public class ConnectDB {
            
            con.close();
        }catch(SQLException ex){
-          Logger.getLogger("getIdFromName").log(Level.SEVERE, null, ex);
+         // Logger.getLogger("getIdFromName").log(Level.SEVERE, null, ex);
+           System.err.println(ex.getMessage());
            id = "";
        }
      return id;
