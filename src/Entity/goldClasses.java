@@ -303,7 +303,6 @@ public class goldClasses {
                 }
                 boolean saveWorkerShare = insertClearWorker(id_workGroup, id_clear ,oneWorkerShare,note );
                 if(saveWorkerShare){
-                   // String sql_insert = "INSERT INTO `creditors` (`amount`, `id_account`, `id_clear`, `note`) VALUES (?,?,?,?)";
                     if(insertClearGhorbal(id_workGroup, id_clear, thridShare, note)){
                         if(insertClearCar(id_workGroup, id_clear, thridShare, note)){
                             connection.commit();
@@ -322,7 +321,7 @@ public class goldClasses {
         }
          return isSave;
     }
-    public boolean insertClearWorker(int id_workGroup , int id_clear , double amount , String note){
+    private boolean insertClearWorker(int id_workGroup , int id_clear , double amount , String note){
         boolean isSave = false;
         try {
             Connection conn = ConnectDB.getCon();
@@ -351,7 +350,7 @@ public class goldClasses {
         }
          return isSave;
     }
-    public boolean insertClearGhorbal(int id_workGroup , int id_clear , double amount , String note){
+    private boolean insertClearGhorbal(int id_workGroup , int id_clear , double amount , String note){
         boolean isSave = false;
         try {
             Connection conn = ConnectDB.getCon();
@@ -374,7 +373,7 @@ public class goldClasses {
         }
          return isSave;
     }
-    public boolean insertClearCar(int id_workGroup , int id_clear , double amount , String note){
+    private boolean insertClearCar(int id_workGroup , int id_clear , double amount , String note){
         boolean isSave = false;
         try {
             Connection conn = ConnectDB.getCon();
@@ -398,14 +397,6 @@ public class goldClasses {
          return isSave;
     }
     
+    
 }
 
-
-//SELECT ac.`id_account` FROM `account` ac INNER JOIN `accountworkgroup` cw ON ac.`id_account` = cw.`id_account` WHERE ac.`id_type` = 1 AND cw.`id_workgroup`= 1
-
-
-
-/*
-INSERT INTO `suppliersaccount` (`Creditor`, `id_Suppliers`,`id_account `, `note`) VALUES (?,?,?,?)
-
-**/
