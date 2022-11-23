@@ -369,7 +369,7 @@ public class Accounts extends javax.swing.JFrame {
                 +" ORDER BY ac.id_account DESC ;";
         ConnectDB.fillAndCenterTable(sql, AccontTable, coulmnName);
         //pB.SetvalProgress(20);
-        ConnectDB.fillCombo("workgroup WHERE isActive = 0 ", "name_workgroup", comWorkgroup);
+        ConnectDB.fillCombo("workgroup WHERE isActive = 1 ", "name_workgroup", comWorkgroup);
        // pB.SetvalProgress(30);
         ConnectDB.fillCombo("type", "name_type", comType);
         //pB.SetvalProgress(40);
@@ -414,7 +414,7 @@ public class Accounts extends javax.swing.JFrame {
             String nBalance = txtNBalance.getText();
             String nameType = comType.getSelectedItem().toString();
             String id_type = ConnectDB.getIdFrmName("type",nameType );
-            String sql = "INSERT INTO account VALUES("+id+",'"+name+"',"+Obalance+","+id_type+","+nBalance+",0);";
+            String sql = "INSERT INTO account VALUES("+id+",'"+name+"',"+Obalance+","+id_type+","+nBalance+",1);";
             String sql_acwork = "INSERT INTO accountworkgroup VALUES("+id+","+id_workgroup+");";
             // isSaved
             boolean is_Save = ConnectDB.ExucuteAnyQuery(sql);

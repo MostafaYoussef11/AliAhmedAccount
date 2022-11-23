@@ -474,7 +474,7 @@ public class RecieveFrame extends javax.swing.JFrame {
 
         }else{
            String number_Vf_else = txtNumVF.getText();
-           if(id_vf == 9){
+           if(id_vf != 9){
                number_Vf_else = numberVF;
            } 
            boolean isSave = receive.SaveRecivedFromSupplier(value, amount, numberVF,number_Vf_else, supplierName);

@@ -6,6 +6,7 @@
 package Frams;
 
 import Entity.goldClasses;
+import Utilities.ConnectDB;
 import Utilities.Tools;
 import java.io.InputStream;
 import java.text.SimpleDateFormat;
@@ -66,6 +67,10 @@ public class Clearing extends javax.swing.JFrame {
         txt3 = new javax.swing.JLabel();
         txtoneWork = new javax.swing.JLabel();
         txt6 = new javax.swing.JLabel();
+        jLabel20 = new javax.swing.JLabel();
+        txtrentLodar = new javax.swing.JTextField();
+        jLabel21 = new javax.swing.JLabel();
+        comAccounts = new javax.swing.JComboBox();
         Ston = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         txtHfilter = new javax.swing.JLabel();
@@ -214,28 +219,43 @@ public class Clearing extends javax.swing.JFrame {
         txt6.setText("العامل الواحد");
         txt6.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
+        jLabel20.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel20.setText("ايجار اللودر");
+        jLabel20.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        txtrentLodar.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        txtrentLodar.setText("0.00");
+
+        jLabel21.setText("نسبة اللودر ترحل لحساب");
+
+        comAccounts.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
         javax.swing.GroupLayout GhorbalLayout = new javax.swing.GroupLayout(Ghorbal);
         Ghorbal.setLayout(GhorbalLayout);
         GhorbalLayout.setHorizontalGroup(
             GhorbalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(GhorbalLayout.createSequentialGroup()
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, GhorbalLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(GhorbalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtTthirds, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtTthirds, javax.swing.GroupLayout.DEFAULT_SIZE, 308, Short.MAX_VALUE)
                     .addComponent(txtCar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtoneWork, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(txtoneWork, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(comAccounts, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(GhorbalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(txt5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txt4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txt6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE))
+                    .addComponent(txt6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 120, Short.MAX_VALUE)
+                    .addComponent(jLabel21, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(GhorbalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(txtLoder, javax.swing.GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE)
                     .addComponent(txtGhorbal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtworks, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(txtworks, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtrentLodar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(GhorbalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel20, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txt3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txt2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txt1, javax.swing.GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE))
@@ -262,7 +282,13 @@ public class Clearing extends javax.swing.JFrame {
                     .addComponent(txtworks, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txt6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txtoneWork, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(GhorbalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jLabel20, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(txtrentLodar, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+                    .addComponent(jLabel21, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(comAccounts))
+                .addContainerGap(32, Short.MAX_VALUE))
         );
 
         tabPanel.addTab("غربال", new javax.swing.ImageIcon(getClass().getResource("/icons/loader.png")), Ghorbal); // NOI18N
@@ -744,6 +770,7 @@ public class Clearing extends javax.swing.JFrame {
     
     private void setNew(){
        gold.FillComboWorkGroup(comWork);
+       ConnectDB.fillCombo("account WHERE isEnable = 1 ", "name_account", comAccounts);
     }
     
     private void clearingActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_clearingActionPerformed
@@ -786,7 +813,9 @@ public class Clearing extends javax.swing.JFrame {
 
     private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
       String note = "تصفية " + comWork.getSelectedItem().toString() + " " + new SimpleDateFormat("dd-MM-yyyy").format(new Date()) + " باجمالي وزن " + txtwight.getText();
-      boolean isSave =   gold.SaveingClear(id_workGroup,note,Double.valueOf(oneThird),Double.valueOf(OneOfTowThird),Double.valueOf(oneWorker));
+      int id_account = Integer.parseInt(gold.getIdAccount(comAccounts.getSelectedItem().toString()));//comAccounts
+      double rentLoder = Double.parseDouble(txtrentLodar.getText());
+      boolean isSave =   gold.SaveingClear(id_account,rentLoder,id_workGroup,note,Double.valueOf(oneThird),Double.valueOf(OneOfTowThird),Double.valueOf(oneWorker));
       if(isSave){
           Tools.showInfoMsg("تم الترحيل بنجاح", "حفظ");
           setNew();
@@ -882,6 +911,7 @@ public class Clearing extends javax.swing.JFrame {
     private javax.swing.JButton btnPrint;
     private javax.swing.JButton clearing;
     private javax.swing.JComboBox comAccount;
+    private javax.swing.JComboBox comAccounts;
     private javax.swing.JComboBox comWork;
     private javax.swing.JRadioButton crThree;
     private javax.swing.JRadioButton cr_tow;
@@ -900,6 +930,8 @@ public class Clearing extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel18;
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -938,6 +970,7 @@ public class Clearing extends javax.swing.JFrame {
     private javax.swing.JLabel txtanyexpens;
     private javax.swing.JLabel txtfilter;
     private javax.swing.JLabel txtoneWork;
+    private javax.swing.JTextField txtrentLodar;
     private javax.swing.JLabel txtwight;
     private javax.swing.JTextField txtworkerOne;
     private javax.swing.JLabel txtworks;

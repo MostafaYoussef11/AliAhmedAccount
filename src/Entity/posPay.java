@@ -215,10 +215,17 @@ public abstract class posPay {
                         if(phone.length() < 10){
                                 System.out.println("Entity.posPay.SaveClients()" + "  Number Phoen is Less Than 10 "+phone);
                         }else{
-                            String sql_inser_num = "INSERT INTO `phone_numbers` (`numbers`) VALUES(?)";
-                            PreparedStatement pst = con.prepareStatement(sql_inser_num);
-                            pst.setString(1, phone.trim());
-                            pst.executeUpdate();
+                            
+                            Tools.SavePhoneNumber(phone);
+//                            String sql_inser_num = "INSERT INTO `phone_numbers` (`numbers`) VALUES(?)";
+//                            PreparedStatement pst = con.prepareStatement(sql_inser_num);
+//                            pst.setString(1, phone.trim());
+//                            boolean isInsert = pst.execute();
+//                            if(isInsert){
+//                                System.out.println("Saved Number");
+//                            }else{
+//                                System.err.println("Not Save the Number");
+//                            }
                         }
 
                     }

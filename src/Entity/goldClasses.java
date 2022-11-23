@@ -139,6 +139,7 @@ public class goldClasses {
         }
         return id;
     }
+    
     public String getIdWorkGroup(String nameWorkGroup){
         String id = "";
         try {   
@@ -281,7 +282,7 @@ public class goldClasses {
     }
     
     
-    public boolean SaveingClear(int id_workGroup , String note , double loaderShare , double thridShare , double oneWorkerShare){
+    public  boolean SaveingClear(int id_account , double rentLoder ,int id_workGroup , String note , double loaderShare , double thridShare , double oneWorkerShare){
         boolean isSave = false;
         try {
             Connection connection = ConnectDB.getCon();
@@ -301,13 +302,26 @@ public class goldClasses {
                 while(rst.next()){
                     id_clear = rst.getInt(1);
                 }
-                boolean saveWorkerShare = insertClearWorker(id_workGroup, id_clear ,oneWorkerShare,note );
+                System.out.println("Save on Clear");
+                boolean saveWorkerShare = insertClearWorker(connection , id_workGroup, id_clear ,oneWorkerShare,note );
                 if(saveWorkerShare){
-                    if(insertClearGhorbal(id_workGroup, id_clear, thridShare, note)){
-                        if(insertClearCar(id_workGroup, id_clear, thridShare, note)){
-                            connection.commit();
-                            connection.close();
-                            isSave = true;
+                    System.out.println("Save Worker");
+                    if(insertClearGhorbal(connection,id_workGroup, id_clear, thridShare, note)){
+                        System.out.println("Save Ghorbal");
+                        if(insertClearCar(connection,id_workGroup, id_clear, thridShare, note)){
+                            System.out.println("Save Car");
+                            if(UpdateExpensAndImports(connection,id_workGroup, id_clear)){
+                                System.out.println("Update Expens and Import");
+                                if(insertClearLodar(connection,id_account,id_workGroup,rentLoder,loaderShare,id_clear,note)){
+                                    System.out.println("Save Lodar");
+                                    connection.commit();
+                                    connection.close();
+                                    isSave = true;
+                                }
+                            }
+//                            connection.commit();
+//                            connection.close();
+//                            isSave = true;
                         }
 
                     }
@@ -321,11 +335,11 @@ public class goldClasses {
         }
          return isSave;
     }
-    private boolean insertClearWorker(int id_workGroup , int id_clear , double amount , String note){
+    private boolean insertClearWorker(Connection conn ,int id_workGroup , int id_clear , double amount , String note){
         boolean isSave = false;
         try {
-            Connection conn = ConnectDB.getCon();
-            conn.setAutoCommit(false);
+            //Connection conn = ConnectDB.getCon();
+           // conn.setAutoCommit(false);
             String sql = "SELECT ac.`id_account` FROM `account` ac INNER JOIN `accountworkgroup` cw ON ac.`id_account` = cw.`id_account` WHERE ac.`id_type` = 1 AND cw.`id_workgroup`= "+id_workGroup;
             String[] ids_Worker = ConnectDB.getColumn(sql);
             int count_worker = ids_Worker.length;
@@ -341,8 +355,8 @@ public class goldClasses {
             }
             if(c == count_worker){
                 isSave = true;
-                conn.commit();
-                conn.close();
+                //conn.commit();
+                //conn.close();
             }
           //  System.out.println("Count Worker : " + count_worker);
         } catch (SQLException ex) {
@@ -350,11 +364,11 @@ public class goldClasses {
         }
          return isSave;
     }
-    private boolean insertClearGhorbal(int id_workGroup , int id_clear , double amount , String note){
+    private boolean insertClearGhorbal(Connection conn ,int id_workGroup , int id_clear , double amount , String note){
         boolean isSave = false;
         try {
-            Connection conn = ConnectDB.getCon();
-            conn.setAutoCommit(false);
+           // Connection conn = ConnectDB.getCon();
+           // conn.setAutoCommit(false);
             String sql = "SELECT ac.`id_account` As id FROM `account` ac INNER JOIN `accountworkgroup` cw ON ac.`id_account` = cw.`id_account` WHERE ac.`id_type` = 4 AND  isEnable = 1 AND cw.`id_workgroup`= "+id_workGroup;
             String sql_insert = "INSERT INTO `creditors` (`amount`, `id_account`, `id_clear`, `note`) VALUES (?,?,?,?)";
             PreparedStatement pstmWorker = conn.prepareStatement(sql_insert, Statement.RETURN_GENERATED_KEYS);
@@ -365,19 +379,19 @@ public class goldClasses {
             int rowAffect = pstmWorker.executeUpdate();
             if(rowAffect == 1){
                 isSave = true;
-                conn.commit();
-                conn.close();
+                //conn.commit();
+                //conn.close();
             }
         } catch (SQLException ex) {
             Logger.getLogger(goldClasses.class.getName()).log(Level.SEVERE, null, ex);
         }
          return isSave;
     }
-    private boolean insertClearCar(int id_workGroup , int id_clear , double amount , String note){
+    private boolean insertClearCar(Connection conn ,int id_workGroup , int id_clear , double amount , String note){
         boolean isSave = false;
         try {
-            Connection conn = ConnectDB.getCon();
-            conn.setAutoCommit(false);
+            //Connection conn = ConnectDB.getCon();
+            //conn.setAutoCommit(false);
             String sql = "SELECT ac.`id_account` As id FROM `account` ac INNER JOIN `accountworkgroup` cw ON ac.`id_account` = cw.`id_account` WHERE ac.`id_type` = 2 AND isEnable = 1 AND cw.`id_workgroup`= "+id_workGroup;
             String sql_insert = "INSERT INTO `creditors` (`amount`, `id_account`, `id_clear`, `note`) VALUES (?,?,?,?)";
             PreparedStatement pstmWorker = conn.prepareStatement(sql_insert, Statement.RETURN_GENERATED_KEYS);
@@ -388,15 +402,104 @@ public class goldClasses {
             int rowAffect = pstmWorker.executeUpdate();
             if(rowAffect == 1){
                  isSave = true;
-                conn.commit();
-                conn.close();
+              //  conn.commit();
+               // conn.close();
             }
         } catch (SQLException ex) {
             Logger.getLogger(goldClasses.class.getName()).log(Level.SEVERE, null, ex);
         }
          return isSave;
     }
-    
-    
+    private boolean UpdateExpensAndImports(Connection connection ,int id_workGroup , int id_clear){
+        boolean isUpDate = false;
+        try {
+           // Connection connection = ConnectDB.getCon();
+          //  connection.setAutoCommit(false);
+            String sqlUdateIdClear = "UPDATE `imports` SET `id_clear`= ? WHERE `id_workgroup` = ? AND `isRelay`= 0";
+            PreparedStatement pst = connection.prepareStatement(sqlUdateIdClear);
+            pst.setInt(1, id_clear);
+            pst.setInt(2, id_workGroup);
+            int isUpdateImport = pst.executeUpdate();
+            if(isUpdateImport > 0){
+                System.out.println("Update Row import = " + isUpdateImport);
+                sqlUdateIdClear = "UPDATE `expens` SET `id_clear`= ? WHERE `id_workgroup` = ? AND `isRelay` = 0";
+                PreparedStatement pst_Expens = connection.prepareStatement(sqlUdateIdClear);
+                pst_Expens.setInt(1, id_clear);
+                pst_Expens.setInt(2, id_workGroup);
+                int isUpdateEpens = pst_Expens.executeUpdate();
+                if(isUpdateEpens > 0){
+                    System.out.println("Update Row Epens = " + isUpdateEpens);
+                    String Sql_updateIsRelyImport = "UPDATE `imports` SET `isRelay`= 1 WHERE `id_clear` = ? And `id_workgroup`= ?";
+                    PreparedStatement pst_update_im = connection.prepareStatement(Sql_updateIsRelyImport);
+                    pst_update_im.setInt(1, id_clear);
+                    pst_update_im.setInt(2, id_workGroup);
+                    int isUpdateIs = pst_update_im.executeUpdate();
+                    if(isUpdateIs > 0){
+                        System.out.println("Update Row import = " + isUpdateIs);
+                        String sql_update_isRely_expen = "UPDATE `expens` SET `isRelay` = 1 WHERE `id_clear` = ? And `id_workgroup`= ?";
+                        PreparedStatement pst_update_Expens = connection.prepareStatement(sql_update_isRely_expen);
+                        pst_update_Expens.setInt(1, id_clear);
+                        pst_update_Expens.setInt(2, id_workGroup);
+                        int updteExpens = pst_update_Expens.executeUpdate();
+                        if(updteExpens > 0){
+                            System.out.println("Update Row Expens = " + updteExpens);
+                           // connection.commit();
+                           // connection.close();
+                            isUpDate = true;
+                        }
+                    }
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(goldClasses.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
+        return isUpDate;//
+    }
+    private boolean insertClearLodar(Connection connection , int id_acount ,int id_workGroup , double rentLoder ,double amount , int id_clear , String note){
+        boolean isSave = false;
+        try {
+            //Connection connection = ConnectDB.getCon();
+           // con.setAutoCommit(false);
+            String sql_select_Lodar = "SELECT ac.`id_account` As id FROM `account` ac INNER JOIN `accountworkgroup` cw ON ac.`id_account` = cw.`id_account` WHERE ac.`id_type` = 3 AND isEnable = 1 AND cw.`id_workgroup`= "+id_workGroup;
+            int id_acount_lodar = Integer.parseInt(ConnectDB.getIdFromName(sql_select_Lodar));
+            String name_loderAccount = ConnectDB.getIdFromName("SELECT name_account AS id FROM id_account = " + id_acount_lodar);
+            String sql_insert = "INSERT INTO `creditors` (`amount`, `id_account`, `id_clear`, `note`) VALUES (?,?,?,?)";
+            PreparedStatement pstmLoder = connection.prepareStatement(sql_insert, Statement.RETURN_GENERATED_KEYS);
+            pstmLoder.setDouble(1, amount);
+            pstmLoder.setInt(2,id_acount);
+            pstmLoder.setInt(3, id_clear);
+            pstmLoder.setString(4, note);
+            int rowAffect = pstmLoder.executeUpdate();
+           //String notRent = 
+            if(rowAffect == 1){
+                String sql_inser_export = "INSERT INTO `exports` (`price_export`, `id_account`, `note`, `id_Suppliers`) VALUES (?,?,?,?)";
+                PreparedStatement pst_export = connection.prepareStatement(sql_inser_export, Statement.RETURN_GENERATED_KEYS);
+                pst_export.setDouble(1, rentLoder);
+                pst_export.setInt(2, id_acount);
+                
+                pst_export.setString(3, "ايجار لودر " + name_loderAccount);
+                pst_export.setInt(4, 1);
+                int rowAffectExport = pst_export.executeUpdate();
+                if(rowAffectExport == 1){
+                    String sql_insert2 = "INSERT INTO `creditors` (`amount`, `id_account`, `id_clear`, `note`) VALUES (?,?,?,?)";
+                    PreparedStatement pstmLoder2 = connection.prepareStatement(sql_insert2, Statement.RETURN_GENERATED_KEYS);
+                    pstmLoder2.setDouble(1, rentLoder);
+                    pstmLoder2.setInt(2,id_acount_lodar);
+                    pstmLoder2.setInt(3, id_clear);
+                    pstmLoder2.setString(4,  "ايجار اللودر " );
+                    int rowAffectRentLoder = pstmLoder2.executeUpdate();
+                    if(rowAffectRentLoder == 1){
+                        //connection.commit();
+                        //connection.close();
+                        isSave = true;
+                    }
+                }
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(goldClasses.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return isSave;
+    }
 }
 

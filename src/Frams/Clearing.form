@@ -285,27 +285,31 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" attributes="0">
+                  <Group type="102" alignment="1" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="txtTthirds" max="32767" attributes="0"/>
+                          <Component id="txtTthirds" pref="308" max="32767" attributes="0"/>
                           <Component id="txtCar" max="32767" attributes="0"/>
                           <Component id="txtoneWork" alignment="1" max="32767" attributes="0"/>
+                          <Component id="comAccounts" alignment="1" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="txt5" max="32767" attributes="0"/>
                           <Component id="txt4" max="32767" attributes="0"/>
                           <Component id="txt6" alignment="1" pref="120" max="32767" attributes="0"/>
+                          <Component id="jLabel21" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
                           <Component id="txtLoder" pref="184" max="32767" attributes="0"/>
                           <Component id="txtGhorbal" max="32767" attributes="0"/>
                           <Component id="txtworks" max="32767" attributes="0"/>
+                          <Component id="txtrentLodar" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="jLabel20" max="32767" attributes="0"/>
                           <Component id="txt3" max="32767" attributes="0"/>
                           <Component id="txt2" max="32767" attributes="0"/>
                           <Component id="txt1" pref="85" max="32767" attributes="0"/>
@@ -338,7 +342,14 @@
                           <Component id="txt6" alignment="0" max="32767" attributes="0"/>
                           <Component id="txtoneWork" alignment="0" min="-2" pref="30" max="-2" attributes="0"/>
                       </Group>
-                      <EmptySpace max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                          <Component id="jLabel20" max="32767" attributes="0"/>
+                          <Component id="txtrentLodar" pref="30" max="32767" attributes="0"/>
+                          <Component id="jLabel21" max="32767" attributes="0"/>
+                          <Component id="comAccounts" max="32767" attributes="0"/>
+                      </Group>
+                      <EmptySpace pref="32" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -468,6 +479,40 @@
                   <Border info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
                     <EtchetBorder/>
                   </Border>
+                </Property>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel20">
+              <Properties>
+                <Property name="horizontalAlignment" type="int" value="0"/>
+                <Property name="text" type="java.lang.String" value="&#x627;&#x64a;&#x62c;&#x627;&#x631; &#x627;&#x644;&#x644;&#x648;&#x62f;&#x631;"/>
+                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                  <Border info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
+                    <EtchetBorder/>
+                  </Border>
+                </Property>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JTextField" name="txtrentLodar">
+              <Properties>
+                <Property name="horizontalAlignment" type="int" value="0"/>
+                <Property name="text" type="java.lang.String" value="0.00"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JLabel" name="jLabel21">
+              <Properties>
+                <Property name="text" type="java.lang.String" value="&#x646;&#x633;&#x628;&#x629; &#x627;&#x644;&#x644;&#x648;&#x62f;&#x631; &#x62a;&#x631;&#x62d;&#x644; &#x644;&#x62d;&#x633;&#x627;&#x628;"/>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JComboBox" name="comAccounts">
+              <Properties>
+                <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
+                  <StringArray count="4">
+                    <StringItem index="0" value="Item 1"/>
+                    <StringItem index="1" value="Item 2"/>
+                    <StringItem index="2" value="Item 3"/>
+                    <StringItem index="3" value="Item 4"/>
+                  </StringArray>
                 </Property>
               </Properties>
             </Component>

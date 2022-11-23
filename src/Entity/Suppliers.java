@@ -44,13 +44,13 @@ public class Suppliers extends Person{
             First_Balance = Double.parseDouble(firstbalance);
         }
          
-        String sqlDebit = ConnectDB.getIdFromName("SELECT SUM(Debit) as id FROM debitandcreditorsupplier WHERE id_Suppliers="+id_Supplier);
+        String sqlDebit = ConnectDB.getIdFromName("SELECT COALESCE(SUM(Debit),0) as id FROM debitandcreditorsupplier WHERE id_Suppliers="+id_Supplier);
         if(sqlDebit == null){
             debit = 0 ;
         }else{
             debit = Double.parseDouble(sqlDebit);
         }
-        String sqlCreditor = ConnectDB.getIdFromName("SELECT SUM(Creditor) as id FROM debitandcreditorsupplier WHERE id_Suppliers="+id_Supplier);
+        String sqlCreditor = ConnectDB.getIdFromName("SELECT COALESCE(SUM(Creditor),0) as id FROM debitandcreditorsupplier WHERE id_Suppliers="+id_Supplier);
         if(sqlCreditor == null){
             Creditor = 0 ;
         }else{

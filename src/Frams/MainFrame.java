@@ -1008,17 +1008,18 @@ public class MainFrame extends javax.swing.JFrame {
         sales.setRemainingAmount(Double.parseDouble("0.00"));
         sales.setNote("فاتورة مبيعات نقدية" + id_Invoic);
         if(sales.Save()){
-            txtPrice.setText("");
-            txtQut.setText("");
-            txtnameItem.setText("");
-            txtIdItems.setText("");
+//            txtPrice.setText("");
+//            txtQut.setText("");
+//            txtnameItem.setText("");
+//            txtIdItems.setText("");
+            restItemsPay();
             txtNowBalance.setText(new CasherClass().getNowBalanceCasher());
         }
           
          
         }
-         txtIdItems.setRequestFocusEnabled(true);
-        txtIdItems.requestFocus();
+//         txtIdItems.setRequestFocusEnabled(true);
+//        txtIdItems.requestFocus();
     }//GEN-LAST:event_btnSaveActionPerformed
 
     private void posMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_posMouseClicked
@@ -1303,6 +1304,10 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
+        restItemsPay();
+    }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void restItemsPay(){
         txtIdItems.setText("");
         txtIdItems.setFocusable(true);
         txtnameItem.setText("");
@@ -1310,8 +1315,7 @@ public class MainFrame extends javax.swing.JFrame {
         txtPrice.setText("");
         txtIdItems.setRequestFocusEnabled(true);
         txtIdItems.requestFocus();
-    }//GEN-LAST:event_jButton2ActionPerformed
-
+    }
     private void btnRturnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btnRturnMouseClicked
         // TODO add your handling code here:
         ReturnSalesFrame rsf = new ReturnSalesFrame();
