@@ -71,6 +71,7 @@ public class Clearing extends javax.swing.JFrame {
         txtrentLodar = new javax.swing.JTextField();
         jLabel21 = new javax.swing.JLabel();
         comAccounts = new javax.swing.JComboBox();
+        isTren = new javax.swing.JCheckBox();
         Ston = new javax.swing.JPanel();
         jLabel4 = new javax.swing.JLabel();
         txtHfilter = new javax.swing.JLabel();
@@ -226,9 +227,16 @@ public class Clearing extends javax.swing.JFrame {
         txtrentLodar.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtrentLodar.setText("0.00");
 
-        jLabel21.setText("نسبة اللودر ترحل لحساب");
+        jLabel21.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel21.setText("نسبة اللودر ترحل ل");
+        jLabel21.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
         comAccounts.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+
+        isTren.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        isTren.setText("الايجار مرحل ");
+        isTren.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        isTren.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
 
         javax.swing.GroupLayout GhorbalLayout = new javax.swing.GroupLayout(Ghorbal);
         Ghorbal.setLayout(GhorbalLayout);
@@ -237,7 +245,7 @@ public class Clearing extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, GhorbalLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(GhorbalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtTthirds, javax.swing.GroupLayout.DEFAULT_SIZE, 308, Short.MAX_VALUE)
+                    .addComponent(txtTthirds, javax.swing.GroupLayout.DEFAULT_SIZE, 312, Short.MAX_VALUE)
                     .addComponent(txtCar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txtoneWork, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(comAccounts, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -249,16 +257,19 @@ public class Clearing extends javax.swing.JFrame {
                     .addComponent(jLabel21, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(GhorbalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txtLoder, javax.swing.GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE)
-                    .addComponent(txtGhorbal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtworks, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtrentLodar))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(GhorbalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel20, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txt3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txt2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txt1, javax.swing.GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE))
+                    .addGroup(GhorbalLayout.createSequentialGroup()
+                        .addGroup(GhorbalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(txtLoder, javax.swing.GroupLayout.DEFAULT_SIZE, 184, Short.MAX_VALUE)
+                            .addComponent(txtGhorbal, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtworks, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txtrentLodar))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(GhorbalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jLabel20, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txt3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txt2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(txt1, javax.swing.GroupLayout.DEFAULT_SIZE, 85, Short.MAX_VALUE)))
+                    .addComponent(isTren, javax.swing.GroupLayout.DEFAULT_SIZE, 275, Short.MAX_VALUE))
                 .addContainerGap())
         );
         GhorbalLayout.setVerticalGroup(
@@ -288,7 +299,8 @@ public class Clearing extends javax.swing.JFrame {
                     .addComponent(txtrentLodar, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
                     .addComponent(jLabel21, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(comAccounts))
-                .addContainerGap(32, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(isTren, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE))
         );
 
         tabPanel.addTab("غربال", new javax.swing.ImageIcon(getClass().getResource("/icons/loader.png")), Ghorbal); // NOI18N
@@ -815,7 +827,8 @@ public class Clearing extends javax.swing.JFrame {
       String note = "تصفية " + comWork.getSelectedItem().toString() + " " + new SimpleDateFormat("dd-MM-yyyy").format(new Date()) + " باجمالي وزن " + txtwight.getText();
       int id_account = Integer.parseInt(gold.getIdAccount(comAccounts.getSelectedItem().toString()));//comAccounts
       double rentLoder = Double.parseDouble(txtrentLodar.getText());
-      boolean isSave =   gold.SaveingClear(id_account,rentLoder,id_workGroup,note,Double.valueOf(oneThird),Double.valueOf(OneOfTowThird),Double.valueOf(oneWorker));
+      boolean isRent = isTren.isSelected();
+      boolean isSave = gold.SaveingClear(isRent , id_account,rentLoder,id_workGroup,note,Double.valueOf(oneThird),Double.valueOf(OneOfTowThird),Double.valueOf(oneWorker));
       if(isSave){
           Tools.showInfoMsg("تم الترحيل بنجاح", "حفظ");
           setNew();
@@ -917,6 +930,7 @@ public class Clearing extends javax.swing.JFrame {
     private javax.swing.JRadioButton cr_tow;
     private javax.swing.JToggleButton edWorker;
     private javax.swing.JPanel history;
+    private javax.swing.JCheckBox isTren;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;

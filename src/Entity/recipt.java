@@ -67,7 +67,7 @@ public class recipt extends MoneyTransfer{
                     pstm_client_account.setString(5, getNote());
                     int row = pstm_client_account.executeUpdate();
                     if(row == 1){
-                        if(FilterAccount(type)){
+                        if(FilterAccount(con,type)){
                              con.commit();
                              con.close();
                              isSaved = true;
@@ -89,7 +89,7 @@ public class recipt extends MoneyTransfer{
         return isSaved;
             //return super.Save(); //To change body of generated methods, choose Tools | Templates.
     }
-    private boolean FilterAccount(TypeOfFilter type){
+    private boolean FilterAccount(Connection connection,TypeOfFilter type){
         boolean isclear = false;
         String sql = "";
         int rowEffect = 0;
@@ -98,26 +98,26 @@ public class recipt extends MoneyTransfer{
                 sql = "UPDATE clientaccount SET isActive = 0 WHERE id_client = ?";
        
             try {
-                PreparedStatement pstm_Update_clear = (PreparedStatement) con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+                PreparedStatement pstm_Update_clear = (PreparedStatement) connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
                 pstm_Update_clear.setInt(1, getId_client());
                 rowEffect = pstm_Update_clear.executeUpdate();
                 if(rowEffect > 0){
                     sql = "UPDATE client SET firstBalance = ? WHERE id_client = ?";
-                    PreparedStatement pstm_up_client = (PreparedStatement) con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+                    PreparedStatement pstm_up_client = (PreparedStatement) connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
                     pstm_up_client.setDouble(1, getNewBalance());
                     pstm_up_client.setInt(2, getId_client());
                     int row = pstm_up_client.executeUpdate();
                     if(row == 1){
                         sql = "UPDATE receipt SET isActive = 0 WHERE id_client = ? ";
-                        PreparedStatement pstm_update_receipt = (PreparedStatement) con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+                        PreparedStatement pstm_update_receipt = (PreparedStatement) connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
                         pstm_update_receipt.setInt(1, getId_client());
                         row = pstm_update_receipt.executeUpdate();
-                        if(row > 0 ){
+                        if(row >= 0 ){
                             sql = "UPDATE salesinvoic SET isActive = 0 WHERE id_client = ?";
-                            PreparedStatement pstm_sales_invoice = (PreparedStatement) con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+                            PreparedStatement pstm_sales_invoice = (PreparedStatement) connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
                             pstm_sales_invoice.setInt(1, getId_client());
                             row = pstm_sales_invoice.executeUpdate();
-                            if(row > 0 ){
+                            if(row >= 0 ){
                                 isclear = true;
                             }
                             

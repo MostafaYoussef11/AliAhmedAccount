@@ -288,7 +288,7 @@
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" attributes="0">
-                          <Component id="txtTthirds" pref="308" max="32767" attributes="0"/>
+                          <Component id="txtTthirds" pref="312" max="32767" attributes="0"/>
                           <Component id="txtCar" max="32767" attributes="0"/>
                           <Component id="txtoneWork" alignment="1" max="32767" attributes="0"/>
                           <Component id="comAccounts" alignment="1" max="32767" attributes="0"/>
@@ -302,17 +302,22 @@
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                       <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="txtLoder" pref="184" max="32767" attributes="0"/>
-                          <Component id="txtGhorbal" max="32767" attributes="0"/>
-                          <Component id="txtworks" max="32767" attributes="0"/>
-                          <Component id="txtrentLodar" max="32767" attributes="0"/>
-                      </Group>
-                      <EmptySpace max="-2" attributes="0"/>
-                      <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                          <Component id="jLabel20" max="32767" attributes="0"/>
-                          <Component id="txt3" max="32767" attributes="0"/>
-                          <Component id="txt2" max="32767" attributes="0"/>
-                          <Component id="txt1" pref="85" max="32767" attributes="0"/>
+                          <Group type="102" attributes="0">
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="txtLoder" pref="184" max="32767" attributes="0"/>
+                                  <Component id="txtGhorbal" max="32767" attributes="0"/>
+                                  <Component id="txtworks" max="32767" attributes="0"/>
+                                  <Component id="txtrentLodar" max="32767" attributes="0"/>
+                              </Group>
+                              <EmptySpace max="-2" attributes="0"/>
+                              <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                  <Component id="jLabel20" max="32767" attributes="0"/>
+                                  <Component id="txt3" max="32767" attributes="0"/>
+                                  <Component id="txt2" max="32767" attributes="0"/>
+                                  <Component id="txt1" pref="85" max="32767" attributes="0"/>
+                              </Group>
+                          </Group>
+                          <Component id="isTren" pref="275" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="-2" attributes="0"/>
                   </Group>
@@ -349,7 +354,8 @@
                           <Component id="jLabel21" max="32767" attributes="0"/>
                           <Component id="comAccounts" max="32767" attributes="0"/>
                       </Group>
-                      <EmptySpace pref="32" max="32767" attributes="0"/>
+                      <EmptySpace max="-2" attributes="0"/>
+                      <Component id="isTren" pref="30" max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
@@ -501,7 +507,13 @@
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel21">
               <Properties>
-                <Property name="text" type="java.lang.String" value="&#x646;&#x633;&#x628;&#x629; &#x627;&#x644;&#x644;&#x648;&#x62f;&#x631; &#x62a;&#x631;&#x62d;&#x644; &#x644;&#x62d;&#x633;&#x627;&#x628;"/>
+                <Property name="horizontalAlignment" type="int" value="0"/>
+                <Property name="text" type="java.lang.String" value="&#x646;&#x633;&#x628;&#x629; &#x627;&#x644;&#x644;&#x648;&#x62f;&#x631; &#x62a;&#x631;&#x62d;&#x644; &#x644;"/>
+                <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
+                  <Border info="org.netbeans.modules.form.compat2.border.EtchedBorderInfo">
+                    <EtchetBorder/>
+                  </Border>
+                </Property>
               </Properties>
             </Component>
             <Component class="javax.swing.JComboBox" name="comAccounts">
@@ -514,6 +526,16 @@
                     <StringItem index="3" value="Item 4"/>
                   </StringArray>
                 </Property>
+              </Properties>
+            </Component>
+            <Component class="javax.swing.JCheckBox" name="isTren">
+              <Properties>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Tahoma" size="11" style="1"/>
+                </Property>
+                <Property name="text" type="java.lang.String" value="&#x627;&#x644;&#x627;&#x64a;&#x62c;&#x627;&#x631; &#x645;&#x631;&#x62d;&#x644; "/>
+                <Property name="horizontalAlignment" type="int" value="0"/>
+                <Property name="horizontalTextPosition" type="int" value="2"/>
               </Properties>
             </Component>
           </SubComponents>

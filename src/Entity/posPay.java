@@ -313,9 +313,9 @@ public boolean SaveVFCash(){
     
     // get Balance Machein befor transaction
     public double getfirstBalance(){
-        String sql_get_sum_pay = "SELECT SUM(discount_of_balance) AS id FROM masary_pay WHERE id_pos="+id_pos;
+        String sql_get_sum_pay = "SELECT COALESCE(SUM(discount_of_balance),0) AS id FROM masary_pay WHERE id_pos="+id_pos;
         String sum_pay = ConnectDB.getIdFromName(sql_get_sum_pay);
-        String sql_get_sum_sell = "SELECT SUM(value_masary_sell) AS id FROM masary_sell WHERE id_pos="+id_pos;
+        String sql_get_sum_sell = "SELECT COALESCE(SUM(value_masary_sell),0) AS id FROM masary_sell WHERE id_pos="+id_pos;
         String sum_sell = ConnectDB.getIdFromName(sql_get_sum_sell);
         if (sum_pay != null) {
             pay = Double.parseDouble(sum_pay);

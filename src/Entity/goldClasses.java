@@ -282,7 +282,7 @@ public class goldClasses {
     }
     
     
-    public  boolean SaveingClear(int id_account , double rentLoder ,int id_workGroup , String note , double loaderShare , double thridShare , double oneWorkerShare){
+    public  boolean SaveingClear( boolean isRent , int id_account , double rentLoder ,int id_workGroup , String note , double loaderShare , double thridShare , double oneWorkerShare){
         boolean isSave = false;
         try {
             Connection connection = ConnectDB.getCon();
@@ -312,7 +312,7 @@ public class goldClasses {
                             System.out.println("Save Car");
                             if(UpdateExpensAndImports(connection,id_workGroup, id_clear)){
                                 System.out.println("Update Expens and Import");
-                                if(insertClearLodar(connection,id_account,id_workGroup,rentLoder,loaderShare,id_clear,note)){
+                                if(insertClearLodar(isRent , connection,id_account,id_workGroup,rentLoder,loaderShare,id_clear,note)){
                                     System.out.println("Save Lodar");
                                     connection.commit();
                                     connection.close();
@@ -456,7 +456,7 @@ public class goldClasses {
         
         return isUpDate;//
     }
-    private boolean insertClearLodar(Connection connection , int id_acount ,int id_workGroup , double rentLoder ,double amount , int id_clear , String note){
+    private boolean insertClearLodar(boolean isRent , Connection connection , int id_acount ,int id_workGroup , double rentLoder ,double amount , int id_clear , String note){
         boolean isSave = false;
         try {
             //Connection connection = ConnectDB.getCon();
@@ -481,20 +481,25 @@ public class goldClasses {
                 pst_export.setString(3, "ايجار لودر " + name_loderAccount);
                 pst_export.setInt(4, 1);
                 int rowAffectExport = pst_export.executeUpdate();
-                if(rowAffectExport == 1){
-                    String sql_insert2 = "INSERT INTO `creditors` (`amount`, `id_account`, `id_clear`, `note`) VALUES (?,?,?,?)";
-                    PreparedStatement pstmLoder2 = connection.prepareStatement(sql_insert2, Statement.RETURN_GENERATED_KEYS);
-                    pstmLoder2.setDouble(1, rentLoder);
-                    pstmLoder2.setInt(2,id_acount_lodar);
-                    pstmLoder2.setInt(3, id_clear);
-                    pstmLoder2.setString(4,  "ايجار اللودر " );
-                    int rowAffectRentLoder = pstmLoder2.executeUpdate();
-                    if(rowAffectRentLoder == 1){
-                        //connection.commit();
-                        //connection.close();
-                        isSave = true;
+                if(isRent){
+                    isSave = true;
+                }else{
+                    if(rowAffectExport == 1){
+                        String sql_insert2 = "INSERT INTO `creditors` (`amount`, `id_account`, `id_clear`, `note`) VALUES (?,?,?,?)";
+                        PreparedStatement pstmLoder2 = connection.prepareStatement(sql_insert2, Statement.RETURN_GENERATED_KEYS);
+                        pstmLoder2.setDouble(1, rentLoder);
+                        pstmLoder2.setInt(2,id_acount_lodar);
+                        pstmLoder2.setInt(3, id_clear);
+                        pstmLoder2.setString(4,  "ايجار اللودر " );
+                        int rowAffectRentLoder = pstmLoder2.executeUpdate();
+                        if(rowAffectRentLoder == 1){
+                            //connection.commit();
+                            //connection.close();
+                            isSave = true;
+                        }
                     }
                 }
+                
             }
         } catch (SQLException ex) {
             Logger.getLogger(goldClasses.class.getName()).log(Level.SEVERE, null, ex);
