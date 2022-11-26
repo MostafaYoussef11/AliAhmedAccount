@@ -28,7 +28,7 @@ public class Send_receiveCash {
     private String Number_VF_cash, Number_client , name_client , name_supplier;
     private boolean take_money;
     private Connection con;
-    private PreparedStatement pstmt_send , pstmt_casher , pstmt_number , pstmt_Client;
+    private PreparedStatement pstm, pstmt_send , pstmt_casher , pstmt_number , pstmt_Client;
     private Statement stmt; 
     private final VFCashClass vf = new VFCashClass();
     private final ClientPerson client = new ClientPerson();
@@ -76,34 +76,6 @@ public class Send_receiveCash {
         }
         this.Number_client = Number_client;
     }
-    
-    
-    
-    
-    
-//    public boolean SaveSendTransaction() throws SQLException{
-//        boolean isSaved = false;
-//        int id_send = GetIntInsertTransaction("Send");
-//        int rowAffectCasher = casher.SavedCasherTransaction(TypeCasherTransaction.Send_VF, amount_Send_Receive, "تحويل فودافون كاش " + Number_client, id_send);
-//        if(rowAffectCasher == 1){
-//              isSaved = true;
-//        }
-//        return isSaved;
-//    }
-    
-//    
-//    public boolean SaveRecieveTransaction() throws SQLException{
-//        boolean isSaved = false;
-//          int id_send = GetIntInsertTransaction("Receive");
-//          int rowAffectCasher = casher.SavedCasherTransaction(TypeCasherTransaction.Receive_VF, amount_Send_Receive, "تحويل فودافون كاش " + Number_client, id_send);
-//          if(rowAffectCasher == 1){
-//                isSaved = true;
-//          }  
-//    
-//        return isSaved;
-//    }
-    
-    // Returen id_SentRecive
     
     public boolean SaveSendAndReciveTransaction(String type) throws SQLException{
            boolean isSaved = false;
@@ -226,7 +198,39 @@ public class Send_receiveCash {
         }
         return isSave;
    }
-   
+   public boolean SaveBettwenWallt(String numberSend, String numberRecive , double value){
+        boolean isSave = false;
+        int id_vf_send = vf.getId_VF_ByNumber(numberSend);
+        int id_vf_recive = vf.getId_VF_ByNumber(numberRecive);
+        try{
+            con = ConnectDB.getCon();
+            con.setAutoCommit(false);
+            String sql = "INSERT INTO `send_receive` (`type_Send_Receive`, `value_Send_Receive`, `id_VF_cash`, `Number_client`) VALUES (?,?,?,?), (?,?,?,?)";
+            pstm = con.prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
+            pstm.setString(1, "Send");
+            pstm.setDouble(2, value-1);
+            pstm.setInt(3, id_vf_send);
+            pstm.setString(4, numberRecive);
+            
+            pstm.setString(5, "Receive");
+            pstm.setDouble(6, value);
+            pstm.setInt(7, id_vf_recive);
+            pstm.setString(8, numberSend);
+            int rowAffect = pstm.executeUpdate();
+            //boolean rowAffect = pstm.execute();
+            if(rowAffect == 2){
+                System.out.println("Ok 2 Row Send and Recive");
+                con.commit();
+                con.close();
+                isSave = true;
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(TransactionVCashAndPos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return isSave;
+    }
+  
    public boolean SaveSendToClient(double value , double amount , int id_vf , String number_client , int id_client){
        boolean isSave =false; 
        try {

@@ -252,7 +252,8 @@ public class ConnectDB {
              while(rst.next()){
                 id = rst.getString("id");
              }
-           }else{
+           }
+           else{
                id = "0";
            }
            

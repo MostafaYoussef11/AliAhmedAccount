@@ -73,31 +73,7 @@ public abstract class posPay {
         txtPhone.setText(phon_number_client);
     }
 
-//    private void SavePhoneNumber(String phone) {
-//      if(phone.length() == 0){
-//             System.out.println("الرقم غير مكتوب"); 
-//        }else{  
-//            ArrayList<String> Phones = Tools.PhoneNumberList();
-//            if(Phones.contains(phone)){
-//              System.out.println("الرقم مسجل"); 
-//            }else{
-//                if(phone.trim().length() < 11){
-//                    System.out.println("الرقم غير مقبول");
-//                }else{
-//                   try{         
-//                    String sql_inser_num = "INSERT INTO `phone_numbers` (`numbers`) VALUES(?)";
-//                    PreparedStatement pst = con.prepareStatement(sql_inser_num);
-//                    pst.setString(1, phone.trim());
-//                    pst.executeUpdate();
-//                  }catch(SQLException ex){
-//                    //throw new ArrayIndexOutOfBoundsException(phone);
-//                   System.out.println("الرقم مسجل");  
-//                    }
-//                }
-//
-//            }
-//         }
-//    }
+
     
     public enum charage{ cash , mob};
     //Abstract Method
@@ -201,9 +177,6 @@ public abstract class posPay {
             id_masary_pay = rst.getInt(1);
          }
          if(rowAffact == 1){
-             /*
-             INSERT INTO `clientaccount` (`Debit`, `id_client` , `id_masary_pay`,`note`) VALUES (?,?,?,?):
-             **/
                  String sql_insert_clientAccount = "INSERT INTO `clientaccount` (`Debit`, `id_client` , `id_masary_pay`,`note`) VALUES (?,?,?,?)";
                  PreparedStatement pstmtm = con.prepareStatement(sql_insert_clientAccount);
                  pstmtm.setDouble(1,amount_masary_pay);
@@ -214,18 +187,8 @@ public abstract class posPay {
                     if(is_requer_phone_num){
                         if(phone.length() < 10){
                                 System.out.println("Entity.posPay.SaveClients()" + "  Number Phoen is Less Than 10 "+phone);
-                        }else{
-                            
+                        }else{   
                             Tools.SavePhoneNumber(phone);
-//                            String sql_inser_num = "INSERT INTO `phone_numbers` (`numbers`) VALUES(?)";
-//                            PreparedStatement pst = con.prepareStatement(sql_inser_num);
-//                            pst.setString(1, phone.trim());
-//                            boolean isInsert = pst.execute();
-//                            if(isInsert){
-//                                System.out.println("Saved Number");
-//                            }else{
-//                                System.err.println("Not Save the Number");
-//                            }
                         }
 
                     }
@@ -248,7 +211,7 @@ public abstract class posPay {
     }
     return isSave;    
  }
-public boolean SaveVFCash(){
+    public boolean SaveVFCash(){
     boolean isSave = false;
     try{
          con = ConnectDB.getCon();

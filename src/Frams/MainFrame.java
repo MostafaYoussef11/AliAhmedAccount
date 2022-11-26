@@ -165,6 +165,7 @@ public class MainFrame extends javax.swing.JFrame {
             
             private void getinfo(){
                 switch (idPos) {
+                   
                     case 7:
                         infoPos = "الرصيد في الجرد الاول : "+new CasherClass().getNowBalanceCasher();
                         txtinformationPos.setText(infoPos);
@@ -178,8 +179,17 @@ public class MainFrame extends javax.swing.JFrame {
                         idPos = 1;
                         break;
                     default:
+                        if(idPos > 7){
+                            idPos = 0;
+                            break;
+                        }
+                        String namePos = ConnectDB.getIdFromName("SELECT name_pos As id FROM pos WHERE id_pos = " + idPos);
+                        if(namePos.isEmpty()){
+                            idPos = 0;
+                            break;
+                        }
                         infoPos = "الرصيد في ماكينة  ";
-                        infoPos += ConnectDB.getIdFromName("SELECT name_pos As id FROM pos WHERE id_pos = " + idPos);
+                        infoPos += namePos;
                         infoPos += " = "+new posPay(idPos) {}.getfirstBalance() + "";
                         txtinformationPos.setText(infoPos);
                         txtinformationPos.setIcon(new ImageIcon(getClass().getResource("/icons/pos24.png")));
@@ -187,7 +197,7 @@ public class MainFrame extends javax.swing.JFrame {
                         break;
                 }
 
-
+               // System.out.println("idPos = " + idPos);
             }
             
         }, 1000,4000); 

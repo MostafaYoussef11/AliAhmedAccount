@@ -3,11 +3,27 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/E:/Masrawy/Account/src/Entity/posPay.java</file>
+            <file>file:/E:/Masrawy/Account/src/Entity/TypeCasherTransaction.java</file>
+            <file>file:/E:/Masrawy/Account/src/Frams/RecieveFrame.java</file>
             <file>file:/E:/Masrawy/Account/src/Entity/goldClasses.java</file>
+            <file>file:/E:/Masrawy/Account/src/Frams/Accounts.java</file>
+            <file>file:/E:/Masrawy/Account/src/Reborts/AccountReport_Credit.jrxml</file>
             <file>file:/E:/Masrawy/Account/src/Frams/Export.java</file>
+            <file>file:/E:/Masrawy/Account/src/Entity/Suppliers.java</file>
             <file>file:/E:/Masrawy/Account/src/Frams/Clearing.java</file>
+            <file>file:/E:/Masrawy/Account/src/Frams/menuCashFrame.java</file>
+            <file>file:/E:/Masrawy/Account/src/Frams/SendBetweenCashF.java</file>
+            <file>file:/E:/Masrawy/Account/src/Utilities/Tools.java</file>
+            <file>file:/E:/Masrawy/Account/src/Entity/TransactionVCashAndPos.java</file>
+            <file>file:/E:/Masrawy/Account/src/Entity/Send_receiveCash.java</file>
+            <file>file:/E:/Masrawy/Account/src/Reborts/BalanceReport.jrxml</file>
+            <file>file:/E:/Masrawy/Account/src/Entity/posPay.java</file>
+            <file>file:/E:/Masrawy/Account/src/Reborts/AccountReport.jrxml</file>
             <file>file:/E:/Masrawy/Account/src/Frams/chooseAccount.java</file>
+            <file>file:/E:/Masrawy/Account/src/Frams/ReciptFrame.java</file>
+            <file>file:/E:/Masrawy/Account/src/Utilities/ConnectDB.java</file>
+            <file>file:/E:/Masrawy/Account/src/Reborts/BalanceReport_subreport1.jrxml</file>
+            <file>file:/E:/Masrawy/Account/src/Frams/RebortsFrame.java</file>
         </group>
     </open-files>
 </project-private>

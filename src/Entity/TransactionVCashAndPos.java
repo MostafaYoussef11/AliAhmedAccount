@@ -122,10 +122,5 @@ public class TransactionVCashAndPos {
         }
         return isSave;
     }
-    
-    /**
-     INSERT INTO `vf_transaction_po` (`type_transaction`, `id_VF_cash`, `price`) VALUES ()
-     * SELECT trans.price, v.number_VF_cash, trans.date_transaction, trans.id_transaction FROM vf_transaction_po AS trans INNER JOIN vf_cash AS v ON trans.id_VF_cash = v.id_VF_cash WHERE trans.type_transaction = 'Withdraw' And trans.id_pos is null ORDER BY trans.id_transaction DESC
 
-     */
 }

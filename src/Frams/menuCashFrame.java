@@ -36,6 +36,7 @@ public class menuCashFrame extends javax.swing.JFrame {
         cridetAtm.setFont(font);
         debit_atm.setFont(font);
         toPos.setFont(font);
+        betwenCash.setFont(font);
         background.setLocation(0, 0);
         background.setSize(dim);
         background.setPreferredSize(dim);
@@ -59,6 +60,7 @@ public class menuCashFrame extends javax.swing.JFrame {
         charging = new javax.swing.JLabel();
         debit_atm = new javax.swing.JLabel();
         toPos = new javax.swing.JLabel();
+        betwenCash = new javax.swing.JLabel();
         background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -185,6 +187,24 @@ public class menuCashFrame extends javax.swing.JFrame {
         });
         getContentPane().add(toPos);
         toPos.setBounds(20, 20, 180, 130);
+
+        betwenCash.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        betwenCash.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/bar.png"))); // NOI18N
+        betwenCash.setText("تحويل بين المحافظ");
+        betwenCash.setToolTipText("");
+        betwenCash.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        betwenCash.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        betwenCash.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        betwenCash.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                betwenCashMouseClicked(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                betwenCashMouseExited(evt);
+            }
+        });
+        getContentPane().add(betwenCash);
+        betwenCash.setBounds(210, 320, 180, 130);
         getContentPane().add(background);
         background.setBounds(0, 0, 0, 0);
 
@@ -276,6 +296,18 @@ public class menuCashFrame extends javax.swing.JFrame {
         exitPanel(toPos);
     }//GEN-LAST:event_toPosMouseExited
 
+    private void betwenCashMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_betwenCashMouseClicked
+        // TODO add your handling code here:
+        clickPanel(betwenCash);
+        SendBetweenCashF sb = new SendBetweenCashF();
+        Tools.openJFram(sb, "التحويل بين المحافظ");
+    }//GEN-LAST:event_betwenCashMouseClicked
+
+    private void betwenCashMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_betwenCashMouseExited
+        // TODO add your handling code here:
+        exitPanel(betwenCash);
+    }//GEN-LAST:event_betwenCashMouseExited
+
     /**
      * @param args the command line arguments
      */
@@ -321,6 +353,7 @@ public class menuCashFrame extends javax.swing.JFrame {
     private javax.swing.JLabel Send;
     private javax.swing.JLabel addSim;
     private javax.swing.JLabel background;
+    private javax.swing.JLabel betwenCash;
     private javax.swing.JLabel charging;
     private javax.swing.JLabel cridetAtm;
     private javax.swing.JLabel debit_atm;
