@@ -38,8 +38,8 @@ AND isFiltering = 0]]>
 	</background>
 	<detail>
 		<band height="29" splitType="Stretch">
-			<textField>
-				<reportElement x="175" y="2" width="100" height="25" uuid="fa130287-7fa4-4592-9058-11b3676084db"/>
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToBandHeight" x="175" y="2" width="100" height="25" uuid="fa130287-7fa4-4592-9058-11b3676084db"/>
 				<box>
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -52,8 +52,8 @@ AND isFiltering = 0]]>
 				</textElement>
 				<textFieldExpression><![CDATA[new SimpleDateFormat("YYYY-MM-dd").format($F{date_exports})]]></textFieldExpression>
 			</textField>
-			<textField>
-				<reportElement x="0" y="2" width="100" height="25" uuid="e66ee224-3bee-4711-b1b7-6c4609b9253e"/>
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToBandHeight" x="0" y="2" width="100" height="25" uuid="e66ee224-3bee-4711-b1b7-6c4609b9253e"/>
 				<box>
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>
@@ -66,8 +66,8 @@ AND isFiltering = 0]]>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{note}]]></textFieldExpression>
 			</textField>
-			<textField>
-				<reportElement x="100" y="2" width="75" height="25" uuid="f95bc193-677b-48aa-a55e-f09f9a0368d9"/>
+			<textField isStretchWithOverflow="true">
+				<reportElement stretchType="RelativeToBandHeight" x="100" y="2" width="75" height="25" uuid="f95bc193-677b-48aa-a55e-f09f9a0368d9"/>
 				<box>
 					<pen lineWidth="1.0"/>
 					<topPen lineWidth="1.0"/>

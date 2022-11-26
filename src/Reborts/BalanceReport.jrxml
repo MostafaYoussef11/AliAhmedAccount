@@ -134,7 +134,8 @@ FROM
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="103" splitType="Prevent">
+		<band height="103" splitType="Stretch">
+			<printWhenExpression><![CDATA[$V{REPORT_COUNT}.intValue()==1]]></printWhenExpression>
 			<subreport>
 				<reportElement x="255" y="0" width="300" height="100" uuid="92d13159-90ab-45a1-a94c-4fdcde4437c4"/>
 				<subreportParameter name="SUBREPORT_DIR">
