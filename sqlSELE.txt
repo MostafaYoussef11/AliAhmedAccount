@@ -1,6 +1,0 @@
-
-SELECT 
-(SELECT ifnull(balance,0) FROM masary_pay WHERE id_pos = 2 AND date_masary_pay = '2022-07-11' ORDER BY id_masary_pay DESC LIMIT 1) AS first_balnace ,
-(SELECT ifnull(SUM(discount_of_balance),0) FROM masary_pay WHERE id_pos = 2 AND date_masary_pay BETWEEN '2022-07-12' AND '2022-07-13') AS Pay, 
-(SELECT ifnull(SUM(masary_sell.value_masary_sell),0) FROM masary_sell WHERE id_pos = 2 AND masary_sell.date_masary_sell BETWEEN '2022-07-12' AND '2022-07-13') AS sell, 
-(SELECT first_balnace + sell - Pay) AS nowBalance

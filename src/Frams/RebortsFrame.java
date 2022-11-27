@@ -168,6 +168,9 @@ public class RebortsFrame extends javax.swing.JFrame {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 btn_report_casher_dayMouseClicked(evt);
             }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btn_report_casher_dayMouseExited(evt);
+            }
         });
         getContentPane().add(btn_report_casher_day);
         btn_report_casher_day.setBounds(50, 380, 300, 100);
@@ -302,16 +305,23 @@ public class RebortsFrame extends javax.swing.JFrame {
 
     private void btn_report_casher_dayMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_report_casher_dayMouseClicked
         // TODO add your handling code here:
-        String sql = " SELECT * FROM `casher` where date_casher = $P{date_day}";
+        btn_report_casher_day.setBorder(BorderFactory.createLoweredBevelBorder());
+        String sql = " SELECT * FROM `casher` ";//where date_casher = $P{date_day}";
         
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        String date_cahser = sdf.format(new Date());
-        InputStream streem = getClass().getResourceAsStream("/Reborts/CasherReport_day.jrxml");
+        //SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
+        //String date_cahser = sdf.format(new Date());
+        InputStream streem = getClass().getResourceAsStream("/Reborts/BalanceReport.jrxml");
         HashMap para = new HashMap();
-        System.out.println(date_cahser);
-        para.put("date_day", date_cahser);
+        //System.out.println(date_cahser);
+        //para.put("date_day", date_cahser);
         Tools.Printer(sql, streem, para);
     }//GEN-LAST:event_btn_report_casher_dayMouseClicked
+
+    private void btn_report_casher_dayMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_report_casher_dayMouseExited
+        // TODO add your handling code here:
+       btn_report_casher_day.setBorder(BorderFactory.createRaisedBevelBorder());
+
+    }//GEN-LAST:event_btn_report_casher_dayMouseExited
 
     /**
      * @param args the command line arguments

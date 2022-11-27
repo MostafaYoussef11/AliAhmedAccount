@@ -218,42 +218,37 @@
 			</textField>
 		</band>
 	</detail>
-	<columnFooter>
-		<band height="45" splitType="Stretch"/>
-	</columnFooter>
 	<pageFooter>
-		<band height="54" splitType="Stretch">
-			<textField>
-				<reportElement x="227" y="0" width="75" height="20" uuid="c017f26b-2115-413c-b911-cad31fe70ad1"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="12" isBold="true"/>
+		<band height="37" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Transparent" x="302" y="0" width="250" height="37" forecolor="#000000" backcolor="#FFFFFF" uuid="2e6c28bf-96ec-4bcb-9827-d3c98c489271"/>
+				<box>
+					<pen lineWidth="1.5"/>
+					<topPen lineWidth="1.5"/>
+					<leftPen lineWidth="1.5"/>
+					<bottomPen lineWidth="1.5"/>
+					<rightPen lineWidth="1.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="18" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
 				</textElement>
-				<textFieldExpression><![CDATA[$V{firstBalance_1}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="152" y="0" width="75" height="20" uuid="d94ded5c-538f-40ca-b1d7-a69bb376e0a6"/>
+				<text><![CDATA[الاجمــــالي]]></text>
+			</staticText>
+			<textField pattern="###0.00">
+				<reportElement x="2" y="0" width="300" height="37" uuid="58adb772-a778-49b3-9aab-2c9d4580ddfe"/>
+				<box>
+					<pen lineWidth="2.0"/>
+					<topPen lineWidth="2.0"/>
+					<leftPen lineWidth="2.0"/>
+					<bottomPen lineWidth="2.0"/>
+					<rightPen lineWidth="2.0"/>
+				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="12" isBold="true"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$V{creditor_1}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="77" y="0" width="75" height="20" uuid="3c5839f3-cd1a-4c89-b958-a146ba1e443e"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="12" isBold="true"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$V{debit_1}]]></textFieldExpression>
-			</textField>
-			<textField>
-				<reportElement x="0" y="20" width="100" height="34" uuid="58adb772-a778-49b3-9aab-2c9d4580ddfe"/>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="12" isBold="true"/>
+					<font size="18" isBold="true"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$V{sumBalance}]]></textFieldExpression>
 			</textField>
 		</band>
 	</pageFooter>
-	<summary>
-		<band height="42" splitType="Stretch"/>
-	</summary>
 </jasperReport>

@@ -1,2 +1,0 @@
-
-UPDATE finallyday AS F1 SET F1.oldBalance = IFNULL((SELECT F2.newbalance FROM finallyday AS F2 WHERE F2.dateFinally = F1.dateFinally - INTERVAL 1 DAY ),0) , F1.totalimport = COALESCE((SELECT COALESCE(SUM(C.Debit),0) FROM casher AS C WHERE C.date_casher = F1.dateFinally),0) , F1.totalexport = COALESCE((SELECT COALESCE(SUM(C.Creditor),0) FROM casher AS C WHERE C.date_casher = F1.dateFinally),0) , F1.newbalance = F1.oldBalance + F1.totalimport -F1.totalexport

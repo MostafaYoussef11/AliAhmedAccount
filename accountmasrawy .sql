@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 26, 2022 at 01:05 AM
+-- Generation Time: Nov 27, 2022 at 10:47 PM
 -- Server version: 10.4.13-MariaDB
 -- PHP Version: 7.2.31
 
@@ -114,6 +114,20 @@ INSERT INTO `assets` (`id_assets`, `price_assets`, `notes`, `date_assets`, `id_w
 -- --------------------------------------------------------
 
 --
+-- Stand-in structure for view `balanceclient`
+-- (See below for the actual view)
+--
+CREATE TABLE `balanceclient` (
+`name_client` varchar(512)
+,`firstBalance` double
+,`Debit` double(19,2)
+,`Credit` double(19,2)
+,`Balance` double
+);
+
+-- --------------------------------------------------------
+
+--
 -- Stand-in structure for view `balanceofpos`
 -- (See below for the actual view)
 --
@@ -151,6 +165,21 @@ INSERT INTO `bankaccount` (`id_bank`, `number_acount`, `name_bank`, `first_debit
 -- --------------------------------------------------------
 
 --
+-- Stand-in structure for view `bankbalance`
+-- (See below for the actual view)
+--
+CREATE TABLE `bankbalance` (
+`namebank` text
+,`first_debit` double(10,2)
+,`first_creditor` double(10,2)
+,`SumDebit` double(19,2)
+,`Sumcredit` double(19,2)
+,`balance` double(19,2)
+);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `banktransaction`
 --
 
@@ -181,7 +210,9 @@ CREATE TABLE `calcbalanceitems` (
 `sales` double(19,2)
 ,`purchase` double(19,2)
 ,`firstbalance` bigint(255)
+,`price` double(10,2)
 ,`balance` double(19,2)
+,`Amount` double(19,2)
 ,`name_items` varchar(255)
 ,`id_items` bigint(255)
 );
@@ -3636,7 +3667,143 @@ INSERT INTO `casher` (`id_casher`, `date_casher`, `Debit`, `Creditor`, `note`, `
 (3482, '2022-11-25', 50.00, NULL, 'فاتورة مبيعات نقدية408', 2, NULL, NULL, 408, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (3483, '2022-11-25', 470.00, NULL, '', 2, NULL, NULL, NULL, NULL, 1712, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
 (3484, '2022-11-25', 180.00, NULL, '', 2, NULL, NULL, NULL, NULL, 1713, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-(3485, '2022-11-25', 280.00, NULL, 'زيادة', 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 44, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+(3485, '2022-11-25', 280.00, NULL, 'زيادة', 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 44, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3486, '2022-11-26', 10.00, NULL, 'فاتورة مبيعات نقدية409', 2, NULL, NULL, 409, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3487, '2022-11-26', 30.00, NULL, 'فاتورة مبيعات نقدية410', 2, NULL, NULL, 410, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3488, '2022-11-26', 30.00, NULL, 'فاتورة مبيعات نقدية411', 2, NULL, NULL, 411, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3489, '2022-11-26', 4245.00, NULL, 'تحويل فودافون كاش 01110797765', 2, NULL, NULL, NULL, NULL, NULL, NULL, 590, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3490, '2022-11-26', 10.00, NULL, '', 2, NULL, NULL, NULL, NULL, 1715, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3491, '2022-11-26', 10.00, NULL, 'كرت  _ 10', 2, NULL, NULL, NULL, NULL, 1716, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3492, '2022-11-26', NULL, 5000.00, 'ترحيل الي جرد الثاني', 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3493, '2022-11-26', 100.00, NULL, '', 2, NULL, NULL, NULL, NULL, 1717, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3494, '2022-11-26', 45.00, NULL, 'فاتورة مبيعات نقدية412', 2, NULL, NULL, 412, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3495, '2022-11-26', NULL, 2040.00, 'تحويل فودافون كاش ', 2, NULL, NULL, NULL, NULL, NULL, NULL, 591, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3496, '2022-11-26', 60.00, NULL, 'فاتورة مبيعات نقدية413', 2, NULL, NULL, 413, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3497, '2022-11-26', 30.00, NULL, 'فاتورة مبيعات نقدية414', 2, NULL, NULL, 414, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3498, '2022-11-26', NULL, 2000.00, 'حساب جمال السواق _ باقي له 2000 ج _ 36 يوم', 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 150, NULL, NULL, NULL),
+(3499, '2022-11-26', 315.00, NULL, '01015937717', 2, NULL, NULL, NULL, NULL, 1718, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3500, '2022-11-26', NULL, 1000.00, 'ايصال دفع رقم 333', 2, NULL, NULL, NULL, 333, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3501, '2022-11-26', 90.00, NULL, 'فاتورة مبيعات نقدية415', 2, NULL, NULL, 415, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3502, '2022-11-26', 14000.00, NULL, 'سحب من جرد الثاني', 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3503, '2022-11-26', NULL, 600.00, 'غيار زيت', 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 151, NULL, NULL, NULL),
+(3504, '2022-11-26', NULL, 200.00, 'نقدي يوسف', 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 152, NULL, NULL, NULL),
+(3505, '2022-11-26', NULL, 100.00, 'السواق _ محمود _100 جمال _100 يوسف', 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 153, NULL, NULL, NULL),
+(3506, '2022-11-26', 6870.00, NULL, 'تحويل فودافون كاش 01095057405', 2, NULL, NULL, NULL, NULL, NULL, NULL, 593, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3507, '2022-11-26', NULL, 16000.00, 'ترحيل الي جرد الثاني', 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3508, '2022-11-26', 7.00, NULL, 'فاتورة مبيعات نقدية416', 2, NULL, NULL, 416, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3509, '2022-11-26', 10.00, NULL, 'كرت  _ 10', 2, NULL, NULL, NULL, NULL, 1719, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3510, '2022-11-26', 10.00, NULL, 'كرت  _ 10', 2, NULL, NULL, NULL, NULL, 1720, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3511, '2022-11-26', 10.00, NULL, 'كرت  _ 10', 2, NULL, NULL, NULL, NULL, 1721, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3512, '2022-11-26', 10.00, NULL, 'كرت  _ 10', 2, NULL, NULL, NULL, NULL, 1722, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3513, '2022-11-26', 30.00, NULL, 'فاتورة مبيعات نقدية417', 2, NULL, NULL, 417, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3514, '2022-11-26', 90.00, NULL, 'فاتورة مبيعات نقدية418', 2, NULL, NULL, 418, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3515, '2022-11-26', 1020.00, NULL, 'تحويل فودافون كاش 01005495093', 2, NULL, NULL, NULL, NULL, NULL, NULL, 594, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3516, '2022-11-26', 5700.00, NULL, 'حسني كاش', 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 54, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3517, '2022-11-26', NULL, 7000.00, 'ترحيل الي جرد الثاني', 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3518, '2022-11-26', NULL, 550.00, 'نقدي _ و رصيد', 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 154, NULL, NULL, NULL),
+(3519, '2022-11-26', 55.00, NULL, '', 2, NULL, NULL, NULL, NULL, 1725, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3520, '2022-11-26', 290.00, NULL, '', 2, NULL, NULL, NULL, NULL, 1726, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3521, '2022-11-26', 10.00, NULL, 'كرت  _ 10', 2, NULL, NULL, NULL, NULL, 1727, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3522, '2022-11-26', 10.00, NULL, 'كرت  _ 10', 2, NULL, NULL, NULL, NULL, 1728, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3523, '2022-11-26', 505.00, NULL, 'تحويل فودافون كاش 01095653879', 2, NULL, NULL, NULL, NULL, NULL, NULL, 595, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3524, '2022-11-26', 10.00, NULL, 'كرت  _ 10', 2, NULL, NULL, NULL, NULL, 1729, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3525, '2022-11-26', 10.00, NULL, 'كرت  _ 10', 2, NULL, NULL, NULL, NULL, 1730, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3526, '2022-11-26', 10.00, NULL, 'كرت  _ 10', 2, NULL, NULL, NULL, NULL, 1731, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3527, '2022-11-26', 10.00, NULL, 'كرت  _ 10', 2, NULL, NULL, NULL, NULL, 1732, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3528, '2022-11-26', 10.00, NULL, 'كرت  _ 10', 2, NULL, NULL, NULL, NULL, 1733, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3529, '2022-11-26', 10.00, NULL, 'كرت  _ 10', 2, NULL, NULL, NULL, NULL, 1734, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3530, '2022-11-26', 10.00, NULL, 'كرت  _ 10', 2, NULL, NULL, NULL, NULL, 1735, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3531, '2022-11-26', 10.00, NULL, 'كرت  _ 10', 2, NULL, NULL, NULL, NULL, 1736, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3532, '2022-11-26', 10.00, NULL, 'كرت  _ 10', 2, NULL, NULL, NULL, NULL, 1737, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3533, '2022-11-26', 10.00, NULL, 'كرت  _ 10', 2, NULL, NULL, NULL, NULL, 1738, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3534, '2022-11-26', 10.00, NULL, 'كرت  _ 10', 2, NULL, NULL, NULL, NULL, 1739, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3535, '2022-11-26', NULL, 400.00, 'يوم 26', 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 28, NULL, NULL, NULL, NULL, NULL),
+(3536, '2022-11-26', 25.00, NULL, '', 2, NULL, NULL, NULL, NULL, 1740, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3537, '2022-11-26', 10.00, NULL, 'كرت  _ 10', 2, NULL, NULL, NULL, NULL, 1741, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3538, '2022-11-26', 10.00, NULL, 'كرت  _ 10', 2, NULL, NULL, NULL, NULL, 1742, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3539, '2022-11-26', 10.00, NULL, 'كرت  _ 10', 2, NULL, NULL, NULL, NULL, 1743, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3540, '2022-11-26', 11000.00, NULL, 'سحب من جرد الثاني', 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3541, '2022-11-26', NULL, 3000.00, 'ايصال دفع رقم 334', 2, NULL, NULL, NULL, 334, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3542, '2022-11-26', NULL, 5000.00, 'ايصال دفع رقم 335', 2, NULL, NULL, NULL, 335, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3543, '2022-11-26', NULL, 3000.00, 'ايصال دفع رقم 336', 2, NULL, NULL, NULL, 336, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3544, '2022-11-26', 100.00, NULL, '', 2, NULL, NULL, NULL, NULL, 1744, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3545, '2022-11-26', 43.00, NULL, '', 2, NULL, NULL, NULL, NULL, 1745, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3546, '2022-11-26', 60.00, NULL, '', 2, NULL, NULL, NULL, NULL, 1746, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3547, '2022-11-26', 30.00, NULL, '', 2, NULL, NULL, NULL, NULL, 1747, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3548, '2022-11-26', 30.00, NULL, 'فاتورة مبيعات نقدية419', 2, NULL, NULL, 419, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3549, '2022-11-26', 210.00, NULL, 'دفعة من حساب  عبد الله البلوك', 2, NULL, 163, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3550, '2022-11-26', NULL, 10.00, 'كرت ', 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 155, NULL, NULL, NULL),
+(3551, '2022-11-26', NULL, 15.00, 'كرت', 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 156, NULL, NULL, NULL),
+(3552, '2022-11-27', 30.00, NULL, 'فاتورة مبيعات نقدية420', 2, NULL, NULL, 420, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3553, '2022-11-27', 30.00, NULL, 'فاتورة مبيعات نقدية421', 2, NULL, NULL, 421, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3554, '2022-11-27', 11100.00, NULL, 'تحويل فودافون كاش 01007058103', 2, NULL, NULL, NULL, NULL, NULL, NULL, 596, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3555, '2022-11-27', 12000.00, NULL, 'سحب من جرد الثاني', 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3556, '2022-11-27', 150.00, NULL, '', 2, NULL, NULL, NULL, NULL, 1749, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3557, '2022-11-27', 10.00, NULL, 'كرت  _ 10', 2, NULL, NULL, NULL, NULL, 1750, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3558, '2022-11-27', 10.00, NULL, 'كرت  _ 10', 2, NULL, NULL, NULL, NULL, 1751, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3559, '2022-11-27', 300.00, NULL, '01027423084', 2, NULL, NULL, NULL, NULL, 1752, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3560, '2022-11-27', 10.00, NULL, 'كرت  _ 10', 2, NULL, NULL, NULL, NULL, 1753, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3561, '2022-11-27', 65.00, NULL, '01204073996', 2, NULL, NULL, NULL, NULL, 1754, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3562, '2022-11-27', 30.00, NULL, '01211428354', 2, NULL, NULL, NULL, NULL, 1755, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3563, '2022-11-27', 200.00, NULL, '01032600345', 2, NULL, NULL, NULL, NULL, 1756, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3564, '2022-11-27', 120.00, NULL, '01142911641', 2, NULL, NULL, NULL, NULL, 1757, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3565, '2022-11-27', 150.00, NULL, 'كرت  _ 10', 2, NULL, NULL, NULL, NULL, 1758, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3566, '2022-11-27', 10.00, NULL, 'كرت  _ 10', 2, NULL, NULL, NULL, NULL, 1759, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3567, '2022-11-27', NULL, 13000.00, 'ايصال دفع رقم 337', 2, NULL, NULL, NULL, 337, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3568, '2022-11-27', 15150.00, NULL, 'سوداني كاش', 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 55, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3569, '2022-11-27', 9900.00, NULL, '  سحب من ال ATM  من رقم null', 2, NULL, NULL, NULL, NULL, NULL, NULL, 305, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3570, '2022-11-27', NULL, 36600.00, 'تصفية نقدية لحساب شريف فتحي', 2, NULL, NULL, NULL, 338, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3571, '2022-11-27', 500.00, NULL, '  سحب من ال ATM  من رقم null', 2, NULL, NULL, NULL, NULL, NULL, NULL, 307, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3572, '2022-11-27', NULL, 500.00, 'ايصال دفع رقم 339', 2, NULL, NULL, NULL, 339, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3573, '2022-11-27', 50000.00, NULL, '  سحب من ال ATM  من رقم null', 2, NULL, NULL, NULL, NULL, NULL, NULL, 308, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3574, '2022-11-27', NULL, 50000.00, 'ايصال دفع رقم 340', 2, NULL, NULL, NULL, 340, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3575, '2022-11-27', 2155.00, NULL, '27108222800215', 2, NULL, NULL, NULL, NULL, 1761, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3576, '2022-11-27', NULL, 770.00, 'تصفية حساب تلاجة', 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 157, NULL, NULL, NULL),
+(3577, '2022-11-27', NULL, 430.00, 'نقدي', 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 158, NULL, NULL, NULL),
+(3578, '2022-11-27', 40.00, NULL, 'فاتورة مبيعات نقدية422', 2, NULL, NULL, 422, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3579, '2022-11-27', 50.00, NULL, 'فاتورة مبيعات نقدية423', 2, NULL, NULL, 423, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3580, '2022-11-27', NULL, 5700.00, 'سداد مبلغ السلفة 5700.0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 81, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3581, '2022-11-27', NULL, 15150.00, 'سداد مبلغ السلفة 15150.0', 0, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 82, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3582, '2022-11-27', 12120.00, NULL, 'تحويل فودافون كاش 01099708515', 2, NULL, NULL, NULL, NULL, NULL, NULL, 602, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3583, '2022-11-27', 2020.00, NULL, 'تحويل فودافون كاش 01147041816', 2, NULL, NULL, NULL, NULL, NULL, NULL, 603, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3584, '2022-11-27', 5700.00, NULL, 'تحويل فودافون كاش 01145408007', 2, NULL, NULL, NULL, NULL, NULL, NULL, 604, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3585, '2022-11-27', 3030.00, NULL, 'سوداني كاش', 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 56, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3586, '2022-11-27', 50.00, NULL, 'فاتورة مبيعات نقدية424', 2, NULL, NULL, 424, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3587, '2022-11-27', 4040.00, NULL, 'تحويل فودافون كاش 01004355822', 2, NULL, NULL, NULL, NULL, NULL, NULL, 606, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3588, '2022-11-27', NULL, 7000.00, 'ترحيل الي جرد الثاني', 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3589, '2022-11-27', 95.00, NULL, '', 2, NULL, NULL, NULL, NULL, 1762, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3590, '2022-11-27', NULL, 150.00, 'ايصال دفع رقم 341', 2, NULL, NULL, NULL, 341, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3591, '2022-11-27', 30.00, NULL, '', 2, NULL, NULL, NULL, NULL, 1763, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3592, '2022-11-27', 160.00, NULL, '01501529898 ', 2, NULL, NULL, NULL, NULL, 1764, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3593, '2022-11-27', 50.00, NULL, 'فاتورة مبيعات نقدية425', 2, NULL, NULL, 425, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3594, '2022-11-27', 50.00, NULL, 'فاتورة مبيعات نقدية426', 2, NULL, NULL, 426, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3595, '2022-11-27', 35.00, NULL, 'فاتورة مبيعات نقدية427', 2, NULL, NULL, 427, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3596, '2022-11-27', NULL, 500.00, 'ايصال دفع رقم 342', 2, NULL, NULL, NULL, 342, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3597, '2022-11-27', 2020.00, NULL, 'تحويل فودافون كاش 01112440276', 2, NULL, NULL, NULL, NULL, NULL, NULL, 610, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3598, '2022-11-27', NULL, 4000.00, 'ترحيل الي جرد الثاني', 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3599, '2022-11-27', 40.00, NULL, 'فاتورة مبيعات نقدية428', 2, NULL, NULL, 428, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3600, '2022-11-27', 900.00, NULL, 'دفعة من حساب  طارق اب مدغة', 2, NULL, 164, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3601, '2022-11-27', 2000.00, NULL, 'سلامة جادو قسط مبادرة', 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 57, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3602, '2022-11-27', NULL, 11000.00, 'ايصال دفع رقم 343', 2, NULL, NULL, NULL, 343, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3603, '2022-11-27', 10.00, NULL, 'فاتورة مبيعات نقدية429', 2, NULL, NULL, 429, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3604, '2022-11-27', 11000.00, NULL, 'سحب من جرد الثاني', 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3605, '2022-11-27', 1200.00, NULL, 'تحويل فودافون كاش 01005268988', 2, NULL, NULL, NULL, NULL, NULL, NULL, 612, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3606, '2022-11-27', 8000.00, NULL, '  سحب من ال ATM  من رقم null', 2, NULL, NULL, NULL, NULL, NULL, NULL, 310, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3607, '2022-11-27', 210.00, NULL, '', 2, NULL, NULL, NULL, NULL, 1766, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3608, '2022-11-27', 30.00, NULL, '', 2, NULL, NULL, NULL, NULL, 1767, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3609, '2022-11-27', 30.00, NULL, 'فاتورة مبيعات نقدية430', 2, NULL, NULL, 430, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3610, '2022-11-27', 35.00, NULL, 'فاتورة مبيعات نقدية431', 2, NULL, NULL, 431, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3611, '2022-11-27', NULL, 10000.00, 'ايصال دفع رقم 344', 2, NULL, NULL, NULL, 344, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3612, '2022-11-27', NULL, 40.00, 'سجاير عرفه ', 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 111, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3613, '2022-11-27', NULL, 25.00, 'بخور', 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 112, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3614, '2022-11-27', 25.00, NULL, 'فاتورة مبيعات نقدية432', 2, NULL, NULL, 432, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3615, '2022-11-27', NULL, 200.00, 'يوم 27', 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 29, NULL, NULL, NULL, NULL, NULL),
+(3616, '2022-11-27', NULL, 200.00, 'نقدي', 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 159, NULL, NULL, NULL),
+(3617, '2022-11-27', NULL, 200.00, 'محمود السواق', 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 160, NULL, NULL, NULL),
+(3618, '2022-11-27', NULL, 200.00, 'نقدي ', 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 161, NULL, NULL, NULL),
+(3619, '2022-11-27', NULL, 100.00, 'رصيد', 2, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 162, NULL, NULL, NULL),
+(3620, '2022-11-27', 630.00, NULL, '', 2, NULL, NULL, NULL, NULL, 1768, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
+(3621, '2022-11-27', 220.00, NULL, '', 2, NULL, NULL, NULL, NULL, 1769, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
 
 --
 -- Triggers `casher`
@@ -3842,7 +4009,16 @@ INSERT INTO `cashertwo` (`id_CasherTwo`, `date_Casher`, `time_Casher`, `Debit`, 
 (157, '2022-11-25', '16:13:37', 0.00, 3000.00),
 (158, '2022-11-25', '16:40:45', 0.00, 2000.00),
 (159, '2022-11-25', '18:26:21', 0.00, 10000.00),
-(160, '2022-11-25', '19:27:18', 0.00, 5000.00);
+(160, '2022-11-25', '19:27:18', 0.00, 5000.00),
+(161, '2022-11-26', '10:27:35', 5000.00, 0.00),
+(162, '2022-11-26', '12:20:54', 0.00, 14000.00),
+(163, '2022-11-26', '12:45:30', 16000.00, 0.00),
+(164, '2022-11-26', '14:04:04', 7000.00, 0.00),
+(165, '2022-11-26', '19:50:23', 0.00, 11000.00),
+(166, '2022-11-27', '13:42:53', 0.00, 12000.00),
+(167, '2022-11-27', '16:20:26', 7000.00, 0.00),
+(168, '2022-11-27', '17:43:09', 4000.00, 0.00),
+(169, '2022-11-27', '18:40:44', 0.00, 11000.00);
 
 -- --------------------------------------------------------
 
@@ -3975,7 +4151,7 @@ INSERT INTO `client` (`id_client`, `name_client`, `phone`, `address`, `idNationa
 (45, 'شعبان عبد الحميد', '', '', '', 0, 1),
 (46, 'عامر العربي', '', '', '', 115, 1),
 (47, 'حسين بدري', '', '', '', 0, 1),
-(48, 'احمد عادل السوداني', '01146938762', '', '', 0, 1),
+(48, 'احمد عادل السوداني', '01146938762', '', '', 550, 1),
 (49, 'عبد الله طاحونة_اسعد', '', '', '', 200, 1),
 (50, 'محمد السوداني', '', '', '', 0, 1),
 (51, 'محمود ابو زياد', '', '', '', 0, 1),
@@ -3996,7 +4172,8 @@ INSERT INTO `client` (`id_client`, `name_client`, `phone`, `address`, `idNationa
 (66, 'محمود اب عز', '', '', '', 0, 1),
 (67, 'ابراهيم المفتي', '', '', '', 0, 1),
 (68, 'حمتو', '', '', '', 0, 1),
-(69, 'محمد كشاف', '', '', '', 0, 1);
+(69, 'محمد كشاف', '', '', '', 0, 1),
+(70, 'رجب الضبعة', '01143099557', '', '', 0, 1);
 
 -- --------------------------------------------------------
 
@@ -4262,7 +4439,11 @@ INSERT INTO `clientaccount` (`id_ClientAccount`, `date_ClientAccount`, `Debit`, 
 (261, '2022-11-24', 100.00, NULL, 48, NULL, NULL, 1699, 'كرت 50', 1),
 (262, '2022-11-25', NULL, 60.00, 69, NULL, 162, NULL, 'دفعة من حساب  محمد كشاف', 1),
 (263, '2022-11-25', 180.00, NULL, 29, NULL, NULL, 1707, '', 1),
-(264, '2022-11-25', 50.00, NULL, 48, NULL, NULL, 1710, '01146938762 ', 1);
+(264, '2022-11-25', 50.00, NULL, 48, NULL, NULL, 1710, '01146938762 ', 1),
+(265, '2022-11-26', 30.00, NULL, 70, NULL, NULL, 1723, '01143099557', 1),
+(266, '2022-11-26', 900.00, NULL, 8, NULL, NULL, 1724, '01097484565', 1),
+(267, '2022-11-26', NULL, 210.00, 22, NULL, 163, NULL, 'دفعة من حساب  عبد الله البلوك', 1),
+(268, '2022-11-27', NULL, 900.00, 8, NULL, 164, NULL, 'دفعة من حساب  طارق اب مدغة', 1);
 
 -- --------------------------------------------------------
 
@@ -4541,7 +4722,6 @@ INSERT INTO `exports` (`id_exports`, `date_exports`, `price_export`, `id_account
 (33, '2022-10-15', 400.00, 7, 'جاز', 1, 0),
 (34, '2022-10-16', 2150.00, 3, 'جوان جديد', 1, 1),
 (35, '2022-10-18', 400.00, 7, 'جاز', 1, 0),
-(36, '2022-10-18', 200.00, 3, 'جمال السواق', 1, 1),
 (37, '2022-10-18', 1200.00, 3, 'عدد 2 جركن زيت للكرونة و فلفلينا', 15, 1),
 (38, '2022-10-18', 100.00, 7, 'نقدي', 1, 0),
 (39, '2022-10-19', 500.00, 3, 'زت تعاون', 15, 1),
@@ -4565,7 +4745,6 @@ INSERT INTO `exports` (`id_exports`, `date_exports`, `price_export`, `id_account
 (58, '2022-10-24', 200.00, 2, 'احمد رمضان', 1, 0),
 (59, '2022-10-24', 20.00, 5, 'رصيد', 1, 0),
 (60, '2022-10-27', 100.00, 4, 'بيد يوسف', 1, 0),
-(61, '2022-10-27', 100.00, 3, 'جمال 300 ج', 1, 0),
 (62, '2022-10-27', 600.00, 7, 'غيار الزيت', 1, 0),
 (63, '2022-10-29', 3000.00, 3, 'جواني و شريط ', 1, 0),
 (64, '2022-10-29', 120.00, 6, 'غرا و سلك و مسامير', 1, 0),
@@ -4574,15 +4753,13 @@ INSERT INTO `exports` (`id_exports`, `date_exports`, `price_export`, `id_account
 (67, '2022-10-29', 500.00, 7, 'جاز', 1, 0),
 (68, '2022-10-29', 300.00, 5, 'نقدي يوسف', 1, 0),
 (69, '2022-10-29', 100.00, 4, 'نقدي يوسف', 1, 0),
-(70, '2022-10-29', 100.00, 3, 'جمال', 1, 0),
 (71, '2022-10-30', 150.00, 6, 'بلي مع يوسف', 1, 0),
 (73, '2022-10-31', 600.00, 7, 'غيار الزيت', 1, 0),
 (74, '2022-10-31', 250.00, 3, 'مصنعية الكوتش', 1, 0),
-(75, '2022-10-31', 100.00, 3, 'جمال', 1, 0),
 (76, '2022-10-31', 100.00, 4, 'نقدي يوسف', 1, 0),
 (77, '2022-11-01', 350.00, 7, 'جاز في المحطة', 12, 0),
-(79, '2022-11-04', 1000.00, 3, 'السواق ( 500 محمد - 500 جمال )', 1, 0),
-(80, '2022-11-04', 600.00, 3, 'السواق', 1, 0),
+(79, '2022-11-04', 500.00, 3, 'السواق محمد -ال )', 1, 0),
+(80, '2022-11-04', 300.00, 3, 'محمد السواق', 1, 0),
 (81, '2022-11-04', 200.00, 1, 'رصيد و كرت', 1, 0),
 (82, '2022-11-06', 4250.00, 3, 'عمرة الكمبريسور و سيرفو الفرامل', 1, 0),
 (83, '2022-11-06', 950.00, 6, 'طرمبة ماية', 1, 0),
@@ -4596,12 +4773,10 @@ INSERT INTO `exports` (`id_exports`, `date_exports`, `price_export`, `id_account
 (91, '2022-11-07', 2000.00, 3, 'حساب الميكانيكي _ كمبريسر و الفرامل', 1, 0),
 (92, '2022-11-08', 130.00, 3, 'رصيد', 1, 0),
 (93, '2022-11-09', 100.00, 4, 'مع يوسف', 1, 0),
-(94, '2022-11-09', 100.00, 3, 'السواق جمال', 1, 0),
 (95, '2022-11-09', 500.00, 3, 'تيفلون و 2 في واحد و غطا باكم و غطا فتيس', 1, 0),
 (96, '2022-11-09', 300.00, 7, 'جاز', 1, 0),
 (97, '2022-11-12', 600.00, 7, 'غيار زيت', 1, 0),
 (98, '2022-11-12', 100.00, 4, 'مع يوسف', 1, 0),
-(99, '2022-11-12', 100.00, 3, 'جمال', 1, 0),
 (100, '2022-11-12', 50.00, 1, 'كروت', 1, 0),
 (101, '2022-11-13', 1730.00, 3, 'ع 2 تلبيسة - فلتر هوا - عداد حرارة', 1, 0),
 (102, '2022-11-13', 900.00, 6, 'لفة خرطوم', 1, 0),
@@ -4609,7 +4784,6 @@ INSERT INTO `exports` (`id_exports`, `date_exports`, `price_export`, `id_account
 (104, '2022-11-13', 400.00, 7, 'جاز', 1, 0),
 (105, '2022-11-13', 120.00, 4, 'خط اتصالات', 1, 0),
 (106, '2022-11-15', 500.00, 7, 'جاز', 1, 0),
-(107, '2022-11-15', 600.00, 3, 'جمال السواق', 1, 0),
 (108, '2022-11-15', 200.00, 4, 'يوسف', 1, 0),
 (109, '2022-11-15', 30.00, 4, 'باقات نت', 1, 0),
 (110, '2022-11-15', 250.00, 3, 'بازوكا', 1, 0),
@@ -4617,18 +4791,15 @@ INSERT INTO `exports` (`id_exports`, `date_exports`, `price_export`, `id_account
 (112, '2022-11-15', 125.00, 5, 'سجاير', 1, 0),
 (113, '2022-11-15', 400.00, 7, 'جاز', 1, 0),
 (114, '2022-11-15', 50.00, 3, 'سلك كهربا', 1, 0),
-(115, '2022-11-15', 50.00, 3, 'جمال', 1, 0),
 (116, '2022-11-16', 5000.00, 5, 'تحويل السودان', 14, 0),
 (117, '2022-11-17', 1000.00, 5, 'نقدي', 1, 0),
 (118, '2022-11-17', 260.00, 3, 'تصليح الكوتش', 1, 0),
 (119, '2022-11-18', 100.00, 5, 'شاحن - بيت خط', 1, 0),
 (120, '2022-11-18', 1000.00, 5, 'نقدي', 1, 0),
 (121, '2022-11-20', 150.00, 4, 'يوسف', 1, 0),
-(122, '2022-11-20', 150.00, 3, 'جمال', 1, 0),
 (123, '2022-11-20', 420.00, 7, 'جاز', 1, 0),
 (124, '2022-11-20', 600.00, 7, 'غيار زيت', 1, 0),
 (125, '2022-11-20', 800.00, 5, 'نقدي _ رصيد', 1, 0),
-(126, '2022-11-21', 200.00, 3, 'نقدي جمال', 1, 0),
 (127, '2022-11-21', 400.00, 3, 'شاكوش كليو ونص _ مفتاح 24 _ يد لقمة صغيرة', 1, 0),
 (128, '2022-11-22', 20400.00, 6, 'نقدي تلاجة', 1, 0),
 (129, '2022-11-22', 720.00, 3, 'ع 16 مسمار كتر ', 1, 0),
@@ -4639,7 +4810,6 @@ INSERT INTO `exports` (`id_exports`, `date_exports`, `price_export`, `id_account
 (135, '2022-11-23', 10.00, 4, 'رصيد', 1, 0),
 (136, '2022-11-23', 100.00, 5, 'رصيد', 1, 0),
 (137, '2022-11-23', 100.00, 6, 'نوكرين مع نور الدين', 1, 0),
-(138, '2022-11-23', 200.00, 3, 'نقدي جمال', 1, 0),
 (139, '2022-11-23', 200.00, 7, 'يوسف', 1, 0),
 (140, '2022-11-23', 500.00, 7, 'جاز', 1, 0),
 (141, '2022-11-23', 200.00, 4, 'مع يوسف', 1, 0),
@@ -4648,8 +4818,20 @@ INSERT INTO `exports` (`id_exports`, `date_exports`, `price_export`, `id_account
 (145, '2022-11-24', 1900.00, 3, 'بطارية', 1, 0),
 (146, '2022-11-24', 700.00, 6, 'جركن زيت 20 لتر', 1, 0),
 (147, '2022-11-25', 2000.00, 6, 'نقدي تلاجة - بكري', 1, 0),
-(148, '2022-11-25', 500.00, 3, 'جمال السواق', 1, 0),
-(149, '2022-11-25', 500.00, 5, 'نقدي', 1, 0);
+(149, '2022-11-25', 500.00, 5, 'نقدي', 1, 0),
+(150, '2022-11-26', 5200.00, 3, 'حساب جمال السواق _ باقي له 2000 ج _ 36 يوم', 1, 0),
+(151, '2022-11-26', 600.00, 7, 'غيار زيت', 1, 0),
+(152, '2022-11-26', 200.00, 4, 'نقدي يوسف', 1, 0),
+(153, '2022-11-26', 200.00, 3, 'السواق  محمود (100 جمال - 100 يوسف)', 1, 0),
+(154, '2022-11-26', 550.00, 5, 'نقدي _ و رصيد', 1, 0),
+(155, '2022-11-26', 10.00, 10, 'كرت ', 1, 0),
+(156, '2022-11-26', 15.00, 4, 'كرت', 1, 0),
+(157, '2022-11-27', 770.00, 5, 'تصفية حساب تلاجة', 1, 0),
+(158, '2022-11-27', 430.00, 6, 'نقدي', 1, 0),
+(159, '2022-11-27', 200.00, 1, 'نقدي', 1, 0),
+(160, '2022-11-27', 200.00, 3, 'محمود السواق', 1, 0),
+(161, '2022-11-27', 200.00, 1, 'نقدي ', 1, 0),
+(162, '2022-11-27', 100.00, 1, 'رصيد', 1, 0);
 
 -- --------------------------------------------------------
 
@@ -4780,7 +4962,9 @@ INSERT INTO `fees` (`id_fees`, `date_fees`, `time_fees`, `amount`, `note`, `id_e
 (107, '2022-11-23', '02:33:03', 100.00, 'مصاريف ', 3),
 (108, '2022-11-23', '17:05:24', 200.00, 'مصروفات حرق ', 3),
 (109, '2022-11-23', '17:07:22', 60.00, 'عرفه ', 2),
-(110, '2022-11-25', '14:41:50', 300.00, 'البيت ', 2);
+(110, '2022-11-25', '14:41:50', 300.00, 'البيت ', 2),
+(111, '2022-11-27', '19:06:01', 40.00, 'سجاير عرفه ', 2),
+(112, '2022-11-27', '19:06:35', 25.00, 'بخور', 3);
 
 -- --------------------------------------------------------
 
@@ -4858,7 +5042,8 @@ INSERT INTO `finallyday` (`dateFinally`, `oldBalance`, `totalimport`, `totalexpo
 ('2022-11-23', 7840, 95480, 102535, '00:00:23'),
 ('2022-11-24', 785, 15732, 16850, '00:00:01'),
 ('2022-11-25', -333, 44658, 42945, '00:01:58'),
-('2022-11-26', 1380, 0, 0, '00:00:09');
+('2022-11-26', 1380, 45240, 45915, '00:00:09'),
+('2022-11-27', 705, 155740, 155765, '00:00:12');
 
 -- --------------------------------------------------------
 
@@ -5584,7 +5769,31 @@ INSERT INTO `itemsonsalesinvoice` (`id`, `id_items`, `name_items`, `qyt`, `name_
 (1, 6966884625422, 'ريدر معدن', 1.00, 'قطعة', 10.00, 0.00, 10.00, 405),
 (1, 6978912378132, 'شاحن سيارة Miller', 1.00, 'قطعة', 75.00, 0.00, 75.00, 406),
 (1, 6720216579322, 'كبل X-SCOOT  ميكرو', 1.00, 'قطعة', 30.00, 0.00, 30.00, 407),
-(1, 6280025702002, 'شاحن ايجل EG-02', 1.00, 'قطعة', 50.00, 0.00, 50.00, 408);
+(1, 6280025702002, 'شاحن ايجل EG-02', 1.00, 'قطعة', 50.00, 0.00, 50.00, 408),
+(1, 6966884625422, 'ريدر معدن', 1.00, 'قطعة', 10.00, 0.00, 10.00, 409),
+(1, 6841566322120, 'OTG & AUX Hight ', 1.00, 'قطعة', 30.00, 0.00, 30.00, 410),
+(1, 6720216579322, 'كبل X-SCOOT  ميكرو', 1.00, 'قطعة', 30.00, 0.00, 30.00, 411),
+(1, 6973224870305, 'شاحن DENMEN ميكرو', 1.00, 'قطعة', 45.00, 0.00, 45.00, 412),
+(1, 6954384258790, 'SPEAKER ZR-35', 1.00, 'قطعة', 60.00, 0.00, 60.00, 413),
+(1, 6720216579322, 'كبل X-SCOOT  ميكرو', 1.00, 'قطعة', 30.00, 0.00, 30.00, 414),
+(1, 6920102001047, 'شاحن ايجل EG-04', 1.00, 'قطعة', 90.00, 0.00, 90.00, 415),
+(1, 6951202937189, 'ريدر ميكرو', 1.00, 'قطعة', 7.00, 0.00, 7.00, 416),
+(1, 6720216579322, 'كبل X-SCOOT  ميكرو', 1.00, 'قطعة', 30.00, 0.00, 30.00, 417),
+(1, 6920102001047, 'شاحن ايجل EG-04', 1.00, 'قطعة', 90.00, 0.00, 90.00, 418),
+(1, 6720216579322, 'كبل X-SCOOT  ميكرو', 1.00, 'قطعة', 30.00, 0.00, 30.00, 419),
+(1, 4414136520176, 'سماعة شعبي D21', 1.00, 'قطعة', 30.00, 0.00, 30.00, 420),
+(1, 4414136520176, 'سماعة شعبي D21', 1.00, 'قطعة', 30.00, 0.00, 30.00, 421),
+(1, 6921042116235, 'وصلة KAKU ميكرو', 1.00, 'قطعة', 40.00, 0.00, 40.00, 422),
+(1, 6712190707051, 'X-Plus وصلة', 1.00, 'قطعة', 50.00, 0.00, 50.00, 423),
+(1, 6920102900104, 'كابل ايجل CA10  3 امبير قماش', 1.00, 'قطعة', 50.00, 0.00, 50.00, 424),
+(1, 6712190707051, 'X-Plus وصلة', 1.00, 'قطعة', 50.00, 0.00, 50.00, 425),
+(1, 8434352101030, 'شاحن دولفين تايب سي', 1.00, 'قطعة', 50.00, 0.00, 50.00, 426),
+(1, 6720200925005, 'شاحن AD-005', 1.00, 'قطعة', 35.00, 0.00, 35.00, 427),
+(1, 4414136520176, 'سماعة شعبي D21', 2.00, 'قطعة', 20.00, 0.00, 40.00, 428),
+(1, 6966884625422, 'ريدر معدن', 1.00, 'قطعة', 10.00, 0.00, 10.00, 429),
+(1, 6925146923324, 'هاند فري YISON', 1.00, 'قطعة', 30.00, 0.00, 30.00, 430),
+(1, 6965468450276, 'JY-107 سماعة', 1.00, 'قطعة', 35.00, 0.00, 35.00, 431),
+(1, 6973224870039, 'كابل دولفين ميكرو', 1.00, 'قطعة', 25.00, 0.00, 25.00, 432);
 
 -- --------------------------------------------------------
 
@@ -7312,7 +7521,63 @@ INSERT INTO `masary_pay` (`id_masary_pay`, `date_masary_pay`, `time_masary_pay`,
 (1710, '2022-11-25', '19:24:11', 142, 34.00, 48, 48.62, 50.00, 4, 1155.59, '01146938762 '),
 (1711, '2022-11-25', '19:28:20', 90, 76.00, 1, 76.00, 80.00, 3, 65.85, '01551396197 '),
 (1712, '2022-11-25', '23:39:31', 90, 466.83, 1, 466.83, 470.00, 1, 54.15, ''),
-(1713, '2022-11-25', '23:40:31', 148, 178.75, 1, 178.75, 180.00, 4, 976.84, '');
+(1713, '2022-11-25', '23:40:31', 148, 178.75, 1, 178.75, 180.00, 4, 976.84, ''),
+(1714, '2022-11-26', '10:25:53', 83, 4210.00, 1, 4210.00, 0.00, 1, 844.15, 'ايداع فودافون كاش'),
+(1715, '2022-11-26', '10:27:02', 79, 1.00, 1, 10.00, 10.00, 1, 834.15, ''),
+(1716, '2022-11-26', '10:27:15', 79, 1.00, 1, 10.00, 10.00, 4, 966.84, 'كرت  _ 10'),
+(1717, '2022-11-26', '10:29:32', 105, 95.00, 1, 95.00, 100.00, 1, 739.15, ''),
+(1718, '2022-11-26', '12:17:24', 155, 210.00, 1, 300.30, 315.00, 1, 438.85, '01015937717'),
+(1719, '2022-11-26', '12:51:48', 78, 10.00, 1, 10.00, 10.00, 4, 956.84, 'كرت  _ 10'),
+(1720, '2022-11-26', '12:51:50', 78, 10.00, 1, 10.00, 10.00, 4, 946.84, 'كرت  _ 10'),
+(1721, '2022-11-26', '12:51:51', 78, 10.00, 1, 10.00, 10.00, 4, 936.84, 'كرت  _ 10'),
+(1722, '2022-11-26', '12:51:53', 78, 10.00, 1, 10.00, 10.00, 4, 926.84, 'كرت  _ 10'),
+(1723, '2022-11-26', '13:27:55', 142, 20.00, 70, 28.60, 30.00, 1, 410.25, '01143099557'),
+(1724, '2022-11-26', '17:55:42', 142, 600.00, 8, 858.00, 900.00, 4, 68.84, '01097484565'),
+(1725, '2022-11-26', '17:57:25', 102, 1.00, 1, 50.00, 55.00, 1, 360.25, ''),
+(1726, '2022-11-26', '17:57:42', 90, 290.00, 1, 290.00, 290.00, 1, 70.25, ''),
+(1727, '2022-11-26', '17:57:58', 77, 10.00, 1, 10.00, 10.00, 3, 55.85, 'كرت  _ 10'),
+(1728, '2022-11-26', '17:58:01', 77, 10.00, 1, 10.00, 10.00, 3, 45.85, 'كرت  _ 10'),
+(1729, '2022-11-26', '19:08:36', 39, 10.00, 1, 10.00, 10.00, 1, 410.25, 'كرت  _ 10'),
+(1730, '2022-11-26', '19:08:37', 39, 10.00, 1, 10.00, 10.00, 1, 400.25, 'كرت  _ 10'),
+(1731, '2022-11-26', '19:08:38', 39, 10.00, 1, 10.00, 10.00, 1, 390.25, 'كرت  _ 10'),
+(1732, '2022-11-26', '19:08:38', 39, 10.00, 1, 10.00, 10.00, 1, 380.25, 'كرت  _ 10'),
+(1733, '2022-11-26', '19:08:39', 39, 10.00, 1, 10.00, 10.00, 1, 370.25, 'كرت  _ 10'),
+(1734, '2022-11-26', '19:08:40', 39, 10.00, 1, 10.00, 10.00, 1, 360.25, 'كرت  _ 10'),
+(1735, '2022-11-26', '19:08:40', 39, 10.00, 1, 10.00, 10.00, 1, 350.25, 'كرت  _ 10'),
+(1736, '2022-11-26', '19:08:41', 39, 10.00, 1, 10.00, 10.00, 1, 340.25, 'كرت  _ 10'),
+(1737, '2022-11-26', '19:08:42', 39, 10.00, 1, 10.00, 10.00, 1, 330.25, 'كرت  _ 10'),
+(1738, '2022-11-26', '19:08:43', 39, 10.00, 1, 10.00, 10.00, 1, 320.25, 'كرت  _ 10'),
+(1739, '2022-11-26', '19:08:43', 39, 10.00, 1, 10.00, 10.00, 1, 310.25, 'كرت  _ 10'),
+(1740, '2022-11-26', '19:12:21', 105, 20.00, 1, 22.80, 25.00, 1, 287.45, ''),
+(1741, '2022-11-26', '19:14:05', 77, 10.00, 1, 10.00, 10.00, 3, 35.85, 'كرت  _ 10'),
+(1742, '2022-11-26', '19:14:05', 77, 10.00, 1, 10.00, 10.00, 3, 25.85, 'كرت  _ 10'),
+(1743, '2022-11-26', '19:14:06', 77, 10.00, 1, 10.00, 10.00, 3, 15.85, 'كرت  _ 10'),
+(1744, '2022-11-26', '19:55:08', 142, 68.00, 1, 97.24, 100.00, 1, 190.21, ''),
+(1745, '2022-11-26', '19:55:25', 79, 4.00, 1, 40.00, 43.00, 1, 150.21, ''),
+(1746, '2022-11-26', '19:55:47', 90, 59.00, 1, 59.00, 60.00, 1, 91.21, ''),
+(1747, '2022-11-26', '19:55:58', 90, 30.00, 1, 30.00, 30.00, 1, 61.21, ''),
+(1748, '2022-11-27', '13:42:00', 83, 10800.00, 1, 10800.00, 0.00, 1, 1261.21, 'ايداع فودافون كاش'),
+(1749, '2022-11-27', '13:43:18', 101, 145.00, 1, 149.00, 150.00, 1, 1112.21, ''),
+(1750, '2022-11-27', '13:43:30', 39, 10.00, 1, 10.00, 10.00, 1, 1102.21, 'كرت  _ 10'),
+(1751, '2022-11-27', '13:43:30', 39, 10.00, 1, 10.00, 10.00, 1, 1092.21, 'كرت  _ 10'),
+(1752, '2022-11-27', '13:44:13', 155, 200.00, 1, 286.00, 300.00, 4, 1782.84, '01027423084'),
+(1753, '2022-11-27', '13:44:50', 78, 10.00, 1, 10.00, 10.00, 4, 1772.84, 'كرت  _ 10'),
+(1754, '2022-11-27', '13:49:55', 160, 45.00, 1, 64.35, 65.00, 4, 1708.49, '01204073996'),
+(1755, '2022-11-27', '13:50:28', 169, 28.00, 1, 28.00, 30.00, 4, 1680.49, '01211428354'),
+(1756, '2022-11-27', '13:51:35', 155, 134.00, 1, 191.62, 200.00, 4, 1488.87, '01032600345'),
+(1757, '2022-11-27', '13:52:03', 142, 80.00, 1, 114.40, 120.00, 4, 1374.47, '01142911641'),
+(1758, '2022-11-27', '13:52:37', 79, 15.00, 1, 150.00, 150.00, 4, 1224.47, 'كرت  _ 10'),
+(1759, '2022-11-27', '13:52:51', 79, 1.00, 1, 10.00, 10.00, 4, 1214.47, 'كرت  _ 10'),
+(1760, '2022-11-27', '14:12:33', 83, 500.00, 1, 500.00, 0.00, 3, 1515.85, 'ايداع فودافون كاش'),
+(1761, '2022-11-27', '14:30:43', 149, 2151.50, 1, 2151.50, 2155.00, 3, 1364.35, '27108222800215'),
+(1762, '2022-11-27', '16:23:17', 90, 92.00, 1, 92.00, 95.00, 1, 1000.21, ''),
+(1763, '2022-11-27', '16:24:29', 108, 1.00, 1, 27.00, 30.00, 4, 1187.47, ''),
+(1764, '2022-11-27', '16:27:31', 90, 158.00, 1, 158.00, 160.00, 3, 1206.35, '01501529898 '),
+(1765, '2022-11-27', '18:43:14', 83, 681.00, 1, 681.00, 0.00, 3, 525.35, 'ايداع فودافون كاش'),
+(1766, '2022-11-27', '18:44:06', 148, 211.00, 1, 211.00, 210.00, 3, 314.35, ''),
+(1767, '2022-11-27', '18:44:34', 108, 1.00, 1, 28.00, 30.00, 4, 1159.47, ''),
+(1768, '2022-11-27', '23:44:50', 148, 627.00, 1, 627.00, 630.00, 4, 532.47, ''),
+(1769, '2022-11-27', '23:45:31', 148, 219.00, 1, 219.00, 220.00, 3, 95.35, '');
 
 -- --------------------------------------------------------
 
@@ -7519,7 +7784,14 @@ INSERT INTO `masary_sell` (`id_masary_sell`, `date_masary_sell`, `time_masary_se
 (180, '2022-11-23', '16:52:40', 10000.00, 10000.00, 2, 6, NULL, 3),
 (181, '2022-11-23', '18:13:14', -600.00, -600.00, 2, 3, NULL, 1),
 (182, '2022-11-24', '10:42:35', 5000.00, 5000.00, 2, 3, NULL, 1),
-(183, '2022-11-24', '10:42:49', 3000.00, 3000.00, 2, 5, NULL, 4);
+(183, '2022-11-24', '10:42:49', 3000.00, 3000.00, 2, 5, NULL, 4),
+(184, '2022-11-26', '10:25:29', 5000.00, 5000.00, 2, 3, NULL, 1),
+(185, '2022-11-26', '18:08:28', 350.00, 353.50, 3, 1, NULL, 1),
+(186, '2022-11-27', '10:48:35', 2000.00, 2000.00, 2, 5, NULL, 4),
+(187, '2022-11-27', '13:41:07', 12000.00, 12000.00, 2, 3, NULL, 1),
+(189, '2022-11-27', '14:21:50', 2000.00, 2000.00, 2, 6, NULL, 3),
+(190, '2022-11-27', '14:29:24', 2000.00, 2000.00, 2, 6, NULL, 3),
+(191, '2022-11-27', '18:40:13', -1000.00, -1000.00, 2, 3, NULL, 1);
 
 --
 -- Triggers `masary_sell`
@@ -7601,7 +7873,9 @@ INSERT INTO `notifcation` (`id_notifcation`, `date_notifcation`, `note`, `isRead
 (19, '2022-11-10', 'موعد سداد مبلغ 10300.0 البيت 2', 0, 18),
 (20, '2022-08-02', 'موعد استحقاق مبلغ  12000.00 جابر الشغبي', 0, 19),
 (21, '2022-08-01', 'موعد استحقاق مبلغ  5000.00 علي عبد الواحد', 0, 20),
-(52, '2022-11-20', 'موعد استحقاق مبلغ  1100.00 خيري بدري', 0, 51);
+(52, '2022-11-20', 'موعد استحقاق مبلغ  1100.00 خيري بدري', 0, 51),
+(57, '2022-11-27', 'موعد استحقاق مبلغ  3030.00 سوداني', 0, 56),
+(58, '2022-11-27', 'موعد استحقاق مبلغ  2000.00 سلامة جادو', 0, 57);
 
 -- --------------------------------------------------------
 
@@ -7642,7 +7916,9 @@ INSERT INTO `ohda` (`id_ohda`, `date_ohda`, `time_ohda`, `date_filtter`, `amount
 (24, '2022-11-22', '17:53:11', '2022-11-22', 400.00, 10, 'جمعية', 1),
 (25, '2022-11-23', '20:07:57', '2022-11-23', 200.00, 10, '', 1),
 (26, '2022-11-24', '18:03:39', '2022-11-24', 700.00, 10, 'جمعية', 1),
-(27, '2022-11-25', '19:40:46', '2022-11-25', 300.00, 10, 'يوم 25', 1);
+(27, '2022-11-25', '19:40:46', '2022-11-25', 300.00, 10, 'يوم 25', 1),
+(28, '2022-11-26', '19:09:16', '2022-11-26', 400.00, 10, 'يوم 26', 1),
+(29, '2022-11-27', '19:40:15', '2022-11-27', 200.00, 10, 'يوم 27', 1);
 
 -- --------------------------------------------------------
 
@@ -7728,7 +8004,9 @@ INSERT INTO `paydebt` (`id_paydebt`, `date_paydebt`, `time_paydebt`, `id_Solf`, 
 (77, '2022-11-15', '11:58:17', 48, -6000.00, '2022-11-16'),
 (78, '2022-11-15', '18:54:10', 48, 9950.00, '2022-11-15'),
 (79, '2022-11-25', '18:58:48', 52, 1215.00, '2022-11-25'),
-(80, '2022-11-25', '23:07:17', 53, 2630.00, '2022-11-25');
+(80, '2022-11-25', '23:07:17', 53, 2630.00, '2022-11-25'),
+(81, '2022-11-27', '15:43:17', 54, 5700.00, '2022-11-27'),
+(82, '2022-11-27', '15:43:38', 55, 15150.00, '2022-11-27');
 
 -- --------------------------------------------------------
 
@@ -8080,7 +8358,19 @@ INSERT INTO `paymentreceipt` (`id_PaymentReceipt`, `date_PaymentReceipt`, `amoun
 (329, '2022-11-25', 1000.00, 15, 1),
 (330, '2022-11-25', 10000.00, 16, 1),
 (331, '2022-11-25', 1000.00, 14, 1),
-(332, '2022-11-25', 5000.00, 3, 1);
+(332, '2022-11-25', 5000.00, 3, 1),
+(333, '2022-11-26', 1000.00, 4, 1),
+(334, '2022-11-26', 3000.00, 16, 1),
+(335, '2022-11-26', 5000.00, 3, 1),
+(336, '2022-11-26', 3000.00, 5, 1),
+(337, '2022-11-27', 13000.00, 6, 1),
+(338, '2022-11-27', 36600.00, 13, 0),
+(339, '2022-11-27', 500.00, 6, 1),
+(340, '2022-11-27', 50000.00, 6, 1),
+(341, '2022-11-27', 150.00, 9, 1),
+(342, '2022-11-27', 500.00, 15, 1),
+(343, '2022-11-27', 11000.00, 3, 1),
+(344, '2022-11-27', 10000.00, 16, 1);
 
 -- --------------------------------------------------------
 
@@ -8192,7 +8482,15 @@ INSERT INTO `phone_numbers` (`id_phone_number`, `numbers`, `name`) VALUES
 (172, '01151450004', NULL),
 (175, '010-98562781', NULL),
 (176, '010-17571245', NULL),
-(179, '01114852006', NULL);
+(179, '01114852006', NULL),
+(186, '01015937717', NULL),
+(188, '01143099557', NULL),
+(189, '01097484565', NULL),
+(190, '01027423084', NULL),
+(191, '01204073996', NULL),
+(192, '01211428354', NULL),
+(193, '01032600345', NULL),
+(194, '01142911641', NULL);
 
 -- --------------------------------------------------------
 
@@ -8377,7 +8675,12 @@ INSERT INTO `priselist` (`id_priceList`, `last_edit`, `purchase_price_low`, `pur
 (140, '2022-11-19', 15.50, 15.50, 35.00, 35.00, 6954176814968),
 (141, '2022-11-19', 17.50, 17.50, 40.00, 40.00, 6720200950007),
 (142, '2022-11-19', 17.50, 17.50, 30.00, 30.00, 6720200925005),
-(143, '2022-11-23', 7.50, 7.50, 20.00, 20.00, 6846850320547);
+(143, '2022-11-23', 7.50, 7.50, 20.00, 20.00, 6846850320547),
+(144, '2022-11-27', 5.00, 5.00, 10.00, 10.00, 200009201938),
+(145, '2022-11-27', 8.00, 8.00, 30.00, 30.00, 2000000520186),
+(146, '2022-11-27', 8.00, 8.00, 30.00, 30.00, 2000009201932),
+(147, '2022-11-27', 10.00, 10.00, 30.00, 30.00, 6922564610003),
+(148, '2022-11-27', 40.00, 40.00, 90.00, 90.00, 693313861030);
 
 -- --------------------------------------------------------
 
@@ -8596,7 +8899,9 @@ INSERT INTO `receipt` (`id_Receipt`, `date_Receipt`, `amount`, `id_client`, `isA
 (159, '2022-11-23', 2550.00, 45, 1),
 (160, '2022-11-23', -2500.00, 45, 1),
 (161, '2022-11-23', 200.00, 45, 1),
-(162, '2022-11-25', 60.00, 69, 1);
+(162, '2022-11-25', 60.00, 69, 1),
+(163, '2022-11-26', 210.00, 22, 1),
+(164, '2022-11-27', 900.00, 8, 1);
 
 -- --------------------------------------------------------
 
@@ -9041,7 +9346,31 @@ INSERT INTO `salesinvoic` (`id_salesInvoic`, `date_salesInvoic`, `type_salesInvo
 (405, '2022-11-25', 'كاش', 1, 10.00, 0.00, 10.00, 0.00, 'فاتورة مبيعات نقدية405', 1),
 (406, '2022-11-25', 'كاش', 1, 75.00, 0.00, 75.00, 0.00, 'فاتورة مبيعات نقدية406', 1),
 (407, '2022-11-25', 'كاش', 1, 30.00, 0.00, 30.00, 0.00, 'فاتورة مبيعات نقدية407', 1),
-(408, '2022-11-25', 'كاش', 1, 50.00, 0.00, 50.00, 0.00, 'فاتورة مبيعات نقدية408', 1);
+(408, '2022-11-25', 'كاش', 1, 50.00, 0.00, 50.00, 0.00, 'فاتورة مبيعات نقدية408', 1),
+(409, '2022-11-26', 'كاش', 1, 10.00, 0.00, 10.00, 0.00, 'فاتورة مبيعات نقدية409', 1),
+(410, '2022-11-26', 'كاش', 1, 30.00, 0.00, 30.00, 0.00, 'فاتورة مبيعات نقدية410', 1),
+(411, '2022-11-26', 'كاش', 1, 30.00, 0.00, 30.00, 0.00, 'فاتورة مبيعات نقدية411', 1),
+(412, '2022-11-26', 'كاش', 1, 45.00, 0.00, 45.00, 0.00, 'فاتورة مبيعات نقدية412', 1),
+(413, '2022-11-26', 'كاش', 1, 60.00, 0.00, 60.00, 0.00, 'فاتورة مبيعات نقدية413', 1),
+(414, '2022-11-26', 'كاش', 1, 30.00, 0.00, 30.00, 0.00, 'فاتورة مبيعات نقدية414', 1),
+(415, '2022-11-26', 'كاش', 1, 90.00, 0.00, 90.00, 0.00, 'فاتورة مبيعات نقدية415', 1),
+(416, '2022-11-26', 'كاش', 1, 7.00, 0.00, 7.00, 0.00, 'فاتورة مبيعات نقدية416', 1),
+(417, '2022-11-26', 'كاش', 1, 30.00, 0.00, 30.00, 0.00, 'فاتورة مبيعات نقدية417', 1),
+(418, '2022-11-26', 'كاش', 1, 90.00, 0.00, 90.00, 0.00, 'فاتورة مبيعات نقدية418', 1),
+(419, '2022-11-26', 'كاش', 1, 30.00, 0.00, 30.00, 0.00, 'فاتورة مبيعات نقدية419', 1),
+(420, '2022-11-27', 'كاش', 1, 30.00, 0.00, 30.00, 0.00, 'فاتورة مبيعات نقدية420', 1),
+(421, '2022-11-27', 'كاش', 1, 30.00, 0.00, 30.00, 0.00, 'فاتورة مبيعات نقدية421', 1),
+(422, '2022-11-27', 'كاش', 1, 40.00, 0.00, 40.00, 0.00, 'فاتورة مبيعات نقدية422', 1),
+(423, '2022-11-27', 'كاش', 1, 50.00, 0.00, 50.00, 0.00, 'فاتورة مبيعات نقدية423', 1),
+(424, '2022-11-27', 'كاش', 1, 50.00, 0.00, 50.00, 0.00, 'فاتورة مبيعات نقدية424', 1),
+(425, '2022-11-27', 'كاش', 1, 50.00, 0.00, 50.00, 0.00, 'فاتورة مبيعات نقدية425', 1),
+(426, '2022-11-27', 'كاش', 1, 50.00, 0.00, 50.00, 0.00, 'فاتورة مبيعات نقدية426', 1),
+(427, '2022-11-27', 'كاش', 1, 35.00, 0.00, 35.00, 0.00, 'فاتورة مبيعات نقدية427', 1),
+(428, '2022-11-27', 'كاش', 1, 40.00, 0.00, 40.00, 0.00, 'فاتورة مبيعات نقدية428', 1),
+(429, '2022-11-27', 'كاش', 1, 10.00, 0.00, 10.00, 0.00, 'فاتورة مبيعات نقدية429', 1),
+(430, '2022-11-27', 'كاش', 1, 30.00, 0.00, 30.00, 0.00, 'فاتورة مبيعات نقدية430', 1),
+(431, '2022-11-27', 'كاش', 1, 35.00, 0.00, 35.00, 0.00, 'فاتورة مبيعات نقدية431', 1),
+(432, '2022-11-27', 'كاش', 1, 25.00, 0.00, 25.00, 0.00, 'فاتورة مبيعات نقدية432', 1);
 
 -- --------------------------------------------------------
 
@@ -9640,7 +9969,30 @@ INSERT INTO `send_receive` (`id_Send_Receive`, `date_Send_Receive`, `time_Send_R
 (586, '2022-11-25', '23:44:12', 'Send', 2.95, 0.00, 5, '010-30915434', 1, 1, 1),
 (587, '2022-11-25', '23:44:12', 'Receive', 3.95, 0.00, 12, '010-15807655', 1, 1, 1),
 (588, '2022-11-25', '23:45:12', 'Send', 0.00, 0.00, 15, '010-30915434', 1, 1, 1),
-(589, '2022-11-25', '23:45:12', 'Receive', 1.00, 0.00, 12, '010-10250553', 1, 1, 1);
+(589, '2022-11-25', '23:45:12', 'Receive', 1.00, 0.00, 12, '010-10250553', 1, 1, 1),
+(590, '2022-11-26', '10:26:40', 'Send', 4210.00, 4245.00, 6, '01110797765', 1, 1, 1),
+(591, '2022-11-26', '11:54:35', 'Receive', 2080.00, 2040.00, 6, '', 1, 1, 1),
+(592, '2022-11-26', '12:43:02', 'Receive', 6801.00, 6830.00, 9, NULL, 1, 13, 1),
+(593, '2022-11-26', '12:43:26', 'Send', 6801.00, 6870.00, 9, '01095057405', 1, 1, 1),
+(594, '2022-11-26', '14:01:12', 'Send', 1011.00, 1020.00, 6, '01005495093', 1, 1, 1),
+(595, '2022-11-26', '19:08:27', 'Send', 501.00, 505.00, 6, '01095653879', 1, 1, 1),
+(596, '2022-11-27', '13:42:43', 'Send', 11001.00, 11100.00, 6, '01007058103', 1, 1, 1),
+(597, '2022-11-27', '13:56:23', 'Receive', 10000.00, 10000.00, 9, NULL, 1, 16, 1),
+(598, '2022-11-27', '14:22:58', 'Receive', 50500.00, 50500.00, 9, NULL, 1, 6, 1),
+(599, '2022-11-27', '15:45:12', 'Receive', 12001.00, 12060.00, 9, NULL, 1, 13, 1),
+(600, '2022-11-27', '15:45:53', 'Receive', 2005.00, 2010.00, 9, NULL, 1, 13, 1),
+(601, '2022-11-27', '15:46:54', 'Receive', 5636.00, 5670.00, 9, NULL, 1, 13, 1),
+(602, '2022-11-27', '15:47:17', 'Send', 12001.00, 12120.00, 9, '01099708515', 1, 1, 1),
+(603, '2022-11-27', '15:47:35', 'Send', 2010.00, 2020.00, 9, '01147041816', 1, 1, 1),
+(604, '2022-11-27', '15:48:13', 'Send', 5630.00, 5700.00, 9, '01145408007', 1, 1, 1),
+(605, '2022-11-27', '16:09:18', 'Receive', 4001.00, 4020.00, 9, NULL, 1, 13, 1),
+(606, '2022-11-27', '16:09:29', 'Send', 4001.00, 4040.00, 9, '01004355822', 1, 1, 1),
+(607, '2022-11-27', '17:27:08', 'Receive', 2005.00, 2010.00, 9, NULL, 1, 13, 1),
+(608, '2022-11-27', '17:42:35', 'Send', 2.00, 0.00, 15, '010-00000000', 1, 1, 1),
+(609, '2022-11-27', '17:42:35', 'Receive', 3.00, 0.00, 9, '010-10250553', 1, 1, 1),
+(610, '2022-11-27', '17:42:51', 'Send', 2010.00, 2020.00, 9, '01112440276', 1, 1, 1),
+(611, '2022-11-27', '18:41:56', 'Receive', 8600.00, 8640.00, 9, NULL, 1, 13, 1),
+(612, '2022-11-27', '18:42:45', 'Send', 1191.00, 1200.00, 9, '01005268988', 1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -9714,7 +10066,11 @@ INSERT INTO `solf` (`id_Solf`, `date_Solf`, `time_Solf`, `datePay_Solf`, `amount
 (50, '2022-11-10', '21:07:23', '2022-11-10', 0.00, 'احمد جمعة', 'تحويل كاش', 0),
 (51, '2022-11-20', '22:39:12', '2022-11-20', 1100.00, 'خيري بدري', 'سداد قرض', 1),
 (52, '2022-11-25', '14:48:58', '2022-11-25', 0.00, 'احمد مبارك', 'كاش', 0),
-(53, '2022-11-25', '16:10:28', '2022-11-25', 0.00, 'عبد الحميد', 'كاش', 0);
+(53, '2022-11-25', '16:10:28', '2022-11-25', 0.00, 'عبد الحميد', 'كاش', 0),
+(54, '2022-11-26', '14:03:36', '2022-11-26', 0.00, 'حسني', 'كاش', 0),
+(55, '2022-11-27', '13:55:59', '2022-11-27', 0.00, 'سوداني', 'كاش', 0),
+(56, '2022-11-27', '15:49:13', '2022-11-27', 3030.00, 'سوداني', 'كاش', 1),
+(57, '2022-11-27', '18:39:55', '2022-11-27', 2000.00, 'سلامة جادو', 'قسط مبادرة', 1);
 
 --
 -- Triggers `solf`
@@ -9760,7 +10116,7 @@ INSERT INTO `suppliers` (`id_Suppliers`, `name_Suppliers`, `phone`, `address`, `
 (10, 'حسين شلطم', '', '', '', 0.00, 8, 1),
 (11, 'احمد عيسي', '', '', '', 0.00, 1, 1),
 (12, 'بنزينة المحطة', '', '', '', -1400.00, 9, 1),
-(13, 'شريف فتحي', '', '', '', -585.00, 8, 1),
+(13, 'شريف فتحي', '', '', '', 1505.00, 8, 1),
 (14, 'محمد نصر الدين', '', '', '', 0.00, 9, 1),
 (15, 'وليد القاعود ', '', '', '', 3900.00, 9, 1),
 (16, 'حسين بكر', '', '', '', 3000.00, 8, 1),
@@ -10506,24 +10862,51 @@ INSERT INTO `suppliersaccount` (`id_supplliersAccount`, `date_suppliersAccount`,
 (726, '2022-11-23', NULL, 3000.00, 16, NULL, NULL, NULL, 550, NULL, NULL, NULL, 'شحن محفظة ', 1),
 (727, '2022-11-23', 10000.00, NULL, 16, NULL, 324, NULL, NULL, NULL, NULL, NULL, 'ايصال دفع رقم 324', 1),
 (728, '2022-11-23', 10000.00, NULL, 13, NULL, 325, NULL, NULL, NULL, NULL, NULL, 'تصفية نقدية لحساب شريف فتحي', 0),
-(729, '2022-11-23', NULL, 9045.00, 13, NULL, NULL, NULL, 551, NULL, NULL, NULL, 'شحن محفظة 010-17571245', 1),
-(730, '2022-11-23', NULL, 5025.00, 13, NULL, NULL, NULL, 552, NULL, NULL, NULL, 'شحن محفظة 01141561985', 1),
+(729, '2022-11-23', NULL, 9045.00, 13, NULL, NULL, NULL, 551, NULL, NULL, NULL, 'شحن محفظة 010-17571245', 0),
+(730, '2022-11-23', NULL, 5025.00, 13, NULL, NULL, NULL, 552, NULL, NULL, NULL, 'شحن محفظة 01141561985', 0),
 (731, '2022-11-23', 14000.00, NULL, 6, NULL, 326, NULL, NULL, NULL, NULL, NULL, 'ايصال دفع رقم 326', 1),
 (732, '2022-11-24', NULL, 5000.00, 3, NULL, NULL, 182, NULL, NULL, NULL, NULL, 'شحن ماكينةمصاري', 1),
 (733, '2022-11-24', NULL, 3000.00, 5, NULL, NULL, 183, NULL, NULL, NULL, NULL, 'شحن ماكينةOPay', 1),
 (734, '2022-11-24', NULL, 10000.00, 16, NULL, NULL, NULL, 554, NULL, NULL, NULL, 'شحن محفظة 010-17571245', 1),
 (735, '2022-11-24', 200.00, NULL, 14, NULL, 327, NULL, NULL, NULL, NULL, NULL, 'ايصال دفع رقم 327', 1),
 (736, '2022-11-24', 300.00, NULL, 2, NULL, 328, NULL, NULL, NULL, NULL, NULL, 'ايصال دفع رقم 328', 1),
-(737, '2022-11-25', NULL, 2010.00, 13, NULL, NULL, NULL, 573, NULL, NULL, NULL, 'شحن محفظة 01099736808', 1),
-(738, '2022-11-25', NULL, 1005.00, 13, NULL, NULL, NULL, 574, NULL, NULL, NULL, 'شحن محفظة 01096768733', 1),
-(739, '2022-11-25', NULL, 9950.00, 13, NULL, NULL, NULL, 575, NULL, NULL, NULL, 'شحن محفظة 01060308824', 1),
+(737, '2022-11-25', NULL, 2010.00, 13, NULL, NULL, NULL, 573, NULL, NULL, NULL, 'شحن محفظة 01099736808', 0),
+(738, '2022-11-25', NULL, 1005.00, 13, NULL, NULL, NULL, 574, NULL, NULL, NULL, 'شحن محفظة 01096768733', 0),
+(739, '2022-11-25', NULL, 9950.00, 13, NULL, NULL, NULL, 575, NULL, NULL, NULL, 'شحن محفظة 01060308824', 0),
 (740, '2022-11-25', 500.00, NULL, 15, NULL, 329, NULL, NULL, NULL, NULL, NULL, 'ايصال دفع رقم 329', 1),
 (741, '2022-11-25', 10000.00, NULL, 16, NULL, 330, NULL, NULL, NULL, NULL, NULL, 'ايصال دفع رقم 330', 1),
-(742, '2022-11-25', NULL, 1005.00, 13, NULL, NULL, NULL, 580, NULL, NULL, NULL, 'شحن محفظة 01122236740', 1),
+(742, '2022-11-25', NULL, 1005.00, 13, NULL, NULL, NULL, 580, NULL, NULL, NULL, 'شحن محفظة 01122236740', 0),
 (743, '2022-11-25', 1000.00, NULL, 14, NULL, 331, NULL, NULL, NULL, NULL, NULL, 'ايصال دفع رقم 331 - تحويلة كاش', 1),
 (744, '2022-11-25', 5000.00, NULL, 3, NULL, 332, NULL, NULL, NULL, NULL, NULL, 'ايصال دفع رقم 332', 1),
-(745, '2022-11-25', NULL, 1205.00, 13, NULL, NULL, NULL, 582, NULL, NULL, NULL, 'شحن محفظة 01141386405', 1),
-(746, '2022-11-25', NULL, 2615.00, 13, NULL, NULL, NULL, 584, NULL, NULL, NULL, 'شحن محفظة 01029773933', 1);
+(745, '2022-11-25', NULL, 1205.00, 13, NULL, NULL, NULL, 582, NULL, NULL, NULL, 'شحن محفظة 01141386405', 0),
+(746, '2022-11-25', NULL, 2615.00, 13, NULL, NULL, NULL, 584, NULL, NULL, NULL, 'شحن محفظة 01029773933', 0),
+(747, '2022-11-26', NULL, 5000.00, 3, NULL, NULL, 184, NULL, NULL, NULL, NULL, 'شحن ماكينةمصاري', 1),
+(748, '2022-11-26', 1000.00, NULL, 4, NULL, 333, NULL, NULL, NULL, NULL, NULL, 'ايصال دفع رقم 333', 1),
+(749, '2022-11-26', NULL, 6830.00, 13, NULL, NULL, NULL, 592, NULL, NULL, NULL, 'شحن محفظة 01095057405', 0),
+(750, '2022-11-26', 3000.00, NULL, 16, NULL, 334, NULL, NULL, NULL, NULL, NULL, 'ايصال دفع رقم 334', 1),
+(751, '2022-11-26', 5000.00, NULL, 3, NULL, 335, NULL, NULL, NULL, NULL, NULL, 'ايصال دفع رقم 335', 1),
+(752, '2022-11-26', 3000.00, NULL, 5, NULL, 336, NULL, NULL, NULL, NULL, NULL, 'ايصال دفع رقم 336', 1),
+(753, '2022-11-27', NULL, 2000.00, 5, NULL, NULL, 186, NULL, NULL, NULL, NULL, 'شحن ماكينةOPay', 1),
+(754, '2022-11-27', NULL, 12000.00, 3, NULL, NULL, 187, NULL, NULL, NULL, NULL, 'شحن ماكينةمصاري', 1),
+(755, '2022-11-27', 13000.00, NULL, 6, NULL, 337, NULL, NULL, NULL, NULL, NULL, 'ايصال دفع رقم 337', 1),
+(756, '2022-11-27', NULL, 10000.00, 16, NULL, NULL, NULL, 597, NULL, NULL, NULL, 'شحن محفظة ', 1),
+(757, '2022-11-27', 36600.00, NULL, 13, NULL, 338, NULL, NULL, NULL, NULL, NULL, 'تصفية نقدية لحساب شريف فتحي', 0),
+(759, '2022-11-27', 500.00, NULL, 6, NULL, 339, NULL, NULL, NULL, NULL, NULL, 'ايصال دفع رقم 339', 1),
+(760, '2022-11-27', NULL, 2000.00, 6, NULL, NULL, 189, NULL, NULL, NULL, NULL, 'شحن ماكينةFawry', 1),
+(761, '2022-11-27', NULL, 50500.00, 6, NULL, NULL, NULL, 598, NULL, NULL, NULL, 'شحن محفظة ', 1),
+(762, '2022-11-27', 50000.00, NULL, 6, NULL, 340, NULL, NULL, NULL, NULL, NULL, 'ايصال دفع رقم 340', 1),
+(763, '2022-11-27', NULL, 2000.00, 6, NULL, NULL, 190, NULL, NULL, NULL, NULL, 'شحن ماكينةFawry', 1),
+(764, '2022-11-27', NULL, 12060.00, 13, NULL, NULL, NULL, 599, NULL, NULL, NULL, 'شحن محفظة 01099708515', 1),
+(765, '2022-11-27', NULL, 2010.00, 13, NULL, NULL, NULL, 600, NULL, NULL, NULL, 'شحن محفظة 01147041816', 1),
+(766, '2022-11-27', NULL, 5670.00, 13, NULL, NULL, NULL, 601, NULL, NULL, NULL, 'شحن محفظة 01145408007', 1),
+(767, '2022-11-27', NULL, 4020.00, 13, NULL, NULL, NULL, 605, NULL, NULL, NULL, 'شحن محفظة 01004355822', 1),
+(768, '2022-11-27', 150.00, NULL, 9, NULL, 341, NULL, NULL, NULL, NULL, NULL, 'ايصال دفع رقم 341', 1),
+(769, '2022-11-27', NULL, 2010.00, 13, NULL, NULL, NULL, 607, NULL, NULL, NULL, 'شحن محفظة 01112440276', 1),
+(770, '2022-11-27', 500.00, NULL, 15, NULL, 342, NULL, NULL, NULL, NULL, NULL, 'ايصال دفع رقم 342', 1),
+(771, '2022-11-27', NULL, -1000.00, 3, NULL, NULL, 191, NULL, NULL, NULL, NULL, 'شحن ماكينةمصاري', 1),
+(772, '2022-11-27', 11000.00, NULL, 3, NULL, 343, NULL, NULL, NULL, NULL, NULL, 'ايصال دفع رقم 343', 1),
+(773, '2022-11-27', NULL, 8640.00, 13, NULL, NULL, NULL, 611, NULL, NULL, NULL, 'شحن محفظة 01030931207', 1),
+(774, '2022-11-27', 10000.00, NULL, 16, NULL, 344, NULL, NULL, NULL, NULL, NULL, 'ايصال دفع رقم 344', 1);
 
 -- --------------------------------------------------------
 
@@ -11269,7 +11652,16 @@ INSERT INTO `vf_transaction_po` (`id_transaction`, `date_transaction`, `time_tra
 (298, '2022-11-24', '17:15:41', 'Withdraw', 18, 6, 3030.00, NULL, NULL),
 (299, '2022-11-24', '20:46:22', 'Deposit', 6, 1, 1001.00, 1700, NULL),
 (300, '2022-11-24', '20:46:36', 'Deposit', 18, 3, 500.00, 1701, NULL),
-(301, '2022-11-25', '14:44:33', 'Deposit', 6, 1, 500.00, 1702, NULL);
+(301, '2022-11-25', '14:44:33', 'Deposit', 6, 1, 500.00, 1702, NULL),
+(302, '2022-11-26', '10:25:53', 'Deposit', 6, 1, 4210.00, 1714, NULL),
+(303, '2022-11-26', '18:08:28', 'Withdraw', 6, 1, 353.50, NULL, 185),
+(304, '2022-11-27', '13:42:01', 'Deposit', 6, 1, 10800.00, 1748, NULL),
+(305, '2022-11-27', '13:56:38', 'Withdraw', 9, 6, 9999.00, NULL, NULL),
+(306, '2022-11-27', '14:12:33', 'Deposit', 6, 3, 500.00, 1760, NULL),
+(307, '2022-11-27', '14:12:49', 'Withdraw', 6, 6, 505.00, NULL, NULL),
+(308, '2022-11-27', '14:23:14', 'Withdraw', 9, 6, 50500.00, NULL, NULL),
+(309, '2022-11-27', '18:43:14', 'Deposit', 9, 3, 681.00, 1765, NULL),
+(310, '2022-11-27', '18:43:24', 'Withdraw', 9, 6, 8080.00, NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -11294,6 +11686,15 @@ INSERT INTO `workgroup` (`id_workgroup`, `name_workgroup`, `id_deal`, `isActive`
 -- --------------------------------------------------------
 
 --
+-- Structure for view `balanceclient`
+--
+DROP TABLE IF EXISTS `balanceclient`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `balanceclient`  AS  select `c`.`name_client` AS `name_client`,`c`.`firstBalance` AS `firstBalance`,(select coalesce(sum(`ca`.`Debit`),0) from `clientaccount` `ca` where `ca`.`id_client` = `c`.`id_client`) AS `Debit`,(select coalesce(sum(`cac`.`Creditor`),0) from `clientaccount` `cac` where `cac`.`id_client` = `c`.`id_client`) AS `Credit`,(select `c`.`firstBalance` + `Debit` - `Credit`) AS `Balance` from `client` `c` ;
+
+-- --------------------------------------------------------
+
+--
 -- Structure for view `balanceofpos`
 --
 DROP TABLE IF EXISTS `balanceofpos`;
@@ -11303,11 +11704,20 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 -- --------------------------------------------------------
 
 --
+-- Structure for view `bankbalance`
+--
+DROP TABLE IF EXISTS `bankbalance`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `bankbalance`  AS  select concat(`bc`.`name_bank`,' | ',`bc`.`number_acount`) AS `namebank`,`bc`.`first_debit` AS `first_debit`,`bc`.`first_creditor` AS `first_creditor`,(select coalesce(sum(`btdebit`.`debit`),0) from `banktransaction` `btdebit` where `bc`.`id_bank` = `btdebit`.`id_bank`) AS `SumDebit`,(select coalesce(sum(`btcredit`.`credit`),0) from `banktransaction` `btcredit` where `bc`.`id_bank` = `btcredit`.`id_bank`) AS `Sumcredit`,(select `bc`.`first_debit` - `bc`.`first_creditor` + `SumDebit` - `Sumcredit`) AS `balance` from `bankaccount` `bc` ;
+
+-- --------------------------------------------------------
+
+--
 -- Structure for view `calcbalanceitems`
 --
 DROP TABLE IF EXISTS `calcbalanceitems`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `calcbalanceitems`  AS  select (select coalesce(sum(`sales`.`qyt`),0) from `itemsonsalesinvoice` `sales` where `sales`.`id_items` = `i`.`id_items`) AS `sales`,(select coalesce(sum(`purchase`.`qyt`),0) from `itemsonpurchaseinvoice` `purchase` where `purchase`.`id_items` = `i`.`id_items`) AS `purchase`,`i`.`firstbalance` AS `firstbalance`,(select `i`.`firstbalance` + `purchase` - `sales`) AS `balance`,`i`.`name_items` AS `name_items`,`i`.`id_items` AS `id_items` from `items` `i` ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `calcbalanceitems`  AS  select (select coalesce(sum(`sales`.`qyt`),0) from `itemsonsalesinvoice` `sales` where `sales`.`id_items` = `i`.`id_items`) AS `sales`,(select coalesce(sum(`purchase`.`qyt`),0) from `itemsonpurchaseinvoice` `purchase` where `purchase`.`id_items` = `i`.`id_items`) AS `purchase`,`i`.`firstbalance` AS `firstbalance`,(select `priselist`.`purchase_price_low` from `priselist` where `priselist`.`id_items` = `i`.`id_items` order by `priselist`.`last_edit` desc limit 1) AS `price`,(select `i`.`firstbalance` + `purchase` - `sales`) AS `balance`,(select `balance` * `price`) AS `Amount`,`i`.`name_items` AS `name_items`,`i`.`id_items` AS `id_items` from `items` `i` ;
 
 -- --------------------------------------------------------
 
@@ -11774,13 +12184,13 @@ ALTER TABLE `banktransaction`
 -- AUTO_INCREMENT for table `casher`
 --
 ALTER TABLE `casher`
-  MODIFY `id_casher` bigint(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3486;
+  MODIFY `id_casher` bigint(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3622;
 
 --
 -- AUTO_INCREMENT for table `cashertwo`
 --
 ALTER TABLE `cashertwo`
-  MODIFY `id_CasherTwo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=161;
+  MODIFY `id_CasherTwo` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=170;
 
 --
 -- AUTO_INCREMENT for table `categoryutilites`
@@ -11798,7 +12208,7 @@ ALTER TABLE `clear`
 -- AUTO_INCREMENT for table `clientaccount`
 --
 ALTER TABLE `clientaccount`
-  MODIFY `id_ClientAccount` bigint(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=265;
+  MODIFY `id_ClientAccount` bigint(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=269;
 
 --
 -- AUTO_INCREMENT for table `creditors`
@@ -11828,13 +12238,13 @@ ALTER TABLE `expensescategory`
 -- AUTO_INCREMENT for table `exports`
 --
 ALTER TABLE `exports`
-  MODIFY `id_exports` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=150;
+  MODIFY `id_exports` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=163;
 
 --
 -- AUTO_INCREMENT for table `fees`
 --
 ALTER TABLE `fees`
-  MODIFY `id_fees` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=111;
+  MODIFY `id_fees` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=113;
 
 --
 -- AUTO_INCREMENT for table `imports`
@@ -11852,13 +12262,13 @@ ALTER TABLE `loans`
 -- AUTO_INCREMENT for table `masary_pay`
 --
 ALTER TABLE `masary_pay`
-  MODIFY `id_masary_pay` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1714;
+  MODIFY `id_masary_pay` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=1770;
 
 --
 -- AUTO_INCREMENT for table `masary_sell`
 --
 ALTER TABLE `masary_sell`
-  MODIFY `id_masary_sell` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=184;
+  MODIFY `id_masary_sell` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=192;
 
 --
 -- AUTO_INCREMENT for table `namebank`
@@ -11870,25 +12280,25 @@ ALTER TABLE `namebank`
 -- AUTO_INCREMENT for table `notifcation`
 --
 ALTER TABLE `notifcation`
-  MODIFY `id_notifcation` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=55;
+  MODIFY `id_notifcation` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=59;
 
 --
 -- AUTO_INCREMENT for table `ohda`
 --
 ALTER TABLE `ohda`
-  MODIFY `id_ohda` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id_ohda` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `paydebt`
 --
 ALTER TABLE `paydebt`
-  MODIFY `id_paydebt` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=81;
+  MODIFY `id_paydebt` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=83;
 
 --
 -- AUTO_INCREMENT for table `phone_numbers`
 --
 ALTER TABLE `phone_numbers`
-  MODIFY `id_phone_number` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=186;
+  MODIFY `id_phone_number` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=201;
 
 --
 -- AUTO_INCREMENT for table `pos`
@@ -11912,19 +12322,19 @@ ALTER TABLE `recharge_type`
 -- AUTO_INCREMENT for table `send_receive`
 --
 ALTER TABLE `send_receive`
-  MODIFY `id_Send_Receive` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=590;
+  MODIFY `id_Send_Receive` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=613;
 
 --
 -- AUTO_INCREMENT for table `solf`
 --
 ALTER TABLE `solf`
-  MODIFY `id_Solf` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=54;
+  MODIFY `id_Solf` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=58;
 
 --
 -- AUTO_INCREMENT for table `suppliersaccount`
 --
 ALTER TABLE `suppliersaccount`
-  MODIFY `id_supplliersAccount` bigint(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=747;
+  MODIFY `id_supplliersAccount` bigint(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=775;
 
 --
 -- AUTO_INCREMENT for table `supplier_type`
@@ -11966,7 +12376,7 @@ ALTER TABLE `vf_cash`
 -- AUTO_INCREMENT for table `vf_transaction_po`
 --
 ALTER TABLE `vf_transaction_po`
-  MODIFY `id_transaction` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=302;
+  MODIFY `id_transaction` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=311;
 
 --
 -- Constraints for dumped tables
