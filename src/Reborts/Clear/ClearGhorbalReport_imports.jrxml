@@ -45,7 +45,7 @@ WHERE
 		<band splitType="Stretch"/>
 	</background>
 	<detail>
-		<band height="31" splitType="Stretch">
+		<band height="31" splitType="Immediate">
 			<textField>
 				<reportElement x="0" y="0" width="120" height="30" uuid="a5066050-d7e0-4513-8d32-a7a72e97a180"/>
 				<box>

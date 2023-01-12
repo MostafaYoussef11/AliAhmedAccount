@@ -11,6 +11,7 @@ import Entity.recipt;
 import Utilities.Tools;
 import Utilities.TypeOfFilter;
 import java.awt.ComponentOrientation;
+import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.sql.SQLException;
@@ -33,14 +34,16 @@ public class ReciptFrame extends javax.swing.JFrame {
     private boolean isSelected ;
     private double OldBalance , newBalance , amount ;
     private TypeOfFilter type_filter;
-    
+    Dimension dim;
     public ReciptFrame() throws SQLException {
         initComponents();
-        setSize(820, 740);
-        background.setLocation(0, 0);
-        background.setSize(820, 740);
-        ImageIcon bg = new ImageIcon(new ImageIcon(Toolkit.getDefaultToolkit().getClass().getResource("/icons/Recipt.jpg")).getImage().getScaledInstance(820, 740, Image.SCALE_DEFAULT));
-        background.setIcon(bg);
+        dim = new Dimension(820, 740);
+        super.setSize(dim);
+//        background.setLocation(0, 0);
+//        background.setSize(820, 740);
+//        ImageIcon bg = new ImageIcon(new ImageIcon(Toolkit.getDefaultToolkit().getClass().getResource("/icons/Recipt.jpg")).getImage().getScaledInstance(820, 740, Image.SCALE_DEFAULT));
+//        background.setIcon(bg);
+        Tools.setBackground(background, dim, "Recipt.jpg");
         titel.setFont(Tools.font(36f));
         newRecipt();
     }

@@ -76,7 +76,7 @@
         <Component class="javax.swing.JButton" name="jButton2">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/icons/hierarchy.png"/>
+              <Image iconType="2" name="E:\Masrawy\Account\dist\Icons\hierarchy.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="&#x645;&#x62c;&#x645;&#x648;&#x639;&#x627;&#x62a; &#x627;&#x644;&#x639;&#x645;&#x644;"/>
             <Property name="toolTipText" type="java.lang.String" value="&#x627;&#x636;&#x627;&#x641;&#x629; &#x648; &#x62a;&#x639;&#x62f;&#x64a;&#x644; &#x645;&#x62c;&#x645;&#x648;&#x639;&#x627;&#x62a; &#x627;&#x644;&#x639;&#x645;&#x644;"/>
@@ -88,7 +88,7 @@
         <Component class="javax.swing.JButton" name="jButton3">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/icons/account.png"/>
+              <Image iconType="2" name="E:\Masrawy\Account\dist\Icons\account.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="&#x627;&#x644;&#x62d;&#x633;&#x627;&#x628;&#x627;&#x62a;"/>
           </Properties>
@@ -99,7 +99,7 @@
         <Component class="javax.swing.JButton" name="jButton8">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/icons/diagram.png"/>
+              <Image iconType="2" name="E:\Masrawy\Account\dist\Icons\diagram.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="&#x62a;&#x635;&#x641;&#x64a;&#x629; &#x62d;&#x633;&#x627;&#x628; &#x645;&#x62c;&#x645;&#x648;&#x639;&#x629;"/>
           </Properties>
@@ -123,7 +123,7 @@
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="450" y="280" width="190" height="190"/>
+          <AbsoluteConstraints x="450" y="280" width="190" height="260"/>
         </Constraint>
       </Constraints>
 
@@ -136,6 +136,8 @@
                       <Component id="jButton5" alignment="0" min="-2" pref="157" max="-2" attributes="0"/>
                       <Component id="jButton6" alignment="0" min="-2" pref="157" max="-2" attributes="0"/>
                       <Component id="jButton4" alignment="0" min="-2" pref="157" max="-2" attributes="0"/>
+                      <Component id="jButton12" alignment="0" min="-2" pref="157" max="-2" attributes="0"/>
+                      <Component id="jButton13" alignment="0" min="-2" pref="157" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace pref="11" max="32767" attributes="0"/>
               </Group>
@@ -149,7 +151,11 @@
                   <Component id="jButton5" min="-2" pref="35" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jButton6" min="-2" pref="35" max="-2" attributes="0"/>
-                  <EmptySpace pref="51" max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="jButton12" min="-2" pref="35" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="jButton13" min="-2" pref="35" max="-2" attributes="0"/>
+                  <EmptySpace max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -158,7 +164,7 @@
         <Component class="javax.swing.JButton" name="jButton4">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/icons/wallet.png"/>
+              <Image iconType="2" name="E:\Masrawy\Account\dist\Icons\wallet.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="&#x635;&#x627;&#x62f;&#x631; &#x644;&#x644;&#x62d;&#x633;&#x627;&#x628;&#x627;&#x62a;"/>
           </Properties>
@@ -169,7 +175,7 @@
         <Component class="javax.swing.JButton" name="jButton5">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/icons/expenses.png"/>
+              <Image iconType="2" name="E:\Masrawy\Account\dist\Icons\expense.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="&#x645;&#x635;&#x631;&#x648;&#x641;&#x627;&#x62a;"/>
           </Properties>
@@ -180,12 +186,34 @@
         <Component class="javax.swing.JButton" name="jButton6">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/icons/work.png"/>
+              <Image iconType="2" name="E:\Masrawy\Account\dist\Icons\work.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="&#x627;&#x633;&#x627;&#x633;&#x64a;&#x627;&#x62a; &#x648;&#x62a;&#x62c;&#x647;&#x64a;&#x632;&#x627;&#x62a;"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton6ActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="jButton12">
+          <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="2" name="E:\Masrawy\Account\dist\Icons\lorry.png"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="&#x645;&#x635;&#x631;&#x648;&#x641;&#x627;&#x62a; &#x627;&#x644;&#x62c;&#x627;&#x645;&#x628;&#x648;"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton12ActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="jButton13">
+          <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="2" name="E:\Masrawy\Account\dist\Icons\work.png"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="&#x645;&#x635;&#x631;&#x648;&#x641;&#x627;&#x62a; &#x627;&#x644;&#x637;&#x627;&#x62d;&#x648;&#x646;&#x629;"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton13ActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>
@@ -252,7 +280,7 @@
         <Component class="javax.swing.JButton" name="jButton7">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/icons/business-report.png"/>
+              <Image iconType="2" name="E:\Masrawy\Account\dist\Icons\business-report.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="&#x62a;&#x642;&#x631;&#x64a;&#x631; &#x645;&#x635;&#x631;&#x648;&#x641;&#x627;&#x62a; &#x627;&#x644;&#x64a;&#x648;&#x645;"/>
           </Properties>
@@ -263,7 +291,7 @@
         <Component class="javax.swing.JButton" name="jButton9">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/icons/report.png"/>
+              <Image iconType="2" name="E:\Masrawy\Account\dist\Icons\report.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="&#x62a;&#x642;&#x631;&#x64a;&#x631; &#x645;&#x635;&#x631;&#x648;&#x641;&#x627;&#x62a; &#x628;&#x62a;&#x627;&#x631;&#x64a;&#x62e;"/>
           </Properties>
@@ -274,7 +302,7 @@
         <Component class="javax.swing.JButton" name="jButton10">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/icons/report.png"/>
+              <Image iconType="2" name="E:\Masrawy\Account\dist\Icons\report.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="&#x643;&#x634;&#x641; &#x62d;&#x633;&#x627;&#x628; "/>
           </Properties>
@@ -285,7 +313,7 @@
         <Component class="javax.swing.JButton" name="jButton11">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/icons/budget.png"/>
+              <Image iconType="2" name="E:\Masrawy\Account\dist\Icons\budget.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="&#x62a;&#x635;&#x641;&#x64a;&#x629; &#x62d;&#x633;&#x627;&#x628;"/>
           </Properties>
@@ -296,7 +324,7 @@
         <Component class="javax.swing.JButton" name="jButton15">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/icons/seo-report.png"/>
+              <Image iconType="2" name="E:\Masrawy\Account\dist\Icons\seo-report.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="&#x643;&#x634;&#x641; &#x62d;&#x633;&#x627;&#x628; &#x645;&#x648;&#x631;&#x62f;"/>
           </Properties>
@@ -320,7 +348,7 @@
       </Properties>
       <Constraints>
         <Constraint layoutClass="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout" value="org.netbeans.modules.form.compat2.layouts.DesignAbsoluteLayout$AbsoluteConstraintsDescription">
-          <AbsoluteConstraints x="670" y="280" width="190" height="190"/>
+          <AbsoluteConstraints x="670" y="280" width="190" height="250"/>
         </Constraint>
       </Constraints>
 
@@ -332,6 +360,8 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Component id="jButton14" alignment="0" min="-2" pref="157" max="-2" attributes="0"/>
                       <Component id="jButton16" alignment="0" min="-2" pref="157" max="-2" attributes="0"/>
+                      <Component id="jButton17" alignment="0" min="-2" pref="157" max="-2" attributes="0"/>
+                      <Component id="jButton18" alignment="0" min="-2" pref="157" max="-2" attributes="0"/>
                   </Group>
                   <EmptySpace max="32767" attributes="0"/>
               </Group>
@@ -343,7 +373,11 @@
                   <Component id="jButton14" min="-2" pref="35" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jButton16" min="-2" pref="35" max="-2" attributes="0"/>
-                  <EmptySpace min="0" pref="91" max="32767" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="jButton17" min="-2" pref="35" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
+                  <Component id="jButton18" min="-2" pref="35" max="-2" attributes="0"/>
+                  <EmptySpace min="0" pref="69" max="32767" attributes="0"/>
               </Group>
           </Group>
         </DimensionLayout>
@@ -352,7 +386,7 @@
         <Component class="javax.swing.JButton" name="jButton14">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/icons/ingots.png"/>
+              <Image iconType="2" name="E:\Masrawy\Account\dist\Icons\ingots.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="&#x627;&#x644;&#x648;&#x627;&#x631;&#x62f;"/>
           </Properties>
@@ -363,12 +397,34 @@
         <Component class="javax.swing.JButton" name="jButton16">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/icons/loader.png"/>
+              <Image iconType="2" name="E:\Masrawy\Account\dist\Icons\loader.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="&#x633;&#x631;&#x643;&#x64a; &#x645;&#x639;&#x62f;&#x629;"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton16ActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="jButton17">
+          <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="2" name="E:\Masrawy\Account\dist\Icons\lorry.png"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="&#x648;&#x627;&#x631;&#x62f; &#x627;&#x644;&#x634;&#x641;&#x631;"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton17ActionPerformed"/>
+          </Events>
+        </Component>
+        <Component class="javax.swing.JButton" name="jButton18">
+          <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="2" name="E:\Masrawy\Account\dist\Icons\loan (5).png"/>
+            </Property>
+            <Property name="text" type="java.lang.String" value="&#x648;&#x627;&#x631;&#x62f; &#x627;&#x644;&#x62d;&#x633;&#x627;&#x628;&#x627;&#x62a;"/>
+          </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton18ActionPerformed"/>
           </Events>
         </Component>
       </SubComponents>

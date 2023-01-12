@@ -10,7 +10,7 @@
 	<detail>
 		<band height="35" splitType="Immediate">
 			<staticText>
-				<reportElement x="0" y="0" width="180" height="35" uuid="0fc9836b-a485-4df8-80b5-9288023a4eb3"/>
+				<reportElement mode="Transparent" x="0" y="0" width="180" height="35" forecolor="#000000" backcolor="#FFFFFF" uuid="0fc9836b-a485-4df8-80b5-9288023a4eb3"/>
 				<box>
 					<pen lineWidth="1.5"/>
 					<topPen lineWidth="1.5"/>
@@ -18,12 +18,13 @@
 					<bottomPen lineWidth="1.5"/>
 					<rightPen lineWidth="1.5"/>
 				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="16" isBold="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="18" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
 				</textElement>
 				<text><![CDATA[رصيد علي المكن]]></text>
 			</staticText>
-			<textField>
+			<textField pattern="#,##0.00">
 				<reportElement mode="Transparent" x="180" y="0" width="120" height="35" forecolor="#000000" backcolor="#FFFFFF" uuid="e7b82a42-635c-42da-9926-4c495a97a289"/>
 				<box>
 					<pen lineWidth="1.5"/>
@@ -33,7 +34,7 @@
 					<rightPen lineWidth="1.5"/>
 				</box>
 				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
-					<font fontName="SansSerif" size="16" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<font fontName="SansSerif" size="18" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
 					<paragraph lineSpacing="Single"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{banalce}]]></textFieldExpression>

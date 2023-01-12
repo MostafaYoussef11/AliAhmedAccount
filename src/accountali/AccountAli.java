@@ -7,6 +7,7 @@ package accountali;
 
 import Frams.BeepayFrame;
 import Frams.Login;
+import Frams.MainFrame;
 import Frams.MasarySellFrame;
 import Frams.OpaypayFrame;
 import Frams.VFCashFrame;
@@ -14,9 +15,11 @@ import Frams.itemsFrame;
 import Frams.menuCashFrame;
 import Frams.paydebtFrame;
 import Utilities.AutoSuggestor;
+import Utilities.ConnectDB;
 import Utilities.Tools;
 import java.awt.Color;
 import java.util.ArrayList;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
@@ -34,11 +37,23 @@ public class AccountAli {
      */
 
     public static void main(String[] args) {
-        Login l = new Login();
+       // Login l = new Login();
         //paydebtFrame o = new paydebtFrame();
        // itemsFrame l = new itemsFrame();
        // Tools.openJFram(o);
-       Tools.openJFram(l, "تسجيل الدخول", "account");
+//       Tools.openJFram(l, "تسجيل الدخول");
+                ConnectDB.chakeusername("0", "0");
+                MainFrame mf = new MainFrame();
+                
+                String nameIcon = "laptop";
+                String title = "ادارة الحسابات";
+                mf.setLocationRelativeTo(null);
+                mf.setTitle(title);
+                mf.setIconImage(new ImageIcon("E:\\Masrawy\\Account\\dist\\Icons\\"+nameIcon+".png").getImage());
+                //Tools.openJFram(mf,title,nameIcon);
+                mf.setExtendedState(JFrame.MAXIMIZED_BOTH);
+                mf.setVisible(true);
+                
     }
     
 }

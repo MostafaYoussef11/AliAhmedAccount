@@ -28,12 +28,13 @@ public class PosFrame extends javax.swing.JFrame {
         font = Tools.font(16f);
         
         setSize(dim);
-        background.setLocation(0, 0);
-        background.setSize(dim);
-        background.setPreferredSize(dim);
-        ImageIcon bg = new ImageIcon(new ImageIcon(Toolkit.getDefaultToolkit().getClass().getResource("/icons/17249.jpg")).getImage().getScaledInstance(dim.width, dim.height, Image.SCALE_DEFAULT));
-        background.setIcon(bg);
-        
+        Tools.setBackground(background, dim, "17249.jpg");
+//        background.setLocation(0, 0);
+//        background.setSize(dim);
+//        background.setPreferredSize(dim);
+//        ImageIcon bg = new ImageIcon(new ImageIcon(Toolkit.getDefaultToolkit().getClass().getResource("/icons/17249.jpg")).getImage().getScaledInstance(dim.width, dim.height, Image.SCALE_DEFAULT));
+//        background.setIcon(bg);
+
         Btn_masary_pay.setFont(font);
         Btn_utilitesMasary.setFont(font);
         Btn_masary_sell.setFont(font);
@@ -97,7 +98,7 @@ public class PosFrame extends javax.swing.JFrame {
         jPanel1.setOpaque(false);
         jPanel1.setPreferredSize(new java.awt.Dimension(220, 290));
 
-        Btn_utilitesMasary.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/utility.png"))); // NOI18N
+        Btn_utilitesMasary.setIcon(new javax.swing.ImageIcon("E:\\Masrawy\\Account\\dist\\Icons\\utility.png")); // NOI18N
         Btn_utilitesMasary.setText("خدمات مصاري");
         Btn_utilitesMasary.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -106,7 +107,7 @@ public class PosFrame extends javax.swing.JFrame {
         });
 
         Btn_masary_pay.setForeground(new java.awt.Color(0, 0, 255));
-        Btn_masary_pay.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/pos32.png"))); // NOI18N
+        Btn_masary_pay.setIcon(new javax.swing.ImageIcon("E:\\Masrawy\\Account\\dist\\Icons\\pos32.png")); // NOI18N
         Btn_masary_pay.setText("مبيعات مصاري");
         Btn_masary_pay.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -115,7 +116,7 @@ public class PosFrame extends javax.swing.JFrame {
         });
 
         Btn_masary_sell.setForeground(new java.awt.Color(255, 51, 102));
-        Btn_masary_sell.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/posPay.png"))); // NOI18N
+        Btn_masary_sell.setIcon(new javax.swing.ImageIcon("E:\\Masrawy\\Account\\dist\\Icons\\posPay.png")); // NOI18N
         Btn_masary_sell.setText("مشتريات مصاري");
         Btn_masary_sell.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -124,7 +125,7 @@ public class PosFrame extends javax.swing.JFrame {
         });
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/masary-logo.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon("E:\\Masrawy\\Account\\dist\\Icons\\masary-logo.png")); // NOI18N
         jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jLabel1.setIconTextGap(1);
 
@@ -160,7 +161,7 @@ public class PosFrame extends javax.swing.JFrame {
 
         jPanel2.setOpaque(false);
 
-        Btn_utilitesBee.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/utility.png"))); // NOI18N
+        Btn_utilitesBee.setIcon(new javax.swing.ImageIcon("E:\\Masrawy\\Account\\dist\\Icons\\utility.png")); // NOI18N
         Btn_utilitesBee.setText("Bee خدمات ");
         Btn_utilitesBee.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -169,7 +170,7 @@ public class PosFrame extends javax.swing.JFrame {
         });
 
         Btn_Bee_pay.setForeground(new java.awt.Color(0, 0, 255));
-        Btn_Bee_pay.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/pos32.png"))); // NOI18N
+        Btn_Bee_pay.setIcon(new javax.swing.ImageIcon("E:\\Masrawy\\Account\\dist\\Icons\\pos32.png")); // NOI18N
         Btn_Bee_pay.setText("Bee مبيعات");
         Btn_Bee_pay.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -178,7 +179,7 @@ public class PosFrame extends javax.swing.JFrame {
         });
 
         Btn_Bee_sell.setForeground(new java.awt.Color(255, 51, 102));
-        Btn_Bee_sell.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/posPay.png"))); // NOI18N
+        Btn_Bee_sell.setIcon(new javax.swing.ImageIcon("E:\\Masrawy\\Account\\dist\\Icons\\posPay.png")); // NOI18N
         Btn_Bee_sell.setText("Bee مشتريات");
         Btn_Bee_sell.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -187,7 +188,7 @@ public class PosFrame extends javax.swing.JFrame {
         });
 
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/bee-logo.png"))); // NOI18N
+        jLabel2.setIcon(new javax.swing.ImageIcon("E:\\Masrawy\\Account\\dist\\Icons\\bee-logo.png")); // NOI18N
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -221,7 +222,7 @@ public class PosFrame extends javax.swing.JFrame {
 
         jPanel3.setOpaque(false);
 
-        Btn_utilitesFawry.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/utility.png"))); // NOI18N
+        Btn_utilitesFawry.setIcon(new javax.swing.ImageIcon("E:\\Masrawy\\Account\\dist\\Icons\\utility.png")); // NOI18N
         Btn_utilitesFawry.setText(" خدمات فوري ");
         Btn_utilitesFawry.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -230,7 +231,7 @@ public class PosFrame extends javax.swing.JFrame {
         });
 
         Btn_Fawry_pay.setForeground(new java.awt.Color(0, 0, 255));
-        Btn_Fawry_pay.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/pos32.png"))); // NOI18N
+        Btn_Fawry_pay.setIcon(new javax.swing.ImageIcon("E:\\Masrawy\\Account\\dist\\Icons\\pos32.png")); // NOI18N
         Btn_Fawry_pay.setText(" مبيعات فوري");
         Btn_Fawry_pay.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -239,7 +240,7 @@ public class PosFrame extends javax.swing.JFrame {
         });
 
         Btn_Fawry_sell.setForeground(new java.awt.Color(255, 51, 102));
-        Btn_Fawry_sell.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/posPay.png"))); // NOI18N
+        Btn_Fawry_sell.setIcon(new javax.swing.ImageIcon("E:\\Masrawy\\Account\\dist\\Icons\\posPay.png")); // NOI18N
         Btn_Fawry_sell.setText(" مشتريات فوري");
         Btn_Fawry_sell.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -248,7 +249,7 @@ public class PosFrame extends javax.swing.JFrame {
         });
 
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/fawrylogo.png"))); // NOI18N
+        jLabel3.setIcon(new javax.swing.ImageIcon("E:\\Masrawy\\Account\\dist\\Icons\\fawrylogo.png")); // NOI18N
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -258,10 +259,9 @@ public class PosFrame extends javax.swing.JFrame {
                 .addGap(10, 10, 10)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(Btn_Fawry_sell, javax.swing.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE)
-                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                        .addComponent(Btn_utilitesFawry, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE)
-                        .addComponent(Btn_Fawry_pay, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                    .addComponent(Btn_utilitesFawry, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 206, Short.MAX_VALUE)
+                    .addComponent(Btn_Fawry_pay, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
@@ -283,7 +283,7 @@ public class PosFrame extends javax.swing.JFrame {
 
         jPanel4.setOpaque(false);
 
-        Btn_utilitesAman.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/utility.png"))); // NOI18N
+        Btn_utilitesAman.setIcon(new javax.swing.ImageIcon("E:\\Masrawy\\Account\\dist\\Icons\\utility.png")); // NOI18N
         Btn_utilitesAman.setText(" خدمات امان ");
         Btn_utilitesAman.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -292,7 +292,7 @@ public class PosFrame extends javax.swing.JFrame {
         });
 
         Btn_Aman_pay.setForeground(new java.awt.Color(0, 0, 255));
-        Btn_Aman_pay.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/pos32.png"))); // NOI18N
+        Btn_Aman_pay.setIcon(new javax.swing.ImageIcon("E:\\Masrawy\\Account\\dist\\Icons\\pos32.png")); // NOI18N
         Btn_Aman_pay.setText(" مبيعات امان");
         Btn_Aman_pay.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -301,7 +301,7 @@ public class PosFrame extends javax.swing.JFrame {
         });
 
         Btn_Aman_sell.setForeground(new java.awt.Color(255, 51, 102));
-        Btn_Aman_sell.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/posPay.png"))); // NOI18N
+        Btn_Aman_sell.setIcon(new javax.swing.ImageIcon("E:\\Masrawy\\Account\\dist\\Icons\\posPay.png")); // NOI18N
         Btn_Aman_sell.setText(" مشتريات امان");
         Btn_Aman_sell.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -310,7 +310,7 @@ public class PosFrame extends javax.swing.JFrame {
         });
 
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/aman-logo.png"))); // NOI18N
+        jLabel4.setIcon(new javax.swing.ImageIcon("E:\\Masrawy\\Account\\dist\\Icons\\aman-logo.png")); // NOI18N
         jLabel4.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
@@ -345,7 +345,7 @@ public class PosFrame extends javax.swing.JFrame {
 
         jPanel5.setOpaque(false);
 
-        Btn_utilitesOpay.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/utility.png"))); // NOI18N
+        Btn_utilitesOpay.setIcon(new javax.swing.ImageIcon("E:\\Masrawy\\Account\\dist\\Icons\\utility.png")); // NOI18N
         Btn_utilitesOpay.setText("OPay خدمات ");
         Btn_utilitesOpay.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -354,7 +354,7 @@ public class PosFrame extends javax.swing.JFrame {
         });
 
         Btn_Opay_pay.setForeground(new java.awt.Color(0, 0, 255));
-        Btn_Opay_pay.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/pos32.png"))); // NOI18N
+        Btn_Opay_pay.setIcon(new javax.swing.ImageIcon("E:\\Masrawy\\Account\\dist\\Icons\\pos32.png")); // NOI18N
         Btn_Opay_pay.setText("OPay مبيعات");
         Btn_Opay_pay.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -363,7 +363,7 @@ public class PosFrame extends javax.swing.JFrame {
         });
 
         Btn_Opay_sell.setForeground(new java.awt.Color(255, 51, 102));
-        Btn_Opay_sell.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/posPay.png"))); // NOI18N
+        Btn_Opay_sell.setIcon(new javax.swing.ImageIcon("E:\\Masrawy\\Account\\dist\\Icons\\posPay.png")); // NOI18N
         Btn_Opay_sell.setText("OPay مشتريات");
         Btn_Opay_sell.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -372,7 +372,7 @@ public class PosFrame extends javax.swing.JFrame {
         });
 
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/opay_logo.png"))); // NOI18N
+        jLabel5.setIcon(new javax.swing.ImageIcon("E:\\Masrawy\\Account\\dist\\Icons\\opay_logo.png")); // NOI18N
         jLabel5.setPreferredSize(new java.awt.Dimension(200, 100));
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
@@ -414,14 +414,14 @@ public class PosFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         UtilitiesMasary u = new UtilitiesMasary(1);
         Tools.openJFram(u , "خدمات مصاري");
-        dispose();
+        //dispose();
     }//GEN-LAST:event_Btn_utilitesMasaryActionPerformed
 
     private void Btn_masary_payActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_masary_payActionPerformed
         // TODO add your handling code here:
         MasarypayFrame mf = new MasarypayFrame();
         Tools.openJFram(mf , "مبيعات مصاري");
-        dispose();
+        //dispose();
     }//GEN-LAST:event_Btn_masary_payActionPerformed
 
     private void Btn_masary_sellActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_masary_sellActionPerformed
@@ -434,7 +434,7 @@ public class PosFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         UtilitiesMasary uB = new UtilitiesMasary(2);
         Tools.openJFram(uB, "Bee خدمات");
-        dispose();
+       // dispose();
         
     }//GEN-LAST:event_Btn_utilitesBeeActionPerformed
 
@@ -442,77 +442,77 @@ public class PosFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         BeepayFrame bpay = new BeepayFrame();
         Tools.openJFram(bpay, "Bee");
-        dispose();
+       // dispose();
     }//GEN-LAST:event_Btn_Bee_payActionPerformed
 
     private void Btn_Bee_sellActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_Bee_sellActionPerformed
         // TODO add your handling code here:
         BeeSellFrame bsf = new BeeSellFrame(5);
         Tools.openJFram(bsf, "  Bee مشتريات");
-        dispose();
+       // dispose();
     }//GEN-LAST:event_Btn_Bee_sellActionPerformed
 
     private void Btn_utilitesFawryActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_utilitesFawryActionPerformed
         // TODO add your handling code here:
         UtilitiesMasary uB = new UtilitiesMasary(3);
         Tools.openJFram(uB, "Fawry خدمات");
-        dispose();
+        //dispose();
     }//GEN-LAST:event_Btn_utilitesFawryActionPerformed
 
     private void Btn_Fawry_payActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_Fawry_payActionPerformed
         // TODO add your handling code here:
         FawrypayFrame fpf = new FawrypayFrame();
         Tools.openJFram(fpf, "Fawry مبيعات");
-        dispose();
+       // dispose();
     }//GEN-LAST:event_Btn_Fawry_payActionPerformed
 
     private void Btn_Fawry_sellActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_Fawry_sellActionPerformed
         // TODO add your handling code here:
         FawrySellFrame fsf = new FawrySellFrame(3);
         Tools.openJFram(fsf, "مشتريات فوري");
-        dispose();
+       // dispose();
     }//GEN-LAST:event_Btn_Fawry_sellActionPerformed
 
     private void Btn_utilitesAmanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_utilitesAmanActionPerformed
         // TODO add your handling code here:
         UtilitiesMasary uB = new UtilitiesMasary(5);
         Tools.openJFram(uB, "Fawry خدمات");
-        dispose();
+      //  dispose();
     }//GEN-LAST:event_Btn_utilitesAmanActionPerformed
 
     private void Btn_Aman_payActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_Aman_payActionPerformed
         // TODO add your handling code here:
         AmanpayFrame aman = new AmanpayFrame();
         Tools.openJFram(aman, "Aman مبيعات");
-        dispose();
+       // dispose();
     }//GEN-LAST:event_Btn_Aman_payActionPerformed
 
     private void Btn_Aman_sellActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_Aman_sellActionPerformed
         // TODO add your handling code here:
         AmanSellFrame aman = new AmanSellFrame(2);
         Tools.openJFram(aman, "مشتريات أمان");
-        dispose();       
+      //  dispose();       
     }//GEN-LAST:event_Btn_Aman_sellActionPerformed
 
     private void Btn_utilitesOpayActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_utilitesOpayActionPerformed
         // TODO add your handling code here:
         UtilitiesMasary uB = new UtilitiesMasary(4);
         Tools.openJFram(uB, "OPay خدمات");
-        dispose();
+       // dispose();
     }//GEN-LAST:event_Btn_utilitesOpayActionPerformed
 
     private void Btn_Opay_payActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_Opay_payActionPerformed
         // TODO add your handling code here:
         OpaypayFrame op = new OpaypayFrame();
         Tools.openJFram(op, "OPay مبيعات");
-        dispose();
+       // dispose();
     }//GEN-LAST:event_Btn_Opay_payActionPerformed
 
     private void Btn_Opay_sellActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Btn_Opay_sellActionPerformed
         // TODO add your handling code here:
         OpaySellFrame os = new OpaySellFrame(6);
         Tools.openJFram(os,"OPay مشتريات");
-        dispose();
+       // dispose();
     }//GEN-LAST:event_Btn_Opay_sellActionPerformed
 
     /**

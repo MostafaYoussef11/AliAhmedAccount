@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="BalanceReport_subreport5" language="groovy" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="3a646e10-5894-4fdf-a4b8-3e6fda348141">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[SELECT
+   Sum(`Balance`) AS Balance
+FROM
+     `balanceclient`]]>
+	</queryString>
+	<field name="Balance" class="java.lang.Double">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="35" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Transparent" x="0" y="0" width="180" height="35" forecolor="#000000" backcolor="#FFFFFF" uuid="df72e5ee-d9aa-4d88-a507-4039545c5667"/>
+				<box>
+					<pen lineWidth="1.5"/>
+					<topPen lineWidth="1.5"/>
+					<leftPen lineWidth="1.5"/>
+					<bottomPen lineWidth="1.5"/>
+					<rightPen lineWidth="1.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="18" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[العملاء]]></text>
+			</staticText>
+			<textField pattern="###0.00" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="180" y="0" width="120" height="35" forecolor="#000000" backcolor="#FFFFFF" uuid="6b160ffc-3d88-43a9-be99-f6f5db0c89d2"/>
+				<box>
+					<pen lineWidth="1.5"/>
+					<topPen lineWidth="1.5"/>
+					<leftPen lineWidth="1.5"/>
+					<bottomPen lineWidth="1.5"/>
+					<rightPen lineWidth="1.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="18" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{Balance}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

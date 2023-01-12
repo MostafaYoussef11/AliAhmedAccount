@@ -35,8 +35,8 @@ public class CounterFrame extends javax.swing.JFrame {
         initComponents();
         
         setBackground(new Color(0.564f, 0.960f, 0.478f, 0.5f));
-
-        String bip = "src/Sound/money_counter.mp3";
+//E:\\Masrawy\\Account\\
+        String bip = "E:\\Masrawy\\Account\\dist\\Sound\\money_counter.mp3";
         JFXPanel jfx = new JFXPanel();
         String uri = new File(bip).toURI().toString();
          media =  new MediaPlayer(new Media(uri));

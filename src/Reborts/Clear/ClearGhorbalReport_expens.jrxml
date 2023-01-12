@@ -33,7 +33,7 @@ and isRelay = 0]]>
 		<band splitType="Stretch"/>
 	</background>
 	<detail>
-		<band height="30">
+		<band height="30" splitType="Immediate">
 			<textField pattern="" isBlankWhenNull="false">
 				<reportElement stretchType="RelativeToBandHeight" mode="Transparent" x="0" y="0" width="125" height="30" forecolor="#000000" backcolor="#FFFFFF" uuid="694586a6-af4e-4edb-8d00-173109494484"/>
 				<box>

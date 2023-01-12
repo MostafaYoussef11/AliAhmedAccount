@@ -54,11 +54,12 @@ public class purchaseInvoiceFrame extends javax.swing.JFrame {
     public purchaseInvoiceFrame() {
         initComponents();
         background.setLocation(0, 0);
-        dim = getToolkit().getScreenSize();
-        setSize(1024,520);
-        background.setSize(1024,520);
-        ImageIcon bg = new ImageIcon(new ImageIcon(Toolkit.getDefaultToolkit().getClass().getResource("/icons/selBack.jpg")).getImage().getScaledInstance(1024, 520, Image.SCALE_DEFAULT));
-        background.setIcon(bg);
+        dim = new Dimension(1024,520);//getToolkit().getScreenSize();
+        setSize(dim);
+//        background.setSize(1024,520);
+//        ImageIcon bg = new ImageIcon(new ImageIcon(Toolkit.getDefaultToolkit().getClass().getResource("/icons/selBack.jpg")).getImage().getScaledInstance(1024, 520, Image.SCALE_DEFAULT));
+//        background.setIcon(bg);
+        Tools.setBackground(background, dim, "selBack.jpg");
         txtNote.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
         newInvoice();
         

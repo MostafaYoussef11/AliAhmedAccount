@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="null" pageWidth="595" pageHeight="842" columnWidth="555" leftMargin="20" rightMargin="20" topMargin="20" bottomMargin="20" uuid="34936439-18cd-44d2-91ab-e5e74db9f4cb">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<parameter name="id_workgroup" class="java.lang.Integer">
+		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
+	</parameter>
+	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
+		<defaultValueExpression><![CDATA["E:\\Masrawy\\Account\\src\\Reborts\\StonClear\\"]]></defaultValueExpression>
+	</parameter>
+	<parameter name="sumImport" class="java.lang.Double"/>
+	<parameter name="sumExpenes" class="java.lang.Double"/>
+	<parameter name="countWorker" class="java.lang.Integer"/>
+	<queryString>
+		<![CDATA[SELECT
+    name_workgroup
+FROM
+     workgroup
+where
+id_workgroup =  $P{id_workgroup}]]>
+	</queryString>
+	<field name="name_workgroup" class="java.lang.String">
+		<fieldDescription><![CDATA[]]></fieldDescription>
+	</field>
+	<variable name="thefilter" class="java.lang.Double">
+		<variableExpression><![CDATA[$P{sumImport} - $P{sumExpenes}]]></variableExpression>
+	</variable>
+	<variable name="half" class="java.lang.Double">
+		<variableExpression><![CDATA[$V{thefilter} / 2]]></variableExpression>
+	</variable>
+	<variable name="oneWorker" class="java.lang.Double">
+		<variableExpression><![CDATA[$V{thefilter}/$P{countWorker}]]></variableExpression>
+	</variable>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="39" splitType="Stretch">
+			<staticText>
+				<reportElement x="293" y="0" width="122" height="38" uuid="b73f1adc-20ef-4a8c-a890-f4821ebb07f5"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="VIP Hala Bold" size="18"/>
+				</textElement>
+				<text><![CDATA[تصفية شغل ]]></text>
+			</staticText>
+			<textField>
+				<reportElement mode="Transparent" x="98" y="0" width="195" height="38" forecolor="#000000" backcolor="#FFFFFF" uuid="b8a8db83-b058-45f6-b0c5-c55400c3bcd4"/>
+				<textElement textAlignment="Right" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="VIP Hala Bold" size="18" isBold="false" isItalic="false" isUnderline="true" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{name_workgroup}]]></textFieldExpression>
+			</textField>
+		</band>
+	</title>
+	<columnHeader>
+		<band height="70" splitType="Stretch">
+			<staticText>
+				<reportElement x="0" y="0" width="277" height="35" uuid="14d7ca02-30f0-4adc-8892-2be5969c52b3"/>
+				<box>
+					<pen lineWidth="1.5"/>
+					<topPen lineWidth="1.5"/>
+					<leftPen lineWidth="1.5"/>
+					<bottomPen lineWidth="1.5"/>
+					<rightPen lineWidth="1.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="VIP Hala Bold" size="14" isBold="true"/>
+				</textElement>
+				<text><![CDATA[المصروفات]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="277" y="0" width="277" height="35" forecolor="#000000" backcolor="#FFFFFF" uuid="16178703-2e9d-4b55-9a3a-d4dc07d6cfe8"/>
+				<box>
+					<pen lineWidth="1.5"/>
+					<topPen lineWidth="1.5"/>
+					<leftPen lineWidth="1.5"/>
+					<bottomPen lineWidth="1.5"/>
+					<rightPen lineWidth="1.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="VIP Hala Bold" size="14" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[الوارد]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="454" y="35" width="100" height="35" uuid="1174179b-e687-4ce5-9103-98ea4bdd8c6d"/>
+				<box>
+					<pen lineWidth="1.5"/>
+					<topPen lineWidth="1.5"/>
+					<leftPen lineWidth="1.5"/>
+					<bottomPen lineWidth="1.5"/>
+					<rightPen lineWidth="1.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="VIP Hala Bold" size="14"/>
+				</textElement>
+				<text><![CDATA[المبلغ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="277" y="35" width="177" height="35" forecolor="#000000" backcolor="#FFFFFF" uuid="9d78e51d-3271-416a-a942-1483b5e446ff"/>
+				<box>
+					<pen lineWidth="1.5"/>
+					<topPen lineWidth="1.5"/>
+					<leftPen lineWidth="1.5"/>
+					<bottomPen lineWidth="1.5"/>
+					<rightPen lineWidth="1.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="VIP Hala Bold" size="14" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[البيان]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="177" y="35" width="100" height="35" uuid="47ced1ce-7a01-48e5-9376-787ad4fc7978"/>
+				<box>
+					<pen lineWidth="1.5"/>
+					<topPen lineWidth="1.5"/>
+					<leftPen lineWidth="1.5"/>
+					<bottomPen lineWidth="1.5"/>
+					<rightPen lineWidth="1.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font fontName="VIP Hala Bold" size="14"/>
+				</textElement>
+				<text><![CDATA[المبلغ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="0" y="35" width="177" height="35" forecolor="#000000" backcolor="#FFFFFF" uuid="7f25bb98-ba1f-42ab-abd8-e88ffb1c996a"/>
+				<box>
+					<pen lineWidth="1.5"/>
+					<topPen lineWidth="1.5"/>
+					<leftPen lineWidth="1.5"/>
+					<bottomPen lineWidth="1.5"/>
+					<rightPen lineWidth="1.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="VIP Hala Bold" size="14" isBold="false" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[البيان]]></text>
+			</staticText>
+		</band>
+	</columnHeader>
+	<detail>
+		<band height="35" splitType="Stretch">
+			<subreport>
+				<reportElement x="277" y="0" width="278" height="35" uuid="f40246e2-3aaf-4914-a26e-4e338733a190"/>
+				<subreportParameter name="id_workgroup">
+					<subreportParameterExpression><![CDATA[$P{id_workgroup}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="SUBREPORT_DIR">
+					<subreportParameterExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "ClearStonReport_imports.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement x="0" y="0" width="277" height="35" uuid="c0e6b0ef-f7da-448d-a03a-9763a596c391"/>
+				<subreportParameter name="id_workgroup">
+					<subreportParameterExpression><![CDATA[$P{id_workgroup}]]></subreportParameterExpression>
+				</subreportParameter>
+				<subreportParameter name="SUBREPORT_DIR">
+					<subreportParameterExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "ClearStonReport_subreport1.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+	</detail>
+	<summary>
+		<band height="158" splitType="Stretch">
+			<staticText>
+				<reportElement x="455" y="13" width="100" height="30" uuid="f06a52a0-b9b0-47cc-927c-5ace217eb66d"/>
+				<box>
+					<pen lineWidth="1.5"/>
+					<topPen lineWidth="1.5"/>
+					<leftPen lineWidth="1.5"/>
+					<bottomPen lineWidth="1.5"/>
+					<rightPen lineWidth="1.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[اجمالي الوارد]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="277" y="13" width="177" height="30" uuid="22b38309-0465-414c-8e8c-c7c60b91f64e"/>
+				<box>
+					<pen lineWidth="1.5"/>
+					<topPen lineWidth="1.5"/>
+					<leftPen lineWidth="1.5"/>
+					<bottomPen lineWidth="1.5"/>
+					<rightPen lineWidth="1.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{sumImport}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="455" y="43" width="100" height="35" uuid="85bfbcba-95bc-409b-afb6-57159cc7c74b"/>
+				<box>
+					<pen lineWidth="1.5"/>
+					<topPen lineWidth="1.5"/>
+					<leftPen lineWidth="1.5"/>
+					<bottomPen lineWidth="1.5"/>
+					<rightPen lineWidth="1.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[ المصروفات]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="277" y="43" width="177" height="35" uuid="ab533065-4e10-4f25-aa6b-40a70b346e9a"/>
+				<box>
+					<pen lineWidth="1.5"/>
+					<topPen lineWidth="1.5"/>
+					<leftPen lineWidth="1.5"/>
+					<bottomPen lineWidth="1.5"/>
+					<rightPen lineWidth="1.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{sumExpenes}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement x="177" y="13" width="100" height="65" uuid="7d992f36-30b5-478d-a3fa-ff0988e3bb46"/>
+				<box>
+					<pen lineWidth="1.5"/>
+					<topPen lineWidth="1.5"/>
+					<leftPen lineWidth="1.5"/>
+					<bottomPen lineWidth="1.5"/>
+					<rightPen lineWidth="1.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<text><![CDATA[الصافي]]></text>
+			</staticText>
+			<textField>
+				<reportElement x="0" y="13" width="177" height="65" uuid="f48353ab-0ae7-4ad8-a991-eb931282f68f"/>
+				<box>
+					<pen lineWidth="1.5"/>
+					<topPen lineWidth="1.5"/>
+					<leftPen lineWidth="1.5"/>
+					<bottomPen lineWidth="1.5"/>
+					<rightPen lineWidth="1.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="16" isBold="true"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{thefilter}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Transparent" x="455" y="78" width="100" height="35" forecolor="#000000" backcolor="#FFFFFF" uuid="3767973a-3a2f-474b-8d4c-3ca24f36a24f"/>
+				<box>
+					<pen lineWidth="1.5"/>
+					<topPen lineWidth="1.5"/>
+					<leftPen lineWidth="1.5"/>
+					<bottomPen lineWidth="1.5"/>
+					<rightPen lineWidth="1.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="16" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[النص]]></text>
+			</staticText>
+			<textField>
+				<reportElement mode="Transparent" x="277" y="78" width="177" height="35" forecolor="#000000" backcolor="#FFFFFF" uuid="5db930e6-4bca-46f0-b260-8f3d47220055"/>
+				<box>
+					<pen lineWidth="1.5"/>
+					<topPen lineWidth="1.5"/>
+					<leftPen lineWidth="1.5"/>
+					<bottomPen lineWidth="1.5"/>
+					<rightPen lineWidth="1.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="16" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{half}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Transparent" x="177" y="78" width="100" height="35" forecolor="#000000" backcolor="#FFFFFF" uuid="88266c01-e26a-4c47-9fa3-d9d935efc5a5"/>
+				<box>
+					<pen lineWidth="1.5"/>
+					<topPen lineWidth="1.5"/>
+					<leftPen lineWidth="1.5"/>
+					<bottomPen lineWidth="1.5"/>
+					<rightPen lineWidth="1.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="16" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[عدد العمال]]></text>
+			</staticText>
+			<textField>
+				<reportElement mode="Transparent" x="0" y="78" width="177" height="35" forecolor="#000000" backcolor="#FFFFFF" uuid="cd8184aa-de56-461f-b3a2-fa75cf5b7145"/>
+				<box>
+					<pen lineWidth="1.5"/>
+					<topPen lineWidth="1.5"/>
+					<leftPen lineWidth="1.5"/>
+					<bottomPen lineWidth="1.5"/>
+					<rightPen lineWidth="1.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="16" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$P{countWorker}]]></textFieldExpression>
+			</textField>
+			<staticText>
+				<reportElement mode="Transparent" x="455" y="113" width="100" height="40" forecolor="#000000" backcolor="#FFFFFF" uuid="fd124b91-c002-43da-b960-4a2d25c5b651"/>
+				<box>
+					<pen lineWidth="1.5"/>
+					<topPen lineWidth="1.5"/>
+					<leftPen lineWidth="1.5"/>
+					<bottomPen lineWidth="1.5"/>
+					<rightPen lineWidth="1.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="18" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[حق العامل]]></text>
+			</staticText>
+			<textField>
+				<reportElement mode="Transparent" x="0" y="113" width="455" height="40" forecolor="#000000" backcolor="#FFFFFF" uuid="0bcd188b-415f-4110-8cad-414d34c33691"/>
+				<box>
+					<pen lineWidth="1.5"/>
+					<topPen lineWidth="1.5"/>
+					<leftPen lineWidth="1.5"/>
+					<bottomPen lineWidth="1.5"/>
+					<rightPen lineWidth="1.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="18" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{oneWorker}]]></textFieldExpression>
+			</textField>
+		</band>
+	</summary>
+</jasperReport>

@@ -8,6 +8,7 @@ package Frams;
 import Entity.ClientPerson;
 import Entity.Send_receiveCash;
 import Entity.VFCashClass;
+import Entity.numberPhoneClass;
 import Utilities.Tools;
 import java.awt.Dimension;
 import java.awt.Font;
@@ -583,7 +584,7 @@ public class SendCashFrame extends javax.swing.JFrame {
         txt_discont.setText("");
         txt_cost.setText("");
         txt_amount.setText("");
-        Tools.txtNumberClient(txt_valu,txtNumberClient, this ,680 ,222);
+        new numberPhoneClass().txtNumberClient(txt_valu,txtNumberClient, this ,680 ,222);
         send.fillTableSend(jTable1);
     }
 

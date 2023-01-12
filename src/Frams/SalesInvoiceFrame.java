@@ -52,14 +52,18 @@ public class SalesInvoiceFrame extends javax.swing.JFrame {
     private String high_name_unit ,  balance;
     private double balanceItem;
     Items items;
+   // Dimension dim;
     public SalesInvoiceFrame() {
         initComponents();
+        dim = new Dimension(1024,520);
         background.setLocation(0, 0);
-        dim = getToolkit().getScreenSize();
-        setSize(1024,520);
-        background.setSize(1024,520);
-        ImageIcon bg = new ImageIcon(new ImageIcon(Toolkit.getDefaultToolkit().getClass().getResource("/icons/selBack.jpg")).getImage().getScaledInstance(1024, 520, Image.SCALE_DEFAULT));
-        background.setIcon(bg);
+        
+       // dim = getToolkit().getScreenSize();
+        super.setSize(dim);
+        Tools.setBackground(background, dim, "selBack.jpg");
+//        background.setSize(1024,520);
+//        ImageIcon bg = new ImageIcon(new ImageIcon(Toolkit.getDefaultToolkit().getClass().getResource("/icons/selBack.jpg")).getImage().getScaledInstance(1024, 520, Image.SCALE_DEFAULT));
+//        background.setIcon(bg);
         txtNote.setComponentOrientation(ComponentOrientation.RIGHT_TO_LEFT);
         newInvoice();
         

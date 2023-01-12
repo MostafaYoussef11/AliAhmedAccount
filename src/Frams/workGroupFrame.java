@@ -106,7 +106,7 @@ public class workGroupFrame extends javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        btnNew.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/meeting.png"))); // NOI18N
+        btnNew.setIcon(new javax.swing.ImageIcon("E:\\Masrawy\\Account\\src\\Icons\\meeting.png")); // NOI18N
         btnNew.setText("مجموعة جديدة");
         btnNew.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -114,7 +114,7 @@ public class workGroupFrame extends javax.swing.JFrame {
             }
         });
 
-        btnEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/pencil (1).png"))); // NOI18N
+        btnEdit.setIcon(new javax.swing.ImageIcon("E:\\Masrawy\\Account\\src\\Icons\\pencil (1).png")); // NOI18N
         btnEdit.setText("تعديل");
         btnEdit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -122,7 +122,7 @@ public class workGroupFrame extends javax.swing.JFrame {
             }
         });
 
-        btnDel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/delete.png"))); // NOI18N
+        btnDel.setIcon(new javax.swing.ImageIcon("E:\\Masrawy\\Account\\src\\Icons\\delete.png")); // NOI18N
         btnDel.setText("حذف");
         btnDel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -130,7 +130,7 @@ public class workGroupFrame extends javax.swing.JFrame {
             }
         });
 
-        btnRebort.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/enable.png"))); // NOI18N
+        btnRebort.setIcon(new javax.swing.ImageIcon("E:\\Masrawy\\Account\\src\\Icons\\enable.png")); // NOI18N
         btnRebort.setText("تعطيل");
         btnRebort.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -138,7 +138,7 @@ public class workGroupFrame extends javax.swing.JFrame {
             }
         });
 
-        btnExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/exit.png"))); // NOI18N
+        btnExit.setIcon(new javax.swing.ImageIcon("E:\\Masrawy\\Account\\src\\Icons\\exit.png")); // NOI18N
         btnExit.setText("خروج");
         btnExit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -199,7 +199,7 @@ public class workGroupFrame extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, Short.MAX_VALUE)
                     .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, 142, Short.MAX_VALUE)
                     .addComponent(txtActive, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -287,7 +287,7 @@ public class workGroupFrame extends javax.swing.JFrame {
                 Tools.showErrorMsg("اكتب اسم المجموعة");
             }
             else{
-                String sql = "INSERT INTO workgroup values("+id+",'"+name+"',"+id_deal+",0);";
+                String sql = "INSERT INTO workgroup values("+id+",'"+name+"',"+id_deal+",1);";
                 boolean isAdd = ConnectDB.ExucuteAnyQuery(sql);
                 if(isAdd){
                     Tools.showInfoMsg("تم الحفظ بنجاح" , "حفظ");

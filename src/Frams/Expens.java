@@ -8,6 +8,7 @@ package Frams;
 import Entity.goldClasses;
 import Utilities.ConnectDB;
 import Utilities.Tools;
+import java.awt.Dimension;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -25,8 +26,12 @@ public class Expens extends javax.swing.JFrame {
      * Creates new form expels
      */
     private goldClasses gold;
+    Dimension dim;
     public Expens() {
         initComponents();
+        dim = new Dimension(1010, 430);
+        super.setSize(dim);
+        Tools.setBackground(background, dim, "17249.jpg");
         gold = new goldClasses();
     }
 
@@ -65,6 +70,7 @@ public class Expens extends javax.swing.JFrame {
         btnExit = new javax.swing.JButton();
         jLabel8 = new javax.swing.JLabel();
         id_daily = new javax.swing.JLabel();
+        background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("مصروفات التشغيل");
@@ -73,8 +79,10 @@ public class Expens extends javax.swing.JFrame {
                 formWindowOpened(evt);
             }
         });
+        getContentPane().setLayout(null);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel1.setOpaque(false);
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("رقم");
@@ -178,6 +186,9 @@ public class Expens extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        getContentPane().add(jPanel1);
+        jPanel1.setBounds(10, 6, 959, 88);
+
         tableExpens.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -215,15 +226,22 @@ public class Expens extends javax.swing.JFrame {
             tableExpens.getColumnModel().getColumn(5).setPreferredWidth(50);
         }
 
+        getContentPane().add(jScrollPane1);
+        jScrollPane1.setBounds(10, 100, 959, 200);
+
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel7.setText("البحث");
         jLabel7.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        getContentPane().add(jLabel7);
+        jLabel7.setBounds(869, 308, 100, 27);
 
         txtSearch.setHorizontalAlignment(javax.swing.JTextField.CENTER);
+        getContentPane().add(txtSearch);
+        txtSearch.setBounds(209, 308, 656, 27);
 
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        btnNew.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/add-file.png"))); // NOI18N
+        btnNew.setIcon(new javax.swing.ImageIcon("E:\\Masrawy\\Account\\dist\\Icons\\add-file.png")); // NOI18N
         btnNew.setText("جديد");
         btnNew.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -231,7 +249,7 @@ public class Expens extends javax.swing.JFrame {
             }
         });
 
-        btnSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/diskette (1).png"))); // NOI18N
+        btnSave.setIcon(new javax.swing.ImageIcon("E:\\Masrawy\\Account\\dist\\Icons\\diskette (1).png")); // NOI18N
         btnSave.setText("حفظ");
         btnSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -239,7 +257,7 @@ public class Expens extends javax.swing.JFrame {
             }
         });
 
-        btnEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/pencil (1).png"))); // NOI18N
+        btnEdit.setIcon(new javax.swing.ImageIcon("E:\\Masrawy\\Account\\dist\\Icons\\pencil (1).png")); // NOI18N
         btnEdit.setText("تعديل");
         btnEdit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -247,7 +265,7 @@ public class Expens extends javax.swing.JFrame {
             }
         });
 
-        btnUpdate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/exchange.png"))); // NOI18N
+        btnUpdate.setIcon(new javax.swing.ImageIcon("E:\\Masrawy\\Account\\dist\\Icons\\exchange.png")); // NOI18N
         btnUpdate.setText("تحديث");
         btnUpdate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -255,7 +273,7 @@ public class Expens extends javax.swing.JFrame {
             }
         });
 
-        btnDel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/delete.png"))); // NOI18N
+        btnDel.setIcon(new javax.swing.ImageIcon("E:\\Masrawy\\Account\\dist\\Icons\\delete.png")); // NOI18N
         btnDel.setText("حذف");
         btnDel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -263,7 +281,7 @@ public class Expens extends javax.swing.JFrame {
             }
         });
 
-        btnExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/exit.png"))); // NOI18N
+        btnExit.setIcon(new javax.swing.ImageIcon("E:\\Masrawy\\Account\\dist\\Icons\\exit.png")); // NOI18N
         btnExit.setText("خروج");
         btnExit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -304,51 +322,23 @@ public class Expens extends javax.swing.JFrame {
                 .addGap(3, 3, 3))
         );
 
+        getContentPane().add(jPanel2);
+        jPanel2.setBounds(10, 346, 959, 40);
+
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel8.setText("قيد اليومية");
         jLabel8.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        getContentPane().add(jLabel8);
+        jLabel8.setBounds(133, 308, 72, 27);
 
         id_daily.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         id_daily.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        getContentPane().add(id_daily);
+        id_daily.setBounds(10, 308, 117, 27);
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(id_daily, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 72, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(txtSearch)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addGap(6, 6, 6)
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(8, 8, 8)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(id_daily, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                        .addComponent(txtSearch, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
+        background.setText("jLabel9");
+        getContentPane().add(background);
+        background.setBounds(0, 0, 60, 14);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -496,6 +486,7 @@ public class Expens extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel background;
     private javax.swing.JButton btnDel;
     private javax.swing.JButton btnEdit;
     private javax.swing.JButton btnExit;

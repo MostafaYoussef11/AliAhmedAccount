@@ -30,13 +30,16 @@ public class ClintFrame extends javax.swing.JFrame {
      * Creates new form ClintFrame
      */
     ClientPerson c = new ClientPerson();
+    Dimension dim;
     public ClintFrame() {
         initComponents(); 
-        setSize(new Dimension(795, 617));
+        dim = new Dimension(795, 617);
+        setSize(dim);
         background.setLocation(0, 0);
-        background.setSize(780,600);
-        ImageIcon bg = new ImageIcon(new ImageIcon(Toolkit.getDefaultToolkit().getClass().getResource("/icons/clientbg.jpg")).getImage().getScaledInstance(780, 600, Image.SCALE_DEFAULT));
-        background.setIcon(bg);
+        background.setSize(dim);
+//        ImageIcon bg = new ImageIcon(new ImageIcon(Toolkit.getDefaultToolkit().getClass().getResource("/icons/clientbg.jpg")).getImage().getScaledInstance(780, 600, Image.SCALE_DEFAULT));
+//        background.setIcon(bg);
+        Tools.setBackground(background, dim, "clientbg.jpg");
         txtId.setText(c.lastid());
         Tools.disableButOpen(btPanel);
         txtFirsbalance.setText("0.00");

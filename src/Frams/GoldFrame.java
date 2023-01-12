@@ -42,6 +42,8 @@ public class GoldFrame extends javax.swing.JFrame {
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
+        jButton12 = new javax.swing.JButton();
+        jButton13 = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         jButton7 = new javax.swing.JButton();
         jButton9 = new javax.swing.JButton();
@@ -51,6 +53,8 @@ public class GoldFrame extends javax.swing.JFrame {
         jPanel5 = new javax.swing.JPanel();
         jButton14 = new javax.swing.JButton();
         jButton16 = new javax.swing.JButton();
+        jButton17 = new javax.swing.JButton();
+        jButton18 = new javax.swing.JButton();
         background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -60,7 +64,7 @@ public class GoldFrame extends javax.swing.JFrame {
         jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "شغل الجبل", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP));
         jPanel1.setOpaque(false);
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/hierarchy.png"))); // NOI18N
+        jButton2.setIcon(new javax.swing.ImageIcon("E:\\Masrawy\\Account\\dist\\Icons\\hierarchy.png")); // NOI18N
         jButton2.setText("مجموعات العمل");
         jButton2.setToolTipText("اضافة و تعديل مجموعات العمل");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
@@ -69,7 +73,7 @@ public class GoldFrame extends javax.swing.JFrame {
             }
         });
 
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/account.png"))); // NOI18N
+        jButton3.setIcon(new javax.swing.ImageIcon("E:\\Masrawy\\Account\\dist\\Icons\\account.png")); // NOI18N
         jButton3.setText("الحسابات");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -77,7 +81,7 @@ public class GoldFrame extends javax.swing.JFrame {
             }
         });
 
-        jButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/diagram.png"))); // NOI18N
+        jButton8.setIcon(new javax.swing.ImageIcon("E:\\Masrawy\\Account\\dist\\Icons\\diagram.png")); // NOI18N
         jButton8.setText("تصفية حساب مجموعة");
         jButton8.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -116,7 +120,7 @@ public class GoldFrame extends javax.swing.JFrame {
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "مدفوعات", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP));
         jPanel3.setOpaque(false);
 
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/wallet.png"))); // NOI18N
+        jButton4.setIcon(new javax.swing.ImageIcon("E:\\Masrawy\\Account\\dist\\Icons\\wallet.png")); // NOI18N
         jButton4.setText("صادر للحسابات");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -124,7 +128,7 @@ public class GoldFrame extends javax.swing.JFrame {
             }
         });
 
-        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/expenses.png"))); // NOI18N
+        jButton5.setIcon(new javax.swing.ImageIcon("E:\\Masrawy\\Account\\dist\\Icons\\expense.png")); // NOI18N
         jButton5.setText("مصروفات");
         jButton5.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -132,11 +136,27 @@ public class GoldFrame extends javax.swing.JFrame {
             }
         });
 
-        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/work.png"))); // NOI18N
+        jButton6.setIcon(new javax.swing.ImageIcon("E:\\Masrawy\\Account\\dist\\Icons\\work.png")); // NOI18N
         jButton6.setText("اساسيات وتجهيزات");
         jButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton6ActionPerformed(evt);
+            }
+        });
+
+        jButton12.setIcon(new javax.swing.ImageIcon("E:\\Masrawy\\Account\\dist\\Icons\\lorry.png")); // NOI18N
+        jButton12.setText("مصروفات الجامبو");
+        jButton12.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton12ActionPerformed(evt);
+            }
+        });
+
+        jButton13.setIcon(new javax.swing.ImageIcon("E:\\Masrawy\\Account\\dist\\Icons\\work.png")); // NOI18N
+        jButton13.setText("مصروفات الطاحونة");
+        jButton13.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton13ActionPerformed(evt);
             }
         });
 
@@ -149,7 +169,9 @@ public class GoldFrame extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton13, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(11, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
@@ -160,17 +182,21 @@ public class GoldFrame extends javax.swing.JFrame {
                 .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(51, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton13, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel3);
-        jPanel3.setBounds(450, 280, 190, 190);
+        jPanel3.setBounds(450, 280, 190, 260);
 
         jPanel4.setBackground(new Color(0.0f, 0.0f, 0.0f, 0.05f));
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "تقارير", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP));
         jPanel4.setOpaque(false);
 
-        jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/business-report.png"))); // NOI18N
+        jButton7.setIcon(new javax.swing.ImageIcon("E:\\Masrawy\\Account\\dist\\Icons\\business-report.png")); // NOI18N
         jButton7.setText("تقرير مصروفات اليوم");
         jButton7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -178,7 +204,7 @@ public class GoldFrame extends javax.swing.JFrame {
             }
         });
 
-        jButton9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/report.png"))); // NOI18N
+        jButton9.setIcon(new javax.swing.ImageIcon("E:\\Masrawy\\Account\\dist\\Icons\\report.png")); // NOI18N
         jButton9.setText("تقرير مصروفات بتاريخ");
         jButton9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -186,7 +212,7 @@ public class GoldFrame extends javax.swing.JFrame {
             }
         });
 
-        jButton10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/report.png"))); // NOI18N
+        jButton10.setIcon(new javax.swing.ImageIcon("E:\\Masrawy\\Account\\dist\\Icons\\report.png")); // NOI18N
         jButton10.setText("كشف حساب ");
         jButton10.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -194,7 +220,7 @@ public class GoldFrame extends javax.swing.JFrame {
             }
         });
 
-        jButton11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/budget.png"))); // NOI18N
+        jButton11.setIcon(new javax.swing.ImageIcon("E:\\Masrawy\\Account\\dist\\Icons\\budget.png")); // NOI18N
         jButton11.setText("تصفية حساب");
         jButton11.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -202,7 +228,7 @@ public class GoldFrame extends javax.swing.JFrame {
             }
         });
 
-        jButton15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/seo-report.png"))); // NOI18N
+        jButton15.setIcon(new javax.swing.ImageIcon("E:\\Masrawy\\Account\\dist\\Icons\\seo-report.png")); // NOI18N
         jButton15.setText("كشف حساب مورد");
         jButton15.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -250,7 +276,7 @@ public class GoldFrame extends javax.swing.JFrame {
         jPanel5.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "الواردات", javax.swing.border.TitledBorder.CENTER, javax.swing.border.TitledBorder.TOP));
         jPanel5.setOpaque(false);
 
-        jButton14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/ingots.png"))); // NOI18N
+        jButton14.setIcon(new javax.swing.ImageIcon("E:\\Masrawy\\Account\\dist\\Icons\\ingots.png")); // NOI18N
         jButton14.setText("الوارد");
         jButton14.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -258,11 +284,27 @@ public class GoldFrame extends javax.swing.JFrame {
             }
         });
 
-        jButton16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/loader.png"))); // NOI18N
+        jButton16.setIcon(new javax.swing.ImageIcon("E:\\Masrawy\\Account\\dist\\Icons\\loader.png")); // NOI18N
         jButton16.setText("سركي معدة");
         jButton16.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton16ActionPerformed(evt);
+            }
+        });
+
+        jButton17.setIcon(new javax.swing.ImageIcon("E:\\Masrawy\\Account\\dist\\Icons\\lorry.png")); // NOI18N
+        jButton17.setText("وارد الشفر");
+        jButton17.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton17ActionPerformed(evt);
+            }
+        });
+
+        jButton18.setIcon(new javax.swing.ImageIcon("E:\\Masrawy\\Account\\dist\\Icons\\loan (5).png")); // NOI18N
+        jButton18.setText("وارد الحسابات");
+        jButton18.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton18ActionPerformed(evt);
             }
         });
 
@@ -274,7 +316,9 @@ public class GoldFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jButton14, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jButton16, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton16, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton17, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButton18, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel5Layout.setVerticalGroup(
@@ -283,11 +327,15 @@ public class GoldFrame extends javax.swing.JFrame {
                 .addComponent(jButton14, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton16, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 91, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton17, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton18, javax.swing.GroupLayout.PREFERRED_SIZE, 35, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 69, Short.MAX_VALUE))
         );
 
         getContentPane().add(jPanel5);
-        jPanel5.setBounds(670, 280, 190, 190);
+        jPanel5.setBounds(670, 280, 190, 250);
         getContentPane().add(background);
         background.setBounds(0, 0, 50, 40);
 
@@ -360,6 +408,31 @@ public class GoldFrame extends javax.swing.JFrame {
 
     }//GEN-LAST:event_jButton16ActionPerformed
 
+    private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
+        // TODO add your handling code here:
+       ChefrExpensFrame chef = new ChefrExpensFrame();
+       Tools.openJFram(chef);
+    }//GEN-LAST:event_jButton12ActionPerformed
+
+    private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
+        // TODO add your handling code here:
+        EpenesMillFrame emf = new EpenesMillFrame();
+        Tools.openJFram(emf);
+    }//GEN-LAST:event_jButton13ActionPerformed
+
+    private void jButton17ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton17ActionPerformed
+        // TODO add your handling code here:
+        ChevroletImportsFrame chevroletImports = new ChevroletImportsFrame();
+        Tools.openJFram(chevroletImports);
+    
+    }//GEN-LAST:event_jButton17ActionPerformed
+
+    private void jButton18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton18ActionPerformed
+        // TODO add your handling code here:
+        ImportToAccountFrame imtAf = new ImportToAccountFrame();
+        Tools.openJFram(imtAf);
+    }//GEN-LAST:event_jButton18ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -399,9 +472,13 @@ public class GoldFrame extends javax.swing.JFrame {
     private javax.swing.JLabel background;
     private javax.swing.JButton jButton10;
     private javax.swing.JButton jButton11;
+    private javax.swing.JButton jButton12;
+    private javax.swing.JButton jButton13;
     private javax.swing.JButton jButton14;
     private javax.swing.JButton jButton15;
     private javax.swing.JButton jButton16;
+    private javax.swing.JButton jButton17;
+    private javax.swing.JButton jButton18;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;

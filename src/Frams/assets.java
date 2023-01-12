@@ -10,6 +10,7 @@ import Entity.Suppliers;
 import Entity.goldClasses;
 import Utilities.ConnectDB;
 import Utilities.Tools;
+import java.awt.Dimension;
 import java.sql.SQLException;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -24,12 +25,16 @@ import java.util.logging.Logger;
 public class assets extends javax.swing.JFrame {
     private String id_casher;
     private goldClasses gold;
+    Dimension dim;
     /**
      * Creates new form assets
      */
 
     public assets() {
         initComponents();
+        dim = new Dimension(700, 480);
+        super.setSize(dim);
+        Tools.setBackground(background, dim, "1230.jpg");
         //SetNew();
     }
 
@@ -66,6 +71,7 @@ public class assets extends javax.swing.JFrame {
         btnDel = new javax.swing.JButton();
         btnPrint = new javax.swing.JButton();
         btnEixt = new javax.swing.JButton();
+        background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("اساسيات و تجهيزات");
@@ -74,8 +80,10 @@ public class assets extends javax.swing.JFrame {
                 formWindowOpened(evt);
             }
         });
+        getContentPane().setLayout(null);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel1.setOpaque(false);
 
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel1.setText("رقم");
@@ -191,6 +199,9 @@ public class assets extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        getContentPane().add(jPanel1);
+        jPanel1.setBounds(10, 11, 655, 128);
+
         tableAssets.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
@@ -226,9 +237,13 @@ public class assets extends javax.swing.JFrame {
             tableAssets.getColumnModel().getColumn(4).setPreferredWidth(50);
         }
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        getContentPane().add(jScrollPane1);
+        jScrollPane1.setBounds(10, 145, 655, 231);
 
-        btnNew.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/add_1.png"))); // NOI18N
+        jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel2.setOpaque(false);
+
+        btnNew.setIcon(new javax.swing.ImageIcon("E:\\Masrawy\\Account\\dist\\Icons\\add_1.png")); // NOI18N
         btnNew.setText("جديد");
         btnNew.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -236,7 +251,7 @@ public class assets extends javax.swing.JFrame {
             }
         });
 
-        btnSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/save.png"))); // NOI18N
+        btnSave.setIcon(new javax.swing.ImageIcon("E:\\Masrawy\\Account\\dist\\Icons\\save.png")); // NOI18N
         btnSave.setText("حفظ");
         btnSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -244,7 +259,7 @@ public class assets extends javax.swing.JFrame {
             }
         });
 
-        btnEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/pencil (1).png"))); // NOI18N
+        btnEdit.setIcon(new javax.swing.ImageIcon("E:\\Masrawy\\Account\\dist\\Icons\\pencil (1).png")); // NOI18N
         btnEdit.setText("تعديل");
         btnEdit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -252,7 +267,7 @@ public class assets extends javax.swing.JFrame {
             }
         });
 
-        btnUpdate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/exchange.png"))); // NOI18N
+        btnUpdate.setIcon(new javax.swing.ImageIcon("E:\\Masrawy\\Account\\dist\\Icons\\exchange.png")); // NOI18N
         btnUpdate.setText("تحديث");
         btnUpdate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -260,7 +275,7 @@ public class assets extends javax.swing.JFrame {
             }
         });
 
-        btnDel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/delete.png"))); // NOI18N
+        btnDel.setIcon(new javax.swing.ImageIcon("E:\\Masrawy\\Account\\dist\\Icons\\delete.png")); // NOI18N
         btnDel.setText("حذف");
         btnDel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -268,10 +283,10 @@ public class assets extends javax.swing.JFrame {
             }
         });
 
-        btnPrint.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/printer.png"))); // NOI18N
+        btnPrint.setIcon(new javax.swing.ImageIcon("E:\\Masrawy\\Account\\dist\\Icons\\printer.png")); // NOI18N
         btnPrint.setText("طباعة");
 
-        btnEixt.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/exit.png"))); // NOI18N
+        btnEixt.setIcon(new javax.swing.ImageIcon("E:\\Masrawy\\Account\\dist\\Icons\\exit.png")); // NOI18N
         btnEixt.setText("خروج");
         btnEixt.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -315,29 +330,12 @@ public class assets extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jScrollPane1)
-                    .addComponent(jPanel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 231, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
+        getContentPane().add(jPanel2);
+        jPanel2.setBounds(10, 382, 655, 56);
+
+        background.setText("jLabel6");
+        getContentPane().add(background);
+        background.setBounds(0, 0, 34, 14);
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -463,6 +461,7 @@ public class assets extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel background;
     private javax.swing.JButton btnDel;
     private javax.swing.JButton btnEdit;
     private javax.swing.JButton btnEixt;

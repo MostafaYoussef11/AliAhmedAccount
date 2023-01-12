@@ -135,7 +135,7 @@ public class SendBetweenCashF extends javax.swing.JFrame {
         jLabel5.setText("القيمة");
         jLabel5.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        txt_valu.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter()));
+        txt_valu.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("###0.###"))));
         txt_valu.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txt_valu.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         txt_valu.addKeyListener(new java.awt.event.KeyAdapter() {

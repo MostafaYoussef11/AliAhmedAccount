@@ -28,11 +28,16 @@ public enum TypeCasherTransaction {
     deficiency,  // عجز الجرد  // Creditor
     excess,       // زيادة في الجرد// Debit
     accountExport , // Creditor  Export To Account
+    accountImport,  // Debit import from Account
     expensGold ,     // Creditor Expens of Gold
     importsGold ,     // Debit import mony of Sell Gold
     assetsGold,
     getLoans,  // Debit imoprt Money of Loans
     paymentLoans , // Creditor Loans
     debitToBank,  // Creditor ايداع في البنك و خصم من الخزنة
-    creditFromBank // Debit سحب من البنك و ايداع في الخزنة
+    creditFromBank ,// Debit سحب من البنك و ايداع في الخزنة
+    ChefrExpens, // Creditor مصروفات الجامبو
+    ChefrImport,// Debit الوارد من الجامبو
+    MillExpens, // Creditor مصروفات الطاحونة
+    MillImport // Debit الوارد من الطاحونة
 }

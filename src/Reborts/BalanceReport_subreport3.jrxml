@@ -4,8 +4,7 @@
 	<property name="ireport.x" value="0"/>
 	<property name="ireport.y" value="0"/>
 	<queryString>
-		<![CDATA[SELECT SUM(totalcash.NowBalance) as balance FROM `totalcash`
-]]>
+		<![CDATA[SELECT SUM(totalcash.NowBalance) as balance FROM `totalcash`]]>
 	</queryString>
 	<field name="balance" class="java.lang.Double">
 		<fieldDescription><![CDATA[]]></fieldDescription>
@@ -26,7 +25,7 @@
 				</textElement>
 				<text><![CDATA[رصيد المحافظ الاليكترونية]]></text>
 			</staticText>
-			<textField>
+			<textField pattern="#,##0.00">
 				<reportElement x="180" y="0" width="120" height="35" uuid="632ae699-ecfc-404b-bfc0-a9acd90b893f"/>
 				<box>
 					<pen lineWidth="1.5"/>

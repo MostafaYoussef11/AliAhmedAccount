@@ -10,6 +10,7 @@ import Entity.ClientPerson;
 import Entity.Fawrypay;
 import Entity.MasaryPay;
 import Entity.masary_Utilites;
+import Entity.numberPhoneClass;
 import Utilities.Tools;
 import java.awt.Component;
 import java.awt.Dimension;
@@ -62,7 +63,7 @@ public class FawrypayFrame extends javax.swing.JFrame {
 
     private void newMasaray(){
         Tools.disableButOpen(btPanel);
-        Tools.txtNumberClient(txtAmount,txtPhone, this, 275, 290);
+        new numberPhoneClass().txtNumberClient(txtAmount,txtPhone, this, 275, 290);
         client.FillComboAllNameClient(combClient);
         Bee_util.fillComboCategoryUtilites(comUtility);
         String nameUtility = comUtility.getSelectedItem().toString();

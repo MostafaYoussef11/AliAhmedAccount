@@ -61,7 +61,7 @@ public class FilterOhdaFrame extends javax.swing.JFrame {
         btexit = new javax.swing.JButton();
         btprint = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel1.setOpaque(false);

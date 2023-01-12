@@ -134,10 +134,7 @@ public class Items implements Ent{
         String sql = "SELECT id_items as id FROM items WHERE name_items='"+nameItem+"';";
         return ConnectDB.getIdFromName(sql);
     }
-//    public String getIdUnitFromName(String nameItem){
-//        String sql = "SELECT id FROM items WHERE name_items='"+nameItem+"';";
-//        return ConnectDB.getIdFromName(sql);
-//    }
+
     public String getLastIdPriceList(){
         return ConnectDB.LastId("priselist", "id_priceList");
     }

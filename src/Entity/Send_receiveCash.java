@@ -107,7 +107,7 @@ public class Send_receiveCash {
                         break;
                   } 
                   if(pstmt_casher.executeUpdate() == 1){
-                      Tools.SavePhoneNumber(Number_VF_cash);
+                      new numberPhoneClass().SavePhoneNumber(Number_VF_cash);
                       isSaved = true;
                       con.commit();
                       con.close();
@@ -254,7 +254,7 @@ public class Send_receiveCash {
               pstmt_Client.setString(3, "تحويل فودافون كاش رقم " + number_client);
               int rowClientAffect = pstmt_Client.executeUpdate();
               if(rowClientAffect == 1){
-                Tools.SavePhoneNumber(number_client);
+                new numberPhoneClass().SavePhoneNumber(number_client);
                 con.commit();
                 con.close();
                 isSave = true;

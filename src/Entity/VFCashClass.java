@@ -26,7 +26,6 @@ public class VFCashClass {
     private String id_international ;
     private String sim;
     private double balance ;
-    
     private Connection con;
     private PreparedStatement pstmt;
     

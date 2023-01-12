@@ -88,6 +88,8 @@ public class Clearing extends javax.swing.JFrame {
         jLabel19 = new javax.swing.JLabel();
         txtClear = new javax.swing.JLabel();
         edWorker = new javax.swing.JToggleButton();
+        jLabel22 = new javax.swing.JLabel();
+        txtCreditArea = new javax.swing.JTextField();
         Bocklen = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
         txtBoclen = new javax.swing.JLabel();
@@ -113,6 +115,7 @@ public class Clearing extends javax.swing.JFrame {
         btnPrint = new javax.swing.JButton();
         btnClear = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("تصفية الشغل");
@@ -124,7 +127,6 @@ public class Clearing extends javax.swing.JFrame {
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/budget_1.png"))); // NOI18N
         jLabel1.setText("تصفية حساب مجموعة");
         jLabel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -136,7 +138,7 @@ public class Clearing extends javax.swing.JFrame {
 
         clearing.setBackground(new java.awt.Color(255, 204, 204));
         clearing.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        clearing.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/calculator.png"))); // NOI18N
+        clearing.setIcon(new javax.swing.ImageIcon("E:\\Masrawy\\Account\\src\\Icons\\calculator.png")); // NOI18N
         clearing.setText("تصفية الحساب");
         clearing.setOpaque(false);
         clearing.addActionListener(new java.awt.event.ActionListener() {
@@ -245,7 +247,7 @@ public class Clearing extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, GhorbalLayout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(GhorbalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtTthirds, javax.swing.GroupLayout.DEFAULT_SIZE, 312, Short.MAX_VALUE)
+                    .addComponent(txtTthirds, javax.swing.GroupLayout.DEFAULT_SIZE, 388, Short.MAX_VALUE)
                     .addComponent(txtCar, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(txtoneWork, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(comAccounts, javax.swing.GroupLayout.Alignment.TRAILING, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
@@ -303,7 +305,7 @@ public class Clearing extends javax.swing.JFrame {
                 .addComponent(isTren, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE))
         );
 
-        tabPanel.addTab("غربال", new javax.swing.ImageIcon(getClass().getResource("/icons/loader.png")), Ghorbal); // NOI18N
+        tabPanel.addTab("غربال", new javax.swing.ImageIcon("E:\\Masrawy\\Account\\src\\Icons\\loader.png"), Ghorbal); // NOI18N
 
         Ston.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
@@ -364,6 +366,9 @@ public class Clearing extends javax.swing.JFrame {
         txtHworker.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtHworker.setEnabled(false);
         txtHworker.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txtHworkerKeyReleased(evt);
+            }
             public void keyTyped(java.awt.event.KeyEvent evt) {
                 txtHworkerKeyTyped(evt);
             }
@@ -376,12 +381,20 @@ public class Clearing extends javax.swing.JFrame {
         txtClear.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         txtClear.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        edWorker.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/pencil.png"))); // NOI18N
+        edWorker.setIcon(new javax.swing.ImageIcon("E:\\Masrawy\\Account\\src\\Icons\\pencil.png")); // NOI18N
         edWorker.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 edWorkerActionPerformed(evt);
             }
         });
+
+        jLabel22.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel22.setText("حق المكان");
+        jLabel22.setToolTipText("");
+        jLabel22.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+
+        txtCreditArea.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        txtCreditArea.setHorizontalAlignment(javax.swing.JTextField.CENTER);
 
         javax.swing.GroupLayout StonLayout = new javax.swing.GroupLayout(Ston);
         Ston.setLayout(StonLayout);
@@ -396,7 +409,7 @@ public class Clearing extends javax.swing.JFrame {
                         .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 61, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(txtHtow, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, StonLayout.createSequentialGroup()
-                        .addComponent(edWorker, javax.swing.GroupLayout.DEFAULT_SIZE, 98, Short.MAX_VALUE)
+                        .addComponent(edWorker, javax.swing.GroupLayout.DEFAULT_SIZE, 136, Short.MAX_VALUE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(txtHworker, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -406,21 +419,18 @@ public class Clearing extends javax.swing.JFrame {
                     .addComponent(jLabel18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(StonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(StonLayout.createSequentialGroup()
-                        .addGap(8, 8, 8)
-                        .addComponent(txtHfilter, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, StonLayout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(StonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txxtHassets, javax.swing.GroupLayout.DEFAULT_SIZE, 156, Short.MAX_VALUE)
-                            .addComponent(txtClear, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(StonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel14, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel19, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addComponent(txtHfilter, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtClear, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtCreditArea, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txxtHassets, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(StonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel14, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jLabel22, javax.swing.GroupLayout.PREFERRED_SIZE, 92, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap())
         );
         StonLayout.setVerticalGroup(
@@ -443,17 +453,23 @@ public class Clearing extends javax.swing.JFrame {
                     .addComponent(jLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(comAccount))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(StonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(StonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jLabel18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtHworker, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+                        .addComponent(edWorker, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(StonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                        .addComponent(jLabel22, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(txtCreditArea, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(StonLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jLabel18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtHworker, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
-                    .addComponent(jLabel19, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(txtClear, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(edWorker, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel19, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtClear, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 38, Short.MAX_VALUE))
             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        tabPanel.addTab("حجر", new javax.swing.ImageIcon(getClass().getResource("/icons/jackhammer.png")), Ston); // NOI18N
+        tabPanel.addTab("حجر", new javax.swing.ImageIcon("E:\\Masrawy\\Account\\src\\Icons\\jackhammer.png"), Ston); // NOI18N
 
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel6.setText("نصيب الحفار");
@@ -542,7 +558,7 @@ public class Clearing extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, BocklenLayout.createSequentialGroup()
                         .addGroup(BocklenLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(BocklenLayout.createSequentialGroup()
-                                .addComponent(txtfilter, javax.swing.GroupLayout.DEFAULT_SIZE, 277, Short.MAX_VALUE)
+                                .addComponent(txtfilter, javax.swing.GroupLayout.DEFAULT_SIZE, 315, Short.MAX_VALUE)
                                 .addGap(5, 5, 5))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, BocklenLayout.createSequentialGroup()
                                 .addGap(0, 0, Short.MAX_VALUE)
@@ -568,7 +584,7 @@ public class Clearing extends javax.swing.JFrame {
                         .addGap(5, 5, 5)
                         .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, BocklenLayout.createSequentialGroup()
-                        .addComponent(txtMillandTravel, javax.swing.GroupLayout.DEFAULT_SIZE, 222, Short.MAX_VALUE)
+                        .addComponent(txtMillandTravel, javax.swing.GroupLayout.DEFAULT_SIZE, 260, Short.MAX_VALUE)
                         .addGap(5, 5, 5)
                         .addComponent(jLabel15, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
@@ -614,7 +630,7 @@ public class Clearing extends javax.swing.JFrame {
                 .addContainerGap(35, Short.MAX_VALUE))
         );
 
-        tabPanel.addTab("حفار", new javax.swing.ImageIcon(getClass().getResource("/icons/digger.png")), Bocklen); // NOI18N
+        tabPanel.addTab("حفار", new javax.swing.ImageIcon("E:\\Masrawy\\Account\\src\\Icons\\digger.png"), Bocklen); // NOI18N
 
         table.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -636,7 +652,7 @@ public class Clearing extends javax.swing.JFrame {
         historyLayout.setHorizontalGroup(
             historyLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(historyLayout.createSequentialGroup()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 729, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 805, Short.MAX_VALUE)
                 .addContainerGap())
         );
         historyLayout.setVerticalGroup(
@@ -646,11 +662,11 @@ public class Clearing extends javax.swing.JFrame {
                 .addGap(0, 68, Short.MAX_VALUE))
         );
 
-        tabPanel.addTab("تصفيات", new javax.swing.ImageIcon(getClass().getResource("/icons/history.png")), history); // NOI18N
+        tabPanel.addTab("تصفيات", new javax.swing.ImageIcon("E:\\Masrawy\\Account\\src\\Icons\\history.png"), history); // NOI18N
 
         jPanel4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        btnPrint.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/printer.png"))); // NOI18N
+        btnPrint.setIcon(new javax.swing.ImageIcon("E:\\Masrawy\\Account\\src\\Icons\\printer.png")); // NOI18N
         btnPrint.setText("طباعة");
         btnPrint.setEnabled(false);
         btnPrint.addActionListener(new java.awt.event.ActionListener() {
@@ -659,7 +675,7 @@ public class Clearing extends javax.swing.JFrame {
             }
         });
 
-        btnClear.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/navigation.png"))); // NOI18N
+        btnClear.setIcon(new javax.swing.ImageIcon("E:\\Masrawy\\Account\\src\\Icons\\navigation.png")); // NOI18N
         btnClear.setText("ترحيل التصفية");
         btnClear.setEnabled(false);
         btnClear.addActionListener(new java.awt.event.ActionListener() {
@@ -668,11 +684,18 @@ public class Clearing extends javax.swing.JFrame {
             }
         });
 
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/history.png"))); // NOI18N
+        jButton2.setIcon(new javax.swing.ImageIcon("E:\\Masrawy\\Account\\src\\Icons\\history.png")); // NOI18N
         jButton2.setText("تصفيات سابقة");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
+            }
+        });
+
+        jButton1.setText("تعديل المصروفات");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
             }
         });
 
@@ -682,6 +705,8 @@ public class Clearing extends javax.swing.JFrame {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel4Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 144, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnClear, javax.swing.GroupLayout.PREFERRED_SIZE, 140, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -693,11 +718,12 @@ public class Clearing extends javax.swing.JFrame {
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(btnPrint, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(btnClear, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -776,10 +802,10 @@ public class Clearing extends javax.swing.JFrame {
         setNew();
     }//GEN-LAST:event_formWindowOpened
    
-    private double   Expens , amount , mt , anyex;
+    private double   Expens , amount , Sumasses ,tmt , anyex , hTow;
     String nameWorkGroup;
     private int workerCount , id_workGroup , oneThird ,towThird , OneOfTowThird , oneWorker;
-    
+   
     private void setNew(){
        gold.FillComboWorkGroup(comWork);
        ConnectDB.fillCombo("account WHERE isEnable = 1 ", "name_account", comAccounts);
@@ -789,6 +815,62 @@ public class Clearing extends javax.swing.JFrame {
         nameWorkGroup = comWork.getSelectedItem().toString();
         String st_id_workGroup = gold.getIdWorkGroup(nameWorkGroup);
         id_workGroup = Integer.parseInt(st_id_workGroup);
+        int id_deal = gold.getIdDeal(id_workGroup);
+        switch(id_deal){
+            case 1:
+              ClearGhorbal();
+              break;
+            case 2:
+                ClearStone();
+                break;
+        }
+        
+        
+    }//GEN-LAST:event_clearingActionPerformed
+    private void ClearStone(){
+        ConnectDB.fillCombo("account", "name_account", comAccount);
+        tabPanel.setEnabledAt(0, false);
+        tabPanel.setEnabledAt(1, true);
+        tabPanel.setEnabledAt(2, false);
+        Ston.setEnabled(true);
+        tabPanel.setSelectedIndex(1);
+        String st_id_workGroup = gold.getIdWorkGroup(nameWorkGroup);
+        double wights = gold.GetSumWights(st_id_workGroup);
+        txtwight.setText(wights+"");
+        amount = gold.GetSumAmount(st_id_workGroup);
+        txtAmount.setText(amount+"");
+        Expens = gold.GetSumExpens(st_id_workGroup);
+        txtExpention.setText(Expens+"");
+        workerCount = gold.GetCountWorker(st_id_workGroup);
+        txtCount.setText(workerCount+"");
+        double hfilter = amount - Expens;
+        txtHfilter.setText(hfilter+"");
+        hTow = hfilter / 2;
+        txtHtow.setText(hTow+"");
+        
+        if(machin.isSelected()){
+            oneWorker = (int) (hTow / (workerCount + 1));
+        }else{
+            oneWorker = (int) (hTow/workerCount);
+        }
+        txtHworker.setText(oneWorker+"");
+        Sumasses = gold.GetSumAssest(st_id_workGroup);
+        txxtHassets.setText(Sumasses+"");
+        double TowWorker = oneWorker * 2 ;
+        txtCreditArea.setText(TowWorker+"");
+        double filter = hTow - Sumasses - Double.parseDouble(txtCreditArea.getText());
+        txtClear.setText(filter+"");
+        
+        btnPrint.setEnabled(true);
+        btnClear.setEnabled(true);
+    }
+    private void ClearGhorbal(){
+        tabPanel.setEnabledAt(0, true);
+        tabPanel.setEnabledAt(1, false);
+        tabPanel.setEnabledAt(2, false);
+        Ghorbal.setEnabled(true);
+        tabPanel.setSelectedIndex(0);
+        String st_id_workGroup = gold.getIdWorkGroup(nameWorkGroup);
         double wights = gold.GetSumWights(st_id_workGroup);
         txtwight.setText(wights+"");
         amount = gold.GetSumAmount(st_id_workGroup);
@@ -816,11 +898,22 @@ public class Clearing extends javax.swing.JFrame {
         
         btnPrint.setEnabled(true);
         btnClear.setEnabled(true);
-    }//GEN-LAST:event_clearingActionPerformed
-
+    
+    }
     private void machinActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_machinActionPerformed
-
-
+       if(machin.isSelected()){
+            oneWorker = (int) (hTow / (workerCount + 1));
+            comAccount.setEnabled(true);
+        }else{
+            oneWorker = (int) (hTow/workerCount);
+            comAccount.setEnabled(false);
+        }
+        txtHworker.setText(oneWorker+"");
+        oneWorker = Integer.parseInt(txtHworker.getText());
+        double TowWorker = oneWorker * 2 ;
+        txtCreditArea.setText(TowWorker+"");
+        double filter = hTow - Sumasses - Double.parseDouble(txtCreditArea.getText());
+        txtClear.setText(filter+"");
     }//GEN-LAST:event_machinActionPerformed
 
     private void btnClearActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnClearActionPerformed
@@ -838,10 +931,16 @@ public class Clearing extends javax.swing.JFrame {
 
     private void txtHworkerKeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtHworkerKeyTyped
 
+        
     }//GEN-LAST:event_txtHworkerKeyTyped
 
     private void edWorkerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_edWorkerActionPerformed
-
+        if(edWorker.isSelected()){
+            txtHworker.setEnabled(true);
+        }else{
+            txtHworker.setEnabled(false);
+        }
+        
        
         
     }//GEN-LAST:event_edWorkerActionPerformed
@@ -852,16 +951,42 @@ public class Clearing extends javax.swing.JFrame {
     }
     
     private void btnPrintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnPrintActionPerformed
-        String sql = "SELECT * FROM workgroup ";
-         InputStream stream = getClass().getResourceAsStream("/Reborts/Clear/ClearGhorbalReport.jrxml");
-         HashMap para = new HashMap();
-         para.put("id_workgroup", id_workGroup);
-         para.put("sumImport", amount);
-         para.put("SumExpen", Expens);
-         para.put("CountWorker", workerCount);
-        Tools.Printer(sql, stream, para);
+       // id_workgroup   sumImport   sumExpenes   countWorker
+        nameWorkGroup = comWork.getSelectedItem().toString();
+        String st_id_workGroup = gold.getIdWorkGroup(nameWorkGroup);
+        id_workGroup = Integer.parseInt(st_id_workGroup);
+        int id_deal = gold.getIdDeal(id_workGroup);
+        switch(id_deal){
+            case 1:
+              GhorbalPrinter();
+              break;
+            case 2:
+                StonPrinter();
+                break;
+        }
     }//GEN-LAST:event_btnPrintActionPerformed
-
+    private void GhorbalPrinter(){
+        String sql = "SELECT * FROM workgroup ";
+        InputStream stream = getClass().getResourceAsStream("/Reborts/Clear/ClearGhorbalReport.jrxml");
+        HashMap para = new HashMap();
+        para.put("id_workgroup", id_workGroup);
+        para.put("sumImport", amount);
+        para.put("SumExpen", Expens);
+        para.put("CountWorker", workerCount);
+        Tools.Printer(sql, stream, para);
+    
+    }
+    private void StonPrinter(){
+        String sql = "SELECT * FROM workgroup ";
+        InputStream stream = getClass().getResourceAsStream("/Reborts/StonClear/ClearStonReport.jrxml");
+        HashMap para = new HashMap();
+        para.put("id_workgroup", id_workGroup);
+        para.put("sumImport", amount);
+        para.put("sumExpenes", Expens);
+        para.put("countWorker", workerCount);
+        Tools.Printer(sql, stream, para);
+    
+    }
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
       
         
@@ -879,6 +1004,22 @@ public class Clearing extends javax.swing.JFrame {
     private void cr_towActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cr_towActionPerformed
     
     }//GEN-LAST:event_cr_towActionPerformed
+
+    private void txtHworkerKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txtHworkerKeyReleased
+        // TODO add your handling code here:
+        oneWorker = Integer.parseInt(txtHworker.getText());
+        double TowWorker = oneWorker * 2 ;
+        txtCreditArea.setText(TowWorker+"");
+        double filter = hTow - Sumasses - Double.parseDouble(txtCreditArea.getText());
+        txtClear.setText(filter+"");
+    }//GEN-LAST:event_txtHworkerKeyReleased
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        nameWorkGroup = comWork.getSelectedItem().toString();
+        EditExpenesFrame ef = new EditExpenesFrame(nameWorkGroup);
+        Tools.openJFram(ef, nameWorkGroup);
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -931,6 +1072,7 @@ public class Clearing extends javax.swing.JFrame {
     private javax.swing.JToggleButton edWorker;
     private javax.swing.JPanel history;
     private javax.swing.JCheckBox isTren;
+    private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
@@ -946,6 +1088,7 @@ public class Clearing extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
     private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel22;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -972,6 +1115,7 @@ public class Clearing extends javax.swing.JFrame {
     private javax.swing.JLabel txtCar;
     private javax.swing.JLabel txtClear;
     private javax.swing.JLabel txtCount;
+    private javax.swing.JTextField txtCreditArea;
     private javax.swing.JLabel txtExpention;
     private javax.swing.JLabel txtGhorbal;
     private javax.swing.JLabel txtHfilter;

@@ -15,7 +15,7 @@
 	<detail>
 		<band height="35" splitType="Stretch">
 			<staticText>
-				<reportElement x="0" y="0" width="180" height="35" uuid="eb036329-c44d-471a-936f-f28233d8a452"/>
+				<reportElement mode="Transparent" x="0" y="0" width="180" height="35" forecolor="#000000" backcolor="#FFFFFF" uuid="eb036329-c44d-471a-936f-f28233d8a452"/>
 				<box>
 					<pen lineWidth="1.5"/>
 					<topPen lineWidth="1.5"/>
@@ -23,13 +23,14 @@
 					<bottomPen lineWidth="1.5"/>
 					<rightPen lineWidth="1.5"/>
 				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="18" isBold="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="18" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
 				</textElement>
 				<text><![CDATA[رصيد البنك]]></text>
 			</staticText>
-			<textField>
-				<reportElement x="180" y="0" width="120" height="35" uuid="85b10b12-0476-4f80-a281-4dde5d64f653"/>
+			<textField pattern="#,##0.00">
+				<reportElement mode="Transparent" x="180" y="0" width="120" height="35" forecolor="#000000" backcolor="#FFFFFF" uuid="85b10b12-0476-4f80-a281-4dde5d64f653"/>
 				<box>
 					<pen lineWidth="1.5"/>
 					<topPen lineWidth="1.5"/>
@@ -37,8 +38,9 @@
 					<bottomPen lineWidth="1.5"/>
 					<rightPen lineWidth="1.5"/>
 				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="18" isBold="true"/>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="18" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
 				</textElement>
 				<textFieldExpression><![CDATA[$F{balance}]]></textFieldExpression>
 			</textField>

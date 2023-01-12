@@ -34,7 +34,6 @@ public class paydebtFrame extends javax.swing.JFrame {
           initComponents();
           super.setSize(dim);
           Tools.setBackground(background, dim, "2500.jpg");
-          
           setnewpay();
           combName.addActionListener(new ActionListener() {
               @Override

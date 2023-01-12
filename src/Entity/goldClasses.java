@@ -17,6 +17,7 @@ import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JComboBox;
+import javax.swing.JTable;
 
 /**
  *
@@ -25,9 +26,29 @@ import javax.swing.JComboBox;
 public class goldClasses {
     private boolean isSaveAssets, isSaveImport, isSaveExpens, isSaveExportAccount = false;
     private Connection con;
-    private PreparedStatement pstmt ;
+    private PreparedStatement pstmt , pstmtCasher ;
     private CasherClass casher;
     
+    public int getIdDeal(int id_workGroup){
+        String id = ConnectDB.getIdFromName("SELECT `id_deal` as id FROM `workgroup` WHERE `id_workgroup` = "+id_workGroup);
+        return  Integer.parseInt(id);
+    }
+    public void FillExpenesTable(String nameWork , JTable table){
+        String id_workgroup = getIdWorkGroup(nameWork);
+        String sql = "SELECT `note` , `price_expens` , `date_expens` , `id_expens` FROM `expens` WHERE `isRelay` = 0 AND `id_workgroup` = "+ id_workgroup;
+        String[] nameColumn = {"البيان", "المبلغ", "التاريخ", "م"};
+        ConnectDB.fillAndCenterTable(sql, table, nameColumn);
+    }
+    public boolean disableExpensById(String id_expens){
+        String sql = "UPDATE `expens` SET `isRelay`= 1 WHERE `id_expens` = "+id_expens;
+        return ConnectDB.ExucuteAnyQuery(sql);
+    }
+    
+    public void FillImportAccountsTable(JTable table){
+        String sql = "SELECT cr.note, ac.name_account, cr.amount, cr.date_credit FROM creditors AS cr INNER JOIN account AS ac ON ac.id_account = cr.id_account ORDER BY cr.date_credit DESC";
+        String[] columsName = {"البيان", "الاسم", "المبلغ", "التاريخ"};
+        ConnectDB.fillAndCenterTable(sql, table, columsName);
+    }
     
     public boolean SaveExportAccount(double amount , int idAccount , int idSupplier , String note , int id_export){
         try{
@@ -100,18 +121,23 @@ public class goldClasses {
             if(rowExpensAffect == 1){
                 // if Cash money insert into Casher
                 int rowAffect = 0;
-                if(id_suppliers == 1){
-                    PreparedStatement pstmtCash = casher.SavedCasherTransaction(TypeCasherTransaction.expensGold, price, note, id_expens, con);
-                    rowAffect = pstmtCash.executeUpdate();
+                if(id_expens == 0){
+                    rowAffect = 1;
                 }else{
-                    String SqlInsertSupplierAccount = "INSERT INTO `suppliersaccount` (`Creditor`, `id_Suppliers`,`id_expens`, `note`) VALUES (?,?,?,?)";
-                    PreparedStatement pstmtSuppliers = con.prepareStatement(SqlInsertSupplierAccount, Statement.RETURN_GENERATED_KEYS);
-                    pstmtSuppliers.setDouble(1, price);
-                    pstmtSuppliers.setInt(2, id_suppliers);
-                    pstmtSuppliers.setInt(3, id_expens);
-                    pstmtSuppliers.setString(4, note);
-                    rowAffect = pstmtSuppliers.executeUpdate();
+                    if(id_suppliers == 1){
+                        PreparedStatement pstmtCash = casher.SavedCasherTransaction(TypeCasherTransaction.expensGold, price, note, id_expens, con);
+                        rowAffect = pstmtCash.executeUpdate();
+                     }else{
+                        String SqlInsertSupplierAccount = "INSERT INTO `suppliersaccount` (`Creditor`, `id_Suppliers`,`id_expens`, `note`) VALUES (?,?,?,?)";
+                        PreparedStatement pstmtSuppliers = con.prepareStatement(SqlInsertSupplierAccount, Statement.RETURN_GENERATED_KEYS);
+                        pstmtSuppliers.setDouble(1, price);
+                        pstmtSuppliers.setInt(2, id_suppliers);
+                        pstmtSuppliers.setInt(3, id_expens);
+                        pstmtSuppliers.setString(4, note);
+                        rowAffect = pstmtSuppliers.executeUpdate();
+                     }
                 }
+                
                 if(rowAffect == 1){
                    con.commit();
                    con.close();
@@ -250,7 +276,11 @@ public class goldClasses {
         }
         return isSaveAssets;
     }
-
+    public void FillComboAccount(JComboBox combo){
+       // String sql = "SELECT `name_workgroup` FROM `workgroup` WHERE`isActive`= 1";
+        ConnectDB.fillCombo("account WHERE isEnable = 1", "name_account", combo);
+    
+    }
 
     public void FillComboWorkGroup(JComboBox combo){
        // String sql = "SELECT `name_workgroup` FROM `workgroup` WHERE`isActive`= 1";
@@ -280,7 +310,11 @@ public class goldClasses {
         String str_Count = ConnectDB.getIdFromName(sql);
         return Integer.parseInt(str_Count);
     }
-    
+    public double GetSumAssest(String id_workGroup){
+        String sql = "SELECT COALESCE(SUM( `price_assets`) , 0) AS id FROM `assets` WHERE `isRelay` = 0  AND `id_workgroup` = "+id_workGroup;
+        String str_sum_amount = ConnectDB.getIdFromName(sql);
+        return Double.parseDouble(str_sum_amount);
+    }
     
     public  boolean SaveingClear( boolean isRent , int id_account , double rentLoder ,int id_workGroup , String note , double loaderShare , double thridShare , double oneWorkerShare){
         boolean isSave = false;
@@ -505,6 +539,56 @@ public class goldClasses {
             Logger.getLogger(goldClasses.class.getName()).log(Level.SEVERE, null, ex);
         }
         return isSave;
+    }
+    public boolean SaveCreditAccount(String nameAccount , double amount , String note){
+        boolean isSave = false;
+        casher = new CasherClass();
+        try {
+            
+            con = ConnectDB.getCon();
+            con.setAutoCommit(false);
+            String sqlInsertCredit = "INSERT INTO `creditors` (`amount`, `id_account`, `note`) VALUES (?,?,?)";
+            pstmt = con.prepareStatement(sqlInsertCredit, Statement.RETURN_GENERATED_KEYS);
+            pstmt.setDouble(1, amount);
+            int id_account = Integer.parseInt(getIdAccount(nameAccount));
+            pstmt.setInt(2, id_account);
+            pstmt.setString(3, note);
+            int rowAffect = pstmt.executeUpdate();
+            if(rowAffect == 1){
+                int id_credit = 0;
+                ResultSet rst = pstmt.getGeneratedKeys();
+                while(rst.next()){
+                    id_credit = rst.getInt(1);
+                }
+                pstmtCasher = casher.SavedCasherTransaction(TypeCasherTransaction.accountImport, amount, note, id_credit, con);
+                int rowCAsher = pstmtCasher.executeUpdate();
+                if(rowCAsher == 1){
+                    con.commit();
+                    con.close();
+                    isSave = true;
+                }else{
+                    con.rollback();
+                    con.close();
+                    isSave = false;
+                }
+            }
+        } catch (SQLException ex) {
+            
+            Logger.getLogger(goldClasses.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return isSave;
+    }
+    
+    public double GetBalanceAccount(String nameAccount){
+        String id_account = getIdAccount(nameAccount);
+        String Sql_firstBalance = "SELECT `balance_account` AS id FROM `account` WHERE `id_account`="+id_account;
+        double firstBalance = Double.parseDouble(ConnectDB.getIdFromName(Sql_firstBalance));
+        String SqlSumCredit = "SELECT COALESCE(SUM(`amount`),0) AS id FROM `creditors` WHERE `id_account`="+id_account;
+        double Creditors = Double.parseDouble(ConnectDB.getIdFromName(SqlSumCredit));
+        String SqlSumExport = "SELECT COALESCE(SUM(`price_export`),0) AS id FROM `exports` WHERE `id_account`="+id_account;
+        double debit = Double.parseDouble(ConnectDB.getIdFromName(SqlSumExport));
+        double balance =  firstBalance+Creditors-debit;
+        return balance;
     }
 }
 

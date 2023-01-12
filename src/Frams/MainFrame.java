@@ -12,6 +12,8 @@ import java.awt.Font;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.sql.SQLException;
 import java.text.SimpleDateFormat;
 import java.util.*;
@@ -62,9 +64,14 @@ public class MainFrame extends javax.swing.JFrame {
         background.setLocation(0, 0);
         background.setSize(dim);
         background.setPreferredSize(dim);
-        ImageIcon bg = new ImageIcon(new ImageIcon(Toolkit.getDefaultToolkit().getClass().getResource("/icons/bg4.jpg")).getImage().getScaledInstance(dim.width, dim.height, Image.SCALE_DEFAULT));
-        background.setIcon(bg);
+        ImageIcon b = null;
+        
+            //ImageIcon bg = new ImageIcon(new ImageIcon(Toolkit.getDefaultToolkit().getClass().getResource("/icons/bg4.jpg")).getImage().getScaledInstance(dim.width, dim.height, Image.SCALE_DEFAULT));
+            b = new ImageIcon(new ImageIcon("E:\\Masrawy\\Account\\dist\\Icons\\bg4.jpg").getImage().getScaledInstance(dim.width, dim.height, Image.SCALE_DEFAULT));
+        
+        background.setIcon(b);
         int x = dim.width - 140;
+        //01148962956
         client.setLocation(x , 40);
         client.setFont(font);
         items.setLocation(x , 180);
@@ -107,7 +114,7 @@ public class MainFrame extends javax.swing.JFrame {
         settxtnumer();
         txtvalue.setText("0");
         txtIdItems.requestFocus();
-        Tools.txtNumberClient(txtIdItems,txtNmber, this, 0, 0);
+        new numberPhoneClass().txtNumberClient(txtIdItems,txtNmber, this, 0, 0);
         winFastCashSend = new JWindow(this);
         winCahse = new JWindow(this);
         windeficiencyExcess = new JWindow(this);
@@ -164,18 +171,17 @@ public class MainFrame extends javax.swing.JFrame {
             }
             
             private void getinfo(){
-                switch (idPos) {
-                   
+                switch (idPos) {      
                     case 7:
                         infoPos = "الرصيد في الجرد الاول : "+new CasherClass().getNowBalanceCasher();
                         txtinformationPos.setText(infoPos);
-                        txtinformationPos.setIcon(new ImageIcon(getClass().getResource("/icons/cashier.png")));
+                        txtinformationPos.setIcon(new ImageIcon("E:\\Masrawy\\Account\\dist\\Icons\\cashier.png"));
                         idPos = 0;
                         break;
                     case 0:
                         infoPos = "الرصيد في جرد الثاني = " + new CasherClass().getBalanceCasherTwo();
                         txtinformationPos.setText(infoPos);
-                        txtinformationPos.setIcon(new ImageIcon(getClass().getResource("/icons/safe-box.png")));
+                        txtinformationPos.setIcon(new ImageIcon("E:\\Masrawy\\Account\\dist\\Icons\\safe-box.png"));
                         idPos = 1;
                         break;
                     default:
@@ -192,7 +198,7 @@ public class MainFrame extends javax.swing.JFrame {
                         infoPos += namePos;
                         infoPos += " = "+new posPay(idPos) {}.getfirstBalance() + "";
                         txtinformationPos.setText(infoPos);
-                        txtinformationPos.setIcon(new ImageIcon(getClass().getResource("/icons/pos24.png")));
+                        txtinformationPos.setIcon(new ImageIcon("E:\\Masrawy\\Account\\dist\\Icons\\pos24.png"));
                         idPos++;
                         break;
                 }
@@ -1230,7 +1236,7 @@ public class MainFrame extends javax.swing.JFrame {
             // TODO add your handling code here:
             String [] selectionValues = ConnectDB.getColumn("pos", "name_pos");
             String master = selectionValues[0];
-            ImageIcon icon = new ImageIcon(new ImageIcon(Toolkit.getDefaultToolkit().getClass().getResource("/icons/pos.png")).getImage());
+            ImageIcon icon = new ImageIcon(new ImageIcon("E:\\Masrawy\\Account\\dist\\Icons\\pos.png").getImage());
             Object name_pos = JOptionPane.showInputDialog(this, "اختر ماكينة الشحن", "تغيير المكنة", JOptionPane.OK_CANCEL_OPTION, icon, selectionValues, master);
             if(name_pos == null){
                 name_pos = "ATM";
@@ -1240,7 +1246,7 @@ public class MainFrame extends javax.swing.JFrame {
                 id_pos_st = "6";
             }
             id_pos = Integer.parseInt(id_pos_st);
-            ImageIcon iconlogo = new ImageIcon(new ImageIcon(Toolkit.getDefaultToolkit().getClass().getResource("/icons/"+id_pos_st+".png")).getImage());
+            ImageIcon iconlogo = new ImageIcon(new ImageIcon("E:\\Masrawy\\Account\\dist\\Icons\\"+id_pos_st+".png").getImage());
             logo.setIcon(iconlogo);
         } catch (SQLException ex) {
             Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
@@ -1406,7 +1412,7 @@ public class MainFrame extends javax.swing.JFrame {
                 break;
                 
         }
-        Tools.txtNumberClient(txtIdItems,txtNmber, this, 0, 0);
+        new numberPhoneClass().txtNumberClient(txtIdItems,txtNmber, this, 0, 0);
         txtNmber.requestFocus();   
     }
     private void clickPanel(JLabel lable){

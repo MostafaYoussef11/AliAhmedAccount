@@ -122,5 +122,51 @@ public class TransactionVCashAndPos {
         }
         return isSave;
     }
+    
+    public boolean SaveDepositATM(String numberVF , double amount , double value ){
+        boolean isSave = false;
+        VFCashClass vf = new VFCashClass();
+        casher = new CasherClass();
+        int id_vf = vf.getId_VF_ByNumber(numberVF);
+        try {
+            con = ConnectDB.getCon();
+            con.setAutoCommit(false);
+            String sql_vf_trans = "INSERT INTO `vf_transaction_po` (`type_transaction`, `id_VF_cash`,`id_pos` ,`price`) VALUES (?,?,?,?)";
+            pstm = con.prepareStatement(sql_vf_trans, Statement.RETURN_GENERATED_KEYS);
+            pstm.setString(1, "Deposit");
+            pstm.setInt(2, id_vf);
+            pstm.setInt(3, 6);
+            pstm.setDouble(4, value);
+            
+            int rowAffect = pstm.executeUpdate();
+            int id_trans = 0;
+            ResultSet rst = pstm.getGeneratedKeys();
+            while(rst.next()){
+                id_trans = rst.getInt(1);
+            }
+            if(rowAffect == 1){
+               PreparedStatement pstmt_Cash = casher.SavedCasherTransaction(TypeCasherTransaction.Receive_VF, amount,"  سحب من ال ATM  من رقم "+ number, id_trans, con);
+               int Row_casher = pstmt_Cash.executeUpdate();
+               if(Row_casher == 1){
+                   con.commit();
+                   con.close();
+                   isSave = true;
+               }else{
+                   con.rollback();
+                   con.close();
+                   isSave = false;
+               }
+            }else{
+               con.rollback();
+               con.close();
+               isSave = false;
+            }
+            
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(TransactionVCashAndPos.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return isSave;
+    }
 
 }

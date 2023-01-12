@@ -26,13 +26,16 @@ public class SuppliersFrame extends javax.swing.JFrame {
      * Creates new form ClintFrame
      */
     Suppliers s = new Suppliers();
+    Dimension dim;
     public SuppliersFrame() {
         initComponents(); 
-        setSize(new Dimension(795, 617));
-        background.setLocation(0, 0);
-        background.setSize(780,600);
-        ImageIcon bg = new ImageIcon(new ImageIcon(Toolkit.getDefaultToolkit().getClass().getResource("/icons/clientbg.jpg")).getImage().getScaledInstance(780, 600, Image.SCALE_DEFAULT));
-        background.setIcon(bg);
+        dim = new Dimension(795, 617);
+        setSize(dim);
+//        background.setLocation(0, 0);
+//        background.setSize(780,600);
+//        ImageIcon bg = new ImageIcon(new ImageIcon(Toolkit.getDefaultToolkit().getClass().getResource("/icons/clientbg.jpg")).getImage().getScaledInstance(780, 600, Image.SCALE_DEFAULT));
+//        background.setIcon(bg);
+        Tools.setBackground(background, dim, "clientbg.jpg");
         txtId.setText(s.lastid());
         Tools.disableButOpen(btPanel);
         txtFirsbalance.setText("0.00");

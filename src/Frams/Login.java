@@ -10,7 +10,9 @@ package Frams;
 import Utilities.ConnectDB;
 import Utilities.Tools;
 import java.awt.Color;
+import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
+import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 
 
@@ -29,6 +31,8 @@ public class Login extends javax.swing.JFrame {
         super.setUndecorated(true);
         initComponents();
         setBackground(new Color(0.0f, 0.0f, 0.0f, 0.02f));
+        super.setIconImage(new ImageIcon("E:\\Masrawy\\Account\\dist\\Icons\\account.png").getImage());
+        CheckUserAndPass();
     }
     public static String getServer(){
          return Servernum;
@@ -210,12 +214,12 @@ public class Login extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void CheckUserAndPass() {
-        String user = txtUsrname.getText();
-        String passwod = txtPassword.getText();
-        if(user.equals("") || passwod.equals("")){
-           Tools.showErrorMsg("اسم المستخدم أو كلمة المرور غير مكتوب");
-        }else{
-            if(ConnectDB.chakeusername(user, passwod)){
+//        String user = txtUsrname.getText();
+//        String passwod = txtPassword.getText();
+//        if(user.equals("") || passwod.equals("")){
+//           Tools.showErrorMsg("اسم المستخدم أو كلمة المرور غير مكتوب");
+//        }else{
+            if(ConnectDB.chakeusername("0", "0")){
                 MainFrame mf = new MainFrame();
                 mf.setExtendedState(JFrame.MAXIMIZED_BOTH);
                 String nameIcon = "laptop";
@@ -227,7 +231,7 @@ public class Login extends javax.swing.JFrame {
                 ClearJtext();
             }
         
-        }
+
         
     }
 }

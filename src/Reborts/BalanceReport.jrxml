@@ -10,7 +10,7 @@
 		<![CDATA[SELECT
      *
 FROM
-     `casher` ]]>
+     `casher`]]>
 	</queryString>
 	<field name="id_casher" class="java.lang.Long">
 		<fieldDescription><![CDATA[]]></fieldDescription>
@@ -152,6 +152,49 @@ FROM
 				</textElement>
 				<text><![CDATA[البيان]]></text>
 			</staticText>
+			<staticText>
+				<reportElement x="135" y="40" width="120" height="34" uuid="37fd148f-84cd-4036-95f6-97f327a03041"/>
+				<box>
+					<pen lineWidth="1.5"/>
+					<topPen lineWidth="1.5"/>
+					<leftPen lineWidth="1.5"/>
+					<bottomPen lineWidth="1.5"/>
+					<rightPen lineWidth="1.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="18" isBold="true"/>
+				</textElement>
+				<text><![CDATA[المبلغ]]></text>
+			</staticText>
+			<staticText>
+				<reportElement mode="Transparent" x="0" y="40" width="135" height="34" forecolor="#000000" backcolor="#FFFFFF" uuid="79038791-1381-44a7-bfa1-d4d5537f136a"/>
+				<box>
+					<pen lineWidth="1.5"/>
+					<topPen lineWidth="1.5"/>
+					<leftPen lineWidth="1.5"/>
+					<bottomPen lineWidth="1.5"/>
+					<rightPen lineWidth="1.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="18" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[البيان]]></text>
+			</staticText>
+			<staticText>
+				<reportElement x="0" y="5" width="255" height="35" uuid="7c441c34-51d6-4247-ad19-e346ae1a2162"/>
+				<box>
+					<pen lineWidth="1.5"/>
+					<topPen lineWidth="1.5"/>
+					<leftPen lineWidth="1.5"/>
+					<bottomPen lineWidth="1.5"/>
+					<rightPen lineWidth="1.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle">
+					<font size="22" isBold="true"/>
+				</textElement>
+				<text><![CDATA[الخصوم]]></text>
+			</staticText>
 		</band>
 	</columnHeader>
 	<detail>
@@ -165,6 +208,14 @@ FROM
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "BalanceReport_subreport1.jasper"]]></subreportExpression>
 			</subreport>
+			<subreport>
+				<reportElement x="0" y="0" width="255" height="35" uuid="9d503381-af48-425f-9775-1b82661cbd02"/>
+				<subreportParameter name="SUBREPORT_DIR">
+					<subreportParameterExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "BalanceReport_subliers.jasper"]]></subreportExpression>
+			</subreport>
 		</band>
 		<band height="35">
 			<printWhenExpression><![CDATA[$V{REPORT_COUNT}.intValue()==1]]></printWhenExpression>
@@ -172,6 +223,14 @@ FROM
 				<reportElement x="255" y="0" width="300" height="35" uuid="e6c5c95c-aa0f-47d1-8be0-930025f439f3"/>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "BalanceReport_subreport2.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement x="0" y="0" width="255" height="35" uuid="d6cab401-6931-4455-ba44-3f310b97e307"/>
+				<subreportParameter name="SUBREPORT_DIR">
+					<subreportParameterExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "BalanceReport_balanceAccount.jasper"]]></subreportExpression>
 			</subreport>
 		</band>
 		<band height="35" splitType="Stretch">
@@ -181,13 +240,43 @@ FROM
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "BalanceReport_subreport3.jasper"]]></subreportExpression>
 			</subreport>
+			<subreport>
+				<reportElement x="0" y="0" width="255" height="35" uuid="488fb7e2-cfca-4fa8-9b6e-ae7338747b97"/>
+				<subreportParameter name="SUBREPORT_DIR">
+					<subreportParameterExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "BalanceReport_subreport8.jasper"]]></subreportExpression>
+			</subreport>
 		</band>
 		<band height="35">
 			<printWhenExpression><![CDATA[$V{REPORT_COUNT}.intValue() == 1]]></printWhenExpression>
 			<subreport>
 				<reportElement x="255" y="0" width="300" height="35" uuid="3a8f5116-9399-4e6d-a6bf-35c04e077f1c"/>
+				<subreportParameter name="SUBREPORT_DIR">
+					<subreportParameterExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportParameterExpression>
+				</subreportParameter>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "BalanceReport_subreport4.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement x="0" y="0" width="255" height="35" uuid="d4a8dd3e-91c4-4c8e-add3-d61e37bc1864"/>
+				<subreportParameter name="SUBREPORT_DIR">
+					<subreportParameterExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "BalanceReport_subreport9.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="35">
+			<printWhenExpression><![CDATA[$V{REPORT_COUNT}.intValue() == 1]]></printWhenExpression>
+			<subreport>
+				<reportElement x="255" y="0" width="300" height="35" uuid="c06a744f-2f1e-4ad5-9f8e-572c156c12d4"/>
+				<subreportParameter name="SUBREPORT_DIR">
+					<subreportParameterExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportParameterExpression>
+				</subreportParameter>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "BalanceReport_balanceClient.jasper"]]></subreportExpression>
 			</subreport>
 		</band>
 	</detail>

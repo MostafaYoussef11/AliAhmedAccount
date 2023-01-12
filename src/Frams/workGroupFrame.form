@@ -231,7 +231,7 @@
         <Component class="javax.swing.JButton" name="btnNew">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/icons/meeting.png"/>
+              <Image iconType="2" name="E:\Masrawy\Account\src\Icons\meeting.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="&#x645;&#x62c;&#x645;&#x648;&#x639;&#x629; &#x62c;&#x62f;&#x64a;&#x62f;&#x629;"/>
           </Properties>
@@ -242,7 +242,7 @@
         <Component class="javax.swing.JButton" name="btnEdit">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/icons/pencil (1).png"/>
+              <Image iconType="2" name="E:\Masrawy\Account\src\Icons\pencil (1).png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="&#x62a;&#x639;&#x62f;&#x64a;&#x644;"/>
           </Properties>
@@ -253,7 +253,7 @@
         <Component class="javax.swing.JButton" name="btnDel">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/icons/delete.png"/>
+              <Image iconType="2" name="E:\Masrawy\Account\src\Icons\delete.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="&#x62d;&#x630;&#x641;"/>
           </Properties>
@@ -264,7 +264,7 @@
         <Component class="javax.swing.JButton" name="btnRebort">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/icons/enable.png"/>
+              <Image iconType="2" name="E:\Masrawy\Account\src\Icons\enable.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="&#x62a;&#x639;&#x637;&#x64a;&#x644;"/>
           </Properties>
@@ -275,7 +275,7 @@
         <Component class="javax.swing.JButton" name="btnExit">
           <Properties>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/icons/exit.png"/>
+              <Image iconType="2" name="E:\Masrawy\Account\src\Icons\exit.png"/>
             </Property>
             <Property name="text" type="java.lang.String" value="&#x62e;&#x631;&#x648;&#x62c;"/>
           </Properties>

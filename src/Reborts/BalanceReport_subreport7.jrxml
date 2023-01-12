@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="BalanceReport_subreport7" language="groovy" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="da1db82a-231a-48d5-87b0-a5fe4dfc6181">
+	<queryString language="SQL">
+		<![CDATA[SELECT sup.id_Suppliers AS id, COALESCE(SUM(sup.Debit),0) AS debit , COALESCE(SUM(sup.Creditor),0) AS creditor , sup.name_Suppliers  , s.firstBalance  FROM debitandcreditorsupplier AS sup inner  JOIN suppliers s ON sup.id_Suppliers = s.id_Suppliers GROUP BY id]]>
+	</queryString>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<title>
+		<band height="79" splitType="Stretch"/>
+	</title>
+	<pageHeader>
+		<band height="35" splitType="Stretch"/>
+	</pageHeader>
+	<columnHeader>
+		<band height="61" splitType="Stretch"/>
+	</columnHeader>
+	<detail>
+		<band height="125" splitType="Stretch"/>
+	</detail>
+	<columnFooter>
+		<band height="45" splitType="Stretch"/>
+	</columnFooter>
+	<pageFooter>
+		<band height="54" splitType="Stretch"/>
+	</pageFooter>
+	<summary>
+		<band height="42" splitType="Stretch"/>
+	</summary>
+</jasperReport>

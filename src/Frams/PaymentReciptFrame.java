@@ -14,6 +14,7 @@ import Utilities.Tafqeet;
 import Utilities.Tools;
 import Utilities.TypeOfFilter;
 import java.awt.ComponentOrientation;
+import java.awt.Dimension;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.io.InputStream;
@@ -44,13 +45,16 @@ public class PaymentReciptFrame extends javax.swing.JFrame {
     private TypeOfFilter type_filter;
     private String noteText = "";
     private Date date;
+    Dimension dim;
     public PaymentReciptFrame() {
         initComponents();
-        setSize(820, 740);
-        background.setLocation(0, 0);
-        background.setSize(820, 740);
-        ImageIcon bg = new ImageIcon(new ImageIcon(Toolkit.getDefaultToolkit().getClass().getResource("/icons/Recipt.jpg")).getImage().getScaledInstance(820, 740, Image.SCALE_DEFAULT));
-        background.setIcon(bg);
+        dim = new Dimension(820,740);
+        setSize(dim);
+        Tools.setBackground(background, dim, "Recipt.jpg");
+//        background.setLocation(0, 0);
+//        background.setSize(820, 740);
+//        ImageIcon bg = new ImageIcon(new ImageIcon(Toolkit.getDefaultToolkit().getClass().getResource("/icons/Recipt.jpg")).getImage().getScaledInstance(820, 740, Image.SCALE_DEFAULT));
+//        background.setIcon(bg);
         title.setFont(Tools.font(36f));
         newRecipt();
     }

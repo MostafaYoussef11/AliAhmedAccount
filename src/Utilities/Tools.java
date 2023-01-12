@@ -36,7 +36,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.sound.sampled.AudioInputStream;
+
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -65,7 +65,7 @@ import net.sf.jasperreports.view.JasperViewer;
  * @author mosta
  */
 public class Tools {
-  private AudioInputStream audioInputStream;
+ // private AudioInputStream audioInputStream;
   //Method To Message Show User           رسائل المستخدم
   public static void showErrorMsg(String msg){
       JOptionPane.showMessageDialog(null, msg, "خطأ", JOptionPane.ERROR_MESSAGE);
@@ -84,8 +84,8 @@ public class Tools {
       openJFram(f);
   }
   public static void openJFram(JFrame f , String title , String nameicon){
-      ImageIcon icon = new ImageIcon();
-      f.setIconImage(new ImageIcon(Toolkit.getDefaultToolkit().getClass().getClass().getResource("/icons/"+nameicon+".png")).getImage());
+      //ImageIcon icon = new ImageIcon();
+      f.setIconImage(new ImageIcon("E:\\Masrawy\\Account\\dist\\Icons\\"+nameicon+".png").getImage());
       openJFram(f, title);
   }
   // This Method used to JLable Setting Font and Alignment   
@@ -152,7 +152,7 @@ public class Tools {
         background.setLocation(0, 0);
         background.setSize(dim);
         background.setPreferredSize(dim);
-        ImageIcon bg = new ImageIcon(new ImageIcon(Toolkit.getDefaultToolkit().getClass().getResource("/icons/"+nameImage)).getImage().getScaledInstance(dim.width, dim.height, Image.SCALE_DEFAULT));
+        ImageIcon bg = new ImageIcon(new ImageIcon("E:\\Masrawy\\Account\\dist\\Icons\\"+nameImage).getImage().getScaledInstance(dim.width, dim.height, Image.SCALE_DEFAULT));
         background.setIcon(bg);
   }
   //طرق الدفع الماتحة سواء نقدي او علي الحساب
@@ -235,7 +235,8 @@ public class Tools {
   public static Font font(Float size){
        Font font = null ;
         try {
-            InputStream stream = new BufferedInputStream(new FileInputStream("Fonts/vip.ttf"));
+            //E:\Masrawy\Account\dist\Fonts
+            InputStream stream = new BufferedInputStream(new FileInputStream("E:\\Masrawy\\Account\\Fonts\\vip.ttf"));
             font = Font.createFont(Font.TRUETYPE_FONT, stream); 
         } catch (FileNotFoundException ex) {
             font = Font.getFont("Tahoma") ;
@@ -311,87 +312,6 @@ public class Tools {
         });
     
     }
-  public static ArrayList<String> PhoneNumberList(){
-       ArrayList<String> numbers;
-        numbers = new ArrayList<String>();
-        try {
-            Connection conn = ConnectDB.getCon();
-            com.mysql.jdbc.Statement stmt = (com.mysql.jdbc.Statement) conn.createStatement();
-            //String sql_items = "SELECT name_items FROM `items`";
-            ResultSet rst = stmt.executeQuery("SELECT numbers  FROM phone_numbers");
-            String elment;
-            while (rst.next()) {
-                elment = rst.getString(1);
-                numbers.add(elment);
-                
-            }
-           
-            conn.close();
-        } catch (SQLException ex) {
-            Logger.getLogger(PosClass.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return numbers;
-    }
-  public static void txtNumberClient(JTextField other,JTextField textField,Window mainWindow ,int windowX , int windowY ){
-        AutoSuggestor autoSuggestor = new AutoSuggestor(other,textField, mainWindow, null, Color.WHITE.brighter(), Color.BLUE, Color.red, 0.75f);
-        ArrayList<String> listNumber = new ArrayList<String>();
-               listNumber = PhoneNumberList();
-        autoSuggestor.setDictionary(listNumber);
-        autoSuggestor.setLocation(windowY, windowX);
-    }
-  
-    public static void SavePhoneNumber(String phone) {
-        Connection con = ConnectDB.getCon();
-      if(phone.length() == 0){
-             System.out.println("الرقم غير مكتوب"); 
-        }
-      else{  
-            ArrayList<String> Phones = Tools.PhoneNumberList();
-            System.out.println("Size List : " + Phones.size());
-            
-            
-            int index = Tools.IndexOnList(Phones, phone);
-            if(index != 0){
-              System.out.println("الرقم مسجل" + index); 
-            }else{
-                if(phone.trim().length() < 11){
-                    System.out.println("الرقم غير مقبول اقل من 11 ");
-                }
-                else{
-                   try{
-                    con.setAutoCommit(false);
-                    String sql_inser_num = "INSERT INTO `phone_numbers` (`numbers`) VALUES(?)";
-                    PreparedStatement pst = con.prepareStatement(sql_inser_num , Statement.RETURN_GENERATED_KEYS);
-                    pst.setString(1, phone.trim());
-                    int rowAffect = pst.executeUpdate();
-                    if(rowAffect == 1){
-                       con.commit();
-                       con.close();
-                       System.out.println(phone);
-                    }else{
-                        con.rollback();
-                        con.close();
-                        System.err.println("not Save :" + phone);
-                    }
-                    
-                  }catch(SQLException ex){
-                      System.out.println("الرقم مسجل" + ex.getMessage());  
-                 }
-                }
+ 
 
-            }
-         }
-    }
-    
-    private static int IndexOnList(ArrayList<String> Phones ,String phone ){
-       int index = 0;
-       int size = Phones.size();
-       for(int i = 0 ; i < size ; i++){
-           phone = phone.trim();
-           if(phone.equals(Phones.get(i))){
-               index = i;
-           }
-       }
-       return index;
-    }
 }

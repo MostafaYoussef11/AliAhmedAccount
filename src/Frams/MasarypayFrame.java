@@ -7,6 +7,7 @@ package Frams;
 
 import Entity.ClientPerson;
 import Entity.masary_Utilites;
+import Entity.numberPhoneClass;
 import Utilities.Autocomplete;
 import Utilities.ConnectDB;
 import Utilities.Tools;
@@ -67,7 +68,7 @@ public class MasarypayFrame extends javax.swing.JFrame {
     private void newMasaray(){
         
         Tools.disableButOpen(btPanel);
-        Tools.txtNumberClient(txtAmount,txtPhone, this, 275, 290);
+        new numberPhoneClass().txtNumberClient(txtAmount,txtPhone, this, 275, 290);
         client.FillComboAllNameClient(combClient);
         masary_util.fillComboCategoryUtilites(comUtility);
         String nameUtility = comUtility.getSelectedItem().toString();

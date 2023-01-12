@@ -6,17 +6,17 @@
 package Entity;
 
 import Utilities.ConnectDB;
-import Utilities.Tools;
-import com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException;
-import com.sun.org.apache.bcel.internal.generic.BREAKPOINT;
-import java.nio.file.FileVisitResult;
+//import Utilities.Tools;
+//import com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException;
+//import com.sun.org.apache.bcel.internal.generic.BREAKPOINT;
+//import java.nio.file.FileVisitResult;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.DecimalFormat;
-import java.util.ArrayList;
+//import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JComboBox;
@@ -124,7 +124,7 @@ public abstract class posPay {
                      
                      if(is_requer_phone_num){
                          System.out.println("Phone number will Save");
-                         Tools.SavePhoneNumber(phone);
+                         new numberPhoneClass().SavePhoneNumber(phone);
                      }
                      con.commit();
                      isSave = true;
@@ -188,7 +188,7 @@ public abstract class posPay {
                         if(phone.length() < 10){
                                 System.out.println("Entity.posPay.SaveClients()" + "  Number Phoen is Less Than 10 "+phone);
                         }else{   
-                            Tools.SavePhoneNumber(phone);
+                            new numberPhoneClass().SavePhoneNumber(phone);
                         }
 
                     }

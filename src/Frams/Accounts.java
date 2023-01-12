@@ -43,7 +43,7 @@ public class Accounts extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         txtName = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
-        comWorkgroup = new javax.swing.JComboBox<>();
+        comWorkgroup = new javax.swing.JComboBox<String>();
         jLabel5 = new javax.swing.JLabel();
         txtOBalance = new javax.swing.JTextField();
         jLabel6 = new javax.swing.JLabel();
@@ -64,7 +64,6 @@ public class Accounts extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("الحسابات");
-        setIconImage(new ImageIcon(Toolkit.getDefaultToolkit().getClass().getResource("/icons/laptop.png")).getImage());
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
@@ -91,7 +90,7 @@ public class Accounts extends javax.swing.JFrame {
         jLabel4.setText("المجموعة");
         jLabel4.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        comWorkgroup.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comWorkgroup.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel5.setText("النوع");
@@ -106,7 +105,7 @@ public class Accounts extends javax.swing.JFrame {
 
         comType.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/plus.png"))); // NOI18N
+        jButton1.setIcon(new javax.swing.ImageIcon("E:\\Masrawy\\Account\\src\\Icons\\plus.png")); // NOI18N
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -120,7 +119,7 @@ public class Accounts extends javax.swing.JFrame {
         txtNBalance.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txtNBalance.setText("0.00");
 
-        addGroup.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/add_1.png"))); // NOI18N
+        addGroup.setIcon(new javax.swing.ImageIcon("E:\\Masrawy\\Account\\src\\Icons\\add (1).png")); // NOI18N
         addGroup.setText("مجموعة اخري");
         addGroup.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -231,7 +230,7 @@ public class Accounts extends javax.swing.JFrame {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        btnNew.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/add-file.png"))); // NOI18N
+        btnNew.setIcon(new javax.swing.ImageIcon("E:\\Masrawy\\Account\\src\\Icons\\add-file.png")); // NOI18N
         btnNew.setText("جديد");
         btnNew.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -239,7 +238,7 @@ public class Accounts extends javax.swing.JFrame {
             }
         });
 
-        btnSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/diskette (1).png"))); // NOI18N
+        btnSave.setIcon(new javax.swing.ImageIcon("E:\\Masrawy\\Account\\src\\Icons\\diskette (1).png")); // NOI18N
         btnSave.setText("حفظ");
         btnSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -247,7 +246,7 @@ public class Accounts extends javax.swing.JFrame {
             }
         });
 
-        btnEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/pencil (1).png"))); // NOI18N
+        btnEdit.setIcon(new javax.swing.ImageIcon("E:\\Masrawy\\Account\\src\\Icons\\pencil (1).png")); // NOI18N
         btnEdit.setText("تعديل");
         btnEdit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -255,7 +254,7 @@ public class Accounts extends javax.swing.JFrame {
             }
         });
 
-        btnDel.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/delete.png"))); // NOI18N
+        btnDel.setIcon(new javax.swing.ImageIcon("E:\\Masrawy\\Account\\src\\Icons\\delete (1).png")); // NOI18N
         btnDel.setText("حذف");
         btnDel.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -263,7 +262,7 @@ public class Accounts extends javax.swing.JFrame {
             }
         });
 
-        btnEx.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/exit.png"))); // NOI18N
+        btnEx.setIcon(new javax.swing.ImageIcon("E:\\Masrawy\\Account\\src\\Icons\\exit.png")); // NOI18N
         btnEx.setText("خروج");
         btnEx.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

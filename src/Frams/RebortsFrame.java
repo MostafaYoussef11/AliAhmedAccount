@@ -7,6 +7,7 @@ package Frams;
 
 import Utilities.Tools;
 import java.awt.Cursor;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Image;
 import java.awt.Toolkit;
@@ -31,13 +32,16 @@ public class RebortsFrame extends javax.swing.JFrame {
      * Creates new form RebortsFrame
      */
     final Font font = Tools.font(24f);
+    Dimension dim;
     public RebortsFrame() {
         initComponents();
         setSize(725, 530);
-        background.setSize(725, 530);
-        background.setLocation(0, 0);
-        ImageIcon bg = new ImageIcon(new ImageIcon(Toolkit.getDefaultToolkit().getClass().getResource("/icons/bg_reports.jpg")).getImage().getScaledInstance(725, 530, Image.SCALE_DEFAULT));
-        background.setIcon(bg);
+        dim = new Dimension(725, 530);
+        Tools.setBackground(background, dim, "bg_reports.jpg");
+//        background.setSize(725, 530);
+//        background.setLocation(0, 0);
+//        ImageIcon bg = new ImageIcon(new ImageIcon(Toolkit.getDefaultToolkit().getClass().getResource("/icons/bg_reports.jpg")).getImage().getScaledInstance(725, 530, Image.SCALE_DEFAULT));
+//        background.setIcon(bg);
         btn_report_all_client.setFont(font);
         btn_report_one_items.setFont(font);
         btn_report_all_supllires.setFont(font);

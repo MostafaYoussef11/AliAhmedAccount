@@ -6,7 +6,7 @@
 package Frams;
 
 import Utilities.Tools;
-import com.sun.org.apache.bcel.internal.generic.AALOAD;
+//import com.sun.org.apache.bcel.internal.generic.AALOAD;
 import java.awt.Dimension;
 
 /**
@@ -261,6 +261,11 @@ public class MenusolfandOtherFrame extends javax.swing.JFrame {
         association_pay_btn2.setForeground(new java.awt.Color(255, 0, 0));
         association_pay_btn2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/borrow (1).png"))); // NOI18N
         association_pay_btn2.setText("سحب");
+        association_pay_btn2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                association_pay_btn2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -341,6 +346,12 @@ public class MenusolfandOtherFrame extends javax.swing.JFrame {
         BankTransactionFrame bankDebit = new BankTransactionFrame();
         Tools.openJFram(bankDebit);
     }//GEN-LAST:event_association_pay_btn1ActionPerformed
+
+    private void association_pay_btn2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_association_pay_btn2ActionPerformed
+        // TODO add your handling code here:
+        BankWithdTransactionFrame bankCredit = new BankWithdTransactionFrame();
+        Tools.openJFram(bankCredit);
+    }//GEN-LAST:event_association_pay_btn2ActionPerformed
 
     /**
      * @param args the command line arguments

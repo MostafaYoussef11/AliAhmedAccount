@@ -234,7 +234,7 @@ public class Imports extends javax.swing.JFrame {
 
         btnDImage.setText("حذف الصورة");
 
-        jToggleButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/pencil (1).png"))); // NOI18N
+        jToggleButton2.setIcon(new javax.swing.ImageIcon("E:\\Masrawy\\Account\\src\\Icons\\pencil (1).png")); // NOI18N
         jToggleButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jToggleButton2ActionPerformed(evt);
@@ -369,7 +369,7 @@ public class Imports extends javax.swing.JFrame {
 
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        btnNew.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/dollar.png"))); // NOI18N
+        btnNew.setIcon(new javax.swing.ImageIcon("E:\\Masrawy\\Account\\src\\Icons\\dollar.png")); // NOI18N
         btnNew.setText("جديد");
         btnNew.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -377,7 +377,7 @@ public class Imports extends javax.swing.JFrame {
             }
         });
 
-        btnSave.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/diskette (1).png"))); // NOI18N
+        btnSave.setIcon(new javax.swing.ImageIcon("E:\\Masrawy\\Account\\src\\Icons\\diskette (1).png")); // NOI18N
         btnSave.setText("حفظ");
         btnSave.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -385,7 +385,7 @@ public class Imports extends javax.swing.JFrame {
             }
         });
 
-        btnEdit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/pencil.png"))); // NOI18N
+        btnEdit.setIcon(new javax.swing.ImageIcon("E:\\Masrawy\\Account\\src\\Icons\\pencil.png")); // NOI18N
         btnEdit.setText("تعديل");
         btnEdit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -393,7 +393,7 @@ public class Imports extends javax.swing.JFrame {
             }
         });
 
-        btnUpdate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/exchange.png"))); // NOI18N
+        btnUpdate.setIcon(new javax.swing.ImageIcon("E:\\Masrawy\\Account\\src\\Icons\\exchange.png")); // NOI18N
         btnUpdate.setText("تحديث");
         btnUpdate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -401,7 +401,7 @@ public class Imports extends javax.swing.JFrame {
             }
         });
 
-        btnDelete.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/delete.png"))); // NOI18N
+        btnDelete.setIcon(new javax.swing.ImageIcon("E:\\Masrawy\\Account\\src\\Icons\\delete.png")); // NOI18N
         btnDelete.setText("حذف");
         btnDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -409,7 +409,7 @@ public class Imports extends javax.swing.JFrame {
             }
         });
 
-        btnExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icons/exit.png"))); // NOI18N
+        btnExit.setIcon(new javax.swing.ImageIcon("E:\\Masrawy\\Account\\src\\Icons\\exit.png")); // NOI18N
         btnExit.setText("خروج");
         btnExit.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

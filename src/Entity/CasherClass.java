@@ -6,7 +6,6 @@
 package Entity;
 
 import Utilities.ConnectDB;
-import Utilities.Tools;
 import Utilities.saveData;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -95,7 +94,7 @@ public class CasherClass {
   
   
   public PreparedStatement SavedCasherTransaction(TypeCasherTransaction type , double amount , String note , int id , Connection con){
-      int rowAffect = 0;
+     // int rowAffect = 0;
       String sql_insert_casher = getSQlStatement(type);
       PreparedStatement pstmt = null;
       try{
@@ -213,7 +212,15 @@ public class CasherClass {
           case creditFromBank:
               sql_insert_casher = "INSERT INTO `casher` (`Debit`, `note`,`id_users`,`id_transaction_fromBank`) VALUES (?,?,?,?)"; 
               break;
-              
+          case ChefrImport:
+              sql_insert_casher = "INSERT INTO `casher` (`Debit`, `note`,`id_users`,`id_ChevroletImports`) VALUES (?,?,?,?)"; 
+              break;
+          case MillImport:
+              sql_insert_casher = "INSERT INTO `casher` (`Debit`, `note`,`id_users`,`id_MillImports`) VALUES (?,?,?,?)"; 
+              break;
+          case accountImport:
+              sql_insert_casher = "INSERT INTO `casher` (`Debit`, `note`,`id_users`,`id_credit`) VALUES (?,?,?,?)"; 
+              break;    
               
           case PosSell: // id_masary_sell 1
               sql_insert_casher = "INSERT INTO `casher` (`Creditor`, `note`,`id_users`,`id_masary_sell`) VALUES (?,?,?,?)";
@@ -260,6 +267,12 @@ public class CasherClass {
           case debitToBank:
               sql_insert_casher = "INSERT INTO `casher` (`Creditor`, `note`,`id_users`,`id_transaction_toBank`) VALUES (?,?,?,?)";
               break;
+          case ChefrExpens:
+              sql_insert_casher = "INSERT INTO `casher` (`Creditor`, `note`,`id_users`,`id_ChevroletExpens`) VALUES (?,?,?,?)";
+              break;    
+          case MillExpens:
+              sql_insert_casher = "INSERT INTO `casher` (`Creditor`, `note`,`id_users`,`id_MillExpenes`) VALUES (?,?,?,?)";
+              break;  
       }
       return sql_insert_casher;
   }

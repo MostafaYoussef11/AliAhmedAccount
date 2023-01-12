@@ -37,11 +37,12 @@ public class menuCashFrame extends javax.swing.JFrame {
         debit_atm.setFont(font);
         toPos.setFont(font);
         betwenCash.setFont(font);
-        background.setLocation(0, 0);
-        background.setSize(dim);
-        background.setPreferredSize(dim);
-        ImageIcon bg = new ImageIcon(new ImageIcon(Toolkit.getDefaultToolkit().getClass().getResource("/icons/wave_1.png")).getImage().getScaledInstance(dim.width, dim.height, Image.SCALE_DEFAULT));
-        background.setIcon(bg);
+//        background.setLocation(0, 0);
+//        background.setSize(dim);
+//        background.setPreferredSize(dim);
+//        ImageIcon bg = new ImageIcon(new ImageIcon(Toolkit.getDefaultToolkit().getClass().getResource("/icons/wave_1.png")).getImage().getScaledInstance(dim.width, dim.height, Image.SCALE_DEFAULT));
+//        background.setIcon(bg);
+        Tools.setBackground(background, dim, "wave_1.png");
     }
 
     /**
@@ -278,6 +279,9 @@ public class menuCashFrame extends javax.swing.JFrame {
 
     private void debit_atmMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_debit_atmMouseClicked
         // TODO add your handling code here:
+        clickPanel(debit_atm);
+        depositFromATMFrame dfa = new depositFromATMFrame();
+        Tools.openJFram(dfa, "ايداع من ال ATM","atm");
     }//GEN-LAST:event_debit_atmMouseClicked
 
     private void debit_atmMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_debit_atmMouseExited
