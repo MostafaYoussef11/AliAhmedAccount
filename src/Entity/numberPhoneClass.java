@@ -50,7 +50,7 @@ public class numberPhoneClass {
   public void txtNumberClient(JTextField other,JTextField textField,Window mainWindow ,int windowX , int windowY ){
         AutoSuggestor autoSuggestor = new AutoSuggestor(other,textField, mainWindow, null, Color.WHITE.brighter(), Color.BLUE, Color.red, 0.75f);
         ArrayList<String> listNumber = new ArrayList<String>();
-               listNumber = PhoneNumberList();
+               listNumber = new numberPhoneClass().PhoneNumberList();
         autoSuggestor.setDictionary(listNumber);
         autoSuggestor.setLocation(windowY, windowX);
     } 

@@ -212,7 +212,7 @@
         <Component class="javax.swing.JFormattedTextField" name="txt_valu">
           <Properties>
             <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
-              <Format subtype="0" type="0"/>
+              <Format format="###0.###" subtype="-1" type="0"/>
             </Property>
             <Property name="horizontalAlignment" type="int" value="0"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -240,7 +240,7 @@
         <Component class="javax.swing.JFormattedTextField" name="txt_cost">
           <Properties>
             <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
-              <Format subtype="0" type="0"/>
+              <Format format="#0.00" subtype="-1" type="0"/>
             </Property>
             <Property name="horizontalAlignment" type="int" value="0"/>
             <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
@@ -279,7 +279,7 @@
         <Component class="javax.swing.JFormattedTextField" name="txt_discont">
           <Properties>
             <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
-              <Format subtype="0" type="0"/>
+              <Format format="###0.###" subtype="-1" type="0"/>
             </Property>
             <Property name="horizontalAlignment" type="int" value="0"/>
             <Property name="disabledTextColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
@@ -318,6 +318,9 @@
         </Component>
         <Component class="javax.swing.JFormattedTextField" name="txt_amount">
           <Properties>
+            <Property name="formatterFactory" type="javax.swing.JFormattedTextField$AbstractFormatterFactory" editor="org.netbeans.modules.form.editors.AbstractFormatterFactoryEditor">
+              <Format format="#0" subtype="-1" type="0"/>
+            </Property>
             <Property name="horizontalAlignment" type="int" value="0"/>
             <Property name="disabledTextColor" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
               <Color blue="0" green="0" red="0" type="rgb"/>

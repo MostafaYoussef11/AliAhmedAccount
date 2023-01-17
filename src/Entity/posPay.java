@@ -123,7 +123,7 @@ public abstract class posPay {
                  if(rowAffectCasher == 1){
                      
                      if(is_requer_phone_num){
-                         System.out.println("Phone number will Save");
+                         //System.out.println("Phone number will Save");
                          new numberPhoneClass().SavePhoneNumber(phone);
                      }
                      con.commit();

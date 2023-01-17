@@ -12,6 +12,7 @@ import java.awt.Font;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
+import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.sql.SQLException;
@@ -765,6 +766,11 @@ public class MainFrame extends javax.swing.JFrame {
         txtDate.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/calendar1.png"))); // NOI18N
         txtDate.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         txtDate.setIconTextGap(20);
+        txtDate.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                txtDateMouseClicked(evt);
+            }
+        });
         Barpanel.add(txtDate);
         txtDate.setBounds(560, 0, 250, 30);
 
@@ -1139,16 +1145,21 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void card_10MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_card_10MouseExited
         // TODO add your handling code here:
-        //exitPanel(calc);
+        exitPanel(card_10);
     }//GEN-LAST:event_card_10MouseExited
 
     private void calcMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_calcMouseClicked
-
-        if(!(cf.isVisible())){
-             cf = new calcFrame();
-             Tools.openJFram(cf,"حاسبة","calculator");
-        }else{
-            cf.dispose();
+        try {
+            Runtime runtime = Runtime.getRuntime();
+            Process proc = runtime.exec("E:\\Masrawy\\Account\\dist\\calc.exe");
+//        if(!(cf.isVisible())){
+//             cf = new calcFrame();
+//             Tools.openJFram(cf,"حاسبة","calculator");
+//        }else{
+//            cf.dispose();
+//        }
+        } catch (IOException ex) {
+            Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_calcMouseClicked
 
@@ -1388,6 +1399,11 @@ public class MainFrame extends javax.swing.JFrame {
         txtNowBalance.setText(new CasherClass().getNowBalanceCasher());  
 
     }//GEN-LAST:event_txtNowBalanceMouseClicked
+
+    private void txtDateMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_txtDateMouseClicked
+        // TODO add your handling code here:
+        
+    }//GEN-LAST:event_txtDateMouseClicked
     
     private void settxtnumer(){
         masary_Utilites utilit = new masary_Utilites(id_pos);

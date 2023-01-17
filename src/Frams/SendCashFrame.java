@@ -131,7 +131,7 @@ public class SendCashFrame extends javax.swing.JFrame {
         jLabel5.setText("القيمة");
         jLabel5.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        txt_valu.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter()));
+        txt_valu.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("###0.###"))));
         txt_valu.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txt_valu.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         txt_valu.addKeyListener(new java.awt.event.KeyAdapter() {
@@ -145,7 +145,7 @@ public class SendCashFrame extends javax.swing.JFrame {
         jLabel6.setText("تكلفة الخدمة");
         jLabel6.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        txt_cost.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter()));
+        txt_cost.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0.00"))));
         txt_cost.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txt_cost.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
 
@@ -159,7 +159,7 @@ public class SendCashFrame extends javax.swing.JFrame {
         jLabel7.setText("المبلغ المدفوع");
         jLabel7.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        txt_discont.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter()));
+        txt_discont.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("###0.###"))));
         txt_discont.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txt_discont.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         txt_discont.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
@@ -171,6 +171,7 @@ public class SendCashFrame extends javax.swing.JFrame {
 
         comboClient.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
+        txt_amount.setFormatterFactory(new javax.swing.text.DefaultFormatterFactory(new javax.swing.text.NumberFormatter(new java.text.DecimalFormat("#0"))));
         txt_amount.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txt_amount.setDisabledTextColor(new java.awt.Color(0, 0, 0));
         txt_amount.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N

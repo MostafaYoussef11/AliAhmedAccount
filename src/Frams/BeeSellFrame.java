@@ -62,9 +62,9 @@ public class BeeSellFrame extends javax.swing.JFrame {
         txt_title = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        comb_recharge_type = new javax.swing.JComboBox<>();
+        comb_recharge_type = new javax.swing.JComboBox<String>();
         jLabel2 = new javax.swing.JLabel();
-        comb_to_account = new javax.swing.JComboBox<>();
+        comb_to_account = new javax.swing.JComboBox<String>();
         jLabel3 = new javax.swing.JLabel();
         txt_value = new javax.swing.JTextField();
         jLabel4 = new javax.swing.JLabel();
@@ -99,7 +99,7 @@ public class BeeSellFrame extends javax.swing.JFrame {
         jLabel1.setText("التوريد");
         jLabel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        comb_recharge_type.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comb_recharge_type.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
         comb_recharge_type.addItemListener(new java.awt.event.ItemListener() {
             public void itemStateChanged(java.awt.event.ItemEvent evt) {
                 comb_recharge_typeItemStateChanged(evt);
@@ -111,7 +111,7 @@ public class BeeSellFrame extends javax.swing.JFrame {
         jLabel2.setText("من حساب");
         jLabel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        comb_to_account.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        comb_to_account.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
 
         jLabel3.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -121,6 +121,11 @@ public class BeeSellFrame extends javax.swing.JFrame {
         txt_value.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         txt_value.setHorizontalAlignment(javax.swing.JTextField.CENTER);
         txt_value.setText("0.00");
+        txt_value.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                txt_valueKeyReleased(evt);
+            }
+        });
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
@@ -422,6 +427,12 @@ public class BeeSellFrame extends javax.swing.JFrame {
     private void btprintActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btprintActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_btprintActionPerformed
+
+    private void txt_valueKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_valueKeyReleased
+        // TODO add your handling code here:
+        String text = txt_value.getText();
+        txt_amount.setText(text);
+    }//GEN-LAST:event_txt_valueKeyReleased
 
     private void newSell(){
         Tools.disableButOpen(btPanel);

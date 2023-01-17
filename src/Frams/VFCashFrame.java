@@ -30,9 +30,10 @@ public class VFCashFrame extends javax.swing.JFrame {
     public VFCashFrame() {
         initComponents();
         setSize(dim);
-        background.setLocation(0, 0);
-        ImageIcon icon = new ImageIcon(new ImageIcon(Toolkit.getDefaultToolkit().getClass().getResource("/icons/vfcash.png")).getImage().getScaledInstance(dim.width, dim.height, Image.SCALE_DEFAULT));
-        background.setIcon(icon);
+//        background.setLocation(0, 0);
+//        ImageIcon icon = new ImageIcon(new ImageIcon(Toolkit.getDefaultToolkit().getClass().getResource("/icons/vfcash.png")).getImage().getScaledInstance(dim.width, dim.height, Image.SCALE_DEFAULT));
+//        background.setIcon(icon);
+        Tools.setBackground(background, dim, "vfcash.png");
         font = Tools.font(24f);
         title.setFont(font);
         vf = new VFCashClass();
