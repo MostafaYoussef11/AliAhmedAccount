@@ -20,6 +20,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
+import javax.swing.JLabel;
 import javax.swing.border.Border;
 
 /**
@@ -35,8 +36,9 @@ public class RebortsFrame extends javax.swing.JFrame {
     Dimension dim;
     public RebortsFrame() {
         initComponents();
-        setSize(725, 530);
-        dim = new Dimension(725, 530);
+       // setSize(725, 530);
+        dim = new Dimension(725, 650);
+        super.setSize(dim);
         Tools.setBackground(background, dim, "bg_reports.jpg");
 //        background.setSize(725, 530);
 //        background.setLocation(0, 0);
@@ -50,6 +52,7 @@ public class RebortsFrame extends javax.swing.JFrame {
         btn_report_one_suplier.setFont(font);
         btn_report_all_items.setFont(font);
         btn_report_casher.setFont(font);
+        btn_report_salesDay.setFont(font);
     }
 
     /**
@@ -69,6 +72,7 @@ public class RebortsFrame extends javax.swing.JFrame {
         btn_report_casher_day = new javax.swing.JLabel();
         btn_report_all_items = new javax.swing.JLabel();
         btn_report_casher = new javax.swing.JLabel();
+        btn_report_salesDay = new javax.swing.JLabel();
         background = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
@@ -209,6 +213,23 @@ public class RebortsFrame extends javax.swing.JFrame {
         });
         getContentPane().add(btn_report_casher);
         btn_report_casher.setBounds(370, 380, 300, 100);
+
+        btn_report_salesDay.setForeground(new java.awt.Color(0, 51, 153));
+        btn_report_salesDay.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        btn_report_salesDay.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/report_5.png"))); // NOI18N
+        btn_report_salesDay.setText("مبيعات اليوم");
+        btn_report_salesDay.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        btn_report_salesDay.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        btn_report_salesDay.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                btn_report_salesDayMouseClicked(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                btn_report_salesDayMouseExited(evt);
+            }
+        });
+        getContentPane().add(btn_report_salesDay);
+        btn_report_salesDay.setBounds(370, 500, 300, 100);
         getContentPane().add(background);
         background.setBounds(0, 0, 0, 0);
 
@@ -295,6 +316,7 @@ public class RebortsFrame extends javax.swing.JFrame {
 
     private void btn_report_one_itemsMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_report_one_itemsMouseClicked
         // TODO add your handling code here:
+        
         chooseitems item = new chooseitems();
         Tools.openJFram(item);
     }//GEN-LAST:event_btn_report_one_itemsMouseClicked
@@ -327,6 +349,27 @@ public class RebortsFrame extends javax.swing.JFrame {
 
     }//GEN-LAST:event_btn_report_casher_dayMouseExited
 
+    private void btn_report_salesDayMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_report_salesDayMouseClicked
+        // TODO add your handling code here:
+        //btn_report_salesDay.setBorder(BorderFactory.createLoweredBevelBorder());
+        clickPanel(btn_report_salesDay);
+        String sql = "SELECT si.id_salesInvoic, it.name_items , it.qyt , it.price , it.Amount FROM "
+                + "salesinvoic AS si INNER JOIN itemsonsalesinvoice AS it ON it.id_salesInvoic = si.id_salesInvoic WHERE si.date_salesInvoic = CURRENT_DATE()";
+        InputStream streem = getClass().getResourceAsStream("/Reborts/SalesDay.jrxml");
+        HashMap para = new HashMap();
+        Tools.Printer(sql, streem, para);
+    }//GEN-LAST:event_btn_report_salesDayMouseClicked
+
+    private void btn_report_salesDayMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_btn_report_salesDayMouseExited
+        // TODO add your handling code here:
+        exitPanel(btn_report_salesDay);
+    }//GEN-LAST:event_btn_report_salesDayMouseExited
+    private void clickPanel(JLabel lable){
+        lable.setBorder(BorderFactory.createLoweredBevelBorder());
+    }
+    private void exitPanel(JLabel lable){
+        lable.setBorder(BorderFactory.createRaisedSoftBevelBorder());
+    }
     /**
      * @param args the command line arguments
      */
@@ -372,5 +415,6 @@ public class RebortsFrame extends javax.swing.JFrame {
     private javax.swing.JLabel btn_report_one_client;
     private javax.swing.JLabel btn_report_one_items;
     private javax.swing.JLabel btn_report_one_suplier;
+    private javax.swing.JLabel btn_report_salesDay;
     // End of variables declaration//GEN-END:variables
 }

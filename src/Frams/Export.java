@@ -30,6 +30,9 @@ public class Export extends javax.swing.JFrame {
         dim = new Dimension(860, 560);
         super.setSize(dim);
         Tools.setBackground(background, dim, "17249.jpg");
+        buttonGroup1.add(rd_Clear);
+        buttonGroup1.add(rd_Payment);
+        buttonGroup1.add(rd_end);
     }
      
     private void SetNew(){
@@ -176,16 +179,19 @@ public class Export extends javax.swing.JFrame {
         rd_Payment.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         rd_Payment.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
         rd_Payment.setLabel("دفعة من الحساب");
+        rd_Payment.setOpaque(false);
         rd_Payment.setPreferredSize(new java.awt.Dimension(93, 30));
 
         rd_Clear.setText("تصفية نقدية");
         rd_Clear.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         rd_Clear.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        rd_Clear.setOpaque(false);
         rd_Clear.setPreferredSize(new java.awt.Dimension(93, 30));
 
         rd_end.setText("تصفية نهائية");
         rd_end.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         rd_end.setHorizontalTextPosition(javax.swing.SwingConstants.LEFT);
+        rd_end.setOpaque(false);
         rd_end.setPreferredSize(new java.awt.Dimension(93, 30));
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
@@ -252,7 +258,7 @@ public class Export extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(txtDaily, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addComponent(txtDaily, javax.swing.GroupLayout.DEFAULT_SIZE, 92, Short.MAX_VALUE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(txtNote, javax.swing.GroupLayout.PREFERRED_SIZE, 233, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -481,7 +487,12 @@ public class Export extends javax.swing.JFrame {
                 boolean isSave = false;
                     if(rd_Payment.isSelected()){
                         isSave = gold.SaveExportAccount(amount, idAccount, idSupplier, note,id);
+                        System.out.println("rdPayment");
                     }//
+                    else if(rd_Clear.isSelected()){
+                       isSave = gold.SaveExportAndClearAccount(amount, nameAccount, idAccount, idSupplier, note, id);
+                        System.out.println("rdClear");
+                    }
                 if(isSave){
                     Tools.showInfoMsg("تم الحفظ بنجاح", "حفظ");
                     SetNew();

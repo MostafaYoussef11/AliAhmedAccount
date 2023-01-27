@@ -105,6 +105,53 @@ public class goldClasses {
       return isSaveExportAccount;
     }
     
+    public boolean SaveExportAndClearAccount(double amount ,String nameAccount, int idAccount , int idSupplier , String note , int id_export){
+      boolean isSave = SaveExportAccount(amount, idAccount, idSupplier, note, id_export);
+      boolean Saved = false;
+      if(isSave){
+          try {
+              con = ConnectDB.getCon();
+              con.setAutoCommit(false);
+              double balanceAccount = GetBalanceAccount(nameAccount);
+              // update Creditor
+              String sql = "UPDATE `creditors` SET `isFiltering`= 1 WHERE `id_account`=?";
+              PreparedStatement pst_update_Credit = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+              pst_update_Credit.setInt(1, idAccount);
+              int rowsAffect = pst_update_Credit.executeUpdate();
+              if(rowsAffect >= 0){
+                  System.out.println("Update The Creditor to Account = "+nameAccount);
+                  // Update The Export
+                  String sql_export = "UPDATE `exports` SET `isFiltering`=1 WHERE `id_account`=?";
+                  PreparedStatement pst_update_ex = con.prepareStatement(sql_export, Statement.RETURN_GENERATED_KEYS);
+                  pst_update_ex.setInt(1, idAccount);
+                  int rowAffectExport = pst_update_ex.executeUpdate();
+                  if(rowAffectExport >= 0){
+                      System.out.println("Update The Export to Account = "+nameAccount);
+                      // update The Balance 
+                      String sql_updateBalance = "UPDATE `account` SET `balance_account`= ? ,`now_balance`= ? WHERE `id_account` = ?";
+                      PreparedStatement pstm_Account = con.prepareStatement(sql_updateBalance, Statement.RETURN_GENERATED_KEYS);
+                      pstm_Account.setDouble(1, balanceAccount);
+                      pstm_Account.setDouble(2, balanceAccount);
+                      pstm_Account.setInt(3, idAccount);
+                      int rowAffect = pstm_Account.executeUpdate();
+                      if(rowAffect == 1){
+                          System.out.println("Update Balance " + nameAccount);
+                          Saved = true;
+                          con.commit();
+                          con.close();
+                          
+                      }
+                  }
+              }
+          } catch (SQLException ex) {
+              Logger.getLogger(goldClasses.class.getName()).log(Level.SEVERE, null, ex);
+          }
+          
+      
+      }
+      return Saved; 
+    }
+    
     public boolean SaveExpensGold(double price , int id_work_group , String note , int id_suppliers , int id_expens){
         try {
             con = ConnectDB.getCon();
