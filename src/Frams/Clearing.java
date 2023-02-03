@@ -988,12 +988,70 @@ public class Clearing extends javax.swing.JFrame {
     
     }
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-      
+        tabPanel.setEnabled(true);
+        tabPanel.setTitleAt(1, null);
+        tabPanel.setTitleAt(0, null);
+        tabPanel.setTitleAt(2, null);
+        tabPanel.setTitleAt(3, "السجل");
+        tabPanel.setSelectedIndex(3);
+        tabPanel.setEnabledAt(0, false);
+        tabPanel.setEnabledAt(2, false);
+        tabPanel.setEnabledAt(3, true);
+        tabPanel.setEnabledAt(1, false);
+        history.setEnabled(true);
+        btnPrint.setEnabled(true);
+        String sql = "SELECT notes ,date_clear , id_clear   FROM clear";
+        String [] coulmnName = new String[]{ "البيان", "التاريخ", "الرقم"};
+        ConnectDB.fillAndCenterTable(sql, table, coulmnName);
+        clearing.setEnabled(false);
         
     }//GEN-LAST:event_jButton2ActionPerformed
 
     private void tableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_tableMouseClicked
-      
+   int row = table.getSelectedRow();
+        String id_clear = table.getValueAt(row, 2).toString();
+        String id_workgroup = ConnectDB.getIdFromName("SELECT id_workgroup AS id FROM expens WHERE id_clear ="+id_clear+" GROUP BY id_workgroup;");
+        String nameWorkgroup = ConnectDB.getIdFromName("SELECT name_workgroup AS id FROM workgroup WHERE id_workgroup = "+id_workGroup + ";");
+        comWork.setSelectedItem(nameWorkgroup);
+        //SELECT SUM(wight_imports) as sum FROM imports WHERE id_clear = 1;
+        double wight = gold.GetSumWights(id_workgroup); //Conn.getSum("SELECT SUM(wight_imports) as sum FROM imports WHERE id_clear = "+id_clear+";");
+        txtwight.setText(wight+"");
+        //SELECT SUM(price_expens) as sum FROM expens WHERE id_clear = 1
+        double price_expens = gold.GetSumExpens(id_workgroup);//ConectionDataBase.getSum("SELECT SUM(price_expens) as sum FROM expens WHERE id_clear = "+id_clear+";");
+        txtExpention.setText(price_expens+"");
+        //SELECT SUM(amount_imports) as sum FROM imports WHERE id_clear = 1;
+        double amounts = gold.GetSumAmount(id_workgroup);//.getSum("SELECT SUM(amount_imports) as sum FROM imports WHERE id_clear = "+id_clear+";");
+        txtAmount.setText(amounts+"");
+        //SELECT COUNT(aw.id_account) FROM accountworkgroup aw INNER JOIN account a on a.id_account = aw.id_account where a.id_type = 2 and aw.id_workgroup = 1
+//        String selectDeal = "SELECT id_deal AS sum FROM workgroup WHERE id_workgroup="+id_workgroup+";";
+//        id_deal = ConectionDataBase.getSum(selectDeal);
+//        String id_type = "" ;
+//        switch(id_deal){
+//           case "1":
+//               id_type = "2";
+//               break;
+//           case "2":
+//               id_type = "8";
+//               break;
+//           case "4":
+//               id_type = "8";
+//               break;
+//           default:
+//               break;
+//        
+//        }
+//        
+        //SELECT COUNT(creditors.id_account) FROM creditors INNER JOIN account on creditors.id_account = account.id_account WHERE account.id_type = 8 and creditors.id_clear = 1
+        //SELECT creditors.id_account , account.name_account FROM creditors INNER JOIN account on creditors.id_account = account.id_account WHERE account.id_type = 8 and creditors.id_clear = 1
+
+        
+//        String SqlcountWorker = "SELECT COUNT(creditors.id_account) AS sum FROM creditors"
+//                           + " INNER JOIN account on creditors.id_account = account.id_account "
+//                           + " WHERE account.id_type = "+id_type+" and creditors.id_clear = "+id_clear+";";
+        
+        int CountWorker = gold.GetCountWorker(id_workgroup);
+        txtCount.setText(CountWorker+"");
+              
         
     }//GEN-LAST:event_tableMouseClicked
 

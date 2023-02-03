@@ -2,7 +2,7 @@
 <jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="report name" pageWidth="595" pageHeight="842" columnWidth="575" leftMargin="10" rightMargin="10" topMargin="27" bottomMargin="10" uuid="cafe808f-11be-4b02-a918-f7113d77cdee">
 	<property name="ireport.zoom" value="1.0"/>
 	<property name="ireport.x" value="0"/>
-	<property name="ireport.y" value="335"/>
+	<property name="ireport.y" value="0"/>
 	<parameter name="id_workgroup" class="java.lang.Integer">
 		<defaultValueExpression><![CDATA[]]></defaultValueExpression>
 	</parameter>
@@ -215,7 +215,8 @@ WHERE
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="107" splitType="Stretch">
+		<band height="107">
+			<printWhenExpression><![CDATA[$V{REPORT_COUNT}.intValue() == 1]]></printWhenExpression>
 			<subreport>
 				<reportElement x="5" y="0" width="285" height="100" uuid="c2a2b779-87ae-4aae-8195-a369256c5f1a"/>
 				<subreportParameter name="sumImport">

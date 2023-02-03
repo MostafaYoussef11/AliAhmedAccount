@@ -56,7 +56,7 @@ public class VFCashClass {
         return isSave;
     }
     public void fillCombo(JComboBox comboBox){
-        ConnectDB.fillCombo("VF_cash", "number_VF_cash", comboBox);
+        ConnectDB.fillCombo("totalcash order by NowBalance desc", "Number", comboBox);
     }
     
     //setter and getter Method
