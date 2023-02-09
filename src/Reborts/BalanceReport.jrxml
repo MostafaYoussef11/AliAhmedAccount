@@ -278,15 +278,43 @@ FROM
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "BalanceReport_balanceClient.jasper"]]></subreportExpression>
 			</subreport>
+			<subreport>
+				<reportElement x="0" y="0" width="255" height="35" uuid="915c3b1f-0df0-4908-857d-c1dc49697727"/>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "BalanceReport_subreport13.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
+		<band height="35">
+			<printWhenExpression><![CDATA[$V{REPORT_COUNT}.intValue() == 1]]></printWhenExpression>
+			<subreport>
+				<reportElement x="255" y="0" width="300" height="35" uuid="2c40c14c-1174-41ca-8d75-9f006a661421"/>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "BalanceReport_subreport10.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement x="0" y="0" width="255" height="35" uuid="73cd5143-178a-4f96-8d1a-c97377222499"/>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "BalanceReport_subreport13.jasper"]]></subreportExpression>
+			</subreport>
 		</band>
 	</detail>
-	<columnFooter>
-		<band height="45" splitType="Stretch"/>
-	</columnFooter>
-	<pageFooter>
-		<band height="54" splitType="Stretch"/>
-	</pageFooter>
 	<summary>
-		<band height="42" splitType="Stretch"/>
+		<band height="88" splitType="Stretch">
+			<subreport>
+				<reportElement x="255" y="0" width="300" height="35" uuid="122101f9-079b-4215-ac9b-9e6d6608c8a2"/>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "BalanceReport_subreport11.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement x="0" y="0" width="255" height="35" uuid="2f334dc3-1413-435e-badc-c700b9570342"/>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "BalanceReport_subreport12.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement x="0" y="35" width="555" height="53" uuid="ec5a6308-dde0-4b20-8ecf-701d4cf6afcc"/>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "BalanceReport_subreport14.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
 	</summary>
 </jasperReport>

@@ -207,6 +207,11 @@ public class MenusolfandOtherFrame extends javax.swing.JFrame {
         association_new_btn.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         association_new_btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/team.png"))); // NOI18N
         association_new_btn.setText("جديدة");
+        association_new_btn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                association_new_btnActionPerformed(evt);
+            }
+        });
 
         association_pay_btn.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         association_pay_btn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Icons/borrow (1).png"))); // NOI18N
@@ -352,6 +357,12 @@ public class MenusolfandOtherFrame extends javax.swing.JFrame {
         BankWithdTransactionFrame bankCredit = new BankWithdTransactionFrame();
         Tools.openJFram(bankCredit);
     }//GEN-LAST:event_association_pay_btn2ActionPerformed
+
+    private void association_new_btnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_association_new_btnActionPerformed
+        // TODO add your handling code here:
+        associationFrame ass = new associationFrame();
+        Tools.openJFram(ass);
+    }//GEN-LAST:event_association_new_btnActionPerformed
 
     /**
      * @param args the command line arguments

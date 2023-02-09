@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports http://jasperreports.sourceforge.net/xsd/jasperreport.xsd" name="BalanceReport_subreport11" pageWidth="555" pageHeight="802" columnWidth="555" leftMargin="0" rightMargin="0" topMargin="0" bottomMargin="0" uuid="b48a0207-2361-4a44-8d8d-98a97641a7ca">
+	<property name="ireport.zoom" value="1.0"/>
+	<property name="ireport.x" value="0"/>
+	<property name="ireport.y" value="0"/>
+	<queryString>
+		<![CDATA[SELECT
+(SELECT Sum(balanceofpos.balance) as banalce FROM `balanceofpos`) + (SELECT SUM(bankbalance.balance)as balance FROM `bankbalance`)+(SELECT SUM(totalcash.NowBalance) as balance FROM `totalcash`)+(SELECT ((select f.newbalance from finallyday as f where dateFinally = CURRENT_DATE()) + (SELECT c.Balance FROM cashertwobalance AS c)) AS Balance) + (SELECT sum(balance) as Balance FROM `balanceclient`)+(select sum(price_expens)as sum from expens where isRelay = 0) AS total]]>
+	</queryString>
+	<field name="total" class="java.lang.Double"/>
+	<background>
+		<band splitType="Stretch"/>
+	</background>
+	<detail>
+		<band height="35" splitType="Stretch">
+			<staticText>
+				<reportElement mode="Transparent" x="0" y="0" width="180" height="35" forecolor="#000000" backcolor="#FFFFFF" uuid="d2a48a72-d289-4f84-b84d-bc9818c2757a"/>
+				<box>
+					<pen lineWidth="2.75" lineStyle="Solid"/>
+					<topPen lineWidth="2.75" lineStyle="Solid"/>
+					<leftPen lineWidth="2.75" lineStyle="Solid"/>
+					<bottomPen lineWidth="2.75" lineStyle="Solid"/>
+					<rightPen lineWidth="2.75" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="22" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<text><![CDATA[الاجمالي]]></text>
+			</staticText>
+			<textField pattern="#,##0.00;-#,##0.00" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="180" y="0" width="120" height="35" forecolor="#000000" backcolor="#FFFFFF" uuid="594603fe-ca13-42d0-a10c-a2e2f7737c5d"/>
+				<box>
+					<pen lineWidth="2.75" lineStyle="Solid"/>
+					<topPen lineWidth="2.75" lineStyle="Solid"/>
+					<leftPen lineWidth="2.75" lineStyle="Solid"/>
+					<bottomPen lineWidth="2.75" lineStyle="Solid"/>
+					<rightPen lineWidth="2.75" lineStyle="Solid"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="22" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$F{total}]]></textFieldExpression>
+			</textField>
+		</band>
+	</detail>
+</jasperReport>

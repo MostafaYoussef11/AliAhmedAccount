@@ -49,8 +49,8 @@ public class Send_receiveCash {
     
     //fill Table Send Transaction only
     public void fillTableSend(JTable table){
-        String[] columnName = {"المبلغ", "القيمة", "المحفظة", "الوقت", "التاريخ", "م"};
-        String sql_select = "SELECT send.amount_Send_Receive , send.value_Send_Receive , v.number_VF_cash , send.time_Send_Receive"
+        String[] columnName = {"المبلغ", "القيمة","الرقم", "المحفظة", "الوقت", "التاريخ", "م"};
+        String sql_select = "SELECT send.amount_Send_Receive , send.value_Send_Receive ,send.Number_client, v.number_VF_cash , send.time_Send_Receive"
                 + " , send.date_Send_Receive , send.id_Send_Receive FROM send_receive AS send INNER JOIN vf_cash AS v ON "
                 + "send.id_VF_cash = v.id_VF_cash WHERE send.type_Send_Receive = 'Send' ORDER BY send.id_Send_Receive DESC; ";
         ConnectDB.fillAndCenterTable(sql_select, table, columnName);
