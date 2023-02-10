@@ -44,6 +44,7 @@ public class ClintFrame extends javax.swing.JFrame {
         Tools.disableButOpen(btPanel);
         txtFirsbalance.setText("0.00");
         c.filTable(jTable1);
+        Tools.SearchField(jTable1, txtName);
     }
 
     /**
