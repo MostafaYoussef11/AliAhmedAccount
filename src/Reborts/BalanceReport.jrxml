@@ -297,6 +297,19 @@ FROM
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "BalanceReport_subreport13.jasper"]]></subreportExpression>
 			</subreport>
 		</band>
+		<band height="35">
+			<printWhenExpression><![CDATA[$V{REPORT_COUNT}.intValue() == 1]]></printWhenExpression>
+			<subreport>
+				<reportElement x="255" y="0" width="300" height="35" uuid="253c1562-c48b-4537-a98b-8013aa5aa943"/>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "BalanceReport_subreport15.jasper"]]></subreportExpression>
+			</subreport>
+			<subreport>
+				<reportElement x="0" y="0" width="255" height="35" uuid="4bfd6d30-1f3b-435b-831d-48594e6fa631"/>
+				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
+				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "BalanceReport_subreport13.jasper"]]></subreportExpression>
+			</subreport>
+		</band>
 	</detail>
 	<summary>
 		<band height="88" splitType="Stretch">

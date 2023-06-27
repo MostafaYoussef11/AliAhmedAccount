@@ -630,9 +630,9 @@ public class goldClasses {
         String id_account = getIdAccount(nameAccount);
         String Sql_firstBalance = "SELECT `balance_account` AS id FROM `account` WHERE `id_account`="+id_account;
         double firstBalance = Double.parseDouble(ConnectDB.getIdFromName(Sql_firstBalance));
-        String SqlSumCredit = "SELECT COALESCE(SUM(`amount`),0) AS id FROM `creditors` WHERE `id_account`="+id_account;
+        String SqlSumCredit = "SELECT COALESCE(SUM(`amount`),0) AS id FROM `creditors` WHERE isFiltering = 0 and `id_account`="+id_account;
         double Creditors = Double.parseDouble(ConnectDB.getIdFromName(SqlSumCredit));
-        String SqlSumExport = "SELECT COALESCE(SUM(`price_export`),0) AS id FROM `exports` WHERE `id_account`="+id_account;
+        String SqlSumExport = "SELECT COALESCE(SUM(`price_export`),0) AS id FROM `exports` WHERE isFiltering = 0 and `id_account`="+id_account;
         double debit = Double.parseDouble(ConnectDB.getIdFromName(SqlSumExport));
         double balance =  firstBalance+Creditors-debit;
         return balance;

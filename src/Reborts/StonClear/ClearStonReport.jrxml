@@ -146,7 +146,8 @@ id_workgroup =  $P{id_workgroup}]]>
 		</band>
 	</columnHeader>
 	<detail>
-		<band height="35" splitType="Stretch">
+		<band height="35" splitType="Immediate">
+			<printWhenExpression><![CDATA[$V{REPORT_COUNT}.intValue() == 1]]></printWhenExpression>
 			<subreport>
 				<reportElement x="277" y="0" width="278" height="35" uuid="f40246e2-3aaf-4914-a26e-4e338733a190"/>
 				<subreportParameter name="id_workgroup">

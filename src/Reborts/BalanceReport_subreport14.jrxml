@@ -7,7 +7,7 @@
 		<![CDATA[SELECT 
 (
 SELECT
-(SELECT Sum(balanceofpos.balance) as banalce FROM `balanceofpos`) + (SELECT SUM(bankbalance.balance)as balance FROM `bankbalance`)+(SELECT SUM(totalcash.NowBalance) as balance FROM `totalcash`)+(SELECT ((select f.newbalance from finallyday as f where dateFinally = CURRENT_DATE()) + (SELECT c.Balance FROM cashertwobalance AS c)) AS Balance) + (SELECT sum(balance) as Balance FROM `balanceclient`)+(select sum(price_expens)as sum from expens where isRelay = 0) 
+(SELECT Sum(balanceofpos.balance) as banalce FROM `balanceofpos`) + (SELECT SUM(bankbalance.balance)as balance FROM `bankbalance`)+(SELECT SUM(totalcash.NowBalance) as balance FROM `totalcash`)+(SELECT ((select f.newbalance from finallyday as f where dateFinally = CURRENT_DATE()) + (SELECT c.Balance FROM cashertwobalance AS c)) AS Balance) + (SELECT sum(balance) as Balance FROM `balanceclient`)+(select sum(price_expens)as sum from expens where isRelay = 0) +(SELECT SUM(`Amount`) as balance FROM `calcbalanceitems` )
 ) - (
 (SELECT Sum(Balance) as balance FROM `supliersbalance`) + (SELECT sum(balance) As Balance FROM `balanceaccounts` where id_account != 9) + (SELECT SUM(`amount_Solf`) as Balance FROM `solf` WHERE `isActive`=1) + (SELECT COALESCE(SUM(`amount_imports`),0) AS balance FROM `imports` WHERE `isRelay`=0) ) AS total]]>
 	</queryString>

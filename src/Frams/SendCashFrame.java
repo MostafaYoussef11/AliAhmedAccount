@@ -493,8 +493,8 @@ public class SendCashFrame extends javax.swing.JFrame {
             cost = 1;
         }else{
             cost = value * 0.005;
-            if(cost > 10){
-                cost = 10;
+            if(cost > 15){
+                cost = 15;
             }
         }
         txt_cost.setText(cost+"");

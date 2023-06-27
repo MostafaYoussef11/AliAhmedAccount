@@ -110,8 +110,9 @@ public class SearchPurchaseFrame extends javax.swing.JFrame {
         HashMap para = new HashMap();
         int id_invoicBil = Integer.parseInt(St_id_invoicBil);
         para.put("id_purchaseInvoice", id_invoicBil);
-        double amount = Total_amount - discont;
-        para.put("Tafqeet", Tafqeet.doTafqeet(new BigDecimal(amount)));
+        double amount = Total_amount - discont;//Tafqeet
+        
+      //  para.put("Tafqeet", Tafqeet.doTafqeet(new BigDecimal(amount)));
         InputStream stream =getClass().getResourceAsStream("/Reborts/PurchaseInvoicReport.jrxml");
         Tools.Printer(sql, stream, para);
     }//GEN-LAST:event_jTable1MouseClicked

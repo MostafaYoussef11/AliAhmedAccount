@@ -173,7 +173,7 @@ public class MainFrame extends javax.swing.JFrame {
             
             private void getinfo(){
                 switch (idPos) {      
-                    case 7:
+                    case 8:
                         infoPos = "الرصيد في الجرد الاول : "+new CasherClass().getNowBalanceCasher();
                         txtinformationPos.setText(infoPos);
                         txtinformationPos.setIcon(new ImageIcon("E:\\Masrawy\\Account\\dist\\Icons\\cashier.png"));
@@ -186,7 +186,7 @@ public class MainFrame extends javax.swing.JFrame {
                         idPos = 1;
                         break;
                     default:
-                        if(idPos > 7){
+                        if(idPos > 8){
                             idPos = 0;
                             break;
                         }
