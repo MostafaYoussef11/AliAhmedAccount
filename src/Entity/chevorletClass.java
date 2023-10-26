@@ -95,7 +95,36 @@ public class chevorletClass {
     }
     public boolean SaveImport(int id_workgroup , double amount , String note){
         if(id_workgroup == 0){
-        
+               try {
+                con = ConnectDB.getCon();
+                con.setAutoCommit(false);
+                String sql = "INSERT INTO `chevroletimports` (`id_workgroup`, `amount`, `note` ) VALUES (?,?,?)";
+                pstmt = con.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+                pstmt.setInt(1, id_workgroup);
+                pstmt.setDouble(2,amount);
+                pstmt.setString(3, note);
+                int rowAffect = pstmt.executeUpdate();
+                if(rowAffect == 1){
+                    ResultSet rst = pstmt.getGeneratedKeys();
+                        int id = 0;
+                        while(rst.next()){
+                            id = rst.getInt(1);
+                        }
+                    CasherClass gold = new CasherClass();
+                    pstmtCasher = new CasherClass().SavedCasherTransaction(TypeCasherTransaction.ChefrImport , amount,note,id,con);
+                    int saveExpens = pstmtCasher.executeUpdate();
+                    if(saveExpens == 1){
+                        //con.close();
+                        con.commit();
+                        con.close();
+                        isSave = true;
+                    }
+                }
+            } catch (SQLException ex) {
+                Logger.getLogger(chevorletClass.class.getName()).log(Level.SEVERE, null, ex);
+            }    
+            
+            
         }else{
             try {
                 con = ConnectDB.getCon();

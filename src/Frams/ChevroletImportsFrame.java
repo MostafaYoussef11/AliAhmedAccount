@@ -133,7 +133,7 @@ public class ChevroletImportsFrame extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(comWork, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(comWork, 0, 307, Short.MAX_VALUE)
                             .addComponent(txtnote))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -319,6 +319,10 @@ public class ChevroletImportsFrame extends javax.swing.JFrame {
         int id_workgroub = Integer.parseInt(id_work);
         double amount = Double.parseDouble(txtamount.getText());
         String note = txtnote.getText();
+        String type = comType.getSelectedItem().toString();
+        if(type.equals("خارجي")){
+           id_workgroub = 0;
+        }
         boolean isSave = chevorlet.SaveImport(id_workgroub, amount, note);
         if(isSave){
             Tools.showInfoMsg("تم الحفظ بنجاح", "حفظ");
