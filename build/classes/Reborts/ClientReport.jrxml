@@ -9,7 +9,6 @@
 	<parameter name="SUBREPORT_DIR" class="java.lang.String" isForPrompting="false">
 		<defaultValueExpression><![CDATA["E:\\Masrawy\\Account\\src\\Reborts\\"]]></defaultValueExpression>
 	</parameter>
-	<parameter name="Tafqeet" class="java.lang.String"/>
 	<queryString>
 		<![CDATA[SELECT ac.id_client , c.firstBalance , c.name_client ,c.address,c.phone, SUM(ac.Debit) As Debit, Sum(ac.Creditor) as Creditor from clientaccount ac  INNER JOIN client c ON c.id_client = ac.id_client where ac.id_client = $P{id_client} and  ac.isActive = 1]]>
 	</queryString>
@@ -310,9 +309,6 @@
 				<subreportParameter name="SUBREPORT_DIR">
 					<subreportParameterExpression><![CDATA[$P{SUBREPORT_DIR}]]></subreportParameterExpression>
 				</subreportParameter>
-				<subreportParameter name="Tafqeet">
-					<subreportParameterExpression><![CDATA[$P{Tafqeet}]]></subreportParameterExpression>
-				</subreportParameter>
 				<connectionExpression><![CDATA[$P{REPORT_CONNECTION}]]></connectionExpression>
 				<subreportExpression><![CDATA[$P{SUBREPORT_DIR} + "ClientReport_subreport1.jasper"]]></subreportExpression>
 			</subreport>
@@ -399,20 +395,6 @@
 				</textElement>
 				<text><![CDATA[الرصيد الحالي]]></text>
 			</staticText>
-			<textField>
-				<reportElement x="5" y="45" width="216" height="60" uuid="57cbca1a-5148-4e60-af29-8cba9b848155"/>
-				<box>
-					<pen lineWidth="1.5"/>
-					<topPen lineWidth="1.5"/>
-					<leftPen lineWidth="1.5"/>
-					<bottomPen lineWidth="1.5"/>
-					<rightPen lineWidth="1.5"/>
-				</box>
-				<textElement textAlignment="Center" verticalAlignment="Middle">
-					<font size="14" isBold="true"/>
-				</textElement>
-				<textFieldExpression><![CDATA[$P{Tafqeet}]]></textFieldExpression>
-			</textField>
 			<textField pattern="#,##0.00">
 				<reportElement mode="Transparent" x="327" y="45" width="127" height="30" forecolor="#000000" backcolor="#FFFFFF" uuid="7b8f1b85-9949-4960-b7c4-e73f22264e07"/>
 				<box>
@@ -547,6 +529,21 @@
 				</textElement>
 				<text><![CDATA[المبلـــغ]]></text>
 			</staticText>
+			<textField pattern="#,##0.00" isBlankWhenNull="false">
+				<reportElement mode="Transparent" x="5" y="45" width="215" height="60" forecolor="#000000" backcolor="#FFFFFF" uuid="cd4f1f2a-7a6e-4a0a-810f-e8efb157df77"/>
+				<box>
+					<pen lineWidth="1.5"/>
+					<topPen lineWidth="1.5"/>
+					<leftPen lineWidth="1.5"/>
+					<bottomPen lineWidth="1.5"/>
+					<rightPen lineWidth="1.5"/>
+				</box>
+				<textElement textAlignment="Center" verticalAlignment="Middle" rotation="None" markup="none">
+					<font fontName="SansSerif" size="15" isBold="true" isItalic="false" isUnderline="false" isStrikeThrough="false" pdfEncoding="Cp1252" isPdfEmbedded="false"/>
+					<paragraph lineSpacing="Single"/>
+				</textElement>
+				<textFieldExpression><![CDATA[$V{balance} != null ? $V{balance} : 0.00]]></textFieldExpression>
+			</textField>
 		</band>
 	</summary>
 </jasperReport>

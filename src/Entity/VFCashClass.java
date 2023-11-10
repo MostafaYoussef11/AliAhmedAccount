@@ -97,13 +97,18 @@ public class VFCashClass {
         this.sim = sim;
     }
     
+    
+    /**
+     SELECT
+         DATE_FORMAT(now(), '%Y-%m') AS year_and_month
+     **/
    
     public double getLamiteOfMonth_SendAndWithdraw(int id){
         String sql_select_sSend = "SELECT IFNULL(SUM(s.value_Send_Receive),0) as id FROM send_receive AS s "
-                                + "WHERE Month(s.date_Send_Receive) = Month(now()) AND s.type_Send_Receive = 'Send'"
+                                + "WHERE DATE_FORMAT(s.date_Send_Receive , '%y-%m') = DATE_FORMAT(now(),'%y-%m') AND s.type_Send_Receive = 'Send'"
                 + " AND id_VF_cash = "+id;
         String sql_select_sWithdraw = "SELECT IFNULL(SUM(v.price),0) as id FROM vf_transaction_po AS v "
-                                    + "WHERE Month(v.date_transaction) = Month(now()) AND v.type_transaction = 'Withdraw'"
+                                    + "WHERE DATE_FORMAT(v.date_transaction , '%y-%m') = DATE_FORMAT(now(), '%y-%m') AND v.type_transaction = 'Withdraw'"
                 + " AND id_VF_cash = "+id;
         
         String St_TotalSend = ConnectDB.getIdFromName(sql_select_sSend);

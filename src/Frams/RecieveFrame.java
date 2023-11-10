@@ -522,6 +522,9 @@ public class RecieveFrame extends javax.swing.JFrame {
         if(limet < 10000){
            txt_limet.setBackground(Color.red);
             txt_limet.setForeground(Color.DARK_GRAY);
+        }else{
+           txt_limet.setBackground(new Color(240,240,240));
+            txt_limet.setForeground(new Color(0,0,0)); 
         }
         St_limet = "الحد الاقصي المتبقي  للسحب : " + limet;
         txt_limet.setText(St_limet);

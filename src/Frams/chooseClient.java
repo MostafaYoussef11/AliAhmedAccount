@@ -124,7 +124,7 @@ public class chooseClient extends javax.swing.JFrame {
             HashMap para = new HashMap();
             para.put("id_client", idClient);
             double new_balance = client.calcBalanceClient(name_client);
-            para.put("Tafqeet", Tafqeet.doTafqeet(new BigDecimal(new_balance)));            
+//            para.put("Tafqeet", Tafqeet.doTafqeet(new BigDecimal(new_balance)));            
             Tools.Printer(sql, strem, para);
         } catch (SQLException ex) {
             Logger.getLogger(chooseClient.class.getName()).log(Level.SEVERE, null, ex);

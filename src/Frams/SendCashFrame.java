@@ -52,7 +52,7 @@ public class SendCashFrame extends javax.swing.JFrame {
                 txtBalance.setText(balance+"");
             }
         });
-        client.FillComboAllNameClient(comboClient);
+        
         setNewTransSend();
     }
 
@@ -575,6 +575,7 @@ public class SendCashFrame extends javax.swing.JFrame {
     // End of variables declaration//GEN-END:variables
 
     private void setNewTransSend(){
+        client.FillComboAllNameClient(comboClient);
         send = new Send_receiveCash();
         vf.fillCombo(combVFNumber);
         balance = vf.getNowBalance(combVFNumber.getSelectedItem().toString());
