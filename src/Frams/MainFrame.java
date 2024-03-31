@@ -12,6 +12,7 @@ import java.awt.Font;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
+import java.io.File;
 import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -21,6 +22,10 @@ import java.util.*;
 import java.util.concurrent.ExecutionException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.embed.swing.JFXPanel;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.util.Duration;
 import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -50,6 +55,7 @@ public class MainFrame extends javax.swing.JFrame {
     private calcFrame cf = new calcFrame();
     private CounterFrame cuf = new CounterFrame(); 
     private FastCashSendPanel c;
+   // private final MediaPlayer media;
     //private final Timer timer;
     // set Jframe variable 
     private  ClintFrame cnt ;
@@ -139,7 +145,43 @@ public class MainFrame extends javax.swing.JFrame {
         clockTime();
         txtinformationPos.setBounds(Barpanel.getWidth() - 310 , 0, 300, 30);
         informationPosAndCasher();
+//        Random r = new Random();
+//         String bip = "E:\\Masrawy\\Account\\dist\\Sound\\236\\"+r.nextInt(114)+".mp3";
+//        JFXPanel jfx = new JFXPanel();
+//        System.out.println(bip);
+//        String uri = new File(bip).toURI().toString();
+//         media =  new MediaPlayer(new Media(uri));
+//         media.setStartTime(Duration.ZERO);
+//         media.play();
+         
+//        Queue<File> musicList = new LinkedList<File>();
+//        try (Scanner musicListReader = new Scanner(new File("E:\\Masrawy\\Account\\dist\\Sound\\Music_PlayList.txt"))) {
+//          while (musicListReader.hasNext()) {
+//            musicList.add(new File(musicListReader.next()));
+//          }
+//
+//        } catch (Exception e) {
+//          e.printStackTrace();
+//        }
+//        playNextMusicFile(musicList);
     };
+    
+    private void playNextMusicFile(Queue<File> musicList) {
+        if (musicList.isEmpty()) {
+          return ;
+        }
+        String fileName = musicList.remove().toURI().toString();
+        System.out.println(fileName);
+        Media media = new Media(fileName);
+        MediaPlayer player = new MediaPlayer(media);
+        player.setOnEndOfMedia(() -> {
+          player.dispose();
+          playNextMusicFile(musicList);
+        });
+        player.play();
+   }
+    
+    
     
   private void clockTime(){
         Timer timeclock = new Timer();
@@ -150,8 +192,10 @@ public class MainFrame extends javax.swing.JFrame {
                 SimpleDateFormat sdf = new SimpleDateFormat("hh:mm:ss");
                 SimpleDateFormat ss = new SimpleDateFormat("SS");
                 SimpleDateFormat sd = new SimpleDateFormat("YYYY-MM-dd");
+                
                 String timenow = sdf.format(d);
                 String datenow = sd.format(d);
+                
                 int x_user = Integer.parseInt(ss.format(d)) / 100;
                 txtTimer.setText(timenow);
                 txtDate.setText(datenow);
